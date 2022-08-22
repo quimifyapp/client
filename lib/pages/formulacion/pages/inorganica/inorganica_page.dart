@@ -11,22 +11,23 @@ class InorganicaPage extends StatelessWidget {
         body: Center(
             child: Column(
           children: [
-            const SizedBox(height: 25),
-            const TextField(
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nombre o fórmula'),
-            ),
+            const SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: () {}, child: const Text('Buscar')),
+                Flexible(
+                    child: TextField(
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                      prefixIcon: IconButton(
+                          icon: const Icon(Icons.camera_alt_rounded),
+                          onPressed: () {}),
+                      border: const OutlineInputBorder(),
+                      labelText: 'Nombre o fórmula'),
+                )),
                 ElevatedButton(
-                    onPressed: () {},
-                    child: const Icon(Icons.camera_alt_rounded))
+                    onPressed: () {}, child: const Icon(Icons.search)),
               ],
-            )
+            ),
           ],
         )));
   }
