@@ -2,7 +2,7 @@
 
 Cliente de Quimify
 
-Android icon: 102 no trim
+Android icon: 90 no trim
 
 ## Getting Started
 

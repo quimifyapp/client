@@ -43,7 +43,7 @@ dev_dependencies:
 flutter_icons:
   image_path: "assets/icons/logo_white_extended.png"
   ios: true
-  android: false
+  android: false # Adaptive icons have been manually added
   web:
     generate: true
     image_path: "assets/icons/logo_white.png"
