@@ -1,4 +1,4 @@
-package com.quimify.cliente;
+package com.quimify;
 
 import io.flutter.embedding.android.FlutterActivity;
 
