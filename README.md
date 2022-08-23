@@ -2,6 +2,8 @@
 
 Cliente de Quimify
 
+Android icon: 102 no trim
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -8,7 +8,7 @@ class QuimifyIcon extends StatelessWidget {
     return IconButton(
         onPressed: () {},
         icon: const ImageIcon(
-          AssetImage('images/icons/quimify_light.png'),
+          AssetImage('assets/images/icons/quimify_dark.png'),
           color: Colors.white,
         ));
   }
