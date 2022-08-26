@@ -1,3 +1,5 @@
+import 'package:cliente/widgets/body_box_decoration.dart';
+import 'package:cliente/widgets/gradient_box_decoration.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:cliente/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -8,41 +10,54 @@ class InorganicaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-            Color.fromARGB(255, 68, 226, 220),
-            Color.fromARGB(255, 67, 230, 166)
-          ])),
+      decoration: gradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
-            child: Center(
-                child: Column(
-          children: [
-            Container(
-              // App bar and search zone:
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: Column(
-                children: [
-                  PageAppBar(title: 'Formulación inorgánica'),
-                  SearchBar(hint: 'Nombre o fórmula'),
-                ],
+          child: Column(
+            children: [
+              PageAppBar(title: 'Formulación inorgánica'),
+              SearchBar(hint: 'Un nombre o fórmula'),
+              Flexible(
+                child: Container(
+                  decoration: bodyBoxDecoration,
+                  width: double.infinity,
+                  child: Column(
+                    children: [SizedBox(height: 28.8), SearchResult()],
+                  ),
+                ),
               ),
-            ),
-            Container(
-              // Body:
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 245, 247, 251),
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(30))),
-              width: double.infinity,
-              height: 500,
-            ),
-          ],
-        ))),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SearchResult extends StatelessWidget {
+  const SearchResult({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.85,
+      height: 400,
+      decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        children: [
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                  height: 40,
+                  child: Row(
+                    children: [
+                      Text('Result of: '), Text('ácido sulfúrico')
+                    ],
+                  )),
+
+        ],
       ),
     );
   }

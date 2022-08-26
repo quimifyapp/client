@@ -1,5 +1,8 @@
 import 'package:cliente/pages/formulacion/formulacion_page.dart';
 import 'package:cliente/pages/masa_molecular/masa_molecular_page.dart';
+import 'package:cliente/widgets/body_box_decoration.dart';
+import 'package:cliente/widgets/gradient_box_decoration.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,24 +42,9 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[currentPage],
-      bottomNavigationBar: NavigationBar(
-
-        destinations: const [
-          NavigationDestination(
-              icon: Icon(Icons.document_scanner_outlined),
-              label: 'Formulación'),
-          NavigationDestination(
-              icon: Icon(Icons.calculate_outlined), label: 'Masa molecular'),
-        ],
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        selectedIndex: currentPage,
-      ),
-    );
+    return Container(
+        child: Scaffold(
+          body: pages[0],
+        ));
   }
 }

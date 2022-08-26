@@ -7,35 +7,37 @@ class PageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 15),
-        Row(
-          // App bar
-          children: [
-            Container(
-                child: IconButton(
-                    icon: Icon(Icons.arrow_back),
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: Column(
+        children: [
+          SizedBox(height: 15),
+          Row(
+            children: [
+              Container(
+                  child: IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      color: Colors.white,
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () => Navigator.of(context).pop()),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 106, 233, 218),
+                      borderRadius: BorderRadius.circular(10))),
+              SizedBox(width: 20),
+              Text(
+                'Formulación inorgánica',
+                style: TextStyle(
+                    fontSize: 20,
                     color: Colors.white,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onPressed: () => Navigator.of(context).pop()),
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 106, 233, 218),
-                    borderRadius: BorderRadius.circular(10))),
-            SizedBox(width: 20),
-            Text(
-              'Formulación inorgánica',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-        SizedBox(height: 30),
-      ],
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+          SizedBox(height: 30),
+        ],
+      ),
     );
   }
 }
