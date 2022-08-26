@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/images/icons/quimify_light.png
     - assets/images/icons/quimify_dark.png
+    - assets/images/icons/search.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,4 +1,3 @@
-import 'package:cliente/widgets/quimify_icon_widget.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -9,8 +8,18 @@ class QuimifyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
       title: Text(title),
-      actions: const [QuimifyIcon()],
+      foregroundColor: Colors.white,
+      leading: Ink(
+          child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () => Navigator.of(context).pop()),
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 106, 233, 218),
+              borderRadius: BorderRadius.circular(10))),
     );
   }
 

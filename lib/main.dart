@@ -1,20 +1,28 @@
 import 'package:cliente/pages/formulacion/formulacion_page.dart';
 import 'package:cliente/pages/masa_molecular/masa_molecular_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quimify',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.cyan),
-      home: const RootPage(),
-    );
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        child: MaterialApp(
+          title: 'Quimify',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(primaryColor: Color.fromARGB(255, 34, 34, 34)),
+          home: const RootPage(),
+        ),
+        // To get rid of status bar's tint:
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+        ));
   }
 }
 
@@ -34,6 +42,7 @@ class _RootPageState extends State<RootPage> {
     return Scaffold(
       body: pages[currentPage],
       bottomNavigationBar: NavigationBar(
+
         destinations: const [
           NavigationDestination(
               icon: Icon(Icons.document_scanner_outlined),
