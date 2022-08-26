@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/body_box_decoration.dart';
 import '../../widgets/gradient_box_decoration.dart';
-import '../../widgets/page_app_bar.dart';
+import '../../widgets/home_app_bar.dart';
 
 class FormulacionPage extends StatelessWidget {
   const FormulacionPage({Key? key}) : super(key: key);
@@ -17,29 +17,7 @@ class FormulacionPage extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              // App bar:
-              Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                child: Column(
-                  children: [
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        // Icon
-                        // SizedBox(width: 20),
-                        Text(
-                          'Formulación',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 30),
-                  ],
-                ),
-              ),
+              HomeAppBar(title: 'Formulación'),
               Flexible(
                 child: Container(
                   decoration: bodyBoxDecoration,

@@ -2,10 +2,10 @@ import 'package:cliente/widgets/margined_column.dart';
 import 'package:cliente/widgets/margined_row.dart';
 import 'package:flutter/material.dart';
 
-class PageAppBar extends StatelessWidget {
-  const PageAppBar({Key? key, required this.title}) : super(key: key);
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  final String title; // TODO: permitir el rótulo de las letras
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,18 @@ class PageAppBar extends StatelessWidget {
               height: 48,
               width: 48,
               child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: Colors.white,
+                icon: Image.asset(
+                  'assets/images/icons/quimify_dark.png',
+                  color: Colors.white,
+                ),
+                // To remove native effects:
                 hoverColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 106, 233, 218),
-                borderRadius: BorderRadius.circular(10),
+                // So it fills container (48 x 48):
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
+                onPressed: () {},
               ),
             ),
             SizedBox(width: 20),
