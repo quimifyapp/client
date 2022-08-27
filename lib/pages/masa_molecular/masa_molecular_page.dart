@@ -16,8 +16,16 @@ class MasaMolecularPage extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              HomeAppBar(title: 'Masa molecular'),
-              Flexible(
+              HomeAppBar(
+                title: Text(
+                  'Masa molecular',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
                 child: Container(
                   decoration: bodyBoxDecoration,
                   width: double.infinity,

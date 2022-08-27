@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
 class MarginedRow extends StatelessWidget {
-  const MarginedRow({Key? key, required this.margin, required this.child})
-      : super(key: key);
+  const MarginedRow({Key? key, required this.margin, this.left, this.right,
+    required this.child}) : super(key: key);
 
-  final double margin;
+  const MarginedRow.right({Key? key, this.margin, this.left,
+    required this.right, required this.child}) : super(key: key);
+
+  final double? margin;
+  final double? left;
+  final double? right;
+
   final Widget child;
+
+  double _marginFor(double? provided) {
+    return provided ?? margin ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {
-    SizedBox margin = SizedBox(width: this.margin);
-
     return Row(
       children: [
-        margin,
-        Expanded(child: child),
-        margin,
+        SizedBox(width: _marginFor(left)),
+        child,
+        SizedBox(width: _marginFor(right)),
       ],
     );
   }

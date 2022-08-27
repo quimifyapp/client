@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key, required this.title}) : super(key: key);
 
-  final String title; // TODO: permitir el rótulo de las letras
+  final Widget title;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HomeAppBar extends StatelessWidget {
               width: 48,
               child: IconButton(
                 icon: Image.asset(
-                  'assets/images/icons/quimify_dark.png',
+                  'assets/images/icons/logo.png',
                   color: Colors.white,
                 ),
                 // To remove native effects:
@@ -35,13 +35,8 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
             SizedBox(width: 20),
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
+            // Could be text or an image:
+            title,
           ],
         ),
       ),

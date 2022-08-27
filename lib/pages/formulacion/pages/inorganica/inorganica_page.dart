@@ -21,16 +21,20 @@ class InorganicaPage extends StatelessWidget {
             children: [
               PageAppBar(title: 'Formulación inorgánica'),
               SearchBar(hint: 'NaCl, óxido de hierro...'),
-              Flexible(
+              Expanded(
                 child: Container(
                   decoration: bodyBoxDecoration,
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
                   width: double.infinity,
                   child: MarginedRow(
                     margin: 25,
-                    child: SingleChildScrollView(
-                      child: MarginedColumn.bottom(
-                        bottom: 25,
-                        child: SearchResults(),
+                    child: Expanded(
+                      child: SingleChildScrollView(
+                        child: MarginedColumn.bottom(
+                          bottom: 25,
+                          child: SearchResults(),
+                        ),
                       ),
                     ),
                   ),

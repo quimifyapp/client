@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MarginedColumn extends StatelessWidget {
+  const MarginedColumn({Key? key, this.margin, required this.top,
+    required this.bottom, required this.child}) : super(key: key);
+  
   const MarginedColumn.center({Key? key, required this.margin, this.top,
     this.bottom, required this.child}) : super(key: key);
 
   const MarginedColumn.bottom({Key? key, this.margin, this.top,
     required this.bottom, required this.child}) : super(key: key);
 
-  const MarginedColumn({Key? key, this.margin, required this.top,
-    required this.bottom, required this.child}) : super(key: key);
+  const MarginedColumn.top({Key? key, this.margin, required this.top,
+    this.bottom, required this.child}) : super(key: key);
 
   final double? margin;
   final double? top;

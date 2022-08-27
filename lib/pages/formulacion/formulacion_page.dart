@@ -1,9 +1,11 @@
 import 'package:cliente/pages/formulacion/pages/inorganica/inorganica_page.dart';
+import 'package:cliente/widgets/margined_column.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/body_box_decoration.dart';
 import '../../widgets/gradient_box_decoration.dart';
 import '../../widgets/home_app_bar.dart';
+import '../../widgets/margined_row.dart';
 
 class FormulacionPage extends StatelessWidget {
   const FormulacionPage({Key? key}) : super(key: key);
@@ -17,32 +19,122 @@ class FormulacionPage extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              HomeAppBar(title: 'Formulación'),
-              Flexible(
+              HomeAppBar(
+                title: Image.asset(
+                  'assets/images/icons/branding_slim.png',
+                  height: 17,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
                 child: Container(
                   decoration: bodyBoxDecoration,
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
                   width: double.infinity,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 30),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return const InorganicaPage();
-                                },
+                  child: SingleChildScrollView(
+                    child: MarginedColumn.top(
+                      top: 30,
+                      child: Column(
+                        children: [
+                          MarginedRow(
+                            margin: 25,
+                            child: Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Inorgánica',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Spacer(),
+                                  IconButton(
+                                    icon: Icon(Icons.help_outline),
+                                    // To remove padding:
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {},
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                          child: const Text('Inorgánica')),
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text('Formular')),
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text('Simple')),
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text('Éter')),
-                    ],
+                            ),
+                          ),
+                          SizedBox(height: 25),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 25),
+                                MenuCard(
+                                  title: 'Formular o nombrar',
+                                  structure: 'H₂O',
+                                  name: 'dióxido de hidrógeno',
+                                ),
+                                MenuCard.locked(title: 'Practicar'),
+                                SizedBox(width: 5),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 40),
+                          MarginedRow(
+                            margin: 25,
+                            child: Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Orgánica',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Spacer(),
+                                  IconButton(
+                                    icon: Icon(Icons.help_outline),
+                                    // To remove padding:
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 25),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 25),
+                                MenuCard(
+                                  title: 'Formular',
+                                  structure: 'CH₂ = CH - COOH',
+                                  name: 'ácido 2-propenoico',
+                                ),
+                                MenuCard(
+                                  title: 'Formular o nombrar',
+                                  structure: 'H₂O',
+                                  name: 'dióxido de hidrógeno',
+                                ),
+                                MenuCard(
+                                  title: 'Formular o nombrar',
+                                  structure: 'H₂O',
+                                  name: 'dióxido de hidrógeno',
+                                ),
+                                MenuCard(
+                                  title: 'Formular o nombrar',
+                                  structure: 'H₂O',
+                                  name: 'dióxido de hidrógeno',
+                                ),
+                                MenuCard(
+                                  title: 'Formular o nombrar',
+                                  structure: 'H₂O',
+                                  name: 'dióxido de hidrógeno',
+                                ),
+                                SizedBox(width: 5),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 150),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -50,6 +142,129 @@ class FormulacionPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MenuCard extends StatelessWidget {
+  const MenuCard(
+      {Key? key,
+      required this.title,
+      required this.structure,
+      required this.name})
+      : super(key: key);
+
+  const MenuCard.locked(
+      {Key? key, required this.title, this.structure, this.name})
+      : super(key: key);
+
+  final String title;
+  final String? structure;
+  final String? name;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget body;
+
+    if (structure != null)
+      body = MarginedRow(
+        margin: 25,
+        child: MarginedColumn.top(
+          top: 15,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                structure!,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 15),
+              Text(
+                name!,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    else
+      body = Container(
+        child: MarginedColumn.top(
+          top: 15,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Icon(
+                  Icons.lock,
+                  size: 35,
+                  color: Colors.black87,
+                ),
+              ),
+              SizedBox(height: 7),
+              Center(
+                child: Text(
+                  'Próximamente',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+    return Row(
+      children: [
+        InkWell(
+          child: Container(
+            width: 270,
+            height: 150,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            // To avoid rounded corners overflow:
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              children: [
+                Container(
+                  height: 50,
+                  decoration: gradientBoxDecoration,
+                  child: MarginedRow(
+                    margin: 25,
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                body,
+              ],
+            ),
+          ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return const InorganicaPage();
+                },
+              ),
+            );
+          },
+        ),
+        SizedBox(width: 15),
+      ],
     );
   }
 }
