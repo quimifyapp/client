@@ -1,4 +1,3 @@
-import 'package:cliente/widgets/body_box_decoration.dart';
 import 'package:cliente/widgets/gradient_box_decoration.dart';
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../widgets/margined_row.dart';
 import '../../../../widgets/search_bar.dart';
+import '../../../constants.dart';
 
 class InorganicaPage extends StatelessWidget {
   const InorganicaPage({Key? key}) : super(key: key);

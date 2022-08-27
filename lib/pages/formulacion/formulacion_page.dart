@@ -2,10 +2,11 @@ import 'package:cliente/pages/formulacion/pages/inorganica/inorganica_page.dart'
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/body_box_decoration.dart';
 import '../../widgets/gradient_box_decoration.dart';
 import '../../widgets/home_app_bar.dart';
 import '../../widgets/margined_row.dart';
+import '../constants.dart' as constants;
+import '../constants.dart';
 
 class FormulacionPage extends StatelessWidget {
   const FormulacionPage({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class FormulacionPage extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  decoration: bodyBoxDecoration,
+                  decoration: constants.bodyBoxDecoration,
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   width: double.infinity,
@@ -44,7 +45,9 @@ class FormulacionPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Inorgánica',
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Spacer(),
                                   IconButton(
@@ -82,7 +85,9 @@ class FormulacionPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Orgánica',
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Spacer(),
                                   IconButton(
@@ -104,28 +109,27 @@ class FormulacionPage extends StatelessWidget {
                                 SizedBox(width: 25),
                                 MenuCard(
                                   title: 'Formular',
-                                  structure: 'CH₂ = CH - COOH',
-                                  name: 'ácido 2-propenoico',
+                                  structure: 'No sé qué poner',
+                                  name: 'Aquí tampoco',
                                 ),
                                 MenuCard(
-                                  title: 'Formular o nombrar',
-                                  structure: 'H₂O',
-                                  name: 'dióxido de hidrógeno',
+                                  title: 'Nombrar simple',
+                                  structure: 'CH₃ - COOH',
+                                  name: 'ácido etanoico',
                                 ),
                                 MenuCard(
-                                  title: 'Formular o nombrar',
-                                  structure: 'H₂O',
-                                  name: 'dióxido de hidrógeno',
+                                  title: 'Nombrar éter',
+                                  structure: 'CH₃ - O - CH₂CH₃',
+                                  name: 'etil metil éter',
                                 ),
-                                MenuCard(
-                                  title: 'Formular o nombrar',
-                                  structure: 'H₂O',
-                                  name: 'dióxido de hidrógeno',
+                                MenuCard.locked(
+                                  title: 'Nombrar éster',
                                 ),
-                                MenuCard(
-                                  title: 'Formular o nombrar',
-                                  structure: 'H₂O',
-                                  name: 'dióxido de hidrógeno',
+                                MenuCard.locked(
+                                    title: 'Nombrar cíclico'
+                                ),
+                                MenuCard.locked(
+                                    title: 'Nombrar aromático'
                                 ),
                                 SizedBox(width: 5),
                               ],
@@ -150,23 +154,66 @@ class MenuCard extends StatelessWidget {
   const MenuCard(
       {Key? key,
       required this.title,
+      this.customBody,
       required this.structure,
       required this.name})
       : super(key: key);
 
   const MenuCard.locked(
-      {Key? key, required this.title, this.structure, this.name})
+      {Key? key,
+      required this.title,
+      this.customBody,
+      this.structure,
+      this.name})
+      : super(key: key);
+
+  const MenuCard.custom(
+      {Key? key,
+      required this.title,
+      required this.customBody,
+      this.structure,
+      this.name})
       : super(key: key);
 
   final String title;
+
+  final Widget? customBody;
+
   final String? structure;
   final String? name;
+
+  static MarginedColumn lockedBody = MarginedColumn.top(
+    top: 15,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: Icon(
+            Icons.lock,
+            size: 35,
+            color: Colors.black87,
+          ),
+        ),
+        SizedBox(height: 7),
+        Center(
+          child: Text(
+            'Próximamente',
+            style: TextStyle(
+              fontSize: 17,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     Widget body;
 
-    if (structure != null)
+    if (structure == null)
+      body = customBody ?? lockedBody;
+    else
       body = MarginedRow(
         margin: 25,
         child: MarginedColumn.top(
@@ -177,8 +224,9 @@ class MenuCard extends StatelessWidget {
               Text(
                 structure!,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
+                  color: quimifyTeal,
                 ),
               ),
               SizedBox(height: 15),
@@ -186,33 +234,6 @@ class MenuCard extends StatelessWidget {
                 name!,
                 style: TextStyle(
                   fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    else
-      body = Container(
-        child: MarginedColumn.top(
-          top: 15,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Icon(
-                  Icons.lock,
-                  size: 35,
-                  color: Colors.black87,
-                ),
-              ),
-              SizedBox(height: 7),
-              Center(
-                child: Text(
-                  'Próximamente',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
                 ),
               ),
             ],
@@ -242,7 +263,7 @@ class MenuCard extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),

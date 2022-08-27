@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/body_box_decoration.dart';
 import '../../widgets/gradient_box_decoration.dart';
 import '../../widgets/home_app_bar.dart';
+import '../constants.dart';
 
 class MasaMolecularPage extends StatelessWidget {
   const MasaMolecularPage({Key? key}) : super(key: key);

@@ -20,7 +20,7 @@ class PageAppBar extends StatelessWidget {
               height: 48,
               width: 48,
               child: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.arrow_back_ios),
                 color: Colors.white,
                 hoverColor: Colors.transparent,
                 splashColor: Colors.transparent,

@@ -16,8 +16,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Quimify',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Color.fromARGB(255, 34, 34, 34)),
-        scrollBehavior: const ScrollBehavior( //TODO: deprecated y font size
+        theme: ThemeData(
+          fontFamily: 'CeraPro',
+          primaryColor: Color.fromARGB(255, 34, 34, 34),
+        ),
+        scrollBehavior: const ScrollBehavior(
+            //TODO: deprecated y font size
             androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
         home: const RootPage(),
       ),

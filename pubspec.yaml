@@ -3,7 +3,7 @@ description: Cliente de Quimify
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,20 +20,10 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.17.6 <3.0.0"
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter_native_splash: ^2.2.8
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -42,12 +32,12 @@ dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
 
 flutter_icons:
-  image_path: "assets/icons/logo_white_extended.png"
+  image_path: "assets/images/launcher_icons/logo_white_extended.png"
   ios: true
   android: false # Adaptive icons have been manually added
   web:
     generate: true
-    image_path: "assets/icons/logo_white.png"
+    image_path: "assets/images/logo_white.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -56,45 +46,45 @@ flutter_icons:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/icons/logo.png
     - assets/images/icons/search.png
     - assets/images/icons/branding_slim.png
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+     - family: CeraPro
+       fonts:
+         - asset: assets/fonts/CeraProBlack.otf
+           weight: 900
+         - asset: assets/fonts/CeraProBold.otf
+           weight: 800
+         - asset: assets/fonts/CeraProMedium.otf
+           weight: 600
+         - asset: assets/fonts/CeraProRegular.otf
+           weight: 500
+         - asset: assets/fonts/CeraProLight.otf
+           weight: 300
+         - asset: assets/fonts/CeraProThin.otf
+           weight: 100
+         - asset: assets/fonts/CeraProBlackItalic.otf
+           style: italic
+           weight: 900
+         - asset: assets/fonts/CeraProBoldItalic.otf
+           style: italic
+           weight: 700
+         - asset: assets/fonts/CeraProMediumItalic.otf
+           style: italic
+           weight: 500
+         - asset: assets/fonts/CeraProRegularItalic.otf
+           style: italic
+           weight: 400
+         - asset: assets/fonts/CeraProLightItalic.otf
+           style: italic
+           weight: 300
+         - asset: assets/fonts/CeraProThinItalic.otf
+           style: italic
+           weight: 100
