@@ -10,7 +10,7 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarginedRow(
+    return MarginedRow.center(
       margin: 25,
       child: Expanded(
         child: MarginedColumn(

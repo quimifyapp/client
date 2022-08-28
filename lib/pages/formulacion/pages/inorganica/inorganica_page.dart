@@ -1,11 +1,10 @@
-import 'package:cliente/widgets/gradient_box_decoration.dart';
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/margined_row.dart';
 import '../../../../widgets/search_bar.dart';
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class InorganicaPage extends StatelessWidget {
   const InorganicaPage({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class InorganicaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: gradientBoxDecoration,
+      decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -27,7 +26,7 @@ class InorganicaPage extends StatelessWidget {
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   width: double.infinity,
-                  child: MarginedRow(
+                  child: MarginedRow.center(
                     margin: 25,
                     child: Expanded(
                       child: SingleChildScrollView(
@@ -89,7 +88,7 @@ class SearchResult extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
             ),
-            child: MarginedRow(
+            child: MarginedRow.center(
               margin: 15,
               child: MarginedColumn.center(
                 margin: 15,
@@ -111,7 +110,7 @@ class SearchResult extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
             ),
-            child: MarginedRow(
+            child: MarginedRow.center(
               margin: 20,
               child: MarginedColumn.center(
                 margin: 20,

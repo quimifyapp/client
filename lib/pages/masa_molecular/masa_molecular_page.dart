@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/gradient_box_decoration.dart';
 import '../../widgets/home_app_bar.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class MasaMolecularPage extends StatelessWidget {
   const MasaMolecularPage({Key? key}) : super(key: key);
@@ -10,7 +9,7 @@ class MasaMolecularPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: gradientBoxDecoration,
+      decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -20,7 +19,7 @@ class MasaMolecularPage extends StatelessWidget {
                 title: Text(
                   'Masa molecular',
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),

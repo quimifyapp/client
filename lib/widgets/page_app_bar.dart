@@ -9,7 +9,7 @@ class PageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarginedRow(
+    return MarginedRow.center(
       margin: 25,
       child: MarginedColumn(
         top: 15,
@@ -20,7 +20,7 @@ class PageAppBar extends StatelessWidget {
               height: 48,
               width: 48,
               child: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: Icon(Icons.arrow_back),
                 color: Colors.white,
                 hoverColor: Colors.transparent,
                 splashColor: Colors.transparent,

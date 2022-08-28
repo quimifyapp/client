@@ -9,7 +9,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarginedRow(
+    return MarginedRow.center(
       margin: 25,
       child: MarginedColumn(
         top: 15,

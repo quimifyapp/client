@@ -1,3 +1,4 @@
+import 'package:cliente/constants.dart';
 import 'package:cliente/pages/formulacion/formulacion_page.dart';
 import 'package:cliente/pages/masa_molecular/masa_molecular_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'CeraPro',
-          primaryColor: Color.fromARGB(255, 34, 34, 34),
         ),
         scrollBehavior: const ScrollBehavior(
             //TODO: deprecated y font size
@@ -48,7 +48,22 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        body: pages[0],
+        body: pages[currentPage],
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(bottom: 50),
+          child: FractionallySizedBox(
+            widthFactor: 0.8,
+            child: Container(
+              height: 65,
+              decoration: BoxDecoration(
+                gradient: quimifyGradient,
+                borderRadius: BorderRadius.circular(35),
+              ),
+            ),
+          )
+        ),
+        // So navigation bar is floating on top:
+        extendBody: true,
       ),
     );
   }

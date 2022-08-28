@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MarginedRow extends StatelessWidget {
-  const MarginedRow({Key? key, required this.margin, this.left, this.right,
+  const MarginedRow({Key? key, this.margin, required this.left,
+    required this.right, required this.child}) : super(key: key);
+
+  const MarginedRow.center({Key? key, required this.margin, this.left, this.right,
     required this.child}) : super(key: key);
 
   const MarginedRow.right({Key? key, this.margin, this.left,
