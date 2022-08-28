@@ -13,13 +13,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      // To get rid of status bar's tint:
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      ),
+    MediaQueryData windowData =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    windowData = windowData.copyWith(
+      textScaleFactor: 1.0,
+    );
+
+    return MediaQuery(
       // To ignore device's font scaling factor:
-      child: MaterialApp(
+      data: windowData,
+      // To get rid of status bar's tint:
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+        ),
+        child: MaterialApp(
+          useInheritedMediaQuery: true,
           // To get rid of debug banner:
           debugShowCheckedModeBanner: false,
           // To set stretched scroll on all Android versions: //TODO: deprecated
@@ -33,6 +42,7 @@ class MyApp extends StatelessWidget {
           title: 'Quimify',
           home: const MainPage(),
         ),
+      ),
     );
   }
 }
