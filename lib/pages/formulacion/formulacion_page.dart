@@ -1,4 +1,4 @@
-import 'package:cliente/pages/formulacion/pages/inorganica/inorganica_page.dart';
+import 'package:cliente/pages/formulacion/pages/inorganica/formular_o_nombrar_page.dart';
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,6 @@ class FormulacionPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SectionTitle(title: 'Inorgánica'),
-                        SizedBox(height: 25),
                         InorganicMenu(),
                         SizedBox(height: 40),
                         SectionTitle(title: 'Orgánica'),
@@ -327,7 +326,7 @@ class MenuCard extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const InorganicaPage();
+                  return const FormularONombrarPage();
                 },
               ),
             );

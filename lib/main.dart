@@ -14,37 +14,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      child: MaterialApp(
-          title: 'Quimify',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'CeraPro',
-          ),
-          scrollBehavior: const ScrollBehavior(
-              //TODO: deprecated y font size
-              androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
-          builder: (context, child) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: const RootPage(),
-            );
-          }),
       // To get rid of status bar's tint:
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
+      ),
+      // To ignore device's font scaling factor:
+      child: MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        child: MaterialApp(
+          useInheritedMediaQuery: true,
+          // To get rid of debug banner:
+          debugShowCheckedModeBanner: false,
+          // To set stretched scroll on all Android versions: //TODO: deprecated
+          scrollBehavior: const ScrollBehavior(
+              androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
+          // Theme:
+          theme: ThemeData(
+            fontFamily: 'CeraPro',
+          ),
+          // App:
+          title: 'Quimify',
+          home: const MainPage(),
+        ),
       ),
     );
   }
 }
 
-class RootPage extends StatefulWidget {
-  const RootPage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<RootPage> createState() => _RootPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _RootPageState extends State<RootPage> {
+class _MainPageState extends State<MainPage> {
   int currentPage = 0;
   List<Widget> pages = const [FormulacionPage(), MasaMolecularPage()];
 
