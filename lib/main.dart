@@ -13,11 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // To ignore device's font scaling factor:
     MediaQueryData windowData =
         MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-    windowData = windowData.copyWith(
-      textScaleFactor: 1.0,
-    );
+    windowData = windowData.copyWith(textScaleFactor: 1.0);
+
+    // So it's always vertical:
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return MediaQuery(
       // To ignore device's font scaling factor:
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
           statusBarColor: Colors.transparent,
         ),
         child: MaterialApp(
+          // To ignore device's font scaling factor:
           useInheritedMediaQuery: true,
           // To get rid of debug banner:
           debugShowCheckedModeBanner: false,
@@ -83,7 +87,6 @@ class _MainPageState extends State<MainPage> {
             child: Container(
               height: 60,
               decoration: BoxDecoration(
-                //color: constants.quimifyTeal,
                 gradient: constants.quimifyGradient,
                 borderRadius: BorderRadius.circular(35),
                 border: Border.all(

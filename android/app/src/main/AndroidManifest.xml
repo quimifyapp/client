@@ -1,10 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quimify">
+
    <application
         android:label="Quimify"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:screenOrientation="sensorPortrait"
+
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
