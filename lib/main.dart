@@ -15,16 +15,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       child: MaterialApp(
-        title: 'Quimify',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'CeraPro',
-        ),
-        scrollBehavior: const ScrollBehavior(
-            //TODO: deprecated y font size
-            androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
-        home: const RootPage(),
-      ),
+          title: 'Quimify',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'CeraPro',
+          ),
+          scrollBehavior: const ScrollBehavior(
+              //TODO: deprecated y font size
+              androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: const RootPage(),
+            );
+          }),
       // To get rid of status bar's tint:
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

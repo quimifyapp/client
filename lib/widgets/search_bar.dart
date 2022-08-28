@@ -28,6 +28,7 @@ class SearchBar extends StatelessWidget {
                       color: Color.fromARGB(255, 34, 34, 34),
                     ),
                     decoration: InputDecoration(
+                      // So hint doesn't
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: EdgeInsets.all(15),
                       border: OutlineInputBorder(
