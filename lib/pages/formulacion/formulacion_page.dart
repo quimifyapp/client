@@ -2,10 +2,9 @@ import 'package:cliente/pages/formulacion/pages/inorganica/inorganica_page.dart'
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/home_app_bar.dart';
-import '../../widgets/margined_row.dart';
-import '../../constants.dart' as constants;
-import '../../constants.dart';
+import 'package:cliente/widgets/home_app_bar.dart';
+import 'package:cliente/widgets/margined_row.dart';
+import 'package:cliente/constants.dart' as constants;
 
 class FormulacionPage extends StatelessWidget {
   const FormulacionPage({Key? key}) : super(key: key);
@@ -13,21 +12,17 @@ class FormulacionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: quimifyGradientBoxDecoration,
+      decoration: constants.quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            // So it's not inside status bar:
-            SafeArea(
-              child: HomeAppBar(
-                title: Image.asset(
-                  'assets/images/icons/branding_slim.png',
-                  height: 17,
-                  color: Colors.white,
-                ),
+            HomeAppBar(
+              title: Image.asset(
+                'assets/images/icons/branding_slim.png',
+                height: 17,
+                color: Colors.white,
               ),
-              bottom: false,
             ),
             // Body:
             Expanded(
@@ -41,6 +36,7 @@ class FormulacionPage extends StatelessWidget {
                   child: MarginedColumn.top(
                     top: 30,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SectionTitle(title: 'Inorgánica'),
                         SizedBox(height: 25),
@@ -49,7 +45,8 @@ class FormulacionPage extends StatelessWidget {
                         SectionTitle(title: 'Orgánica'),
                         SizedBox(height: 25),
                         OrganicMenu(),
-                        SizedBox(height: 150), // TODO: test
+                        // To keep it visible above navigation bar:
+                        SizedBox(height: 50 + 60 + 50),
                       ],
                     ),
                   ),
@@ -77,7 +74,10 @@ class SectionTitle extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Spacer(),
             IconButton(
@@ -135,10 +135,10 @@ class OrganicMenu extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/images/icons/3-chloropropylbenzene.png',
-                    color: quimifyTeal,
+                    color: constants.quimifyTeal,
                     height: 30,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 12),
                   Text(
                     '3-cloropropilbenceno',
                     style: TextStyle(
@@ -235,24 +235,6 @@ class MenuCard extends StatelessWidget {
     );
   }
 
-  static final MarginedColumn lockedBody = MarginedColumn.center(
-    margin: 15,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Icon(
-            Icons.lock,
-            size: 35,
-            color: Colors.black87,
-          ),
-        ),
-        SizedBox(height: 10),
-        Center(child: _nameFor('Próximamente')),
-      ],
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     Widget body;
@@ -270,10 +252,10 @@ class MenuCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  color: quimifyTeal,
+                  color: constants.quimifyTeal,
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 12),
               Text(
                 name!,
                 style: TextStyle(
@@ -286,7 +268,23 @@ class MenuCard extends StatelessWidget {
         ),
       );
     else if (locked!)
-      body = lockedBody;
+      body = MarginedColumn.center(
+        margin: 15,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Image.asset(
+                'assets/images/icons/lock.png',
+                height: 35,
+                color: Color.fromARGB(255, 70, 70, 70),
+              ),
+            ),
+            SizedBox(height: 12),
+            Center(child: _nameFor('Próximamente')),
+          ],
+        ),
+      );
     else
       body = customBody!;
 
@@ -304,7 +302,7 @@ class MenuCard extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  decoration: quimifyGradientBoxDecoration,
+                  decoration: constants.quimifyGradientBoxDecoration,
                   child: MarginedColumn(
                     top: 17,
                     bottom: 13,

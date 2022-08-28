@@ -2,9 +2,9 @@ import 'package:cliente/widgets/margined_column.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../widgets/margined_row.dart';
-import '../../../../widgets/search_bar.dart';
-import '../../../../constants.dart';
+import 'package:cliente/widgets/margined_row.dart';
+import 'package:cliente/widgets/search_bar.dart';
+import 'package:cliente/constants.dart' as constants;
 
 class InorganicaPage extends StatelessWidget {
   const InorganicaPage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class InorganicaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: quimifyGradientBoxDecoration,
+      decoration: constants.quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -22,7 +22,7 @@ class InorganicaPage extends StatelessWidget {
               SearchBar(hint: 'NaCl, óxido de hierro...'),
               Expanded(
                 child: Container(
-                  decoration: bodyBoxDecoration,
+                  decoration: constants.bodyBoxDecoration,
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   width: double.infinity,

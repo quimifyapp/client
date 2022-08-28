@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/home_app_bar.dart';
-import '../../constants.dart';
+import 'package:cliente/widgets/home_app_bar.dart';
+import 'package:cliente/constants.dart' as constants;
 
 class MasaMolecularPage extends StatelessWidget {
   const MasaMolecularPage({Key? key}) : super(key: key);
@@ -9,29 +9,27 @@ class MasaMolecularPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: quimifyGradientBoxDecoration,
+      decoration: constants.quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Column(
-            children: [
-              HomeAppBar(
-                title: Text(
-                  'Masa molecular',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
+        body: Column(
+          children: [
+            HomeAppBar(
+              title: Text(
+                'Masa molecular',
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
-              Expanded(
-                child: Container(
-                  decoration: bodyBoxDecoration,
-                  width: double.infinity,
-                ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: constants.bodyBoxDecoration,
+                width: double.infinity,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

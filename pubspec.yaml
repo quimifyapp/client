@@ -54,6 +54,7 @@ flutter:
     - assets/images/icons/logo.png
     - assets/images/icons/search.png
     - assets/images/icons/branding_slim.png
+    - assets/images/icons/lock.png
     - assets/images/icons/3-chloropropylbenzene.png
 
   fonts:
