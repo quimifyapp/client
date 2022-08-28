@@ -19,10 +19,7 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.transparent,
       ),
       // To ignore device's font scaling factor:
-      child: MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-        child: MaterialApp(
-          useInheritedMediaQuery: true,
+      child: MaterialApp(
           // To get rid of debug banner:
           debugShowCheckedModeBanner: false,
           // To set stretched scroll on all Android versions: //TODO: deprecated
@@ -36,7 +33,6 @@ class MyApp extends StatelessWidget {
           title: 'Quimify',
           home: const MainPage(),
         ),
-      ),
     );
   }
 }

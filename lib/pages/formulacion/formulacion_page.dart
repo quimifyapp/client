@@ -39,6 +39,7 @@ class FormulacionPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SectionTitle(title: 'Inorgánica'),
+                        SizedBox(height: 25),
                         InorganicMenu(),
                         SizedBox(height: 40),
                         SectionTitle(title: 'Orgánica'),
