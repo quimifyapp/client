@@ -34,51 +34,51 @@ class _SearchBarState extends State<SearchBar> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  child: TextField(
-                    // Aspect:
-                    cursorColor: Color.fromARGB(255, 34, 34, 34),
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 34, 34, 34),
-                      fontSize: 18
-                    ),
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      // So vertical center works:
-                      isCollapsed: true,
-                      labelText: widget.hint,
-                      // So hint doesn't go up while typing:
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      // To remove bottom border:
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
-                      ),
-                      // Search icon:
-                      prefixIcon: Transform.scale(
-                        scale: 0.7,
-                        child: IconButton(
-                          icon: Image.asset(
-                            'assets/images/icons/search.png',
-                            color: Color.fromARGB(255, 34, 34, 34),
+                  child: Center(
+                    child: TextField(
+                      // Aspect:
+                      cursorColor: Color.fromARGB(255, 34, 34, 34),
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 34, 34, 34), fontSize: 18),
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        // So vertical center works:
+                        isCollapsed: true,
+                        labelText: widget.hint,
+                        // So hint doesn't go up while typing:
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        // To remove bottom border:
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
                           ),
-                          hoverColor: Colors.transparent,
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onPressed: () {},
+                        ),
+                        // Search icon:
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: IconButton(
+                            icon: Image.asset(
+                              'assets/images/icons/search.png',
+                              color: Color.fromARGB(255, 34, 34, 34),
+                            ),
+                            hoverColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onPressed: () {},
+                          ),
                         ),
                       ),
+                      // Logic:
+                      textInputAction: TextInputAction.done,
+                      controller: widget._controller,
+                      onChanged: (String input) {
+                        widget._controller.value =
+                            widget._controller.value.copyWith(
+                          text: widget.corrector(input),
+                        );
+                      },
                     ),
-                    // Logic:
-                    textInputAction: TextInputAction.done,
-                    controller: widget._controller,
-                    onChanged: (String input) {
-                      widget._controller.value =
-                          widget._controller.value.copyWith(
-                        text: widget.corrector(input),
-                      );
-                    },
                   ),
                 ),
               ),

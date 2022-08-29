@@ -37,3 +37,14 @@ String toCapsAfterDigit(String input) {
 
   return result;
 }
+
+String toFirstCap(String input) {
+  if (input.length == 0) return input;
+
+  String result = input[0].toUpperCase();
+
+  for (int i = 1; i < input.length; i++)
+    result += input[i];
+
+  return result;
+}

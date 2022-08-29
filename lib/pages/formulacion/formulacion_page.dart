@@ -28,9 +28,9 @@ class FormulacionPage extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: bodyBoxDecoration,
+                width: double.infinity,
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
-                width: double.infinity,
                 // Vertically scrollable for short devices:
                 child: SingleChildScrollView(
                   child: MarginedColumn.top(
