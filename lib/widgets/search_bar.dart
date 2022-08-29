@@ -30,26 +30,32 @@ class _SearchBarState extends State<SearchBar> {
               Expanded(
                 child: Container(
                   height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
                   child: TextField(
                     // Aspect:
                     cursorColor: Color.fromARGB(255, 34, 34, 34),
                     style: TextStyle(
                       color: Color.fromARGB(255, 34, 34, 34),
+                      fontSize: 18
                     ),
+                    textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
+                      // So vertical center works:
+                      isCollapsed: true,
                       labelText: widget.hint,
                       // So hint doesn't go up while typing:
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.only(top: 35),
+                      // To remove bottom border:
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           width: 0,
                           style: BorderStyle.none,
                         ),
                       ),
+                      // Search icon:
                       prefixIcon: Transform.scale(
                         scale: 0.7,
                         child: IconButton(
