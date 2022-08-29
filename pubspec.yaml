@@ -56,6 +56,8 @@ flutter:
     - assets/images/icons/branding_slim.png
     - assets/images/icons/lock.png
     - assets/images/icons/3-chloropropylbenzene.png
+    - assets/images/icons/molecule.png
+    - assets/images/icons/calculator.png
 
   fonts:
      - family: CeraPro

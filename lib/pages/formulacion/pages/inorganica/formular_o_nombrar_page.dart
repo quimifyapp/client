@@ -14,6 +14,8 @@ class FormularONombrarPage extends StatelessWidget {
     return Container(
       decoration: constants.quimifyGradientBoxDecoration,
       child: Scaffold(
+        // To avoid keyboard resizing:
+        resizeToAvoidBottomInset : false,
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Column(

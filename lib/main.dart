@@ -62,10 +62,13 @@ class _MainPageState extends State<MainPage> {
   int currentPage = 0;
   List<Widget> pages = const [FormulacionPage(), MasaMolecularPage()];
 
+  static double widthFactor = 0.85;
+
   void _goToPage(int page) {
-    setState(() {
-      currentPage = page;
-    });
+    if (currentPage != page)
+      setState(() {
+        currentPage = page;
+      });
   }
 
   @override
@@ -83,23 +86,24 @@ class _MainPageState extends State<MainPage> {
         bottomNavigationBar: Padding(
           padding: EdgeInsets.only(bottom: 50),
           child: FractionallySizedBox(
-            widthFactor: 0.85,
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                gradient: constants.quimifyGradient,
-                borderRadius: BorderRadius.circular(35),
-                border: Border.all(
-                    color: Color.fromARGB(255, 245, 247, 251), width: 0.5),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    child: Row(
+            widthFactor: widthFactor,
+            child: GestureDetector(
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  gradient: constants.quimifyGradient,
+                  borderRadius: BorderRadius.circular(35),
+                  border: Border.all(
+                      color: Color.fromARGB(255, 245, 247, 251), width: 0.5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
                       children: [
-                        Icon(
-                          Icons.share_outlined,
+                        Image.asset(
+                          'assets/images/icons/molecule.png',
+                          width: 20,
                           color:
                               currentPage == 0 ? Colors.white : Colors.white70,
                         ),
@@ -116,20 +120,16 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      _goToPage(0);
-                    },
-                  ),
-                  Container(
-                    height: 40,
-                    width: 0.5,
-                    color: Colors.white,
-                  ),
-                  InkWell(
-                    child: Row(
+                    Container(
+                      height: 40,
+                      width: 0.5,
+                      color: Colors.white,
+                    ),
+                    Row(
                       children: [
-                        Icon(
-                          Icons.calculate_outlined,
+                        Image.asset(
+                          'assets/images/icons/calculator.png',
+                          width: 20,
                           color:
                               currentPage == 1 ? Colors.white : Colors.white70,
                         ),
@@ -146,12 +146,13 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      _goToPage(1);
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
+              onTapDown: (details) {
+                double width = MediaQuery.of(context).size.width * widthFactor;
+                _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);
+              },
             ),
           ),
         ),
