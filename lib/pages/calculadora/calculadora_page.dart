@@ -199,7 +199,9 @@ class _OutputState extends State<Output> {
 }
 
 class Graph extends StatefulWidget {
-  const Graph({Key? key}) : super(key: key);
+  Graph({Key? key}) : super(key: key);
+
+  bool _mol = false;
 
   @override
   State<Graph> createState() => _GraphState();
@@ -229,9 +231,24 @@ class _GraphState extends State<Graph> {
               Spacer(),
               Switch(
                 activeColor: Colors.white,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  value: true,
-                  onChanged: (bool) {}),
+                activeTrackColor: quimifyTeal,
+                inactiveTrackColor: Colors.black12,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: widget._mol,
+                onChanged: (bool) {
+                  setState(() {
+                    widget._mol = !widget._mol;
+                  });
+                },
+              ),
+              Text(
+                'mol',
+                style: TextStyle(
+                  color: widget._mol ? quimifyTeal : Colors.black12 ,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           )
         ],
