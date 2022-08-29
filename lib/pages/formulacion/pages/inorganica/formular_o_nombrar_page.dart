@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/margined_row.dart';
 import 'package:cliente/widgets/search_bar.dart';
-import 'package:cliente/constants.dart' as constants;
+import 'package:cliente/widgets/constants.dart';
+
+import '../../../../tools/text.dart';
 
 class FormularONombrarPage extends StatelessWidget {
   const FormularONombrarPage({Key? key}) : super(key: key);
@@ -12,19 +14,23 @@ class FormularONombrarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: constants.quimifyGradientBoxDecoration,
+      decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
         // To avoid keyboard resizing:
-        resizeToAvoidBottomInset : false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Column(
             children: [
               PageAppBar(title: 'Formulación inorgánica'),
-              SearchBar(hint: 'NaCl, óxido de hierro...'),
+              SearchBar(
+                hint: 'NaCl, óxido de hierro...',
+                corrector: (String input) =>
+                    toSubscripts(toCapsAfterDigit(input)),
+              ),
               Expanded(
                 child: Container(
-                  decoration: constants.bodyBoxDecoration,
+                  decoration: bodyBoxDecoration,
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   width: double.infinity,

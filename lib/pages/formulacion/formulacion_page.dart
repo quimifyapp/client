@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/widgets/margined_row.dart';
-import 'package:cliente/constants.dart' as constants;
+import 'package:cliente/widgets/constants.dart';
 
 class FormulacionPage extends StatelessWidget {
   const FormulacionPage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class FormulacionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: constants.quimifyGradientBoxDecoration,
+      decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -27,7 +27,7 @@ class FormulacionPage extends StatelessWidget {
             // Body:
             Expanded(
               child: Container(
-                decoration: constants.bodyBoxDecoration,
+                decoration: bodyBoxDecoration,
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 width: double.infinity,
@@ -135,7 +135,7 @@ class OrganicMenu extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/images/icons/3-chloropropylbenzene.png',
-                    color: constants.quimifyTeal,
+                    color: quimifyTeal,
                     height: 30,
                   ),
                   SizedBox(height: 12),
@@ -252,7 +252,7 @@ class MenuCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  color: constants.quimifyTeal,
+                  color: quimifyTeal,
                 ),
               ),
               SizedBox(height: 12),
@@ -302,7 +302,7 @@ class MenuCard extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  decoration: constants.quimifyGradientBoxDecoration,
+                  decoration: quimifyGradientBoxDecoration,
                   child: MarginedColumn(
                     top: 17,
                     bottom: 13,

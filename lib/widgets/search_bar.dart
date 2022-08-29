@@ -3,11 +3,20 @@ import 'package:flutter/material.dart';
 import 'margined_column.dart';
 import 'margined_row.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key, required this.hint}) : super(key: key);
+class SearchBar extends StatefulWidget {
+  SearchBar({Key? key, required this.hint, required this.corrector})
+      : super(key: key);
 
   final String hint;
+  final Function(String) corrector;
 
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  State<SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return MarginedRow.center(
@@ -22,15 +31,18 @@ class SearchBar extends StatelessWidget {
                 child: Container(
                   height: 48,
                   child: TextField(
-                    textInputAction: TextInputAction.done,
+                    // Aspect:
                     cursorColor: Color.fromARGB(255, 34, 34, 34),
                     style: TextStyle(
                       color: Color.fromARGB(255, 34, 34, 34),
                     ),
                     decoration: InputDecoration(
-                      // So hint doesn't
+                      labelText: widget.hint,
+                      // So hint doesn't go up while typing:
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      contentPadding: EdgeInsets.all(15),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.only(top: 35),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -38,8 +50,6 @@ class SearchBar extends StatelessWidget {
                           style: BorderStyle.none,
                         ),
                       ),
-                      filled: true,
-                      fillColor: Colors.white,
                       prefixIcon: Transform.scale(
                         scale: 0.7,
                         child: IconButton(
@@ -53,8 +63,16 @@ class SearchBar extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ),
-                      labelText: hint,
                     ),
+                    // Logic:
+                    textInputAction: TextInputAction.done,
+                    controller: widget._controller,
+                    onChanged: (String input) {
+                      widget._controller.value =
+                          widget._controller.value.copyWith(
+                        text: widget.corrector(input),
+                      );
+                    },
                   ),
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
-import 'package:cliente/constants.dart' as constants;
+import 'package:cliente/widgets/constants.dart';
 
 class CalculadoraPage extends StatelessWidget {
   const CalculadoraPage({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class CalculadoraPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: constants.quimifyGradientBoxDecoration,
+      decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -25,7 +25,7 @@ class CalculadoraPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                decoration: constants.bodyBoxDecoration,
+                decoration: bodyBoxDecoration,
                 width: double.infinity,
               ),
             ),
