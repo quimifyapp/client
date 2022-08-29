@@ -1,12 +1,10 @@
+import 'package:cliente/pages/calculadora/calculadora_page.dart';
 import 'package:cliente/pages/formulacion/formulacion_page.dart';
-import 'package:cliente/pages/masa_molecular/masa_molecular_page.dart';
 import 'package:cliente/constants.dart' as constants;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -60,7 +58,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentPage = 0;
-  List<Widget> pages = const [FormulacionPage(), MasaMolecularPage()];
+  List<Widget> pages = const [FormulacionPage(), CalculadoraPage()];
 
   static double widthFactor = 0.85;
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/constants.dart' as constants;
 
-class MasaMolecularPage extends StatelessWidget {
-  const MasaMolecularPage({Key? key}) : super(key: key);
+class CalculadoraPage extends StatelessWidget {
+  const CalculadoraPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MasaMolecularPage extends StatelessWidget {
           children: [
             HomeAppBar(
               title: Text(
-                'Masa molecular',
+                'Calculadora',
                 style: TextStyle(
                     fontSize: 22,
                     color: Colors.white,
