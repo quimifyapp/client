@@ -10,13 +10,13 @@ class SearchBar extends StatefulWidget {
   final String hint;
   final Function(String) corrector;
 
-  final TextEditingController _controller = TextEditingController();
-
   @override
   State<SearchBar> createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MarginedRow.center(
@@ -71,10 +71,9 @@ class _SearchBarState extends State<SearchBar> {
                       ),
                       // Logic:
                       textInputAction: TextInputAction.done,
-                      controller: widget._controller,
+                      controller: _controller,
                       onChanged: (String input) {
-                        widget._controller.value =
-                            widget._controller.value.copyWith(
+                        _controller.value = _controller.value.copyWith(
                           text: widget.corrector(input),
                         );
                       },

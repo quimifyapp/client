@@ -1,4 +1,4 @@
-import 'package:cliente/pages/formulacion/pages/inorganica/formular_o_nombrar_page.dart';
+import 'package:cliente/nomenclature/inorganic/formulate_or_name.dart';
 import 'package:cliente/widgets/margined_column.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +6,8 @@ import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/widgets/margined_row.dart';
 import 'package:cliente/widgets/constants.dart';
 
-class FormulacionPage extends StatelessWidget {
-  const FormulacionPage({Key? key}) : super(key: key);
+class NomenclaturePage extends StatelessWidget {
+  const NomenclaturePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,23 @@ class FormulacionPage extends StatelessWidget {
                         SectionTitle(title: 'Orgánica'),
                         SizedBox(height: 25),
                         OrganicMenu(),
-                        // To keep it visible above navigation bar:
+                        SizedBox(height: 40),
+                        SectionTitle(title: 'Orgánica'),
+                        SizedBox(height: 25),
+                        OrganicMenu(),
+                        SizedBox(height: 40),
+                        SectionTitle(title: 'Orgánica'),
+                        SizedBox(height: 25),
+                        OrganicMenu(),
+                        SizedBox(height: 40),
+                        SectionTitle(title: 'Orgánica'),
+                        SizedBox(height: 25),
+                        OrganicMenu(),
+                        SizedBox(height: 40),
+                        SectionTitle(title: 'Orgánica'),
+                        SizedBox(height: 25),
+                        OrganicMenu(),
+                        // To keep it above navigation bar:
                         SizedBox(height: 50 + 60 + 50),
                       ],
                     ),
@@ -327,7 +343,7 @@ class MenuCard extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const FormularONombrarPage();
+                  return const FormulateOrNamePage();
                 },
               ),
             );

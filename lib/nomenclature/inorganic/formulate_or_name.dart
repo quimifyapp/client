@@ -6,10 +6,10 @@ import 'package:cliente/widgets/margined_row.dart';
 import 'package:cliente/widgets/search_bar.dart';
 import 'package:cliente/widgets/constants.dart';
 
-import '../../../../tools/text.dart';
+import '../../utils/text.dart';
 
-class FormularONombrarPage extends StatelessWidget {
-  const FormularONombrarPage({Key? key}) : super(key: key);
+class FormulateOrNamePage extends StatelessWidget {
+  const FormulateOrNamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
