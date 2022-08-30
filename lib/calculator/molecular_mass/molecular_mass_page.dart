@@ -111,7 +111,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             Row(
                               children: [
                                 Text(
-                                  _result.formula,
+                                  toSubscripts(_result.formula),
                                   style: TextStyle(
                                     color: quimifyTeal,
                                     fontSize: 22,
