@@ -19,7 +19,7 @@ class MolecularMassPage extends StatelessWidget {
         body: Column(
           children: [
             // App bar:
-            HomeAppBar(
+            const HomeAppBar(
               title: Text(
                 'Calculadora',
                 style: TextStyle(
@@ -36,22 +36,22 @@ class MolecularMassPage extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 // Vertically scrollable for short devices:
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.only(top: 30, left: 25, right: 25),
+                  padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
                   child: Column(
                     children: [
-                      Input(),
-                      SizedBox(height: 20),
+                      const Input(),
+                      const SizedBox(height: 20),
                       Output(mass: _result.mass),
-                      SizedBox(height: 25),
-                      CalculateButton(),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
+                      const CalculateButton(),
+                      const SizedBox(height: 25),
                       GraphMenu(
                         mass: _result.mass,
                         elementToGrams: _result.elementToGrams,
                         elementToMoles: _result.elementToMoles,
                       ),
                       // To keep it above navigation bar:
-                      SizedBox(height: 50 + 60 + 50),
+                      const SizedBox(height: 50 + 60 + 50),
                     ],
                   ),
                 ),
@@ -76,7 +76,7 @@ const TextStyle inputOutputStyle = TextStyle(
 );
 
 class Input extends StatefulWidget {
-  Input({Key? key}) : super(key: key);
+  const Input({Key? key}) : super(key: key);
 
   @override
   State<Input> createState() => _InputState();
@@ -92,53 +92,51 @@ class _InputState extends State<Input> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       alignment: Alignment.topLeft,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Fórmula',
             style: subTitleStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: TextField(
-              // Aspect:
-              cursorColor: Color.fromARGB(255, 34, 34, 34),
-              style: inputOutputStyle,
-              textAlignVertical: TextAlignVertical.center,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                isCollapsed: true,
-                //filled: false,
-                labelText: 'H₂SO₄',
-                labelStyle: inputOutputStyle,
-                // So hint doesn't go up while typing:
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: quimifyTeal.withOpacity(0.5)),
-                ),
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: quimifyTeal.withOpacity(0.5)),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: quimifyTeal),
-                ),
+          TextField(
+            // Aspect:
+            cursorColor: const Color.fromARGB(255, 34, 34, 34),
+            style: inputOutputStyle,
+            textAlignVertical: TextAlignVertical.center,
+            keyboardType: TextInputType.visiblePassword,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(bottom: 10),
+              isCollapsed: true,
+              //filled: false,
+              labelText: 'H₂SO₄',
+              labelStyle: inputOutputStyle,
+              // So hint doesn't go up while typing:
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: quimifyTeal.withOpacity(0.5)),
               ),
-              // Logic:
-              textInputAction: TextInputAction.done,
-              controller: _controller,
-              onChanged: (String input) {
-                _controller.value = _controller.value.copyWith(
-                  text: formatFormula(input),
-                );
-              },
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: quimifyTeal.withOpacity(0.5)),
+              ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: quimifyTeal),
+              ),
             ),
+            // Logic:
+            textInputAction: TextInputAction.done,
+            controller: _controller,
+            onChanged: (String input) {
+              _controller.value = _controller.value.copyWith(
+                text: formatFormula(input),
+              );
+            },
           ),
         ],
       ),
@@ -158,24 +156,22 @@ class Output extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       alignment: Alignment.topLeft,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Masa molecular',
             style: subTitleStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Text(
-              mass.toStringAsFixed(3) + ' g/mol',
-              style: inputOutputStyle,
-            ),
+          Text(
+            '${mass.toStringAsFixed(3)} g/mol',
+            style: inputOutputStyle,
           ),
         ],
       ),
@@ -199,7 +195,7 @@ class CalculateButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          child: Text(
+          child: const Text(
             'Calcular',
             style: TextStyle(
               color: Colors.white,
@@ -251,7 +247,7 @@ class _GraphMenuState extends State<GraphMenu> {
 
     int totalMoles = widget.elementToMoles.values.reduce((sum, i) => sum + i);
     widget.elementToMoles.forEach((symbol, moles) {
-      formula += moles > 1 ? '$symbol$moles' : '$symbol';
+      formula += moles > 1 ? '$symbol$moles' : symbol;
       molBars.add(GraphBar(amount: moles, total: totalMoles));
       molAmounts.add(GraphAmount(amount: '$moles mol'));
     });
@@ -261,29 +257,29 @@ class _GraphMenuState extends State<GraphMenu> {
         color: quimifyTeal.withOpacity(0.08),
         borderRadius: BorderRadius.circular(15),
       ),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Column(
         children: [
           Row(
             children: [
               Text(
                 toSubscripts(formula),
-                style: TextStyle(
+                style: const TextStyle(
                   color: quimifyTeal,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Switch(
                 activeColor: Colors.white,
                 activeTrackColor: quimifyTeal,
                 inactiveTrackColor: Colors.black12,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 value: _mol,
-                onChanged: (bool) {
+                onChanged: (bool value) {
                   setState(() {
-                    _mol = !_mol;
+                    _mol = value;
                   });
                 },
               ),
@@ -297,7 +293,7 @@ class _GraphMenuState extends State<GraphMenu> {
               ),
             ],
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           IndexedStack(
             index: _mol ? 1 : 0,
             children: [
@@ -321,7 +317,7 @@ class GraphSymbol extends StatelessWidget {
     return Text(
       symbol,
       textAlign: TextAlign.left,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
       ),
     );
@@ -369,7 +365,7 @@ class GraphAmount extends StatelessWidget {
     return Text(
       amount,
       textAlign: TextAlign.right,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
       ),
     );
@@ -377,7 +373,7 @@ class GraphAmount extends StatelessWidget {
 }
 
 class Graph extends StatelessWidget {
-  Graph(
+  const Graph(
       {Key? key,
       required this.symbols,
       required this.bars,
@@ -399,23 +395,23 @@ class Graph extends StatelessWidget {
                 (symbol) => Column(
                   children: [
                     symbol,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                   ],
                 ),
               )
               .toList(),
         ),
-        SizedBox(width: 15),
+        const SizedBox(width: 15),
         Expanded(
           child: Column(
             children: bars
                 .map(
                   (bar) => Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Column(
                       children: [
                         bar,
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                       ],
                     ),
                   ),
@@ -423,7 +419,7 @@ class Graph extends StatelessWidget {
                 .toList(),
           ),
         ),
-        SizedBox(width: 15),
+        const SizedBox(width: 15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: amounts
@@ -431,7 +427,7 @@ class Graph extends StatelessWidget {
                 (amount) => Column(
                   children: [
                     amount,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                   ],
                 ),
               )

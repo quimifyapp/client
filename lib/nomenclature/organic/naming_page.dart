@@ -18,7 +18,7 @@ class NamingPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            PageAppBar(title: 'Nombrar orgánico'),
+            const PageAppBar(title: 'Nombrar orgánico'),
             // Body:
             Expanded(
               child: Container(
@@ -27,17 +27,17 @@ class NamingPage extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 30),
                     child: Column(
                       children: [
-                        SectionTitle(title: 'Tipo de compuesto'),
-                        SizedBox(height: 25),
+                        const SectionTitle(title: 'Tipo de compuesto'),
+                        const SizedBox(height: 25),
                         Container(
                           padding: EdgeInsets.only(bottom: 30),
                           child: Wrap(
                             direction: Axis.vertical,
                             spacing: 25,
-                            children: [
+                            children: const [
                               MenuCard(
                                 title: 'Simple',
                                 structure: 'CH₂ - CH₂(F)',

@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget {
           bottom: 25,
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 height: 48,
                 width: 48,
                 child: IconButton(
@@ -32,11 +32,11 @@ class HomeAppBar extends StatelessWidget {
                   highlightColor: Colors.transparent,
                   // So it fills container (48 x 48):
                   padding: EdgeInsets.zero,
-                  constraints: BoxConstraints(),
+                  constraints: const BoxConstraints(),
                   onPressed: () {},
                 ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               // Could be text or an image:
               title,
             ],

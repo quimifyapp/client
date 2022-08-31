@@ -4,7 +4,7 @@ import 'margined_column.dart';
 import 'margined_row.dart';
 
 class SearchBar extends StatefulWidget {
-  SearchBar({Key? key, required this.hint, required this.corrector})
+  const SearchBar({Key? key, required this.hint, required this.corrector})
       : super(key: key);
 
   final String hint;
@@ -37,8 +37,8 @@ class _SearchBarState extends State<SearchBar> {
                   child: Center(
                     child: TextField(
                       // Aspect:
-                      cursorColor: Color.fromARGB(255, 34, 34, 34),
-                      style: TextStyle(
+                      cursorColor: const Color.fromARGB(255, 34, 34, 34),
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 34, 34, 34), fontSize: 18),
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
@@ -48,7 +48,7 @@ class _SearchBarState extends State<SearchBar> {
                         // So hint doesn't go up while typing:
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         // To remove bottom border:
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderSide: BorderSide(
                             width: 0,
                             style: BorderStyle.none,
@@ -60,7 +60,7 @@ class _SearchBarState extends State<SearchBar> {
                           child: IconButton(
                             icon: Image.asset(
                               'assets/images/icons/search.png',
-                              color: Color.fromARGB(255, 34, 34, 34),
+                              color: const Color.fromARGB(255, 34, 34, 34),
                             ),
                             hoverColor: Colors.transparent,
                             splashColor: Colors.transparent,
@@ -81,21 +81,21 @@ class _SearchBarState extends State<SearchBar> {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Container(
                 height: 48,
                 width: 48,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: IconButton(
-                  icon: Icon(Icons.camera_alt_outlined),
-                  color: Color.fromARGB(255, 34, 34, 34),
+                  icon: const Icon(Icons.camera_alt_outlined),
+                  color: const Color.fromARGB(255, 34, 34, 34),
                   hoverColor: Colors.transparent,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () {},
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ],

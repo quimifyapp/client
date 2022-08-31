@@ -21,23 +21,23 @@ class PageAppBar extends StatelessWidget {
               Container(
                 height: 48,
                 width: 48,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 106, 233, 218),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   color: Colors.white,
                   hoverColor: Colors.transparent,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 106, 233, 218),
-                  borderRadius: BorderRadius.circular(10),
-                ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),

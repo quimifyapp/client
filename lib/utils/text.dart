@@ -14,10 +14,10 @@ const Map<String, String> digitToSubscript = {
 String toSubscripts(String input) {
   String result = '';
 
-  input.runes.forEach((rune) {
+  for (int rune in input.runes) {
     String char = String.fromCharCode(rune);
     result += digitToSubscript[char] ?? char;
-  });
+  }
 
   return result;
 }
@@ -28,33 +28,36 @@ bool isDigit(String char) {
 }
 
 String toCapsAfterDigit(String input) {
-  if (input.length == 0) return input;
+  if (input.isEmpty) return input;
 
   String result = input[0];
-  for (int i = 1; i < input.length; i++)
+  for (int i = 1; i < input.length; i++) {
     result += isDigit(input[i - 1]) ? input[i].toUpperCase() : input[i];
+  }
 
   return result;
 }
 
 String toFirstCap(String input) {
-  if (input.length == 0) return input;
+  if (input.isEmpty) return input;
 
   String result = input[0].toUpperCase();
 
-  for (int i = 1; i < input.length; i++)
+  for (int i = 1; i < input.length; i++) {
     result += input[i];
+  }
 
   return result;
 }
 
 String toCapsExceptN(String input) {
-  if (input.length == 0) return input;
+  if (input.isEmpty) return input;
 
   String result = '';
 
-  for (int i = 0; i < input.length; i++)
-    result += input[i] == 'N' ? input[i].toLowerCase() : input[i];
+  for (int i = 0; i < input.length; i++) {
+    result += input[i] != 'N' ? input[i].toLowerCase() : input[i];
+  }
 
   return result;
 }
@@ -70,4 +73,3 @@ String formatOrganicName(String name) {
 String formatFormula(String formula) {
   return toSubscripts(toCapsAfterDigit(toFirstCap(formula)));
 }
-

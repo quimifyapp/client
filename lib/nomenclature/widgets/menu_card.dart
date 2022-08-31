@@ -45,7 +45,7 @@ class MenuCard extends StatelessWidget {
   static Text _nameFor(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
@@ -55,9 +55,9 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget body;
-    if (_custom)
+    if (_custom) {
       body = customBody!;
-    else if (_locked)
+    } else if (_locked) {
       body = MarginedColumn.center(
         margin: 15,
         child: Column(
@@ -67,15 +67,15 @@ class MenuCard extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/lock.png',
                 height: 35,
-                color: Color.fromARGB(255, 70, 70, 70),
+                color: const Color.fromARGB(255, 70, 70, 70),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Center(child: _nameFor('Próximamente')),
           ],
         ),
       );
-    else
+    } else {
       body = MarginedColumn.center(
         margin: 15,
         child: MarginedRow.center(
@@ -85,16 +85,16 @@ class MenuCard extends StatelessWidget {
             children: [
               Text(
                 structure!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
                   color: quimifyTeal,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 name!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -103,8 +103,20 @@ class MenuCard extends StatelessWidget {
           ),
         ),
       );
+    }
 
     return InkWell(
+      onTap: (page == null)
+          ? () {}
+          : () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return page!;
+                  },
+                ),
+              );
+            },
       child: Container(
         width: 290,
         decoration: BoxDecoration(
@@ -124,7 +136,7 @@ class MenuCard extends StatelessWidget {
                   margin: 25,
                   child: Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -137,17 +149,6 @@ class MenuCard extends StatelessWidget {
           ],
         ),
       ),
-      onTap: (page == null)
-          ? () {}
-          : () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return page!;
-                  },
-                ),
-              );
-            },
     );
   }
 }

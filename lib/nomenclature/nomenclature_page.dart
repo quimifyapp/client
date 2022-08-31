@@ -40,7 +40,7 @@ class NomenclaturePage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         SectionTitle(title: 'Inorgánica'),
                         SizedBox(height: 25),
                         InorganicMenu(),
@@ -68,7 +68,7 @@ class InorganicMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HorizontalCardsMenu(
+    return const HorizontalCardsMenu(
       cards: [
         MenuCard(
           title: 'Formular o nombrar',
@@ -106,8 +106,8 @@ class OrganicMenu extends StatelessWidget {
                     color: quimifyTeal,
                     height: 30,
                   ),
-                  SizedBox(height: 12),
-                  Text(
+                  const SizedBox(height: 12),
+                  const Text(
                     '3-cloropropilbenceno',
                     style: TextStyle(
                       fontSize: 16,
@@ -118,15 +118,15 @@ class OrganicMenu extends StatelessWidget {
               ),
             ),
           ),
-          page: FindingFormulaPage(),
+          page: const FindingFormulaPage(),
         ),
-        MenuCard(
+        const MenuCard(
           title: 'Nombrar',
           structure: 'CH₂ - CH₂(F)',
           name: '1-fluoroetano',
           page: NamingPage(),
         ),
-        MenuCard.locked(
+        const MenuCard.locked(
           title: 'Practicar',
         ),
       ],
@@ -144,7 +144,7 @@ class HorizontalCardsMenu extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Wrap(
             spacing: 15,
             children: cards,
