@@ -9,38 +9,41 @@ class PageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MarginedRow.center(
-      margin: 25,
-      child: MarginedColumn(
-        top: 15,
-        bottom: 25,
-        child: Row(
-          children: [
-            Container(
-              height: 48,
-              width: 48,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: Colors.white,
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 106, 233, 218),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            SizedBox(width: 20),
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: 20,
+    return SafeArea(
+      bottom: false,
+      child: MarginedRow.center(
+        margin: 25,
+        child: MarginedColumn(
+          top: 15,
+          bottom: 25,
+          child: Row(
+            children: [
+              Container(
+                height: 48,
+                width: 48,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
                   color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
+                  hoverColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 106, 233, 218),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              SizedBox(width: 20),
+              Text(
+                title,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
         ),
       ),
     );

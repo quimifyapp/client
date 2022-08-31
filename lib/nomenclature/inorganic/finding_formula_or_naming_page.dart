@@ -9,8 +9,8 @@ import 'package:cliente/widgets/constants.dart';
 
 import '../../utils/text.dart';
 
-class FormulateOrNamePage extends StatelessWidget {
-  const FormulateOrNamePage({Key? key}) : super(key: key);
+class FindingFormulaOrNamingPage extends StatelessWidget {
+  const FindingFormulaOrNamingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,13 @@ class FormulateOrNamePage extends StatelessWidget {
               SearchBar(
                 hint: 'NaCl, óxido de hierro...',
                 corrector: (String input) =>
-                    toSubscripts(toCapsAfterDigit(input)),
+                    formatInorganicFormulaOrName(input),
               ),
               Expanded(
                 child: Container(
                   decoration: bodyBoxDecoration,
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
-                  width: double.infinity,
                   child: MarginedRow.center(
                     margin: 25,
                     child: Expanded(

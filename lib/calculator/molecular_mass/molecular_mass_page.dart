@@ -5,46 +5,13 @@ import '../../widgets/constants.dart';
 import '../../widgets/home_app_bar.dart';
 import 'molecular_mass_result.dart';
 
-class MolecularMassPage extends StatefulWidget {
+class MolecularMassPage extends StatelessWidget {
   MolecularMassPage({Key? key}) : super(key: key);
 
-  @override
-  State<MolecularMassPage> createState() => _MolecularMassPageState();
-}
-
-class _MolecularMassPageState extends State<MolecularMassPage> {
-  String _input = 'H₂SO₄';
-  bool _mol = false;
-
-  MolecularMassResult _result = MolecularMassResult();
-
-  List<GraphSymbol> _symbols = [];
-  List<GraphBar> _gramBars = [], _molBars = [];
-  List<GraphAmount> _gramAmounts = [], _molAmounts = [];
+  final MolecularMassResult _result = MolecularMassResult();
 
   @override
   Widget build(BuildContext context) {
-    _symbols = [];
-
-    _gramBars = [];
-    _gramAmounts = [];
-    _result.elementToGrams.forEach((symbol, grams) {
-      _symbols.add(GraphSymbol(symbol: symbol));
-
-      _gramBars.add(GraphBar(amount: grams, total: _result.mass));
-
-      int rounded_grams = grams.round();
-      _gramAmounts.add(GraphAmount(amount: '$rounded_grams g'));
-    });
-
-    _molBars = [];
-    _molAmounts = [];
-    _result.elementToMoles.forEach((symbol, moles) {
-      _molBars.add(GraphBar(amount: moles, total: _result.moles));
-
-      _molAmounts.add(GraphAmount(amount: '$moles mol'));
-    });
-
     return Container(
       decoration: quimifyGradientBoxDecoration,
       child: Scaffold(
@@ -65,7 +32,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
             Expanded(
               child: Container(
                 decoration: bodyBoxDecoration,
-                width: double.infinity,
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 // Vertically scrollable for short devices:
@@ -75,89 +41,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     children: [
                       Input(),
                       SizedBox(height: 20),
-                      Output(mass: _result.mass.toStringAsFixed(3)),
+                      Output(mass: _result.mass),
                       SizedBox(height: 25),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: quimifyGradient,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            'Calcular',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
+                      CalculateButton(),
                       SizedBox(height: 25),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: quimifyTeal.withOpacity(0.08),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  toSubscripts(_result.formula),
-                                  style: TextStyle(
-                                    color: quimifyTeal,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Spacer(),
-                                Switch(
-                                  activeColor: Colors.white,
-                                  activeTrackColor: quimifyTeal,
-                                  inactiveTrackColor: Colors.black12,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  value: _mol,
-                                  onChanged: (bool) {
-                                    setState(() {
-                                      _mol = !_mol;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'Pasar a mol',
-                                  style: TextStyle(
-                                    color: _mol ? quimifyTeal : Colors.black12,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 15),
-                            IndexedStack(
-                              index: _mol ? 1 : 0,
-                              children: [
-                                Graph(
-                                    symbols: _symbols,
-                                    bars: _gramBars,
-                                    amounts: _gramAmounts),
-                                Graph(
-                                    symbols: _symbols,
-                                    bars: _molBars,
-                                    amounts: _molAmounts),
-                              ],
-                            ),
-                          ],
-                        ),
+                      GraphMenu(
+                        mass: _result.mass,
+                        elementToGrams: _result.elementToGrams,
+                        elementToMoles: _result.elementToMoles,
                       ),
                       // To keep it above navigation bar:
                       SizedBox(height: 50 + 60 + 50),
@@ -208,7 +99,7 @@ class _InputState extends State<Input> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Fórmula:',
+            'Fórmula',
             style: subTitleStyle,
           ),
           SizedBox(
@@ -244,7 +135,7 @@ class _InputState extends State<Input> {
               controller: _controller,
               onChanged: (String input) {
                 _controller.value = _controller.value.copyWith(
-                  text: toSubscripts(toCapsAfterDigit(toFirstCap(input))),
+                  text: formatFormula(input),
                 );
               },
             ),
@@ -258,7 +149,7 @@ class _InputState extends State<Input> {
 class Output extends StatelessWidget {
   const Output({Key? key, required this.mass}) : super(key: key);
 
-  final String mass;
+  final double mass;
 
   @override
   Widget build(BuildContext context) {
@@ -274,7 +165,7 @@ class Output extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Masa molecular:',
+            'Masa molecular',
             style: subTitleStyle,
           ),
           SizedBox(
@@ -282,9 +173,137 @@ class Output extends StatelessWidget {
           ),
           Container(
             child: Text(
-              mass + ' g/mol',
+              mass.toStringAsFixed(3) + ' g/mol',
               style: inputOutputStyle,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CalculateButton extends StatelessWidget {
+  const CalculateButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        gradient: quimifyGradient,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: SizedBox.expand(
+        child: MaterialButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Text(
+            'Calcular',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+}
+
+class GraphMenu extends StatefulWidget {
+  const GraphMenu(
+      {Key? key,
+      required this.mass,
+      required this.elementToGrams,
+      required this.elementToMoles})
+      : super(key: key);
+
+  final double mass;
+  final Map<String, double> elementToGrams;
+  final Map<String, int> elementToMoles;
+
+  @override
+  State<GraphMenu> createState() => _GraphMenuState();
+}
+
+class _GraphMenuState extends State<GraphMenu> {
+  bool _mol = false;
+
+  @override
+  Widget build(BuildContext context) {
+    List<GraphSymbol> symbols = [];
+    List<GraphBar> gramBars = [];
+    List<GraphAmount> gramAmounts = [];
+
+    widget.elementToGrams.forEach((symbol, grams) {
+      symbols.add(GraphSymbol(symbol: symbol));
+      gramBars.add(GraphBar(amount: grams, total: widget.mass));
+      gramAmounts.add(GraphAmount(amount: '${grams.round()} g'));
+    });
+
+    String formula = '';
+    List<GraphBar> molBars = [];
+    List<GraphAmount> molAmounts = [];
+
+    int totalMoles = widget.elementToMoles.values.reduce((sum, i) => sum + i);
+    widget.elementToMoles.forEach((symbol, moles) {
+      formula += moles > 1 ? '$symbol$moles' : '$symbol';
+      molBars.add(GraphBar(amount: moles, total: totalMoles));
+      molAmounts.add(GraphAmount(amount: '$moles mol'));
+    });
+
+    return Container(
+      decoration: BoxDecoration(
+        color: quimifyTeal.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      padding: EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                toSubscripts(formula),
+                style: TextStyle(
+                  color: quimifyTeal,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Spacer(),
+              Switch(
+                activeColor: Colors.white,
+                activeTrackColor: quimifyTeal,
+                inactiveTrackColor: Colors.black12,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: _mol,
+                onChanged: (bool) {
+                  setState(() {
+                    _mol = !_mol;
+                  });
+                },
+              ),
+              Text(
+                'Pasar a mol',
+                style: TextStyle(
+                  color: _mol ? quimifyTeal : Colors.black12,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15),
+          IndexedStack(
+            index: _mol ? 1 : 0,
+            children: [
+              Graph(symbols: symbols, bars: gramBars, amounts: gramAmounts),
+              Graph(symbols: symbols, bars: molBars, amounts: molAmounts),
+            ],
           ),
         ],
       ),
@@ -365,9 +384,9 @@ class Graph extends StatelessWidget {
       required this.amounts})
       : super(key: key);
 
-  List<GraphSymbol> symbols = [];
-  List<GraphBar> bars = [];
-  List<GraphAmount> amounts = [];
+  final List<GraphSymbol> symbols;
+  final List<GraphBar> bars;
+  final List<GraphAmount> amounts;
 
   @override
   Widget build(BuildContext context) {
