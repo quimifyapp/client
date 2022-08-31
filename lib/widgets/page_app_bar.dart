@@ -1,5 +1,3 @@
-import 'package:cliente/widgets/margined_column.dart';
-import 'package:cliente/widgets/margined_row.dart';
 import 'package:flutter/material.dart';
 
 class PageAppBar extends StatelessWidget {
@@ -11,12 +9,9 @@ class PageAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       bottom: false,
-      child: MarginedRow.center(
-        margin: 25,
-        child: MarginedColumn(
-          top: 15,
-          bottom: 25,
-          child: Row(
+      child: Container(
+        padding: const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
+        child: Row(
             children: [
               Container(
                 height: 48,
@@ -45,7 +40,6 @@ class PageAppBar extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

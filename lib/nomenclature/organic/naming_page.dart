@@ -26,44 +26,44 @@ class NamingPage extends StatelessWidget {
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 child: SingleChildScrollView(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Column(
-                      children: [
-                        const SectionTitle(title: 'Tipo de compuesto'),
-                        const SizedBox(height: 25),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 30),
-                          child: Wrap(
-                            direction: Axis.vertical,
-                            spacing: 25,
-                            children: const [
-                              MenuCard(
-                                title: 'Simple',
-                                structure: 'CH₂ - CH₂(F)',
-                                name: '1-fluoroetano',
-                                page: NamingSimplePage(),
-                              ),
-                              MenuCard(
-                                title: 'Éter',
-                                structure: 'CH₃ - O - CH₃',
-                                name: 'dimetiléter',
-                                page: NamingEtherPage(),
-                              ),
-                              MenuCard.locked(
-                                title: 'Éster',
-                              ),
-                              MenuCard.locked(
-                                title: 'Aromático',
-                              ),
-                              MenuCard.locked(
-                                title: 'Cíclico',
-                              ),
-                            ],
-                          ),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: Column(
+                    children: [
+                      const SectionTitle(title: 'Tipo de compuesto'),
+                      const SizedBox(height: 25),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: const [
+                            MenuCard(
+                              title: 'Simple',
+                              structure: 'CH₂ - CH₂(F)',
+                              name: '1-fluoroetano',
+                              page: NamingSimplePage(),
+                            ),
+                            SizedBox(height: 25),
+                            MenuCard(
+                              title: 'Éter',
+                              structure: 'CH₃ - O - CH₃',
+                              name: 'dimetiléter',
+                              page: NamingEtherPage(),
+                            ),
+                            SizedBox(height: 25),
+                            MenuCard.locked(
+                              title: 'Éster',
+                            ),
+                            SizedBox(height: 25),
+                            MenuCard.locked(
+                              title: 'Aromático',
+                            ),
+                            SizedBox(height: 25),
+                            MenuCard.locked(
+                              title: 'Cíclico',
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

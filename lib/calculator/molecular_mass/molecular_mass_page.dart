@@ -36,7 +36,7 @@ class MolecularMassPage extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 // Vertically scrollable for short devices:
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(top: 30, left: 25, right: 25),
+                  padding: const EdgeInsets.all(25),
                   child: Column(
                     children: [
                       const Input(),
@@ -51,7 +51,7 @@ class MolecularMassPage extends StatelessWidget {
                         elementToMoles: _result.elementToMoles,
                       ),
                       // To keep it above navigation bar:
-                      const SizedBox(height: 50 + 60 + 50),
+                      const SizedBox(height: 50 + 60),
                     ],
                   ),
                 ),

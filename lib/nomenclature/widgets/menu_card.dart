@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/constants.dart';
-import '../../widgets/margined_column.dart';
-import '../../widgets/margined_row.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard(
       {Key? key,
+      this.width,
       required this.title,
       required this.structure,
       required this.name,
@@ -17,6 +16,7 @@ class MenuCard extends StatelessWidget {
 
   const MenuCard.custom(
       {Key? key,
+      this.width,
       required this.title,
       required this.customBody,
       required this.page})
@@ -25,13 +25,15 @@ class MenuCard extends StatelessWidget {
         name = null,
         structure = null;
 
-  const MenuCard.locked({Key? key, required this.title})
+  const MenuCard.locked({Key? key, this.width, required this.title})
       : _custom = false,
         _locked = true,
         customBody = null,
         structure = null,
         name = null,
         page = null;
+
+  final double? width;
 
   final String title;
   final Widget? customBody;
@@ -58,8 +60,8 @@ class MenuCard extends StatelessWidget {
     if (_custom) {
       body = customBody!;
     } else if (_locked) {
-      body = MarginedColumn.center(
-        margin: 15,
+      body = Container(
+        padding: const EdgeInsets.symmetric(vertical: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -76,39 +78,37 @@ class MenuCard extends StatelessWidget {
         ),
       );
     } else {
-      body = MarginedColumn.center(
-        margin: 15,
-        child: MarginedRow.center(
-          margin: 25,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                structure!,
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w600,
-                  color: quimifyTeal,
-                ),
+      body = Container(
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 15, left: 25, right: 25),
+        alignment: Alignment.centerLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              structure!,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                color: quimifyTeal,
               ),
-              const SizedBox(height: 12),
-              Text(
-                name!,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              name!,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }
 
     return InkWell(
-      onTap: (page == null)
-          ? () {}
-          : () {
+      onTap: page != null
+          ? () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
@@ -116,9 +116,10 @@ class MenuCard extends StatelessWidget {
                   },
                 ),
               );
-            },
+            }
+          : () {},
       child: Container(
-        width: 290,
+        width: width,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -129,19 +130,15 @@ class MenuCard extends StatelessWidget {
           children: [
             Container(
               decoration: quimifyGradientBoxDecoration,
-              child: MarginedColumn(
-                top: 17,
-                bottom: 13,
-                child: MarginedRow.center(
-                  margin: 25,
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+              padding: const EdgeInsets.only(
+                  top: 17, bottom: 13, left: 25, right: 25),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
