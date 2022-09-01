@@ -66,6 +66,7 @@ class _SearchBarState extends State<SearchBar> {
                       ),
                     ),
                     // Logic:
+                    scribbleEnabled: false,
                     textInputAction: TextInputAction.done,
                     controller: _controller,
                     onChanged: (String input) {

@@ -37,10 +37,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   void _scrollToStart() {
-    // Goes to the end of the page:
+    // Goes to the top of the page:
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
-        _scrollController.position.minScrollExtent,
+        0,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 300),
       );
@@ -101,69 +101,77 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   padding: const EdgeInsets.all(25),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.all(20),
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Fórmula',
-                              style: subTitleStyle,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            TextField(
-                              // Aspect:
-                              cursorColor:
-                                  const Color.fromARGB(255, 34, 34, 34),
-                              style: inputOutputStyle,
-                              keyboardType: TextInputType.visiblePassword,
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.only(bottom: 3),
-                                isCollapsed: true,
-                                labelText: _labelText,
-                                labelStyle: const TextStyle(
-                                  color: Colors.black12,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                // So hint doesn't go up while typing:
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: quimifyTeal.withOpacity(0.5)),
-                                ),
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: quimifyTeal.withOpacity(0.5)),
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: quimifyTeal),
-                                ),
+                      GestureDetector(
+                        onTap: () => _scrollToStart(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.all(20),
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Fórmula',
+                                style: subTitleStyle,
                               ),
-                              // Logic:
-                              controller: _textController,
-                              onChanged: (String input) {
-                                _textController.value =
-                                    _textController.value.copyWith(
-                                  text: formatFormula(input),
-                                );
-                              },
-                              textInputAction: TextInputAction.search,
-                              onSubmitted: (input) => _calculate(input),
-                              onTap: _scrollToStart,
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              TextField(
+                                // Aspect:
+                                cursorColor:
+                                    const Color.fromARGB(255, 34, 34, 34),
+                                style: inputOutputStyle,
+                                keyboardType: TextInputType.visiblePassword,
+                                textAlignVertical: TextAlignVertical.center,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(bottom: 3),
+                                  isCollapsed: true,
+                                  labelText: _labelText,
+                                  labelStyle: const TextStyle(
+                                    color: Colors.black12,
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  // So hint doesn't go up while typing:
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: quimifyTeal.withOpacity(0.5)),
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: quimifyTeal.withOpacity(0.5)),
+                                  ),
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: quimifyTeal),
+                                  ),
+                                ),
+                                // Logic:
+                                scribbleEnabled: false,
+                                controller: _textController,
+                                onChanged: (String input) {
+                                  _textController.value =
+                                      _textController.value.copyWith(
+                                    text: formatFormula(input),
+                                  );
+                                },
+                                textInputAction: TextInputAction.search,
+                                onSubmitted: (input) => _calculate(input),
+                                onTap: () {
+                                  Future.delayed(
+                                      const Duration(milliseconds: 200),
+                                      _scrollToStart);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -315,6 +323,18 @@ class _GraphMenuState extends State<GraphMenu> {
               Expanded(
                 child: AutoSizeText(
                   toSubscripts(formula),
+                  minFontSize: 18,
+                  overflowReplacement: const Text(
+                    'Diagrama',
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: quimifyTeal,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  stepGranularity: 0.1,
+                  maxLines: 1,
                   style: const TextStyle(
                     color: quimifyTeal,
                     fontSize: 22,
@@ -354,6 +374,72 @@ class _GraphMenuState extends State<GraphMenu> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class Graph extends StatelessWidget {
+  const Graph(
+      {Key? key,
+        required this.symbols,
+        required this.bars,
+        required this.amounts})
+      : super(key: key);
+
+  final List<GraphSymbol> symbols;
+  final List<GraphBar> bars;
+  final List<GraphAmount> amounts;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: symbols
+              .map(
+                (symbol) => Column(
+              children: [
+                symbol,
+                const SizedBox(height: 15),
+              ],
+            ),
+          )
+              .toList(),
+        ),
+        const SizedBox(width: 15),
+        Expanded(
+          child: Column(
+            children: bars
+                .map(
+                  (bar) => Container(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Column(
+                  children: [
+                    bar,
+                    const SizedBox(height: 15),
+                  ],
+                ),
+              ),
+            )
+                .toList(),
+          ),
+        ),
+        const SizedBox(width: 15),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: amounts
+              .map(
+                (amount) => Column(
+              children: [
+                amount,
+                const SizedBox(height: 15),
+              ],
+            ),
+          )
+              .toList(),
+        ),
+      ],
     );
   }
 }
@@ -421,72 +507,6 @@ class GraphAmount extends StatelessWidget {
       style: const TextStyle(
         fontSize: 16,
       ),
-    );
-  }
-}
-
-class Graph extends StatelessWidget {
-  const Graph(
-      {Key? key,
-      required this.symbols,
-      required this.bars,
-      required this.amounts})
-      : super(key: key);
-
-  final List<GraphSymbol> symbols;
-  final List<GraphBar> bars;
-  final List<GraphAmount> amounts;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: symbols
-              .map(
-                (symbol) => Column(
-                  children: [
-                    symbol,
-                    const SizedBox(height: 15),
-                  ],
-                ),
-              )
-              .toList(),
-        ),
-        const SizedBox(width: 15),
-        Expanded(
-          child: Column(
-            children: bars
-                .map(
-                  (bar) => Container(
-                    padding: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(
-                      children: [
-                        bar,
-                        const SizedBox(height: 15),
-                      ],
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-        ),
-        const SizedBox(width: 15),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: amounts
-              .map(
-                (amount) => Column(
-                  children: [
-                    amount,
-                    const SizedBox(height: 15),
-                  ],
-                ),
-              )
-              .toList(),
-        ),
-      ],
     );
   }
 }
