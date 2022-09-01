@@ -27,12 +27,14 @@ bool isDigit(String char) {
       digitToSubscript.containsValue(char);
 }
 
-String toCapsAfterDigit(String input) {
+String toCapsAfterDigitOrParentheses(String input) {
   if (input.isEmpty) return input;
 
   String result = input[0];
   for (int i = 1; i < input.length; i++) {
-    result += isDigit(input[i - 1]) ? input[i].toUpperCase() : input[i];
+    result += isDigit(input[i - 1]) || RegExp('\\(|\\)').hasMatch(input[i - 1])
+        ? input[i].toUpperCase()
+        : input[i];
   }
 
   return result;
@@ -75,8 +77,12 @@ String toDigits(String input) {
   return result;
 }
 
+String noSpaces(String input) {
+  return input.isNotEmpty ? input.replaceAll(RegExp(r'\s+'), '') : '';
+}
+
 String formatInorganicFormulaOrName(String formulaOrName) {
-  return toSubscripts(toCapsAfterDigit(formulaOrName));
+  return toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
 }
 
 String formatOrganicName(String name) {
@@ -84,5 +90,5 @@ String formatOrganicName(String name) {
 }
 
 String formatFormula(String formula) {
-  return toSubscripts(toCapsAfterDigit(toFirstCap(formula)));
+  return toSubscripts(toCapsAfterDigitOrParentheses(toFirstCap(formula)));
 }

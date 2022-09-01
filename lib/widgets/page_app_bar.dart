@@ -10,36 +10,41 @@ class PageAppBar extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Container(
-        padding: const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
         child: Row(
-            children: [
-              Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 106, 233, 218),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  color: Colors.white,
-                  hoverColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+          children: [
+            Container(
+              height: 48,
+              width: 48,
+              // To avoid rounded corners overflow:
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 106, 233, 218),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SizedBox.expand(
+                child: MaterialButton(
+                  padding: const EdgeInsets.all(0),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
-              const SizedBox(width: 20),
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
         ),
+      ),
     );
   }
 }

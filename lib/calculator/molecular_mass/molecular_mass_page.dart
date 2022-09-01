@@ -6,6 +6,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/text.dart';
+import '../../widgets/button.dart';
 import '../../widgets/constants.dart';
 import '../../widgets/home_app_bar.dart';
 import 'molecular_mass_result.dart';
@@ -20,8 +21,11 @@ class MolecularMassPage extends StatefulWidget {
 class _MolecularMassPageState extends State<MolecularMassPage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
-  String _labelText = 'H₂SO₄';
+  final FocusNode _textFocusNode = FocusNode();
 
+  // Initial values:
+
+  String _labelText = 'H₂SO₄';
   MolecularMassResult _result = MolecularMassResult(true, 97.96737971,
       {'H': 2.01588, 'S': 32.066, 'O': 63.976}, {'H': 2, 'S': 1, 'O': 4}, '');
 
@@ -37,37 +41,62 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   void _scrollToStart() {
-    // Goes to the top of the page:
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-        0,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 300),
-      );
-    });
+    // Goes to the top of the page after a delay:
+    Future.delayed(
+        const Duration(milliseconds: 200),
+        () => WidgetsBinding.instance.addPostFrameCallback((_) {
+              _scrollController.animateTo(
+                0,
+                curve: Curves.easeOut,
+                duration: const Duration(milliseconds: 300),
+              );
+            }));
+  }
+
+  void _startTyping() {
+    // Like if the TextField was tapped:
+    _textFocusNode.requestFocus();
+    _scrollToStart();
+  }
+
+  void _focusTextIfEmpty(String input) {
+    if (noSpaces(input).isEmpty) {
+      _startTyping();
+    }
   }
 
   Future<void> _calculate(String input) async {
-    if (input.isNotEmpty) {
-      var url = Uri.http(
+    if (noSpaces(input).isNotEmpty) {
+      Uri url = Uri.http(
           '192.168.1.90:8080', 'masamolecular', {'formula': toDigits(input)});
-      var response = await http.get(url);
+      http.Response response = await http.get(url);
 
-      MolecularMassResult result =
-          MolecularMassResult.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        String body = utf8.decode(response.bodyBytes);
+        MolecularMassResult result = MolecularMassResult.fromJson(body);
 
-      setState(() {
-        _result = result;
-      });
+        if (result.present) {
+          setState(() => _result = result);
 
-      // UI/UX actions:
+          // UI/UX actions:
 
-      _labelText = input; // Clears input
-      _textController.clear(); // Sets previous input as label
+          _labelText = input; // Clears input
+          _textController.clear(); // Sets previous input as label
 
-      FocusManager.instance.primaryFocus?.unfocus(); // Hides keyboard
+          _textFocusNode.unfocus(); // Hides keyboard
 
-      _scrollToEnd(); // Goes to the end of the page
+          _scrollToEnd(); // Goes to the end of the page
+        } else {
+          showDialog<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('No encontrado'),
+                  content: Text(toSubscripts(result.error)),
+                );
+              });
+        }
+      }
     }
   }
 
@@ -102,8 +131,12 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () => _scrollToStart(),
+                        onTap: () {
+                          // Like if the TextField was tapped:
+                          _startTyping();
+                        },
                         child: Container(
+                          height: 110,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -111,16 +144,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           padding: const EdgeInsets.all(20),
                           alignment: Alignment.topLeft,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
                                 'Fórmula',
                                 style: subTitleStyle,
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              const Spacer(),
                               TextField(
                                 // Aspect:
                                 cursorColor:
@@ -141,20 +171,17 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                   // So hint doesn't go up while typing:
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
-                                  enabledBorder: UnderlineInputBorder(
+                                  // To remove bottom border:
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: quimifyTeal.withOpacity(0.5)),
-                                  ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: quimifyTeal.withOpacity(0.5)),
-                                  ),
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(color: quimifyTeal),
+                                      width: 0,
+                                      style: BorderStyle.none,
+                                    ),
                                   ),
                                 ),
                                 // Logic:
                                 scribbleEnabled: false,
+                                focusNode: _textFocusNode,
                                 controller: _textController,
                                 onChanged: (String input) {
                                   _textController.value =
@@ -164,11 +191,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                 },
                                 textInputAction: TextInputAction.search,
                                 onSubmitted: (input) => _calculate(input),
-                                onTap: () {
-                                  Future.delayed(
-                                      const Duration(milliseconds: 200),
-                                      _scrollToStart);
-                                },
+                                onTap: _scrollToStart,
                               ),
                             ],
                           ),
@@ -177,28 +200,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                       const SizedBox(height: 20),
                       Output(mass: _result.mass),
                       const SizedBox(height: 25),
-                      Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: quimifyGradient,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: SizedBox.expand(
-                          child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            onPressed: () => _calculate(_textController.text),
-                            child: const Text(
-                              'Calcular',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                      Button(
+                        onPressed: () {
+                          _focusTextIfEmpty(_textController.text);
+                          _calculate(_textController.text);
+                        },
                       ),
                       const SizedBox(height: 25),
                       GraphMenu(
@@ -239,23 +245,21 @@ class Output extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 115,
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      padding: const EdgeInsets.all(20),
-      alignment: Alignment.topLeft,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Masa molecular',
             style: subTitleStyle,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const Spacer(),
           AutoSizeText(
             '${mass.toStringAsFixed(3)} g/mol',
             stepGranularity: 0.1,
@@ -325,7 +329,7 @@ class _GraphMenuState extends State<GraphMenu> {
                   toSubscripts(formula),
                   minFontSize: 18,
                   overflowReplacement: const Text(
-                    'Diagrama',
+                    'Proporciones',
                     maxLines: 1,
                     style: TextStyle(
                       color: quimifyTeal,
@@ -381,9 +385,9 @@ class _GraphMenuState extends State<GraphMenu> {
 class Graph extends StatelessWidget {
   const Graph(
       {Key? key,
-        required this.symbols,
-        required this.bars,
-        required this.amounts})
+      required this.symbols,
+      required this.bars,
+      required this.amounts})
       : super(key: key);
 
   final List<GraphSymbol> symbols;
@@ -399,12 +403,12 @@ class Graph extends StatelessWidget {
           children: symbols
               .map(
                 (symbol) => Column(
-              children: [
-                symbol,
-                const SizedBox(height: 15),
-              ],
-            ),
-          )
+                  children: [
+                    symbol,
+                    const SizedBox(height: 15),
+                  ],
+                ),
+              )
               .toList(),
         ),
         const SizedBox(width: 15),
@@ -413,15 +417,15 @@ class Graph extends StatelessWidget {
             children: bars
                 .map(
                   (bar) => Container(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(
-                  children: [
-                    bar,
-                    const SizedBox(height: 15),
-                  ],
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(
+                      children: [
+                        bar,
+                        const SizedBox(height: 15),
+                      ],
+                    ),
+                  ),
+                )
                 .toList(),
           ),
         ),
@@ -431,12 +435,12 @@ class Graph extends StatelessWidget {
           children: amounts
               .map(
                 (amount) => Column(
-              children: [
-                amount,
-                const SizedBox(height: 15),
-              ],
-            ),
-          )
+                  children: [
+                    amount,
+                    const SizedBox(height: 15),
+                  ],
+                ),
+              )
               .toList(),
         ),
       ],
