@@ -62,6 +62,19 @@ String toCapsExceptN(String input) {
   return result;
 }
 
+String toDigits(String input) {
+  String result = '';
+
+  for (int rune in input.runes) {
+    String char = String.fromCharCode(rune);
+    result += digitToSubscript.keys.singleWhere(
+        (keys) => digitToSubscript[keys] == char,
+        orElse: () => char);
+  }
+
+  return result;
+}
+
 String formatInorganicFormulaOrName(String formulaOrName) {
   return toSubscripts(toCapsAfterDigit(formulaOrName));
 }

@@ -37,15 +37,15 @@ class NamingPage extends StatelessWidget {
                           children: const [
                             MenuCard(
                               title: 'Simple',
-                              structure: 'CH₂ - CH₂(F)',
-                              name: '1-fluoroetano',
+                              structure: 'CH₃ - CH₂(CH₃) - CH₃',
+                              name: '2-metilpropano',
                               page: NamingSimplePage(),
                             ),
                             SizedBox(height: 25),
                             MenuCard(
                               title: 'Éter',
-                              structure: 'CH₃ - O - CH₃',
-                              name: 'dimetiléter',
+                              structure: 'CH₃ - CH₂ - O - CH₃',
+                              name: 'etil metil éter',
                               page: NamingEtherPage(),
                             ),
                             SizedBox(height: 25),

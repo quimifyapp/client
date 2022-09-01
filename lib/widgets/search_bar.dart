@@ -38,6 +38,9 @@ class _SearchBarState extends State<SearchBar> {
                       // So vertical center works:
                       isCollapsed: true,
                       labelText: widget.hint,
+                      labelStyle: const TextStyle(
+                        color: Colors.black45,
+                      ),
                       // So hint doesn't go up while typing:
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       // To remove bottom border:
