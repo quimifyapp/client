@@ -1,4 +1,4 @@
-import 'package:cliente/widgets/square_icon_button.dart';
+import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
@@ -23,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
         children: [
           Expanded(
             child: Container(
-              height: 48,
+              height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -80,11 +80,12 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ),
           const SizedBox(width: 8),
-          SquareIconButton(
-            iconData: Icons.camera_alt_outlined,
-            color: const Color.fromARGB(255, 34, 34, 34),
-            backgroundColor: Colors.white,
+          Button(
+            width: 50,
+            color: Colors.white,
             onPressed: () {},
+            child: const Icon(Icons.camera_alt_outlined,
+                color: Color.fromARGB(255, 34, 34, 34)),
           ),
         ],
       ),

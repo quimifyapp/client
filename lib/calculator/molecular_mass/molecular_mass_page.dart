@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:cliente/utils/popups.dart';
+import 'package:cliente/widgets/button.dart';
 import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -92,15 +94,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
           _scrollToEnd(); // Goes to the end of the page
         } else {
-          showDialog<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('No encontrado'),
-                content: Text(toSubscripts(result.error)),
-              );
-            },
-          );
+          if (!mounted) return; // For security reasons
+          showPopup(context, 'Entendido', toSubscripts(result.error));
         }
       }
     }
@@ -214,7 +209,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         const SizedBox(height: 20),
                         Output(mass: _result.mass),
                         const SizedBox(height: 25),
-                        Button(
+                        Button.gradient(
+                          height: 50,
+                          gradient: quimifyGradient,
                           onPressed: () {
                             if (_textFocusNode.hasFocus) {
                               _textFocusNode.unfocus(); // Hides keyboard
@@ -222,9 +219,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             } else {
                               _focusTextIfEmpty(_textController.text);
                             }
-
                             _calculate(_textController.text);
                           },
+                          child: const Text(
+                            'Calcular',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 25),
                         GraphMenu(

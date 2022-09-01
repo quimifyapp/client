@@ -97,7 +97,8 @@ class _MainPageState extends State<MainPage> {
                 gradient: quimifyGradient,
                 borderRadius: BorderRadius.circular(35),
                 border: Border.all(
-                    color: const Color.fromARGB(255, 245, 247, 251), width: 0.5),
+                    color: const Color.fromARGB(255, 245, 247, 251),
+                    width: 0.5),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -107,18 +108,16 @@ class _MainPageState extends State<MainPage> {
                       Image.asset(
                         'assets/images/icons/molecule.png',
                         width: 20,
-                        color:
-                        currentPage == 0 ? Colors.white : Colors.white70,
+                        color: currentPage == 0 ? Colors.white : Colors.white70,
                       ),
                       navigationBarItemSeparator,
                       Text(
                         'Formulación',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: currentPage == 0
-                              ? Colors.white
-                              : Colors.white70,
+                          color:
+                              currentPage == 0 ? Colors.white : Colors.white70,
                         ),
                       ),
                     ],
@@ -133,18 +132,16 @@ class _MainPageState extends State<MainPage> {
                       Image.asset(
                         'assets/images/icons/calculator.png',
                         width: 20,
-                        color:
-                        currentPage == 1 ? Colors.white : Colors.white70,
+                        color: currentPage == 1 ? Colors.white : Colors.white70,
                       ),
                       navigationBarItemSeparator,
                       Text(
                         'Calculadora',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: currentPage == 1
-                              ? Colors.white
-                              : Colors.white70,
+                          color:
+                              currentPage == 1 ? Colors.white : Colors.white70,
                         ),
                       ),
                     ],
