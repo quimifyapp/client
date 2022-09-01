@@ -67,8 +67,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   void _unfocusAndEraseTextIfEmpty() {
     _textFocusNode.unfocus(); // Hides keyboard
-    if(noSpaces(_textController.text).isEmpty) {
-      _textController.text = '';
+    if (noSpaces(_textController.text).isEmpty) {
+      _textController.clear(); // Clears input
     }
   }
 
@@ -87,8 +87,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
           // UI/UX actions:
 
-          _labelText = input; // Clears input
-          _textController.clear(); // Sets previous input as label
+          _labelText = input; // Sets previous input as label
+          _textController.clear(); // Clears input
+          _textFocusNode.unfocus(); // Hides keyboard
 
           _scrollToEnd(); // Goes to the end of the page
         } else {
@@ -102,9 +103,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
               });
         }
       }
+    } else if(input.isNotEmpty) {
+      _unfocusAndEraseTextIfEmpty();
     }
-
-    _unfocusAndEraseTextIfEmpty();
   }
 
   @override
@@ -163,13 +164,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                 TextField(
                                   // Aspect:
                                   cursorColor:
-                                  const Color.fromARGB(255, 34, 34, 34),
+                                      const Color.fromARGB(255, 34, 34, 34),
                                   style: inputOutputStyle,
                                   keyboardType: TextInputType.visiblePassword,
                                   textAlignVertical: TextAlignVertical.center,
                                   decoration: InputDecoration(
                                     contentPadding:
-                                    const EdgeInsets.only(bottom: 3),
+                                        const EdgeInsets.only(bottom: 3),
                                     isCollapsed: true,
                                     labelText: _labelText,
                                     labelStyle: const TextStyle(
@@ -179,7 +180,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                     ),
                                     // So hint doesn't go up while typing:
                                     floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
+                                        FloatingLabelBehavior.never,
                                     // To remove bottom border:
                                     border: const OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -195,8 +196,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                   onChanged: (String input) {
                                     _textController.value =
                                         _textController.value.copyWith(
-                                          text: formatFormula(input),
-                                        );
+                                      text: formatFormula(input),
+                                    );
                                   },
                                   textInputAction: TextInputAction.search,
                                   onSubmitted: (input) => _calculate(input),
