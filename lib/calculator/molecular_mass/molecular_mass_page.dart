@@ -65,6 +65,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
+  void _unfocusAndEraseTextIfEmpty() {
+    _textFocusNode.unfocus(); // Hides keyboard
+    if(noSpaces(_textController.text).isEmpty) {
+      _textController.text = '';
+    }
+  }
+
   Future<void> _calculate(String input) async {
     if (noSpaces(input).isNotEmpty) {
       Uri url = Uri.http(
@@ -83,8 +90,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           _labelText = input; // Clears input
           _textController.clear(); // Sets previous input as label
 
-          _textFocusNode.unfocus(); // Hides keyboard
-
           _scrollToEnd(); // Goes to the end of the page
         } else {
           showDialog<void>(
@@ -98,128 +103,133 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         }
       }
     }
+
+    _unfocusAndEraseTextIfEmpty();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: quimifyGradientBoxDecoration,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            // App bar:
-            const HomeAppBar(
-              title: Text(
-                'Calculadora',
-                style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: _unfocusAndEraseTextIfEmpty,
+      child: Container(
+        decoration: quimifyGradientBoxDecoration,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              // App bar:
+              const HomeAppBar(
+                title: Text(
+                  'Calculadora',
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            // Body:
-            Expanded(
-              child: Container(
-                decoration: bodyBoxDecoration,
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                // Vertically scrollable for short devices:
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Like if the TextField was tapped:
-                          _startTyping();
-                        },
-                        child: Container(
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          padding: const EdgeInsets.all(20),
-                          alignment: Alignment.topLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Fórmula',
-                                style: subTitleStyle,
-                              ),
-                              const Spacer(),
-                              TextField(
-                                // Aspect:
-                                cursorColor:
-                                    const Color.fromARGB(255, 34, 34, 34),
-                                style: inputOutputStyle,
-                                keyboardType: TextInputType.visiblePassword,
-                                textAlignVertical: TextAlignVertical.center,
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(bottom: 3),
-                                  isCollapsed: true,
-                                  labelText: _labelText,
-                                  labelStyle: const TextStyle(
-                                    color: Colors.black12,
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  // So hint doesn't go up while typing:
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  // To remove bottom border:
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
+              // Body:
+              Expanded(
+                child: Container(
+                  decoration: bodyBoxDecoration,
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
+                  // Vertically scrollable for short devices:
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Like if the TextField was tapped:
+                            _startTyping();
+                          },
+                          child: Container(
+                            height: 110,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            padding: const EdgeInsets.all(20),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Fórmula',
+                                  style: subTitleStyle,
+                                ),
+                                const Spacer(),
+                                TextField(
+                                  // Aspect:
+                                  cursorColor:
+                                  const Color.fromARGB(255, 34, 34, 34),
+                                  style: inputOutputStyle,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                    const EdgeInsets.only(bottom: 3),
+                                    isCollapsed: true,
+                                    labelText: _labelText,
+                                    labelStyle: const TextStyle(
+                                      color: Colors.black12,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    // So hint doesn't go up while typing:
+                                    floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                    // To remove bottom border:
+                                    border: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 0,
+                                        style: BorderStyle.none,
+                                      ),
                                     ),
                                   ),
+                                  // Logic:
+                                  scribbleEnabled: false,
+                                  focusNode: _textFocusNode,
+                                  controller: _textController,
+                                  onChanged: (String input) {
+                                    _textController.value =
+                                        _textController.value.copyWith(
+                                          text: formatFormula(input),
+                                        );
+                                  },
+                                  textInputAction: TextInputAction.search,
+                                  onSubmitted: (input) => _calculate(input),
+                                  onTap: _scrollToStart,
                                 ),
-                                // Logic:
-                                scribbleEnabled: false,
-                                focusNode: _textFocusNode,
-                                controller: _textController,
-                                onChanged: (String input) {
-                                  _textController.value =
-                                      _textController.value.copyWith(
-                                    text: formatFormula(input),
-                                  );
-                                },
-                                textInputAction: TextInputAction.search,
-                                onSubmitted: (input) => _calculate(input),
-                                onTap: _scrollToStart,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Output(mass: _result.mass),
-                      const SizedBox(height: 25),
-                      Button(
-                        onPressed: () {
-                          _focusTextIfEmpty(_textController.text);
-                          _calculate(_textController.text);
-                        },
-                      ),
-                      const SizedBox(height: 25),
-                      GraphMenu(
-                        mass: _result.mass,
-                        elementToGrams: _result.elementToGrams,
-                        elementToMoles: _result.elementToMoles,
-                      ),
-                      // To keep it above navigation bar:
-                      const SizedBox(height: 50 + 60),
-                    ],
+                        const SizedBox(height: 20),
+                        Output(mass: _result.mass),
+                        const SizedBox(height: 25),
+                        Button(
+                          onPressed: () {
+                            _focusTextIfEmpty(_textController.text);
+                            _calculate(_textController.text);
+                          },
+                        ),
+                        const SizedBox(height: 25),
+                        GraphMenu(
+                          mass: _result.mass,
+                          elementToGrams: _result.elementToGrams,
+                          elementToMoles: _result.elementToMoles,
+                        ),
+                        // To keep it above navigation bar:
+                        const SizedBox(height: 50 + 60),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:cliente/widgets/square_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class PageAppBar extends StatelessWidget {
@@ -14,26 +15,11 @@ class PageAppBar extends StatelessWidget {
             const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
         child: Row(
           children: [
-            Container(
-              height: 48,
-              width: 48,
-              // To avoid rounded corners overflow:
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 106, 233, 218),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: SizedBox.expand(
-                child: MaterialButton(
-                  padding: const EdgeInsets.all(0),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-            ),
+            SquareIconButton(
+                iconData: Icons.arrow_back,
+                color: Colors.white,
+                backgroundColor: const Color.fromARGB(255, 106, 233, 218),
+                onPressed: () => Navigator.of(context).pop()),
             const SizedBox(width: 20),
             Text(
               title,
