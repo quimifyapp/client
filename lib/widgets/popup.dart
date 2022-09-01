@@ -33,7 +33,7 @@ class Popup extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/report.png',
                 color: Colors.red,
-                width: 25,
+                width: 20,
               ),
             ),
             const SizedBox(width: 5),

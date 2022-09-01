@@ -96,7 +96,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           _scrollToEnd(); // Goes to the end of the page
         } else {
           if (!mounted) return; // For security reasons
-          showPopup(context, 'Entendido', toSubscripts(result.error));
+          showPopup(context, 'No encontrado', toSubscripts(result.error));
         }
       }
     }
