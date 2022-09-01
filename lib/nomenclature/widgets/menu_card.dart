@@ -4,7 +4,7 @@ import '../../widgets/constants.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard(
-      {Key? key,
+      {super.key,
       this.width,
       required this.title,
       required this.structure,
@@ -15,7 +15,7 @@ class MenuCard extends StatelessWidget {
         customBody = null;
 
   const MenuCard.custom(
-      {Key? key,
+      {super.key,
       this.width,
       required this.title,
       required this.customBody,
@@ -25,7 +25,7 @@ class MenuCard extends StatelessWidget {
         name = null,
         structure = null;
 
-  const MenuCard.locked({Key? key, this.width, required this.title})
+  const MenuCard.locked({super.key, this.width, required this.title})
       : _custom = false,
         _locked = true,
         customBody = null,

@@ -25,6 +25,28 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   MolecularMassResult _result = MolecularMassResult(true, 97.96737971,
       {'H': 2.01588, 'S': 32.066, 'O': 63.976}, {'H': 2, 'S': 1, 'O': 4}, '');
 
+  void _scrollToEnd() {
+    // Goes to the end of the page:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
+    });
+  }
+
+  void _scrollToStart() {
+    // Goes to the end of the page:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
+    });
+  }
+
   Future<void> _calculate(String input) async {
     if (input.isNotEmpty) {
       var url = Uri.http(
@@ -45,14 +67,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
       FocusManager.instance.primaryFocus?.unfocus(); // Hides keyboard
 
-      // Goes to the end of the page:
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          curve: Curves.easeOut,
-          duration: const Duration(milliseconds: 300),
-        );
-      });
+      _scrollToEnd(); // Goes to the end of the page
     }
   }
 
@@ -146,6 +161,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               },
                               textInputAction: TextInputAction.search,
                               onSubmitted: (input) => _calculate(input),
+                              onTap: _scrollToStart,
                             ),
                           ],
                         ),
