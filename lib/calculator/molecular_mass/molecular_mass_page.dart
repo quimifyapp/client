@@ -65,8 +65,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _unfocusAndEraseTextIfEmpty() {
-    _textFocusNode.unfocus(); // Hides keyboard
+  void _eraseTextIfEmpty() {
     if (noSpaces(_textController.text).isEmpty) {
       _textController.clear(); // Clears input
     }
@@ -94,24 +93,26 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           _scrollToEnd(); // Goes to the end of the page
         } else {
           showDialog<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('No encontrado'),
-                  content: Text(toSubscripts(result.error)),
-                );
-              });
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('No encontrado'),
+                content: Text(toSubscripts(result.error)),
+              );
+            },
+          );
         }
       }
-    } else if(input.isNotEmpty) {
-      _unfocusAndEraseTextIfEmpty();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _unfocusAndEraseTextIfEmpty,
+      onTap: () {
+        _textFocusNode.unfocus(); // Hides keyboard
+        _eraseTextIfEmpty();
+      },
       child: Container(
         decoration: quimifyGradientBoxDecoration,
         child: Scaffold(
@@ -200,7 +201,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                     );
                                   },
                                   textInputAction: TextInputAction.search,
-                                  onSubmitted: (input) => _calculate(input),
+                                  onSubmitted: (input) {
+                                    _eraseTextIfEmpty(); // Hides keyboard
+                                    _calculate(input);
+                                  },
                                   onTap: _scrollToStart,
                                 ),
                               ],
@@ -212,7 +216,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         const SizedBox(height: 25),
                         Button(
                           onPressed: () {
-                            _focusTextIfEmpty(_textController.text);
+                            if (_textFocusNode.hasFocus) {
+                              _textFocusNode.unfocus(); // Hides keyboard
+                              _eraseTextIfEmpty();
+                            } else {
+                              _focusTextIfEmpty(_textController.text);
+                            }
+
                             _calculate(_textController.text);
                           },
                         ),
