@@ -33,26 +33,27 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   void _scrollToEnd() {
     // Goes to the end of the page:
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 300),
-      );
-    });
+      ),
+    );
   }
 
   void _scrollToStart() {
     // Goes to the top of the page after a delay:
     Future.delayed(
-        const Duration(milliseconds: 200),
-        () => WidgetsBinding.instance.addPostFrameCallback((_) {
-              _scrollController.animateTo(
-                0,
-                curve: Curves.easeOut,
-                duration: const Duration(milliseconds: 300),
-              );
-            }));
+      const Duration(milliseconds: 200),
+      () => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _scrollController.animateTo(
+          _scrollController.position.minScrollExtent,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 300),
+        ),
+      ),
+    );
   }
 
   void _startTyping() {
