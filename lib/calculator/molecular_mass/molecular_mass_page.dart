@@ -166,15 +166,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'Fórmula',
-                                      style: subTitleStyle,
-                                    ),
-                                    Spacer(),
-                                    HelpButton(),
-                                  ],
+                                const Text(
+                                  'Fórmula',
+                                  style: subTitleStyle,
                                 ),
                                 const Spacer(),
                                 TextField(
