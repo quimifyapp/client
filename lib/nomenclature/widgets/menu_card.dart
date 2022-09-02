@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/constants.dart';
@@ -8,6 +9,7 @@ class MenuCard extends StatelessWidget {
       this.width,
       required this.title,
       required this.structure,
+      required this.autoSizeGroup,
       required this.name,
       required this.page})
       : _custom = false,
@@ -23,13 +25,15 @@ class MenuCard extends StatelessWidget {
       : _custom = true,
         _locked = false,
         name = null,
-        structure = null;
+        structure = null,
+        autoSizeGroup = null;
 
   const MenuCard.locked({super.key, this.width, required this.title})
       : _custom = false,
         _locked = true,
         customBody = null,
         structure = null,
+        autoSizeGroup = null,
         name = null,
         page = null;
 
@@ -38,6 +42,7 @@ class MenuCard extends StatelessWidget {
   final String title;
   final Widget? customBody;
   final String? structure;
+  final AutoSizeGroup? autoSizeGroup;
   final String? name;
   final Widget? page;
 
@@ -85,8 +90,11 @@ class MenuCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AutoSizeText(
               structure!,
+              maxLines: 1,
+              stepGranularity: 0.1,
+              group: autoSizeGroup,
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w600,

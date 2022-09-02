@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cliente/utils/popups.dart';
 import 'package:cliente/widgets/button.dart';
+import 'package:cliente/widgets/help_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -76,28 +77,40 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   Future<void> _calculate(String input) async {
     if (noSpaces(input).isNotEmpty) {
-      Uri url = Uri.http(
-          '192.168.1.90:8080', 'masamolecular', {'formula': toDigits(input)});
-      http.Response response = await http.get(url);
+      try {
+        Uri url = Uri.http(
+            '192.168.1.90:8080', 'masamolecular', {'formula': toDigits(input)});
+        http.Response response = await http.get(url);
 
-      if (response.statusCode == 200) {
-        String body = utf8.decode(response.bodyBytes);
-        MolecularMassResult result = MolecularMassResult.fromJson(body);
+        if (response.statusCode == 200) {
+          String body = utf8.decode(response.bodyBytes);
+          MolecularMassResult result = MolecularMassResult.fromJson(body);
 
-        if (result.present) {
-          setState(() => _result = result);
+          if (result.present) {
+            setState(() => _result = result);
 
-          // UI/UX actions:
+            // UI/UX actions:
 
-          _labelText = input; // Sets previous input as label
-          _textController.clear(); // Clears input
-          _textFocusNode.unfocus(); // Hides keyboard
+            _labelText = input; // Sets previous input as label
+            _textController.clear(); // Clears input
+            _textFocusNode.unfocus(); // Hides keyboard
 
-          _scrollToEnd(); // Goes to the end of the page
+            _scrollToEnd(); // Goes to the end of the page
+          } else {
+            if (!mounted) return; // For security reasons
+            showDetailedDialogPopup(
+                context, 'Sin resultado', toSubscripts(result.error));
+          }
         } else {
+          // Server crash or invalid URL
+          // Error...
           if (!mounted) return; // For security reasons
-          showDialogPopup(context, 'Sin resultado', toSubscripts(result.error));
+          showDialogPopup(context, 'Sin resultado HTTP');
         }
+      } catch (_) {
+        // No internet, server down or client error
+        // Error...
+        showDialogPopup(context, 'Sin resultado CATCH');
       }
     }
   }
@@ -153,9 +166,15 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'Fórmula',
-                                  style: subTitleStyle,
+                                Row(
+                                  children: const [
+                                    Text(
+                                      'Fórmula',
+                                      style: subTitleStyle,
+                                    ),
+                                    Spacer(),
+                                    HelpButton(),
+                                  ],
                                 ),
                                 const Spacer(),
                                 TextField(
@@ -283,9 +302,15 @@ class Output extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Masa molecular',
-            style: subTitleStyle,
+          Row(
+            children: const [
+              Text(
+                'Masa molecular',
+                style: subTitleStyle,
+              ),
+              Spacer(),
+              HelpButton(),
+            ],
           ),
           const Spacer(),
           AutoSizeText(

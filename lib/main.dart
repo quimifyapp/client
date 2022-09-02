@@ -60,7 +60,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentPage = 0;
 
-  List<Widget> pages = [const NomenclaturePage(), const CalculatorPage()];
+  List<Widget> pages = [NomenclaturePage(), const CalculatorPage()];
 
   static double widthFactor = 0.85;
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/help_button.dart';
+
 class SectionTitle extends StatelessWidget {
   const SectionTitle({Key? key, required this.title}) : super(key: key);
 
@@ -19,13 +21,7 @@ class SectionTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            // To remove padding:
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            onPressed: () {},
-          ),
+          const HelpButton(),
         ],
       ),
     );

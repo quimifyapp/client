@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/nomenclature/inorganic/finding_formula_or_naming_page.dart';
 import 'package:cliente/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/nomenclature/widgets/menu_card.dart';
@@ -10,7 +11,9 @@ import 'package:cliente/widgets/constants.dart';
 import 'organic/naming_page.dart';
 
 class NomenclaturePage extends StatelessWidget {
-  const NomenclaturePage({Key? key}) : super(key: key);
+  NomenclaturePage({Key? key}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +41,16 @@ class NomenclaturePage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        SectionTitle(title: 'Inorgánica'),
-                        SizedBox(height: 25),
-                        InorganicMenu(),
-                        SizedBox(height: 40),
-                        SectionTitle(title: 'Orgánica'),
-                        SizedBox(height: 25),
-                        OrganicMenu(),
+                      children: [
+                        const SectionTitle(title: 'Inorgánica'),
+                        const SizedBox(height: 25),
+                        InorganicMenu(autoSizeGroup: autoSizeGroup),
+                        const SizedBox(height: 40),
+                        const SectionTitle(title: 'Orgánica'),
+                        const SizedBox(height: 25),
+                        OrganicMenu(autoSizeGroup: autoSizeGroup),
                         // To keep it above navigation bar:
-                        SizedBox(height: 50 + 60 + 50),
+                        const SizedBox(height: 50 + 60 + 50),
                       ],
                     ),
                   ),
@@ -62,20 +65,23 @@ class NomenclaturePage extends StatelessWidget {
 }
 
 class InorganicMenu extends StatelessWidget {
-  const InorganicMenu({Key? key}) : super(key: key);
+  InorganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup;
 
   @override
   Widget build(BuildContext context) {
-    return const HorizontalCardsMenu(
+    return HorizontalCardsMenu(
       cards: [
         MenuCard(
           width: 290,
           title: 'Formular o nombrar',
           structure: 'H₂O',
+          autoSizeGroup: autoSizeGroup,
           name: 'dióxido de hidrógeno',
-          page: FindingFormulaOrNamingPage(),
+          page: const FindingFormulaOrNamingPage(),
         ),
-        MenuCard.locked(
+        const MenuCard.locked(
           width: 290,
           title: 'Practicar',
         ),
@@ -85,7 +91,9 @@ class InorganicMenu extends StatelessWidget {
 }
 
 class OrganicMenu extends StatelessWidget {
-  const OrganicMenu({Key? key}) : super(key: key);
+  OrganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup;
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +127,11 @@ class OrganicMenu extends StatelessWidget {
           ),
           page: const FindingFormulaPage(),
         ),
-        const MenuCard(
+        MenuCard(
           width: 290,
           title: 'Nombrar',
           structure: 'CH₂ - CH₂(F)',
+          autoSizeGroup: autoSizeGroup,
           name: '1-fluoroetano',
           page: NamingPage(),
         ),

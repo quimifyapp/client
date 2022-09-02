@@ -4,27 +4,39 @@ import 'button.dart';
 import 'constants.dart';
 
 class DialogPopup extends StatelessWidget {
-  const DialogPopup({Key? key, required this.title, required this.message})
+  const DialogPopup({Key? key, required this.title, this.details})
       : super(key: key);
 
-  final String title, message;
+  final String title;
+  final String? details;
 
   @override
   Widget build(BuildContext context) {
+    Text? content;
+    if (details != null) {
+      if (details!.isNotEmpty) {
+        content = Text(
+          details!,
+          textAlign: TextAlign.center,
+        );
+      }
+    }
+
     return AlertDialog(
       title: Text(
         title,
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 22),
       ),
-      content: Text(
-        message,
-        textAlign: TextAlign.center,
-      ),
+      content: content,
       contentPadding:
           const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      actionsPadding: const EdgeInsets.only(bottom: 20, left: 15, right: 15,),
+      actionsPadding: const EdgeInsets.only(
+        bottom: 20,
+        left: 15,
+        right: 15,
+      ),
       actions: [
         Row(
           children: [

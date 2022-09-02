@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/nomenclature/organic/naming/naming_ether_page.dart';
 import 'package:cliente/nomenclature/organic/naming/naming_simple_page.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import '../widgets/menu_card.dart';
 import '../widgets/section_title.dart';
 
 class NamingPage extends StatelessWidget {
-  const NamingPage({Key? key}) : super(key: key);
+  NamingPage({Key? key}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -34,30 +37,32 @@ class NamingPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Column(
-                          children: const [
+                          children: [
                             MenuCard(
                               title: 'Simple',
                               structure: 'CH₃ - CH₂(CH₃) - CH₃',
+                              autoSizeGroup: autoSizeGroup,
                               name: '2-metilpropano',
-                              page: NamingSimplePage(),
+                              page: const NamingSimplePage(),
                             ),
-                            SizedBox(height: 25),
+                            const SizedBox(height: 25),
                             MenuCard(
                               title: 'Éter',
                               structure: 'CH₃ - CH₂ - O - CH₃',
+                              autoSizeGroup: autoSizeGroup,
                               name: 'etil metil éter',
-                              page: NamingEtherPage(),
+                              page: const NamingEtherPage(),
                             ),
-                            SizedBox(height: 25),
-                            MenuCard.locked(
+                            const SizedBox(height: 25),
+                            const MenuCard.locked(
                               title: 'Éster',
                             ),
-                            SizedBox(height: 25),
-                            MenuCard.locked(
+                            const SizedBox(height: 25),
+                            const MenuCard.locked(
                               title: 'Aromático',
                             ),
-                            SizedBox(height: 25),
-                            MenuCard.locked(
+                            const SizedBox(height: 25),
+                            const MenuCard.locked(
                               title: 'Cíclico',
                             ),
                           ],
