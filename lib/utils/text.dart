@@ -40,7 +40,7 @@ String toCapsAfterDigitOrParentheses(String input) {
   return result;
 }
 
-String toFirstCap(String input) {
+String capFirst(String input) {
   if (input.isEmpty) return input;
 
   String result = input[0].toUpperCase();
@@ -59,6 +59,19 @@ String toCapsExceptN(String input) {
 
   for (int i = 0; i < input.length; i++) {
     result += input[i] != 'N' ? input[i].toLowerCase() : input[i];
+  }
+
+  return result;
+}
+
+String toCapsAfterNotAnUppercaseLetter(String input) {
+  if (input.isEmpty) return input;
+
+  String result = input[0];
+  for (int i = 1; i < input.length; i++) {
+    result += input[i - 1] == input[i - 1].toUpperCase()
+        ? input[i]
+        : input[i].toUpperCase();
   }
 
   return result;
@@ -90,5 +103,6 @@ String formatOrganicName(String name) {
 }
 
 String formatFormula(String formula) {
-  return toSubscripts(toCapsAfterDigitOrParentheses(toFirstCap(formula)));
+  return capFirst(
+      toCapsAfterNotAnUppercaseLetter(formatInorganicFormulaOrName(formula)));
 }

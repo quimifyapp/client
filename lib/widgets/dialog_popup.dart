@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'button.dart';
 import 'constants.dart';
 
-class Popup extends StatelessWidget {
-  const Popup({Key? key, required this.title, required this.message})
+class DialogPopup extends StatelessWidget {
+  const DialogPopup({Key? key, required this.title, required this.message})
       : super(key: key);
 
   final String title, message;
@@ -21,31 +21,33 @@ class Popup extends StatelessWidget {
         message,
         textAlign: TextAlign.center,
       ),
+      contentPadding:
+          const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      actionsPadding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
+      actionsPadding: const EdgeInsets.only(bottom: 20, left: 15, right: 15,),
       actions: [
         Row(
           children: [
             Button(
               width: 50,
-              color: Colors.red.withOpacity(0.1),
+              color: const Color.fromARGB(255, 255, 241, 241),
               onPressed: () {},
               child: Image.asset(
                 'assets/images/icons/report.png',
-                color: Colors.red,
+                color: const Color.fromARGB(255, 255, 96, 96),
                 width: 20,
               ),
             ),
-            const SizedBox(width: 5),
+            const SizedBox(width: 8),
             Expanded(
               child: Button.gradient(
                 gradient: quimifyGradient,
                 child: const Text(
                   'Entendido',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
