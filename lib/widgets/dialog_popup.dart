@@ -45,7 +45,7 @@ class DialogPopup extends StatelessWidget {
       required this.link})
       : _hasLink = true,
         _hasReportButton = false,
-        _hasCloseButton = false,
+        _hasCloseButton = closable,
         title = 'Actualización ${closable ? 'disponible' : 'necesaria'}',
         linkName = 'Actualizar';
 
