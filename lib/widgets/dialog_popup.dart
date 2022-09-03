@@ -54,6 +54,9 @@ class DialogPopup extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => Future.value(closable),
       child: AlertDialog(
+        insetPadding: EdgeInsets.all(25),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        titlePadding: hasCloseButton ? EdgeInsets.zero : null,
         title: Column(
           children: [
             if (hasCloseButton)
@@ -78,16 +81,14 @@ class DialogPopup extends StatelessWidget {
             ),
           ],
         ),
-        titlePadding: hasCloseButton ? EdgeInsets.zero : null,
+        contentPadding:
+            const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
         content: (details != null && details!.isNotEmpty)
             ? Text(
                 details!,
                 textAlign: TextAlign.center,
               )
             : null,
-        contentPadding:
-            const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         actionsPadding: const EdgeInsets.only(
           bottom: 20,
           left: 15,
@@ -97,21 +98,16 @@ class DialogPopup extends StatelessWidget {
           Column(
             children: [
               if (_hasLink)
-                Column(
-                  children: [
-                    Button.gradient(
-                      gradient: quimifyGradient,
-                      child: Text(
-                        linkName!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
-                      ),
-                      onPressed: () => _launchUrl(),
+                Button.gradient(
+                  gradient: quimifyGradient,
+                  child: Text(
+                    linkName!,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
                     ),
-                    const SizedBox(height: 8),
-                  ],
+                  ),
+                  onPressed: () => _launchUrl(),
                 ),
               if (!_hasLink)
                 Row(
