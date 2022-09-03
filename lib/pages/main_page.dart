@@ -23,8 +23,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentPage = 0;
 
-  List<Widget> pages = [NomenclaturePage(), const CalculatorPage()];
-
   static double widthFactor = 0.85;
 
   void _goToPage(int page) {
@@ -81,14 +79,22 @@ class _MainPageState extends State<MainPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        Api().close();
-        return true;
+        if(currentPage == 0) {
+          Api().close();
+          return true;
+        } else {
+          _goToPage(0);
+          return false;
+        }
       },
       child: Scaffold(
         // Body:
         body: IndexedStack(
           index: currentPage,
-          children: pages,
+          children: [
+            NomenclaturePage(),
+            const CalculatorPage(),
+          ],
         ),
         // Navigation bar:
         extendBody: true, // So it's always floating on top
@@ -114,8 +120,7 @@ class _MainPageState extends State<MainPage> {
                         Image.asset(
                           'assets/images/icons/molecule.png',
                           width: 20,
-                          color:
-                              currentPage == 0 ? Colors.white : Colors.white70,
+                          color: currentPage == 0 ? Colors.white : Colors.white70,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -123,9 +128,8 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: currentPage == 0
-                                ? Colors.white
-                                : Colors.white70,
+                            color:
+                            currentPage == 0 ? Colors.white : Colors.white70,
                           ),
                         ),
                       ],
@@ -140,8 +144,7 @@ class _MainPageState extends State<MainPage> {
                         Image.asset(
                           'assets/images/icons/calculator.png',
                           width: 20,
-                          color:
-                              currentPage == 1 ? Colors.white : Colors.white70,
+                          color: currentPage == 1 ? Colors.white : Colors.white70,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -149,9 +152,8 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: currentPage == 1
-                                ? Colors.white
-                                : Colors.white70,
+                            color:
+                            currentPage == 1 ? Colors.white : Colors.white70,
                           ),
                         ),
                       ],
