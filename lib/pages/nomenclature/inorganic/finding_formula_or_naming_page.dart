@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cliente/widgets/search_bar.dart';
 import 'package:cliente/widgets/constants.dart';
 
-import '../../utils/text.dart';
+import '../../../utils/text.dart';
+
 
 class FindingFormulaOrNamingPage extends StatelessWidget {
   const FindingFormulaOrNamingPage({Key? key}) : super(key: key);

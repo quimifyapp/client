@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/nomenclature/inorganic/finding_formula_or_naming_page.dart';
-import 'package:cliente/nomenclature/organic/finding_formula_page.dart';
-import 'package:cliente/nomenclature/widgets/menu_card.dart';
-import 'package:cliente/nomenclature/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/widgets/constants.dart';
 
+import 'organic/finding_formula_page.dart';
+import 'widgets/menu_card.dart';
+import 'widgets/section_title.dart';
+import 'inorganic/finding_formula_or_naming_page.dart';
 import 'organic/naming_page.dart';
 
 class NomenclaturePage extends StatelessWidget {

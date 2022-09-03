@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/help_button.dart';
+import '../../../widgets/help_button.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({Key? key, required this.title}) : super(key: key);
