@@ -45,9 +45,9 @@ class DialogPopup extends StatelessWidget {
       required this.link})
       : _hasLink = true,
         _hasReportButton = false,
-        _hasCloseButton = true,
+        _hasCloseButton = closable,
         title =
-            closable ? 'Actualización disponible' : 'Actualización disponible',
+            closable ? 'Actualización disponible' : 'Actualización necesaria',
         linkName = 'Actualizar';
 
   final String title;
