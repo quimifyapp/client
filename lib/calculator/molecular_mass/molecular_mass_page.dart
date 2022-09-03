@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:cliente/utils/popups.dart';
+import 'package:cliente/popups.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';

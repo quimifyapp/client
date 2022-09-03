@@ -1,5 +1,5 @@
 import 'package:cliente/api/api.dart';
-import 'package:cliente/utils/popups.dart';
+import 'package:cliente/popups.dart';
 import 'package:cliente/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
