@@ -1,18 +1,17 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:cliente/utils/popups.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/help_button.dart';
-import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../api/api.dart';
 import '../../utils/text.dart';
 import '../../widgets/button.dart';
 import '../../widgets/constants.dart';
 import '../../widgets/home_app_bar.dart';
-import 'molecular_mass_result.dart';
+import '../../api/results/molecular_mass_result.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -22,15 +21,43 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
-  final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
 
   // Initial values:
 
   String _labelText = 'H₂SO₄';
   MolecularMassResult _result = MolecularMassResult(true, 97.96737971,
       {'H': 2.01588, 'S': 32.066, 'O': 63.976}, {'H': 2, 'S': 1, 'O': 4}, '');
+
+  Future<void> _calculate(String input) async {
+    if (!isEmptyWithSpaces(input)) {
+      String formula = toDigits(input);
+      MolecularMassResult? result = await Api().getMolecularMass(formula);
+
+      if (result != null) {
+        if (result.present) {
+          setState(() => _result = result);
+
+          // UI/UX actions:
+
+          _labelText = input; // Sets previous input as label
+          _textController.clear(); // Clears input
+          _textFocusNode.unfocus(); // Hides keyboard
+
+          _scrollToEnd(); // Goes to the end of the page
+        } else {
+          if (!mounted) return; // For security reasons
+          showReportDialogPopup(
+              context, 'Sin resultado', toSubscripts(result.error));
+        }
+      } else {
+        if (!mounted) return; // For security reasons
+        showReportDialogPopup(context, 'Sin resultado');
+      }
+    }
+  }
 
   void _scrollToEnd() {
     // Goes to the end of the page:
@@ -63,65 +90,43 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     _scrollToStart();
   }
 
-  void _focusTextIfEmpty(String input) {
-    if (noSpaces(input).isEmpty) {
-      _startTyping();
-    }
-  }
-
-  void _eraseTextIfEmpty() {
-    if (noSpaces(_textController.text).isEmpty) {
+  void _eraseTextIfEmpty(input) {
+    if (isEmptyWithSpaces(input)) {
       _textController.clear(); // Clears input
     }
   }
 
-  Future<void> _calculate(String input) async {
-    if (noSpaces(input).isNotEmpty) {
-      try {
-        Uri url = Uri.http(
-            '192.168.1.90:8080', 'masamolecular', {'formula': toDigits(input)});
-        http.Response response = await http.get(url);
+  void _pressedButton() {
+    _calculate(_textController.text);
 
-        if (response.statusCode == 200) {
-          String body = utf8.decode(response.bodyBytes);
-          MolecularMassResult result = MolecularMassResult.fromJson(body);
+    if (_textFocusNode.hasFocus) {
+      _textFocusNode.unfocus();
+    }
 
-          if (result.present) {
-            setState(() => _result = result);
-
-            // UI/UX actions:
-
-            _labelText = input; // Sets previous input as label
-            _textController.clear(); // Clears input
-            _textFocusNode.unfocus(); // Hides keyboard
-
-            _scrollToEnd(); // Goes to the end of the page
-          } else {
-            if (!mounted) return; // For security reasons
-            showDetailedDialogPopup(
-                context, 'Sin resultado', toSubscripts(result.error));
-          }
-        } else {
-          // Server crash or invalid URL
-          // Error...
-          if (!mounted) return; // For security reasons
-          showDialogPopup(context, 'Sin resultado HTTP');
-        }
-      } catch (_) {
-        // No internet, server down or client error
-        // Error...
-        showDialogPopup(context, 'Sin resultado CATCH');
+    if (isEmptyWithSpaces(_textController.text)) {
+      if (!_textFocusNode.hasFocus) {
+        _startTyping();
+      } else {
+        _textController.clear(); // Clears input
       }
     }
+  }
+
+  void _submittedText(String input) {
+    // Keyboard will be hidden afterwards
+    _calculate(input);
+    _eraseTextIfEmpty(input);
+  }
+
+  void _tapOutsideText() {
+    _textFocusNode.unfocus(); // Hides keyboard
+    _eraseTextIfEmpty(_textController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        _textFocusNode.unfocus(); // Hides keyboard
-        _eraseTextIfEmpty();
-      },
+      onTap: _tapOutsideText,
       child: Container(
         decoration: quimifyGradientBoxDecoration,
         child: Scaffold(
@@ -205,17 +210,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                   scribbleEnabled: false,
                                   focusNode: _textFocusNode,
                                   controller: _textController,
-                                  onChanged: (String input) {
+                                  onChanged: (input) {
                                     _textController.value =
                                         _textController.value.copyWith(
                                       text: formatFormula(input),
                                     );
                                   },
                                   textInputAction: TextInputAction.search,
-                                  onSubmitted: (input) {
-                                    _eraseTextIfEmpty(); // Hides keyboard
-                                    _calculate(input);
-                                  },
+                                  onSubmitted: _submittedText,
                                   onTap: _scrollToStart,
                                 ),
                               ],
@@ -228,15 +230,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         Button.gradient(
                           height: 50,
                           gradient: quimifyGradient,
-                          onPressed: () {
-                            if (_textFocusNode.hasFocus) {
-                              _textFocusNode.unfocus(); // Hides keyboard
-                              _eraseTextIfEmpty();
-                            } else {
-                              _focusTextIfEmpty(_textController.text);
-                            }
-                            _calculate(_textController.text);
-                          },
+                          onPressed: _pressedButton,
                           child: const Text(
                             'Calcular',
                             style: TextStyle(

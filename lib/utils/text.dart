@@ -22,10 +22,8 @@ String toSubscripts(String input) {
   return result;
 }
 
-bool isDigit(String char) {
-  return digitToSubscript.containsKey(char) ||
-      digitToSubscript.containsValue(char);
-}
+bool isDigit(String char) =>
+    digitToSubscript.containsKey(char) || digitToSubscript.containsValue(char);
 
 String toCapsAfterDigitOrParentheses(String input) {
   if (input.isEmpty) return input;
@@ -90,19 +88,14 @@ String toDigits(String input) {
   return result;
 }
 
-String noSpaces(String input) {
-  return input.isNotEmpty ? input.replaceAll(RegExp(r'\s+'), '') : '';
-}
+String noSpaces(String input) => input.replaceAll(RegExp(r'\s+'), '');
 
-String formatInorganicFormulaOrName(String formulaOrName) {
-  return toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
-}
+bool isEmptyWithSpaces(String input) => noSpaces(input).isEmpty;
 
-String formatOrganicName(String name) {
-  return toCapsExceptN(name);
-}
+String formatInorganicFormulaOrName(String formulaOrName) =>
+    toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
 
-String formatFormula(String formula) {
-  return capFirst(
-      toCapsAfterNotAnUppercaseLetter(formatInorganicFormulaOrName(formula)));
-}
+String formatOrganicName(String name) => toCapsExceptN(name);
+
+String formatFormula(String formula) => toCapsAfterNotAnUppercaseLetter(
+    formatInorganicFormulaOrName(capFirst(formula)));
