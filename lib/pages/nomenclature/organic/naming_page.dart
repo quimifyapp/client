@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'naming/naming_ether_page.dart';
 import 'naming/naming_simple_page.dart';
-import '../../../widgets/constants.dart';
+import '../../../constants.dart';
 import '../../../widgets/page_app_bar.dart';
 import '../widgets/menu_card.dart';
 import '../widgets/section_title.dart';

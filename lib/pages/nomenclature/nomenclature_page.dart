@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
-import 'package:cliente/widgets/constants.dart';
+import 'package:cliente/constants.dart';
 
 import 'organic/finding_formula_page.dart';
 import 'widgets/menu_card.dart';

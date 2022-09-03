@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:cliente/main.dart';
+import 'package:cliente/widgets/dialog_popup.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../api/api.dart';
 import '../api/results/access_result.dart';
-import '../popups.dart';
-import '../widgets/constants.dart';
+import '../constants.dart';
 import 'calculator/calculator_page.dart';
 import 'nomenclature/nomenclature_page.dart';
 
@@ -32,14 +35,42 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  void _showWelcomeMessagePopup() {
+    if (accessResult!.messageLinkPresent) {
+      DialogPopup.linkedMessage(
+        title: accessResult!.messageTitle,
+        details: accessResult!.messageDetails,
+        linkName: accessResult!.messageLinkName,
+        link: accessResult!.messageLink,
+      ).show(context);
+    } else {
+      DialogPopup.message(
+        title: accessResult!.messageTitle,
+        details: accessResult!.messageDetails,
+      ).show(context);
+    }
+  }
+
+  void _showWelcomePopups() {
+    if (accessResult != null) {
+      if (accessResult!.updateAvailable && !kIsWeb) {
+        DialogPopup.update(
+          details: accessResult!.updateDetails,
+          closable: !accessResult!.updateMandatory,
+          link: Platform.isAndroid
+              ? 'https://play.google.com/store/apps/details?id=com.quimify'
+              : 'https://apps.apple.com/pa/app/youtube/id544007664',
+        ).show(context).then((value) => _showWelcomeMessagePopup());
+      }
+    } else {
+      _showWelcomeMessagePopup();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (accessResult != null) {
-        showWelcomeDialogPopups(context, accessResult!);
-      }
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showWelcomePopups());
   }
 
   @override

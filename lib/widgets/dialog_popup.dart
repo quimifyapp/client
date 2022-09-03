@@ -2,51 +2,71 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'button.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class DialogPopup extends StatelessWidget {
-  const DialogPopup({
+  const DialogPopup.message({
     super.key,
     required this.title,
     this.details,
-  })  : linkName = null,
-        link = null,
-        _hasLink = false,
+  })  : _hasLink = true,
         _hasReportButton = false,
-        hasCloseButton = false,
+        _hasCloseButton = true,
+        closable = true,
+        linkName = null,
+        link = null;
+
+  const DialogPopup.linkedMessage({
+    super.key,
+    required this.title,
+    required this.details,
+    required this.linkName,
+    required this.link,
+  })  : _hasLink = true,
+        _hasReportButton = false,
+        _hasCloseButton = true,
         closable = true;
 
-  const DialogPopup.report({
+  const DialogPopup.reportableMessage({
     super.key,
     required this.title,
     this.details,
-  })  : linkName = null,
-        link = null,
-        _hasLink = false,
+  })  : _hasLink = false,
         _hasReportButton = true,
-        hasCloseButton = false,
-        closable = true;
+        _hasCloseButton = false,
+        closable = true,
+        linkName = null,
+        link = null;
 
-  const DialogPopup.link(
+  const DialogPopup.update(
       {super.key,
-      required this.title,
       required this.details,
-      required this.linkName,
-      required this.link,
-      required this.hasCloseButton,
-      required this.closable})
+      required this.closable,
+      required this.link})
       : _hasLink = true,
-        _hasReportButton = false;
+        _hasReportButton = false,
+        _hasCloseButton = true,
+        title =
+            closable ? 'Actualización disponible' : 'Actualización disponible',
+        linkName = 'Actualizar';
 
   final String title;
   final String? details, linkName, link;
-  final bool hasCloseButton, closable;
+  final bool closable, _hasLink, _hasReportButton, _hasCloseButton;
 
-  final bool _hasLink;
-  final bool _hasReportButton;
+  void _openLink() {
+    launchUrl(Uri.parse(link!), mode: LaunchMode.externalApplication);
+  }
 
-  Future<void> _launchUrl() async {
-    await launchUrl(Uri.parse(link!), mode: LaunchMode.externalApplication);
+  Future<void> show(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: closable,
+      barrierColor: Colors.black.withOpacity(0.2),
+      builder: (BuildContext context) {
+        return this;
+      },
+    );
   }
 
   @override
@@ -54,12 +74,12 @@ class DialogPopup extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => Future.value(closable),
       child: AlertDialog(
-        insetPadding: EdgeInsets.all(25),
+        insetPadding: const EdgeInsets.all(25),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        titlePadding: hasCloseButton ? EdgeInsets.zero : null,
+        titlePadding: _hasCloseButton ? EdgeInsets.zero : null,
         title: Column(
           children: [
-            if (hasCloseButton)
+            if (_hasCloseButton)
               Row(
                 children: [
                   const Spacer(),
@@ -107,7 +127,7 @@ class DialogPopup extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  onPressed: () => _launchUrl(),
+                  onPressed: () => _openLink(),
                 ),
               if (!_hasLink)
                 Row(

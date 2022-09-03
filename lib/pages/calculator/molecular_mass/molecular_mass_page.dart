@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:cliente/popups.dart';
 import 'package:cliente/widgets/button.dart';
+import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +9,8 @@ import 'package:flutter/material.dart';
 import '../../../api/api.dart';
 import '../../../api/results/molecular_mass_result.dart';
 import '../../../utils/text.dart';
-import '../../../widgets/constants.dart';
+import '../../../constants.dart';
 import '../../../widgets/home_app_bar.dart';
-
-
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -50,12 +48,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           _scrollToEnd(); // Goes to the end of the page
         } else {
           if (!mounted) return; // For security reasons
-          showReportDialogPopup(
-              context, 'Sin resultado', toSubscripts(result.error));
+          DialogPopup.reportableMessage(
+            title: 'Sin resultado',
+            details: toSubscripts(result.error),
+          ).show(context);
         }
       } else {
         if (!mounted) return; // For security reasons
-        showReportDialogPopup(context, 'Sin resultado');
+        const DialogPopup.message(
+          title: 'Sin resultado',
+        ).show(context);
       }
     }
   }

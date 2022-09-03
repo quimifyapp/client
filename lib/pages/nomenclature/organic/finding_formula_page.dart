@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/text.dart';
-import '../../../widgets/constants.dart';
+import '../../../constants.dart';
 import '../../../widgets/page_app_bar.dart';
 import '../../../widgets/search_bar.dart';
 
