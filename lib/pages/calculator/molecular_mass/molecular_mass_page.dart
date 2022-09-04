@@ -339,23 +339,23 @@ class _GraphMenuState extends State<GraphMenu> {
   Widget build(BuildContext context) {
     List<GraphSymbol> symbols = [];
     List<GraphBar> gramBars = [];
-    List<GraphAmount> gramAmounts = [];
+    List<GraphQuantity> gramQuantities = [];
 
     widget.elementToGrams.forEach((symbol, grams) {
       symbols.add(GraphSymbol(symbol: symbol));
-      gramBars.add(GraphBar(amount: grams, total: widget.mass));
-      gramAmounts.add(GraphAmount(amount: '${grams.round()} g'));
+      gramBars.add(GraphBar(quantity: grams, total: widget.mass));
+      gramQuantities.add(GraphQuantity(quantity: '${grams.round()} g'));
     });
 
     String formula = '';
     List<GraphBar> molBars = [];
-    List<GraphAmount> molAmounts = [];
+    List<GraphQuantity> molQuantities = [];
 
     int totalMoles = widget.elementToMoles.values.reduce((sum, i) => sum + i);
     widget.elementToMoles.forEach((symbol, moles) {
       formula += moles > 1 ? '$symbol$moles' : symbol;
-      molBars.add(GraphBar(amount: moles, total: totalMoles));
-      molAmounts.add(GraphAmount(amount: '$moles mol'));
+      molBars.add(GraphBar(quantity: moles, total: totalMoles));
+      molQuantities.add(GraphQuantity(quantity: '$moles mol'));
     });
 
     return Container(
@@ -416,8 +416,16 @@ class _GraphMenuState extends State<GraphMenu> {
           IndexedStack(
             index: _mol ? 1 : 0,
             children: [
-              Graph(symbols: symbols, bars: gramBars, amounts: gramAmounts),
-              Graph(symbols: symbols, bars: molBars, amounts: molAmounts),
+              Graph(
+                symbols: symbols,
+                bars: gramBars,
+                quantities: gramQuantities,
+              ),
+              Graph(
+                symbols: symbols,
+                bars: molBars,
+                quantities: molQuantities,
+              ),
             ],
           ),
         ],
@@ -431,12 +439,12 @@ class Graph extends StatelessWidget {
       {Key? key,
       required this.symbols,
       required this.bars,
-      required this.amounts})
+      required this.quantities})
       : super(key: key);
 
   final List<GraphSymbol> symbols;
   final List<GraphBar> bars;
-  final List<GraphAmount> amounts;
+  final List<GraphQuantity> quantities;
 
   @override
   Widget build(BuildContext context) {
@@ -476,11 +484,11 @@ class Graph extends StatelessWidget {
         const SizedBox(width: 15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: amounts
+          children: quantities
               .map(
-                (amount) => Column(
+                (quantity) => Column(
                   children: [
-                    amount,
+                    quantity,
                     const SizedBox(height: 15),
                   ],
                 ),
@@ -510,14 +518,14 @@ class GraphSymbol extends StatelessWidget {
 }
 
 class GraphBar extends StatelessWidget {
-  const GraphBar({Key? key, required this.amount, required this.total})
+  const GraphBar({Key? key, required this.quantity, required this.total})
       : super(key: key);
 
-  final num amount, total;
+  final num quantity, total;
 
   @override
   Widget build(BuildContext context) {
-    double proportion = amount / total;
+    double proportion = quantity / total;
 
     return Container(
       height: 10,
@@ -542,15 +550,15 @@ class GraphBar extends StatelessWidget {
   }
 }
 
-class GraphAmount extends StatelessWidget {
-  const GraphAmount({Key? key, required this.amount}) : super(key: key);
+class GraphQuantity extends StatelessWidget {
+  const GraphQuantity({Key? key, required this.quantity}) : super(key: key);
 
-  final String amount;
+  final String quantity;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      amount,
+      quantity,
       textAlign: TextAlign.right,
       style: const TextStyle(
         fontSize: 16,
