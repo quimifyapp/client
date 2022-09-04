@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,23 @@ import 'package:cliente/constants.dart';
 import '../../../utils/text.dart';
 import '../../../widgets/button.dart';
 
-class FindingFormulaOrNamingPage extends StatelessWidget {
-  const FindingFormulaOrNamingPage({Key? key}) : super(key: key);
+class FindingFormulaOrNamingPage extends StatefulWidget {
+  FindingFormulaOrNamingPage({Key? key}) : super(key: key);
+
+  @override
+  State<FindingFormulaOrNamingPage> createState() =>
+      _FindingFormulaOrNamingPageState();
+}
+
+class _FindingFormulaOrNamingPageState
+    extends State<FindingFormulaOrNamingPage> {
+  List<SearchResult> _results = [
+    SearchResult(),
+  ];
+
+  void _search(String input) {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +47,12 @@ class FindingFormulaOrNamingPage extends StatelessWidget {
                 decoration: bodyBoxDecoration,
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
-                child: const SingleChildScrollView(
-                  padding:
-                      EdgeInsets.only(top: 30, bottom: 5, left: 25, right: 25),
-                  child: SearchResults(),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(
+                      top: 30, bottom: 5, left: 25, right: 25),
+                  child: Column(
+                    children: _results,
+                  ),
                 ),
               ),
             ),
@@ -45,40 +63,56 @@ class FindingFormulaOrNamingPage extends StatelessWidget {
   }
 }
 
-class SearchResults extends StatefulWidget {
-  const SearchResults({Key? key}) : super(key: key);
-
-  @override
-  State<SearchResults> createState() => _SearchResultsState();
-}
-
-class _SearchResultsState extends State<SearchResults> {
-  List<SearchResult> results = [
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-    const SearchResult(),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: results,
-    );
-  }
-}
-
 class SearchResult extends StatelessWidget {
-  const SearchResult({Key? key}) : super(key: key);
+  SearchResult({Key? key}) : super(key: key);
+
+  final AutoSizeGroup quantityTitleAutoSizeGroup = AutoSizeGroup();
+
+  bool _isCollapsed = true;
 
   @override
   Widget build(BuildContext context) {
+    List<SearchResultQuantity> quantities = [];
+
+    quantities.add(
+      SearchResultQuantity(
+        title: 'Masa',
+        quantity: '18.01',
+        unit: 'g/mol',
+        titleAutoSizeGroup: quantityTitleAutoSizeGroup,
+      ),
+    );
+
+    quantities.add(
+      SearchResultQuantity(
+        title: 'Densidad',
+        quantity: '1.08',
+        unit: 'g/cm³',
+        titleAutoSizeGroup: quantityTitleAutoSizeGroup,
+      ),
+    );
+
+    quantities.add(
+      SearchResultQuantity(
+        title: 'P. de fusión',
+        quantity: '273.15',
+        unit: 'K',
+        titleAutoSizeGroup: quantityTitleAutoSizeGroup,
+      ),
+    );
+
+    quantities.add(
+      SearchResultQuantity(
+        title: 'P. de ebullición',
+        quantity: '143.27',
+        unit: 'K',
+        titleAutoSizeGroup: quantityTitleAutoSizeGroup,
+      ),
+    );
+
     return Column(
       children: [
+        // Head: (Result of: ...)
         Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -103,7 +137,9 @@ class SearchResult extends StatelessWidget {
             ],
           ),
         ),
+        // Separator:
         const SizedBox(height: 3),
+        // Body:
         Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -134,62 +170,51 @@ class SearchResult extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  color: quimifyTeal.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(10),
+              // Extra info:
+              if (quantities.isNotEmpty)
+                Container(
+                  decoration: BoxDecoration(
+                    color: quimifyTeal.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 50,
+                            child: quantities[0],
+                          ),
+                          if (quantities.length > 1) const SizedBox(width: 20),
+                          if (quantities.length > 1)
+                            Expanded(
+                              flex: 50,
+                              child: quantities[1],
+                            ),
+                        ],
+                      ),
+                      if (quantities.length > 2) const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          if (quantities.length > 2)
+                            Expanded(
+                              flex: 50,
+                              child: quantities[2],
+                            ),
+                          if (quantities.length > 3) const SizedBox(width: 20),
+                          if (quantities.length > 3)
+                            Expanded(
+                              flex: 50,
+                              child: quantities[3],
+                            ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 50,
-                          child: SearchResultQuantity(
-                            title: 'Masa',
-                            quantity: '18.01',
-                            unit: 'g/mol',
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          flex: 50,
-                          child: SearchResultQuantity(
-                            title: 'Densidad',
-                            quantity: '4.0012',
-                            unit: 'g/cm³',
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 50,
-                          child: SearchResultQuantity(
-                            title: 'P. de fusión',
-                            quantity: '273.15',
-                            unit: 'K',
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          flex: 50,
-                          child: SearchResultQuantity(
-                            title: 'P. de ebullición',
-                            quantity: '143.27',
-                            unit: 'K',
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -233,25 +258,33 @@ class SearchResultQuantity extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.quantity,
-      required this.unit})
+      required this.unit,
+      required this.titleAutoSizeGroup})
       : super(key: key);
 
   final String title, quantity, unit;
+  final AutoSizeGroup titleAutoSizeGroup;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 14),
-          ),
-          Text(
-            '$quantity $unit',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AutoSizeText(
+          title,
+          maxLines: 1,
+          stepGranularity: 0.1,
+          group: titleAutoSizeGroup,
+          style: const TextStyle(fontSize: 14),
+        ),
+        SizedBox(height: 5),
+        AutoSizeText(
+          '$quantity $unit',
+          maxLines: 1,
+          stepGranularity: 0.1,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

@@ -13,7 +13,7 @@ import 'organic/naming_page.dart';
 class NomenclaturePage extends StatelessWidget {
   NomenclaturePage({Key? key}) : super(key: key);
 
-  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
+  final autoSizeGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class InorganicMenu extends StatelessWidget {
           structure: 'H₂O',
           autoSizeGroup: autoSizeGroup,
           name: 'dióxido de hidrógeno',
-          page: const FindingFormulaOrNamingPage(),
+          page: FindingFormulaOrNamingPage(),
         ),
         const MenuCard.locked(
           width: 290,
