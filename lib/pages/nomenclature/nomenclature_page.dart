@@ -7,7 +7,7 @@ import 'package:cliente/constants.dart';
 import 'organic/finding_formula_page.dart';
 import 'widgets/menu_card.dart';
 import 'widgets/section_title.dart';
-import 'inorganic/finding_formula_or_naming_page.dart';
+import 'inorganic/inorganic_nomenclature.dart';
 import 'organic/naming_page.dart';
 
 class NomenclaturePage extends StatelessWidget {
@@ -79,7 +79,7 @@ class InorganicMenu extends StatelessWidget {
           structure: 'H₂O',
           autoSizeGroup: autoSizeGroup,
           name: 'dióxido de hidrógeno',
-          page: const FindingFormulaOrNamingPage(),
+          page: const InorganicNomenclaturePage(),
         ),
         const MenuCard.locked(
           width: 290,
@@ -125,7 +125,7 @@ class OrganicMenu extends StatelessWidget {
               ],
             ),
           ),
-          page: const FindingFormulaPage(),
+          page: FindingFormulaPage(),
         ),
         MenuCard(
           width: 290,

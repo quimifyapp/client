@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 class InorganicResult {
   final bool present, premium;
   final String name, formula;
   final String? synonym, mass, density, meltingPoint, boilingPoint;
 
   final String? suggestion;
-  final bool isOrganicSuggestion;
+  final bool? isOrganicSuggestion;
 
   InorganicResult(
     this.present,
@@ -20,7 +22,8 @@ class InorganicResult {
     this.isOrganicSuggestion,
   );
 
-  factory InorganicResult.fromJson(dynamic json) {
+  factory InorganicResult.fromJson(String body) {
+    dynamic json = jsonDecode(body);
     return InorganicResult(
       json['encontrado'] as bool,
       json['premium'] as bool,
@@ -32,7 +35,7 @@ class InorganicResult {
       json['fusion'] as String?,
       json['ebullicion'] as String?,
       json['sugerencia'] as String?,
-      json['es_organico_sugerencia'] as bool,
+      json['es_organico_sugerencia'] as bool?,
     );
   }
 }

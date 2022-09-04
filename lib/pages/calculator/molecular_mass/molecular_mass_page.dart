@@ -5,6 +5,7 @@ import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../api/api.dart';
 import '../../../api/results/molecular_mass_result.dart';
@@ -27,13 +28,19 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   // Initial values:
 
   String _labelText = 'H₂SO₄';
-  MolecularMassResult _result = MolecularMassResult(true, 97.96737971,
-      {'H': 2.01588, 'S': 32.066, 'O': 63.976}, {'H': 2, 'S': 1, 'O': 4}, '');
+  MolecularMassResult _result = MolecularMassResult(
+    true,
+    97.96737971,
+    {'H': 2.01588, 'S': 32.066, 'O': 63.976},
+    {'H': 2, 'S': 1, 'O': 4},
+    '',
+  );
 
-  Future<void> _calculate(String input) async {
-    if (!isEmptyWithSpaces(input)) {
-      String formula = toDigits(input);
-      MolecularMassResult? result = await Api().getMolecularMass(formula);
+  Future<void> _calculate() async {
+    String input = _textController.text;
+    if (!isEmptyWithBlanks(input)) {
+      MolecularMassResult? result =
+          await Api().getMolecularMass(toDigits(input));
 
       if (result != null) {
         if (result.present) {
@@ -50,7 +57,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           if (!mounted) return; // For security reasons
           DialogPopup.reportableMessage(
             title: 'Sin resultado',
-            details: toSubscripts(result.error),
+            details: toSubscripts(result.error!),
           ).show(context);
         }
       } else {
@@ -93,20 +100,27 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     _scrollToStart();
   }
 
-  void _eraseTextIfEmpty(input) {
-    if (isEmptyWithSpaces(input)) {
+  void _eraseTextIfEmpty() {
+    if (isEmptyWithBlanks(_textController.text)) {
       _textController.clear(); // Clears input
     }
   }
 
+  void _eraseInitialAndFinalBlanks() {
+    _textController.text =
+        noInitialAndFinalBlanks(_textController.text); // Clears input
+  }
+
   void _pressedButton() {
-    _calculate(_textController.text);
+    _eraseInitialAndFinalBlanks();
+
+    _calculate();
 
     if (_textFocusNode.hasFocus) {
       _textFocusNode.unfocus();
     }
 
-    if (isEmptyWithSpaces(_textController.text)) {
+    if (isEmptyWithBlanks(_textController.text)) {
       if (!_textFocusNode.hasFocus) {
         _startTyping();
       } else {
@@ -115,15 +129,17 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _submittedText(String input) {
+  void _submittedText() {
     // Keyboard will be hidden afterwards
-    _calculate(input);
-    _eraseTextIfEmpty(input);
+    _eraseInitialAndFinalBlanks();
+    _calculate();
+    _eraseTextIfEmpty();
   }
 
   void _tapOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
-    _eraseTextIfEmpty(_textController.text);
+    _eraseInitialAndFinalBlanks();
+    _eraseTextIfEmpty();
   }
 
   @override
@@ -133,6 +149,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       child: Container(
         decoration: quimifyGradientBoxDecoration,
         child: Scaffold(
+          // To avoid keyboard resizing:
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: Column(
             children: [
@@ -208,6 +226,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                     ),
                                   ),
                                   // Logic:
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        inputFormatter)
+                                  ],
                                   textCapitalization:
                                       TextCapitalization.sentences,
                                   scribbleEnabled: false,
@@ -220,7 +242,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                     );
                                   },
                                   textInputAction: TextInputAction.search,
-                                  onSubmitted: _submittedText,
+                                  onSubmitted: (_) => _submittedText(),
                                   onTap: _scrollToStart,
                                 ),
                               ],

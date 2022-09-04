@@ -62,6 +62,7 @@ class DialogPopup extends StatelessWidget {
       context: context,
       barrierDismissible: closable,
       barrierColor: Colors.black.withOpacity(0.2),
+      anchorPoint: const Offset(0, 0), // Centered
       builder: (BuildContext context) {
         return this;
       },

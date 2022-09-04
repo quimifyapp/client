@@ -5,7 +5,7 @@ class MolecularMassResult {
   final num mass;
   final Map<String, num> elementToGrams;
   final Map<String, int> elementToMoles;
-  final String error;
+  final String? error;
 
   MolecularMassResult(
     this.present,
@@ -22,7 +22,7 @@ class MolecularMassResult {
       (json['masa'] ?? 0.0) as double,
       (json['elemento_a_gramos'] ?? {}).cast<String, num>(),
       (json['elemento_a_moles'] ?? {}).cast<String, int>(),
-      json['error'] != null ? json['error'] as String : '',
+      json['error'] as String?,
     );
   }
 }

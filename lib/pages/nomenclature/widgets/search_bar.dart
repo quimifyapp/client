@@ -1,19 +1,34 @@
 import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../utils/text.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key, required this.hint, required this.corrector})
+  const SearchBar(
+      {Key? key,
+      required this.label,
+      required this.controller,
+      required this.focusNode,
+      required this.corrector,
+      required this.onSubmitted})
       : super(key: key);
 
-  final String hint;
-  final Function(String) corrector;
+  final String label;
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final Function(String) corrector, onSubmitted;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  final TextEditingController _controller = TextEditingController();
+  void _eraseInitialAndFinalBlanks() {
+    setState(() {
+      widget.controller.text = noInitialAndFinalBlanks(widget.controller.text);
+    }); // Clears input
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +53,7 @@ class _SearchBarState extends State<SearchBar> {
                   decoration: InputDecoration(
                     // So vertical center works:
                     isCollapsed: true,
-                    labelText: widget.hint,
+                    labelText: widget.label,
                     labelStyle: const TextStyle(
                       color: Colors.black45,
                     ),
@@ -62,18 +77,29 @@ class _SearchBarState extends State<SearchBar> {
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.focusNode.unfocus();
+                          _eraseInitialAndFinalBlanks();
+                          widget.onSubmitted(widget.controller.text);
+                        },
                       ),
                     ),
                   ),
                   // Logic:
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(inputFormatter),
+                  ],
                   scribbleEnabled: false,
-                  textInputAction: TextInputAction.done,
-                  controller: _controller,
-                  onChanged: (String input) {
-                    _controller.value = _controller.value.copyWith(
-                      text: widget.corrector(input),
-                    );
+                  textInputAction: TextInputAction.search,
+                  focusNode: widget.focusNode,
+                  controller: widget.controller,
+                  onChanged: (String input) => widget.controller.value =
+                      widget.controller.value.copyWith(
+                    text: widget.corrector(input),
+                  ),
+                  onSubmitted: (_) {
+                    _eraseInitialAndFinalBlanks();
+                    widget.onSubmitted(widget.controller.text);
                   },
                 ),
               ),

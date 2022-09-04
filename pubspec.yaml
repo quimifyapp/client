@@ -63,6 +63,7 @@ flutter:
     - assets/images/icons/molecule.png
     - assets/images/icons/calculator.png
     - assets/images/icons/report.png
+    - assets/images/icons/narrow_arrow.png
 
   fonts:
      - family: CeraPro

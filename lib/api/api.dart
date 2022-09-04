@@ -16,7 +16,7 @@ class Api {
   factory Api() => _singleton;
 
   Future<String?> _getResponse(
-      String path, Map<String, String> parameters) async {
+      String path, Map<String, dynamic> parameters) async {
     String? result;
 
     try {
@@ -38,11 +38,11 @@ class Api {
     return result;
   }
 
-  Future<InorganicResult?> getInorganic(String input) async {
+  Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 
-    String? response =
-        await _getResponse('inorganico/buscar', {'input': input});
+    String? response = await _getResponse(
+        'inorganico/', {'input': input, 'foto': photo.toString()});
 
     if (response != null) {
       try {

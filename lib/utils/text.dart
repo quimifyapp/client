@@ -1,3 +1,6 @@
+RegExp inputFormatter = RegExp(r'[A-zÁ-úñ\d\(\) \-+,=≡#'
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
+
 const Map<String, String> digitToSubscript = {
   '0': '\u2080',
   '1': '\u2081',
@@ -88,9 +91,17 @@ String toDigits(String input) {
   return result;
 }
 
-String noSpaces(String input) => input.replaceAll(RegExp(r'\s+'), '');
+String noInitialAndFinalBlanks(String input) {
+  String result =
+      input.replaceAll(RegExp(r'^\s+'), '').replaceAll(RegExp(r'\s+$'), '');
+  print(result);
+  return result;
+}
 
-bool isEmptyWithSpaces(String input) => noSpaces(input).isEmpty;
+String noBlanks(String input) =>
+    input.replaceAll(RegExp(r'\s+'), '');
+
+bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 
 String formatInorganicFormulaOrName(String formulaOrName) =>
     toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
