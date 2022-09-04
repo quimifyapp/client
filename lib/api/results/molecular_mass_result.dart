@@ -17,7 +17,6 @@ class MolecularMassResult {
 
   factory MolecularMassResult.fromJson(String body) {
     dynamic json = jsonDecode(body);
-
     return MolecularMassResult(
       json['encontrado'] as bool,
       (json['masa'] ?? 0.0) as double,

@@ -9,7 +9,7 @@ import '../../../utils/text.dart';
 import '../../../widgets/button.dart';
 
 class FindingFormulaOrNamingPage extends StatefulWidget {
-  FindingFormulaOrNamingPage({Key? key}) : super(key: key);
+  const FindingFormulaOrNamingPage({Key? key}) : super(key: key);
 
   @override
   State<FindingFormulaOrNamingPage> createState() =>
@@ -18,7 +18,8 @@ class FindingFormulaOrNamingPage extends StatefulWidget {
 
 class _FindingFormulaOrNamingPageState
     extends State<FindingFormulaOrNamingPage> {
-  List<SearchResult> _results = [
+  final List<SearchResult> _results = [
+    SearchResult(),
     SearchResult(),
   ];
 
@@ -138,7 +139,7 @@ class SearchResult extends StatelessWidget {
           ),
         ),
         // Separator:
-        const SizedBox(height: 3),
+        const SizedBox(height: 2),
         // Body:
         Container(
           decoration: const BoxDecoration(

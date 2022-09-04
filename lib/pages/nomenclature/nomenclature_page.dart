@@ -79,7 +79,7 @@ class InorganicMenu extends StatelessWidget {
           structure: 'H₂O',
           autoSizeGroup: autoSizeGroup,
           name: 'dióxido de hidrógeno',
-          page: FindingFormulaOrNamingPage(),
+          page: const FindingFormulaOrNamingPage(),
         ),
         const MenuCard.locked(
           width: 290,

@@ -486,9 +486,9 @@ class Graph extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: quantities
               .map(
-                (quantity) => Column(
+                (amount) => Column(
                   children: [
-                    quantity,
+                    amount,
                     const SizedBox(height: 15),
                   ],
                 ),

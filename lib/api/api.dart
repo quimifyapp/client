@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cliente/api/results/access_result.dart';
+import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,16 +15,17 @@ class Api {
 
   factory Api() => _singleton;
 
-  Future<MolecularMassResult?> getMolecularMass(String formula) async {
-    MolecularMassResult? result;
+  Future<String?> _getResponse(
+      String path, Map<String, String> parameters) async {
+    String? result;
 
     try {
-      Uri url = Uri.http(authority, 'masamolecular', {'formula': formula});
+      Uri url = Uri.http(authority, path, parameters);
       http.Response response = await _client.get(url);
 
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         String body = utf8.decode(response.bodyBytes);
-        result = MolecularMassResult.fromJson(body);
+        result = body;
       } else {
         // Server crash or invalid URL
         // Error...
@@ -36,23 +38,51 @@ class Api {
     return result;
   }
 
+  Future<InorganicResult?> getInorganic(String input) async {
+    InorganicResult? result;
+
+    String? response =
+        await _getResponse('inorganico/buscar', {'input': input});
+
+    if (response != null) {
+      try {
+        result = InorganicResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
+  Future<MolecularMassResult?> getMolecularMass(String formula) async {
+    MolecularMassResult? result;
+
+    String? response =
+        await _getResponse('masamolecular', {'formula': formula});
+
+    if (response != null) {
+      try {
+        result = MolecularMassResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
   Future<AccessResult?> connect() async {
     AccessResult? result;
 
-    try {
-      Uri url = Uri.http(authority, 'bienvenida');
-      http.Response response = await _client.get(url);
+    String? response = await _getResponse('bienvenida', {});
 
-      if(response.statusCode == 200) {
-        String body = utf8.decode(response.bodyBytes);
-        result = AccessResult.fromJson(body);
-      } else {
-        // Server crash or invalid URL
+    if (response != null) {
+      try {
+        result = AccessResult.fromJson(response);
+      } catch (_) {
         // Error...
       }
-    } catch (_) {
-      // No internet, server down or client error
-      // Error...
     }
 
     return result;
