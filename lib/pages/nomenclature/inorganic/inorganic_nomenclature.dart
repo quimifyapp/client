@@ -210,10 +210,15 @@ class _SearchResultState extends State<SearchResult> {
                     fontSize: 14,
                   ),
                 ),
-                Text(
-                  widget.query,
-                  style: const TextStyle(
-                    fontSize: 14,
+                Expanded(
+                  child: AutoSizeText(
+                    maxLines: 1,
+                    minFontSize: 12,
+                    stepGranularity: 0.1,
+                    widget.query,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ],
@@ -257,7 +262,7 @@ class _SearchResultState extends State<SearchResult> {
                   Container(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      'y ${widget.inorganicResult.synonym!}',
+                      'o ${widget.inorganicResult.synonym!}',
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),
