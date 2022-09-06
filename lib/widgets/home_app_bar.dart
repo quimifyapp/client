@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
               child: IconButton(
                 icon: Image.asset(
                   'assets/images/icons/logo.png',
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 // To remove native effects:
                 hoverColor: Colors.transparent,

@@ -6,21 +6,22 @@ import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  final _client = http.Client();
+  factory Api() => _singleton;
 
   Api._internal();
   static final _singleton = Api._internal();
+  final _client = http.Client();
 
-  static const String authority = '192.168.1.90:8080';
+  static const String _authority = '192.168.1.90:8080';
 
-  factory Api() => _singleton;
+  static const int android = 0, iOS = 1, web = 2;
 
   Future<String?> _getResponse(
       String path, Map<String, dynamic> parameters) async {
     String? result;
 
     try {
-      Uri url = Uri.http(authority, path, parameters);
+      Uri url = Uri.http(_authority, path, parameters);
       http.Response response = await _client.get(url);
 
       if (response.statusCode == 200) {
@@ -72,10 +73,11 @@ class Api {
     return result;
   }
 
-  Future<AccessResult?> connect() async {
+  Future<AccessResult?> connect(int platform) async {
     AccessResult? result;
 
-    String? response = await _getResponse('bienvenida', {});
+    String? response =
+        await _getResponse('bienvenida', {'plataforma': platform.toString()});
 
     if (response != null) {
       try {

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cliente/main.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../api/api.dart';
@@ -34,34 +33,36 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _showWelcomeMessagePopup() {
-    if (accessResult!.messageLinkPresent) {
-      DialogPopup.linkedMessage(
-        title: accessResult!.messageTitle,
-        details: accessResult!.messageDetails,
-        linkName: accessResult!.messageLinkName,
-        link: accessResult!.messageLink,
-      ).show(context);
-    } else {
-      DialogPopup.message(
-        title: accessResult!.messageTitle,
-        details: accessResult!.messageDetails,
-      ).show(context);
+    if (accessResult!.messagePresent) {
+      if (accessResult!.messageLinkPresent!) {
+        DialogPopup.linkedMessage(
+          title: accessResult!.messageTitle!,
+          details: accessResult!.messageDetails!,
+          linkName: accessResult!.messageLinkName!,
+          link: accessResult!.messageLink!,
+        ).show(context);
+      } else {
+        DialogPopup.message(
+          title: accessResult!.messageTitle!,
+          details: accessResult!.messageDetails!,
+        ).show(context);
+      }
     }
   }
 
   void _showWelcomePopups() {
     if (accessResult != null) {
-      if (accessResult!.updateAvailable && !kIsWeb) {
+      if (accessResult!.updateAvailable) {
         DialogPopup.update(
           details: accessResult!.updateDetails,
-          closable: !accessResult!.updateMandatory,
+          closable: !accessResult!.updateMandatory!,
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
               : 'https://apps.apple.com/pa/app/youtube/id544007664',
         ).show(context).then((value) => _showWelcomeMessagePopup());
+      } else {
+        _showWelcomeMessagePopup();
       }
-    } else {
-      _showWelcomeMessagePopup();
     }
   }
 
@@ -79,7 +80,7 @@ class _MainPageState extends State<MainPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        if(currentPage == 0) {
+        if (currentPage == 0) {
           Api().close();
           return true;
         } else {
@@ -109,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                   gradient: quimifyGradient,
                   borderRadius: BorderRadius.circular(35),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 245, 247, 251),
+                      color: Theme.of(context).colorScheme.background,
                       width: 0.5),
                 ),
                 child: Row(
@@ -120,7 +121,9 @@ class _MainPageState extends State<MainPage> {
                         Image.asset(
                           'assets/images/icons/molecule.png',
                           width: 20,
-                          color: currentPage == 0 ? Colors.white : Colors.white70,
+                          color: currentPage == 0
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.outline,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -128,8 +131,9 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color:
-                            currentPage == 0 ? Colors.white : Colors.white70,
+                            color: currentPage == 0
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ],
@@ -137,14 +141,16 @@ class _MainPageState extends State<MainPage> {
                     Container(
                       height: 40,
                       width: 0.5,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.background,
                     ),
                     Row(
                       children: [
                         Image.asset(
                           'assets/images/icons/calculator.png',
                           width: 20,
-                          color: currentPage == 1 ? Colors.white : Colors.white70,
+                          color: currentPage == 1
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.outline,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -152,8 +158,9 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color:
-                            currentPage == 1 ? Colors.white : Colors.white70,
+                            color: currentPage == 1
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ],

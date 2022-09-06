@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-
 class MenuCard extends StatelessWidget {
   const MenuCard(
       {super.key,
@@ -13,8 +12,8 @@ class MenuCard extends StatelessWidget {
       required this.autoSizeGroup,
       required this.name,
       required this.page})
-      : _custom = false,
-        _locked = false,
+      : _isCustom = false,
+        _isLocked = false,
         customBody = null;
 
   const MenuCard.custom(
@@ -23,15 +22,15 @@ class MenuCard extends StatelessWidget {
       required this.title,
       required this.customBody,
       required this.page})
-      : _custom = true,
-        _locked = false,
+      : _isCustom = true,
+        _isLocked = false,
         name = null,
         structure = null,
         autoSizeGroup = null;
 
   const MenuCard.locked({super.key, this.width, required this.title})
-      : _custom = false,
-        _locked = true,
+      : _isCustom = false,
+        _isLocked = true,
         customBody = null,
         structure = null,
         autoSizeGroup = null,
@@ -47,74 +46,11 @@ class MenuCard extends StatelessWidget {
   final String? name;
   final Widget? page;
 
-  final bool _custom;
-  final bool _locked;
-
-  static Text _nameFor(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-  }
+  final bool _isCustom;
+  final bool _isLocked;
 
   @override
   Widget build(BuildContext context) {
-    Widget body;
-    if (_custom) {
-      body = customBody!;
-    } else if (_locked) {
-      body = Container(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.asset(
-                'assets/images/icons/lock.png',
-                height: 35,
-                color: const Color.fromARGB(255, 70, 70, 70),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Center(child: _nameFor('Próximamente')),
-          ],
-        ),
-      );
-    } else {
-      body = Container(
-        padding:
-            const EdgeInsets.only(top: 15, bottom: 15, left: 25, right: 25),
-        alignment: Alignment.centerLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeText(
-              structure!,
-              maxLines: 1,
-              stepGranularity: 0.1,
-              group: autoSizeGroup,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
-                color: quimifyTeal,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              name!,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
     return InkWell(
       onTap: page != null
           ? () {
@@ -130,7 +66,6 @@ class MenuCard extends StatelessWidget {
       child: Container(
         width: width,
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(15),
         ),
         // To avoid rounded corners overflow:
@@ -144,14 +79,72 @@ class MenuCard extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            body,
+            if (!_isCustom && !_isLocked)
+              Container(
+                color: Theme.of(context).colorScheme.surface,
+                padding: const EdgeInsets.only(
+                    top: 15, bottom: 15, left: 25, right: 25),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      structure!,
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                      group: autoSizeGroup,
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
+                        color: quimifyTeal,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      name!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (_isLocked)
+              Container(
+                color: Theme.of(context).colorScheme.surface,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        'assets/images/icons/lock.png',
+                        height: 35,
+                        color: Theme.of(context).colorScheme.inverseSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Center(child: Text(
+                      'Próximamente',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
+                  ],
+                ),
+              ),
+            if (_isCustom) customBody!,
           ],
         ),
       ),

@@ -27,13 +27,18 @@ class NomenclaturePage extends StatelessWidget {
               title: Image.asset(
                 'assets/images/icons/branding_slim.png',
                 height: 17,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
             // Body:
             Expanded(
               child: Container(
-                decoration: bodyBoxDecoration,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(25),
+                  ),
+                ),
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 child: SingleChildScrollView(
@@ -103,6 +108,7 @@ class OrganicMenu extends StatelessWidget {
           width: 290,
           title: 'Formular',
           customBody: Container(
+            color: Theme.of(context).colorScheme.surface,
             padding:
                 const EdgeInsets.only(top: 20, bottom: 15, left: 25, right: 25),
             alignment: Alignment.centerLeft,
@@ -115,10 +121,11 @@ class OrganicMenu extends StatelessWidget {
                   height: 30,
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   '3-cloropropilbenceno',
                   style: TextStyle(
                     fontSize: 16,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

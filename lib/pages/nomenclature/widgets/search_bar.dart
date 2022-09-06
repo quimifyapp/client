@@ -41,21 +41,23 @@ class _SearchBarState extends State<SearchBar> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
               ),
               child: Center(
                 child: TextField(
                   // Aspect:
-                  cursorColor: const Color.fromARGB(255, 34, 34, 34),
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 34, 34, 34), fontSize: 18),
+                  cursorColor: Theme.of(context).colorScheme.primary,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 18,
+                  ),
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
                     // So vertical center works:
                     isCollapsed: true,
                     labelText: widget.label,
-                    labelStyle: const TextStyle(
-                      color: Colors.black45,
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     // So hint doesn't go up while typing:
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -72,7 +74,7 @@ class _SearchBarState extends State<SearchBar> {
                       child: IconButton(
                         icon: Image.asset(
                           'assets/images/icons/search.png',
-                          color: const Color.fromARGB(255, 34, 34, 34),
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
@@ -108,10 +110,10 @@ class _SearchBarState extends State<SearchBar> {
           const SizedBox(width: 8),
           Button(
             width: 50,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             onPressed: () {},
-            child: const Icon(Icons.camera_alt_outlined,
-                color: Color.fromARGB(255, 34, 34, 34)),
+            child: Icon(Icons.camera_alt_outlined,
+                color: Theme.of(context).colorScheme.primary),
           ),
         ],
       ),

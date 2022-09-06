@@ -117,7 +117,12 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
             // Body:
             Expanded(
               child: Container(
-                decoration: bodyBoxDecoration,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(25),
+                  ),
+                ),
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 child: SingleChildScrollView(
@@ -196,17 +201,17 @@ class _SearchResultState extends State<SearchResult> {
         children: [
           // Head: (Result of: ...)
           Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
             ),
             padding: const EdgeInsets.all(15),
             child: Row(
               children: [
-                const Text(
+                Text(
                   'Búsqueda: ',
                   style: TextStyle(
-                    color: Colors.black38,
+                    color: Theme.of(context).colorScheme.tertiary,
                     fontSize: 14,
                   ),
                 ),
@@ -216,7 +221,8 @@ class _SearchResultState extends State<SearchResult> {
                     minFontSize: 12,
                     stepGranularity: 0.1,
                     widget.query,
-                    style: const TextStyle(
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 14,
                     ),
                   ),
@@ -226,11 +232,13 @@ class _SearchResultState extends State<SearchResult> {
           ),
           // Separator:
           const SizedBox(height: 2),
-          // Body:
+          // Body:,
           Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(15),
+              ),
             ),
             padding:
                 const EdgeInsets.only(top: 20, bottom: 15, left: 20, right: 20),
@@ -241,8 +249,8 @@ class _SearchResultState extends State<SearchResult> {
                 Container(
                   padding: const EdgeInsets.only(left: 5),
                   child: Text(
-                    toSubscripts(widget.inorganicResult.formula),
-                    style: const TextStyle(
+                    toSubscripts(widget.inorganicResult.formula!),
+                    style: TextStyle(
                       color: quimifyTeal,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -253,8 +261,11 @@ class _SearchResultState extends State<SearchResult> {
                 Container(
                   padding: const EdgeInsets.only(left: 5),
                   child: Text(
-                    widget.inorganicResult.name,
-                    style: const TextStyle(fontSize: 20),
+                    widget.inorganicResult.name!,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 if (widget.inorganicResult.synonym != null) ...[
@@ -263,7 +274,10 @@ class _SearchResultState extends State<SearchResult> {
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
                       'o ${widget.inorganicResult.synonym!}',
-                      style: const TextStyle(fontSize: 20),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ],
@@ -280,7 +294,7 @@ class _SearchResultState extends State<SearchResult> {
                         if (widget._quantities.isNotEmpty)
                           Container(
                             decoration: BoxDecoration(
-                              color: quimifyTeal.withOpacity(0.08),
+                              color: Theme.of(context).colorScheme.onSurface,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             padding: const EdgeInsets.all(20),
@@ -325,33 +339,33 @@ class _SearchResultState extends State<SearchResult> {
                           ),
                         Row(
                           children: [
+                            const SizedBox(width: 5),
                             Expanded(
                               child: SearchResultButton(
-                                color: const Color.fromARGB(255, 255, 96, 96),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 255, 241, 241),
+                                color: Theme.of(context).colorScheme.onError,
+                                backgroundColor: Theme.of(context).colorScheme.error,
                                 icon: Image.asset(
                                   'assets/images/icons/report.png',
-                                  color: const Color.fromARGB(255, 255, 96, 96),
+                                  color: Theme.of(context).colorScheme.onError,
                                   width: 18,
                                 ),
                                 text: 'Reportar',
                               ),
                             ),
                             const SizedBox(width: 15),
-                            const Expanded(
+                            Expanded(
                               child: SearchResultButton(
-                                color: Color.fromARGB(255, 56, 133, 224),
-                                backgroundColor:
-                                    Color.fromARGB(255, 239, 246, 253),
+                                color: Theme.of(context).colorScheme.onErrorContainer,
+                                backgroundColor: Theme.of(context).colorScheme.errorContainer,
                                 icon: Icon(
                                   Icons.share_outlined,
-                                  color: Color.fromARGB(255, 56, 133, 224),
+                                  color: Theme.of(context).colorScheme.onErrorContainer,
                                   size: 18,
                                 ),
                                 text: 'Compartir',
                               ),
                             ),
+                            const SizedBox(width: 5),
                           ],
                         ),
                       ],
@@ -364,7 +378,7 @@ class _SearchResultState extends State<SearchResult> {
                     quarterTurns: widget._isCollapsed ? 2 : 0,
                     child: Image.asset(
                       'assets/images/icons/narrow_arrow.png',
-                      color: Colors.black26,
+                      color: const Color.fromARGB(255, 189, 189, 189),
                       width: 25,
                     ),
                   ),
@@ -401,14 +415,21 @@ class SearchResultQuantity extends StatelessWidget {
           maxLines: 1,
           stepGranularity: 0.1,
           group: titleAutoSizeGroup,
-          style: const TextStyle(fontSize: 14),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 14,
+          ),
         ),
         const SizedBox(height: 5),
         AutoSizeText(
           '$quantity $unit',
           maxLines: 1,
           stepGranularity: 0.1,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );

@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 class AccessResult {
-  final bool updateAvailable,
-      updateMandatory,
-      messagePresent,
-      messageLinkPresent;
-  final String updateDetails,
+  final bool updateAvailable, messagePresent;
+  final bool? updateMandatory, messageLinkPresent;
+  final String? updateDetails,
       messageTitle,
       messageDetails,
       messageLinkName,
@@ -28,14 +26,14 @@ class AccessResult {
 
     return AccessResult(
       json['actualizacion_disponible'] as bool,
-      json['actualizacion_obligatoria'] as bool,
-      json['actualizacion_detalles'] as String,
+      json['actualizacion_obligatoria'] as bool?,
+      json['actualizacion_detalles'] as String?,
       json['mensaje_presente'] as bool,
-      json['mensaje_titulo'] as String,
-      json['mensaje_detalles'] as String,
-      json['mensaje_enlace_presente'] as bool,
-      json['mensaje_enlace_nombre'] as String,
-      json['mensaje_enlace'] as String,
+      json['mensaje_titulo'] as String?,
+      json['mensaje_detalles'] as String?,
+      json['mensaje_enlace_presente'] as bool?,
+      json['mensaje_enlace_nombre'] as String?,
+      json['mensaje_enlace'] as String?,
     );
   }
 }

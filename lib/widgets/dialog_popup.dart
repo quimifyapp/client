@@ -61,7 +61,7 @@ class DialogPopup extends StatelessWidget {
     await showDialog<void>(
       context: context,
       barrierDismissible: closable,
-      barrierColor: Colors.black.withOpacity(0.2),
+      barrierColor: Theme.of(context).colorScheme.shadow,
       anchorPoint: const Offset(0, 0), // Centered
       builder: (BuildContext context) {
         return this;
@@ -75,6 +75,7 @@ class DialogPopup extends StatelessWidget {
       onWillPop: () => Future.value(closable),
       child: AlertDialog(
         insetPadding: const EdgeInsets.all(25),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         titlePadding: _hasCloseButton ? EdgeInsets.zero : null,
         title: Column(
@@ -85,8 +86,9 @@ class DialogPopup extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.close_rounded,
+                      color: Theme.of(context).colorScheme.primary,
                       size: 25,
                     ),
                     padding:
@@ -97,7 +99,10 @@ class DialogPopup extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 22),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 22,
+              ),
             ),
           ],
         ),
@@ -107,6 +112,9 @@ class DialogPopup extends StatelessWidget {
             ? Text(
                 details!,
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               )
             : null,
         actionsPadding: const EdgeInsets.only(
@@ -122,8 +130,8 @@ class DialogPopup extends StatelessWidget {
                   gradient: quimifyGradient,
                   child: Text(
                     linkName!,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
                       fontSize: 17,
                     ),
                   ),
@@ -137,11 +145,11 @@ class DialogPopup extends StatelessWidget {
                         children: [
                           Button(
                             width: 50,
-                            color: const Color.fromARGB(255, 255, 241, 241),
+                            color: Theme.of(context).colorScheme.error,
                             onPressed: () {},
                             child: Image.asset(
                               'assets/images/icons/report.png',
-                              color: const Color.fromARGB(255, 255, 96, 96),
+                              color: Theme.of(context).colorScheme.onError,
                               width: 20,
                             ),
                           ),
@@ -151,10 +159,10 @@ class DialogPopup extends StatelessWidget {
                     Expanded(
                       child: Button.gradient(
                         gradient: quimifyGradient,
-                        child: const Text(
+                        child: Text(
                           'Entendido',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             fontSize: 17,
                           ),
                         ),

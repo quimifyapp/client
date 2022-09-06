@@ -155,19 +155,24 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           body: Column(
             children: [
               // App bar:
-              const HomeAppBar(
+              HomeAppBar(
                 title: Text(
                   'Calculadora',
                   style: TextStyle(
                       fontSize: 22,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold),
                 ),
               ),
               // Body:
               Expanded(
                 child: Container(
-                  decoration: bodyBoxDecoration,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(25),
+                    ),
+                  ),
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   // Vertically scrollable for short devices:
@@ -184,7 +189,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           child: Container(
                             height: 110,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             padding: const EdgeInsets.all(20),
@@ -192,15 +197,20 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Fórmula',
-                                  style: subTitleStyle,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 const Spacer(),
                                 TextField(
                                   // Aspect:
                                   cursorColor:
-                                      const Color.fromARGB(255, 34, 34, 34),
+                                      Theme.of(context).colorScheme.primary,
                                   style: inputOutputStyle,
                                   keyboardType: TextInputType.visiblePassword,
                                   textAlignVertical: TextAlignVertical.center,
@@ -209,8 +219,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                         const EdgeInsets.only(bottom: 3),
                                     isCollapsed: true,
                                     labelText: _labelText,
-                                    labelStyle: const TextStyle(
-                                      color: Colors.black12,
+                                    labelStyle: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
                                       fontSize: 26,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -250,16 +262,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        Output(mass: _result.mass),
+                        Output(mass: _result.mass!),
                         const SizedBox(height: 25),
                         Button.gradient(
                           height: 50,
                           gradient: quimifyGradient,
                           onPressed: _pressedButton,
-                          child: const Text(
+                          child: Text(
                             'Calcular',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onPrimary,
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),
@@ -267,7 +279,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         ),
                         const SizedBox(height: 25),
                         GraphMenu(
-                          mass: _result.mass,
+                          mass: _result.mass!,
                           elementToGrams: _result.elementToGrams,
                           elementToMoles: _result.elementToMoles,
                         ),
@@ -286,14 +298,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 }
 
-const TextStyle subTitleStyle = TextStyle(
-  fontSize: 18,
-  fontWeight: FontWeight.w500,
-);
-
-const TextStyle inputOutputStyle = TextStyle(
-  color: quimifyTeal,
+TextStyle inputOutputStyle = TextStyle(
   fontSize: 26,
+  color: quimifyTeal,
   fontWeight: FontWeight.bold,
 );
 
@@ -309,20 +316,24 @@ class Output extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
+            children: [
               Text(
                 'Masa molecular',
-                style: subTitleStyle,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              Spacer(),
-              HelpButton(),
+              const Spacer(),
+              const HelpButton(),
             ],
           ),
           const Spacer(),
@@ -382,7 +393,7 @@ class _GraphMenuState extends State<GraphMenu> {
 
     return Container(
       decoration: BoxDecoration(
-        color: quimifyTeal.withOpacity(0.08),
+        color: Theme.of(context).colorScheme.onBackground,
         borderRadius: BorderRadius.circular(15),
       ),
       padding: const EdgeInsets.all(15),
@@ -394,7 +405,7 @@ class _GraphMenuState extends State<GraphMenu> {
                 child: AutoSizeText(
                   toSubscripts(formula),
                   minFontSize: 18,
-                  overflowReplacement: const Text(
+                  overflowReplacement: Text(
                     'Proporciones',
                     maxLines: 1,
                     style: TextStyle(
@@ -405,7 +416,7 @@ class _GraphMenuState extends State<GraphMenu> {
                   ),
                   stepGranularity: 0.1,
                   maxLines: 1,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: quimifyTeal,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -413,9 +424,10 @@ class _GraphMenuState extends State<GraphMenu> {
                 ),
               ),
               Switch(
-                activeColor: Colors.white,
+                activeColor: Colors.white.withOpacity(0.9),
+                inactiveThumbColor: Colors.white.withOpacity(0.9),
                 activeTrackColor: quimifyTeal,
-                inactiveTrackColor: Colors.black12,
+                inactiveTrackColor: Theme.of(context).colorScheme.secondary,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 value: _mol,
                 onChanged: (bool value) {
@@ -427,7 +439,9 @@ class _GraphMenuState extends State<GraphMenu> {
               Text(
                 'Pasar a mol',
                 style: TextStyle(
-                  color: _mol ? quimifyTeal : Colors.black12,
+                  color: _mol
+                      ? quimifyTeal
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -532,7 +546,8 @@ class GraphSymbol extends StatelessWidget {
     return Text(
       symbol,
       textAlign: TextAlign.left,
-      style: const TextStyle(
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
         fontSize: 16,
       ),
     );
@@ -552,7 +567,7 @@ class GraphBar extends StatelessWidget {
     return Container(
       height: 10,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.05),
+        color: Theme.of(context).colorScheme.onInverseSurface,
         borderRadius: BorderRadius.circular(15),
       ),
       alignment: Alignment.centerLeft,
@@ -582,7 +597,8 @@ class GraphQuantity extends StatelessWidget {
     return Text(
       quantity,
       textAlign: TextAlign.right,
-      style: const TextStyle(
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
         fontSize: 16,
       ),
     );

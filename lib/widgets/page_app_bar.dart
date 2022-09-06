@@ -18,11 +18,11 @@ class PageAppBar extends StatelessWidget {
           children: [
             Button(
               width: 50,
-              color: const Color.fromARGB(255, 106, 233, 218),
+              color: Theme.of(context).colorScheme.onSecondary,
               onPressed: () => Navigator.of(context).pop(),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
               ),
             ),
             const SizedBox(width: 20),
@@ -32,9 +32,9 @@ class PageAppBar extends StatelessWidget {
                 maxLines: 1,
                 stepGranularity: 0.1,
                 maxFontSize: 20,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.bold),
               ),
             ),

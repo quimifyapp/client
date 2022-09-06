@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cliente/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,7 +7,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'api/api.dart';
 import 'api/results/access_result.dart';
-
 
 late final AccessResult? accessResult;
 
@@ -15,7 +16,11 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Loading:
-  accessResult = await Api().connect();
+  accessResult = await Api().connect(Platform.isAndroid
+      ? Api.android
+      : Platform.isIOS
+          ? Api.iOS
+          : Api.web);
 
   // App launch:
   runApp(const QuimifyApp());
@@ -26,42 +31,95 @@ class QuimifyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // To ignore device's font scaling factor:
-    MediaQueryData windowData =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-    windowData = windowData.copyWith(textScaleFactor: 1.0);
-
-    // So it's always vertical:
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
     // Hide splash screen:
     FlutterNativeSplash.remove();
 
-    return MediaQuery(
-      // To ignore device's font scaling factor:
-      data: windowData,
-      // To get rid of status bar's tint:
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-        ),
-        child: MaterialApp(
-          // To ignore device's font scaling factor:
-          useInheritedMediaQuery: true,
-          // To get rid of debug banner:
-          debugShowCheckedModeBanner: false,
-          // To set stretched scroll on all Android versions: //TODO: deprecated
-          scrollBehavior: const ScrollBehavior(
-              androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
-          // Theme:
-          theme: ThemeData(
-            fontFamily: 'CeraPro',
+    // To get rid of status bar's tint:
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+      child: MaterialApp(
+        title: 'Quimify',
+        // To get rid of debug banner:
+        debugShowCheckedModeBanner: false,
+        // To set stretched scroll on all Android versions:
+        scrollBehavior: const ScrollBehavior(
+            androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
+        // To ignore device's font scaling factor:
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: child!,
+          );
+        },
+        // Themes:
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'CeraPro',
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+
+            primary: Color.fromARGB(255, 34, 34, 34),
+            secondary: Colors.black12,
+            tertiary: Colors.black45,
+
+            surface: Colors.white,
+            background: Color.fromARGB(255, 245, 247, 251),
+
+            onPrimary: Colors.white, // White text
+
+            onBackground: Color.fromARGB(255, 231, 246, 247), // From teal
+            onSurface: Color.fromARGB(255, 241, 253, 250), // From teal
+
+            shadow: Color.fromARGB(51, 0, 0, 0), // Dialog barrier
+            inverseSurface: Color.fromARGB(255, 60, 60, 60), // Lock icon
+
+            outline: Color.fromARGB(255, 235, 235, 235), // Nav bar unselected
+            onSecondary: Color.fromARGB(255, 106, 233, 218), // For PageAppBar
+
+            onInverseSurface: Color.fromARGB(13, 0, 0, 0), // Graph bar background
+
+            onError: Color.fromARGB(255, 255, 96, 96), // Error text
+            error: Color.fromARGB(255, 255, 241, 241), // Background
+            onErrorContainer: Color.fromARGB(255, 56, 133, 224), // Share text
+            errorContainer: Color.fromARGB(255, 239, 246, 253), // Background
           ),
-          // App:
-          title: 'Quimify',
-          home: MainPage(accessResult: accessResult),
         ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: 'CeraPro',
+          colorScheme: const ColorScheme(
+            brightness: Brightness.dark,
+
+            primary: Colors.white,
+            secondary: Colors.white54,
+            tertiary: Colors.white60,
+
+            surface: Color.fromARGB(255, 30, 30, 30),
+            background: Color.fromARGB(255, 18, 18, 18),
+
+            onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
+
+            onBackground: Color.fromARGB(255, 10, 38, 34), // From teal
+            onSurface: Color.fromARGB(255, 48, 170, 150), // From teal
+
+            shadow: Color.fromARGB(25, 255, 255, 255), // Dialog barrier
+            inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
+
+            outline: Color.fromARGB(255, 100, 100, 100), // Nav bar unselected
+            onSecondary: Color.fromARGB(255, 53, 197, 173), // For PageAppBar
+
+            onInverseSurface: Colors.black45, // Graph bar background
+
+            onError: Color.fromARGB(255, 255, 241, 241), // Error text
+            error: Color.fromARGB(255, 255, 96, 96), // Background
+            onErrorContainer: Color.fromARGB(255, 239, 246, 253), // Share text
+            errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
+          ),
+        ),
+        // App:
+        home: MainPage(accessResult: accessResult),
       ),
     );
   }

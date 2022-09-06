@@ -25,7 +25,12 @@ class NamingPage extends StatelessWidget {
             // Body:
             Expanded(
               child: Container(
-                decoration: bodyBoxDecoration,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(25),
+                  ),
+                ),
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 child: SingleChildScrollView(
