@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage> {
           index: currentPage,
           children: [
             NomenclaturePage(),
-            const CalculatorPage(),
+            CalculatorPage(),
           ],
         ),
         // Navigation bar:

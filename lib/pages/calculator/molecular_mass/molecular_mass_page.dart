@@ -4,6 +4,7 @@ import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +12,6 @@ import '../../../api/api.dart';
 import '../../../api/results/molecular_mass_result.dart';
 import '../../../utils/text.dart';
 import '../../../constants.dart';
-import '../../../widgets/home_app_bar.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -38,46 +38,66 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   Future<void> _calculate() async {
     String input = _textController.text;
-    if (!isEmptyWithBlanks(input)) {
-      MolecularMassResult? result =
-          await Api().getMolecularMass(toDigits(input));
 
-      if (result != null) {
-        if (result.present) {
-          setState(() => _result = result);
+    MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
 
-          // UI/UX actions:
+    if (result != null) {
+      if (result.present) {
+        setState(() => _result = result);
 
-          _labelText = input; // Sets previous input as label
-          _textController.clear(); // Clears input
-          _textFocusNode.unfocus(); // Hides keyboard
+        // UI/UX actions:
+        _labelText = input; // Sets previous input as label
+        _textController.clear(); // Clears input
 
-          _scrollToEnd(); // Goes to the end of the page
-        } else {
-          if (!mounted) return; // For security reasons
-          DialogPopup.reportableMessage(
-            title: 'Sin resultado',
-            details: toSubscripts(result.error!),
-          ).show(context);
-        }
+        _textFocusNode.unfocus();
       } else {
         if (!mounted) return; // For security reasons
-        const DialogPopup.message(
+        DialogPopup.reportableMessage(
           title: 'Sin resultado',
+          details: toSubscripts(result.error!),
         ).show(context);
       }
+    } else {
+      if (!mounted) return; // For security reasons
+      const DialogPopup.message(
+        title: 'Sin resultado',
+      ).show(context);
     }
   }
 
-  void _scrollToEnd() {
-    // Goes to the end of the page:
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 300),
-      ),
-    );
+  void _pressedButton() {
+    _eraseInitialAndFinalBlanks();
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      if (_textFocusNode.hasFocus) {
+        _textController.clear(); // Clears input
+      } else {
+        _startTyping();
+      }
+    } else {
+      _calculate();
+    }
+  }
+
+  void _submittedText() {
+    // Keyboard will be hidden afterwards
+    _eraseInitialAndFinalBlanks();
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      _textController.clear(); // Clears input
+    } else {
+      _calculate();
+    }
+  }
+
+  void _tapOutsideText() {
+    _textFocusNode.unfocus(); // Hides keyboard
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      _textController.clear(); // Clears input
+    } else {
+      _eraseInitialAndFinalBlanks();
+    }
   }
 
   void _scrollToStart() {
@@ -100,46 +120,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     _scrollToStart();
   }
 
-  void _eraseTextIfEmpty() {
-    if (isEmptyWithBlanks(_textController.text)) {
-      _textController.clear(); // Clears input
-    }
-  }
-
   void _eraseInitialAndFinalBlanks() {
     _textController.text =
         noInitialAndFinalBlanks(_textController.text); // Clears input
-  }
-
-  void _pressedButton() {
-    _eraseInitialAndFinalBlanks();
-
-    _calculate();
-
-    if (_textFocusNode.hasFocus) {
-      _textFocusNode.unfocus();
-    }
-
-    if (isEmptyWithBlanks(_textController.text)) {
-      if (!_textFocusNode.hasFocus) {
-        _startTyping();
-      } else {
-        _textController.clear(); // Clears input
-      }
-    }
-  }
-
-  void _submittedText() {
-    // Keyboard will be hidden afterwards
-    _eraseInitialAndFinalBlanks();
-    _calculate();
-    _eraseTextIfEmpty();
-  }
-
-  void _tapOutsideText() {
-    _textFocusNode.unfocus(); // Hides keyboard
-    _eraseInitialAndFinalBlanks();
-    _eraseTextIfEmpty();
   }
 
   @override
@@ -155,15 +138,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           body: Column(
             children: [
               // App bar:
-              HomeAppBar(
-                title: Text(
-                  'Calculadora',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              const PageAppBar(title: 'Masa molecular'),
               // Body:
               Expanded(
                 child: Container(
@@ -283,8 +258,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           elementToGrams: _result.elementToGrams,
                           elementToMoles: _result.elementToMoles,
                         ),
-                        // To keep it above navigation bar:
-                        const SizedBox(height: 50 + 60),
                       ],
                     ),
                   ),

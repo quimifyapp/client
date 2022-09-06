@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({Key? key, required this.title}) : super(key: key);
-
-  final Widget title;
+  const HomeAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +31,11 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            // Could be text or an image:
-            title,
+            Image.asset(
+              'assets/images/icons/branding_slim.png',
+              height: 17,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ],
         ),
       ),

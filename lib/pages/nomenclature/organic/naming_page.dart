@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/horizontal_cards_menu.dart';
 import 'naming/naming_ether_page.dart';
 import 'naming/naming_simple_page.dart';
 import '../../../constants.dart';
@@ -37,42 +38,13 @@ class NamingPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const SectionTitle(title: 'Tipo de compuesto'),
+                      const SectionTitle(title: 'Cadena abierta'),
                       const SizedBox(height: 25),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Column(
-                          children: [
-                            MenuCard(
-                              title: 'Simple',
-                              structure: 'CH₃ - CH₂(CH₃) - CH₃',
-                              autoSizeGroup: autoSizeGroup,
-                              name: '2-metilpropano',
-                              page: const NamingSimplePage(),
-                            ),
-                            const SizedBox(height: 30),
-                            MenuCard(
-                              title: 'Éter',
-                              structure: 'CH₃ - CH₂ - O - CH₃',
-                              autoSizeGroup: autoSizeGroup,
-                              name: 'etil metil éter',
-                              page: const NamingEtherPage(),
-                            ),
-                            const SizedBox(height: 30),
-                            const MenuCard.locked(
-                              title: 'Éster',
-                            ),
-                            const SizedBox(height: 30),
-                            const MenuCard.locked(
-                              title: 'Aromático',
-                            ),
-                            const SizedBox(height: 30),
-                            const MenuCard.locked(
-                              title: 'Cíclico',
-                            ),
-                          ],
-                        ),
-                      ),
+                      OpenChainMenu(autoSizeGroup: autoSizeGroup),
+                      const SizedBox(height: 40),
+                      const SectionTitle(title: 'Cadena cerrada'),
+                      const SizedBox(height: 25),
+                      ClosedChainMenu(autoSizeGroup: autoSizeGroup),
                     ],
                   ),
                 ),
@@ -81,6 +53,62 @@ class NamingPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class OpenChainMenu extends StatelessWidget {
+  const OpenChainMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup;
+
+  @override
+  Widget build(BuildContext context) {
+    return HorizontalCardsMenu(
+      cards: [
+        MenuCard(
+          width: 290,
+          title: 'Simple',
+          structure: 'CH₃ - C(CH₃) = CH₃',
+          autoSizeGroup: autoSizeGroup,
+          name: '2-metilprop-1-eno',
+          page: const NamingSimplePage(),
+        ),
+        MenuCard(
+          width: 290,
+          title: 'Éter',
+          structure: 'CH₃ - O - CH₂(F)',
+          autoSizeGroup: autoSizeGroup,
+          name: 'fluorometil metil éter',
+          page: const NamingEtherPage(),
+        ),
+        const MenuCard.locked(
+          width: 290,
+          title: 'Éster',
+        ),
+      ],
+    );
+  }
+}
+
+class ClosedChainMenu extends StatelessWidget {
+  const ClosedChainMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+
+  final AutoSizeGroup autoSizeGroup;
+
+  @override
+  Widget build(BuildContext context) {
+    return const HorizontalCardsMenu(
+      cards: [
+        MenuCard.locked(
+          width: 290,
+          title: 'Aromático',
+        ),
+        MenuCard.locked(
+          width: 290,
+          title: 'Cíclico',
+        ),
+      ],
     );
   }
 }

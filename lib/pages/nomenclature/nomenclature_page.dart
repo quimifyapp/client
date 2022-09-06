@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/pages/nomenclature/widgets/horizontal_cards_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
@@ -23,13 +24,7 @@ class NomenclaturePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            HomeAppBar(
-              title: Image.asset(
-                'assets/images/icons/branding_slim.png',
-                height: 17,
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
-            ),
+            const HomeAppBar(),
             // Body:
             Expanded(
               child: Container(
@@ -96,7 +91,7 @@ class InorganicMenu extends StatelessWidget {
 }
 
 class OrganicMenu extends StatelessWidget {
-  OrganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+  const OrganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
 
   final AutoSizeGroup autoSizeGroup;
 
@@ -147,26 +142,6 @@ class OrganicMenu extends StatelessWidget {
           title: 'Practicar',
         ),
       ],
-    );
-  }
-}
-
-class HorizontalCardsMenu extends StatelessWidget {
-  const HorizontalCardsMenu({Key? key, required this.cards}) : super(key: key);
-
-  final List<MenuCard> cards;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Wrap(
-          spacing: 15,
-          children: cards,
-        ),
-      ),
     );
   }
 }
