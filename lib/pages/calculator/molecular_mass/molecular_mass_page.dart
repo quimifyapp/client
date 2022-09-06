@@ -75,7 +75,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       (_) => _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 400),
       ),
     );
   }
@@ -298,7 +298,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 }
 
-TextStyle inputOutputStyle = TextStyle(
+const TextStyle inputOutputStyle = TextStyle(
   fontSize: 26,
   color: quimifyTeal,
   fontWeight: FontWeight.bold,

@@ -98,47 +98,50 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: quimifyGradientBoxDecoration,
-      child: Scaffold(
-        // To avoid keyboard resizing:
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            const PageAppBar(title: 'Formulación inorgánica'),
-            SearchBar(
-              label: _labelText,
-              controller: _textController,
-              focusNode: _textFocusNode,
-              corrector: formatInorganicFormulaOrName,
-              onSubmitted: (input) => _search(input, false),
-            ),
-            // Body:
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(25),
+    return GestureDetector(
+      onTap: () => _textFocusNode.unfocus(),
+      child: Container(
+        decoration: quimifyGradientBoxDecoration,
+        child: Scaffold(
+          // To avoid keyboard resizing:
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              const PageAppBar(title: 'Formulación inorgánica'),
+              SearchBar(
+                label: _labelText,
+                controller: _textController,
+                focusNode: _textFocusNode,
+                corrector: formatInorganicFormulaOrName,
+                onSubmitted: (input) => _search(input, false),
+              ),
+              // Body:
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(25),
+                    ),
                   ),
-                ),
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 5, left: 25, right: 25),
-                  child: Column(
-                    children: [
-                      ..._results.toList(),
-                      const SizedBox(height: 10),
-                    ],
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 5, left: 25, right: 25),
+                    child: Column(
+                      children: [
+                        ..._results.toList(),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

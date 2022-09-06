@@ -50,7 +50,7 @@ class NamingPage extends StatelessWidget {
                               name: '2-metilpropano',
                               page: const NamingSimplePage(),
                             ),
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 30),
                             MenuCard(
                               title: 'Éter',
                               structure: 'CH₃ - CH₂ - O - CH₃',
@@ -58,15 +58,15 @@ class NamingPage extends StatelessWidget {
                               name: 'etil metil éter',
                               page: const NamingEtherPage(),
                             ),
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 30),
                             const MenuCard.locked(
                               title: 'Éster',
                             ),
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 30),
                             const MenuCard.locked(
                               title: 'Aromático',
                             ),
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 30),
                             const MenuCard.locked(
                               title: 'Cíclico',
                             ),
