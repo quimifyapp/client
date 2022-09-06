@@ -75,7 +75,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       (_) => _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 300),
       ),
     );
   }
