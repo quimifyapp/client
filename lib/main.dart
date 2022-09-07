@@ -65,20 +65,18 @@ class QuimifyApp extends StatelessWidget {
             tertiary: Colors.black45,
 
             surface: Colors.white,
-            background: Color.fromARGB(255, 245, 247, 251),
+            background: Color.fromARGB(255, 247, 247, 247),
 
             onPrimary: Colors.white, // White text
 
-            onBackground: Color.fromARGB(255, 231, 246, 247), // From teal
-            onSurface: Color.fromARGB(255, 241, 253, 250), // From teal
+            onBackground: Color.fromARGB(255, 231, 246, 247), // Graph background
+            onInverseSurface: Color.fromARGB(13, 0, 0, 0), // Graph bar background
+            onSurface: Color.fromARGB(255, 241, 253, 250), // Inorganic amounts
 
             shadow: Color.fromARGB(51, 0, 0, 0), // Dialog barrier
             inverseSurface: Color.fromARGB(255, 60, 60, 60), // Lock icon
 
-            outline: Color.fromARGB(255, 235, 235, 235), // Nav bar unselected
             onSecondary: Color.fromARGB(255, 106, 233, 218), // For PageAppBar
-
-            onInverseSurface: Color.fromARGB(13, 0, 0, 0), // Graph bar background
 
             onError: Color.fromARGB(255, 255, 96, 96), // Error text
             error: Color.fromARGB(255, 255, 241, 241), // Background
@@ -101,20 +99,18 @@ class QuimifyApp extends StatelessWidget {
 
             onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
 
-            onBackground: Color.fromARGB(255, 10, 38, 34), // From teal
-            onSurface: Color.fromARGB(255, 48, 170, 150), // From teal
+            onBackground: Color.fromARGB(255, 10, 38, 34), // Graph background // TODO: ??
+            onInverseSurface: Colors.black45, // Graph bar background
+            onSurface: Color.fromARGB(255, 48, 170, 150), // Inorganic amounts
 
             shadow: Color.fromARGB(25, 255, 255, 255), // Dialog barrier
             inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
 
-            outline: Color.fromARGB(255, 100, 100, 100), // Nav bar unselected
-            onSecondary: Color.fromARGB(255, 53, 197, 173), // For PageAppBar TODO: ??
+            onSecondary: Color.fromARGB(255, 106, 233, 218), // For PageAppBar
 
-            onInverseSurface: Colors.black45, // Graph bar background
-
-            onError: Color.fromARGB(255, 255, 241, 241), // Error text
+            onError: Colors.white, // Error text
             error: Color.fromARGB(255, 255, 96, 96), // Background
-            onErrorContainer: Color.fromARGB(255, 239, 246, 253), // Share text
+            onErrorContainer: Colors.white, // Share text
             errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
           ),
         ),

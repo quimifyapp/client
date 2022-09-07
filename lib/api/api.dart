@@ -12,10 +12,10 @@ class Api {
   static final _singleton = Api._internal();
   final _client = http.Client();
 
-  static const String _apiVersion = '0';
-  static const String _authority = 'api.quimify.com:808$_apiVersion';
-
   static const int android = 0, iOS = 1, web = 2;
+
+  static const int _apiVersion = 0;
+  static const String _authority = 'api.quimify.com:${8080 + _apiVersion}';
 
   Future<String?> _getResponse(
       String path, Map<String, dynamic> parameters) async {

@@ -79,9 +79,9 @@ class MenuCard extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),

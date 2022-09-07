@@ -243,10 +243,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           height: 50,
                           gradient: quimifyGradient,
                           onPressed: _pressedButton,
-                          child: Text(
+                          child: const Text(
                             'Calcular',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: Colors.white,
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),

@@ -78,8 +78,8 @@ class _MainPageState extends State<MainPage> {
       width: MediaQuery.of(context).size.width * 0.01 + 4,
     );
 
-    Color enabledColor = Theme.of(context).colorScheme.onPrimary;
-    Color disabledColor = Theme.of(context).colorScheme.outline;
+    Color enabledColor = Colors.white;
+    Color disabledColor = Colors.white70;
 
     return WillPopScope(
       onWillPop: () async {
@@ -144,7 +144,7 @@ class _MainPageState extends State<MainPage> {
                     Container(
                       height: 40,
                       width: 0.5,
-                      color: Theme.of(context).colorScheme.background,
+                      color: const Color.fromARGB(255, 247, 247, 247),
                     ),
                     Row(
                       children: [

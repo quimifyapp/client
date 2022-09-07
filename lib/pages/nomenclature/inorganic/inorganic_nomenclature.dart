@@ -206,7 +206,8 @@ class _SearchResultState extends State<SearchResult> {
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(15)),
             ),
             padding: const EdgeInsets.all(15),
             child: Row(
@@ -253,7 +254,7 @@ class _SearchResultState extends State<SearchResult> {
                   padding: const EdgeInsets.only(left: 5),
                   child: Text(
                     toSubscripts(widget.inorganicResult.formula!),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: quimifyTeal,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -346,7 +347,8 @@ class _SearchResultState extends State<SearchResult> {
                             Expanded(
                               child: SearchResultButton(
                                 color: Theme.of(context).colorScheme.onError,
-                                backgroundColor: Theme.of(context).colorScheme.error,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.error,
                                 icon: Image.asset(
                                   'assets/images/icons/report.png',
                                   color: Theme.of(context).colorScheme.onError,
@@ -358,11 +360,17 @@ class _SearchResultState extends State<SearchResult> {
                             const SizedBox(width: 15),
                             Expanded(
                               child: SearchResultButton(
-                                color: Theme.of(context).colorScheme.onErrorContainer,
-                                backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onErrorContainer,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .errorContainer,
                                 icon: Icon(
                                   Icons.share_outlined,
-                                  color: Theme.of(context).colorScheme.onErrorContainer,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onErrorContainer,
                                   size: 18,
                                 ),
                                 text: 'Compartir',
