@@ -105,9 +105,9 @@ class QuimifyApp extends StatelessWidget {
             inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
 
             onError: Colors.white, // Error text
-            error: Colors.white, // Background
+            error: Color.fromARGB(255, 255, 96, 96), // Background
             onErrorContainer: Colors.white, // Share text
-            errorContainer: Colors.white, // Background
+            errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
           ),
         ),
         // App:
