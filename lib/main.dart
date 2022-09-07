@@ -97,7 +97,7 @@ class QuimifyApp extends StatelessWidget {
 
             onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
 
-            onBackground: Color.fromARGB(255, 10, 38, 34), // Graph background // TODO: ??
+            onBackground: Color.fromARGB(255, 10, 38, 34), // Graph background
             onSecondary: Colors.black45, // Graph bar background
             onSurface: Color.fromARGB(255, 48, 170, 150), // Inorganic amounts
 
@@ -105,9 +105,9 @@ class QuimifyApp extends StatelessWidget {
             inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
 
             onError: Colors.white, // Error text
-            error: Color.fromARGB(255, 255, 96, 96), // Background
+            error: Colors.white, // Background
             onErrorContainer: Colors.white, // Share text
-            errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
+            errorContainer: Colors.white, // Background
           ),
         ),
         // App:

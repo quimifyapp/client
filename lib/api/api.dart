@@ -9,13 +9,16 @@ class Api {
   factory Api() => _singleton;
 
   Api._internal();
+
   static final _singleton = Api._internal();
   final _client = http.Client();
 
   static const int android = 0, iOS = 1, web = 2;
 
-  static const int _apiVersion = 0;
-  static const String _authority = 'api.quimify.com:${8080 + _apiVersion}';
+  static const int _clientVersion = 0;
+  static const String _clientKey = 'qTsXzmRYeM8Bf7uZbK7Df2EyauzZYTm7';
+
+  static const String _authority = 'api.quimify.com:8080';
 
   Future<String?> _getResponse(
       String path, Map<String, dynamic> parameters) async {
@@ -43,8 +46,8 @@ class Api {
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 
-    String? response = await _getResponse(
-        'inorganico/', {'input': input, 'foto': photo.toString()});
+    String? response = await _getResponse('inorganico/',
+        {'input': input, 'foto': photo.toString(), 'clave': _clientKey});
 
     if (response != null) {
       try {
@@ -60,8 +63,8 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response =
-        await _getResponse('masamolecular', {'formula': formula});
+    String? response = await _getResponse(
+        'masamolecular', {'formula': formula, 'clave': _clientKey});
 
     if (response != null) {
       try {
@@ -77,8 +80,11 @@ class Api {
   Future<AccessResult?> connect(int platform) async {
     AccessResult? result;
 
-    String? response =
-        await _getResponse('bienvenida', {'plataforma': platform.toString()});
+    String? response = await _getResponse('cliente', {
+      'version': _clientVersion.toString(),
+      'plataforma': platform.toString(),
+      'clave': _clientKey
+    });
 
     if (response != null) {
       try {
