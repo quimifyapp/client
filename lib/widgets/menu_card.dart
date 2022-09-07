@@ -100,7 +100,7 @@ class MenuCard extends StatelessWidget {
                       maxLines: 1,
                       stepGranularity: 0.1,
                       group: autoSizeGroup,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
                         color: quimifyTeal,

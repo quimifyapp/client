@@ -78,6 +78,9 @@ class _MainPageState extends State<MainPage> {
       width: MediaQuery.of(context).size.width * 0.01 + 4,
     );
 
+    Color enabledColor = Theme.of(context).colorScheme.onPrimary;
+    Color disabledColor = Theme.of(context).colorScheme.outline;
+
     return WillPopScope(
       onWillPop: () async {
         if (currentPage == 0) {
@@ -122,8 +125,8 @@ class _MainPageState extends State<MainPage> {
                           'assets/images/icons/molecule.png',
                           width: 20,
                           color: currentPage == 0
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.outline,
+                              ? enabledColor
+                              : disabledColor,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -132,8 +135,8 @@ class _MainPageState extends State<MainPage> {
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                             color: currentPage == 0
-                                ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context).colorScheme.outline,
+                                ? enabledColor
+                                : disabledColor,
                           ),
                         ),
                       ],
@@ -149,8 +152,8 @@ class _MainPageState extends State<MainPage> {
                           'assets/images/icons/calculator.png',
                           width: 20,
                           color: currentPage == 1
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.outline,
+                              ? enabledColor
+                              : disabledColor,
                         ),
                         navigationBarItemSeparator,
                         Text(
@@ -159,8 +162,8 @@ class _MainPageState extends State<MainPage> {
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                             color: currentPage == 1
-                                ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context).colorScheme.outline,
+                                ? enabledColor
+                                : disabledColor,
                           ),
                         ),
                       ],

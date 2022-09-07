@@ -108,7 +108,7 @@ class QuimifyApp extends StatelessWidget {
             inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
 
             outline: Color.fromARGB(255, 100, 100, 100), // Nav bar unselected
-            onSecondary: Color.fromARGB(255, 53, 197, 173), // For PageAppBar
+            onSecondary: Color.fromARGB(255, 53, 197, 173), // For PageAppBar TODO: ??
 
             onInverseSurface: Colors.black45, // Graph bar background
 
