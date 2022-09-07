@@ -12,7 +12,8 @@ class Api {
   static final _singleton = Api._internal();
   final _client = http.Client();
 
-  static const String _authority = '192.168.1.90:8080';
+  static const String _apiVersion = '0';
+  static const String _authority = 'api.quimify.com:808$_apiVersion';
 
   static const int android = 0, iOS = 1, web = 2;
 

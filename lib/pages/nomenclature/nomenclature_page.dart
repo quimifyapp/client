@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/nomenclature/widgets/horizontal_cards_menu.dart';
+import 'package:cliente/widgets/horizontal_cards_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/constants.dart';
 
 import 'organic/finding_formula_page.dart';
-import 'widgets/menu_card.dart';
-import 'widgets/section_title.dart';
+import '../../widgets/menu_card.dart';
+import '../../widgets/section_title.dart';
 import 'inorganic/inorganic_nomenclature.dart';
 import 'organic/naming_page.dart';
 

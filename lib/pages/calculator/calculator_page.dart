@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import '../../widgets/home_app_bar.dart';
-import '../nomenclature/widgets/menu_card.dart';
-import '../nomenclature/widgets/section_title.dart';
+import '../../widgets/menu_card.dart';
+import '../../widgets/section_title.dart';
 
 
 class CalculatorPage extends StatelessWidget {
