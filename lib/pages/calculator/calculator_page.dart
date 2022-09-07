@@ -7,7 +7,6 @@ import '../../widgets/home_app_bar.dart';
 import '../../widgets/menu_card.dart';
 import '../../widgets/section_title.dart';
 
-
 class CalculatorPage extends StatelessWidget {
   CalculatorPage({Key? key}) : super(key: key);
 
@@ -43,11 +42,18 @@ class CalculatorPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Column(
                           children: [
-                            MenuCard(
+                            MenuCard.custom(
                               title: 'Masa molecular',
-                              structure: 'H₂SO₄',
-                              autoSizeGroup: autoSizeGroup,
-                              name: '97.967 g/mol',
+                              customBody: Container(
+                                alignment: Alignment.center,
+                                color: Theme.of(context).colorScheme.surface,
+                                padding: const EdgeInsets.all(17),
+                                child: Image.asset(
+                                  'assets/images/icons/scale.png',
+                                  height: 61,
+                                  color: quimifyTeal,
+                                ),
+                              ),
                               page: const MolecularMassPage(),
                             ),
                             const SizedBox(height: 30),

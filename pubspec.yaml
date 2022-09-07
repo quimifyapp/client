@@ -64,6 +64,7 @@ flutter:
     - assets/images/icons/calculator.png
     - assets/images/icons/report.png
     - assets/images/icons/narrow_arrow.png
+    - assets/images/icons/scale.png
 
   fonts:
      - family: CeraPro

@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget {
               child: IconButton(
                 icon: Image.asset(
                   'assets/images/icons/logo.png',
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Colors.white,
                 ),
                 // To remove native effects:
                 hoverColor: Colors.transparent,
@@ -34,7 +34,7 @@ class HomeAppBar extends StatelessWidget {
             Image.asset(
               'assets/images/icons/branding_slim.png',
               height: 17,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Colors.white,
             ),
           ],
         ),
