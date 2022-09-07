@@ -540,7 +540,7 @@ class GraphBar extends StatelessWidget {
     return Container(
       height: 10,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onInverseSurface,
+        color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.circular(15),
       ),
       alignment: Alignment.centerLeft,

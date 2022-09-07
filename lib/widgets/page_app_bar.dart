@@ -18,7 +18,7 @@ class PageAppBar extends StatelessWidget {
           children: [
             Button(
               width: 50,
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: const Color.fromARGB(255, 106, 233, 218),
               onPressed: () => Navigator.of(context).pop(),
               child: const Icon(
                 Icons.arrow_back,

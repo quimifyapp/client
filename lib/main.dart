@@ -70,13 +70,11 @@ class QuimifyApp extends StatelessWidget {
             onPrimary: Colors.white, // White text
 
             onBackground: Color.fromARGB(255, 231, 246, 247), // Graph background
-            onInverseSurface: Color.fromARGB(13, 0, 0, 0), // Graph bar background
+            onSecondary: Color.fromARGB(13, 0, 0, 0), // Graph bar background
             onSurface: Color.fromARGB(255, 241, 253, 250), // Inorganic amounts
 
             shadow: Color.fromARGB(51, 0, 0, 0), // Dialog barrier
             inverseSurface: Color.fromARGB(255, 60, 60, 60), // Lock icon
-
-            onSecondary: Color.fromARGB(255, 106, 233, 218), // For PageAppBar
 
             onError: Color.fromARGB(255, 255, 96, 96), // Error text
             error: Color.fromARGB(255, 255, 241, 241), // Background
@@ -100,13 +98,11 @@ class QuimifyApp extends StatelessWidget {
             onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
 
             onBackground: Color.fromARGB(255, 10, 38, 34), // Graph background // TODO: ??
-            onInverseSurface: Colors.black45, // Graph bar background
+            onSecondary: Colors.black45, // Graph bar background
             onSurface: Color.fromARGB(255, 48, 170, 150), // Inorganic amounts
 
             shadow: Color.fromARGB(25, 255, 255, 255), // Dialog barrier
             inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
-
-            onSecondary: Color.fromARGB(255, 106, 233, 218), // For PageAppBar
 
             onError: Colors.white, // Error text
             error: Color.fromARGB(255, 255, 96, 96), // Background
