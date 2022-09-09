@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cliente/main.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
 
@@ -33,29 +32,29 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _showWelcomeMessagePopup() {
-    if (accessResult!.messagePresent) {
-      if (accessResult!.messageLinkPresent!) {
+    if (widget.accessResult!.messagePresent) {
+      if (widget.accessResult!.messageLinkPresent!) {
         DialogPopup.linkedMessage(
-          title: accessResult!.messageTitle!,
-          details: accessResult!.messageDetails!,
-          linkName: accessResult!.messageLinkName!,
-          link: accessResult!.messageLink!,
+          title: widget.accessResult!.messageTitle!,
+          details: widget.accessResult!.messageDetails!,
+          linkName: widget.accessResult!.messageLinkName!,
+          link: widget.accessResult!.messageLink!,
         ).show(context);
       } else {
         DialogPopup.message(
-          title: accessResult!.messageTitle!,
-          details: accessResult!.messageDetails!,
+          title: widget.accessResult!.messageTitle!,
+          details: widget.accessResult!.messageDetails!,
         ).show(context);
       }
     }
   }
 
   void _showWelcomePopups() {
-    if (accessResult != null) {
-      if (accessResult!.updateAvailable) {
+    if (widget.accessResult != null) {
+      if (widget.accessResult!.updateAvailable) {
         DialogPopup.update(
-          details: accessResult!.updateDetails,
-          closable: !accessResult!.updateMandatory!,
+          details: widget.accessResult!.updateDetails,
+          closable: !widget.accessResult!.updateMandatory!,
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
               : 'https://apps.apple.com/pa/app/youtube/id544007664',

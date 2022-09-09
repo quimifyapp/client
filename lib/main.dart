@@ -8,26 +8,26 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'api/api.dart';
 import 'api/results/access_result.dart';
 
-late final AccessResult? accessResult;
-
 Future<void> main() async {
   // Show splash screen UNTIL stated otherwise:
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Loading:
-  accessResult = await Api().connect(Platform.isAndroid
+  AccessResult? accessResult = await Api().connect(Platform.isAndroid
       ? Api.android
       : Platform.isIOS
           ? Api.iOS
           : Api.web);
 
   // App launch:
-  runApp(const QuimifyApp());
+  runApp(QuimifyApp(accessResult: accessResult));
 }
 
 class QuimifyApp extends StatelessWidget {
-  const QuimifyApp({Key? key}) : super(key: key);
+  const QuimifyApp({Key? key, this.accessResult}) : super(key: key);
+
+  final AccessResult? accessResult;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class QuimifyApp extends StatelessWidget {
             onSecondary: Color.fromARGB(13, 0, 0, 0), // Graph bar background
             onSurface: Color.fromARGB(255, 241, 253, 250), // Inorganic amounts
 
-            shadow: Color.fromARGB(51, 0, 0, 0), // Dialog barrier
+            shadow: Color.fromARGB(25, 0, 0, 0), // Dialog barrier
             inverseSurface: Color.fromARGB(255, 60, 60, 60), // Lock icon
 
             onError: Color.fromARGB(255, 255, 96, 96), // Error text

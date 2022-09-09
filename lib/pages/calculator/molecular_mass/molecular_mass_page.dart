@@ -58,6 +58,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         ).show(context);
       }
     } else {
+      // Client already reported an error in this case
       if (!mounted) return; // For security reasons
       const DialogPopup.message(
         title: 'Sin resultado',
