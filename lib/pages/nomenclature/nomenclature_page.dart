@@ -9,7 +9,7 @@ import 'organic/finding_formula_page.dart';
 import '../../widgets/menu_card.dart';
 import '../../widgets/section_title.dart';
 import 'inorganic/inorganic_nomenclature.dart';
-import 'organic/naming_page.dart';
+import 'organic/naming/naming_page.dart';
 
 class NomenclaturePage extends StatelessWidget {
   NomenclaturePage({Key? key}) : super(key: key);

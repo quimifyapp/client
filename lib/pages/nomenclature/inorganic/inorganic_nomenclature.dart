@@ -8,8 +8,8 @@ import 'package:cliente/constants.dart';
 import '../../../api/api.dart';
 import '../../../api/results/inorganic_result.dart';
 import '../../../utils/text.dart';
-import '../../../widgets/button.dart';
 import '../../../widgets/dialog_popup.dart';
+import '../../../widgets/result_button.dart';
 
 class InorganicNomenclaturePage extends StatefulWidget {
   const InorganicNomenclaturePage({Key? key}) : super(key: key);
@@ -131,7 +131,11 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                   child: SingleChildScrollView(
                     controller: _scrollController,
                     padding: const EdgeInsets.only(
-                        top: 30, bottom: 5, left: 25, right: 25),
+                      top: 30,
+                      bottom: 5,
+                      left: 25,
+                      right: 25,
+                    ),
                     child: Column(
                       children: [
                         ..._results.toList(),
@@ -346,7 +350,8 @@ class _SearchResultState extends State<SearchResult> {
                           children: [
                             const SizedBox(width: 5),
                             Expanded(
-                              child: SearchResultButton(
+                              child: ResultButton(
+                                size: 50,
                                 color: Theme.of(context).colorScheme.onError,
                                 backgroundColor:
                                     Theme.of(context).colorScheme.error,
@@ -360,7 +365,8 @@ class _SearchResultState extends State<SearchResult> {
                             ),
                             const SizedBox(width: 15),
                             Expanded(
-                              child: SearchResultButton(
+                              child: ResultButton(
+                                size: 50,
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onErrorContainer,
@@ -444,46 +450,6 @@ class SearchResultQuantity extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class SearchResultButton extends StatelessWidget {
-  const SearchResultButton(
-      {Key? key,
-      required this.icon,
-      required this.text,
-      required this.color,
-      required this.backgroundColor})
-      : super(key: key);
-
-  final Widget icon;
-  final String text;
-  final Color color, backgroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Button(
-      width: 50,
-      color: backgroundColor,
-      onPressed: () {},
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Spacer(),
-          icon,
-          const SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(
-              color: color,
-              fontSize: 16,
-              //fontWeight: FontWeight.bold
-            ),
-          ),
-          const Spacer(),
-        ],
-      ),
     );
   }
 }

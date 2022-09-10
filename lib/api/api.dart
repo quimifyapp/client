@@ -18,7 +18,7 @@ class Api {
   static const int _clientVersion = 0;
   static const String _clientKey = 'qTsXzmRYeM8Bf7uZbK7Df2EyauzZYTm7';
 
-  static const String _authority = 'api.quimify.com:8080';
+  static const String _authority = '192.168.1.90:8080';
 
   Future<String?> _getResponse(
       String path, Map<String, dynamic> parameters) async {
@@ -26,7 +26,8 @@ class Api {
 
     try {
       Uri url = Uri.http(_authority, path, parameters);
-      http.Response response = await _client.get(url);
+      http.Response response =
+          await _client.get(url, headers: {'Authorization': _clientKey});
 
       if (response.statusCode == 200) {
         String body = utf8.decode(response.bodyBytes);
@@ -46,8 +47,8 @@ class Api {
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 
-    String? response = await _getResponse('inorganico/',
-        {'input': input, 'foto': photo.toString(), 'clave': _clientKey});
+    String? response = await _getResponse(
+        'inorganico/', {'input': input, 'foto': photo.toString()});
 
     if (response != null) {
       try {
@@ -63,8 +64,8 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response = await _getResponse(
-        'masamolecular', {'formula': formula, 'clave': _clientKey});
+    String? response =
+        await _getResponse('masamolecular', {'formula': formula});
 
     if (response != null) {
       try {
@@ -82,8 +83,7 @@ class Api {
 
     String? response = await _getResponse('cliente', {
       'version': _clientVersion.toString(),
-      'plataforma': platform.toString(),
-      'clave': _clientKey
+      'plataforma': platform.toString()
     });
 
     if (response != null) {

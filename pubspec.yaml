@@ -28,6 +28,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   url_launcher: ^6.1.5
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
     - assets/images/icons/report.png
     - assets/images/icons/narrow_arrow.png
     - assets/images/icons/scale.png
+    - assets/images/dietanoic_acid.png
 
   fonts:
      - family: CeraPro
