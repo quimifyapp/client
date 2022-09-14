@@ -61,7 +61,7 @@ class CalculatorPage extends StatelessWidget {
                               title: 'Ajustar reacción',
                             ),
                             // To keep it above navigation bar:
-                            const SizedBox(height: 50 + 60),
+                            const SizedBox(height: 2 * 30 + 60),
                           ],
                         ),
                       ),

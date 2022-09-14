@@ -102,7 +102,7 @@ class _MainPageState extends State<MainPage> {
         // Navigation bar:
         extendBody: true, // So it's always floating on top
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(bottom: 50),
+          padding: const EdgeInsets.only(bottom: 30),
           child: FractionallySizedBox(
             widthFactor: widthFactor,
             child: GestureDetector(

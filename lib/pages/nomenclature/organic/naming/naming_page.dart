@@ -41,7 +41,7 @@ class NamingPage extends StatelessWidget {
                       const SectionTitle(title: 'Cadena abierta'),
                       const SizedBox(height: 25),
                       OpenChainMenu(autoSizeGroup: autoSizeGroup),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 25),
                       const SectionTitle(title: 'Cadena cerrada'),
                       const SizedBox(height: 25),
                       ClosedChainMenu(autoSizeGroup: autoSizeGroup),

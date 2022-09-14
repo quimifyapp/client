@@ -18,7 +18,7 @@ class Api {
   static const int _clientVersion = 0;
   static const String _clientKey = 'qTsXzmRYeM8Bf7uZbK7Df2EyauzZYTm7';
 
-  static const String _authority = '192.168.1.90:8080';
+  static const String _authority = '192.168.1.131:8080';
 
   Future<String?> _getResponse(
       String path, Map<String, dynamic> parameters) async {
