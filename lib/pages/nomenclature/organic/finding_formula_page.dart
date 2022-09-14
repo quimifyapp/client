@@ -1,10 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
+import '../../../api/api.dart';
 import '../../../utils/text.dart';
 import '../../../constants.dart';
+import '../../../widgets/dialog_popup.dart';
 import '../../../widgets/page_app_bar.dart';
 import '../../../widgets/result_button.dart';
 import '../widgets/search_bar.dart';
@@ -20,7 +23,52 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
 
-  void _search(String name, bool photo) {}
+  String _labelText = 'dietiléter, but-2-eno...';
+  bool _firstSearch = true;
+  OrganicResult _result = OrganicResult(
+    true,
+    'COOH - COOH',
+    'ácido dietanoico',
+    '102.09',
+    null,
+    false,
+  );
+
+  Future<void> _search(String name, bool photo) async {
+    if (!isEmptyWithBlanks(name)) {
+      OrganicResult? result = await Api().getOrganic(toDigits(name), photo);
+
+      if (result != null) {
+        if (result.present) {
+          setState(() {
+            _result = result;
+            if (_firstSearch) {
+              _firstSearch = false;
+            }
+          });
+
+          // UI/UX actions:
+
+          _labelText = name; // Sets previous input as label
+          _textController.clear(); // Clears input
+          _textFocusNode.unfocus(); // Hides keyboard
+        } else {
+          if (!mounted) return; // For security reasons
+          DialogPopup.reportableMessage(
+            title: 'Sin resultado',
+            details: 'No se ha encontrado "$name".',
+          ).show(context);
+        }
+      } else {
+        // Client already reported an error in this case
+        if (!mounted) return; // For security reasons
+        DialogPopup.message(
+          title: 'Sin resultado',
+          details: 'No se ha encontrado "$name".',
+        ).show(context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +85,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
               children: [
                 const PageAppBar(title: 'Formular orgánico'),
                 SearchBar(
-                  label: 'dietiléter, but-2-eno...',
+                  label: _labelText,
                   controller: _textController,
                   focusNode: _textFocusNode,
                   corrector: formatOrganicName,
-                  onSubmitted: (_) {},
+                  onSubmitted: (input) => _search(input, false),
                 ),
                 Expanded(
                   child: Container(
@@ -119,15 +167,19 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                             child: Column(
                               children: [
                                 ResultField(
-                                    title: 'Nombre:',
-                                    field: 'ácido dietanoico'),
-                                SizedBox(height: 15),
+                                    title: 'Búsqueda:', field: _result.name!),
+                                const SizedBox(height: 15),
                                 ResultField(
                                     title: 'Masa molecular:',
-                                    field: '102.09 g/mol'),
-                                SizedBox(height: 15),
-                                ResultField(
-                                    title: 'Fórmula:', field: 'COOH - COOH'),
+                                    field: '${_result.mass!} g/mol'),
+                                if (_result.formula != null) ...[
+                                  const SizedBox(height: 15),
+                                  ResultField(
+                                    title: 'Fórmula:',
+                                    field:
+                                        formatOrganicFormula(_result.formula!),
+                                  ),
+                                ],
                               ],
                             ),
                           ),
@@ -148,44 +200,46 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                           const SizedBox(height: 25),
                           Expanded(
                             child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              // To avoid rounded corners overflow:
+                              clipBehavior: Clip.hardEdge,
+                              child: ColorFiltered(
+                                colorFilter: ColorFilter.matrix(
+                                  MediaQuery.of(context).platformBrightness ==
+                                          Brightness.dark
+                                      ? [
+                                          -1, 0, 0, 0, 255, //
+                                          0, -1, 0, 0, 255, //
+                                          0, 0, -1, 0, 255, //
+                                          0, 0, 0, 1, 0, //
+                                        ]
+                                      : [
+                                          1, 0, 0, 0, 0, //
+                                          0, 1, 0, 0, 0, //
+                                          0, 0, 1, 0, 0, //
+                                          0, 0, 0, 1, 0, //
+                                        ],
                                 ),
-                                // To avoid rounded corners overflow:
-                                clipBehavior: Clip.hardEdge,
-                                child: ColorFiltered(
-                                  colorFilter: ColorFilter.matrix(
-                                    MediaQuery.of(context).platformBrightness ==
-                                            Brightness.dark
-                                        ? [
-                                            -1, 0, 0, 0, 255, //
-                                            0, -1, 0, 0, 255, //
-                                            0, 0, -1, 0, 255, //
-                                            0, 0, 0, 1, 0, //
-                                          ]
-                                        : [
-                                            1, 0, 0, 0, 0, //
-                                            0, 1, 0, 0, 0, //
-                                            0, 0, 1, 0, 0, //
-                                            0, 0, 0, 1, 0, //
-                                          ],
+                                child: PhotoView(
+                                  filterQuality: FilterQuality.high,
+                                  gaplessPlayback: true,
+                                  backgroundDecoration: const BoxDecoration(
+                                    color: Colors.transparent,
                                   ),
-                                  child: PhotoView(
-                                    filterQuality: FilterQuality.high,
-                                    gaplessPlayback: true,
-                                    backgroundDecoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background,
-                                    ),
-                                    minScale: 1.0,
-                                    initialScale: 1.2,
-                                    maxScale: 5.0,
-                                    imageProvider: const AssetImage(
-                                      'assets/images/dietanoic_acid.png',
-                                    ),
-                                  ),
-                                )),
+                                  minScale: 1.1,
+                                  initialScale: 1.1,
+                                  maxScale: 5.0,
+                                  imageProvider: _firstSearch
+                                      ? const AssetImage(
+                                          'assets/images/dietanoic_acid.png')
+                                      : NetworkImage(_result.url2D!)
+                                          as ImageProvider,
+                                ),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 10),
                         ],
@@ -211,6 +265,7 @@ class ResultField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
@@ -223,9 +278,6 @@ class ResultField extends StatelessWidget {
         Expanded(
           child: AutoSizeText(
             field,
-            maxLines: 1,
-            stepGranularity: 0.1,
-            minFontSize: 14,
             textAlign: TextAlign.right,
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,

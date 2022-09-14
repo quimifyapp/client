@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants.dart';
-import '../../../../widgets/page_app_bar.dart';
+import '../../../../../constants.dart';
+import '../../../../../widgets/page_app_bar.dart';
 
-class NamingSimplePage extends StatelessWidget {
-  const NamingSimplePage({Key? key}) : super(key: key);
+class NamingEtherPage extends StatelessWidget {
+  const NamingEtherPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class NamingSimplePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            const PageAppBar(title: 'Nombrar simple'),
+            const PageAppBar(title: 'Nombrar éter'),
             // Body:
             Expanded(
               child: Container(

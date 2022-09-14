@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/horizontal_cards_menu.dart';
-import 'naming_ether_page.dart';
-import 'naming_simple_page.dart';
+import 'ether/naming_ether_page.dart';
+import 'simple/naming_simple_page.dart';
 import '../../../../constants.dart';
 import '../../../../widgets/page_app_bar.dart';
 import '../../../../widgets/menu_card.dart';

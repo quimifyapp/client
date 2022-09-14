@@ -65,7 +65,7 @@ class NomenclaturePage extends StatelessWidget {
 }
 
 class InorganicMenu extends StatelessWidget {
-  InorganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+  const InorganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
 
   final AutoSizeGroup autoSizeGroup;
 
@@ -127,7 +127,7 @@ class OrganicMenu extends StatelessWidget {
               ],
             ),
           ),
-          page: FindingFormulaPage(),
+          page: const FindingFormulaPage(),
         ),
         MenuCard(
           width: 290,

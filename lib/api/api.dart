@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
+import 'package:cliente/api/results/organic_result.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -39,6 +40,23 @@ class Api {
     } catch (_) {
       // No internet, server down or client error
       // Error...
+    }
+
+    return result;
+  }
+
+  Future<OrganicResult?> getOrganic(String name, bool photo) async {
+    OrganicResult? result;
+
+    String? response = await _getResponse(
+        'organico/formular/', {'nombre': name, 'foto': photo.toString()});
+
+    if (response != null) {
+      try {
+        result = OrganicResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
     }
 
     return result;

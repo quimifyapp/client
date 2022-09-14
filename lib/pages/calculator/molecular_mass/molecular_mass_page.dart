@@ -216,7 +216,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                   // Logic:
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
-                                        inputFormatter)
+                                      inputFormatter,
+                                    ),
                                   ],
                                   textCapitalization:
                                       TextCapitalization.sentences,
@@ -226,7 +227,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                   onChanged: (input) {
                                     _textController.value =
                                         _textController.value.copyWith(
-                                      text: formatFormula(input),
+                                      text: formatOrganicFormula(input),
                                     );
                                   },
                                   textInputAction: TextInputAction.search,

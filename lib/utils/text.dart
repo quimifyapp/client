@@ -98,8 +98,14 @@ String noInitialAndFinalBlanks(String input) {
   return result;
 }
 
-String noBlanks(String input) =>
-    input.replaceAll(RegExp(r'\s+'), '');
+String toSpacedBonds(String formula) {
+  return formula
+      .replaceAll(RegExp(r'-'), ' - ')
+      .replaceAll(RegExp(r'='), ' = ')
+      .replaceAll(RegExp(r'≡'), ' ≡ ');
+}
+
+String noBlanks(String input) => input.replaceAll(RegExp(r'\s+'), '');
 
 bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 
@@ -108,5 +114,10 @@ String formatInorganicFormulaOrName(String formulaOrName) =>
 
 String formatOrganicName(String name) => toCapsExceptN(name);
 
-String formatFormula(String formula) => toCapsAfterNotAnUppercaseLetter(
-    formatInorganicFormulaOrName(capFirst(formula)));
+String formatInorganicFormula(String formula) =>
+    toCapsAfterNotAnUppercaseLetter(
+        formatInorganicFormulaOrName(capFirst(formula)));
+
+String formatOrganicFormula(String formula) =>
+    toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
+        toSubscripts(toCapsAfterDigitOrParentheses((capFirst(formula))))));
