@@ -35,8 +35,6 @@ class QuimifyApp extends StatelessWidget {
     // Hide splash screen:
     FlutterNativeSplash.remove();
 
-
-
     // To get rid of status bar's tint:
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(

@@ -77,182 +77,192 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _textFocusNode.unfocus(),
-      child: Container(
-        decoration: quimifyGradientBoxDecoration,
-        child: Scaffold(
-          // To avoid keyboard resizing:
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.transparent,
-          body: SafeArea(
-            child: Column(
-              children: [
-                const PageAppBar(title: 'Formular orgánico'),
-                SearchBar(
-                  label: _labelText,
-                  controller: _textController,
-                  focusNode: _textFocusNode,
-                  corrector: formatOrganicName,
-                  onSubmitted: (input) => _search(input, false),
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(25),
-                      ),
-                    ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
+    return WillPopScope(
+      onWillPop: () async {
+        stopLoading();
+        return true;
+      },
+      child: GestureDetector(
+        onTap: () => _textFocusNode.unfocus(),
+        child: Container(
+          decoration: quimifyGradientBoxDecoration,
+          child: Scaffold(
+            // To avoid keyboard resizing:
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const PageAppBar(title: 'Formular orgánico'),
+                  SearchBar(
+                    label: _labelText,
+                    controller: _textController,
+                    focusNode: _textFocusNode,
+                    corrector: formatOrganicName,
+                    onSubmitted: (input) => _search(input, false),
+                  ),
+                  Expanded(
                     child: Container(
-                      padding: const EdgeInsets.only(
-                        top: 30,
-                        bottom: 5,
-                        left: 25,
-                        right: 25,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(25),
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Resultado',
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
+                      // To avoid rounded corners overflow:
+                      clipBehavior: Clip.hardEdge,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                          top: 30,
+                          bottom: 5,
+                          left: 25,
+                          right: 25,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Resultado',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              const Spacer(),
-                              ResultButton(
-                                size: 44,
-                                color: Theme.of(context).colorScheme.onError,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.error,
-                                icon: Image.asset(
-                                  'assets/images/icons/report.png',
+                                const Spacer(),
+                                ResultButton(
+                                  size: 44,
                                   color: Theme.of(context).colorScheme.onError,
-                                  width: 18,
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.error,
+                                  icon: Image.asset(
+                                    'assets/images/icons/report.png',
+                                    color:
+                                        Theme.of(context).colorScheme.onError,
+                                    width: 18,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 12),
-                              ResultButton(
-                                size: 44,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onErrorContainer,
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .errorContainer,
-                                icon: Icon(
-                                  Icons.share_outlined,
+                                const SizedBox(width: 12),
+                                ResultButton(
+                                  size: 44,
                                   color: Theme.of(context)
                                       .colorScheme
                                       .onErrorContainer,
-                                  size: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 25),
-                          Container(
-                            height: 1.5,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          const SizedBox(height: 25),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onSurface,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              children: [
-                                ResultField(
-                                    title: 'Búsqueda:', field: _result.name!),
-                                const SizedBox(height: 15),
-                                ResultField(
-                                    title: 'Masa molecular:',
-                                    field: '${_result.mass!} g/mol'),
-                                if (_result.formula != null) ...[
-                                  const SizedBox(height: 15),
-                                  ResultField(
-                                    title: 'Fórmula:',
-                                    field:
-                                        formatOrganicFormula(_result.formula!),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .errorContainer,
+                                  icon: Icon(
+                                    Icons.share_outlined,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onErrorContainer,
+                                    size: 18,
                                   ),
-                                ],
+                                ),
                               ],
                             ),
-                          ),
-                          const SizedBox(height: 25),
-                          Row(
-                            children: [
-                              Text(
-                                'Estructura:',
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const Spacer(),
-                              const HelpButton(),
-                            ],
-                          ),
-                          const SizedBox(height: 25),
-                          Expanded(
-                            child: Container(
+                            const SizedBox(height: 25),
+                            Container(
+                              height: 1.5,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            const SizedBox(height: 25),
+                            Container(
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              // To avoid rounded corners overflow:
-                              clipBehavior: Clip.hardEdge,
-                              child: ColorFiltered(
-                                colorFilter: ColorFilter.matrix(
-                                  MediaQuery.of(context).platformBrightness ==
-                                          Brightness.dark
-                                      ? [
-                                          -1, 0, 0, 0, 255, //
-                                          0, -1, 0, 0, 255, //
-                                          0, 0, -1, 0, 255, //
-                                          0, 0, 0, 1, 0, //
-                                        ]
-                                      : [
-                                          1, 0, 0, 0, 0, //
-                                          0, 1, 0, 0, 0, //
-                                          0, 0, 1, 0, 0, //
-                                          0, 0, 0, 1, 0, //
-                                        ],
-                                ),
-                                child: PhotoView(
-                                  filterQuality: FilterQuality.high,
-                                  gaplessPlayback: true,
-                                  backgroundDecoration: const BoxDecoration(
-                                    color: Colors.transparent,
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  ResultField(
+                                      title: 'Búsqueda:', field: _result.name!),
+                                  const SizedBox(height: 15),
+                                  ResultField(
+                                      title: 'Masa molecular:',
+                                      field: '${_result.mass!} g/mol'),
+                                  if (_result.formula != null) ...[
+                                    const SizedBox(height: 15),
+                                    ResultField(
+                                      title: 'Fórmula:',
+                                      field: formatOrganicFormula(
+                                          _result.formula!),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 25),
+                            Row(
+                              children: [
+                                Text(
+                                  'Estructura:',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize: 16,
                                   ),
-                                  minScale: 1.1,
-                                  initialScale: 1.1,
-                                  maxScale: 5.0,
-                                  imageProvider: _firstSearch
-                                      ? const AssetImage(
-                                          'assets/images/dietanoic_acid.png')
-                                      : NetworkImage(_result.url2D!)
-                                          as ImageProvider,
+                                ),
+                                const Spacer(),
+                                const HelpButton(),
+                              ],
+                            ),
+                            const SizedBox(height: 25),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // To avoid rounded corners overflow:
+                                clipBehavior: Clip.hardEdge,
+                                child: ColorFiltered(
+                                  colorFilter: ColorFilter.matrix(
+                                    MediaQuery.of(context).platformBrightness ==
+                                            Brightness.dark
+                                        ? [
+                                            -1, 0, 0, 0, 255, //
+                                            0, -1, 0, 0, 255, //
+                                            0, 0, -1, 0, 255, //
+                                            0, 0, 0, 1, 0, //
+                                          ]
+                                        : [
+                                            1, 0, 0, 0, 0, //
+                                            0, 1, 0, 0, 0, //
+                                            0, 0, 1, 0, 0, //
+                                            0, 0, 0, 1, 0, //
+                                          ],
+                                  ),
+                                  child: PhotoView(
+                                    filterQuality: FilterQuality.high,
+                                    gaplessPlayback: true,
+                                    backgroundDecoration: const BoxDecoration(
+                                      color: Colors.transparent,
+                                    ),
+                                    minScale: 1.1,
+                                    initialScale: 1.1,
+                                    maxScale: 5.0,
+                                    imageProvider: _firstSearch
+                                        ? const AssetImage(
+                                            'assets/images/dietanoic_acid.png')
+                                        : NetworkImage(_result.url2D!)
+                                            as ImageProvider,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
+                            const SizedBox(height: 10),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

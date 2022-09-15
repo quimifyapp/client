@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/loading.dart';
+
 class PageAppBar extends StatelessWidget {
   const PageAppBar({Key? key, required this.title}) : super(key: key);
 
@@ -19,7 +21,10 @@ class PageAppBar extends StatelessWidget {
             Button(
               width: 50,
               color: const Color.fromARGB(255, 106, 233, 218),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.of(context).pop();
+                stopLoading();
+              },
               child: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
