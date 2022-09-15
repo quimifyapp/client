@@ -12,7 +12,8 @@ void startLoading(context) {
     ..indicatorColor = quimifyTeal
     ..maskType = EasyLoadingMaskType.custom
     ..maskColor = Theme.of(context).colorScheme.shadow
-    ..indicatorSize = 35
+    ..indicatorSize = 25
+    ..radius = 13
     ..userInteractions = true
     ..dismissOnTap = false
     ..textColor = Colors.transparent; // No nullable
