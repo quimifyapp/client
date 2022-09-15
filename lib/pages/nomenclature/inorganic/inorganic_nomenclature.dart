@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/utils/loading.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -46,8 +47,12 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
 
   Future<void> _search(String input, bool photo) async {
     if (!isEmptyWithBlanks(input)) {
+      startLoading(context);
+
       InorganicResult? result =
           await Api().getInorganic(toDigits(input), photo);
+
+      stopLoading();
 
       if (result != null) {
         if (result.present) {

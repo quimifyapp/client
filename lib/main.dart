@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cliente/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'api/api.dart';
@@ -34,6 +35,8 @@ class QuimifyApp extends StatelessWidget {
     // Hide splash screen:
     FlutterNativeSplash.remove();
 
+
+
     // To get rid of status bar's tint:
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -48,9 +51,10 @@ class QuimifyApp extends StatelessWidget {
             androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
         // To ignore device's font scaling factor:
         builder: (context, child) {
+          child = EasyLoading.init()(context, child);
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: child!,
+            child: child,
           );
         },
         // Themes:
@@ -69,7 +73,8 @@ class QuimifyApp extends StatelessWidget {
 
             onPrimary: Colors.white, // White text
 
-            onBackground: Color.fromARGB(255, 231, 246, 247), // Graph background
+            onBackground:
+                Color.fromARGB(255, 231, 246, 247), // Graph background
             onSecondary: Color.fromARGB(13, 0, 0, 0), // Graph bar background
             onSurface: Color.fromARGB(255, 241, 253, 250), // Inorganic amounts
 

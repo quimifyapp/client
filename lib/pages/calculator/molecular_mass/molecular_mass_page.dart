@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cliente/utils/loading.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:cliente/widgets/help_button.dart';
@@ -39,7 +40,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   Future<void> _calculate() async {
     String input = _textController.text;
 
+    startLoading(context);
+
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
+
+    stopLoading();
 
     if (result != null) {
       if (result.present) {

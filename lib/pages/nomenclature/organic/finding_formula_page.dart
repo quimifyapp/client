@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:cliente/utils/loading.dart';
 import 'package:cliente/widgets/help_button.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -36,7 +37,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   Future<void> _search(String name, bool photo) async {
     if (!isEmptyWithBlanks(name)) {
+      startLoading(context);
+
       OrganicResult? result = await Api().getOrganic(toDigits(name), photo);
+
+      stopLoading();
 
       if (result != null) {
         if (result.present) {
