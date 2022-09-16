@@ -77,7 +77,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           if (!mounted) return; // For security reasons
           DialogPopup.reportableMessage(
             title: 'Sin resultado',
-            details: 'No se ha encontrado "$input".',
+            details: 'No se ha encontrado:\n"$input"',
           ).show(context);
         }
       } else {
@@ -85,7 +85,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
         if (!mounted) return; // For security reasons
         DialogPopup.message(
           title: 'Sin resultado',
-          details: 'No se ha encontrado "$input".',
+          details: 'No se ha encontrado:\n"$input"',
         ).show(context);
       }
     }

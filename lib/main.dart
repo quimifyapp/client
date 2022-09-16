@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'api/api.dart';
 import 'api/results/access_result.dart';
@@ -15,11 +16,11 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Loading:
-  AccessResult? accessResult = await Api().connect(Platform.isAndroid
-      ? Api.android
+  AccessResult? accessResult = await Api().connect(kIsWeb
+      ? Api.web
       : Platform.isIOS
           ? Api.iOS
-          : Api.web);
+          : Api.android);
 
   // App launch:
   runApp(QuimifyApp(accessResult: accessResult));

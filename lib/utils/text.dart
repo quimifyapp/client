@@ -94,7 +94,6 @@ String toDigits(String input) {
 String noInitialAndFinalBlanks(String input) {
   String result =
       input.replaceAll(RegExp(r'^\s+'), '').replaceAll(RegExp(r'\s+$'), '');
-  print(result);
   return result;
 }
 

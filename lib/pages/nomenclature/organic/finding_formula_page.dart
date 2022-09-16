@@ -61,7 +61,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           if (!mounted) return; // For security reasons
           DialogPopup.reportableMessage(
             title: 'Sin resultado',
-            details: 'No se ha encontrado "$name".',
+            details: 'No se ha encontrado:\n"$name"',
           ).show(context);
         }
       } else {
@@ -69,7 +69,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         if (!mounted) return; // For security reasons
         DialogPopup.message(
           title: 'Sin resultado',
-          details: 'No se ha encontrado "$name".',
+          details: 'No se ha encontrado:\n"$name"',
         ).show(context);
       }
     }

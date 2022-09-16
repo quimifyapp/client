@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -62,7 +63,13 @@ class MenuCard extends StatelessWidget {
                 ),
               );
             }
-          : () {},
+          : _isLocked
+              ? () => const DialogPopup.message(
+                    title: 'Ya casi está',
+                    details:
+                        'Esta función pronto estará lista.',
+                  ).show(context)
+              : () {},
       child: Container(
         width: width,
         decoration: BoxDecoration(
@@ -133,7 +140,8 @@ class MenuCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Center(child: Text(
+                    Center(
+                        child: Text(
                       'Próximamente',
                       style: TextStyle(
                         fontSize: 16,
