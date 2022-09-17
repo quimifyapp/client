@@ -65,7 +65,7 @@ class MenuCard extends StatelessWidget {
             }
           : _isLocked
               ? () => const DialogPopup.message(
-                    title: 'Ya casi está',
+                    title: 'Falta muy poco',
                     details:
                         'Esta función pronto estará lista.',
                   ).show(context)
