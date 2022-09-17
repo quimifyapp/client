@@ -1,6 +1,6 @@
 flutter_native_splash:
-  #android: false
-  #ios: false
+  android: false
+  ios: false
   #web: false
 
   color: "#FFFFFF"

@@ -2,13 +2,13 @@ import 'dart:convert';
 
 class OrganicResult {
   final bool present;
-  final String? name, formula, mass, url2D;
+  final String? name, structure, mass, url2D;
 
   final bool? isInorganicSuggestion;
 
   OrganicResult(
     this.present,
-    this.formula,
+    this.structure,
     this.name,
     this.mass,
     this.url2D,

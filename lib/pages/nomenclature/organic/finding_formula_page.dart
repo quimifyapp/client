@@ -184,12 +184,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                                   ResultField(
                                       title: 'Masa molecular:',
                                       field: '${_result.mass!} g/mol'),
-                                  if (_result.formula != null) ...[
+                                  if (_result.structure != null) ...[
                                     const SizedBox(height: 15),
                                     ResultField(
                                       title: 'Fórmula:',
                                       field: formatOrganicFormula(
-                                          _result.formula!),
+                                          _result.structure!),
                                     ),
                                   ],
                                 ],
