@@ -1,5 +1,6 @@
 import 'package:cliente/organic/components/functions.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/widgets/function_button.dart';
+import 'package:cliente/utils/text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants.dart';
@@ -49,7 +50,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      _simple.toString(),
+                      formatOrganicFormula(_simple.toString()),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18

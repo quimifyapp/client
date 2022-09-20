@@ -29,7 +29,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   OrganicResult _result = OrganicResult(
     true,
     'COOH - COOH',
-    'ácido dietanoico',
+    'ácido etanodioico',
     '102.09',
     null,
     false,

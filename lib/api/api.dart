@@ -6,6 +6,8 @@ import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:http/http.dart' as http;
 
+enum ApiPlatform { android, iOS, web }
+
 class Api {
   factory Api() => _singleton;
 
@@ -14,21 +16,17 @@ class Api {
   static final _singleton = Api._internal();
   final _client = http.Client();
 
-  static const int android = 0, iOS = 1, web = 2;
+  static const int _apiVersion = 0;
+  static const String _authority = 'api.quimify.com';
 
   static const int _clientVersion = 0;
-  static const String _clientKey = 'qTsXzmRYeM8Bf7uZbK7Df2EyauzZYTm7';
 
-  static const String _authority = '185.2.68.11:8080';
-
-  Future<String?> _getResponse(
-      String path, Map<String, dynamic> parameters) async {
+  Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? result;
 
     try {
-      Uri url = Uri.http(_authority, path, parameters);
-      http.Response response =
-          await _client.get(url, headers: {'Authorization': _clientKey});
+      Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
+      http.Response response = await _client.get(url);
 
       if (response.statusCode == 200) {
         String body = utf8.decode(response.bodyBytes);
@@ -49,7 +47,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getResponse(
-        'organico/formular/', {'nombre': name, 'foto': photo.toString()});
+        'organico/formular', {'nombre': name, 'foto': photo.toString()});
 
     if (response != null) {
       try {
@@ -66,7 +64,7 @@ class Api {
     InorganicResult? result;
 
     String? response = await _getResponse(
-        'inorganico/', {'input': input, 'foto': photo.toString()});
+        'inorganico', {'input': input, 'foto': photo.toString()});
 
     if (response != null) {
       try {

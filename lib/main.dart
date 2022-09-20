@@ -17,10 +17,10 @@ Future<void> main() async {
 
   // Loading:
   AccessResult? accessResult = await Api().connect(kIsWeb
-      ? Api.web
+      ? ApiPlatform.web.index
       : Platform.isIOS
-          ? Api.iOS
-          : Api.android);
+          ? ApiPlatform.iOS.index
+          : ApiPlatform.android.index);
 
   // App launch:
   runApp(QuimifyApp(accessResult: accessResult));
