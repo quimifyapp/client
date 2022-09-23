@@ -68,6 +68,8 @@ flutter:
     - assets/images/icons/narrow_arrow.png
     - assets/images/icons/scale.png
     - assets/images/dietanoic_acid.png
+    - assets/ssl/certificate.crt
+    - assets/ssl/private.key
 
   fonts:
      - family: CeraPro

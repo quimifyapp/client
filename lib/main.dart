@@ -16,7 +16,8 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Loading:
-  AccessResult? accessResult = await Api().connect(kIsWeb
+  await Api().connect();
+  AccessResult? accessResult = await Api().getAccess(kIsWeb
       ? ApiPlatform.web.index
       : Platform.isIOS
           ? ApiPlatform.iOS.index

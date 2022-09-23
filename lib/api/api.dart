@@ -1,25 +1,38 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 enum ApiPlatform { android, iOS, web }
 
 class Api {
+  static final Api _singleton = Api._internal();
   factory Api() => _singleton;
-
   Api._internal();
 
-  static final _singleton = Api._internal();
-  final _client = http.Client();
+  late final IOClient _client;
 
-  static const int _apiVersion = 0;
-  static const String _authority = 'api.quimify.com';
+  static const _apiVersion = 0;
+  static const _clientVersion = 0;
+  static const _authority = 'api.quimify.com';
 
-  static const int _clientVersion = 0;
+  Future<void> connect() async {
+    SecurityContext context = SecurityContext(withTrustedRoots: true);
+
+    String ssl = 'assets/ssl';
+    context.useCertificateChainBytes(
+        (await rootBundle.load('$ssl/certificate.crt')).buffer.asUint8List());
+    context.usePrivateKeyBytes(
+        (await rootBundle.load('$ssl/private.key')).buffer.asUint8List());
+
+    _client = IOClient(HttpClient(context: context));
+  }
 
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? result;
@@ -43,11 +56,32 @@ class Api {
     return result;
   }
 
+  Future<AccessResult?> getAccess(int platform) async {
+    AccessResult? result;
+
+    String? response = await _getResponse('cliente', {
+      'version': _clientVersion.toString(),
+      'plataforma': platform.toString(),
+    });
+
+    if (response != null) {
+      try {
+        result = AccessResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
   Future<OrganicResult?> getOrganic(String name, bool photo) async {
     OrganicResult? result;
 
-    String? response = await _getResponse(
-        'organico/formular', {'nombre': name, 'foto': photo.toString()});
+    String? response = await _getResponse('organico/formular', {
+      'nombre': name,
+      'foto': photo.toString(),
+    });
 
     if (response != null) {
       try {
@@ -63,8 +97,10 @@ class Api {
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 
-    String? response = await _getResponse(
-        'inorganico', {'input': input, 'foto': photo.toString()});
+    String? response = await _getResponse('inorganico', {
+      'input': input,
+      'foto': photo.toString(),
+    });
 
     if (response != null) {
       try {
@@ -80,31 +116,13 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response =
-        await _getResponse('masamolecular', {'formula': formula});
-
-    if (response != null) {
-      try {
-        result = MolecularMassResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
-    }
-
-    return result;
-  }
-
-  Future<AccessResult?> connect(int platform) async {
-    AccessResult? result;
-
-    String? response = await _getResponse('cliente', {
-      'version': _clientVersion.toString(),
-      'plataforma': platform.toString()
+    String? response = await _getResponse('masamolecular', {
+      'formula': formula,
     });
 
     if (response != null) {
       try {
-        result = AccessResult.fromJson(response);
+        result = MolecularMassResult.fromJson(response);
       } catch (_) {
         // Error...
       }
