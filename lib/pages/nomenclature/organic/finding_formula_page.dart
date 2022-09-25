@@ -1,16 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:cliente/pages/nomenclature/organic/widgets/result_display.dart';
 import 'package:cliente/utils/loading.dart';
-import 'package:cliente/widgets/help_button.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 
 import '../../../api/api.dart';
 import '../../../utils/text.dart';
 import '../../../constants.dart';
 import '../../../widgets/dialog_popup.dart';
 import '../../../widgets/page_app_bar.dart';
-import '../../../widgets/result_button.dart';
 import '../widgets/search_bar.dart';
 
 class FindingFormulaPage extends StatefulWidget {
@@ -102,163 +99,16 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     onSubmitted: (input) => _search(input, false),
                   ),
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(25),
-                        ),
-                      ),
-                      // To avoid rounded corners overflow:
-                      clipBehavior: Clip.hardEdge,
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                          top: 30,
-                          bottom: 5,
-                          left: 25,
-                          right: 25,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Resultado',
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const Spacer(),
-                                ResultButton(
-                                  size: 44,
-                                  color: Theme.of(context).colorScheme.onError,
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.error,
-                                  icon: Image.asset(
-                                    'assets/images/icons/report.png',
-                                    color:
-                                        Theme.of(context).colorScheme.onError,
-                                    width: 18,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                ResultButton(
-                                  size: 44,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onErrorContainer,
-                                  backgroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .errorContainer,
-                                  icon: Icon(
-                                    Icons.share_outlined,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onErrorContainer,
-                                    size: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 25),
-                            Container(
-                              height: 1.5,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            const SizedBox(height: 25),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                children: [
-                                  ResultField(
-                                      title: 'Búsqueda:', field: _result.name!),
-                                  const SizedBox(height: 15),
-                                  ResultField(
-                                      title: 'Masa molecular:',
-                                      field: '${_result.mass!} g/mol'),
-                                  if (_result.structure != null) ...[
-                                    const SizedBox(height: 15),
-                                    ResultField(
-                                      title: 'Fórmula:',
-                                      field: formatOrganicFormula(
-                                          _result.structure!),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 25),
-                            Row(
-                              children: [
-                                Text(
-                                  'Estructura:',
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                const Spacer(),
-                                const HelpButton(),
-                              ],
-                            ),
-                            const SizedBox(height: 25),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).colorScheme.background,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                // To avoid rounded corners overflow:
-                                clipBehavior: Clip.hardEdge,
-                                child: ColorFiltered(
-                                  colorFilter: ColorFilter.matrix(
-                                    MediaQuery.of(context).platformBrightness ==
-                                            Brightness.dark
-                                        ? [
-                                            -1, 0, 0, 0, 255, //
-                                            0, -1, 0, 0, 255, //
-                                            0, 0, -1, 0, 255, //
-                                            0, 0, 0, 1, 0, //
-                                          ]
-                                        : [
-                                            1, 0, 0, 0, 0, //
-                                            0, 1, 0, 0, 0, //
-                                            0, 0, 1, 0, 0, //
-                                            0, 0, 0, 1, 0, //
-                                          ],
-                                  ),
-                                  child: PhotoView(
-                                    filterQuality: FilterQuality.high,
-                                    gaplessPlayback: true,
-                                    backgroundDecoration: const BoxDecoration(
-                                      color: Colors.transparent,
-                                    ),
-                                    minScale: 1.1,
-                                    initialScale: 1.1,
-                                    maxScale: 5.0,
-                                    imageProvider: _firstSearch
-                                        ? const AssetImage(
-                                            'assets/images/dietanoic_acid.png')
-                                        : NetworkImage(_result.url2D!)
-                                            as ImageProvider,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        ),
-                      ),
+                    child: ResultDisplay(
+                      firstTitle: 'Búsqueda:',
+                      firstField: _result.name!,
+                      secondTitle: 'Masa molecular:',
+                      secondField: '${_result.mass!} g/mol',
+                      thirdTitle: 'Fórmula',
+                      thirdField: formatOrganicFormula(_result.structure!),
+                      imageProvider: _firstSearch
+                          ? const AssetImage('assets/images/dietanoic_acid.png')
+                          : NetworkImage(_result.url2D!) as ImageProvider,
                     ),
                   ),
                 ],
@@ -267,41 +117,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ResultField extends StatelessWidget {
-  const ResultField({Key? key, required this.title, required this.field})
-      : super(key: key);
-
-  final String title, field;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: AutoSizeText(
-            field,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

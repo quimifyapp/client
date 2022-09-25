@@ -35,7 +35,7 @@ class ResultButton extends StatelessWidget {
               text!,
               style: TextStyle(
                 color: color,
-                fontSize: 16,
+                fontSize: 15,
                 //fontWeight: FontWeight.bold
               ),
             ),

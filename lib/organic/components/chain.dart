@@ -8,6 +8,14 @@ class Chain extends Organic {
     _carbons = [];
   }
 
+  Chain.from(Chain other) {
+    _carbons = [];
+
+    for(Carbon otherCarbon in other._carbons) {
+      _carbons.add(Carbon.from(otherCarbon));
+    }
+  }
+
   late List<Carbon> _carbons;
 
   void _start(int freeBonds) {

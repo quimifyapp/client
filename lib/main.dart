@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:cliente/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'api/api.dart';
 import 'api/results/access_result.dart';
@@ -17,11 +14,7 @@ Future<void> main() async {
 
   // Loading:
   await Api().connect();
-  AccessResult? accessResult = await Api().getAccess(kIsWeb
-      ? ApiPlatform.web.index
-      : Platform.isIOS
-          ? ApiPlatform.iOS.index
-          : ApiPlatform.android.index);
+  AccessResult? accessResult = await Api().getAccess();
 
   // App launch:
   runApp(QuimifyApp(accessResult: accessResult));
@@ -85,6 +78,8 @@ class QuimifyApp extends StatelessWidget {
             error: Color.fromARGB(255, 255, 241, 241), // Background
             onErrorContainer: Color.fromARGB(255, 56, 133, 224), // Share text
             errorContainer: Color.fromARGB(255, 239, 246, 253), // Background
+
+            surfaceTint: Color.fromARGB(255, 245, 245, 245), // Diagram background
           ),
         ),
         darkTheme: ThemeData(
@@ -113,6 +108,8 @@ class QuimifyApp extends StatelessWidget {
             error: Color.fromARGB(255, 255, 96, 96), // Background
             onErrorContainer: Colors.white, // Share text
             errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
+
+            surfaceTint: Color.fromARGB(255, 10, 10, 10), // Diagram background
           ),
         ),
         // App:

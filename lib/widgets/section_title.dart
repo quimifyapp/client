@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'help_button.dart';
 
 class SectionTitle extends StatelessWidget {
-  const SectionTitle({Key? key, required this.title}) : super(key: key);
+  const SectionTitle({super.key, required this.title})
+      : fontWeight = FontWeight.bold;
+
+  const SectionTitle.custom(
+      {Key? key, required this.title, required this.fontWeight})
+      : super(key: key);
 
   final String title;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class SectionTitle extends StatelessWidget {
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 18,
-              fontWeight: FontWeight.bold,
+              fontWeight: fontWeight,
             ),
           ),
           const Spacer(),

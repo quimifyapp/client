@@ -25,7 +25,6 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   http: ^0.13.5
   url_launcher: ^6.1.5
   photo_view: ^0.14.0
@@ -68,6 +67,9 @@ flutter:
     - assets/images/icons/narrow_arrow.png
     - assets/images/icons/scale.png
     - assets/images/dietanoic_acid.png
+    - assets/images/icons/bond_carbon.png
+    - assets/images/icons/hydrogenate.png
+    - assets/images/icons/undo.png
     - assets/ssl/certificate.crt
     - assets/ssl/private.key
 

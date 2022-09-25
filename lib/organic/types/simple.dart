@@ -7,27 +7,31 @@ class Simple {
     _chain = Chain();
   }
 
+  Simple.from(Simple other) {
+    _chain = Chain.from(other._chain);
+  }
+
   late Chain _chain;
 
-  _getFreeBonds() => _chain.getFreeBonds();
+  getFreeBonds() => _chain.getFreeBonds();
 
   bool isDone() => _chain.isDone();
 
   List<Functions> getAvailableSubstituents() {
     List<Functions> available = [];
 
-    if(_getFreeBonds() > 2) {
+    if(getFreeBonds() > 2) {
       available.add(Functions.acid);
       available.add(Functions.amide);
       available.add(Functions.nitrile);
       available.add(Functions.aldehyde);
     }
 
-    if(_getFreeBonds() > 1) {
+    if(getFreeBonds() > 1) {
       available.add(Functions.ketone);
     }
 
-    if(_getFreeBonds() > 0) {
+    if(getFreeBonds() > 0) {
       available.add(Functions.alcohol);
       available.add(Functions.amine);
       available.add(Functions.nitro);

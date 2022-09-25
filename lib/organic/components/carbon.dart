@@ -5,12 +5,21 @@ import 'functions.dart';
 
 class Carbon extends Organic {
   Carbon(int previousBonds) {
-    _substituents = [];
     _freeBonds = 4 - previousBonds;
+    _substituents = [];
   }
 
-  late List<Substituent> _substituents;
+  Carbon.from(Carbon otherCarbon) {
+    _freeBonds = otherCarbon._freeBonds;
+
+    _substituents = [];
+    for(Substituent otherSubstituent in otherCarbon._substituents) {
+      _substituents.add(otherSubstituent);
+    }
+  }
+
   late int _freeBonds;
+  late List<Substituent> _substituents;
 
   void bond(Substituent substituent) {
     _substituents.add(substituent);

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
@@ -7,23 +7,22 @@ import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
-
-enum ApiPlatform { android, iOS, web }
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:http/io_client.dart' as io;
 
 class Api {
   static final Api _singleton = Api._internal();
   factory Api() => _singleton;
   Api._internal();
 
-  late final IOClient _client;
+  late final  _client;
 
   static const _apiVersion = 0;
   static const _clientVersion = 0;
   static const _authority = 'api.quimify.com';
 
   Future<void> connect() async {
-    SecurityContext context = SecurityContext(withTrustedRoots: true);
+    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
 
     String ssl = 'assets/ssl';
     context.useCertificateChainBytes(
@@ -31,7 +30,7 @@ class Api {
     context.usePrivateKeyBytes(
         (await rootBundle.load('$ssl/private.key')).buffer.asUint8List());
 
-    _client = IOClient(HttpClient(context: context));
+    _client = io.IOClient(io.HttpClient(context: context));
   }
 
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
@@ -48,7 +47,8 @@ class Api {
         // Server crash or invalid URL
         // Error...
       }
-    } catch (_) {
+    } catch (e) {
+      print(e.toString());
       // No internet, server down or client error
       // Error...
     }
@@ -56,8 +56,14 @@ class Api {
     return result;
   }
 
-  Future<AccessResult?> getAccess(int platform) async {
+  Future<AccessResult?> getAccess() async {
     AccessResult? result;
+
+    int platform = kIsWeb
+        ? 2
+        : io.Platform.isIOS
+            ? 1
+            : 0;
 
     String? response = await _getResponse('cliente', {
       'version': _clientVersion.toString(),
@@ -67,25 +73,6 @@ class Api {
     if (response != null) {
       try {
         result = AccessResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
-    }
-
-    return result;
-  }
-
-  Future<OrganicResult?> getOrganic(String name, bool photo) async {
-    OrganicResult? result;
-
-    String? response = await _getResponse('organico/formular', {
-      'nombre': name,
-      'foto': photo.toString(),
-    });
-
-    if (response != null) {
-      try {
-        result = OrganicResult.fromJson(response);
       } catch (_) {
         // Error...
       }
@@ -123,6 +110,43 @@ class Api {
     if (response != null) {
       try {
         result = MolecularMassResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
+  Future<OrganicResult?> getOrganic(String name, bool photo) async {
+    OrganicResult? result;
+
+    String? response = await _getResponse('organico/formular', {
+      'nombre': name,
+      'foto': photo.toString(),
+    });
+
+    if (response != null) {
+      try {
+        result = OrganicResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
+  Future<OrganicResult?> getSimple(List<int> sequence) async {
+    OrganicResult? result;
+
+    String? response = await _getResponse('organico/nombrar/simple', {
+      'secuencia': sequence.join(','),
+    });
+
+    if (response != null) {
+      try {
+        result = OrganicResult.fromJson(response);
       } catch (_) {
         // Error...
       }
