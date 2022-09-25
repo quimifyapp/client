@@ -147,7 +147,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
     }
   }
 
-  void _bondRadical(Substituent substituent) {}
+  void _bondRadical() {}
 
   void _bondFunction(Functions function) {
     _startEditing();
@@ -227,7 +227,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
       Functions.radical: FunctionButton(
         bonds: 1,
         text: 'CH2 ... CH3',
-        onPressed: () => _bondFunction(Functions.radical),
+        onPressed: () => _bondRadical(),
       ),
       Functions.hydrogen: FunctionButton(
         bonds: 1,
