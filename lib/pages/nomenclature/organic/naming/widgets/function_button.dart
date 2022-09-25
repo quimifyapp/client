@@ -9,11 +9,12 @@ class FunctionButton extends StatelessWidget {
       {Key? key,
       required this.bonds,
       required this.text,
+        required this.actionText,
       required this.onPressed})
       : super(key: key);
 
   final int bonds;
-  final String text;
+  final String text, actionText;
   final VoidCallback onPressed;
 
   @override
@@ -26,7 +27,7 @@ class FunctionButton extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         child: Row(
           children: [
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Container(
               width: 40,
               height: 40,
@@ -54,17 +55,17 @@ class FunctionButton extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
-            Icon(Icons.add, color: quimifyTeal, size: 22,),
-            const SizedBox(width: 5),
-            const Text(
-              'Enlazar',
-              style: TextStyle(
+            const Spacer(),
+            Text(
+              actionText,
+              style: const TextStyle(
                 color: quimifyTeal,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(width: 5),
+            const Icon(Icons.add, color: quimifyTeal, size: 22,),
             const SizedBox(width: 15),
           ],
         ),

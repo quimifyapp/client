@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/organic/components/functions.dart';
-import 'package:cliente/organic/components/substituent.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/widgets/function_button.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/widgets/section_title.dart';
@@ -25,13 +24,11 @@ class NamingSimplePage extends StatefulWidget {
 
 class _NamingSimplePageState extends State<NamingSimplePage> {
   final String _title = 'Nombrar simple';
+  final double _unselectedOpacity = 0.5;
 
   late List<Simple> _simpleStack;
   late List<List<int>> _sequenceStack;
-
   late bool _done;
-
-  final double _unselectedOpacity = 0.5;
 
   void _reset() {
     _simpleStack = [Simple()];
@@ -164,75 +161,89 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
   @override
   Widget build(BuildContext context) {
     final Map<Functions, FunctionButton> functionToButton = {
-      Functions.acid: FunctionButton(
-        bonds: 3,
-        text: 'OOH',
-        onPressed: () => _bondFunction(Functions.acid),
-      ),
-      Functions.amide: FunctionButton(
-        bonds: 3,
-        text: 'ONH2',
-        onPressed: () => _bondFunction(Functions.amide),
-      ),
-      Functions.nitrile: FunctionButton(
-        bonds: 3,
-        text: 'N',
-        onPressed: () => _bondFunction(Functions.nitrile),
-      ),
-      Functions.aldehyde: FunctionButton(
-        bonds: 3,
-        text: 'HO',
-        onPressed: () => _bondFunction(Functions.aldehyde),
-      ),
-      Functions.ketone: FunctionButton(
-        bonds: 2,
-        text: 'O',
-        onPressed: () => _bondFunction(Functions.ketone),
-      ),
-      Functions.alcohol: FunctionButton(
+      Functions.hydrogen: FunctionButton(
         bonds: 1,
-        text: 'OH',
-        onPressed: () => _bondFunction(Functions.alcohol),
-      ),
-      Functions.amine: FunctionButton(
-        bonds: 1,
-        text: 'NH2',
-        onPressed: () => _bondFunction(Functions.amine),
-      ),
-      Functions.nitro: FunctionButton(
-        bonds: 1,
-        text: 'NO2',
-        onPressed: () => _bondFunction(Functions.nitro),
-      ),
-      Functions.bromine: FunctionButton(
-        bonds: 1,
-        text: 'Br',
-        onPressed: () => _bondFunction(Functions.bromine),
-      ),
-      Functions.chlorine: FunctionButton(
-        bonds: 1,
-        text: 'Cl',
-        onPressed: () => _bondFunction(Functions.chlorine),
-      ),
-      Functions.fluorine: FunctionButton(
-        bonds: 1,
-        text: 'F',
-        onPressed: () => _bondFunction(Functions.fluorine),
-      ),
-      Functions.iodine: FunctionButton(
-        bonds: 1,
-        text: 'I',
-        onPressed: () => _bondFunction(Functions.iodine),
+        text: 'H',
+        actionText: 'Hidrógeno',
+        onPressed: () => _bondFunction(Functions.hydrogen),
       ),
       Functions.radical: FunctionButton(
         bonds: 1,
         text: 'CH2 ... CH3',
+        actionText: 'Cadena',
         onPressed: () => _bondRadical(),
       ),
-      Functions.hydrogen: FunctionButton(
+      Functions.iodine: FunctionButton(
         bonds: 1,
-        text: 'H',
-        onPressed: () => _bondFunction(Functions.hydrogen),
+        text: 'I',
+        actionText: 'Yodo',
+        onPressed: () => _bondFunction(Functions.iodine),
+      ),
+      Functions.fluorine: FunctionButton(
+        bonds: 1,
+        text: 'F',
+        actionText: 'Flúor',
+        onPressed: () => _bondFunction(Functions.fluorine),
+      ),
+      Functions.chlorine: FunctionButton(
+        bonds: 1,
+        text: 'Cl',
+        actionText: 'Cloro',
+        onPressed: () => _bondFunction(Functions.chlorine),
+      ),
+      Functions.bromine: FunctionButton(
+        bonds: 1,
+        text: 'Br',
+        actionText: 'Bromo',
+        onPressed: () => _bondFunction(Functions.bromine),
+      ),
+      Functions.nitro: FunctionButton(
+        bonds: 1,
+        text: 'NO2',
+        actionText: 'Nitro',
+        onPressed: () => _bondFunction(Functions.nitro),
+      ),
+      Functions.amine: FunctionButton(
+        bonds: 1,
+        text: 'NH2',
+        actionText: 'Amina',
+        onPressed: () => _bondFunction(Functions.amine),
+      ),
+      Functions.alcohol: FunctionButton(
+        bonds: 1,
+        text: 'OH',
+        actionText: 'Alcohol',
+        onPressed: () => _bondFunction(Functions.alcohol),
+      ),
+      Functions.ketone: FunctionButton(
+        bonds: 2,
+        text: 'O',
+        actionText: 'Cetona',
+        onPressed: () => _bondFunction(Functions.ketone),
+      ),
+      Functions.aldehyde: FunctionButton(
+        bonds: 3,
+        text: 'HO',
+        actionText: 'Aldehído',
+        onPressed: () => _bondFunction(Functions.aldehyde),
+      ),
+      Functions.nitrile: FunctionButton(
+        bonds: 3,
+        text: 'N',
+        actionText: 'Nitrilo',
+        onPressed: () => _bondFunction(Functions.nitrile),
+      ),
+      Functions.amide: FunctionButton(
+        bonds: 3,
+        text: 'ONH2',
+        actionText: 'Amida',
+        onPressed: () => _bondFunction(Functions.amide),
+      ),
+      Functions.acid: FunctionButton(
+        bonds: 3,
+        text: 'OOH',
+        actionText: 'Ácido',
+        onPressed: () => _bondFunction(Functions.acid),
       ),
     };
 
@@ -263,8 +274,8 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
                       margin:
                           const EdgeInsets.only(top: 25, left: 25, right: 25),
                       padding: const EdgeInsets.only(
-                        top: 15,
-                        bottom: 15,
+                        top: 12,
+                        bottom: 18,
                         left: 25,
                         right: 25,
                       ),
@@ -283,6 +294,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
+                        strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -371,7 +383,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
                           gradient: quimifyGradient,
                           onPressed: _pressedButton,
                           child: const Text(
-                            'Nombrar',
+                            'Resolver',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,
