@@ -375,7 +375,7 @@ class _NamingSimplePageState extends State<NamingSimplePage> {
                       ),
                     ],
                     if (_done) ...[
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 20),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Button.gradient(
