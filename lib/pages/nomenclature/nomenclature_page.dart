@@ -132,7 +132,7 @@ class OrganicMenu extends StatelessWidget {
         MenuCard(
           width: 290,
           title: 'Nombrar',
-          structure: 'CH₂ - CH₂(F)',
+          structure: 'CH₃ - CH₂(F)',
           autoSizeGroup: autoSizeGroup,
           name: '1-fluoroetano',
           page: NamingPage(),

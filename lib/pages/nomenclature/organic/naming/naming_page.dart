@@ -69,7 +69,7 @@ class OpenChainMenu extends StatelessWidget {
         MenuCard(
           width: 290,
           title: 'Simple',
-          structure: 'CH₃ - C(CH₃) = CH₃',
+          structure: 'CH₃ - C(CH₃) = CH₂',
           autoSizeGroup: autoSizeGroup,
           name: '2-metilprop-1-eno',
           page: NamingSimplePage(),

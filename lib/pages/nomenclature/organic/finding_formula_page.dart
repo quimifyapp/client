@@ -104,7 +104,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                       firstField: _result.name!,
                       secondTitle: 'Masa molecular:',
                       secondField: '${_result.mass!} g/mol',
-                      thirdTitle: 'Fórmula',
+                      thirdTitle: 'Fórmula:',
                       thirdField: formatOrganicFormula(_result.structure!),
                       imageProvider: _firstSearch
                           ? const AssetImage('assets/images/dietanoic_acid.png')
