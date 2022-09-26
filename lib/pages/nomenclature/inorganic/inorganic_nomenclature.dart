@@ -179,35 +179,35 @@ class InorganicResultView extends StatefulWidget {
 class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
 
-  late List<InorganicField> _quantities;
+  late List<InorganicResultField> _quantities;
   bool _isCollapsed = true;
 
   @override
   Widget build(BuildContext context) {
     _quantities = [
       if (widget.inorganicResult.mass != null)
-        InorganicField(
+        InorganicResultField(
           title: 'Masa',
           quantity: widget.inorganicResult.mass!,
           unit: 'g/mol',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.density != null)
-        InorganicField(
+        InorganicResultField(
           title: 'Densidad',
           quantity: widget.inorganicResult.density!,
           unit: 'g/cm³',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.meltingPoint != null)
-        InorganicField(
+        InorganicResultField(
           title: 'P. de fusión',
           quantity: widget.inorganicResult.meltingPoint!,
           unit: 'K',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.boilingPoint != null)
-        InorganicField(
+        InorganicResultField(
           title: 'P. de ebullición',
           quantity: widget.inorganicResult.boilingPoint!,
           unit: 'K',
@@ -422,8 +422,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   }
 }
 
-class InorganicField extends StatelessWidget {
-  const InorganicField(
+class InorganicResultField extends StatelessWidget {
+  const InorganicResultField(
       {Key? key,
       required this.title,
       required this.quantity,
