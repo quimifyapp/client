@@ -391,7 +391,7 @@ class _GraphMenuState extends State<GraphMenu> {
                 child: AutoSizeText(
                   toSubscripts(formula),
                   minFontSize: 18,
-                  overflowReplacement: Text(
+                  overflowReplacement: const Text(
                     'Proporciones',
                     maxLines: 1,
                     style: TextStyle(
@@ -402,7 +402,7 @@ class _GraphMenuState extends State<GraphMenu> {
                   ),
                   stepGranularity: 0.1,
                   maxLines: 1,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: quimifyTeal,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

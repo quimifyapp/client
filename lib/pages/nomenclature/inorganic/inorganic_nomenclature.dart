@@ -26,8 +26,8 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   final ScrollController _scrollController = ScrollController();
 
   String _labelText = 'NaCl, óxido de hierro...';
-  final List<SearchResult> _results = [
-    SearchResult(
+  final List<InorganicResultView> _results = [
+    InorganicResultView(
       query: 'NaCl',
       inorganicResult: InorganicResult(
         true,
@@ -59,7 +59,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           setState(
             () => _results.insert(
               0,
-              SearchResult(
+              InorganicResultView(
                 query: input,
                 inorganicResult: result,
               ),
@@ -164,49 +164,50 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   }
 }
 
-class SearchResult extends StatefulWidget {
-  SearchResult({Key? key, required this.query, required this.inorganicResult})
+class InorganicResultView extends StatefulWidget {
+  const InorganicResultView(
+      {Key? key, required this.query, required this.inorganicResult})
       : super(key: key);
 
   final String query;
   final InorganicResult inorganicResult;
 
-  late List<SearchResultQuantity> _quantities;
+  @override
+  State<InorganicResultView> createState() => _InorganicResultViewState();
+}
+
+class _InorganicResultViewState extends State<InorganicResultView> {
+  final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
+
+  late List<InorganicField> _quantities;
   bool _isCollapsed = true;
 
   @override
-  State<SearchResult> createState() => _SearchResultState();
-}
-
-class _SearchResultState extends State<SearchResult> {
-  final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
-
-  @override
   Widget build(BuildContext context) {
-    widget._quantities = [
+    _quantities = [
       if (widget.inorganicResult.mass != null)
-        SearchResultQuantity(
+        InorganicField(
           title: 'Masa',
           quantity: widget.inorganicResult.mass!,
           unit: 'g/mol',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.density != null)
-        SearchResultQuantity(
+        InorganicField(
           title: 'Densidad',
           quantity: widget.inorganicResult.density!,
           unit: 'g/cm³',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.meltingPoint != null)
-        SearchResultQuantity(
+        InorganicField(
           title: 'P. de fusión',
           quantity: widget.inorganicResult.meltingPoint!,
           unit: 'K',
           titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
         ),
       if (widget.inorganicResult.boilingPoint != null)
-        SearchResultQuantity(
+        InorganicField(
           title: 'P. de ebullición',
           quantity: widget.inorganicResult.boilingPoint!,
           unit: 'K',
@@ -215,7 +216,7 @@ class _SearchResultState extends State<SearchResult> {
     ];
 
     return GestureDetector(
-      onTap: () => setState(() => widget._isCollapsed = !widget._isCollapsed),
+      onTap: () => setState(() => _isCollapsed = !_isCollapsed),
       child: Column(
         children: [
           // Head: (Result of: ...)
@@ -302,16 +303,15 @@ class _SearchResultState extends State<SearchResult> {
                   ),
                 ],
                 AnimatedSize(
-                  duration:
-                      Duration(milliseconds: widget._isCollapsed ? 150 : 300),
+                  duration: Duration(milliseconds: _isCollapsed ? 150 : 300),
                   curve: Curves.easeOut,
                   alignment: Alignment.topCenter,
                   child: SizedBox(
-                    height: widget._isCollapsed ? 0 : null,
+                    height: _isCollapsed ? 0 : null,
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        if (widget._quantities.isNotEmpty)
+                        if (_quantities.isNotEmpty)
                           Container(
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.onSurface,
@@ -325,30 +325,30 @@ class _SearchResultState extends State<SearchResult> {
                                   children: [
                                     Expanded(
                                       flex: 50,
-                                      child: widget._quantities[0],
+                                      child: _quantities[0],
                                     ),
-                                    if (widget._quantities.length > 1) ...[
+                                    if (_quantities.length > 1) ...[
                                       const SizedBox(width: 20),
                                       Expanded(
                                         flex: 50,
-                                        child: widget._quantities[1],
+                                        child: _quantities[1],
                                       ),
                                     ],
                                   ],
                                 ),
-                                if (widget._quantities.length > 2) ...[
+                                if (_quantities.length > 2) ...[
                                   const SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
                                         flex: 50,
-                                        child: widget._quantities[2],
+                                        child: _quantities[2],
                                       ),
-                                      if (widget._quantities.length > 3) ...[
+                                      if (_quantities.length > 3) ...[
                                         const SizedBox(width: 20),
                                         Expanded(
                                           flex: 50,
-                                          child: widget._quantities[3],
+                                          child: _quantities[3],
                                         ),
                                       ],
                                     ],
@@ -404,7 +404,7 @@ class _SearchResultState extends State<SearchResult> {
                 const SizedBox(height: 20),
                 Center(
                   child: RotatedBox(
-                    quarterTurns: widget._isCollapsed ? 2 : 0,
+                    quarterTurns: _isCollapsed ? 2 : 0,
                     child: Image.asset(
                       'assets/images/icons/narrow_arrow.png',
                       color: const Color.fromARGB(255, 189, 189, 189),
@@ -422,8 +422,8 @@ class _SearchResultState extends State<SearchResult> {
   }
 }
 
-class SearchResultQuantity extends StatelessWidget {
-  const SearchResultQuantity(
+class InorganicField extends StatelessWidget {
+  const InorganicField(
       {Key? key,
       required this.title,
       required this.quantity,

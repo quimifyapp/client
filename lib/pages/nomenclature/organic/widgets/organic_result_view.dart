@@ -34,7 +34,6 @@ class OrganicResultView extends StatelessWidget {
           right: 25,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -82,10 +81,11 @@ class OrganicResultView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(20),
-              child: Column(
+              child: Wrap(
+                runSpacing: 15,
                 children: fields.entries
                     .map((field) =>
-                        ResultField(title: field.key, field: field.value))
+                        OrganicField(title: field.key, field: field.value))
                     .toList(),
               ),
             ),
@@ -149,8 +149,8 @@ class OrganicResultView extends StatelessWidget {
   }
 }
 
-class ResultField extends StatelessWidget {
-  const ResultField({Key? key, required this.title, required this.field})
+class OrganicField extends StatelessWidget {
+  const OrganicField({Key? key, required this.title, required this.field})
       : super(key: key);
 
   final String title, field;
@@ -158,7 +158,7 @@ class ResultField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      //crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
