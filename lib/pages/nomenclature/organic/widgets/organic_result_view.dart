@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -85,7 +86,7 @@ class OrganicResultView extends StatelessWidget {
                 runSpacing: 15,
                 children: fields.entries
                     .map((field) =>
-                        OrganicField(title: field.key, field: field.value))
+                        ResultField(title: field.key, field: field.value))
                     .toList(),
               ),
             ),
@@ -113,23 +114,12 @@ class OrganicResultView extends StatelessWidget {
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
                 child: ColorFiltered(
-                  colorFilter: ColorFilter.matrix(
-                    MediaQuery.of(context).platformBrightness == Brightness.dark
-                        ? [
-                            -1, 0, 0, 0, 255, //
-                            0, -1, 0, 0, 255, //
-                            0, 0, -1, 0, 255, //
-                            0, 0, 0, 1, 0, //
-                          ]
-                        : [
-                            1, 0, 0, 0, 0, //
-                            0, 1, 0, 0, 0, //
-                            0, 0, 1, 0, 0, //
-                            0, 0, 0, 1, 0, //
-                          ],
-                  ),
+                  colorFilter: MediaQuery.of(context).platformBrightness ==
+                          Brightness.light
+                      ? identityFilter
+                      : inverseFilter,
                   child: PhotoView(
-                    filterQuality: FilterQuality.high,
+                    filterQuality: FilterQuality.low,
                     gaplessPlayback: true,
                     backgroundDecoration: const BoxDecoration(
                       color: Colors.transparent,
@@ -149,8 +139,8 @@ class OrganicResultView extends StatelessWidget {
   }
 }
 
-class OrganicField extends StatelessWidget {
-  const OrganicField({Key? key, required this.title, required this.field})
+class ResultField extends StatelessWidget {
+  const ResultField({Key? key, required this.title, required this.field})
       : super(key: key);
 
   final String title, field;
