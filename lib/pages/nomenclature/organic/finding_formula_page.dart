@@ -1,5 +1,5 @@
 import 'package:cliente/api/results/organic_result.dart';
-import 'package:cliente/pages/nomenclature/organic/widgets/result_display.dart';
+import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:cliente/utils/loading.dart';
 import 'package:flutter/material.dart';
 
@@ -99,13 +99,15 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     onSubmitted: (input) => _search(input, false),
                   ),
                   Expanded(
-                    child: ResultDisplay(
-                      firstTitle: 'Búsqueda:',
-                      firstField: _result.name!,
-                      secondTitle: 'Masa molecular:',
-                      secondField: '${_result.mass!} g/mol',
-                      thirdTitle: 'Fórmula:',
-                      thirdField: formatOrganicFormula(_result.structure!),
+                    child: OrganicResultView(
+                      fields: {
+                        if(_result.name != null)
+                          'Búsqueda:': _result.name!,
+                        if(_result.mass != null)
+                          'Masa molecular:': '${_result.mass!} g/mol',
+                        if(_result.structure != null)
+                          'Fórmula:': formatOrganicFormula(_result.structure!),
+                      },
                       imageProvider: _firstSearch
                           ? const AssetImage('assets/images/dietanoic_acid.png')
                           : NetworkImage(_result.url2D!) as ImageProvider,

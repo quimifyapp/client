@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants.dart';
 import '../../../../utils/text.dart';
 import '../../../../widgets/page_app_bar.dart';
-import '../widgets/result_display.dart';
+import '../widgets/organic_result_view.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({Key? key, required this.title, required this.result})
@@ -26,13 +26,15 @@ class ResultPage extends StatelessWidget {
             children: [
               PageAppBar(title: title),
               Expanded(
-                child: ResultDisplay(
-                  firstTitle: 'Nombre:',
-                  firstField: result.name!,
-                  secondTitle: 'Masa molecular:',
-                  secondField: '${result.mass!} g/mol',
-                  thirdTitle: 'Fórmula:',
-                  thirdField: formatOrganicFormula(result.structure!),
+                child: OrganicResultView(
+                  fields: {
+                    if(result.name != null)
+                    'Nombre:': result.name!,
+                    if(result.mass != null)
+                    'Masa molecular:': '${result.mass!} g/mol',
+                    if(result.structure != null)
+                    'Fórmula:': formatOrganicFormula(result.structure!),
+                  },
                   imageProvider: NetworkImage(result.url2D!),
                 ),
               ),

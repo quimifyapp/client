@@ -5,21 +5,14 @@ import 'package:photo_view/photo_view.dart';
 import '../../../../widgets/help_button.dart';
 import '../../../../widgets/result_button.dart';
 
-class ResultDisplay extends StatelessWidget {
-  const ResultDisplay({
+class OrganicResultView extends StatelessWidget {
+  const OrganicResultView({
     Key? key,
-    required this.firstTitle,
-    required this.firstField,
-    required this.secondTitle,
-    required this.secondField,
-    this.thirdTitle,
-    this.thirdField,
+    required this.fields,
     required this.imageProvider,
   }) : super(key: key);
 
-  final String firstTitle, firstField, secondTitle, secondField;
-  final String? thirdTitle, thirdField;
-
+  final Map<String, String> fields;
   final ImageProvider imageProvider;
 
   @override
@@ -90,18 +83,10 @@ class ResultDisplay extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(20),
               child: Column(
-                children: [
-                  ResultField(title: firstTitle, field: firstField),
-                  const SizedBox(height: 15),
-                  ResultField(title: secondTitle, field: secondField),
-                  if (thirdField != null) ...[
-                    const SizedBox(height: 15),
-                    ResultField(
-                      title: thirdTitle!,
-                      field: thirdField!,
-                    ),
-                  ],
-                ],
+                children: fields.entries
+                    .map((field) =>
+                        ResultField(title: field.key, field: field.value))
+                    .toList(),
               ),
             ),
             const SizedBox(height: 25),
@@ -110,10 +95,9 @@ class ResultDisplay extends StatelessWidget {
                 Text(
                   'Estructura:',
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500
-                  ),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
                 const Spacer(),
                 const HelpButton(),

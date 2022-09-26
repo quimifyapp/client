@@ -72,7 +72,7 @@ class OpenChainMenu extends StatelessWidget {
           structure: 'CH₃ - C(CH₃) = CH₂',
           autoSizeGroup: autoSizeGroup,
           name: '2-metilprop-1-eno',
-          page: NamingSimplePage(),
+          page: const NamingSimplePage(),
         ),
         MenuCard(
           width: 290,
@@ -80,7 +80,7 @@ class OpenChainMenu extends StatelessWidget {
           structure: 'CH₃ - O - CH₂(F)',
           autoSizeGroup: autoSizeGroup,
           name: 'fluorometil metil éter',
-          page: NamingEtherPage(),
+          page: const NamingEtherPage(),
         ),
         const MenuCard.locked(
           width: 290,
