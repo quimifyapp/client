@@ -1,16 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/utils/loading.dart';
+import 'package:cliente/api/api.dart';
+import 'package:cliente/api/results/inorganic_result.dart';
+import 'package:cliente/utils/text.dart';
+import 'package:cliente/widgets/dialog_popup.dart';
+import 'package:cliente/widgets/loading.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
+import 'package:cliente/widgets/result_button.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
 import 'package:cliente/constants.dart';
-
-import '../../../api/api.dart';
-import '../../../api/results/inorganic_result.dart';
-import '../../../utils/text.dart';
-import '../../../widgets/dialog_popup.dart';
-import '../../../widgets/result_button.dart';
 
 class InorganicNomenclaturePage extends StatefulWidget {
   const InorganicNomenclaturePage({Key? key}) : super(key: key);

@@ -1,10 +1,14 @@
+import 'package:cliente/api/api.dart';
+import 'package:cliente/constants.dart';
+import 'package:cliente/organic/types/open_chain/ether.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/open_chain/widget/open_chain_builder.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../constants.dart';
-import '../../../../../widgets/page_app_bar.dart';
 
 class NamingEtherPage extends StatelessWidget {
   const NamingEtherPage({Key? key}) : super(key: key);
+
+  final String _title = 'Nombrar éter';
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class NamingEtherPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            const PageAppBar(title: 'Nombrar éter'),
+            PageAppBar(title: _title),
             // Body:
             Expanded(
               child: Container(
@@ -28,6 +32,11 @@ class NamingEtherPage extends StatelessWidget {
                 ),
                 // To avoid rounded corners overflow:
                 clipBehavior: Clip.hardEdge,
+                child: OpenChainBuilder(
+                  title: _title,
+                  openChain: Ether(),
+                  apiGetter: Api().getEther,
+                ),
               ),
             ),
           ],

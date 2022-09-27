@@ -1,10 +1,9 @@
 import 'dart:math';
 
+import 'package:cliente/organic/organic.dart';
 import 'package:cliente/organic/components/functions.dart';
 
-import '../organic.dart';
-
-class Substituent {
+class Substituent extends Organic {
   Substituent(Functions function) {
     switch (function) {
       case Functions.acid:

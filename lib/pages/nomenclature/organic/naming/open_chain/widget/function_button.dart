@@ -1,8 +1,7 @@
 import 'package:cliente/constants.dart';
+import 'package:cliente/utils/text.dart';
+import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../utils/text.dart';
-import '../../../../../widgets/button.dart';
 
 class FunctionButton extends StatelessWidget {
   const FunctionButton(

@@ -1,11 +1,10 @@
+import 'package:cliente/api/api.dart';
+import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-import 'api/api.dart';
-import 'api/results/access_result.dart';
 
 Future<void> main() async {
   // Show splash screen UNTIL stated otherwise:

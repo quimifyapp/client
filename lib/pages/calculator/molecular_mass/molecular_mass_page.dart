@@ -1,6 +1,10 @@
 import 'dart:math';
 
-import 'package:cliente/utils/loading.dart';
+import 'package:cliente/api/api.dart';
+import 'package:cliente/api/results/molecular_mass_result.dart';
+import 'package:cliente/constants.dart';
+import 'package:cliente/utils/text.dart';
+import 'package:cliente/widgets/loading.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:cliente/widgets/help_button.dart';
@@ -8,11 +12,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../api/api.dart';
-import '../../../api/results/molecular_mass_result.dart';
-import '../../../utils/text.dart';
-import '../../../constants.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);

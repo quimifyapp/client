@@ -1,11 +1,11 @@
 import 'package:cliente/organic/components/substituent.dart';
-
-import '../organic.dart';
+import 'package:cliente/organic/organic.dart';
 import 'carbon.dart';
 
 class Chain extends Organic {
-  Chain() {
+  Chain({required int previousBonds}) {
     _carbons = [];
+    _start(previousBonds);
   }
 
   Chain.from(Chain other) {
@@ -22,6 +22,10 @@ class Chain extends Organic {
     _carbons.add(Carbon(freeBonds));
   }
 
+  int getFreeBonds() => _carbons.last.getFreeBonds();
+
+  bool isDone() => getFreeBonds() == 0;
+
   void bond(Substituent substituent) => _carbons.last.bond(substituent);
 
   void bondCarbon() {
@@ -33,10 +37,6 @@ class Chain extends Organic {
       _start(0);
     }
   }
-
-  bool isDone() => getFreeBonds() == 0;
-
-  int getFreeBonds() => _carbons.last.getFreeBonds();
 
   @override
   String toString() {

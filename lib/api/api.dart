@@ -15,7 +15,7 @@ class Api {
   factory Api() => _singleton;
   Api._internal();
 
-  late final  _client;
+  late final http.Client _client;
 
   static const _apiVersion = 0;
   static const _clientVersion = 0;
@@ -141,6 +141,24 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getResponse('organico/nombrar/simple', {
+      'secuencia': sequence.join(','),
+    });
+
+    if (response != null) {
+      try {
+        result = OrganicResult.fromJson(response);
+      } catch (_) {
+        // Error...
+      }
+    }
+
+    return result;
+  }
+
+  Future<OrganicResult?> getEther(List<int> sequence) async {
+    OrganicResult? result;
+
+    String? response = await _getResponse('organico/nombrar/eter', {
       'secuencia': sequence.join(','),
     });
 

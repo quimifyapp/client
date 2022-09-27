@@ -1,8 +1,7 @@
+import 'package:cliente/constants.dart';
+import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'button.dart';
-import '../constants.dart';
 
 class DialogPopup extends StatelessWidget {
   const DialogPopup.message({

@@ -1,13 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/constants.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_ether_page.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_simple_page.dart';
+import 'package:cliente/widgets/horizontal_cards_menu.dart';
+import 'package:cliente/widgets/menu_card.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
+import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../widgets/horizontal_cards_menu.dart';
-import 'ether/naming_ether_page.dart';
-import 'simple/naming_simple_page.dart';
-import '../../../../constants.dart';
-import '../../../../widgets/page_app_bar.dart';
-import '../../../../widgets/menu_card.dart';
-import '../../../../widgets/section_title.dart';
 
 class NamingPage extends StatelessWidget {
   NamingPage({Key? key}) : super(key: key);

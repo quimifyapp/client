@@ -1,7 +1,6 @@
+import 'package:cliente/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
-import '../constants.dart';
 
 void startLoading(context) {
   // Popup customization:

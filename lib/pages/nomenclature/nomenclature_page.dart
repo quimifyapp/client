@@ -1,15 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature.dart';
+import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
 import 'package:cliente/widgets/horizontal_cards_menu.dart';
+import 'package:cliente/widgets/menu_card.dart';
+import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/constants.dart';
-
-import 'organic/finding_formula_page.dart';
-import '../../widgets/menu_card.dart';
-import '../../widgets/section_title.dart';
-import 'inorganic/inorganic_nomenclature.dart';
-import 'organic/naming/naming_page.dart';
 
 class NomenclaturePage extends StatelessWidget {
   NomenclaturePage({Key? key}) : super(key: key);

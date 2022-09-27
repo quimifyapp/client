@@ -1,8 +1,7 @@
+import 'package:cliente/utils/text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../utils/text.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar(

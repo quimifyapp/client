@@ -1,14 +1,13 @@
+import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
-import 'package:cliente/utils/loading.dart';
+import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
+import 'package:cliente/utils/text.dart';
+import 'package:cliente/widgets/dialog_popup.dart';
+import 'package:cliente/widgets/loading.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../../../api/api.dart';
-import '../../../utils/text.dart';
-import '../../../constants.dart';
-import '../../../widgets/dialog_popup.dart';
-import '../../../widgets/page_app_bar.dart';
-import '../widgets/search_bar.dart';
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);

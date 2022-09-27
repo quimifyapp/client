@@ -1,6 +1,5 @@
+import 'package:cliente/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
-
-import 'menu_card.dart';
 
 class HorizontalCardsMenu extends StatelessWidget {
   const HorizontalCardsMenu({Key? key, required this.cards}) : super(key: key);

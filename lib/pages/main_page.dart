@@ -1,13 +1,12 @@
 import 'dart:io';
 
+import 'package:cliente/api/api.dart';
+import 'package:cliente/api/results/access_result.dart';
+import 'package:cliente/constants.dart';
+import 'package:cliente/pages/calculator/calculator_page.dart';
+import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
-
-import '../api/api.dart';
-import '../api/results/access_result.dart';
-import '../constants.dart';
-import 'calculator/calculator_page.dart';
-import 'nomenclature/nomenclature_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.accessResult}) : super(key: key);

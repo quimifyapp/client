@@ -1,7 +1,6 @@
+import 'package:cliente/organic/organic.dart';
+import 'package:cliente/organic/components/functions.dart';
 import 'package:cliente/organic/components/substituent.dart';
-
-import '../organic.dart';
-import 'functions.dart';
 
 class Carbon extends Organic {
   Carbon(int previousBonds) {

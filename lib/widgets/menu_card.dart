@@ -1,8 +1,7 @@
+import 'package:cliente/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
-import 'package:flutter/material.dart';
-
-import '../constants.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard(
@@ -66,8 +65,7 @@ class MenuCard extends StatelessWidget {
           : _isLocked
               ? () => const DialogPopup.message(
                     title: 'Falta muy poco',
-                    details:
-                        'Esta función pronto estará lista.',
+                    details: 'Esta función pronto estará lista.',
                   ).show(context)
               : () {},
       child: Container(

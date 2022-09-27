@@ -1,10 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
+import 'package:cliente/widgets/help_button.dart';
+import 'package:cliente/widgets/result_button.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-
-import '../../../../widgets/help_button.dart';
-import '../../../../widgets/result_button.dart';
 
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({

@@ -1,13 +1,12 @@
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:cliente/constants.dart';
+import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
+import 'package:cliente/utils/text.dart';
+import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants.dart';
-import '../../../../utils/text.dart';
-import '../../../../widgets/page_app_bar.dart';
-import '../widgets/organic_result_view.dart';
-
-class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key, required this.title, required this.result})
+class OrganicResultPage extends StatelessWidget {
+  const OrganicResultPage({Key? key, required this.title, required this.result})
       : super(key: key);
 
   final String title;
