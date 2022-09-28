@@ -113,10 +113,10 @@ String formatInorganicFormulaOrName(String formulaOrName) =>
 
 String formatOrganicName(String name) => toCapsExceptN(name);
 
-String formatInorganicFormula(String formula) =>
+String formatInorganicStructure(String formula) =>
     toCapsAfterNotAnUppercaseLetter(
         formatInorganicFormulaOrName(capFirst(formula)));
 
-String formatOrganicFormula(String formula) =>
+String formatOrganicStructure(String formula) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(formula))))));

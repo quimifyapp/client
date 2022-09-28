@@ -27,14 +27,14 @@ class OrganicResultPage extends StatelessWidget {
               Expanded(
                 child: OrganicResultView(
                   fields: {
-                    if(result.name != null)
-                    'Nombre:': result.name!,
-                    if(result.mass != null)
-                    'Masa molecular:': '${result.mass!} g/mol',
-                    if(result.structure != null)
-                    'Fórmula:': formatOrganicFormula(result.structure!),
+                    if (result.name != null) 'Nombre:': result.name!,
+                    if (result.mass != null)
+                      'Masa molecular:': '${result.mass!} g/mol',
+                    if (result.structure != null)
+                      'Fórmula:': formatOrganicStructure(result.structure!),
                   },
-                  imageProvider: NetworkImage(result.url2D!),
+                  imageProvider:
+                      result.url2D != null ? NetworkImage(result.url2D!) : null,
                 ),
               ),
             ],

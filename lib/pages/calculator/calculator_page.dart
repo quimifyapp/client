@@ -55,7 +55,7 @@ class CalculatorPage extends StatelessWidget {
                               ),
                               page: const MolecularMassPage(),
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 20),
                             const MenuCard.locked(
                               title: 'Ajustar reacción',
                             ),

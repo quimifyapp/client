@@ -69,8 +69,8 @@ flutter:
     - assets/images/dietanoic_acid.png
     - assets/images/icons/bond_carbon.png
     - assets/images/icons/hydrogenate.png
-    - assets/ssl/certificate.crt
-    - assets/ssl/private.key
+    - assets/https/certificate.crt
+    - assets/https/private.key
 
   fonts:
      - family: CeraPro

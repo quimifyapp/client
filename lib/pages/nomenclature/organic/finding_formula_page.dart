@@ -31,11 +31,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     false,
   );
 
-  Future<void> _search(String name, bool photo) async {
+  Future<void> _search(String name, bool picture) async {
     if (!isEmptyWithBlanks(name)) {
       startLoading(context);
 
-      OrganicResult? result = await Api().getOrganic(toDigits(name), photo);
+      OrganicResult? result =
+          await Api().getOrganicByName(toDigits(name), picture);
 
       stopLoading();
 
@@ -100,12 +101,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                   Expanded(
                     child: OrganicResultView(
                       fields: {
-                        if(_result.name != null)
-                          'Búsqueda:': _result.name!,
-                        if(_result.mass != null)
+                        if (_result.name != null) 'Búsqueda:': _result.name!,
+                        if (_result.mass != null)
                           'Masa molecular:': '${_result.mass!} g/mol',
-                        if(_result.structure != null)
-                          'Fórmula:': formatOrganicFormula(_result.structure!),
+                        if (_result.structure != null)
+                          'Fórmula:': formatOrganicStructure(_result.structure!),
                       },
                       imageProvider: _firstSearch
                           ? const AssetImage('assets/images/dietanoic_acid.png')

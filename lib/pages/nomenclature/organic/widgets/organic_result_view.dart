@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
-import 'package:cliente/widgets/help_button.dart';
 import 'package:cliente/widgets/result_button.dart';
+import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -13,7 +13,7 @@ class OrganicResultView extends StatelessWidget {
   }) : super(key: key);
 
   final Map<String, String> fields;
-  final ImageProvider imageProvider;
+  final ImageProvider? imageProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class OrganicResultView extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(20),
               child: Wrap(
-                runSpacing: 15,
+                runSpacing: 13,
                 children: fields.entries
                     .map((field) => OrganicResultField(
                         title: field.key, field: field.value))
@@ -90,47 +90,42 @@ class OrganicResultView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 25),
-            Row(
-              children: [
-                Text(
-                  'Estructura:',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                ),
-                const Spacer(),
-                const HelpButton(),
-              ],
-            ),
-            const SizedBox(height: 25),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceTint,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                child: ColorFiltered(
-                  colorFilter: MediaQuery.of(context).platformBrightness ==
-                          Brightness.light
-                      ? identityFilter
-                      : inverseFilter,
-                  child: PhotoView(
-                    filterQuality: FilterQuality.low,
-                    gaplessPlayback: true,
-                    backgroundDecoration: const BoxDecoration(
-                      color: Colors.transparent,
+            if (imageProvider != null) ...[
+              const SectionTitle.custom(
+                title: 'Estructura',
+                horizontalPadding: 0,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              const SizedBox(height: 25),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceTint,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
+                  child: ColorFiltered(
+                    colorFilter: MediaQuery.of(context).platformBrightness ==
+                            Brightness.light
+                        ? identityFilter
+                        : inverseFilter,
+                    child: PhotoView(
+                      backgroundDecoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      filterQuality: FilterQuality.high,
+                      gaplessPlayback: true,
+                      disableGestures: true,
+                      imageProvider: imageProvider!,
+                      // TODO: loading builder
                     ),
-                    minScale: 0.5,
-                    maxScale: 5.0,
-                    imageProvider: imageProvider,
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
+            ],
           ],
         ),
       ),
@@ -155,6 +150,7 @@ class OrganicResultField extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             fontSize: 16,
           ),
+          strutStyle: const StrutStyle(fontSize: 16, height: 1.3),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -166,6 +162,7 @@ class OrganicResultField extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
+            strutStyle: const StrutStyle(fontSize: 16, height: 1.3),
           ),
         ),
       ],

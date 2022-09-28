@@ -1,5 +1,5 @@
 import 'package:cliente/organic/organic.dart';
-import 'package:cliente/organic/components/functions.dart';
+import 'package:cliente/organic/components/functional_group.dart';
 import 'package:cliente/organic/components/substituent.dart';
 
 class Carbon extends Organic {
@@ -50,11 +50,11 @@ class Carbon extends Organic {
     return uniqueSubstituents;
   }
 
-  bool contains(Functions function) {
+  bool contains(FunctionalGroup function) {
     switch (function) {
-      case Functions.alkene:
+      case FunctionalGroup.alkene:
         return _freeBonds == 1; // Como en -CO=
-      case Functions.alkyne:
+      case FunctionalGroup.alkyne:
         return _freeBonds == 2; // Como en -CH#
       default:
         for (Substituent substituent in _substituents) {
@@ -70,11 +70,11 @@ class Carbon extends Organic {
   int getAmountOfSubstituent(Substituent substituent) =>
       _substituents.where((listed) => listed.equals(substituent)).length;
 
-  int getAmountOfFunction(Functions functions) {
+  int getAmountOfFunction(FunctionalGroup functions) {
     int amount = 0;
 
     if (contains(functions)) {
-      if (functions != Functions.alkene && functions != Functions.alkyne) {
+      if (functions != FunctionalGroup.alkene && functions != FunctionalGroup.alkyne) {
         for (Substituent substituent in _substituents) {
           if (substituent.isLike(functions)) {
             amount += 1;
@@ -100,8 +100,8 @@ class Carbon extends Organic {
     Organic.orderByFunctions(uniqueSubstituents);
 
     // Se escribe los hidrógenos:
-    Substituent hydrogen = Substituent(Functions.hydrogen);
-    int cantidad = getAmountOfFunction(Functions.hydrogen);
+    Substituent hydrogen = Substituent(FunctionalGroup.hydrogen);
+    int cantidad = getAmountOfFunction(FunctionalGroup.hydrogen);
     if (cantidad > 0) {
       result += hydrogen.toString() + Organic.molecularQuantifier(cantidad);
       uniqueSubstituents.removeLast(); // Se borra el hidrógeno de la lista
@@ -109,7 +109,7 @@ class Carbon extends Organic {
 
     // Se escribe el resto de substituents excepto el éter:
     uniqueSubstituents
-        .removeWhere((substituent) => substituent.isLike(Functions.ether));
+        .removeWhere((substituent) => substituent.isLike(FunctionalGroup.ether));
 
     if (uniqueSubstituents.length == 1) {
       // Solo hay un tipo además del hidrógeno y éter
@@ -133,8 +133,8 @@ class Carbon extends Organic {
     }
 
     // Ether:
-    if (contains(Functions.ether)) {
-      result += Substituent(Functions.ether).toString();
+    if (contains(FunctionalGroup.ether)) {
+      result += Substituent(FunctionalGroup.ether).toString();
     }
 
     return result;

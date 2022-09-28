@@ -1,6 +1,6 @@
 import 'package:cliente/organic/components/substituent.dart';
 
-import 'components/functions.dart';
+import 'components/functional_group.dart';
 
 // This class serves as a parent for any organic chemistry component.
 
@@ -38,10 +38,10 @@ class Organic {
     }
   }
 
-  static bool isHalogen(Functions function) => [
-    Functions.bromine,
-    Functions.chlorine,
-    Functions.fluorine,
-    Functions.iodine
+  static bool isHalogen(FunctionalGroup function) => [
+    FunctionalGroup.bromine,
+    FunctionalGroup.chlorine,
+    FunctionalGroup.fluorine,
+    FunctionalGroup.iodine
   ].contains(function);
 }

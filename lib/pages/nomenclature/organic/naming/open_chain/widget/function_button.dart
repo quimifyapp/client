@@ -3,8 +3,8 @@ import 'package:cliente/utils/text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 
-class FunctionButton extends StatelessWidget {
-  const FunctionButton(
+class FunctionalGroupButton extends StatelessWidget {
+  const FunctionalGroupButton(
       {Key? key,
       required this.bonds,
       required this.text,
@@ -47,7 +47,7 @@ class FunctionButton extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             Text(
-              formatOrganicFormula(text),
+              formatOrganicStructure(text),
               style: const TextStyle(
                 letterSpacing: 1,
                 fontSize: 16,

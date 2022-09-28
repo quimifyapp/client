@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'button.dart';
+import 'package:cliente/widgets/button.dart';
 
 class ResultButton extends StatelessWidget {
   const ResultButton(

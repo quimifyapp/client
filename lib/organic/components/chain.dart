@@ -1,42 +1,38 @@
+import 'package:cliente/organic/components/functional_group.dart';
 import 'package:cliente/organic/components/substituent.dart';
 import 'package:cliente/organic/organic.dart';
 import 'carbon.dart';
 
 class Chain extends Organic {
   Chain({required int previousBonds}) {
-    _carbons = [];
-    _start(previousBonds);
+    _carbons = [Carbon(previousBonds)];
   }
 
   Chain.from(Chain other) {
     _carbons = [];
 
-    for(Carbon otherCarbon in other._carbons) {
+    for (Carbon otherCarbon in other._carbons) {
       _carbons.add(Carbon.from(otherCarbon));
     }
   }
 
   late List<Carbon> _carbons;
 
-  void _start(int freeBonds) {
-    _carbons.add(Carbon(freeBonds));
-  }
-
   int getFreeBonds() => _carbons.last.getFreeBonds();
 
   bool isDone() => getFreeBonds() == 0;
 
-  void bond(Substituent substituent) => _carbons.last.bond(substituent);
-
   void bondCarbon() {
-    if (_carbons.isNotEmpty) {
-      Carbon last = _carbons.last;
-      last.bondCarbon();
-      _carbons.add(Carbon(last.getFreeBonds() + 1));
-    } else {
-      _start(0);
-    }
+    Carbon last = _carbons.last;
+    last.bondCarbon();
+    _carbons.add(Carbon(last.getFreeBonds() + 1));
   }
+
+  void bondSubstituent(Substituent substituent) =>
+      _carbons.last.bond(substituent);
+
+  void bondFunctionalGroup(FunctionalGroup functionalGroup) =>
+      bondSubstituent(Substituent(functionalGroup));
 
   @override
   String toString() {

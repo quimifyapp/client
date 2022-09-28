@@ -19,16 +19,16 @@ class Api {
 
   static const _apiVersion = 0;
   static const _clientVersion = 0;
-  static const _authority = 'api.quimify.com';
+  static const _authority = 'api.quimify.com'; // '192.168.1.155:8080';
 
   Future<void> connect() async {
     io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
 
-    String ssl = 'assets/ssl';
+    String dir = 'assets/https';
     context.useCertificateChainBytes(
-        (await rootBundle.load('$ssl/certificate.crt')).buffer.asUint8List());
+        (await rootBundle.load('$dir/certificate.crt')).buffer.asUint8List());
     context.usePrivateKeyBytes(
-        (await rootBundle.load('$ssl/private.key')).buffer.asUint8List());
+        (await rootBundle.load('$dir/private.key')).buffer.asUint8List());
 
     _client = io.IOClient(io.HttpClient(context: context));
   }
@@ -38,6 +38,7 @@ class Api {
 
     try {
       Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
+      // Uri url = Uri.http(_authority, '_apiVersion/$path', params);
       http.Response response = await _client.get(url);
 
       if (response.statusCode == 200) {
@@ -118,12 +119,12 @@ class Api {
     return result;
   }
 
-  Future<OrganicResult?> getOrganic(String name, bool photo) async {
+  Future<OrganicResult?> getOrganicByName(String name, bool picture) async {
     OrganicResult? result;
 
-    String? response = await _getResponse('organico/formular', {
-      'nombre': name,
-      'foto': photo.toString(),
+    String? response = await _getResponse('organic/name', {
+      'name': name,
+      'picture': picture.toString(),
     });
 
     if (response != null) {
@@ -137,29 +138,11 @@ class Api {
     return result;
   }
 
-  Future<OrganicResult?> getSimple(List<int> sequence) async {
+  Future<OrganicResult?> getOrganic(List<int> structureSequence) async {
     OrganicResult? result;
 
-    String? response = await _getResponse('organico/nombrar/simple', {
-      'secuencia': sequence.join(','),
-    });
-
-    if (response != null) {
-      try {
-        result = OrganicResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
-    }
-
-    return result;
-  }
-
-  Future<OrganicResult?> getEther(List<int> sequence) async {
-    OrganicResult? result;
-
-    String? response = await _getResponse('organico/nombrar/eter', {
-      'secuencia': sequence.join(','),
+    String? response = await _getResponse('organic/structure', {
+      'structure-sequence': structureSequence.join(','),
     });
 
     if (response != null) {

@@ -236,7 +236,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                                     onChanged: (input) {
                                       _textController.value =
                                           _textController.value.copyWith(
-                                        text: formatOrganicFormula(input),
+                                        text: formatOrganicStructure(input),
                                       );
                                     },
                                     textInputAction: TextInputAction.search,

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:flutter/material.dart';
 
-import 'loading.dart';
+import 'package:cliente/widgets/loading.dart';
 
 class PageAppBar extends StatelessWidget {
   const PageAppBar({Key? key, required this.title}) : super(key: key);

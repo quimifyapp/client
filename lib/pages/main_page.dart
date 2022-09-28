@@ -20,7 +20,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentPage = 0;
 
-  static double widthFactor = 0.85;
+  static const double widthFactor = 0.85;
 
   void _goToPage(int page) {
     if (currentPage != page) {

@@ -1,4 +1,4 @@
-enum Functions {
+enum FunctionalGroup {
   // By priority:
   acid, // =O, -OH
   carboxyl, // -COOH non-principal acid

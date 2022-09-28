@@ -1,32 +1,32 @@
 import 'dart:math';
 
 import 'package:cliente/organic/organic.dart';
-import 'package:cliente/organic/components/functions.dart';
+import 'package:cliente/organic/components/functional_group.dart';
 
 class Substituent extends Organic {
-  Substituent(Functions function) {
+  Substituent(FunctionalGroup function) {
     switch (function) {
-      case Functions.acid:
-      case Functions.amide:
-      case Functions.nitrile:
-      case Functions.aldehyde:
+      case FunctionalGroup.acid:
+      case FunctionalGroup.amide:
+      case FunctionalGroup.nitrile:
+      case FunctionalGroup.aldehyde:
         _buildNormal(function, 3);
         break;
-      case Functions.ketone:
+      case FunctionalGroup.ketone:
         _buildNormal(function, 2);
         break;
-      case Functions.carboxyl:
-      case Functions.carbamoyl:
-      case Functions.cyanide:
-      case Functions.alcohol:
-      case Functions.amine:
-      case Functions.ether:
-      case Functions.nitro:
-      case Functions.bromine:
-      case Functions.chlorine:
-      case Functions.fluorine:
-      case Functions.iodine:
-      case Functions.hydrogen:
+      case FunctionalGroup.carboxyl:
+      case FunctionalGroup.carbamoyl:
+      case FunctionalGroup.cyanide:
+      case FunctionalGroup.alcohol:
+      case FunctionalGroup.amine:
+      case FunctionalGroup.ether:
+      case FunctionalGroup.nitro:
+      case FunctionalGroup.bromine:
+      case FunctionalGroup.chlorine:
+      case FunctionalGroup.fluorine:
+      case FunctionalGroup.iodine:
+      case FunctionalGroup.hydrogen:
         _buildNormal(function, 1);
         break;
       default: // Radical, alkene or alkyne
@@ -34,37 +34,37 @@ class Substituent extends Organic {
     }
   }
 
-  late Functions _function;
+  late FunctionalGroup _function;
   late int _bondCount;
 
   // Only for radicals:
   late int _carbonCount;
   late bool _isIso;
 
-  void _buildNormal(Functions function, int bonds) {
+  void _buildNormal(FunctionalGroup function, int bonds) {
     _build(function, bonds, 0, false);
   }
 
   void _buildRadical(int carbons, bool iso) {
-    _build(Functions.radical, 1, carbons, iso);
+    _build(FunctionalGroup.radical, 1, carbons, iso);
   }
 
-  void _build(Functions function, int bonds, int carbons, bool iso) {
+  void _build(FunctionalGroup function, int bonds, int carbons, bool iso) {
     _function = function;
     _bondCount = bonds;
     _carbonCount = carbons;
     _isIso = iso;
   }
 
-  bool isLike(Functions function) => _function == function;
+  bool isLike(FunctionalGroup function) => _function == function;
 
   bool isHalogen() => Organic.isHalogen(_function);
 
-  bool equals(Substituent other) => _function == Functions.radical
+  bool equals(Substituent other) => _function == FunctionalGroup.radical
       ? _carbonCount == other._carbonCount && _isIso == other._isIso
       : _function == other._function && _bondCount == other._bondCount;
 
-  Functions getFunction() => _function;
+  FunctionalGroup getFunction() => _function;
 
   int getBonds() => _bondCount;
 
@@ -73,60 +73,60 @@ class Substituent extends Organic {
     String result = '';
 
     switch (_function) {
-      case Functions.carboxyl:
+      case FunctionalGroup.carboxyl:
         result += 'COOH';
         break;
-      case Functions.acid:
+      case FunctionalGroup.acid:
         result += 'OOH';
         break;
-      case Functions.carbamoyl:
+      case FunctionalGroup.carbamoyl:
         result += 'CONH2';
         break;
-      case Functions.amide:
+      case FunctionalGroup.amide:
         result += 'ONH2';
         break;
-      case Functions.cyanide:
+      case FunctionalGroup.cyanide:
         result += 'CN';
         break;
-      case Functions.nitrile:
+      case FunctionalGroup.nitrile:
         result += 'N';
         break;
-      case Functions.aldehyde:
+      case FunctionalGroup.aldehyde:
         result += 'HO';
         break;
-      case Functions.ketone:
+      case FunctionalGroup.ketone:
         result += 'O';
         break;
-      case Functions.alcohol:
+      case FunctionalGroup.alcohol:
         result += 'OH';
         break;
-      case Functions.amine:
+      case FunctionalGroup.amine:
         result += 'NH2';
         break;
-      case Functions.ether:
+      case FunctionalGroup.ether:
         result += '-O-';
         break;
-      case Functions.nitro:
+      case FunctionalGroup.nitro:
         result += 'NO2';
         break;
-      case Functions.bromine:
+      case FunctionalGroup.bromine:
         result += 'Br';
         break;
-      case Functions.chlorine:
+      case FunctionalGroup.chlorine:
         result += 'Cl';
         break;
-      case Functions.fluorine:
+      case FunctionalGroup.fluorine:
         result += 'F';
         break;
-      case Functions.iodine:
+      case FunctionalGroup.iodine:
         result += 'I';
         break;
-      case Functions.radical:
+      case FunctionalGroup.radical:
         result += _isIso
             ? '${'CH2' * max(0, _carbonCount - 3)}CH(CH3)2'
             : '${'CH2' * max(0, _carbonCount - 1)}CH3';
         break;
-      case Functions.hydrogen:
+      case FunctionalGroup.hydrogen:
         result += 'H';
         break;
       default:

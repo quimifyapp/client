@@ -24,6 +24,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   final ScrollController _scrollController = ScrollController();
 
   String _labelText = 'NaCl, óxido de hierro...';
+
   final List<InorganicResultView> _results = [
     InorganicResultView(
       query: 'NaCl',

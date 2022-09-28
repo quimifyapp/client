@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
-import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_ether_page.dart';
-import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_simple_page.dart';
-import 'package:cliente/widgets/horizontal_cards_menu.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
 import 'package:cliente/widgets/menu_card.dart';
 import 'package:cliente/widgets/page_app_bar.dart';
 import 'package:cliente/widgets/section_title.dart';
@@ -11,7 +9,8 @@ import 'package:flutter/material.dart';
 class NamingPage extends StatelessWidget {
   NamingPage({Key? key}) : super(key: key);
 
-  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
+  static const double _cardVerticalPadding = 20;
+  final AutoSizeGroup _autoSizeGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +36,30 @@ class NamingPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const SectionTitle(title: 'Cadena abierta'),
+                      const SectionTitle(title: 'Tipo de orgánico'),
                       const SizedBox(height: 25),
-                      OpenChainMenu(autoSizeGroup: autoSizeGroup),
-                      const SizedBox(height: 25),
-                      const SectionTitle(title: 'Cadena cerrada'),
-                      const SizedBox(height: 25),
-                      ClosedChainMenu(autoSizeGroup: autoSizeGroup),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: [
+                            MenuCard(
+                              title: 'Cadena abierta',
+                              structure: 'CH₃ - O - CH₂(F)', // 'CH₃ - C(CH₃) = CH₂',
+                              autoSizeGroup: _autoSizeGroup,
+                              name: 'fluorometil metil éter', //'2-metilprop-1-eno',
+                              page: const NamingOpenChainPage(),
+                            ),
+                            const SizedBox(height: _cardVerticalPadding),
+                            const MenuCard.locked(
+                              title: 'Éster',
+                            ),
+                            const SizedBox(height: _cardVerticalPadding),
+                            const MenuCard.locked(
+                              title: 'Cíclico',
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -52,62 +68,6 @@ class NamingPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class OpenChainMenu extends StatelessWidget {
-  const OpenChainMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
-
-  final AutoSizeGroup autoSizeGroup;
-
-  @override
-  Widget build(BuildContext context) {
-    return HorizontalCardsMenu(
-      cards: [
-        MenuCard(
-          width: 290,
-          title: 'Simple',
-          structure: 'CH₃ - C(CH₃) = CH₂',
-          autoSizeGroup: autoSizeGroup,
-          name: '2-metilprop-1-eno',
-          page: const NamingSimplePage(),
-        ),
-        MenuCard(
-          width: 290,
-          title: 'Éter',
-          structure: 'CH₃ - O - CH₂(F)',
-          autoSizeGroup: autoSizeGroup,
-          name: 'fluorometil metil éter',
-          page: const NamingEtherPage(),
-        ),
-        const MenuCard.locked(
-          width: 290,
-          title: 'Éster',
-        ),
-      ],
-    );
-  }
-}
-
-class ClosedChainMenu extends StatelessWidget {
-  const ClosedChainMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
-
-  final AutoSizeGroup autoSizeGroup;
-
-  @override
-  Widget build(BuildContext context) {
-    return const HorizontalCardsMenu(
-      cards: [
-        MenuCard.locked(
-          width: 290,
-          title: 'Aromático',
-        ),
-        MenuCard.locked(
-          width: 290,
-          title: 'Cíclico',
-        ),
-      ],
     );
   }
 }
