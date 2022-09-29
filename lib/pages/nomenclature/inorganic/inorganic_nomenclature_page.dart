@@ -56,8 +56,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
       if (result != null) {
         if (result.present) {
           setState(
-            () => _results.insert(
-              0,
+            () => _results.add(
               InorganicResultView(
                 query: input,
                 inorganicResult: result,
@@ -138,20 +137,18 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                     // To avoid rounded corners overflow:
                     clipBehavior: Clip.hardEdge,
                     child: SingleChildScrollView(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.only(
-                        top: 30,
-                        bottom: 5,
-                        left: 25,
-                        right: 25,
-                      ),
-                      child: Column(
-                        children: [
-                          ..._results.toList(),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
+                        controller: _scrollController,
+                        padding: const EdgeInsets.only(
+                          top: 30,
+                          bottom: 20,
+                          left: 25,
+                          right: 25,
+                        ),
+                        child: Wrap(
+                          verticalDirection: VerticalDirection.up,
+                          runSpacing: 25,
+                          children: _results,
+                        )),
                   ),
                 ),
               ],
@@ -178,8 +175,8 @@ class InorganicResultView extends StatefulWidget {
 class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
 
+  late bool _isCollapsed = true;
   late List<InorganicResultField> _quantities;
-  bool _isCollapsed = true; // TODO
 
   @override
   Widget build(BuildContext context) {
@@ -358,7 +355,6 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                           ),
                         Row(
                           children: [
-                            const SizedBox(width: 5),
                             Expanded(
                               child: ResultButton(
                                 size: 50,
@@ -393,7 +389,6 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                 text: 'Compartir',
                               ),
                             ),
-                            const SizedBox(width: 5),
                           ],
                         ),
                       ],
@@ -414,7 +409,6 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               ],
             ),
           ),
-          const SizedBox(height: 25),
         ],
       ),
     );
