@@ -296,8 +296,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       padding: const EdgeInsets.only(
                         top: 13,
                         bottom: 17,
-                        left: 0, // TODO
-                        right: 25,
                       ),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
@@ -307,19 +305,22 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         reverse: true,
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 25),
-                          child: Text(
-                            formatStructure(
-                                _openChainStack.last.getStructure()),
-                            style: const TextStyle(
-                              color: quimifyTeal,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 25),
+                            Text(
+                              formatStructure(
+                                  _openChainStack.last.getStructure()),
+                              style: const TextStyle(
+                                color: quimifyTeal,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              strutStyle:
+                              const StrutStyle(fontSize: 28, height: 1.4),
                             ),
-                            strutStyle:
-                                const StrutStyle(fontSize: 28, height: 1.4),
-                          ),
+                            const SizedBox(width: 25),
+                          ]
                         ),
                       ),
                     ),
