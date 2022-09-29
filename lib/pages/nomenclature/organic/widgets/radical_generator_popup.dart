@@ -27,7 +27,7 @@ class RadicalGeneratorPopup extends StatefulWidget {
 
 class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
   void _button() {
-    widget.onSubmitted(2, false);
+    widget.onSubmitted(1, false);
 
     Navigator.of(context).pop();
   }
