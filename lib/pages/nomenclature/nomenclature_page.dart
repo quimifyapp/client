@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature.dart';
+import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
 import 'package:cliente/widgets/horizontal_cards_menu.dart';

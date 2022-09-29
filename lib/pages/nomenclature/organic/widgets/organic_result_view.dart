@@ -29,7 +29,7 @@ class OrganicResultView extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(
           top: 30,
-          bottom: 5,
+          bottom: 20,
           left: 25,
           right: 25,
         ),
@@ -119,12 +119,10 @@ class OrganicResultView extends StatelessWidget {
                       gaplessPlayback: true,
                       disableGestures: true,
                       imageProvider: imageProvider!,
-                      // TODO: loading builder
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
             ],
           ],
         ),

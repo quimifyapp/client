@@ -19,9 +19,9 @@ class InorganicNomenclaturePage extends StatefulWidget {
 }
 
 class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
+  final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
-  final ScrollController _scrollController = ScrollController();
 
   String _labelText = 'NaCl, óxido de hierro...';
 
@@ -179,7 +179,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
 
   late List<InorganicResultField> _quantities;
-  bool _isCollapsed = true;
+  bool _isCollapsed = true; // TODO
 
   @override
   Widget build(BuildContext context) {
