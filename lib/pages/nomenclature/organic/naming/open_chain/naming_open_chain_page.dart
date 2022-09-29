@@ -295,8 +295,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       margin:
                           const EdgeInsets.only(top: 25, left: 25, right: 25),
                       padding: const EdgeInsets.only(
-                        top: 12,
-                        bottom: 18,
+                        top: 13,
+                        bottom: 17,
                         left: 25,
                         right: 25,
                       ),

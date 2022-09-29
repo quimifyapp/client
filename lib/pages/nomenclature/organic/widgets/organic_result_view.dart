@@ -106,48 +106,51 @@ class _OrganicResultViewState extends State<OrganicResultView> {
               ),
               const SizedBox(height: 25),
               Expanded(
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceTint,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      // To avoid rounded corners overflow:
-                      clipBehavior: Clip.hardEdge,
-                      child: ColorFiltered(
-                        colorFilter:
-                            MediaQuery.of(context).platformBrightness ==
-                                    Brightness.light
-                                ? identityFilter
-                                : inverseFilter,
-                        child: PhotoView(
-                          backgroundDecoration: const BoxDecoration(
-                            color: Colors.transparent,
+                child: GestureDetector(
+                  onTapUp: (_) => setState(() => _zoomed = !_zoomed),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surfaceTint,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        // To avoid rounded corners overflow:
+                        clipBehavior: Clip.hardEdge,
+                        child: ColorFiltered(
+                          colorFilter:
+                          MediaQuery.of(context).platformBrightness ==
+                              Brightness.light
+                              ? identityFilter
+                              : inverseFilter,
+                          child: PhotoView(
+                            backgroundDecoration: const BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            initialScale: _zoomed ? 1.25 : null,
+                            gaplessPlayback: true,
+                            disableGestures: true,
+                            imageProvider: widget.imageProvider!,
+                            loadingBuilder: (context, event) => const Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3.0,
+                                  color: Colors.black, // Filter will turn it light
+                                )),
                           ),
-                          initialScale: _zoomed ? 1.25 : null,
-                          gaplessPlayback: true,
-                          disableGestures: true,
-                          imageProvider: widget.imageProvider!,
-                          loadingBuilder: (context, event) => const Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 3.0,
-                            color: Colors.black, // Filter will turn it light
-                          )),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => setState(() => _zoomed = !_zoomed),
-                      icon: Icon(
-                        _zoomed
-                            ? Icons.zoom_out_rounded
-                            : Icons.zoom_in_rounded,
-                        size: 27,
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Icon(
+                          size: 27,
+                          color: Theme.of(context).colorScheme.primary,
+                          _zoomed
+                              ? Icons.zoom_out_rounded
+                              : Icons.zoom_in_rounded,
+                        ),
                       ),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
