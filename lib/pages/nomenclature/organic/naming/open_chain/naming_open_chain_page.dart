@@ -180,14 +180,14 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
           _openChainStack.last.getOrderedBondableGroups().indexOf(function);
 
       if (code != -1) {
-        if (function == FunctionalGroup.ether) {
+        if (function != FunctionalGroup.ether) {
+          _openChainStack.last.bondFunctionalGroup(function);
+          _checkDone();
+        } else {
           _openChainStack.last = Ether(_openChainStack.last as Simple);
-          return;
         }
 
-        _openChainStack.last.bondFunctionalGroup(function);
         _inputSequenceStack.last.add(code);
-        _checkDone();
       }
     });
   }
