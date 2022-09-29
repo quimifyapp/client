@@ -20,6 +20,7 @@ class Api {
   static const _apiVersion = 0;
   static const _clientVersion = 0;
   static const _authority = 'api.quimify.com'; // '192.168.1.155:8080';
+  // static const _authority = '192.168.1.155:8080';
 
   Future<void> connect() async {
     io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
@@ -38,7 +39,7 @@ class Api {
 
     try {
       Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
-      // Uri url = Uri.http(_authority, '_apiVersion/$path', params);
+      // Uri url = Uri.http(_authority, path, params);
       http.Response response = await _client.get(url);
 
       if (response.statusCode == 200) {
