@@ -87,18 +87,26 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             // To avoid keyboard resizing:
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  const PageAppBar(title: 'Formular orgánico'),
-                  SearchBar(
-                    label: _labelText,
-                    controller: _textController,
-                    focusNode: _textFocusNode,
-                    corrector: formatOrganicName,
-                    onSubmitted: (input) => _search(input, false),
-                  ),
-                  Expanded(
+            body: Column(
+              children: [
+                const PageAppBar(title: 'Formular orgánico'),
+                SearchBar(
+                  label: _labelText,
+                  controller: _textController,
+                  focusNode: _textFocusNode,
+                  corrector: formatOrganicName,
+                  onSubmitted: (input) => _search(input, false),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(25),
+                      ),
+                    ),
+                    // To avoid rounded corners overflow:
+                    clipBehavior: Clip.hardEdge,
                     child: OrganicResultView(
                       fields: {
                         if (_result.name != null) 'Búsqueda:': _result.name!,
@@ -108,12 +116,13 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                           'Fórmula:': formatStructure(_result.structure!),
                       },
                       imageProvider: _firstSearch
-                          ? const AssetImage('assets/images/dietanoic_acid.png')
+                          ? const AssetImage(
+                              'assets/images/dietanoic_acid.png')
                           : NetworkImage(_result.url2D!) as ImageProvider,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

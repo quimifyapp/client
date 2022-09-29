@@ -20,11 +20,19 @@ class OrganicResultPage extends StatelessWidget {
         // To avoid keyboard resizing:
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Column(
-            children: [
-              PageAppBar(title: title),
-              Expanded(
+        body: Column(
+          children: [
+            PageAppBar(title: title),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(25),
+                  ),
+                ),
+                // To avoid rounded corners overflow:
+                clipBehavior: Clip.hardEdge,
                 child: OrganicResultView(
                   fields: {
                     if (result.name != null) 'Nombre:': result.name!,
@@ -33,12 +41,13 @@ class OrganicResultPage extends StatelessWidget {
                     if (result.structure != null)
                       'Fórmula:': formatStructure(result.structure!),
                   },
-                  imageProvider:
-                      result.url2D != null ? NetworkImage(result.url2D!) : null,
+                  imageProvider: result.url2D != null
+                      ? NetworkImage(result.url2D!)
+                      : null,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

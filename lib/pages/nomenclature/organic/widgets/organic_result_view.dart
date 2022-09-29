@@ -25,137 +25,127 @@ class _OrganicResultViewState extends State<OrganicResultView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(25),
-        ),
+      padding: const EdgeInsets.only(
+        top: 30,
+        bottom: 20,
+        left: 25,
+        right: 25,
       ),
-      // To avoid rounded corners overflow:
-      clipBehavior: Clip.hardEdge,
-      child: Container(
-        padding: const EdgeInsets.only(
-          top: 30,
-          bottom: 20,
-          left: 25,
-          right: 25,
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Resultado',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                'Resultado',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
-                const Spacer(),
-                ResultButton(
-                  size: 44,
+              ),
+              const Spacer(),
+              ResultButton(
+                size: 44,
+                color: Theme.of(context).colorScheme.onError,
+                backgroundColor: Theme.of(context).colorScheme.error,
+                icon: Image.asset(
+                  'assets/images/icons/report.png',
                   color: Theme.of(context).colorScheme.onError,
-                  backgroundColor: Theme.of(context).colorScheme.error,
-                  icon: Image.asset(
-                    'assets/images/icons/report.png',
-                    color: Theme.of(context).colorScheme.onError,
-                    width: 18,
-                  ),
+                  width: 18,
                 ),
-                const SizedBox(width: 12),
-                ResultButton(
-                  size: 44,
+              ),
+              const SizedBox(width: 12),
+              ResultButton(
+                size: 44,
+                color: Theme.of(context).colorScheme.onErrorContainer,
+                backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                icon: Icon(
+                  Icons.share_outlined,
                   color: Theme.of(context).colorScheme.onErrorContainer,
-                  backgroundColor: Theme.of(context).colorScheme.errorContainer,
-                  icon: Icon(
-                    Icons.share_outlined,
-                    color: Theme.of(context).colorScheme.onErrorContainer,
-                    size: 18,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 25),
-            Container(
-              height: 1.5,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            const SizedBox(height: 25),
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onSurface,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.all(20),
-              child: Wrap(
-                runSpacing: 13,
-                children: widget.fields.entries
-                    .map((field) => OrganicResultField(
-                        title: field.key, field: field.value))
-                    .toList(),
-              ),
-            ),
-            const SizedBox(height: 25),
-            if (widget.imageProvider != null) ...[
-              const SectionTitle.custom(
-                title: 'Estructura',
-                horizontalPadding: 0,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              const SizedBox(height: 25),
-              Expanded(
-                child: GestureDetector(
-                  onTapUp: (_) => setState(() => _zoomed = !_zoomed),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceTint,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        // To avoid rounded corners overflow:
-                        clipBehavior: Clip.hardEdge,
-                        child: ColorFiltered(
-                          colorFilter:
-                          MediaQuery.of(context).platformBrightness ==
-                              Brightness.light
-                              ? identityFilter
-                              : inverseFilter,
-                          child: PhotoView(
-                            backgroundDecoration: const BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            initialScale: _zoomed ? 1.25 : null,
-                            gaplessPlayback: true,
-                            disableGestures: true,
-                            imageProvider: widget.imageProvider!,
-                            loadingBuilder: (context, event) => const Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 3.0,
-                                  color: Colors.black, // Filter will turn it light
-                                )),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Icon(
-                          size: 27,
-                          color: Theme.of(context).colorScheme.primary,
-                          _zoomed
-                              ? Icons.zoom_out_rounded
-                              : Icons.zoom_in_rounded,
-                        ),
-                      ),
-                    ],
-                  ),
+                  size: 18,
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 25),
+          Container(
+            height: 1.5,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+          const SizedBox(height: 25),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onSurface,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Wrap(
+              runSpacing: 13,
+              children: widget.fields.entries
+                  .map((field) =>
+                      OrganicResultField(title: field.key, field: field.value))
+                  .toList(),
+            ),
+          ),
+          const SizedBox(height: 25),
+          if (widget.imageProvider != null) ...[
+            const SectionTitle.custom(
+              title: 'Estructura',
+              horizontalPadding: 0,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            const SizedBox(height: 25),
+            Expanded(
+              child: GestureDetector(
+                onTapUp: (_) => setState(() => _zoomed = !_zoomed),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceTint,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      // To avoid rounded corners overflow:
+                      clipBehavior: Clip.hardEdge,
+                      child: ColorFiltered(
+                        colorFilter:
+                            MediaQuery.of(context).platformBrightness ==
+                                    Brightness.light
+                                ? identityFilter
+                                : inverseFilter,
+                        child: PhotoView(
+                          backgroundDecoration: const BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          initialScale: _zoomed ? 1.25 : null,
+                          gaplessPlayback: true,
+                          disableGestures: true,
+                          imageProvider: widget.imageProvider!,
+                          loadingBuilder: (context, event) => const Center(
+                              child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            color: Colors.black, // Filter will turn it light
+                          )),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        size: 27,
+                        color: Theme.of(context).colorScheme.primary,
+                        _zoomed
+                            ? Icons.zoom_out_rounded
+                            : Icons.zoom_in_rounded,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
-        ),
+        ],
       ),
     );
   }
