@@ -146,8 +146,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     }
   }
 
-  void _bondRadical(String carbonCount, String isIso) {
-  }
+  void _bondRadical(String carbonCount, String isIso) {}
 
   void _getRadical() {
     RadicalGeneratorPopup().show(context);
@@ -297,7 +296,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       padding: const EdgeInsets.only(
                         top: 13,
                         bottom: 17,
-                        left: 25,
+                        left: 0, // TODO
                         right: 25,
                       ),
                       decoration: BoxDecoration(
@@ -308,15 +307,19 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         reverse: true,
-                        child: Text(
-                          formatStructure(
-                              _openChainStack.last.getStructure()),
-                          style: const TextStyle(
-                            color: quimifyTeal,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 25),
+                          child: Text(
+                            formatStructure(
+                                _openChainStack.last.getStructure()),
+                            style: const TextStyle(
+                              color: quimifyTeal,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            strutStyle:
+                                const StrutStyle(fontSize: 28, height: 1.4),
                           ),
-                          strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                         ),
                       ),
                     ),
@@ -433,10 +436,10 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
 class FunctionalGroupButton extends StatelessWidget {
   const FunctionalGroupButton(
       {Key? key,
-        required this.bonds,
-        required this.text,
-        required this.actionText,
-        required this.onPressed})
+      required this.bonds,
+      required this.text,
+      required this.actionText,
+      required this.onPressed})
       : super(key: key);
 
   final int bonds;
@@ -466,10 +469,10 @@ class FunctionalGroupButton extends StatelessWidget {
                 bonds == 1
                     ? '-'
                     : bonds == 2
-                    ? '='
-                    : '≡',
+                        ? '='
+                        : '≡',
                 style:
-                const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                    const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(width: 15),
@@ -491,7 +494,11 @@ class FunctionalGroupButton extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 5),
-            const Icon(Icons.add, color: quimifyTeal, size: 22,),
+            const Icon(
+              Icons.add,
+              color: quimifyTeal,
+              size: 22,
+            ),
             const SizedBox(width: 15),
           ],
         ),
