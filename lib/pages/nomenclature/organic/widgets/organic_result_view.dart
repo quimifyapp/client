@@ -5,7 +5,7 @@ import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class OrganicResultView extends StatelessWidget {
+class OrganicResultView extends StatefulWidget {
   const OrganicResultView({
     Key? key,
     required this.fields,
@@ -14,6 +14,13 @@ class OrganicResultView extends StatelessWidget {
 
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
+
+  @override
+  State<OrganicResultView> createState() => _OrganicResultViewState();
+}
+
+class _OrganicResultViewState extends State<OrganicResultView> {
+  late bool _zoomed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +90,14 @@ class OrganicResultView extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Wrap(
                 runSpacing: 13,
-                children: fields.entries
+                children: widget.fields.entries
                     .map((field) => OrganicResultField(
                         title: field.key, field: field.value))
                     .toList(),
               ),
             ),
             const SizedBox(height: 25),
-            if (imageProvider != null) ...[
+            if (widget.imageProvider != null) ...[
               const SectionTitle.custom(
                 title: 'Estructura',
                 horizontalPadding: 0,
@@ -99,28 +106,49 @@ class OrganicResultView extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceTint,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  // To avoid rounded corners overflow:
-                  clipBehavior: Clip.hardEdge,
-                  child: ColorFiltered(
-                    colorFilter: MediaQuery.of(context).platformBrightness ==
-                            Brightness.light
-                        ? identityFilter
-                        : inverseFilter,
-                    child: PhotoView(
-                      backgroundDecoration: const BoxDecoration(
-                        color: Colors.transparent,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceTint,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      filterQuality: FilterQuality.high,
-                      gaplessPlayback: true,
-                      disableGestures: true,
-                      imageProvider: imageProvider!,
+                      // To avoid rounded corners overflow:
+                      clipBehavior: Clip.hardEdge,
+                      child: ColorFiltered(
+                        colorFilter:
+                            MediaQuery.of(context).platformBrightness ==
+                                    Brightness.light
+                                ? identityFilter
+                                : inverseFilter,
+                        child: PhotoView(
+                          backgroundDecoration: const BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          initialScale: _zoomed ? 1.25 : null,
+                          gaplessPlayback: true,
+                          disableGestures: true,
+                          imageProvider: widget.imageProvider!,
+                          loadingBuilder: (context, event) => const Center(
+                              child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            color: Colors.black, // Filter will turn it light
+                          )),
+                        ),
+                      ),
                     ),
-                  ),
+                    IconButton(
+                      onPressed: () => setState(() => _zoomed = !_zoomed),
+                      padding: const EdgeInsets.all(15),
+                      icon: Icon(
+                        _zoomed
+                            ? Icons.zoom_out_rounded
+                            : Icons.zoom_in_rounded,
+                        size: 27,
+                      ),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ],
                 ),
               ),
             ],
