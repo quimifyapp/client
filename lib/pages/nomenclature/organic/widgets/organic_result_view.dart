@@ -139,7 +139,6 @@ class _OrganicResultViewState extends State<OrganicResultView> {
                     ),
                     IconButton(
                       onPressed: () => setState(() => _zoomed = !_zoomed),
-                      padding: const EdgeInsets.all(15),
                       icon: Icon(
                         _zoomed
                             ? Icons.zoom_out_rounded

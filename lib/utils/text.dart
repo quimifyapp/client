@@ -111,12 +111,16 @@ bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 String formatInorganicFormulaOrName(String formulaOrName) =>
     toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
 
-String formatOrganicName(String name) => toCapsExceptN(name);
-
-String formatInorganicStructure(String formula) =>
+String formatFormula(String formula) =>
     toCapsAfterNotAnUppercaseLetter(
         formatInorganicFormulaOrName(capFirst(formula)));
 
-String formatOrganicStructure(String formula) =>
+String formatOrganicName(String name) => toCapsExceptN(name);
+
+String formatStructureInput(String structure) =>
+    toCapsAfterNotAnUppercaseLetter(
+        formatInorganicFormulaOrName(capFirst(structure)));
+
+String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
-        toSubscripts(toCapsAfterDigitOrParentheses((capFirst(formula))))));
+        formatInorganicFormulaOrName(capFirst(structure))));

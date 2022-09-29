@@ -304,7 +304,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         maxLines: 4,
                         stepGranularity: 0.1,
                         minFontSize: 14,
-                        formatOrganicStructure(
+                        formatStructure(
                             _openChainStack.last.getStructure()),
                         style: const TextStyle(
                           color: quimifyTeal,
@@ -468,7 +468,7 @@ class FunctionalGroupButton extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             Text(
-              formatOrganicStructure(text),
+              formatStructure(text),
               style: const TextStyle(
                 letterSpacing: 1,
                 fontSize: 16,

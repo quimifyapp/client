@@ -31,7 +31,7 @@ class OrganicResultPage extends StatelessWidget {
                     if (result.mass != null)
                       'Masa molecular:': '${result.mass!} g/mol',
                     if (result.structure != null)
-                      'Fórmula:': formatOrganicStructure(result.structure!),
+                      'Fórmula:': formatStructure(result.structure!),
                   },
                   imageProvider:
                       result.url2D != null ? NetworkImage(result.url2D!) : null,

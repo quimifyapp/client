@@ -29,6 +29,17 @@ class _SearchBarState extends State<SearchBar> {
     }); // Clears input
   }
 
+  void _search() {
+    if(widget.focusNode.hasPrimaryFocus) {
+      widget.focusNode.unfocus();
+      _eraseInitialAndFinalBlanks();
+      widget.onSubmitted(widget.controller.text);
+    }
+    else {
+      widget.focusNode.requestFocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,11 +89,7 @@ class _SearchBarState extends State<SearchBar> {
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onPressed: () {
-                          widget.focusNode.unfocus();
-                          _eraseInitialAndFinalBlanks();
-                          widget.onSubmitted(widget.controller.text);
-                        },
+                        onPressed: _search,
                       ),
                     ),
                   ),

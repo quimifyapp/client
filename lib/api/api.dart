@@ -22,6 +22,8 @@ class Api {
   // static const _authority = 'api.quimify.com';
   static const _authority = '192.168.1.155:8080';
 
+  static String? _lastUrl, _lastResponse;
+
   Future<void> connect() async {
     io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
 
@@ -35,27 +37,37 @@ class Api {
   }
 
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
-    String? result;
+    String? response;
 
     try {
       // Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
       Uri url = Uri.http(_authority, path, params);
-      http.Response response = await _client.get(url);
 
-      if (response.statusCode == 200) {
-        String body = utf8.decode(response.bodyBytes);
-        result = body;
+      String urlString = url.toString();
+
+      if (urlString == _lastUrl) {
+        return _lastResponse;
+      }
+
+      http.Response httpResponse = await _client.get(url);
+
+      if (httpResponse.statusCode == 200) {
+        String body = utf8.decode(httpResponse.bodyBytes);
+        response = body;
       } else {
         // Server crash or invalid URL
         // Error...
       }
+
+      _lastUrl = urlString;
+      _lastResponse = response;
     } catch (e) {
       print(e.toString());
       // No internet, server down or client error
       // Error...
     }
 
-    return result;
+    return response;
   }
 
   Future<AccessResult?> getAccess() async {
