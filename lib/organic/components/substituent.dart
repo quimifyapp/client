@@ -34,6 +34,10 @@ class Substituent extends Organic {
     }
   }
 
+  Substituent.radical(int carbonCount, bool isIso) {
+    _build(FunctionalGroup.radical, 1, carbonCount, isIso);
+  }
+
   late FunctionalGroup _function;
   late int _bondCount;
 
@@ -43,10 +47,6 @@ class Substituent extends Organic {
 
   void _buildNormal(FunctionalGroup function, int bonds) {
     _build(function, bonds, 0, false);
-  }
-
-  void _buildRadical(int carbons, bool iso) {
-    _build(FunctionalGroup.radical, 1, carbons, iso);
   }
 
   void _build(FunctionalGroup function, int bonds, int carbons, bool iso) {

@@ -1,9 +1,13 @@
 import 'package:cliente/constants.dart';
 import 'package:cliente/widgets/button.dart';
+import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class RadicalGeneratorPopup extends StatefulWidget {
-  const RadicalGeneratorPopup({Key? key}) : super(key: key);
+  const RadicalGeneratorPopup({Key? key, required this.onSubmitted})
+      : super(key: key);
+
+  final Function onSubmitted;
 
   Future<void> show(BuildContext context) async {
     await showDialog<void>(
@@ -22,6 +26,12 @@ class RadicalGeneratorPopup extends StatefulWidget {
 }
 
 class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
+  void _button() {
+    widget.onSubmitted(2, false);
+
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -30,62 +40,74 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
         insetPadding: const EdgeInsets.all(25),
         backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        //titlePadding: EdgeInsets.zero,
-        title: Column(
-          children: [
-            /*
-            Row(
-              children: [
-                const Spacer(),
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 25,
-                  ),
-                  padding:
-                      const EdgeInsets.only(top: 17, right: 17, bottom: 10),
-                ),
-              ],
-            ), */
-            Text(
-              'Radical',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 22,
-              ),
-            ),
-          ],
+        title: Text(
+          'Crear radical',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 22,
+          ),
         ),
         contentPadding:
             const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
-        content: Text(
-                'Hello world',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+        content: Wrap(
+          runSpacing: 25,
+          children: [
+            const SectionTitle.custom(
+              title: 'Carbonos:',
+              horizontalPadding: 0,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Text(
+                  '4',
                 ),
-              ),
+                Wrap(
+                  direction: Axis.vertical,
+                  children: [
+                    Button(
+                      width: 40,
+                      child: Text('+'),
+                      color: const Color.fromARGB(255, 56, 133, 224),
+                      onPressed: () {},
+                    ),
+                    Button(
+                      width: 40,
+                      child: Text('+'),
+                      color: const Color.fromARGB(255, 56, 133, 224),
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const SectionTitle.custom(
+              title: 'Ramificación:',
+              horizontalPadding: 0,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ],
+        ),
         actionsPadding: const EdgeInsets.only(
           bottom: 20,
           left: 15,
           right: 15,
         ),
         actions: [
-          Expanded(
-            child: Button.gradient(
-              gradient: quimifyGradient,
-              child: Text(
-                'Enlazar',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surface,
-                  fontSize: 17,
-                ),
+          Button.gradient(
+            gradient: quimifyGradient,
+            child: Text(
+              'Enlazar',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.surface,
+                fontSize: 17,
               ),
-              onPressed: () => Navigator.of(context).pop(),
             ),
+            onPressed: _button,
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/constants.dart';
 import 'package:cliente/organic/components/functional_group.dart';
+import 'package:cliente/organic/components/substituent.dart';
 import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
@@ -146,10 +147,29 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     }
   }
 
-  void _bondRadical(String carbonCount, String isIso) {}
+  void _bondRadical(int carbonCount, bool isIso) {
+    _startEditing();
+
+    setState(() {
+      int code = _openChainStack.last
+          .getOrderedBondableGroups()
+          .indexOf(FunctionalGroup.radical);
+
+      if (code != -1) {
+        _openChainStack.last
+            .bondSubstituent(Substituent.radical(carbonCount, isIso));
+
+        _inputSequenceStack.last.add(code);
+        _inputSequenceStack.last.add(isIso ? 1 : 0);
+        _inputSequenceStack.last.add(carbonCount);
+
+        _checkDone();
+      }
+    });
+  }
 
   void _getRadical() {
-    RadicalGeneratorPopup().show(context);
+    RadicalGeneratorPopup(onSubmitted: _bondRadical).show(context);
   }
 
   void _bondFunction(FunctionalGroup function) {
@@ -158,16 +178,16 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     setState(() {
       int code =
           _openChainStack.last.getOrderedBondableGroups().indexOf(function);
+
       if (code != -1) {
-        if (function != FunctionalGroup.ether) {
-          _openChainStack.last.bondFunctionalGroup(function);
-          _checkDone();
-        } else {
-          // Ether
+        if (function == FunctionalGroup.ether) {
           _openChainStack.last = Ether(_openChainStack.last as Simple);
+          return;
         }
 
+        _openChainStack.last.bondFunctionalGroup(function);
         _inputSequenceStack.last.add(code);
+        _checkDone();
       }
     });
   }
@@ -293,10 +313,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                     Container(
                       margin:
                           const EdgeInsets.only(top: 25, left: 25, right: 25),
-                      padding: const EdgeInsets.only(
-                        top: 13,
-                        bottom: 17,
-                      ),
+                      // To remove Text widget default top padding:
+                      padding: const EdgeInsets.only(top: 13, bottom: 17),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
@@ -305,23 +323,21 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         reverse: true,
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 25),
-                            Text(
-                              formatStructure(
-                                  _openChainStack.last.getStructure()),
-                              style: const TextStyle(
-                                color: quimifyTeal,
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              strutStyle:
-                              const StrutStyle(fontSize: 28, height: 1.4),
+                        child: Row(children: [
+                          const SizedBox(width: 25),
+                          Text(
+                            formatStructure(
+                                _openChainStack.last.getStructure()),
+                            style: const TextStyle(
+                              color: quimifyTeal,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(width: 25),
-                          ]
-                        ),
+                            strutStyle:
+                                const StrutStyle(fontSize: 28, height: 1.4),
+                          ),
+                          const SizedBox(width: 25),
+                        ]),
                       ),
                     ),
                     const SizedBox(height: 20),
