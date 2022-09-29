@@ -100,79 +100,81 @@ class _HomePageState extends State<HomePage> {
         ),
         // Navigation bar:
         extendBody: true, // So it's always floating on top
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(bottom: 30),
-          child: FractionallySizedBox(
-            widthFactor: widthFactor,
-            child: GestureDetector(
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  gradient: quimifyGradient,
-                  borderRadius: BorderRadius.circular(35),
-                  border: Border.all(
-                      color: Theme.of(context).colorScheme.background,
-                      width: 0.5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/icons/molecule.png',
-                          width: 20,
-                          color: currentPage == 0
-                              ? enabledColor
-                              : disabledColor,
-                        ),
-                        navigationBarItemSeparator,
-                        Text(
-                          'Formulación',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w800,
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: FractionallySizedBox(
+              widthFactor: widthFactor,
+              child: GestureDetector(
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    gradient: quimifyGradient,
+                    borderRadius: BorderRadius.circular(35),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.background,
+                        width: 0.5),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/icons/molecule.png',
+                            width: 20,
                             color: currentPage == 0
                                 ? enabledColor
                                 : disabledColor,
                           ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 40,
-                      width: 0.5,
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                    ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/icons/calculator.png',
-                          width: 20,
-                          color: currentPage == 1
-                              ? enabledColor
-                              : disabledColor,
-                        ),
-                        navigationBarItemSeparator,
-                        Text(
-                          'Calculadora',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w800,
+                          navigationBarItemSeparator,
+                          Text(
+                            'Formulación',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: currentPage == 0
+                                  ? enabledColor
+                                  : disabledColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 40,
+                        width: 0.5,
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                      ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/icons/calculator.png',
+                            width: 20,
                             color: currentPage == 1
                                 ? enabledColor
                                 : disabledColor,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          navigationBarItemSeparator,
+                          Text(
+                            'Calculadora',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: currentPage == 1
+                                  ? enabledColor
+                                  : disabledColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+                onTapDown: (details) {
+                  double width = MediaQuery.of(context).size.width * widthFactor;
+                  _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);
+                },
               ),
-              onTapDown: (details) {
-                double width = MediaQuery.of(context).size.width * widthFactor;
-                _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);
-              },
             ),
           ),
         ),
