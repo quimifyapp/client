@@ -8,16 +8,16 @@ import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key, required this.accessResult}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.accessResult}) : super(key: key);
 
   final AccessResult? accessResult;
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _HomePageState extends State<HomePage> {
   int currentPage = 0;
 
   static const double widthFactor = 0.85;

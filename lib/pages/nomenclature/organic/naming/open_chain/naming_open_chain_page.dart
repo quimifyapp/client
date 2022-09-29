@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/constants.dart';
@@ -7,6 +6,7 @@ import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
+import 'package:cliente/pages/nomenclature/organic/widgets/radical_generator_popup.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
@@ -146,7 +146,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     }
   }
 
-  void _bondRadical() {}
+  void _bondRadical(String carbonCount, String isIso) {
+  }
+
+  void _getRadical() {
+    RadicalGeneratorPopup().show(context);
+  }
 
   void _bondFunction(FunctionalGroup function) {
     _startEditing();
@@ -181,7 +186,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         bonds: 1,
         text: 'CH2 ... CH3',
         actionText: 'Radical',
-        onPressed: () => _bondRadical(),
+        onPressed: () => _getRadical(),
       ),
       FunctionalGroup.iodine: FunctionalGroupButton(
         bonds: 1,
@@ -300,18 +305,19 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       alignment: Alignment.center,
-                      child: AutoSizeText(
-                        maxLines: 4,
-                        stepGranularity: 0.1,
-                        minFontSize: 14,
-                        formatStructure(
-                            _openChainStack.last.getStructure()),
-                        style: const TextStyle(
-                          color: quimifyTeal,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        reverse: true,
+                        child: Text(
+                          formatStructure(
+                              _openChainStack.last.getStructure()),
+                          style: const TextStyle(
+                            color: quimifyTeal,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                         ),
-                        strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                       ),
                     ),
                     const SizedBox(height: 20),
