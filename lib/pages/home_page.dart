@@ -123,9 +123,8 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             'assets/images/icons/molecule.png',
                             width: 20,
-                            color: currentPage == 0
-                                ? enabledColor
-                                : disabledColor,
+                            color:
+                                currentPage == 0 ? enabledColor : disabledColor,
                           ),
                           navigationBarItemSeparator,
                           Text(
@@ -150,9 +149,8 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             'assets/images/icons/calculator.png',
                             width: 20,
-                            color: currentPage == 1
-                                ? enabledColor
-                                : disabledColor,
+                            color:
+                                currentPage == 1 ? enabledColor : disabledColor,
                           ),
                           navigationBarItemSeparator,
                           Text(
@@ -171,7 +169,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onTapDown: (details) {
-                  double width = MediaQuery.of(context).size.width * widthFactor;
+                  double width =
+                      MediaQuery.of(context).size.width * widthFactor;
                   _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);
                 },
               ),

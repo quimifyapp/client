@@ -41,9 +41,8 @@ class OrganicResultPage extends StatelessWidget {
                     if (result.structure != null)
                       'Fórmula:': formatStructure(result.structure!),
                   },
-                  imageProvider: result.url2D != null
-                      ? NetworkImage(result.url2D!)
-                      : null,
+                  imageProvider:
+                      result.url2D != null ? NetworkImage(result.url2D!) : null,
                 ),
               ),
             ),

@@ -111,9 +111,8 @@ bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 String formatInorganicFormulaOrName(String formulaOrName) =>
     toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
 
-String formatFormula(String formula) =>
-    toCapsAfterNotAnUppercaseLetter(
-        formatInorganicFormulaOrName(capFirst(formula)));
+String formatFormula(String formula) => toCapsAfterNotAnUppercaseLetter(
+    formatInorganicFormulaOrName(capFirst(formula)));
 
 String formatOrganicName(String name) => toCapsExceptN(name);
 

@@ -1,6 +1,7 @@
 import 'package:cliente/organic/components/functional_group.dart';
 import 'package:cliente/organic/components/substituent.dart';
 import 'package:cliente/organic/organic.dart';
+
 import 'carbon.dart';
 
 class Chain extends Organic {

@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
-
 import 'package:cliente/widgets/button.dart';
+import 'package:flutter/material.dart';
 
 class ResultButton extends StatelessWidget {
   const ResultButton(
       {Key? key,
-        required this.icon,
-        required this.size,
-        this.text,
-        required this.color,
-        required this.backgroundColor})
+      required this.icon,
+      required this.size,
+      this.text,
+      required this.color,
+      required this.backgroundColor})
       : super(key: key);
 
   final double size;

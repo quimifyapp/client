@@ -14,7 +14,8 @@ class RadicalGeneratorPopup extends StatefulWidget {
       context: context,
       barrierDismissible: true,
       barrierColor: Theme.of(context).colorScheme.shadow,
-      anchorPoint: const Offset(0, 0), // Centered
+      anchorPoint: const Offset(0, 0),
+      // Centered
       builder: (BuildContext context) {
         return this;
       },

@@ -30,12 +30,11 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   void _search() {
-    if(widget.focusNode.hasPrimaryFocus) {
+    if (widget.focusNode.hasPrimaryFocus) {
       widget.focusNode.unfocus();
       _eraseInitialAndFinalBlanks();
       widget.onSubmitted(widget.controller.text);
-    }
-    else {
+    } else {
       widget.focusNode.requestFocus();
     }
   }

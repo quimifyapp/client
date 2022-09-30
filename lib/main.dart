@@ -63,22 +63,32 @@ class QuimifyApp extends StatelessWidget {
             surface: Colors.white,
             background: Color.fromARGB(255, 247, 247, 247),
 
-            onPrimary: Colors.white, // White text
+            onPrimary: Colors.white,
+            // White text
 
-            onBackground:
-                Color.fromARGB(255, 231, 246, 247), // Graph background
-            onSecondary: Color.fromARGB(13, 0, 0, 0), // Graph bar background
-            onSurface: Color.fromARGB(255, 241, 253, 250), // Inorganic amounts
+            onBackground: Color.fromARGB(255, 231, 246, 247),
+            // Graph background
+            onSecondary: Color.fromARGB(13, 0, 0, 0),
+            // Graph bar background
+            onSurface: Color.fromARGB(255, 241, 253, 250),
+            // Inorganic amounts
 
-            shadow: Color.fromARGB(25, 0, 0, 0), // Dialog barrier
-            inverseSurface: Color.fromARGB(255, 60, 60, 60), // Lock icon
+            shadow: Color.fromARGB(25, 0, 0, 0),
+            // Dialog barrier
+            inverseSurface: Color.fromARGB(255, 60, 60, 60),
+            // Lock icon
 
-            onError: Color.fromARGB(255, 255, 96, 96), // Error text
-            error: Color.fromARGB(255, 255, 241, 241), // Background
-            onErrorContainer: Color.fromARGB(255, 56, 133, 224), // Share text
-            errorContainer: Color.fromARGB(255, 239, 246, 253), // Background
+            onError: Color.fromARGB(255, 255, 96, 96),
+            // Error text
+            error: Color.fromARGB(255, 255, 241, 241),
+            // Background
+            onErrorContainer: Color.fromARGB(255, 56, 133, 224),
+            // Share text
+            errorContainer: Color.fromARGB(255, 239, 246, 253),
+            // Background
 
-            surfaceTint: Color.fromARGB(255, 245, 245, 245), // Diagram background
+            surfaceTint:
+                Color.fromARGB(255, 245, 245, 245), // Diagram background
           ),
         ),
         darkTheme: ThemeData(
@@ -94,19 +104,29 @@ class QuimifyApp extends StatelessWidget {
             surface: Color.fromARGB(255, 30, 30, 30),
             background: Color.fromARGB(255, 18, 18, 18),
 
-            onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
+            onPrimary: Color.fromARGB(255, 18, 18, 18),
+            // Black text
 
-            onBackground: Color.fromARGB(255, 10, 38, 34), // Graph background
-            onSecondary: Colors.black45, // Graph bar background
-            onSurface: Color.fromARGB(255, 48, 170, 150), // Inorganic amounts
+            onBackground: Color.fromARGB(255, 10, 38, 34),
+            // Graph background
+            onSecondary: Colors.black45,
+            // Graph bar background
+            onSurface: Color.fromARGB(255, 48, 170, 150),
+            // Inorganic amounts
 
-            shadow: Color.fromARGB(25, 255, 255, 255), // Dialog barrier
-            inverseSurface: Color.fromARGB(255, 235, 235, 235), // Lock icon
+            shadow: Color.fromARGB(25, 255, 255, 255),
+            // Dialog barrier
+            inverseSurface: Color.fromARGB(255, 235, 235, 235),
+            // Lock icon
 
-            onError: Colors.white, // Error text
-            error: Color.fromARGB(255, 255, 96, 96), // Background
-            onErrorContainer: Colors.white, // Share text
-            errorContainer: Color.fromARGB(255, 56, 133, 224), // Background
+            onError: Colors.white,
+            // Error text
+            error: Color.fromARGB(255, 255, 96, 96),
+            // Background
+            onErrorContainer: Colors.white,
+            // Share text
+            errorContainer: Color.fromARGB(255, 56, 133, 224),
+            // Background
 
             surfaceTint: Color.fromARGB(255, 10, 10, 10), // Diagram background
           ),

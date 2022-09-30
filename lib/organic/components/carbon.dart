@@ -1,6 +1,6 @@
-import 'package:cliente/organic/organic.dart';
 import 'package:cliente/organic/components/functional_group.dart';
 import 'package:cliente/organic/components/substituent.dart';
+import 'package:cliente/organic/organic.dart';
 
 class Carbon extends Organic {
   Carbon(int previousBonds) {
@@ -12,7 +12,7 @@ class Carbon extends Organic {
     _freeBonds = otherCarbon._freeBonds;
 
     _substituents = [];
-    for(Substituent otherSubstituent in otherCarbon._substituents) {
+    for (Substituent otherSubstituent in otherCarbon._substituents) {
       _substituents.add(otherSubstituent);
     }
   }
@@ -35,14 +35,14 @@ class Carbon extends Organic {
     for (Substituent substituent in _substituents) {
       bool add = true;
 
-      for(Substituent listed in uniqueSubstituents) {
-        if(listed.equals(substituent)) {
+      for (Substituent listed in uniqueSubstituents) {
+        if (listed.equals(substituent)) {
           add = false;
           break;
         }
       }
 
-      if(add) {
+      if (add) {
         uniqueSubstituents.add(substituent);
       }
     }
@@ -74,7 +74,8 @@ class Carbon extends Organic {
     int amount = 0;
 
     if (contains(functions)) {
-      if (functions != FunctionalGroup.alkene && functions != FunctionalGroup.alkyne) {
+      if (functions != FunctionalGroup.alkene &&
+          functions != FunctionalGroup.alkyne) {
         for (Substituent substituent in _substituents) {
           if (substituent.isLike(functions)) {
             amount += 1;
@@ -108,8 +109,8 @@ class Carbon extends Organic {
     }
 
     // Se escribe el resto de substituents excepto el éter:
-    uniqueSubstituents
-        .removeWhere((substituent) => substituent.isLike(FunctionalGroup.ether));
+    uniqueSubstituents.removeWhere(
+        (substituent) => substituent.isLike(FunctionalGroup.ether));
 
     if (uniqueSubstituents.length == 1) {
       // Solo hay un tipo además del hidrógeno y éter
@@ -127,8 +128,8 @@ class Carbon extends Organic {
     } else if (uniqueSubstituents.length > 1) {
       // Hay más de un tipo además del hidrógeno y éter
       for (Substituent substituent in uniqueSubstituents) {
-        result += '($substituent)${Organic.molecularQuantifier(
-            getAmountOfSubstituent(substituent))}'; // Like "C(OH)3(Cl)"
+        result +=
+            '($substituent)${Organic.molecularQuantifier(getAmountOfSubstituent(substituent))}'; // Like "C(OH)3(Cl)"
       }
     }
 

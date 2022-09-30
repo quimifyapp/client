@@ -73,35 +73,35 @@ flutter:
     - assets/https/private.key
 
   fonts:
-     - family: CeraPro
-       fonts:
-         - asset: assets/fonts/CeraProBlack.otf
-           weight: 900
-         - asset: assets/fonts/CeraProBold.otf
-           weight: 800
-         - asset: assets/fonts/CeraProMedium.otf
-           weight: 600
-         - asset: assets/fonts/CeraProRegular.otf
-           weight: 500
-         - asset: assets/fonts/CeraProLight.otf
-           weight: 300
-         - asset: assets/fonts/CeraProThin.otf
-           weight: 100
-         - asset: assets/fonts/CeraProBlackItalic.otf
-           style: italic
-           weight: 900
-         - asset: assets/fonts/CeraProBoldItalic.otf
-           style: italic
-           weight: 700
-         - asset: assets/fonts/CeraProMediumItalic.otf
-           style: italic
-           weight: 500
-         - asset: assets/fonts/CeraProRegularItalic.otf
-           style: italic
-           weight: 400
-         - asset: assets/fonts/CeraProLightItalic.otf
-           style: italic
-           weight: 300
-         - asset: assets/fonts/CeraProThinItalic.otf
-           style: italic
-           weight: 100
+    - family: CeraPro
+      fonts:
+        - asset: assets/fonts/CeraProBlack.otf
+          weight: 900
+        - asset: assets/fonts/CeraProBold.otf
+          weight: 800
+        - asset: assets/fonts/CeraProMedium.otf
+          weight: 600
+        - asset: assets/fonts/CeraProRegular.otf
+          weight: 500
+        - asset: assets/fonts/CeraProLight.otf
+          weight: 300
+        - asset: assets/fonts/CeraProThin.otf
+          weight: 100
+        - asset: assets/fonts/CeraProBlackItalic.otf
+          style: italic
+          weight: 900
+        - asset: assets/fonts/CeraProBoldItalic.otf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/CeraProMediumItalic.otf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/CeraProRegularItalic.otf
+          style: italic
+          weight: 400
+        - asset: assets/fonts/CeraProLightItalic.otf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/CeraProThinItalic.otf
+          style: italic
+          weight: 100

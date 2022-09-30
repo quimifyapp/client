@@ -313,8 +313,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                     Container(
                       margin:
                           const EdgeInsets.only(top: 25, left: 25, right: 25),
-                      // To remove Text widget default top padding:
-                      padding: const EdgeInsets.only(top: 13, bottom: 17),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
@@ -322,7 +320,10 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       alignment: Alignment.center,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
+                        // So it follows while typing:
                         reverse: true,
+                        // To remove Text widget default top padding:
+                        padding: const EdgeInsets.only(top: 13, bottom: 17),
                         child: Row(children: [
                           const SizedBox(width: 25),
                           Text(
@@ -393,6 +394,25 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         const SizedBox(width: 25),
                       ],
                     ),
+                    if (_done) ...[
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Button.gradient(
+                          height: 50,
+                          gradient: quimifyGradient,
+                          onPressed: _pressedButton,
+                          child: const Text(
+                            'Resolver',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                     if (!_done) ...[
                       const SizedBox(height: 25),
                       const SectionTitle.custom(
@@ -418,26 +438,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                               .toList(),
                         ),
                       ),
-                      const SizedBox(height: 5), // 5 + 15 = 20
-                    ],
-                    if (_done) ...[
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Button.gradient(
-                          height: 50,
-                          gradient: quimifyGradient,
-                          onPressed: _pressedButton,
-                          child: const Text(
-                            'Resolver',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
+                      const SizedBox(height: 10), // 10 + 15 = 20
                     ],
                   ],
                 ),

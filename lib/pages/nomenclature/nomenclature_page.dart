@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
+import 'package:cliente/widgets/home_app_bar.dart';
 import 'package:cliente/widgets/horizontal_cards_menu.dart';
 import 'package:cliente/widgets/menu_card.dart';
 import 'package:cliente/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-import 'package:cliente/widgets/home_app_bar.dart';
-import 'package:cliente/constants.dart';
 
 class NomenclaturePage extends StatelessWidget {
   NomenclaturePage({Key? key}) : super(key: key);
@@ -63,7 +63,8 @@ class NomenclaturePage extends StatelessWidget {
 }
 
 class InorganicMenu extends StatelessWidget {
-  const InorganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
+  const InorganicMenu({Key? key, required this.autoSizeGroup})
+      : super(key: key);
 
   final AutoSizeGroup autoSizeGroup;
 

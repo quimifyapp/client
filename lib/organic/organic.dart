@@ -5,7 +5,6 @@ import 'components/functional_group.dart';
 // This class serves as a parent for any organic chemistry component.
 
 class Organic {
-
   static String bondOfOrder(int order) {
     switch (order) {
       case 0:
@@ -25,8 +24,8 @@ class Organic {
 
   static void orderByFunctions(List<Substituent> substituents) {
     for (int i = 0; i < substituents.length - 1;) {
-      if (Enum.compareByIndex(
-          substituents[i].getFunction(), substituents[i + 1].getFunction()) >
+      if (Enum.compareByIndex(substituents[i].getFunction(),
+              substituents[i + 1].getFunction()) >
           0) {
         Substituent temp = substituents[i];
         substituents[i] = substituents[i + 1];
@@ -39,9 +38,9 @@ class Organic {
   }
 
   static bool isHalogen(FunctionalGroup function) => [
-    FunctionalGroup.bromine,
-    FunctionalGroup.chlorine,
-    FunctionalGroup.fluorine,
-    FunctionalGroup.iodine
-  ].contains(function);
+        FunctionalGroup.bromine,
+        FunctionalGroup.chlorine,
+        FunctionalGroup.fluorine,
+        FunctionalGroup.iodine
+      ].contains(function);
 }

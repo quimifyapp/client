@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:cliente/organic/organic.dart';
 import 'package:cliente/organic/components/functional_group.dart';
+import 'package:cliente/organic/organic.dart';
 
 class Substituent extends Organic {
   Substituent(FunctionalGroup function) {

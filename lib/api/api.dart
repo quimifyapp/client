@@ -5,14 +5,16 @@ import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:cliente/api/results/organic_result.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/io_client.dart' as io;
 
 class Api {
   static final Api _singleton = Api._internal();
+
   factory Api() => _singleton;
+
   Api._internal();
 
   late final http.Client _client;
@@ -20,6 +22,7 @@ class Api {
   static const _apiVersion = 0;
   static const _clientVersion = 0;
   static const _authority = 'api.quimify.com';
+
   // static const _authority = '192.168.1.155:8080';
 
   static String? _lastUrl, _lastResponse;
