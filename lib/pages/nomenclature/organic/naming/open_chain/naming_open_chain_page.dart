@@ -429,7 +429,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       Expanded(
                         child: ListView(
                           shrinkWrap: true,
-                          padding: EdgeInsets.zero,
+                          padding: const EdgeInsets.only(bottom: 10), // +15=20
                           children: _openChainStack.last
                               .getOrderedBondableGroups()
                               .map((function) => functionToButton[function]!)
@@ -438,7 +438,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                               .toList(),
                         ),
                       ),
-                      const SizedBox(height: 10), // 10 + 15 = 20
                     ],
                   ],
                 ),
