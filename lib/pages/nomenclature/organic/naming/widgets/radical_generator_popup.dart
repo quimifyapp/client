@@ -106,7 +106,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                       child: Text(
                         '$_carbonCount',
                         style: const TextStyle(
-                          fontSize: 26,
+                          fontSize: 34,
                           fontWeight: FontWeight.w500,
                           fontFeatures: [FontFeature.tabularFigures()],
                         ),
