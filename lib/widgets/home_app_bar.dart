@@ -32,7 +32,7 @@ class HomeAppBar extends StatelessWidget {
             ),
             const SizedBox(width: 20),
             Image.asset(
-              'assets/images/icons/branding_slim.png',
+              'assets/images/icons/branding-slim.png',
               height: 17,
               color: Colors.white,
             ),

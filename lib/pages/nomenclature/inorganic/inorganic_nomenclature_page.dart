@@ -400,7 +400,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                   child: RotatedBox(
                     quarterTurns: _isCollapsed ? 2 : 0,
                     child: Image.asset(
-                      'assets/images/icons/narrow_arrow.png',
+                      'assets/images/icons/narrow-arrow.png',
                       color: const Color.fromARGB(255, 189, 189, 189),
                       width: 25,
                     ),

@@ -80,7 +80,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
           ),
         ),
         contentPadding:
-            const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+            const EdgeInsets.only(top: 20, bottom: 30, left: 25, right: 25),
         content: Wrap(
           runSpacing: 25,
           children: [
@@ -91,68 +91,71 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
               fontWeight: FontWeight.w500,
             ),
             Center(
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      top: 30,
-                      bottom: 30,
-                      left: 40,
-                      right: 40,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      '$_carbonCount',
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500,
-                        fontFeatures: [FontFeature.tabularFigures()],
+              child: SizedBox(
+                height: 90,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Wrap(
-                    direction: Axis.vertical,
-                    children: [
-                      const SizedBox(height: 2),
-                      Button(
-                        width: 45,
-                        height: 45,
-                        color: const Color.fromARGB(255, 56, 133, 224),
-                        onPressed: _addButton,
-                        child: const Text(
-                          '+',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                          ),
-                          strutStyle: StrutStyle(fontSize: 24, height: 1.2),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '$_carbonCount',
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                          fontFeatures: [FontFeature.tabularFigures()],
                         ),
                       ),
-                      const SizedBox(height: 5),
-                      Button(
-                        width: 45,
-                        height: 45,
-                        color: const Color.fromARGB(255, 255, 96, 96),
-                        enabled: _canRemove(),
-                        onPressed: _removeButton,
-                        child: const Text(
-                          '--',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
+                    ),
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      width: 40,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 2),
+                          Expanded(
+                            child: Button(
+                              color: const Color.fromARGB(255, 56, 133, 224),
+                              onPressed: _addButton,
+                              child: const Text(
+                                '+',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                                strutStyle:
+                                    StrutStyle(fontSize: 24, height: 1.2),
+                              ),
+                            ),
                           ),
-                          strutStyle: StrutStyle(fontSize: 24, height: 1.2),
-                        ),
+                          const SizedBox(height: 8),
+                          Expanded(
+                            child: Button(
+                              color: const Color.fromARGB(255, 255, 96, 96),
+                              enabled: _canRemove(),
+                              onPressed: _removeButton,
+                              child: const Text(
+                                '--',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                                strutStyle:
+                                    StrutStyle(fontSize: 24, height: 1.2),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                        ],
                       ),
-                      const SizedBox(height: 2),
-                    ],
-                  )
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const SectionTitle.custom(
@@ -168,7 +171,8 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                 children: [
                   Image.asset(
                     'assets/images/icons/iso-radical.png',
-                    width: 110,
+                    height: 65,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(width: 40),
                   Padding(
@@ -190,7 +194,6 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                 ],
               ),
             ),
-            const SizedBox(height: 75),
           ],
         ),
         actionsPadding: const EdgeInsets.only(
@@ -205,10 +208,9 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
             child: Text(
               'Enlazar',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 17,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Theme.of(context).colorScheme.surface,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],

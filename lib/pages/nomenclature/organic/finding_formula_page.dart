@@ -116,7 +116,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                           'Fórmula:': formatStructure(_result.structure!),
                       },
                       imageProvider: _firstSearch
-                          ? const AssetImage('assets/images/dietanoic_acid.png')
+                          ? const AssetImage('assets/images/dietanoic-acid.png')
                           : NetworkImage(_result.url2D!) as ImageProvider,
                     ),
                   ),

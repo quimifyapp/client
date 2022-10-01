@@ -202,7 +202,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
       FunctionalGroup.radical: FunctionalGroupButton(
         bonds: 1,
-        text: 'CH2 ... CH3',
+        text: 'CH2 ― CH3',
         actionText: 'Radical',
         onPressed: () => _getRadical(),
       ),
@@ -351,7 +351,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                             onPressed: _bondCarbon,
                             enabled: _canBondCarbon(),
                             child: Image.asset(
-                              'assets/images/icons/bond_carbon.png',
+                              'assets/images/icons/bond-carbon.png',
                               color: Theme.of(context).colorScheme.surface,
                               width: 26,
                             ),
@@ -476,19 +476,19 @@ class FunctionalGroupButton extends StatelessWidget {
                 color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
+              child: Image.asset(
                 bonds == 1
-                    ? '-'
+                    ? 'assets/images/icons/single-bond.png'
                     : bonds == 2
-                        ? '='
-                        : '≡',
-                style:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                        ? 'assets/images/icons/double-bond.png'
+                        : 'assets/images/icons/triple-bond.png',
+                color: Theme.of(context).colorScheme.primary,
+                width: 30,
               ),
             ),
             const SizedBox(width: 15),
             Text(
-              formatStructure(text),
+              formatStructureInput(text),
               style: const TextStyle(
                 letterSpacing: 1,
                 fontSize: 16,
