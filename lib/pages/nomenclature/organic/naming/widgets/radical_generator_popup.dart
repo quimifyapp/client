@@ -112,7 +112,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 8),
                     SizedBox(
                       width: 40,
                       child: Column(
@@ -122,31 +122,35 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                             child: Button(
                               color: const Color.fromARGB(255, 56, 133, 224),
                               onPressed: _addButton,
-                              child: const Text(
+                              child: Text(
                                 '+',
                                 style: TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      Theme.of(context).colorScheme.background,
                                 ),
                                 strutStyle:
-                                    StrutStyle(fontSize: 24, height: 1.2),
+                                    const StrutStyle(fontSize: 24, height: 1.2),
                               ),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           Expanded(
                             child: Button(
                               color: const Color.fromARGB(255, 255, 96, 96),
                               enabled: _canRemove(),
                               onPressed: _removeButton,
-                              child: const Text(
+                              child: Text(
                                 '--',
                                 style: TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      Theme.of(context).colorScheme.background,
                                 ),
                                 strutStyle:
-                                    StrutStyle(fontSize: 24, height: 1.2),
+                                    const StrutStyle(fontSize: 24, height: 1.2),
                               ),
                             ),
                           ),
