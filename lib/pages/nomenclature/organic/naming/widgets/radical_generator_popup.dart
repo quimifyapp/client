@@ -65,18 +65,6 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
 
   @override
   Widget build(BuildContext context) {
-    Image straightRadical = Image.asset(
-      'assets/images/icons/straight-radical.png',
-      height: 65,
-      color: Theme.of(context).colorScheme.primary,
-    );
-
-    Image isoRadical = Image.asset(
-      'assets/images/icons/iso-radical.png',
-      height: 65,
-      color: Theme.of(context).colorScheme.primary,
-    );
-
     return WillPopScope(
       onWillPop: () => Future.value(true),
       child: AlertDialog(
@@ -185,7 +173,21 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
               child: Wrap(
                 direction: Axis.horizontal,
                 children: [
-                  _isIso ? isoRadical : straightRadical,
+                  IndexedStack(
+                    index: _isIso ? 1 : 0,
+                    children: [
+                      Image.asset(
+                        'assets/images/icons/straight-radical.png',
+                        height: 65,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      Image.asset(
+                        'assets/images/icons/iso-radical.png',
+                        height: 65,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ],
+                  ),
                   const SizedBox(width: 40),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
