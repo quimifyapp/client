@@ -18,9 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentPage = 0;
-
   static const double widthFactor = 0.85;
+
+  int currentPage = 0;
 
   void _goToPage(int page) {
     if (currentPage != page) {
@@ -66,8 +66,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _showWelcomePopups());
+    super.initState();
   }
 
   @override

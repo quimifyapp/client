@@ -417,9 +417,7 @@ class _GraphMenuState extends State<GraphMenu> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 value: _mol,
                 onChanged: (bool value) {
-                  setState(() {
-                    _mol = value;
-                  });
+                  setState(() => _mol = value);
                 },
               ),
               Text(

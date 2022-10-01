@@ -31,6 +31,8 @@ class Button extends StatelessWidget {
   final bool enabled;
   final VoidCallback onPressed;
 
+  static const double _unselectedOpacity = 0.5;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +41,7 @@ class Button extends StatelessWidget {
       // To avoid rounded corners overflow:
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: color,
+        color: color?.withOpacity(enabled ? 1 : _unselectedOpacity),
         gradient: gradient,
         borderRadius: BorderRadius.circular(10),
       ),
@@ -47,6 +49,7 @@ class Button extends StatelessWidget {
         child: enabled
             ? MaterialButton(
                 padding: const EdgeInsets.all(0),
+                splashColor: Colors.transparent,
                 onPressed: onPressed,
                 child: child,
               )

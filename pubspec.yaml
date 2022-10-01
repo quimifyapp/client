@@ -66,9 +66,10 @@ flutter:
     - assets/images/icons/report.png
     - assets/images/icons/narrow_arrow.png
     - assets/images/icons/scale.png
-    - assets/images/dietanoic_acid.png
+    - assets/images/dietanoic-acid.png
     - assets/images/icons/bond_carbon.png
     - assets/images/icons/hydrogenate.png
+    - assets/images/icons/iso-radical.png
     - assets/https/certificate.crt
     - assets/https/private.key
 

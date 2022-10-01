@@ -7,7 +7,7 @@ import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
-import 'package:cliente/pages/nomenclature/organic/widgets/radical_generator_popup.dart';
+import 'package:cliente/pages/nomenclature/organic/naming/widgets/radical_generator_popup.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/widgets/button.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
@@ -25,7 +25,6 @@ class NamingOpenChainPage extends StatefulWidget {
 
 class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
   static const String _title = 'Nombrar cadena abierta';
-  static const double _unselectedOpacity = 0.5;
 
   late List<OpenChain> _openChainStack;
   late List<List<int>> _inputSequenceStack;
@@ -348,8 +347,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         Expanded(
                           child: Button(
                             height: 40,
-                            color: quimifyTeal.withOpacity(
-                                _canBondCarbon() ? 1 : _unselectedOpacity),
+                            color: quimifyTeal,
                             onPressed: _bondCarbon,
                             enabled: _canBondCarbon(),
                             child: Image.asset(
@@ -363,9 +361,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         Expanded(
                           child: Button(
                             height: 40,
-                            color: const Color.fromARGB(255, 56, 133, 224)
-                                .withOpacity(
-                                    _canHydrogenate() ? 1 : _unselectedOpacity),
+                            color: const Color.fromARGB(255, 56, 133, 224),
                             onPressed: _hydrogenate,
                             enabled: _canHydrogenate(),
                             child: Image.asset(
@@ -379,9 +375,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         Expanded(
                           child: Button(
                             height: 40,
-                            color: const Color.fromARGB(255, 255, 96, 96)
-                                .withOpacity(
-                                    _canUndo() ? 1 : _unselectedOpacity),
+                            color: const Color.fromARGB(255, 255, 96, 96),
                             onPressed: _undo,
                             enabled: _canUndo(),
                             child: Icon(
