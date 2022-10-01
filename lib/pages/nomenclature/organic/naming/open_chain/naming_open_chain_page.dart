@@ -202,7 +202,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
       FunctionalGroup.radical: FunctionalGroupButton(
         bonds: 1,
-        text: 'CH2 ― CH3',
+        text: 'CH2 –– CH3',
         actionText: 'Radical',
         onPressed: () => _getRadical(),
       ),

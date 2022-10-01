@@ -65,6 +65,18 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
 
   @override
   Widget build(BuildContext context) {
+    Image straightRadical = Image.asset(
+      'assets/images/icons/straight-radical.png',
+      height: 65,
+      color: Theme.of(context).colorScheme.primary,
+    );
+
+    Image isoRadical = Image.asset(
+      'assets/images/icons/iso-radical.png',
+      height: 65,
+      color: Theme.of(context).colorScheme.primary,
+    );
+
     return WillPopScope(
       onWillPop: () => Future.value(true),
       child: AlertDialog(
@@ -80,7 +92,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
           ),
         ),
         contentPadding:
-            const EdgeInsets.only(top: 20, bottom: 30, left: 25, right: 25),
+            const EdgeInsets.only(top: 20, bottom: 35, left: 25, right: 25),
         content: Wrap(
           runSpacing: 25,
           children: [
@@ -163,7 +175,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
               ),
             ),
             const SectionTitle.custom(
-              title: 'Complegidad:',
+              title: 'Terminación:',
               horizontalPadding: 0,
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -173,11 +185,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
               child: Wrap(
                 direction: Axis.horizontal,
                 children: [
-                  Image.asset(
-                    'assets/images/icons/iso-radical.png',
-                    height: 65,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                  _isIso ? isoRadical : straightRadical,
                   const SizedBox(width: 40),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),

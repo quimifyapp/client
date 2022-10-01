@@ -8,16 +8,16 @@ import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
 import 'package:cliente/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.accessResult}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key, required this.accessResult}) : super(key: key);
 
   final AccessResult? accessResult;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   static const double widthFactor = 0.85;
 
   int currentPage = 0;
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                onTapDown: (details) {
+                onTapUp: (details) {
                   double width =
                       MediaQuery.of(context).size.width * widthFactor;
                   _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);

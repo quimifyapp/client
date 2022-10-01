@@ -1,6 +1,6 @@
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/access_result.dart';
-import 'package:cliente/pages/home_page.dart';
+import 'package:cliente/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -132,7 +132,7 @@ class QuimifyApp extends StatelessWidget {
           ),
         ),
         // App:
-        home: HomePage(accessResult: accessResult),
+        home: MainPage(accessResult: accessResult),
       ),
     );
   }
