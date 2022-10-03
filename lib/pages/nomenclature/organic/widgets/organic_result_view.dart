@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
 import 'package:cliente/pages/widgets/result_button.dart';
 import 'package:cliente/pages/widgets/section_title.dart';
@@ -102,8 +101,22 @@ class OrganicResultView extends StatelessWidget {
                   child: ColorFiltered(
                     colorFilter: MediaQuery.of(context).platformBrightness ==
                             Brightness.light
-                        ? identityFilter
-                        : inverseFilter,
+                        ? const ColorFilter.matrix(
+                            [
+                              255 / 245, 0, 0, 0, 0, //
+                              0, 255 / 245, 0, 0, 0, //
+                              0, 0, 255 / 245, 0, 0, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          )
+                        : const ColorFilter.matrix(
+                            [
+                              -1, 0, 0, 0, 255, //
+                              0, -1, 0, 0, 255, //
+                              0, 0, -1, 0, 255, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          ),
                     child: PhotoView(
                       tightMode: true,
                       backgroundDecoration: const BoxDecoration(

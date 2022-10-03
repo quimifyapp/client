@@ -22,7 +22,7 @@ class OrganicImagePage extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceTint,
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(25),
                   ),
@@ -35,8 +35,22 @@ class OrganicImagePage extends StatelessWidget {
                   child: ColorFiltered(
                     colorFilter: MediaQuery.of(context).platformBrightness ==
                             Brightness.light
-                        ? identityFilter
-                        : inverseFilter,
+                        ? const ColorFilter.matrix(
+                            [
+                              247 / 245, 0, 0, 0, 0, //
+                              0, 247 / 245, 0, 0, 0, //
+                              0, 0, 247 / 245, 0, 0, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          )
+                        : const ColorFilter.matrix(
+                            [
+                              -237 / 245, 0, 0, 0, 255, //
+                              0, -237 / 245, 0, 0, 255, //
+                              0, 0, -237 / 245, 0, 255, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          ),
                     child: InteractiveViewer(
                       transformationController: _transformationController,
                       child: Image(
