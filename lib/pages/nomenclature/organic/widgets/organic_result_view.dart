@@ -94,7 +94,7 @@ class OrganicResultView extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 270,
+                  height: 250,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surfaceTint,
                     borderRadius: BorderRadius.circular(10),
@@ -107,6 +107,7 @@ class OrganicResultView extends StatelessWidget {
                         ? identityFilter
                         : inverseFilter,
                     child: PhotoView(
+                      tightMode: true,
                       backgroundDecoration: const BoxDecoration(
                         color: Colors.transparent,
                       ),
@@ -127,7 +128,7 @@ class OrganicResultView extends StatelessWidget {
                   padding: const EdgeInsets.all(5),
                   child: IconButton(
                     icon: Icon(
-                      size: 27,
+                      size: 30,
                       color: Theme.of(context).colorScheme.primary,
                       Icons.fullscreen_rounded,
                     ),
