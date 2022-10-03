@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
+import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
 import 'package:cliente/pages/widgets/result_button.dart';
 import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 
-class OrganicResultView extends StatefulWidget {
+class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
     Key? key,
     required this.fields,
@@ -16,15 +18,8 @@ class OrganicResultView extends StatefulWidget {
   final ImageProvider? imageProvider;
 
   @override
-  State<OrganicResultView> createState() => _OrganicResultViewState();
-}
-
-class _OrganicResultViewState extends State<OrganicResultView> {
-  late bool _zoomed = true;
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 30,
         bottom: 20,
@@ -81,14 +76,14 @@ class _OrganicResultViewState extends State<OrganicResultView> {
             padding: const EdgeInsets.all(20),
             child: Wrap(
               runSpacing: 13,
-              children: widget.fields.entries
+              children: fields.entries
                   .map((field) =>
                       OrganicResultField(title: field.key, field: field.value))
                   .toList(),
             ),
           ),
           const SizedBox(height: 25),
-          if (widget.imageProvider != null) ...[
+          if (imageProvider != null) ...[
             const SectionTitle.custom(
               title: 'Estructura',
               horizontalPadding: 0,
@@ -96,53 +91,54 @@ class _OrganicResultViewState extends State<OrganicResultView> {
               fontWeight: FontWeight.w500,
             ),
             const SizedBox(height: 25),
-            Expanded(
-              child: GestureDetector(
-                onTapUp: (_) => setState(() => _zoomed = !_zoomed),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceTint,
-                        borderRadius: BorderRadius.circular(10),
+            Stack(
+              children: [
+                Container(
+                  height: 270,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceTint,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
+                  child: ColorFiltered(
+                    colorFilter: MediaQuery.of(context).platformBrightness ==
+                            Brightness.light
+                        ? identityFilter
+                        : inverseFilter,
+                    child: PhotoView(
+                      backgroundDecoration: const BoxDecoration(
+                        color: Colors.transparent,
                       ),
-                      // To avoid rounded corners overflow:
-                      clipBehavior: Clip.hardEdge,
-                      child: ColorFiltered(
-                        colorFilter:
-                            MediaQuery.of(context).platformBrightness ==
-                                    Brightness.light
-                                ? identityFilter
-                                : inverseFilter,
-                        child: PhotoView(
-                          backgroundDecoration: const BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          initialScale: _zoomed ? 1.25 : null,
-                          gaplessPlayback: true,
-                          disableGestures: true,
-                          imageProvider: widget.imageProvider!,
-                          loadingBuilder: (context, event) => const Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 3.0,
-                            color: Colors.black, // Filter will turn it light
-                          )),
+                      initialScale: 1.25,
+                      gaplessPlayback: true,
+                      disableGestures: true,
+                      imageProvider: imageProvider!,
+                      loadingBuilder: (context, event) => const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3.0,
+                          color: Colors.black, // Filter will turn it light
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Icon(
-                        size: 27,
-                        color: Theme.of(context).colorScheme.primary,
-                        _zoomed
-                            ? Icons.zoom_out_rounded
-                            : Icons.zoom_in_rounded,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  child: IconButton(
+                    icon: Icon(
+                      size: 27,
+                      color: Theme.of(context).colorScheme.primary,
+                      Icons.fullscreen_rounded,
+                    ),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return OrganicImagePage(imageProvider: imageProvider!);
+                      }),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ],
