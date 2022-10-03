@@ -4,7 +4,6 @@ import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
 import 'package:cliente/pages/widgets/result_button.dart';
 import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 
 class OrganicResultView extends StatelessWidget {
@@ -94,7 +93,6 @@ class OrganicResultView extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 250,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surfaceTint,
                     borderRadius: BorderRadius.circular(10),
@@ -111,14 +109,17 @@ class OrganicResultView extends StatelessWidget {
                       backgroundDecoration: const BoxDecoration(
                         color: Colors.transparent,
                       ),
-                      initialScale: 1.25,
+                      initialScale: 1.0,
                       gaplessPlayback: true,
                       disableGestures: true,
                       imageProvider: imageProvider!,
-                      loadingBuilder: (context, event) => const Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0,
-                          color: Colors.black, // Filter will turn it light
+                      loadingBuilder: (context, event) => const Padding(
+                        padding: EdgeInsets.all(60),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            color: Colors.black, // Filter will turn it light
+                          ),
                         ),
                       ),
                     ),
