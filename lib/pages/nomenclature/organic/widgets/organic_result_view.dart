@@ -21,7 +21,7 @@ class OrganicResultView extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 30,
-        bottom: 20,
+        bottom: 25,
         left: 25,
         right: 25,
       ),
