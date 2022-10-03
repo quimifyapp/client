@@ -1,5 +1,5 @@
 import 'package:cliente/constants.dart';
-import 'package:cliente/widgets/button.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -126,7 +126,7 @@ class DialogPopup extends StatelessWidget {
           Column(
             children: [
               if (_hasLink)
-                Button.gradient(
+                QuimifyButton.gradient(
                   gradient: quimifyGradient,
                   child: Text(
                     linkName!,
@@ -143,7 +143,7 @@ class DialogPopup extends StatelessWidget {
                     if (_hasReportButton)
                       Row(
                         children: [
-                          Button(
+                          QuimifyButton(
                             width: 50,
                             color: Theme.of(context).colorScheme.error,
                             onPressed: () {},
@@ -157,7 +157,7 @@ class DialogPopup extends StatelessWidget {
                         ],
                       ),
                     Expanded(
-                      child: Button.gradient(
+                      child: QuimifyButton.gradient(
                         gradient: quimifyGradient,
                         child: Text(
                           'Entendido',

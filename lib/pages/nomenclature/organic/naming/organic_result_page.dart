@@ -2,7 +2,7 @@ import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class OrganicResultPage extends StatelessWidget {

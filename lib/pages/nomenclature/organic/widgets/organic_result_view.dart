@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
-import 'package:cliente/widgets/result_button.dart';
-import 'package:cliente/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/result_button.dart';
+import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

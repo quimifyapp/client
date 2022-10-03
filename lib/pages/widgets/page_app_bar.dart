@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/widgets/button.dart';
-import 'package:cliente/widgets/loading.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/loading.dart';
 import 'package:flutter/material.dart';
 
 class PageAppBar extends StatelessWidget {
@@ -17,7 +17,7 @@ class PageAppBar extends StatelessWidget {
             const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
         child: Row(
           children: [
-            Button(
+            QuimifyButton(
               width: 50,
               color: const Color.fromARGB(255, 106, 233, 218),
               onPressed: () {

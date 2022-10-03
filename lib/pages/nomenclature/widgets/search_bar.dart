@@ -1,5 +1,5 @@
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/widgets/button.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -113,7 +113,7 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ),
           const SizedBox(width: 8),
-          Button(
+          QuimifyButton(
             width: 50,
             color: Theme.of(context).colorScheme.surface,
             onPressed: () {},

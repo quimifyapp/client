@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget {
-  const Button(
+class QuimifyButton extends StatelessWidget {
+  const QuimifyButton(
       {Key? key,
       required this.child,
       this.width,
@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
       required this.onPressed})
       : super(key: key);
 
-  const Button.gradient(
+  const QuimifyButton.gradient(
       {Key? key,
       required this.child,
       this.width,

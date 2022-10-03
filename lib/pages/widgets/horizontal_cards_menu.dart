@@ -1,4 +1,4 @@
-import 'package:cliente/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/menu_card.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalCardsMenu extends StatelessWidget {

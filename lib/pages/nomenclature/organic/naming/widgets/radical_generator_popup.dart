@@ -1,15 +1,16 @@
 import 'dart:ui';
 
 import 'package:cliente/constants.dart';
-import 'package:cliente/widgets/button.dart';
-import 'package:cliente/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/quimify_switch.dart';
+import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class RadicalGeneratorPopup extends StatefulWidget {
   const RadicalGeneratorPopup({Key? key, required this.onSubmitted})
       : super(key: key);
 
-  final Function onSubmitted;
+  final void Function(int, bool) onSubmitted;
 
   Future<void> show(BuildContext context) async {
     await showDialog<void>(
@@ -44,19 +45,15 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
     Navigator.of(context).pop();
   }
 
-  void _addButton() {
-    setState(() => _carbonCount++);
-  }
+  void _addButton() => setState(() => _carbonCount++);
 
   bool _canRemove() => _carbonCount > (_isIso ? 3 : 1);
 
-  void _removeButton() {
-    setState(() => _carbonCount--);
-  }
+  void _removeButton() => setState(() => _carbonCount--);
 
-  void _switchButton(bool value) {
+  void _switchButton(bool newValue) {
     setState(() {
-      _isIso = value;
+      _isIso = newValue;
       if (_isIso && _carbonCount <= 3) {
         _carbonCount = 3;
       }
@@ -119,7 +116,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                         children: [
                           const SizedBox(height: 2),
                           Expanded(
-                            child: Button(
+                            child: QuimifyButton(
                               color: const Color.fromARGB(255, 56, 133, 224),
                               onPressed: _addButton,
                               child: Text(
@@ -137,7 +134,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                           ),
                           const SizedBox(height: 6),
                           Expanded(
-                            child: Button(
+                            child: QuimifyButton(
                               color: const Color.fromARGB(255, 255, 96, 96),
                               enabled: _canRemove(),
                               onPressed: _removeButton,
@@ -191,18 +188,9 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                   const SizedBox(width: 40),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Transform.scale(
-                      scale: 1.2,
-                      child: Switch(
-                        activeColor: Colors.white.withOpacity(0.9),
-                        inactiveThumbColor: Colors.white.withOpacity(0.9),
-                        activeTrackColor: quimifyTeal,
-                        inactiveTrackColor:
-                            Theme.of(context).colorScheme.secondary,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: _isIso,
-                        onChanged: _switchButton,
-                      ),
+                    child: QuimifySwitch(
+                      value: _isIso,
+                      onChanged: _switchButton,
                     ),
                   ),
                 ],
@@ -216,7 +204,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
           right: 15,
         ),
         actions: [
-          Button.gradient(
+          QuimifyButton.gradient(
             gradient: quimifyGradient,
             onPressed: _doneButton,
             child: Text(

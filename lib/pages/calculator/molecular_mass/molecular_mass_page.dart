@@ -5,13 +5,15 @@ import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
 import 'package:cliente/constants.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/widgets/button.dart';
-import 'package:cliente/widgets/dialog_popup.dart';
-import 'package:cliente/widgets/help_button.dart';
-import 'package:cliente/widgets/loading.dart';
-import 'package:cliente/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/help_button.dart';
+import 'package:cliente/pages/widgets/loading.dart';
+import 'package:cliente/pages/widgets/page_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../widgets/quimify_switch.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -251,7 +253,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           const SizedBox(height: 20),
                           Output(mass: _result.mass!),
                           const SizedBox(height: 25),
-                          Button.gradient(
+                          QuimifyButton.gradient(
                             height: 50,
                             gradient: quimifyGradient,
                             onPressed: _pressedButton,
@@ -354,6 +356,8 @@ class GraphMenu extends StatefulWidget {
 class _GraphMenuState extends State<GraphMenu> {
   bool _mol = false;
 
+  void _switchButton(bool newValue) => setState(() => _mol = newValue);
+
   @override
   Widget build(BuildContext context) {
     List<GraphSymbol> symbols = [];
@@ -409,16 +413,9 @@ class _GraphMenuState extends State<GraphMenu> {
                   ),
                 ),
               ),
-              Switch(
-                activeColor: Colors.white.withOpacity(0.9),
-                inactiveThumbColor: Colors.white.withOpacity(0.9),
-                activeTrackColor: quimifyTeal,
-                inactiveTrackColor: Theme.of(context).colorScheme.secondary,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              QuimifySwitch(
                 value: _mol,
-                onChanged: (bool value) {
-                  setState(() => _mol = value);
-                },
+                onChanged: _switchButton,
               ),
               Text(
                 'Pasar a mol',

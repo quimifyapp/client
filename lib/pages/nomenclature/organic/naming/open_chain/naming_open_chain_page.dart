@@ -9,11 +9,11 @@ import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/widgets/radical_generator_popup.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/widgets/button.dart';
-import 'package:cliente/widgets/dialog_popup.dart';
-import 'package:cliente/widgets/loading.dart';
-import 'package:cliente/widgets/page_app_bar.dart';
-import 'package:cliente/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/loading.dart';
+import 'package:cliente/pages/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingOpenChainPage extends StatefulWidget {
@@ -204,7 +204,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         bonds: 1,
         text: 'CH2 –– CH3',
         actionText: 'Radical',
-        onPressed: () => _getRadical(),
+        onPressed: _getRadical,
       ),
       FunctionalGroup.iodine: FunctionalGroupButton(
         bonds: 1,
@@ -345,7 +345,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       children: [
                         const SizedBox(width: 25),
                         Expanded(
-                          child: Button(
+                          child: QuimifyButton(
                             height: 40,
                             color: quimifyTeal,
                             onPressed: _bondCarbon,
@@ -359,7 +359,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         ),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: Button(
+                          child: QuimifyButton(
                             height: 40,
                             color: const Color.fromARGB(255, 56, 133, 224),
                             onPressed: _hydrogenate,
@@ -373,7 +373,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         ),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: Button(
+                          child: QuimifyButton(
                             height: 40,
                             color: const Color.fromARGB(255, 255, 96, 96),
                             onPressed: _undo,
@@ -392,7 +392,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       const SizedBox(height: 20),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: Button.gradient(
+                        child: QuimifyButton.gradient(
                           height: 50,
                           gradient: quimifyGradient,
                           onPressed: _pressedButton,
@@ -461,7 +461,7 @@ class FunctionalGroupButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15, left: 25, right: 25),
-      child: Button(
+      child: QuimifyButton(
         height: 60,
         onPressed: onPressed,
         color: Theme.of(context).colorScheme.surface,

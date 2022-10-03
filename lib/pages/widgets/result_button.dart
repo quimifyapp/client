@@ -1,4 +1,4 @@
-import 'package:cliente/widgets/button.dart';
+import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 
 class ResultButton extends StatelessWidget {
@@ -18,7 +18,7 @@ class ResultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button(
+    return QuimifyButton(
       width: size,
       height: size,
       color: backgroundColor,

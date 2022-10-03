@@ -3,10 +3,10 @@ import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
-import 'package:cliente/widgets/home_app_bar.dart';
-import 'package:cliente/widgets/horizontal_cards_menu.dart';
-import 'package:cliente/widgets/menu_card.dart';
-import 'package:cliente/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/home_app_bar.dart';
+import 'package:cliente/pages/widgets/horizontal_cards_menu.dart';
+import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class NomenclaturePage extends StatelessWidget {

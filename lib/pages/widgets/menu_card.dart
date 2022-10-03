@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
-import 'package:cliente/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/dialog_popup.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {

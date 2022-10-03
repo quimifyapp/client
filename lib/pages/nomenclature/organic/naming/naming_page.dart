@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
-import 'package:cliente/widgets/menu_card.dart';
-import 'package:cliente/widgets/page_app_bar.dart';
-import 'package:cliente/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingPage extends StatelessWidget {
