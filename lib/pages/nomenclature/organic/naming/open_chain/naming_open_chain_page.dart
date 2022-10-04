@@ -1,6 +1,5 @@
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/organic/components/functional_group.dart';
 import 'package:cliente/organic/components/substituent.dart';
 import 'package:cliente/organic/compounds/open_chain/ether.dart';
@@ -8,6 +7,9 @@ import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/widgets/radical_generator_popup.dart';
+import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/quimify_scaffold.dart';
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:cliente/pages/widgets/dialog_popup.dart';
@@ -286,159 +288,133 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
     };
 
-    return Container(
-      decoration: quimifyGradientBoxDecoration,
-      child: Scaffold(
-        // To avoid keyboard resizing:
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            const PageAppBar(title: _title),
-            // Body:
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(25),
+    return QuimifyScaffold(
+      header: const PageAppBar(title: _title),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              // So it follows while typing:
+              reverse: true,
+              // To remove Text widget default top padding:
+              padding: const EdgeInsets.only(top: 13, bottom: 17),
+              child: Row(children: [
+                const SizedBox(width: 25),
+                Text(
+                  formatStructure(_openChainStack.last.getStructure()),
+                  style: const TextStyle(
+                    color: quimifyTeal,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
+                ),
+                const SizedBox(width: 25),
+              ]),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const SizedBox(width: 25),
+              Expanded(
+                child: QuimifyButton(
+                  height: 40,
+                  color: quimifyTeal,
+                  onPressed: _bondCarbon,
+                  enabled: _canBondCarbon(),
+                  child: Image.asset(
+                    'assets/images/icons/bond-carbon.png',
+                    color: Theme.of(context).colorScheme.surface,
+                    width: 26,
                   ),
                 ),
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin:
-                          const EdgeInsets.only(top: 25, left: 25, right: 25),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        // So it follows while typing:
-                        reverse: true,
-                        // To remove Text widget default top padding:
-                        padding: const EdgeInsets.only(top: 13, bottom: 17),
-                        child: Row(children: [
-                          const SizedBox(width: 25),
-                          Text(
-                            formatStructure(
-                                _openChainStack.last.getStructure()),
-                            style: const TextStyle(
-                              color: quimifyTeal,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            strutStyle:
-                                const StrutStyle(fontSize: 28, height: 1.4),
-                          ),
-                          const SizedBox(width: 25),
-                        ]),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        const SizedBox(width: 25),
-                        Expanded(
-                          child: QuimifyButton(
-                            height: 40,
-                            color: quimifyTeal,
-                            onPressed: _bondCarbon,
-                            enabled: _canBondCarbon(),
-                            child: Image.asset(
-                              'assets/images/icons/bond-carbon.png',
-                              color: Theme.of(context).colorScheme.surface,
-                              width: 26,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: QuimifyButton(
-                            height: 40,
-                            color: const Color.fromARGB(255, 56, 133, 224),
-                            onPressed: _hydrogenate,
-                            enabled: _canHydrogenate(),
-                            child: Image.asset(
-                              'assets/images/icons/hydrogenate.png',
-                              color: Theme.of(context).colorScheme.surface,
-                              width: 28,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: QuimifyButton(
-                            height: 40,
-                            color: const Color.fromARGB(255, 255, 96, 96),
-                            onPressed: _undo,
-                            enabled: _canUndo(),
-                            child: Icon(
-                              Icons.undo,
-                              size: 22,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 25),
-                      ],
-                    ),
-                    if (_done) ...[
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: QuimifyButton.gradient(
-                          height: 50,
-                          gradient: quimifyGradient,
-                          onPressed: _pressedButton,
-                          child: const Text(
-                            'Resolver',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                    if (!_done) ...[
-                      const SizedBox(height: 25),
-                      const SectionTitle.custom(
-                        title: 'Sustituyentes',
-                        horizontalPadding: 25,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(25),
-                        height: 1.5,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      Expanded(
-                        child: ListView(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.only(bottom: 10), // +15=20
-                          children: _openChainStack.last
-                              .getOrderedBondableGroups()
-                              .map((function) => functionToButton[function]!)
-                              .toList()
-                              .reversed
-                              .toList(),
-                        ),
-                      ),
-                    ],
-                  ],
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: QuimifyButton(
+                  height: 40,
+                  color: const Color.fromARGB(255, 56, 133, 224),
+                  onPressed: _hydrogenate,
+                  enabled: _canHydrogenate(),
+                  child: Image.asset(
+                    'assets/images/icons/hydrogenate.png',
+                    color: Theme.of(context).colorScheme.surface,
+                    width: 28,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: QuimifyButton(
+                  height: 40,
+                  color: const Color.fromARGB(255, 255, 96, 96),
+                  onPressed: _undo,
+                  enabled: _canUndo(),
+                  child: Icon(
+                    Icons.undo,
+                    size: 22,
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 25),
+            ],
+          ),
+          if (_done) ...[
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: QuimifyButton.gradient(
+                height: 50,
+                gradient: quimifyGradient,
+                onPressed: _pressedButton,
+                child: const Text(
+                  'Resolver',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ],
-        ),
+          if (!_done) ...[
+            const SizedBox(height: 25),
+            const SectionTitle.custom(
+              title: 'Sustituyentes',
+              horizontalPadding: 25,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            Container(
+              margin: const EdgeInsets.all(25),
+              height: 1.5,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(bottom: 10), // +15=20
+                children: _openChainStack.last
+                    .getOrderedBondableGroups()
+                    .map((function) => functionToButton[function]!)
+                    .toList()
+                    .reversed
+                    .toList(),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }

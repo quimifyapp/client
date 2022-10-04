@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
 import 'package:cliente/pages/widgets/home_app_bar.dart';
 import 'package:cliente/pages/widgets/horizontal_cards_menu.dart';
 import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/quimify_scaffold.dart';
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
@@ -16,46 +17,25 @@ class NomenclaturePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: quimifyGradientBoxDecoration,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            const HomeAppBar(),
-            // Body:
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(25),
-                  ),
-                ),
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SectionTitle(title: 'Inorgánica'),
-                        const SizedBox(height: 25),
-                        InorganicMenu(autoSizeGroup: autoSizeGroup),
-                        const SizedBox(height: 25),
-                        const SectionTitle(title: 'Orgánica'),
-                        const SizedBox(height: 25),
-                        OrganicMenu(autoSizeGroup: autoSizeGroup),
-                        // To keep it above navigation bar:
-                        const SizedBox(height: 2 * 30 + 60),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+    return QuimifyScaffold(
+      header: const HomeAppBar(),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(top: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionTitle(title: 'Inorgánica'),
+              const SizedBox(height: 25),
+              InorganicMenu(autoSizeGroup: autoSizeGroup),
+              const SizedBox(height: 25),
+              const SectionTitle(title: 'Orgánica'),
+              const SizedBox(height: 25),
+              OrganicMenu(autoSizeGroup: autoSizeGroup),
+              // To keep it above navigation bar:
+              const SizedBox(height: 2 * 30 + 60),
+            ],
+          ),
         ),
       ),
     );

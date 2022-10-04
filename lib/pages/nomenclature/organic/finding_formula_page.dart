@@ -1,8 +1,8 @@
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
+import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/dialog_popup.dart';
 import 'package:cliente/pages/widgets/loading.dart';
@@ -81,48 +81,30 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       },
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),
-        child: Container(
-          decoration: quimifyGradientBoxDecoration,
-          child: Scaffold(
-            // To avoid keyboard resizing:
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: Column(
-              children: [
-                const PageAppBar(title: 'Formular orgánico'),
-                SearchBar(
-                  label: _labelText,
-                  controller: _textController,
-                  focusNode: _textFocusNode,
-                  corrector: formatOrganicName,
-                  onSubmitted: (input) => _search(input, false),
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(25),
-                      ),
-                    ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
-                    child: OrganicResultView(
-                      fields: {
-                        if (_result.name != null) 'Búsqueda:': _result.name!,
-                        if (_result.mass != null)
-                          'Masa molecular:': '${_result.mass!} g/mol',
-                        if (_result.structure != null)
-                          'Fórmula:': formatStructure(_result.structure!),
-                      },
-                      imageProvider: _firstSearch
-                          ? const AssetImage('assets/images/dietanoic-acid.png')
-                          : NetworkImage(_result.url2D!) as ImageProvider,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+        child: QuimifyScaffold(
+          header: Column(
+            children: [
+              const PageAppBar(title: 'Formular orgánico'),
+              SearchBar(
+                label: _labelText,
+                controller: _textController,
+                focusNode: _textFocusNode,
+                corrector: formatOrganicName,
+                onSubmitted: (input) => _search(input, false),
+              ),
+            ],
+          ),
+          body: OrganicResultView(
+            fields: {
+              if (_result.name != null) 'Búsqueda:': _result.name!,
+              if (_result.mass != null)
+                'Masa molecular:': '${_result.mass!} g/mol',
+              if (_result.structure != null)
+                'Fórmula:': formatStructure(_result.structure!),
+            },
+            imageProvider: _firstSearch
+                ? const AssetImage('assets/images/dietanoic-acid.png')
+                : NetworkImage(_result.url2D!) as ImageProvider,
           ),
         ),
       ),

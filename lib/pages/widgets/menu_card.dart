@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
@@ -78,7 +79,9 @@ class MenuCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              decoration: quimifyGradientBoxDecoration,
+              decoration: const BoxDecoration(
+                gradient: quimifyGradient,
+              ),
               padding: const EdgeInsets.only(
                   top: 17, bottom: 13, left: 25, right: 25),
               alignment: Alignment.centerLeft,

@@ -1,5 +1,5 @@
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

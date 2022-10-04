@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
+import 'package:cliente/pages/widgets/quimify_scaffold.dart';
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/dialog_popup.dart';
 import 'package:cliente/pages/widgets/loading.dart';
@@ -109,49 +110,31 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
       },
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),
-        child: Container(
-          decoration: quimifyGradientBoxDecoration,
-          child: Scaffold(
-            // To avoid keyboard resizing:
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: Column(
-              children: [
-                const PageAppBar(title: 'Formulación inorgánica'),
-                SearchBar(
-                  label: _labelText,
-                  controller: _textController,
-                  focusNode: _textFocusNode,
-                  corrector: formatInorganicFormulaOrName,
-                  onSubmitted: (input) => _search(input, false),
-                ),
-                // Body:
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(25),
-                      ),
-                    ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
-                    child: SingleChildScrollView(
-                        controller: _scrollController,
-                        padding: const EdgeInsets.only(
-                          top: 30,
-                          bottom: 25,
-                          left: 25,
-                          right: 25,
-                        ),
-                        child: Wrap(
-                          verticalDirection: VerticalDirection.up,
-                          runSpacing: 25,
-                          children: _results,
-                        )),
-                  ),
-                ),
-              ],
+        child: QuimifyScaffold(
+          header: Column(
+            children: [
+              const PageAppBar(title: 'Formulación inorgánica'),
+              SearchBar(
+                label: _labelText,
+                controller: _textController,
+                focusNode: _textFocusNode,
+                corrector: formatInorganicFormulaOrName,
+                onSubmitted: (input) => _search(input, false),
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            controller: _scrollController,
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 25,
+              left: 25,
+              right: 25,
+            ),
+            child: Wrap(
+              verticalDirection: VerticalDirection.up,
+              runSpacing: 25,
+              children: _results,
             ),
           ),
         ),

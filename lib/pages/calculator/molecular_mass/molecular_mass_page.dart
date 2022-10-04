@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/molecular_mass_result.dart';
-import 'package:cliente/constants.dart';
+import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/quimify_scaffold.dart';
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:cliente/pages/widgets/dialog_popup.dart';
@@ -141,141 +143,106 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       },
       child: GestureDetector(
         onTap: _tapOutsideText,
-        child: Container(
-          decoration: quimifyGradientBoxDecoration,
-          child: Scaffold(
-            // To avoid keyboard resizing:
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: Column(
+        child: QuimifyScaffold(
+          header: const PageAppBar(title: 'Masa molecular'),
+          body: SingleChildScrollView(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(25),
+            child: Column(
               children: [
-                // App bar:
-                const PageAppBar(title: 'Masa molecular'),
-                // Body:
-                Expanded(
+                const SizedBox(height: 5),
+                GestureDetector(
+                  onTap: () => _startTyping(), // As if the TextField was tapped
                   child: Container(
+                    height: 110,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(25),
-                      ),
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
-                    // Vertically scrollable for short devices:
-                    child: SingleChildScrollView(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.all(25),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 5),
-                          GestureDetector(
-                            onTap: () {
-                              // Like if the TextField was tapped:
-                              _startTyping();
-                            },
-                            child: Container(
-                              height: 110,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              alignment: Alignment.topLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Fórmula',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  TextField(
-                                    // Aspect:
-                                    cursorColor:
-                                        Theme.of(context).colorScheme.primary,
-                                    style: inputOutputStyle,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.only(bottom: 3),
-                                      isCollapsed: true,
-                                      labelText: _labelText,
-                                      labelStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      // So hint doesn't go up while typing:
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                      // To remove bottom border:
-                                      border: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          width: 0,
-                                          style: BorderStyle.none,
-                                        ),
-                                      ),
-                                    ),
-                                    // Logic:
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                        inputFormatter,
-                                      ),
-                                    ],
-                                    textCapitalization:
-                                        TextCapitalization.sentences,
-                                    scribbleEnabled: false,
-                                    focusNode: _textFocusNode,
-                                    controller: _textController,
-                                    onChanged: (input) {
-                                      _textController.value =
-                                          _textController.value.copyWith(
-                                        text: formatStructureInput(input),
-                                      );
-                                    },
-                                    textInputAction: TextInputAction.search,
-                                    onSubmitted: (_) => _submittedText(),
-                                    onTap: _scrollToStart,
-                                  ),
-                                ],
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Fórmula',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const Spacer(),
+                        TextField(
+                          // Aspect:
+                          cursorColor: Theme.of(context).colorScheme.primary,
+                          style: inputOutputStyle,
+                          keyboardType: TextInputType.visiblePassword,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(bottom: 3),
+                            isCollapsed: true,
+                            labelText: _labelText,
+                            labelStyle: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            // So hint doesn't go up while typing:
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            // To remove bottom border:
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          Output(mass: _result.mass!),
-                          const SizedBox(height: 25),
-                          QuimifyButton.gradient(
-                            height: 50,
-                            gradient: quimifyGradient,
-                            onPressed: _pressedButton,
-                            child: const Text(
-                              'Calcular',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          // Logic:
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              inputFormatter,
                             ),
-                          ),
-                          const SizedBox(height: 25),
-                          GraphMenu(
-                            mass: _result.mass!,
-                            elementToGrams: _result.elementToGrams,
-                            elementToMoles: _result.elementToMoles,
-                          ),
-                        ],
-                      ),
+                          ],
+                          textCapitalization: TextCapitalization.sentences,
+                          scribbleEnabled: false,
+                          focusNode: _textFocusNode,
+                          controller: _textController,
+                          onChanged: (input) {
+                            _textController.value =
+                                _textController.value.copyWith(
+                              text: formatStructureInput(input),
+                            );
+                          },
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: (_) => _submittedText(),
+                          onTap: _scrollToStart,
+                        ),
+                      ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 20),
+                Output(mass: _result.mass!),
+                const SizedBox(height: 25),
+                QuimifyButton.gradient(
+                  height: 50,
+                  gradient: quimifyGradient,
+                  onPressed: _pressedButton,
+                  child: const Text(
+                    'Calcular',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                GraphMenu(
+                  mass: _result.mass!,
+                  elementToGrams: _result.elementToGrams,
+                  elementToMoles: _result.elementToMoles,
                 ),
               ],
             ),

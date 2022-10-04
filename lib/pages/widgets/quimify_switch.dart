@@ -1,5 +1,5 @@
+import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:flutter/material.dart';
-import 'package:cliente/constants.dart';
 
 class QuimifySwitch extends StatelessWidget {
   const QuimifySwitch({Key? key, required this.value, required this.onChanged})

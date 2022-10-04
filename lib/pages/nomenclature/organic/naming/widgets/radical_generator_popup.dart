@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:cliente/constants.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/quimify_switch.dart';
 import 'package:cliente/pages/widgets/section_title.dart';
 import 'package:flutter/material.dart';
