@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class OrganicImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: const PageAppBar(title: 'Estructura'),
+      header: const QuimifyPageBar(title: 'Estructura'),
       body: GestureDetector(
         onDoubleTap: () => _transformationController.value = Matrix4.identity(),
         child: ColorFiltered(

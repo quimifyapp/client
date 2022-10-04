@@ -3,8 +3,8 @@ import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar(
+class QuimifySearchBar extends StatefulWidget {
+  const QuimifySearchBar(
       {Key? key,
       required this.label,
       required this.controller,
@@ -19,10 +19,10 @@ class SearchBar extends StatefulWidget {
   final Function(String) corrector, onSubmitted;
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<QuimifySearchBar> createState() => _QuimifySearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _QuimifySearchBarState extends State<QuimifySearchBar> {
   void _eraseInitialAndFinalBlanks() {
     setState(() {
       widget.controller.text = noInitialAndFinalBlanks(widget.controller.text);

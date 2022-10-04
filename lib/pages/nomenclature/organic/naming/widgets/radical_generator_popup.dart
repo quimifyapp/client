@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/quimify_switch.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class RadicalGeneratorPopup extends StatefulWidget {
@@ -81,7 +81,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
         content: Wrap(
           runSpacing: 25,
           children: [
-            const SectionTitle.custom(
+            const QuimifySectionTitle.custom(
               title: 'Carbonos:',
               horizontalPadding: 0,
               fontSize: 18,
@@ -159,7 +159,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                 ),
               ),
             ),
-            const SectionTitle.custom(
+            const QuimifySectionTitle.custom(
               title: 'Terminación:',
               horizontalPadding: 0,
               fontSize: 18,

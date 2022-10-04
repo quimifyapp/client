@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
-import 'package:cliente/pages/widgets/menu_card.dart';
-import 'package:cliente/pages/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/quimify_card.dart';
+import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingPage extends StatelessWidget {
@@ -15,18 +15,18 @@ class NamingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: const PageAppBar(title: 'Nombrar orgánico'),
+      header: const QuimifyPageBar(title: 'Nombrar orgánico'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: [
-            const SectionTitle(title: 'Tipo de orgánico'),
+            const QuimifySectionTitle(title: 'Tipo de orgánico'),
             const SizedBox(height: 25),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  MenuCard(
+                  QuimifyCard(
                     title: 'Cadena abierta',
                     structure: 'CH₃ - O - CH₂(F)',
                     // 'CH₃ - C(CH₃) = CH₂',
@@ -36,11 +36,11 @@ class NamingPage extends StatelessWidget {
                     page: const NamingOpenChainPage(),
                   ),
                   const SizedBox(height: _cardVerticalPadding),
-                  const MenuCard.locked(
+                  const QuimifyCard.locked(
                     title: 'Éster',
                   ),
                   const SizedBox(height: _cardVerticalPadding),
-                  const MenuCard.locked(
+                  const QuimifyCard.locked(
                     title: 'Cíclico',
                   ),
                 ],

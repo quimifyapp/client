@@ -2,12 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
-import 'package:cliente/pages/widgets/home_app_bar.dart';
-import 'package:cliente/pages/widgets/horizontal_cards_menu.dart';
-import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/quimify_home_bar.dart';
+import 'package:cliente/pages/widgets/quimify_horizontal_menu.dart';
+import 'package:cliente/pages/widgets/quimify_card.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NomenclaturePage extends StatelessWidget {
@@ -18,18 +18,18 @@ class NomenclaturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: const HomeAppBar(),
+      header: const QuimifyHomeBar(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.only(top: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SectionTitle(title: 'Inorgánica'),
+              const QuimifySectionTitle(title: 'Inorgánica'),
               const SizedBox(height: 25),
               InorganicMenu(autoSizeGroup: autoSizeGroup),
               const SizedBox(height: 25),
-              const SectionTitle(title: 'Orgánica'),
+              const QuimifySectionTitle(title: 'Orgánica'),
               const SizedBox(height: 25),
               OrganicMenu(autoSizeGroup: autoSizeGroup),
               // To keep it above navigation bar:
@@ -50,9 +50,9 @@ class InorganicMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HorizontalCardsMenu(
+    return QuimifyHorizontalMenu(
       cards: [
-        MenuCard(
+        QuimifyCard(
           width: 290,
           title: 'Formular o nombrar',
           structure: 'H₂O',
@@ -60,7 +60,7 @@ class InorganicMenu extends StatelessWidget {
           name: 'dióxido de hidrógeno',
           page: const InorganicNomenclaturePage(),
         ),
-        const MenuCard.locked(
+        const QuimifyCard.locked(
           width: 290,
           title: 'Practicar',
         ),
@@ -76,9 +76,9 @@ class OrganicMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HorizontalCardsMenu(
+    return QuimifyHorizontalMenu(
       cards: [
-        MenuCard.custom(
+        QuimifyCard.custom(
           width: 290,
           title: 'Formular',
           customBody: Container(
@@ -108,7 +108,7 @@ class OrganicMenu extends StatelessWidget {
           ),
           page: const FindingFormulaPage(),
         ),
-        MenuCard(
+        QuimifyCard(
           width: 290,
           title: 'Nombrar',
           structure: 'CH₃ - C(CH₃) = CO',
@@ -116,7 +116,7 @@ class OrganicMenu extends StatelessWidget {
           name: '2-metilprop-1-en-1-ona',
           page: NamingPage(),
         ),
-        const MenuCard.locked(
+        const QuimifyCard.locked(
           width: 290,
           title: 'Practicar',
         ),

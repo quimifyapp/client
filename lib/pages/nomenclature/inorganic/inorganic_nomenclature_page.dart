@@ -1,14 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
-import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
+import 'package:cliente/pages/nomenclature/widgets/quimify_search_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/dialog_popup.dart';
-import 'package:cliente/pages/widgets/loading.dart';
-import 'package:cliente/pages/widgets/page_app_bar.dart';
-import 'package:cliente/pages/widgets/result_button.dart';
+import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/quimify_loading.dart';
+import 'package:cliente/pages/widgets/quimify_page_bar.dart';
+import 'package:cliente/pages/nomenclature/widgets/result_button.dart';
 import 'package:flutter/material.dart';
 
 class InorganicNomenclaturePage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           _scrollToStart(); // Goes to the top of the page
         } else {
           if (!mounted) return; // For security reasons
-          DialogPopup.reportableMessage(
+          QuimifyDialog.reportableMessage(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$input"',
           ).show(context);
@@ -82,7 +82,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        DialogPopup.message(
+        QuimifyDialog.message(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$input"',
         ).show(context);
@@ -113,8 +113,8 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
         child: QuimifyScaffold(
           header: Column(
             children: [
-              const PageAppBar(title: 'Formulación inorgánica'),
-              SearchBar(
+              const QuimifyPageBar(title: 'Formulación inorgánica'),
+              QuimifySearchBar(
                 label: _labelText,
                 controller: _textController,
                 focusNode: _textFocusNode,

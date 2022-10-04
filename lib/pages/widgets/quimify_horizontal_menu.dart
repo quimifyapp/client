@@ -1,10 +1,10 @@
-import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/quimify_card.dart';
 import 'package:flutter/material.dart';
 
-class HorizontalCardsMenu extends StatelessWidget {
-  const HorizontalCardsMenu({Key? key, required this.cards}) : super(key: key);
+class QuimifyHorizontalMenu extends StatelessWidget {
+  const QuimifyHorizontalMenu({Key? key, required this.cards}) : super(key: key);
 
-  final List<MenuCard> cards;
+  final List<QuimifyCard> cards;
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
-import 'package:cliente/pages/widgets/result_button.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/nomenclature/widgets/result_button.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -82,7 +82,7 @@ class OrganicResultView extends StatelessWidget {
           ),
           const SizedBox(height: 25),
           if (imageProvider != null) ...[
-            const SectionTitle.custom(
+            const QuimifySectionTitle.custom(
               title: 'Estructura',
               horizontalPadding: 0,
               fontSize: 16,

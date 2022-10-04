@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:flutter/material.dart';
 
-class MenuCard extends StatelessWidget {
-  const MenuCard(
+class QuimifyCard extends StatelessWidget {
+  const QuimifyCard(
       {super.key,
       this.width,
       required this.title,
@@ -17,7 +17,7 @@ class MenuCard extends StatelessWidget {
         _isLocked = false,
         customBody = null;
 
-  const MenuCard.custom(
+  const QuimifyCard.custom(
       {super.key,
       this.width,
       required this.title,
@@ -29,7 +29,7 @@ class MenuCard extends StatelessWidget {
         structure = null,
         autoSizeGroup = null;
 
-  const MenuCard.locked({super.key, this.width, required this.title})
+  const QuimifyCard.locked({super.key, this.width, required this.title})
       : _isCustom = false,
         _isLocked = true,
         customBody = null,
@@ -64,7 +64,7 @@ class MenuCard extends StatelessWidget {
               );
             }
           : _isLocked
-              ? () => const DialogPopup.message(
+              ? () => const QuimifyDialog.message(
                     title: 'Falta muy poco',
                     details: 'Esta función pronto estará lista.',
                   ).show(context)

@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/calculator/molecular_mass/molecular_mass_page.dart';
-import 'package:cliente/pages/widgets/home_app_bar.dart';
-import 'package:cliente/pages/widgets/menu_card.dart';
+import 'package:cliente/pages/widgets/quimify_home_bar.dart';
+import 'package:cliente/pages/widgets/quimify_card.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatelessWidget {
@@ -15,18 +15,18 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: const HomeAppBar(),
+      header: const QuimifyHomeBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: [
-            const SectionTitle(title: 'Calculadora'),
+            const QuimifySectionTitle(title: 'Calculadora'),
             const SizedBox(height: 25),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  MenuCard.custom(
+                  QuimifyCard.custom(
                     title: 'Masa molecular',
                     customBody: Container(
                       alignment: Alignment.center,
@@ -41,7 +41,7 @@ class CalculatorPage extends StatelessWidget {
                     page: const MolecularMassPage(),
                   ),
                   const SizedBox(height: 20),
-                  const MenuCard.locked(
+                  const QuimifyCard.locked(
                     title: 'Ajustar reacción',
                   ),
                   // To keep it above navigation bar:

@@ -1,13 +1,13 @@
-import 'package:cliente/pages/widgets/help_button.dart';
+import 'package:cliente/pages/widgets/quimify_help_button.dart';
 import 'package:flutter/material.dart';
 
-class SectionTitle extends StatelessWidget {
-  const SectionTitle({super.key, required this.title})
+class QuimifySectionTitle extends StatelessWidget {
+  const QuimifySectionTitle({super.key, required this.title})
       : horizontalPadding = 25,
         fontSize = 18,
         fontWeight = FontWeight.bold;
 
-  const SectionTitle.custom({
+  const QuimifySectionTitle.custom({
     super.key,
     required this.title,
     required this.horizontalPadding,

@@ -4,7 +4,7 @@ import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/pages/calculator/calculator_page.dart';
 import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
-import 'package:cliente/pages/widgets/dialog_popup.dart';
+import 'package:cliente/pages/widgets/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 
@@ -33,14 +33,14 @@ class _MainPageState extends State<MainPage> {
   void _showWelcomeMessagePopup() {
     if (widget.accessResult!.messagePresent) {
       if (widget.accessResult!.messageLinkPresent!) {
-        DialogPopup.linkedMessage(
+        QuimifyDialog.linkedMessage(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
           linkName: widget.accessResult!.messageLinkName!,
           link: widget.accessResult!.messageLink!,
         ).show(context);
       } else {
-        DialogPopup.message(
+        QuimifyDialog.message(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
         ).show(context);
@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
   void _showWelcomePopups() {
     if (widget.accessResult != null) {
       if (widget.accessResult!.updateAvailable) {
-        DialogPopup.update(
+        QuimifyDialog.update(
           details: widget.accessResult!.updateDetails,
           closable: !widget.accessResult!.updateMandatory!,
           link: Platform.isAndroid

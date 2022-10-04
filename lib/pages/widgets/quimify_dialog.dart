@@ -3,8 +3,8 @@ import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DialogPopup extends StatelessWidget {
-  const DialogPopup.message({
+class QuimifyDialog extends StatelessWidget {
+  const QuimifyDialog.message({
     super.key,
     required this.title,
     this.details,
@@ -15,7 +15,7 @@ class DialogPopup extends StatelessWidget {
         linkName = null,
         link = null;
 
-  const DialogPopup.linkedMessage({
+  const QuimifyDialog.linkedMessage({
     super.key,
     required this.title,
     required this.details,
@@ -26,7 +26,7 @@ class DialogPopup extends StatelessWidget {
         _hasCloseButton = true,
         closable = true;
 
-  const DialogPopup.reportableMessage({
+  const QuimifyDialog.reportableMessage({
     super.key,
     required this.title,
     this.details,
@@ -37,7 +37,7 @@ class DialogPopup extends StatelessWidget {
         linkName = null,
         link = null;
 
-  const DialogPopup.update(
+  const QuimifyDialog.update(
       {super.key,
       required this.details,
       required this.closable,

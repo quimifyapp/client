@@ -12,10 +12,10 @@ import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
-import 'package:cliente/pages/widgets/dialog_popup.dart';
-import 'package:cliente/pages/widgets/loading.dart';
-import 'package:cliente/pages/widgets/page_app_bar.dart';
-import 'package:cliente/pages/widgets/section_title.dart';
+import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/quimify_loading.dart';
+import 'package:cliente/pages/widgets/quimify_page_bar.dart';
+import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingOpenChainPage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
-        const DialogPopup.message(
+        const QuimifyDialog.message(
           title: 'Sin resultado',
         ).show(context);
 
@@ -63,7 +63,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      const DialogPopup.message(
+      const QuimifyDialog.message(
         title: 'Sin resultado',
       ).show(context);
     }
@@ -289,7 +289,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     };
 
     return QuimifyScaffold(
-      header: const PageAppBar(title: _title),
+      header: const QuimifyPageBar(title: _title),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -390,7 +390,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
           ],
           if (!_done) ...[
             const SizedBox(height: 25),
-            const SectionTitle.custom(
+            const QuimifySectionTitle.custom(
               title: 'Sustituyentes',
               horizontalPadding: 25,
               fontSize: 18,

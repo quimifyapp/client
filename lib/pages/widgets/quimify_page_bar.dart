@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
-import 'package:cliente/pages/widgets/loading.dart';
+import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:flutter/material.dart';
 
-class PageAppBar extends StatelessWidget {
-  const PageAppBar({Key? key, required this.title}) : super(key: key);
+class QuimifyPageBar extends StatelessWidget {
+  const QuimifyPageBar({Key? key, required this.title}) : super(key: key);
 
   final String title;
 

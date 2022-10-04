@@ -1,12 +1,12 @@
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
-import 'package:cliente/pages/nomenclature/widgets/search_bar.dart';
+import 'package:cliente/pages/nomenclature/widgets/quimify_search_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/dialog_popup.dart';
-import 'package:cliente/pages/widgets/loading.dart';
-import 'package:cliente/pages/widgets/page_app_bar.dart';
+import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/quimify_loading.dart';
+import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:flutter/material.dart';
 
 class FindingFormulaPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _textFocusNode.unfocus(); // Hides keyboard
         } else {
           if (!mounted) return; // For security reasons
-          DialogPopup.reportableMessage(
+          QuimifyDialog.reportableMessage(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
           ).show(context);
@@ -64,7 +64,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        DialogPopup.message(
+        QuimifyDialog.message(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$name"',
         ).show(context);
@@ -84,8 +84,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         child: QuimifyScaffold(
           header: Column(
             children: [
-              const PageAppBar(title: 'Formular orgánico'),
-              SearchBar(
+              const QuimifyPageBar(title: 'Formular orgánico'),
+              QuimifySearchBar(
                 label: _labelText,
                 controller: _textController,
                 focusNode: _textFocusNode,
