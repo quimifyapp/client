@@ -210,9 +210,10 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
             child: Text(
               'Enlazar',
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.surface,
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold),
+                color: Theme.of(context).colorScheme.surface,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
