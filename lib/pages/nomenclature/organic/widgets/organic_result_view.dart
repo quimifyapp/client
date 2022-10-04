@@ -147,9 +147,13 @@ class OrganicResultView extends StatelessWidget {
                       Icons.fullscreen_rounded,
                     ),
                     onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return OrganicImagePage(imageProvider: imageProvider!);
-                      }),
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return OrganicImagePage(
+                            imageProvider: imageProvider!,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

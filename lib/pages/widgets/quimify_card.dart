@@ -142,14 +142,15 @@ class QuimifyCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Center(
-                        child: Text(
-                      'Próximamente',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
+                      child: Text(
+                        'Próximamente',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    )),
+                    ),
                   ],
                 ),
               ),
