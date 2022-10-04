@@ -118,7 +118,10 @@ class Carbon extends Organic {
 
       String text = unique.toString();
 
-      if (text.length == 1 || unique.isHalogen() || unique.getBonds() == 3) {
+      if ((unique.isLike(FunctionalGroup.ketone) ||
+              unique.isHalogen() ||
+              unique.getBonds() == 3) &&
+          !unique.isLike(FunctionalGroup.aldehyde)) {
         result += text; // Like "CN", "CCl", "COOH", "C(O)(NH2)", "CHO"...
       } else {
         result += '($text)'; // Like "CH(OH)3"

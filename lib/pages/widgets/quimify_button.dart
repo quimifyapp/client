@@ -5,7 +5,7 @@ class QuimifyButton extends StatelessWidget {
       {Key? key,
       required this.child,
       this.width,
-      this.height = 50,
+      this.height,
       required this.color,
       this.gradient,
       this.enabled = true,
@@ -16,7 +16,7 @@ class QuimifyButton extends StatelessWidget {
       {Key? key,
       required this.child,
       this.width,
-      this.height = 50,
+      this.height,
       this.color,
       required this.gradient,
       this.enabled = true,
@@ -25,7 +25,7 @@ class QuimifyButton extends StatelessWidget {
 
   final Widget child;
   final double? width;
-  final double height;
+  final double? height;
   final Color? color;
   final Gradient? gradient;
   final bool enabled;
@@ -37,7 +37,7 @@ class QuimifyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: height,
+      height: height ?? 50,
       // To avoid rounded corners overflow:
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(

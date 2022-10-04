@@ -8,7 +8,7 @@ import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:cliente/pages/widgets/quimify_page_bar.dart';
-import 'package:cliente/pages/nomenclature/widgets/result_button.dart';
+import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class InorganicNomenclaturePage extends StatefulWidget {
@@ -339,8 +339,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                         Row(
                           children: [
                             Expanded(
-                              child: ResultButton(
-                                size: 50,
+                              child: QuimifyIconButton(
+                                height: 50,
                                 color: Theme.of(context).colorScheme.onError,
                                 backgroundColor:
                                     Theme.of(context).colorScheme.error,
@@ -354,8 +354,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             ),
                             const SizedBox(width: 15),
                             Expanded(
-                              child: ResultButton(
-                                size: 50,
+                              child: QuimifyIconButton(
+                                height: 50,
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onErrorContainer,

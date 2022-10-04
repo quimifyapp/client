@@ -1,5 +1,5 @@
+import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -113,12 +113,11 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
             ),
           ),
           const SizedBox(width: 8),
-          QuimifyButton(
-            width: 50,
-            color: Theme.of(context).colorScheme.surface,
-            onPressed: () {},
-            child: Icon(Icons.camera_alt_outlined,
-                color: Theme.of(context).colorScheme.primary),
+          QuimifyIconButton(
+            height: 50,
+            color: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            icon: const Icon(Icons.camera_alt_outlined),
           ),
         ],
       ),

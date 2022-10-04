@@ -1,28 +1,25 @@
 import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:flutter/material.dart';
 
-// TODO: ??
+class QuimifyIconButton extends StatelessWidget {
+  const QuimifyIconButton({
+    Key? key,
+    this.height,
+    required this.color,
+    required this.backgroundColor,
+    this.text,
+    required this.icon,
+  }) : super(key: key);
 
-class ResultButton extends StatelessWidget {
-  const ResultButton(
-      {Key? key,
-      required this.icon,
-      required this.size,
-      this.text,
-      required this.color,
-      required this.backgroundColor})
-      : super(key: key);
-
-  final double size;
+  final double? height;
+  final Color color, backgroundColor;
   final Widget icon;
   final String? text;
-  final Color color, backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return QuimifyButton(
-      width: size,
-      height: size,
+      height: height,
       color: backgroundColor,
       onPressed: () {},
       child: Row(
