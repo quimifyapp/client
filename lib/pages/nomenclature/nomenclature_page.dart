@@ -90,13 +90,13 @@ class OrganicMenu extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/images/icons/3-chloropropylbenzene.png',
+                  'assets/images/icons/2-chloroethylbenzene.png',
                   color: quimifyTeal,
                   height: 30,
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '3-cloropropilbenceno',
+                  '2-cloroetilbenceno',
                   style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).colorScheme.primary,
