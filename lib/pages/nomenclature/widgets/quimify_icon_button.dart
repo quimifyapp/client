@@ -4,24 +4,38 @@ import 'package:flutter/material.dart';
 class QuimifyIconButton extends StatelessWidget {
   const QuimifyIconButton({
     Key? key,
-    this.height,
-    required this.color,
+    this.width,
+    required this.height,
     required this.backgroundColor,
-    this.text,
+    required this.onPressed,
     required this.icon,
+    this.text,
   }) : super(key: key);
 
-  final double? height;
-  final Color color, backgroundColor;
+  const QuimifyIconButton.square({
+    super.key,
+    required this.height,
+    required this.backgroundColor,
+    required this.onPressed,
+    required this.icon,
+    this.text,
+  }) : width = height;
+
+  final double? width;
+  final double height;
+  final Color backgroundColor;
   final Widget icon;
-  final String? text;
+  final Text? text;
+
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return QuimifyButton(
+      width: width,
       height: height,
-      color: backgroundColor,
-      onPressed: () {},
+      backgroundColor: backgroundColor,
+      onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -29,14 +43,7 @@ class QuimifyIconButton extends StatelessWidget {
           icon,
           if (text != null) ...[
             const SizedBox(width: 8),
-            Text(
-              text!,
-              style: TextStyle(
-                color: color,
-                fontSize: 15,
-                //fontWeight: FontWeight.bold
-              ),
-            ),
+            text!,
           ],
           const Spacer(),
         ],

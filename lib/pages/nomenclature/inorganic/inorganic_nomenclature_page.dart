@@ -341,24 +341,30 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             Expanded(
                               child: QuimifyIconButton(
                                 height: 50,
-                                color: Theme.of(context).colorScheme.onError,
                                 backgroundColor:
                                     Theme.of(context).colorScheme.error,
+                                onPressed: () {},
                                 icon: Image.asset(
                                   'assets/images/icons/report.png',
                                   color: Theme.of(context).colorScheme.onError,
                                   width: 18,
                                 ),
-                                text: 'Reportar',
+                                text: Text(
+                                  'Reportar',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onError,
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 15),
                             Expanded(
                               child: QuimifyIconButton(
                                 height: 50,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onErrorContainer,
+                                onPressed: () {},
                                 backgroundColor: Theme.of(context)
                                     .colorScheme
                                     .errorContainer,
@@ -369,7 +375,16 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                       .onErrorContainer,
                                   size: 18,
                                 ),
-                                text: 'Compartir',
+                                text: Text(
+                                  'Compartir',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onErrorContainer,
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold
+                                  ),
+                                ),
                               ),
                             ),
                           ],

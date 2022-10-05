@@ -18,7 +18,7 @@ class QuimifyHomeBar extends StatelessWidget {
               child: IconButton(
                 icon: Image.asset(
                   'assets/images/icons/logo.png',
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 // To remove native effects:
                 hoverColor: Colors.transparent,
@@ -34,7 +34,7 @@ class QuimifyHomeBar extends StatelessWidget {
             Image.asset(
               'assets/images/icons/branding-slim.png',
               height: 17,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ],
         ),

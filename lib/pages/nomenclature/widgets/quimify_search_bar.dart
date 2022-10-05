@@ -113,11 +113,14 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
             ),
           ),
           const SizedBox(width: 8),
-          QuimifyIconButton(
+          QuimifyIconButton.square(
             height: 50,
-            color: Theme.of(context).colorScheme.primary,
             backgroundColor: Theme.of(context).colorScheme.surface,
-            icon: const Icon(Icons.camera_alt_outlined),
+            onPressed: () {},
+            icon: Icon(
+              Icons.camera_alt_outlined,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
         ],
       ),

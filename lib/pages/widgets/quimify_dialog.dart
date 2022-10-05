@@ -1,3 +1,4 @@
+import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:flutter/material.dart';
@@ -127,11 +128,12 @@ class QuimifyDialog extends StatelessWidget {
             children: [
               if (_hasLink)
                 QuimifyButton.gradient(
+                  height: 50,
                   gradient: quimifyGradient,
                   child: Text(
                     linkName!,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
@@ -144,14 +146,14 @@ class QuimifyDialog extends StatelessWidget {
                     if (_hasReportButton)
                       Row(
                         children: [
-                          QuimifyButton(
-                            width: 50,
-                            color: Theme.of(context).colorScheme.error,
+                          QuimifyIconButton.square(
+                            height: 50,
+                            backgroundColor: Theme.of(context).colorScheme.error,
                             onPressed: () {},
-                            child: Image.asset(
+                            icon: Image.asset(
                               'assets/images/icons/report.png',
-                              color: Theme.of(context).colorScheme.onError,
                               width: 20,
+                              color: Theme.of(context).colorScheme.onError,
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -159,11 +161,12 @@ class QuimifyDialog extends StatelessWidget {
                       ),
                     Expanded(
                       child: QuimifyButton.gradient(
+                        height: 50,
                         gradient: quimifyGradient,
                         child: Text(
                           'Entendido',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: 17,
                           ),
                         ),

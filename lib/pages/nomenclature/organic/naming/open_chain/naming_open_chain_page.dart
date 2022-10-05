@@ -310,19 +310,21 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               reverse: true,
               // To remove Text widget default top padding:
               padding: const EdgeInsets.only(top: 13, bottom: 17),
-              child: Row(children: [
-                const SizedBox(width: 25),
-                Text(
-                  formatStructure(_openChainStack.last.getStructure()),
-                  style: const TextStyle(
-                    color: quimifyTeal,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+              child: Row(
+                children: [
+                  const SizedBox(width: 25),
+                  Text(
+                    formatStructure(_openChainStack.last.getStructure()),
+                    style: const TextStyle(
+                      color: quimifyTeal,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                   ),
-                  strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
-                ),
-                const SizedBox(width: 25),
-              ]),
+                  const SizedBox(width: 25),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -332,12 +334,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               Expanded(
                 child: QuimifyButton(
                   height: 40,
-                  color: quimifyTeal,
+                  backgroundColor: quimifyTeal,
                   onPressed: _bondCarbon,
                   enabled: _canBondCarbon(),
                   child: Image.asset(
                     'assets/images/icons/bond-carbon.png',
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     width: 26,
                   ),
                 ),
@@ -346,12 +348,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               Expanded(
                 child: QuimifyButton(
                   height: 40,
-                  color: const Color.fromARGB(255, 56, 133, 224),
+                  backgroundColor: const Color.fromARGB(255, 56, 133, 224),
                   onPressed: _hydrogenate,
                   enabled: _canHydrogenate(),
                   child: Image.asset(
                     'assets/images/icons/hydrogenate.png',
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     width: 28,
                   ),
                 ),
@@ -360,13 +362,13 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               Expanded(
                 child: QuimifyButton(
                   height: 40,
-                  color: const Color.fromARGB(255, 255, 96, 96),
+                  backgroundColor: const Color.fromARGB(255, 255, 96, 96),
                   onPressed: _undo,
                   enabled: _canUndo(),
                   child: Icon(
                     Icons.undo,
                     size: 22,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ),
@@ -381,10 +383,10 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                 height: 50,
                 gradient: quimifyGradient,
                 onPressed: _pressedButton,
-                child: const Text(
+                child: Text(
                   'Resolver',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),
@@ -444,7 +446,7 @@ class FunctionalGroupButton extends StatelessWidget {
       child: QuimifyButton(
         height: 60,
         onPressed: onPressed,
-        color: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         child: Row(
           children: [
             const SizedBox(width: 10),
@@ -609,7 +611,9 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                           const SizedBox(height: 2),
                           Expanded(
                             child: QuimifyButton(
-                              color: const Color.fromARGB(255, 56, 133, 224),
+                              height: 50,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 56, 133, 224),
                               onPressed: _addButton,
                               child: Text(
                                 '+',
@@ -617,7 +621,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                                   fontSize: 24,
                                   fontWeight: FontWeight.w500,
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.onPrimary,
                                 ),
                                 strutStyle:
                                     const StrutStyle(fontSize: 24, height: 1.2),
@@ -627,7 +631,9 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                           const SizedBox(height: 6),
                           Expanded(
                             child: QuimifyButton(
-                              color: const Color.fromARGB(255, 255, 96, 96),
+                              height: 50,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 96, 96),
                               enabled: _canRemove(),
                               onPressed: _removeButton,
                               child: Text(
@@ -636,7 +642,7 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                                   fontSize: 24,
                                   fontWeight: FontWeight.w500,
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.onPrimary,
                                 ),
                                 strutStyle:
                                     const StrutStyle(fontSize: 24, height: 1.2),
@@ -697,12 +703,13 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
         ),
         actions: [
           QuimifyButton.gradient(
+            height: 50,
             gradient: quimifyGradient,
             onPressed: _doneButton,
             child: Text(
               'Enlazar',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),

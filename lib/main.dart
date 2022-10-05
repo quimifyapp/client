@@ -63,8 +63,8 @@ class QuimifyApp extends StatelessWidget {
             surface: Colors.white,
             background: Color.fromARGB(255, 247, 247, 247),
 
-            onPrimary: Colors.white,
-            // White text
+            onPrimary: Colors.white, // White text
+            onPrimaryContainer: Colors.white70, // Unselected text
 
             onBackground: Color.fromARGB(255, 231, 246, 247),
             // Graph background
@@ -89,6 +89,8 @@ class QuimifyApp extends StatelessWidget {
 
             surfaceTint:
                 Color.fromARGB(255, 245, 245, 245), // Diagram background
+
+            onTertiaryContainer: Color.fromARGB(255, 106, 233, 218), // [<-]
           ),
         ),
         darkTheme: ThemeData(
@@ -104,8 +106,9 @@ class QuimifyApp extends StatelessWidget {
             surface: Color.fromARGB(255, 30, 30, 30),
             background: Color.fromARGB(255, 18, 18, 18),
 
-            onPrimary: Color.fromARGB(255, 18, 18, 18),
-            // Black text
+            onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
+            onPrimaryContainer:
+                Color.fromARGB(153, 18, 18, 18), // Unselected text
 
             onBackground: Color.fromARGB(255, 10, 38, 34),
             // Graph background
@@ -119,16 +122,18 @@ class QuimifyApp extends StatelessWidget {
             inverseSurface: Color.fromARGB(255, 235, 235, 235),
             // Lock icon
 
-            onError: Colors.white,
-            // Error text
+            onError: Color.fromARGB(255, 18, 18, 18), // Black text
+            // Error color
             error: Color.fromARGB(255, 255, 96, 96),
             // Background
-            onErrorContainer: Colors.white,
-            // Share text
+            onErrorContainer: Color.fromARGB(255, 18, 18, 18), // Black text
+            // Share color
             errorContainer: Color.fromARGB(255, 56, 133, 224),
             // Background
 
             surfaceTint: Color.fromARGB(255, 10, 10, 10), // Diagram background
+
+            onTertiaryContainer: Color.fromARGB(255, 118, 252, 237), // [<-]
           ),
         ),
         // App:

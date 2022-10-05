@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
 import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +17,17 @@ class QuimifyPageBar extends StatelessWidget {
             const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
         child: Row(
           children: [
-            QuimifyButton(
-              width: 50,
-              color: const Color.fromARGB(255, 106, 233, 218),
+            QuimifyIconButton.square(
+              height: 50,
+              backgroundColor:
+                  Theme.of(context).colorScheme.onTertiaryContainer,
               onPressed: () {
                 Navigator.of(context).pop();
                 stopLoading();
               },
-              child: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
             const SizedBox(width: 20),
@@ -36,10 +37,11 @@ class QuimifyPageBar extends StatelessWidget {
                 maxLines: 1,
                 stepGranularity: 0.1,
                 maxFontSize: 20,
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

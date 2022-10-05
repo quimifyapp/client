@@ -37,10 +37,10 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              QuimifyIconButton(
+              QuimifyIconButton.square(
                 height: 44,
-                color: Theme.of(context).colorScheme.onError,
                 backgroundColor: Theme.of(context).colorScheme.error,
+                onPressed: () {},
                 icon: Image.asset(
                   'assets/images/icons/report.png',
                   color: Theme.of(context).colorScheme.onError,
@@ -48,9 +48,9 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              QuimifyIconButton(
+              QuimifyIconButton.square(
                 height: 44,
-                color: Theme.of(context).colorScheme.onErrorContainer,
+                onPressed: () {},
                 backgroundColor: Theme.of(context).colorScheme.errorContainer,
                 icon: Icon(
                   Icons.share_outlined,
@@ -75,8 +75,12 @@ class OrganicResultView extends StatelessWidget {
             child: Wrap(
               runSpacing: 13,
               children: fields.entries
-                  .map((field) =>
-                      OrganicResultField(title: field.key, field: field.value))
+                  .map(
+                    (field) => OrganicResultField(
+                      title: field.key,
+                      field: field.value,
+                    ),
+                  )
                   .toList(),
             ),
           ),
