@@ -42,35 +42,37 @@ class QuimifyDialog extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton(
+                  alignment: Alignment.topRight,
+                  padding: const EdgeInsets.only(top: 15, right: 15),
                   onPressed: () => Navigator.of(context).pop(),
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
                   icon: Icon(
                     Icons.close_rounded,
                     color: Theme.of(context).colorScheme.primary,
-                    size: 25,
+                    size: 17,
                   ),
-                  padding:
-                      const EdgeInsets.only(top: 17, right: 17, bottom: 10),
                 ),
               ],
             ),
           Text(
             title,
-            textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 22,
+              height: 0.6
             ),
-          ),
+          )
         ],
       ),
-      contentPadding:
-          const EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
-      content: content,
-      actionsPadding: const EdgeInsets.only(
+      contentPadding: const EdgeInsets.only(
+        top: 20,
         bottom: 20,
-        left: 15,
-        right: 15,
+        left: 25,
+        right: 25,
       ),
+      content: content,
+      actionsPadding: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
       actions: [
         action,
       ],

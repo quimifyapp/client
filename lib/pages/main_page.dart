@@ -38,11 +38,13 @@ class _MainPageState extends State<MainPage> {
           details: widget.accessResult!.messageDetails!,
           linkName: widget.accessResult!.messageLinkName!,
           link: widget.accessResult!.messageLink!,
+          hasCloseButton: true,
         ).show(context);
       } else {
         QuimifyMessageDialog(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
+          hasCloseButton: true,
         ).show(context);
       }
     }
