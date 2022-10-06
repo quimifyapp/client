@@ -18,14 +18,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  static const double widthFactor = 0.85;
+  static const double _widthFactor = 0.85;
 
-  int currentPage = 0;
+  int _currentPage = 0;
 
   void _goToPage(int page) {
-    if (currentPage != page) {
+    if (_currentPage != page) {
       setState(() {
-        currentPage = page;
+        _currentPage = page;
       });
     }
   }
@@ -85,7 +85,7 @@ class _MainPageState extends State<MainPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        if (currentPage == 0) {
+        if (_currentPage == 0) {
           Api().close();
           return true;
         } else {
@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
         // Body:
         body: IndexedStack(
-          index: currentPage,
+          index: _currentPage,
           children: [
             NomenclaturePage(),
             CalculatorPage(),
@@ -108,7 +108,7 @@ class _MainPageState extends State<MainPage> {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: FractionallySizedBox(
-              widthFactor: widthFactor,
+              widthFactor: _widthFactor,
               child: GestureDetector(
                 child: Container(
                   height: 60,
@@ -116,61 +116,80 @@ class _MainPageState extends State<MainPage> {
                     gradient: quimifyGradient,
                     borderRadius: BorderRadius.circular(35),
                     border: Border.all(
-                        color: Theme.of(context).colorScheme.background,
-                        width: 0.5),
+                      color: Theme.of(context).colorScheme.background,
+                      width: 0.5,
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      const Spacer(),
-                      Image.asset(
-                        'assets/images/icons/molecule.png',
-                        width: 20,
-                        color: currentPage == 0 ? enabledColor : disabledColor,
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 25,
+                            child: Container(),
+                          ),
+                          Image.asset(
+                            'assets/images/icons/molecule.png',
+                            width: 20,
+                            color: _currentPage == 0
+                                ? enabledColor
+                                : disabledColor,
+                          ),
+                          navigationBarItemSeparator,
+                          Text(
+                            'Formulación',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: _currentPage == 0
+                                  ? FontWeight.w800
+                                  : FontWeight.bold,
+                              color: _currentPage == 0
+                                  ? enabledColor
+                                  : disabledColor,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 50,
+                            child: Container(),
+                          ),
+                          Image.asset(
+                            'assets/images/icons/calculator.png',
+                            width: 20,
+                            color: _currentPage == 1
+                                ? enabledColor
+                                : disabledColor,
+                          ),
+                          navigationBarItemSeparator,
+                          Text(
+                            'Calculadora',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: _currentPage == 1
+                                  ? FontWeight.w800
+                                  : FontWeight.bold,
+                              color: _currentPage == 1
+                                  ? enabledColor
+                                  : disabledColor,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 25,
+                            child: Container(),
+                          ),
+                        ],
                       ),
-                      navigationBarItemSeparator,
-                      Text(
-                        'Formulación',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: currentPage == 0
-                              ? FontWeight.w800
-                              : FontWeight.bold,
-                          color:
-                              currentPage == 0 ? enabledColor : disabledColor,
-                        ),
-                      ),
-                      const Spacer(),
                       Container(
                         height: 40,
                         width: 1.0,
                         color: Theme.of(context).colorScheme.background,
                       ),
-                      const Spacer(),
-                      Image.asset(
-                        'assets/images/icons/calculator.png',
-                        width: 20,
-                        color: currentPage == 1 ? enabledColor : disabledColor,
-                      ),
-                      navigationBarItemSeparator,
-                      Text(
-                        'Calculadora',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: currentPage == 1
-                              ? FontWeight.w800
-                              : FontWeight.bold,
-                          color:
-                              currentPage == 1 ? enabledColor : disabledColor,
-                        ),
-                      ),
-                      const Spacer(),
                     ],
                   ),
                 ),
                 onTapUp: (details) {
                   double width =
-                      MediaQuery.of(context).size.width * widthFactor;
+                      MediaQuery.of(context).size.width * _widthFactor;
                   _goToPage(details.localPosition.dx < width * 0.5 ? 0 : 1);
                 },
               ),
