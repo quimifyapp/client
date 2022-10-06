@@ -64,7 +64,8 @@ class QuimifyApp extends StatelessWidget {
             background: Color.fromARGB(255, 247, 247, 247),
 
             onPrimary: Colors.white, // White text
-            onPrimaryContainer: Colors.white70, // Unselected text
+            onPrimaryContainer:
+                Color.fromARGB(255, 240, 240, 240), // Unselected text
 
             onBackground: Color.fromARGB(255, 231, 246, 247),
             // Graph background
@@ -108,7 +109,7 @@ class QuimifyApp extends StatelessWidget {
 
             onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
             onPrimaryContainer:
-                Color.fromARGB(153, 18, 18, 18), // Unselected text
+                Color.fromARGB(255, 90, 90, 90), // Unselected text
 
             onBackground: Color.fromARGB(255, 10, 38, 34),
             // Graph background

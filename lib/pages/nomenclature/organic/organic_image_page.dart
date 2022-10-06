@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class OrganicImagePage extends StatefulWidget {
-  const OrganicImagePage({Key? key, required this.imageProvider}) : super(key: key);
+  const OrganicImagePage({Key? key, required this.imageProvider})
+      : super(key: key);
 
   final ImageProvider imageProvider;
 

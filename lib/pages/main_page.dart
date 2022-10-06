@@ -4,7 +4,7 @@ import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/access_result.dart';
 import 'package:cliente/pages/calculator/calculator_page.dart';
 import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
-import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 
@@ -33,14 +33,14 @@ class _MainPageState extends State<MainPage> {
   void _showWelcomeMessagePopup() {
     if (widget.accessResult!.messagePresent) {
       if (widget.accessResult!.messageLinkPresent!) {
-        QuimifyDialog.linkedMessage(
+        QuimifyMessageDialog.link(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
           linkName: widget.accessResult!.messageLinkName!,
           link: widget.accessResult!.messageLink!,
         ).show(context);
       } else {
-        QuimifyDialog.message(
+        QuimifyMessageDialog(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
         ).show(context);
@@ -49,14 +49,19 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _showWelcomePopups() {
+    bool optionalUpdate = !widget.accessResult!.updateMandatory!;
+
     if (widget.accessResult != null) {
       if (widget.accessResult!.updateAvailable) {
-        QuimifyDialog.update(
+        QuimifyMessageDialog.link(
+          title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
           details: widget.accessResult!.updateDetails,
-          closable: !widget.accessResult!.updateMandatory!,
+          linkName: 'Actualizar',
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
               : 'https://apps.apple.com/pa/app/youtube/id544007664',
+          closable: optionalUpdate,
+          hasCloseButton: optionalUpdate,
         ).show(context).then((value) => _showWelcomeMessagePopup());
       } else {
         _showWelcomeMessagePopup();
@@ -118,53 +123,49 @@ class _MainPageState extends State<MainPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/icons/molecule.png',
-                            width: 20,
-                            color:
-                                currentPage == 0 ? enabledColor : disabledColor,
-                          ),
-                          navigationBarItemSeparator,
-                          Text(
-                            'Formulación',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
-                              color: currentPage == 0
-                                  ? enabledColor
-                                  : disabledColor,
-                            ),
-                          ),
-                        ],
+                      const Spacer(),
+                      Image.asset(
+                        'assets/images/icons/molecule.png',
+                        width: 20,
+                        color: currentPage == 0 ? enabledColor : disabledColor,
                       ),
+                      navigationBarItemSeparator,
+                      Text(
+                        'Formulación',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: currentPage == 0
+                              ? FontWeight.w800
+                              : FontWeight.bold,
+                          color:
+                              currentPage == 0 ? enabledColor : disabledColor,
+                        ),
+                      ),
+                      const Spacer(),
                       Container(
                         height: 40,
-                        width: 0.5,
+                        width: 1.0,
                         color: Theme.of(context).colorScheme.background,
                       ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/icons/calculator.png',
-                            width: 20,
-                            color:
-                                currentPage == 1 ? enabledColor : disabledColor,
-                          ),
-                          navigationBarItemSeparator,
-                          Text(
-                            'Calculadora',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
-                              color: currentPage == 1
-                                  ? enabledColor
-                                  : disabledColor,
-                            ),
-                          ),
-                        ],
+                      const Spacer(),
+                      Image.asset(
+                        'assets/images/icons/calculator.png',
+                        width: 20,
+                        color: currentPage == 1 ? enabledColor : disabledColor,
                       ),
+                      navigationBarItemSeparator,
+                      Text(
+                        'Calculadora',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: currentPage == 1
+                              ? FontWeight.w800
+                              : FontWeight.bold,
+                          color:
+                              currentPage == 1 ? enabledColor : disabledColor,
+                        ),
+                      ),
+                      const Spacer(),
                     ],
                   ),
                 ),

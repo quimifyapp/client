@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/pages/nomenclature/widgets/quimify_search_bar.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
@@ -74,15 +74,16 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           _scrollToStart(); // Goes to the top of the page
         } else {
           if (!mounted) return; // For security reasons
-          QuimifyDialog.reportableMessage(
+          QuimifyMessageDialog.report(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$input"',
+            reportLabel: 'Formulación inorgánica',
           ).show(context);
         }
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        QuimifyDialog.message(
+        QuimifyMessageDialog(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$input"',
         ).show(context);

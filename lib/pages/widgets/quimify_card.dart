@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:flutter/material.dart';
@@ -54,21 +54,12 @@ class QuimifyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: page != null
-          ? () {
-              Navigator.of(context).push(
+          ? () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return page!;
-                  },
+                  builder: (BuildContext context) => page!,
                 ),
-              );
-            }
-          : _isLocked
-              ? () => const QuimifyDialog.message(
-                    title: 'Falta muy poco',
-                    details: 'Esta función pronto estará lista.',
-                  ).show(context)
-              : () {},
+              )
+          : () => const QuimifyMessageDialog.locked().show(context),
       child: Container(
         width: width,
         decoration: BoxDecoration(

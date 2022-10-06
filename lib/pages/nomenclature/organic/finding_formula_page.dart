@@ -2,9 +2,9 @@ import 'package:cliente/api/api.dart';
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:cliente/pages/nomenclature/widgets/quimify_search_bar.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:flutter/material.dart';
@@ -56,15 +56,16 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _textFocusNode.unfocus(); // Hides keyboard
         } else {
           if (!mounted) return; // For security reasons
-          QuimifyDialog.reportableMessage(
+          QuimifyMessageDialog.report(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
+            reportLabel: 'Formular orgánico',
           ).show(context);
         }
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        QuimifyDialog.message(
+        QuimifyMessageDialog(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$name"',
         ).show(context);

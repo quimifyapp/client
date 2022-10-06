@@ -8,13 +8,14 @@ import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/pages/widgets/quimify_switch.dart';
 import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/quimify_button.dart';
-import 'package:cliente/pages/widgets/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_loading.dart';
 import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/quimify_section_title.dart';
@@ -56,7 +57,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
-        const QuimifyDialog.message(
+        const QuimifyMessageDialog(
           title: 'Sin resultado',
         ).show(context);
 
@@ -65,7 +66,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      const QuimifyDialog.message(
+      const QuimifyMessageDialog(
         title: 'Sin resultado',
       ).show(context);
     }
@@ -506,18 +507,8 @@ class RadicalGeneratorPopup extends StatefulWidget {
 
   final void Function(int, bool) onSubmitted;
 
-  Future<void> show(BuildContext context) async {
-    await showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      barrierColor: Theme.of(context).colorScheme.shadow,
-      anchorPoint: const Offset(0, 0),
-      // Centered
-      builder: (BuildContext context) {
-        return this;
-      },
-    );
-  }
+  Future<void> show(BuildContext context) async =>
+      await showQuimifyDialog(this, true, context);
 
   @override
   State<RadicalGeneratorPopup> createState() => _RadicalGeneratorPopupState();
@@ -558,20 +549,8 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.value(true),
-      child: AlertDialog(
-        insetPadding: const EdgeInsets.all(25),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        title: Text(
-          'Radical',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 22,
-          ),
-        ),
-        contentPadding:
-            const EdgeInsets.only(top: 20, bottom: 35, left: 25, right: 25),
+      child: QuimifyDialog(
+        title: 'Radical',
         content: Wrap(
           runSpacing: 25,
           children: [
@@ -623,8 +602,10 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                                   color:
                                       Theme.of(context).colorScheme.onPrimary,
                                 ),
-                                strutStyle:
-                                    const StrutStyle(fontSize: 24, height: 1.2),
+                                strutStyle: const StrutStyle(
+                                  fontSize: 24,
+                                  height: 1.2,
+                                ),
                               ),
                             ),
                           ),
@@ -644,8 +625,10 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
                                   color:
                                       Theme.of(context).colorScheme.onPrimary,
                                 ),
-                                strutStyle:
-                                    const StrutStyle(fontSize: 24, height: 1.2),
+                                strutStyle: const StrutStyle(
+                                  fontSize: 24,
+                                  height: 1.2,
+                                ),
                               ),
                             ),
                           ),
@@ -696,26 +679,20 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
             ),
           ],
         ),
-        actionsPadding: const EdgeInsets.only(
-          bottom: 20,
-          left: 15,
-          right: 15,
-        ),
-        actions: [
-          QuimifyButton.gradient(
-            height: 50,
-            gradient: quimifyGradient,
-            onPressed: _doneButton,
-            child: Text(
-              'Enlazar',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
+        action: QuimifyButton.gradient(
+          height: 50,
+          gradient: quimifyGradient,
+          onPressed: _doneButton,
+          child: Text(
+            'Enlazar',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
+        ),
+        hasCloseButton: false,
       ),
     );
   }
