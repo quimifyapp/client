@@ -1,5 +1,4 @@
-
-import 'package:cliente/pages/widgets/quimify_teal.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 

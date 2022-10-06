@@ -1,7 +1,7 @@
-import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_button.dart';
-import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/objects/quimify_button.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

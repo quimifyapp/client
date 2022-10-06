@@ -8,17 +8,17 @@ import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
-import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
+import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:cliente/pages/widgets/objects/quimify_switch.dart';
+import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
+import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/pages/widgets/quimify_switch.dart';
-import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/quimify_button.dart';
-import 'package:cliente/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_loading.dart';
-import 'package:cliente/pages/widgets/quimify_page_bar.dart';
-import 'package:cliente/pages/widgets/quimify_section_title.dart';
+import 'package:cliente/pages/widgets/objects/quimify_button.dart';
+import 'package:cliente/pages/widgets/popups/quimify_loading.dart';
+import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingOpenChainPage extends StatefulWidget {
@@ -57,18 +57,14 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
-        const QuimifyMessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
+        const QuimifyMessageDialog(title: 'Sin resultado').show(context);
 
         return null;
       }
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      const QuimifyMessageDialog(
-        title: 'Sin resultado',
-      ).show(context);
+      const QuimifyMessageDialog(title: 'Sin resultado').show(context);
     }
 
     return result;

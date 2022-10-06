@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/quimify_button.dart';
+import 'package:cliente/pages/widgets/objects/quimify_button.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyIconButton extends StatelessWidget {

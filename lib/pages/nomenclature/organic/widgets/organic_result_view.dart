@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
-import 'package:cliente/pages/nomenclature/widgets/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/quimify_section_title.dart';
+import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

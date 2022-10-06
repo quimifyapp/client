@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/quimify_card.dart';
+import 'package:cliente/pages/widgets/menus/quimify_card.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyHorizontalMenu extends StatelessWidget {

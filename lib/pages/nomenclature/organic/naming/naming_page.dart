@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
-import 'package:cliente/pages/widgets/quimify_card.dart';
-import 'package:cliente/pages/widgets/quimify_page_bar.dart';
+import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:cliente/pages/widgets/menus/quimify_card.dart';
+import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingPage extends StatelessWidget {

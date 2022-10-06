@@ -1,8 +1,8 @@
 import 'package:cliente/api/results/organic_result.dart';
 import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
+import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/quimify_page_bar.dart';
 import 'package:flutter/material.dart';
 
 class OrganicResultPage extends StatelessWidget {

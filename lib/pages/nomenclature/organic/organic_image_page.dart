@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:cliente/pages/widgets/quimify_page_bar.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
+import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/pages/widgets/quimify_teal.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

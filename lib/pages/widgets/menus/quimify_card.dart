@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_gradient.dart';
-import 'package:cliente/pages/widgets/quimify_teal.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
+import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyCard extends StatelessWidget {

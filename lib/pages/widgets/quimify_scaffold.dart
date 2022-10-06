@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/quimify_gradient.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyScaffold extends StatelessWidget {

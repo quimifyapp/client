@@ -2,12 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:cliente/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/naming_page.dart';
-import 'package:cliente/pages/widgets/quimify_home_bar.dart';
-import 'package:cliente/pages/widgets/quimify_horizontal_menu.dart';
-import 'package:cliente/pages/widgets/quimify_card.dart';
+import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
+import 'package:cliente/pages/widgets/bars/quimify_home_bar.dart';
+import 'package:cliente/pages/widgets/menus/quimify_horizontal_menu.dart';
+import 'package:cliente/pages/widgets/menus/quimify_card.dart';
+import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/pages/widgets/quimify_teal.dart';
-import 'package:cliente/pages/widgets/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NomenclaturePage extends StatelessWidget {
