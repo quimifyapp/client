@@ -11,7 +11,6 @@ class QuimifyMessageDialog extends StatelessWidget {
     required this.title,
     this.details,
     this.closable = true,
-    this.hasCloseButton = false,
   })  : linkName = null,
         link = null,
         reportLabel = null,
@@ -26,7 +25,6 @@ class QuimifyMessageDialog extends StatelessWidget {
   })  : linkName = null,
         link = null,
         closable = true,
-        hasCloseButton = false,
         _hasLink = false,
         _hasReportButton = true;
 
@@ -37,7 +35,6 @@ class QuimifyMessageDialog extends StatelessWidget {
     required this.linkName,
     required this.link,
     this.closable = true,
-    this.hasCloseButton = false,
   })  : reportLabel = null,
         _hasLink = true,
         _hasReportButton = false;
@@ -47,7 +44,6 @@ class QuimifyMessageDialog extends StatelessWidget {
         details = 'Esta función pronto estará lista.',
         reportLabel = null,
         closable = true,
-        hasCloseButton = false,
         linkName = null,
         link = null,
         _hasLink = false,
@@ -56,7 +52,7 @@ class QuimifyMessageDialog extends StatelessWidget {
   final String title;
   final String? details;
   final String? linkName, link, reportLabel;
-  final bool closable, hasCloseButton;
+  final bool closable;
 
   final bool _hasLink, _hasReportButton;
 
@@ -82,7 +78,6 @@ class QuimifyMessageDialog extends StatelessWidget {
       onWillPop: () => Future.value(closable),
       child: QuimifyDialog(
         title: title,
-        hasCloseButton: hasCloseButton,
         content: (details != null && details!.isNotEmpty)
             ? Text(
                 details!,

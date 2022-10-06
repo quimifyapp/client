@@ -692,7 +692,6 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
             ),
           ),
         ),
-        hasCloseButton: true,
       ),
     );
   }
