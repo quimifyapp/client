@@ -64,13 +64,14 @@ class _OrganicImagePageState extends State<OrganicImagePage> {
                   imageProvider: widget.imageProvider,
                   controller: controller,
                   scaleStateController: scaleStateController,
-                  //minScale: 0.75,
-                  //maxScale: 2.5,
-                  disableGestures: true, // TODO: el bug
                   enableRotation: true,
                   backgroundDecoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
+                  // TODO el bug:
+                  //minScale: 0.75,
+                  //maxScale: 2.5,
+                  disableGestures: true,
                 ),
               ),
             ),

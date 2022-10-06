@@ -9,12 +9,12 @@ import 'package:cliente/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class GraphSelector extends StatefulWidget {
-  const GraphSelector(
-      {Key? key,
-        required this.mass,
-        required this.elementToGrams,
-        required this.elementToMoles})
-      : super(key: key);
+  const GraphSelector({
+    Key? key,
+    required this.mass,
+    required this.elementToGrams,
+    required this.elementToMoles,
+  }) : super(key: key);
 
   final num mass;
   final Map<String, num> elementToGrams;
@@ -25,9 +25,9 @@ class GraphSelector extends StatefulWidget {
 }
 
 class _GraphSelectorState extends State<GraphSelector> {
-  bool _mol = false;
+  bool _molesGraph = false;
 
-  void _switchButton(bool newValue) => setState(() => _mol = newValue);
+  void _switchButton(bool newValue) => setState(() => _molesGraph = newValue);
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +85,13 @@ class _GraphSelectorState extends State<GraphSelector> {
                 ),
               ),
               QuimifySwitch(
-                value: _mol,
+                value: _molesGraph,
                 onChanged: _switchButton,
               ),
               Text(
                 'Pasar a mol',
                 style: TextStyle(
-                  color: _mol
+                  color: _molesGraph
                       ? quimifyTeal
                       : Theme.of(context).colorScheme.secondary,
                   fontSize: 16,
@@ -102,7 +102,7 @@ class _GraphSelectorState extends State<GraphSelector> {
           ),
           const SizedBox(height: 15),
           IndexedStack(
-            index: _mol ? 1 : 0,
+            index: _molesGraph ? 1 : 0,
             children: [
               Graph(
                 symbols: symbols,

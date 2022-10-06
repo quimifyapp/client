@@ -5,7 +5,7 @@ import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class QuimifyMessageDialog extends StatelessWidget {
+class QuimifyMessageDialog extends StatefulWidget {
   const QuimifyMessageDialog({
     super.key,
     required this.title,
@@ -59,83 +59,88 @@ class QuimifyMessageDialog extends StatelessWidget {
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(this, closable, context);
 
+  @override
+  State<QuimifyMessageDialog> createState() => _QuimifyMessageDialogState();
+}
+
+class _QuimifyMessageDialogState extends State<QuimifyMessageDialog> {
+  late bool _reportButtonPressed;
+
   void _exit(BuildContext context) => Navigator.of(context).pop();
 
   void _openLink(BuildContext context) {
     launchUrl(
-      Uri.parse(link!),
+      Uri.parse(widget.link!),
       mode: LaunchMode.externalApplication,
     );
 
-    if (closable) {
+    if (widget.closable) {
       _exit(context);
     }
   }
 
   @override
+  void initState() {
+    _reportButtonPressed = false;
+    super.initState();
+  }
+
+  void _reportButton() {
+    setState(() => _reportButtonPressed = true);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => Future.value(closable),
+      onWillPop: () => Future.value(widget.closable),
       child: QuimifyDialog(
-        title: title,
-        content: (details != null && details!.isNotEmpty)
+        title: widget.title,
+        content: (widget.details != null && widget.details!.isNotEmpty)
             ? Text(
-                details!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                strutStyle: const StrutStyle(height: 1.5),
-              )
+          widget.details!,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          strutStyle: const StrutStyle(height: 1.5),
+        )
             : null,
-        action: _hasLink
-            ? QuimifyButton.gradient(
+        action: Row(
+          children: [
+            if (widget._hasReportButton)
+              Row(
+                children: [
+                  QuimifyIconButton.square(
+                    height: 50,
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                    onPressed: _reportButton,
+                    icon: Image.asset(
+                      'assets/images/icons/report.png',
+                      width: 20,
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ],
+              ),
+            Expanded(
+              child: QuimifyButton.gradient(
                 height: 50,
                 gradient: quimifyGradient,
+                onPressed: widget._hasLink
+                    ? () => _openLink(context)
+                    : () => _exit(context),
                 child: Text(
-                  linkName!,
+                  widget._hasLink ? widget.linkName! : 'Entendido',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 17,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () => _openLink(context),
-              )
-            : Row(
-                children: [
-                  if (_hasReportButton)
-                    Row(
-                      children: [
-                        QuimifyIconButton.square(
-                          height: 50,
-                          backgroundColor: Theme.of(context).colorScheme.error,
-                          onPressed: () {},
-                          icon: Image.asset(
-                            'assets/images/icons/report.png',
-                            width: 20,
-                            color: Theme.of(context).colorScheme.onError,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
-                  Expanded(
-                    child: QuimifyButton.gradient(
-                      height: 50,
-                      gradient: quimifyGradient,
-                      child: Text(
-                        'Entendido',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: 17,
-                        ),
-                      ),
-                      onPressed: () => _exit(context),
-                    ),
-                  ),
-                ],
               ),
+            ),
+          ],
+        ),
       ),
     );
   }

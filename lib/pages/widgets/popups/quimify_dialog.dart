@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> showQuimifyDialog(
-    Widget widget, bool closable, BuildContext context) async {
+Future<void> showQuimifyDialog(Widget widget, bool closable, context) async {
   await showDialog<void>(
     context: context,
     barrierDismissible: closable,
@@ -35,30 +34,29 @@ class QuimifyDialog extends StatelessWidget {
       titlePadding: EdgeInsets.zero,
       title: Column(
         children: [
-            Row(
-              children: [
-                const Spacer(),
-                IconButton(
-                  alignment: Alignment.topRight,
-                  padding: const EdgeInsets.only(top: 15, right: 15),
-                  onPressed: () => Navigator.of(context).pop(),
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 17,
-                  ),
+          Row(
+            children: [
+              const Spacer(),
+              IconButton(
+                alignment: Alignment.topRight,
+                padding: const EdgeInsets.only(top: 15, right: 15),
+                onPressed: () => Navigator.of(context).pop(),
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 17,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
           Text(
             title,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 22,
-              height: 0.6
-            ),
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 22,
+                height: 0.6),
           )
         ],
       ),

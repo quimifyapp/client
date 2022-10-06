@@ -49,10 +49,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _showWelcomePopups() {
-    bool optionalUpdate = !widget.accessResult!.updateMandatory!;
-
     if (widget.accessResult != null) {
       if (widget.accessResult!.updateAvailable) {
+        bool optionalUpdate = !widget.accessResult!.updateMandatory!;
+
         QuimifyMessageDialog.link(
           title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
           details: widget.accessResult!.updateDetails,
