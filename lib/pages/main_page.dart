@@ -126,7 +126,7 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         children: [
                           Flexible(
-                            flex: 25,
+                            flex: 27,
                             child: Container(),
                           ),
                           Image.asset(
@@ -150,7 +150,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           Flexible(
-                            flex: 50,
+                            flex: 46,
                             child: Container(),
                           ),
                           Image.asset(
@@ -174,7 +174,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           Flexible(
-                            flex: 25,
+                            flex: 27,
                             child: Container(),
                           ),
                         ],
