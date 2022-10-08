@@ -59,15 +59,14 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           QuimifyMessageDialog.report(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
-            reportLabel: 'Formular orgánico',
+            reportLabel: 'Formular orgánico ("$name")',
           ).show(context);
         }
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog(
+        const QuimifyMessageDialog(
           title: 'Sin resultado',
-          details: 'No se ha encontrado:\n"$name"',
         ).show(context);
       }
     }

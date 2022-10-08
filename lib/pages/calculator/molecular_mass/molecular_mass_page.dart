@@ -34,7 +34,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     97.96737971,
     {'H': 2.01588, 'S': 32.066, 'O': 63.976},
     {'H': 2, 'S': 1, 'O': 4},
-    '',
+    null,
   );
 
   Future<void> _calculate() async {
@@ -60,7 +60,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         QuimifyMessageDialog.report(
           title: 'Sin resultado',
           details: toSubscripts(result.error!),
-          reportLabel: 'Masa molecular',
+          reportLabel: 'Masa molecular ("$input")',
         ).show(context);
       }
     } else {

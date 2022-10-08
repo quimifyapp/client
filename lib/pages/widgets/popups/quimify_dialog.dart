@@ -18,12 +18,12 @@ class QuimifyDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.content,
-    required this.action,
+    required this.actions,
   });
 
   final String title;
   final Widget? content;
-  final Widget action;
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +62,17 @@ class QuimifyDialog extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.only(
         top: 20,
-        bottom: 20,
         left: 25,
         right: 25,
       ),
       content: content,
-      actionsPadding: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
-      actions: [
-        action,
-      ],
+      actionsPadding: const EdgeInsets.only(
+        top: 20,
+        bottom: 20,
+        left: 15,
+        right: 15,
+      ),
+      actions: actions,
     );
   }
 }

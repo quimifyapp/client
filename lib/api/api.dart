@@ -23,8 +23,6 @@ class Api {
   static const _clientVersion = 0;
   static const _authority = 'api.quimify.com';
 
-  // static const _authority = '192.168.1.155:8080';
-
   static String? _lastUrl, _lastResponse;
 
   Future<void> connect() async {
@@ -44,7 +42,6 @@ class Api {
 
     try {
       Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
-      // Uri url = Uri.http(_authority, path, params);
 
       String urlString = url.toString();
 
@@ -59,15 +56,22 @@ class Api {
         response = body;
       } else {
         // Server crash or invalid URL
-        // Error...
+        sendReport(
+          label: 'HTTP código $httpResponse.statusCode',
+          details: urlString,
+        );
       }
 
       _lastUrl = urlString;
       _lastResponse = response;
     } catch (e) {
-      print(e.toString());
-      // No internet, server down or client error
-      // Error...
+      if (false) {
+        // No Internet connection
+        // TODO
+      } else {
+        // Server down or client error
+        sendReport(label: 'Error al conectarse a la API');
+      }
     }
 
     return response;
@@ -82,36 +86,52 @@ class Api {
             ? 1
             : 0;
 
-    String? response = await _getResponse('cliente', {
-      'version': _clientVersion.toString(),
-      'plataforma': platform.toString(),
-    });
+    String? response = await _getResponse(
+      'cliente',
+      {
+        'version': _clientVersion.toString(),
+        'plataforma': platform.toString(),
+      },
+    );
 
     if (response != null) {
       try {
         result = AccessResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
+      } catch (_) {}
     }
 
     return result;
   }
 
+  Future<void> sendReport({required String label, String? details}) async {
+    Uri url = Uri.https(
+      _authority,
+      'v$_apiVersion/reporte',
+      {
+        'version': _clientVersion.toString(),
+        'titulo': label,
+        'detalles': details,
+      },
+    );
+
+    await _client.post(url);
+  }
+
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 
-    String? response = await _getResponse('inorganico', {
-      'input': input,
-      'foto': photo.toString(),
-    });
+    String? response = await _getResponse(
+      'inorganico',
+      {
+        'input': input,
+        'foto': photo.toString(),
+      },
+    );
 
     if (response != null) {
       try {
         result = InorganicResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
+      } catch (_) {}
     }
 
     return result;
@@ -120,16 +140,17 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response = await _getResponse('masamolecular', {
-      'formula': formula,
-    });
+    String? response = await _getResponse(
+      'masamolecular',
+      {
+        'formula': formula,
+      },
+    );
 
     if (response != null) {
       try {
         result = MolecularMassResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
+      } catch (_) {}
     }
 
     return result;
@@ -138,17 +159,18 @@ class Api {
   Future<OrganicResult?> getOrganicByName(String name, bool picture) async {
     OrganicResult? result;
 
-    String? response = await _getResponse('organic/name', {
-      'name': name,
-      'picture': picture.toString(),
-    });
+    String? response = await _getResponse(
+      'organic/name',
+      {
+        'name': name,
+        'picture': picture.toString(),
+      },
+    );
 
     if (response != null) {
       try {
         result = OrganicResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
+      } catch (_) {}
     }
 
     return result;
@@ -157,16 +179,17 @@ class Api {
   Future<OrganicResult?> getOrganic(List<int> structureSequence) async {
     OrganicResult? result;
 
-    String? response = await _getResponse('organic/structure', {
-      'structure-sequence': structureSequence.join(','),
-    });
+    String? response = await _getResponse(
+      'organic/structure',
+      {
+        'structure-sequence': structureSequence.join(','),
+      },
+    );
 
     if (response != null) {
       try {
         result = OrganicResult.fromJson(response);
-      } catch (_) {
-        // Error...
-      }
+      } catch (_) {}
     }
 
     return result;

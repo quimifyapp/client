@@ -675,19 +675,21 @@ class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
             ),
           ],
         ),
-        action: QuimifyButton.gradient(
-          height: 50,
-          gradient: quimifyGradient,
-          onPressed: _doneButton,
-          child: Text(
-            'Enlazar',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
+        actions: [
+          QuimifyButton.gradient(
+            height: 50,
+            gradient: quimifyGradient,
+            onPressed: _doneButton,
+            child: Text(
+              'Enlazar',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
