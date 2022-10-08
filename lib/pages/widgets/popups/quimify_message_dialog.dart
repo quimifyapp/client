@@ -89,7 +89,7 @@ class _QuimifyMessageDialogState extends State<QuimifyMessageDialog> {
   }
 
   Future<void> _report(String details) async {
-    await Api().sendReport(label: widget.reportLabel!);
+    await Api().sendReport(label: widget.reportLabel!, details: details);
   }
 
   void _exitWithThanks() {
