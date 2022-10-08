@@ -3,6 +3,7 @@ import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
 import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
 import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +25,16 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   late bool _isCollapsed = true;
   late List<InorganicResultField> _quantities;
 
+  void _pressedReportButton() {
+    QuimifyReportDialog(
+      details: 'Resultado de la búsqueda:\n"${widget.query}"',
+      reportLabel: 'Formulación inorgánica, resultado de "${widget.query}"',
+    ).show(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // TODO separar en otro aryibo
     _quantities = [
       if (widget.inorganicResult.mass != null)
         InorganicResultField(
@@ -206,7 +215,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                 height: 50,
                                 backgroundColor:
                                     Theme.of(context).colorScheme.error,
-                                onPressed: () {},
+                                onPressed: _pressedReportButton,
                                 icon: Image.asset(
                                   'assets/images/icons/report.png',
                                   color: Theme.of(context).colorScheme.onError,

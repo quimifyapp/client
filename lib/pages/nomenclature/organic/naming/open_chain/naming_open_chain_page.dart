@@ -8,12 +8,14 @@ import 'package:cliente/organic/compounds/open_chain/ether.dart';
 import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
 import 'package:cliente/organic/compounds/open_chain/simple.dart';
 import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
+import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
 import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/objects/quimify_switch.dart';
 import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
 import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:cliente/pages/widgets/objects/quimify_button.dart';
@@ -32,12 +34,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
   static const String _title = 'Nombrar cadena abierta';
 
   late List<OpenChain> _openChainStack;
-  late List<List<int>> _inputSequenceStack;
+  late List<List<int>> _sequenceStack;
   late bool _done;
 
   void _reset() {
     _openChainStack = [Simple()];
-    _inputSequenceStack = [[]];
+    _sequenceStack = [[]];
     _done = false;
   }
 
@@ -50,7 +52,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
   Future<OrganicResult?> _search() async {
     startLoading(context);
 
-    OrganicResult? result = await Api().getOrganic(_inputSequenceStack.last);
+    OrganicResult? result = await Api().getOrganic(_sequenceStack.last);
 
     stopLoading();
 
@@ -74,20 +76,38 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (_done) {
       _search().then(
         (organicResult) {
-          setState(_reset);
-
           if (organicResult != null) {
+            String sequence = _sequenceStack.last.toString();
+
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
                   return OrganicResultPage(
                     title: _title,
-                    result: organicResult,
+                    organicResultView: OrganicResultView(
+                      fields: {
+                        if (organicResult.name != null)
+                          'Nombre:': organicResult.name!,
+                        if (organicResult.mass != null)
+                          'Masa molecular:': '${organicResult.mass!} g/mol',
+                        if (organicResult.structure != null)
+                          'Fórmula:': formatStructure(organicResult.structure!),
+                      },
+                      imageProvider: organicResult.url2D != null
+                          ? NetworkImage(organicResult.url2D!)
+                          : null,
+                      quimifyReportDialog: QuimifyReportDialog(
+                        reportLabel: 'Cadena abierta, búsqueda de $sequence',
+                        details: 'Resultado:\n"${organicResult.name!}"',
+                      ),
+                    ),
                   );
                 },
               ),
             );
           }
+
+          setState(_reset);
         },
       );
     }
@@ -99,7 +119,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
 
   void _startEditing() {
     _openChainStack.add(_openChainStack.last.getCopy());
-    _inputSequenceStack.add(List.from(_inputSequenceStack.last));
+    _sequenceStack.add(List.from(_sequenceStack.last));
   }
 
   bool _canBondCarbon() =>
@@ -110,7 +130,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       _startEditing();
       setState(() {
         _openChainStack.last.bondCarbon();
-        _inputSequenceStack.last.add(-1);
+        _sequenceStack.last.add(-1);
         _checkDone();
       });
     }
@@ -129,7 +149,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               .indexOf(FunctionalGroup.hydrogen);
           if (code != -1) {
             _openChainStack.last.bondFunctionalGroup(FunctionalGroup.hydrogen);
-            _inputSequenceStack.last.add(code);
+            _sequenceStack.last.add(code);
             _checkDone();
           }
         }
@@ -143,7 +163,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (_canUndo()) {
       setState(() {
         _openChainStack.removeLast();
-        _inputSequenceStack.removeLast();
+        _sequenceStack.removeLast();
         _checkDone();
       });
     }
@@ -161,9 +181,9 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         _openChainStack.last
             .bondSubstituent(Substituent.radical(carbonCount, isIso));
 
-        _inputSequenceStack.last.add(code);
-        _inputSequenceStack.last.add(isIso ? 1 : 0);
-        _inputSequenceStack.last.add(carbonCount);
+        _sequenceStack.last.add(code);
+        _sequenceStack.last.add(isIso ? 1 : 0);
+        _sequenceStack.last.add(carbonCount);
 
         _checkDone();
       }
@@ -189,7 +209,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
           _openChainStack.last = Ether(_openChainStack.last as Simple);
         }
 
-        _inputSequenceStack.last.add(code);
+        _sequenceStack.last.add(code);
       }
     });
   }
@@ -504,7 +524,7 @@ class RadicalGeneratorPopup extends StatefulWidget {
   final void Function(int, bool) onSubmitted;
 
   Future<void> show(BuildContext context) async =>
-      await showQuimifyDialog(this, true, context);
+      await showQuimifyDialog(context: context, dialog: this);
 
   @override
   State<RadicalGeneratorPopup> createState() => _RadicalGeneratorPopupState();

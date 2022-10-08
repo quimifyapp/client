@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-Future<void> showQuimifyDialog(Widget widget, bool closable, context) async {
+Future<void> showQuimifyDialog({
+  required BuildContext context,
+  required Widget dialog,
+  bool closable = true,
+}) async {
   await showDialog<void>(
     context: context,
     barrierDismissible: closable,
@@ -8,7 +12,7 @@ Future<void> showQuimifyDialog(Widget widget, bool closable, context) async {
     anchorPoint: const Offset(0, 0),
     // Centered
     builder: (BuildContext context) {
-      return widget;
+      return dialog;
     },
   );
 }

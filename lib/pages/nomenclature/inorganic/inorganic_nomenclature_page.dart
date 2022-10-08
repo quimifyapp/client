@@ -72,10 +72,10 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           _scrollToStart(); // Goes to the top of the page
         } else {
           if (!mounted) return; // For security reasons
-          QuimifyMessageDialog.report(
+          QuimifyMessageDialog.reportable(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$input"',
-            reportLabel: 'Formulación inorgánica ("$input")',
+            reportLabel: 'Formulación inorgánica, búsqueda de "$input"',
           ).show(context);
         }
       } else {

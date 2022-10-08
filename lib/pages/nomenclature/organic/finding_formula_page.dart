@@ -5,6 +5,7 @@ import 'package:cliente/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:cliente/pages/widgets/popups/quimify_loading.dart';
 import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:cliente/pages/widgets/quimify_scaffold.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +57,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _textFocusNode.unfocus(); // Hides keyboard
         } else {
           if (!mounted) return; // For security reasons
-          QuimifyMessageDialog.report(
+          QuimifyMessageDialog.reportable(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
-            reportLabel: 'Formular orgánico ("$name")',
+            reportLabel: 'Formular orgánico, búsqueda de "$name"',
           ).show(context);
         }
       } else {
@@ -105,6 +106,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             imageProvider: _firstSearch
                 ? const AssetImage('assets/images/dietanoic-acid.png')
                 : NetworkImage(_result.url2D!) as ImageProvider,
+            quimifyReportDialog: QuimifyReportDialog(
+              reportLabel: 'Formular orgánico, resultado de "${_result.name!}"',
+              details: 'Resultado de:\n"${_result.name!}"',
+            ),
           ),
         ),
       ),

@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
   void _showWelcomeMessagePopup() {
     if (widget.accessResult!.messagePresent) {
       if (widget.accessResult!.messageLinkPresent!) {
-        QuimifyMessageDialog.link(
+        QuimifyMessageDialog.linked(
           title: widget.accessResult!.messageTitle!,
           details: widget.accessResult!.messageDetails!,
           linkName: widget.accessResult!.messageLinkName!,
@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
       if (widget.accessResult!.updateAvailable) {
         bool optionalUpdate = !widget.accessResult!.updateMandatory!;
 
-        QuimifyMessageDialog.link(
+        QuimifyMessageDialog.linked(
           title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
           details: widget.accessResult!.updateDetails,
           linkName: 'Actualizar',

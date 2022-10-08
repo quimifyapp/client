@@ -57,20 +57,23 @@ class Api {
       } else {
         // Server crash or invalid URL
         sendReport(
-          label: 'HTTP código $httpResponse.statusCode',
+          label: 'HTTP código ${httpResponse.statusCode}',
           details: urlString,
         );
       }
 
       _lastUrl = urlString;
       _lastResponse = response;
-    } catch (e) {
+    } catch (exception) {
+      // TODO
       if (false) {
         // No Internet connection
-        // TODO
       } else {
         // Server down or client error
-        sendReport(label: 'Error al conectarse a la API');
+        sendReport(
+          label: 'Error al conectarse a la API',
+          details: exception.toString(),
+        );
       }
     }
 

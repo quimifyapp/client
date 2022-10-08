@@ -57,9 +57,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _textFocusNode.unfocus();
       } else {
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog.report(
+        QuimifyMessageDialog.reportable(
           title: 'Sin resultado',
-          details: toSubscripts(result.error!),
+          details: result.error != null ? toSubscripts(result.error!) : null,
           reportLabel: 'Masa molecular ("$input")',
         ).show(context);
       }
@@ -215,7 +215,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           onChanged: (input) {
                             _textController.value =
                                 _textController.value.copyWith(
-                              text: formatStructureInput(input),
+                              text: formatStructureInput(input), // TODO comas, enlaces...
                             );
                           },
                           textInputAction: TextInputAction.search,
@@ -277,6 +277,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   ),
                 ),
                 const SizedBox(height: 25),
+                // TODO: reportar, compartir
                 GraphSelector(
                   mass: _result.mass!,
                   elementToGrams: _result.elementToGrams,

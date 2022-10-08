@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
 import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
+import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -10,10 +11,15 @@ class OrganicResultView extends StatelessWidget {
     Key? key,
     required this.fields,
     required this.imageProvider,
+    required this.quimifyReportDialog,
   }) : super(key: key);
 
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
+  final QuimifyReportDialog quimifyReportDialog;
+
+  void _pressedReportButton(BuildContext context) =>
+      quimifyReportDialog.show(context);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,7 @@ class OrganicResultView extends StatelessWidget {
               QuimifyIconButton.square(
                 height: 44,
                 backgroundColor: Theme.of(context).colorScheme.error,
-                onPressed: () {},
+                onPressed: () => _pressedReportButton(context),
                 icon: Image.asset(
                   'assets/images/icons/report.png',
                   color: Theme.of(context).colorScheme.onError,
