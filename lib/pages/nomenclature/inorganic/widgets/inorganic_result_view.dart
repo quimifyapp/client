@@ -29,7 +29,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   void _pressedReportButton() {
     QuimifyReportDialog(
-      details: 'Resultado de la búsqueda:\n"${widget.query}"',
+      details: 'Resultado de:\n"${widget.query}"',
       reportLabel: 'Formulación inorgánica, resultado de "${widget.query}"',
     ).show(context);
   }
