@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io' as io;
 
-import 'package:cliente/api/results/access_result.dart';
-import 'package:cliente/api/results/inorganic_result.dart';
-import 'package:cliente/api/results/molecular_mass_result.dart';
-import 'package:cliente/api/results/organic_result.dart';
+import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/api/results/inorganic_result.dart';
+import 'package:quimify_client/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;

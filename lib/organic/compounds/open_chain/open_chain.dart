@@ -1,6 +1,6 @@
-import 'package:cliente/organic/components/functional_group.dart';
-import 'package:cliente/organic/components/substituent.dart';
-import 'package:cliente/organic/organic.dart';
+import 'package:quimify_client/organic/components/functional_group.dart';
+import 'package:quimify_client/organic/components/substituent.dart';
+import 'package:quimify_client/organic/organic.dart';
 
 abstract class OpenChain extends Organic {
   OpenChain getCopy();

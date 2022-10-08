@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/objects/quimify_help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:flutter/material.dart';
 
 class QuimifySectionTitle extends StatelessWidget {

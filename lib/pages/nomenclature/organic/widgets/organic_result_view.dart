@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/nomenclature/organic/organic_image_page.dart';
-import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/organic/organic_image_page.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

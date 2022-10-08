@@ -1,9 +1,9 @@
-import 'package:cliente/api/api.dart';
-import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/popups/widgets/dialog_button.dart';
-import 'package:cliente/pages/widgets/popups/widgets/dialog_content.dart';
-import 'package:cliente/utils/text.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/dialog_content.dart';
+import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyReportDialog extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
+import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
 import 'package:flutter/material.dart';
 
 class InorganicResultFields extends StatelessWidget {

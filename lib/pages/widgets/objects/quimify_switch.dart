@@ -1,4 +1,4 @@
-import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
 
 class QuimifySwitch extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:cliente/api/api.dart';
-import 'package:cliente/api/results/access_result.dart';
-import 'package:cliente/pages/calculator/calculator_page.dart';
-import 'package:cliente/pages/nomenclature/nomenclature_page.dart';
-import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/pages/calculator/calculator_page.dart';
+import 'package:quimify_client/pages/nomenclature/nomenclature_page.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {

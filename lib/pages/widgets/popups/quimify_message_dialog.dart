@@ -1,8 +1,8 @@
-import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
-import 'package:cliente/pages/widgets/popups/widgets/dialog_button.dart';
-import 'package:cliente/pages/widgets/popups/widgets/dialog_content.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/dialog_content.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

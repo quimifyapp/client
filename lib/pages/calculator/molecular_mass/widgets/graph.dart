@@ -1,6 +1,6 @@
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_bar.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_bar.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
 import 'package:flutter/material.dart';
 
 class Graph extends StatelessWidget {

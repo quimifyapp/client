@@ -1,6 +1,6 @@
-import 'package:cliente/api/api.dart';
-import 'package:cliente/api/results/access_result.dart';
-import 'package:cliente/pages/main_page.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

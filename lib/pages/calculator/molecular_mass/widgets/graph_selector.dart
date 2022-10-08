@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_bar.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
-import 'package:cliente/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
-import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
-import 'package:cliente/pages/widgets/objects/quimify_switch.dart';
-import 'package:cliente/utils/text.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_bar.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
+import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class GraphSelector extends StatefulWidget {

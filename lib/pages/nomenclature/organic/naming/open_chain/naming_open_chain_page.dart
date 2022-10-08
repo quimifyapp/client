@@ -1,26 +1,26 @@
 import 'dart:ui';
 
-import 'package:cliente/api/api.dart';
-import 'package:cliente/api/results/organic_result.dart';
-import 'package:cliente/organic/components/functional_group.dart';
-import 'package:cliente/organic/components/substituent.dart';
-import 'package:cliente/organic/compounds/open_chain/ether.dart';
-import 'package:cliente/organic/compounds/open_chain/open_chain.dart';
-import 'package:cliente/organic/compounds/open_chain/simple.dart';
-import 'package:cliente/pages/nomenclature/organic/naming/organic_result_page.dart';
-import 'package:cliente/pages/nomenclature/organic/widgets/organic_result_view.dart';
-import 'package:cliente/pages/widgets/appearance/quimify_gradient.dart';
-import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
-import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:cliente/pages/widgets/objects/quimify_switch.dart';
-import 'package:cliente/pages/widgets/popups/quimify_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/utils/text.dart';
-import 'package:cliente/pages/widgets/objects/quimify_button.dart';
-import 'package:cliente/pages/widgets/popups/quimify_loading.dart';
-import 'package:cliente/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/organic/components/functional_group.dart';
+import 'package:quimify_client/organic/components/substituent.dart';
+import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
+import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
+import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
+import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
 class NamingOpenChainPage extends StatefulWidget {

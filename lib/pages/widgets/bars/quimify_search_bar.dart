@@ -1,6 +1,6 @@
-import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/utils/text.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

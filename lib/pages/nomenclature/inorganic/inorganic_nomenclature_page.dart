@@ -1,12 +1,12 @@
-import 'package:cliente/api/api.dart';
-import 'package:cliente/api/results/inorganic_result.dart';
-import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_view.dart';
-import 'package:cliente/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:cliente/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:cliente/pages/widgets/popups/quimify_loading.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/quimify_scaffold.dart';
-import 'package:cliente/utils/text.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/api/results/inorganic_result.dart';
+import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_view.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class InorganicNomenclaturePage extends StatefulWidget {

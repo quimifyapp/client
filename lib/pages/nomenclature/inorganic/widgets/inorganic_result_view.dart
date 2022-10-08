@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cliente/api/results/inorganic_result.dart';
-import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
-import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
-import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
-import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
-import 'package:cliente/utils/text.dart';
+import 'package:quimify_client/api/results/inorganic_result.dart';
+import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
+import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class InorganicResultView extends StatefulWidget {
