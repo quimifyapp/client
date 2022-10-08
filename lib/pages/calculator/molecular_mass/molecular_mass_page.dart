@@ -22,8 +22,8 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
-  final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
+  final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   // Initial values:
@@ -60,7 +60,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         QuimifyMessageDialog.reportable(
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
-          reportLabel: 'Masa molecular ("$input")',
+          reportLabel: 'Masa molecular, búsqueda de "$input"',
         ).show(context);
       }
     } else {
@@ -205,7 +205,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           // Logic:
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
-                              inputFormatter,
+                              structureInputFormatter,
                             ),
                           ],
                           textCapitalization: TextCapitalization.sentences,
@@ -215,7 +215,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           onChanged: (input) {
                             _textController.value =
                                 _textController.value.copyWith(
-                              text: formatStructureInput(input), // TODO comas, enlaces...
+                              text: formatStructureInput(input), // TODO enlaces
                             );
                           },
                           textInputAction: TextInputAction.search,
@@ -277,7 +277,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   ),
                 ),
                 const SizedBox(height: 25),
-                // TODO: reportar, compartir
                 GraphSelector(
                   mass: _result.mass!,
                   elementToGrams: _result.elementToGrams,

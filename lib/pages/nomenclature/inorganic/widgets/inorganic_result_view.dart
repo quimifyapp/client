@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cliente/api/results/inorganic_result.dart';
 import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
+import 'package:cliente/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
 import 'package:cliente/pages/widgets/appearance/quimify_teal.dart';
 import 'package:cliente/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:cliente/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:cliente/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:cliente/utils/text.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
 
   late bool _isCollapsed = true;
-  late List<InorganicResultField> _quantities;
+  late List<InorganicResultField> fields;
 
   void _pressedReportButton() {
     QuimifyReportDialog(
@@ -32,42 +34,15 @@ class _InorganicResultViewState extends State<InorganicResultView> {
     ).show(context);
   }
 
+  void _pressedShareButton() =>
+      const QuimifyMessageDialog.locked().show(context);
+
+  void _onTap() => setState(() => _isCollapsed = !_isCollapsed);
+
   @override
   Widget build(BuildContext context) {
-    // TODO separar en otro aryibo
-    _quantities = [
-      if (widget.inorganicResult.mass != null)
-        InorganicResultField(
-          title: 'Masa',
-          quantity: widget.inorganicResult.mass!,
-          unit: 'g/mol',
-          titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
-        ),
-      if (widget.inorganicResult.density != null)
-        InorganicResultField(
-          title: 'Densidad',
-          quantity: widget.inorganicResult.density!,
-          unit: 'g/cm³',
-          titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
-        ),
-      if (widget.inorganicResult.meltingPoint != null)
-        InorganicResultField(
-          title: 'P. de fusión',
-          quantity: widget.inorganicResult.meltingPoint!,
-          unit: 'K',
-          titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
-        ),
-      if (widget.inorganicResult.boilingPoint != null)
-        InorganicResultField(
-          title: 'P. de ebullición',
-          quantity: widget.inorganicResult.boilingPoint!,
-          unit: 'K',
-          titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
-        ),
-    ];
-
     return GestureDetector(
-      onTap: () => setState(() => _isCollapsed = !_isCollapsed),
+      onTap: _onTap,
       child: Column(
         children: [
           // Head: (Result of: ...)
@@ -112,8 +87,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 bottom: Radius.circular(15),
               ),
             ),
-            padding:
-                const EdgeInsets.only(top: 20, bottom: 15, left: 20, right: 20),
+            padding: const EdgeInsets.only(
+              top: 20,
+              bottom: 15,
+              left: 20,
+              right: 20,
+            ),
             alignment: Alignment.centerLeft,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,52 +141,38 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        if (_quantities.isNotEmpty)
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onSurface,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.all(20),
-                            margin: const EdgeInsets.only(bottom: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: _quantities[0],
-                                    ),
-                                    if (_quantities.length > 1) ...[
-                                      const SizedBox(width: 20),
-                                      Expanded(
-                                        flex: 50,
-                                        child: _quantities[1],
-                                      ),
-                                    ],
-                                  ],
-                                ),
-                                if (_quantities.length > 2) ...[
-                                  const SizedBox(height: 20),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 50,
-                                        child: _quantities[2],
-                                      ),
-                                      if (_quantities.length > 3) ...[
-                                        const SizedBox(width: 20),
-                                        Expanded(
-                                          flex: 50,
-                                          child: _quantities[3],
-                                        ),
-                                      ],
-                                    ],
-                                  )
-                                ],
-                              ],
-                            ),
-                          ),
+                        InorganicResultFields(
+                          fields: [
+                            if (widget.inorganicResult.mass != null)
+                              InorganicResultField(
+                                title: 'Masa',
+                                quantity: widget.inorganicResult.mass!,
+                                unit: 'g/mol',
+                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.density != null)
+                              InorganicResultField(
+                                title: 'Densidad',
+                                quantity: widget.inorganicResult.density!,
+                                unit: 'g/cm³',
+                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.meltingPoint != null)
+                              InorganicResultField(
+                                title: 'P. de fusión',
+                                quantity: widget.inorganicResult.meltingPoint!,
+                                unit: 'K',
+                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.boilingPoint != null)
+                              InorganicResultField(
+                                title: 'P. de ebullición',
+                                quantity: widget.inorganicResult.boilingPoint!,
+                                unit: 'K',
+                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                              ),
+                          ],
+                        ),
                         Row(
                           children: [
                             Expanded(
@@ -236,7 +201,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             Expanded(
                               child: QuimifyIconButton(
                                 height: 50,
-                                onPressed: () {},
+                                onPressed: _pressedShareButton,
                                 backgroundColor: Theme.of(context)
                                     .colorScheme
                                     .errorContainer,

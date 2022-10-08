@@ -1,6 +1,9 @@
 RegExp inputFormatter = RegExp(r'[A-zÁ-úñ\d\(\) \-+,=≡#'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
+RegExp structureInputFormatter = RegExp(r'[A-z\d\(\) \-+=≡#'
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
+
 const Map<String, String> digitToSubscript = {
   '0': '\u2080',
   '1': '\u2081',

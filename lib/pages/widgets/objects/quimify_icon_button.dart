@@ -27,7 +27,7 @@ class QuimifyIconButton extends StatelessWidget {
   final Widget icon;
   final Text? text;
 
-  final void Function() onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
