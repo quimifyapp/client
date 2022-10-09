@@ -318,10 +318,9 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     return QuimifyScaffold(
       header: const QuimifyPageBar(title: _title),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+            margin: const EdgeInsets.only(top: 30, left: 25, right: 25),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
@@ -425,21 +424,24 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
+            const SizedBox(height: 25),
             Container(
-              margin: const EdgeInsets.all(25),
+              margin: const EdgeInsets.symmetric(horizontal: 25 + 0.5),
               height: 1.5,
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
-                padding: const EdgeInsets.only(bottom: 10), // +15=20
-                children: _openChainStack.last
-                    .getOrderedBondableGroups()
-                    .map((function) => functionToButton[function]!)
-                    .toList()
-                    .reversed
-                    .toList(),
+                padding: const EdgeInsets.only(top: 25, bottom: 10), // + 15=25
+                children: [
+                  ..._openChainStack.last
+                      .getOrderedBondableGroups()
+                      .map((function) => functionToButton[function]!)
+                      .toList()
+                      .reversed
+                      .toList(),
+                ],
               ),
             ),
           ],

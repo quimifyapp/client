@@ -29,8 +29,8 @@ class QuimifyReportDialog extends StatelessWidget {
     Navigator.of(context).pop();
 
     const QuimifyMessageDialog(
-      title: 'Muchas gracias',
-      details: 'Con tu ayuda podremos mejorar.',
+      title: 'Gracias por tu ayuda',
+      details: 'Seguiremos mejorando.',
     ).show(context);
   }
 
