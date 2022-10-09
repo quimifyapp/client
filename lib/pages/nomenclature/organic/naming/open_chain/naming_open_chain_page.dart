@@ -13,8 +13,10 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
@@ -64,7 +66,17 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      const QuimifyMessageDialog(title: 'Sin resultado').show(context);
+      checkInternetConnection().then(
+        (bool hasInternetConnection) {
+          if (hasInternetConnection) {
+            const QuimifyMessageDialog(
+              title: 'Sin resultado',
+            ).show(context);
+          } else {
+            quimifyNoInternetDialog.show(context);
+          }
+        },
+      );
     }
 
     return result;
@@ -75,7 +87,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       _search().then(
         (organicResult) {
           if (organicResult != null) {
-            String sequence = _sequenceStack.last.toString();
+            setState(_reset);
 
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -95,7 +107,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                           ? NetworkImage(organicResult.url2D!)
                           : null,
                       quimifyReportDialog: QuimifyReportDialog(
-                        reportLabel: 'Cadena abierta, búsqueda de $sequence',
+                        reportLabel: 'Cadena abierta, búsqueda de '
+                            '${_sequenceStack.last.toString()}',
                         details: 'Resultado:\n"${organicResult.name!}"',
                       ),
                     ),
@@ -104,8 +117,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               ),
             );
           }
-
-          setState(_reset);
         },
       );
     }

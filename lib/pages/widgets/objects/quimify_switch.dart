@@ -11,13 +11,18 @@ class QuimifySwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Switch(
-      activeColor: Colors.white.withOpacity(0.9),
-      inactiveThumbColor: Colors.white.withOpacity(0.9),
+      // Colors:
       activeTrackColor: quimifyTeal,
       inactiveTrackColor: Theme.of(context).colorScheme.secondary,
+      activeColor: Colors.white,
+      inactiveThumbColor: Colors.white,
+      // To remove top padding:
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      // To remove splash:
+      splashRadius: 0.0,
+      // Logic:
+      onChanged: (bool newValue) => onChanged(newValue),
       value: value,
-      onChanged: (newValue) => onChanged(newValue),
     );
   }
 }

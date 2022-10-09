@@ -1,5 +1,5 @@
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,9 +25,8 @@ class QuimifySearchBar extends StatefulWidget {
 
 class _QuimifySearchBarState extends State<QuimifySearchBar> {
   void _eraseInitialAndFinalBlanks() {
-    setState(() {
-      widget.controller.text = noInitialAndFinalBlanks(widget.controller.text);
-    }); // Clears input
+    setState(() => widget.controller.text =
+        noInitialAndFinalBlanks(widget.controller.text)); // Clears input
   }
 
   void _search() {
@@ -117,7 +116,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           QuimifyIconButton.square(
             height: 50,
             backgroundColor: Theme.of(context).colorScheme.surface,
-            onPressed: () => const QuimifyMessageDialog.locked().show(context),
+            onPressed: () => quimifyComingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
               color: Theme.of(context).colorScheme.primary,

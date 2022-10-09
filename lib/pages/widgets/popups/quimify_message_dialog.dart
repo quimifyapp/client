@@ -40,16 +40,6 @@ class QuimifyMessageDialog extends StatelessWidget {
         _hasLink = false,
         _hasReportButton = true;
 
-  const QuimifyMessageDialog.locked({super.key})
-      : title = 'Falta muy poco',
-        details = 'Esta función pronto estará lista.',
-        reportLabel = null,
-        closable = true,
-        linkName = null,
-        link = null,
-        _hasLink = false,
-        _hasReportButton = false;
-
   final String title;
   final String? details;
   final String? linkName, link, reportLabel;

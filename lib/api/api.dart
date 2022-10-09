@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io' as io;
+import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart' as io;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
 
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as io;
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -43,9 +43,7 @@ class Api {
     try {
       Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
 
-      String urlString = url.toString();
-
-      if (urlString == _lastUrl) {
+      if (url.toString() == _lastUrl) {
         return _lastResponse;
       }
 
@@ -55,26 +53,18 @@ class Api {
         String body = utf8.decode(httpResponse.bodyBytes);
         response = body;
       } else {
-        // Server crash or invalid URL
+        // Server bug or invalid URL:
         sendReport(
           label: 'HTTP código ${httpResponse.statusCode}',
-          details: urlString,
+          details: url.toString(),
         );
       }
 
-      _lastUrl = urlString;
+      // If reached, it could at least connect to the API:
+      _lastUrl = url.toString();
       _lastResponse = response;
-    } catch (exception) {
-      // TODO
-      if (false) {
-        // No Internet connection
-      } else {
-        // Server down or client error
-        sendReport(
-          label: 'Error al conectarse a la API',
-          details: exception.toString(),
-        );
-      }
+    } catch (_) {
+      // No Internet connection, server down or client error.
     }
 
     return response;

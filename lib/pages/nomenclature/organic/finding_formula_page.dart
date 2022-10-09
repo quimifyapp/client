@@ -5,8 +5,10 @@ import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
@@ -66,9 +68,17 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        const QuimifyMessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
+        checkInternetConnection().then(
+              (bool hasInternetConnection) {
+            if (hasInternetConnection) {
+              const QuimifyMessageDialog(
+                title: 'Sin resultado',
+              ).show(context);
+            } else {
+              quimifyNoInternetDialog.show(context);
+            }
+          },
+        );
       }
     }
   }
@@ -105,7 +115,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             },
             imageProvider: _firstSearch
                 ? const AssetImage('assets/images/dietanoic-acid.png')
-                : NetworkImage(_result.url2D!) as ImageProvider,
+                : _result.url2D != null
+                    ? NetworkImage(_result.url2D!) as ImageProvider
+                    : null,
             quimifyReportDialog: QuimifyReportDialog(
               reportLabel: 'Formular orgánico, resultado de "${_result.name!}"',
               details: 'Resultado de:\n"${_result.name!}"',

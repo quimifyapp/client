@@ -89,7 +89,7 @@ class QuimifyApp extends StatelessWidget {
             // Background
 
             surfaceTint:
-                Color.fromARGB(255, 245, 245, 245), // Diagram background
+                Color.fromARGB(255, 255, 255, 255), // Diagram background
 
             onTertiaryContainer: Color.fromARGB(255, 106, 233, 218), // [<-]
           ),

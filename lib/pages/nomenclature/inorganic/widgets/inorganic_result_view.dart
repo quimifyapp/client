@@ -4,7 +4,7 @@ import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_re
 import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   }
 
   void _pressedShareButton() =>
-      const QuimifyMessageDialog.locked().show(context);
+      quimifyComingSoonDialog.show(context);
 
   void _onTap() => setState(() => _isCollapsed = !_isCollapsed);
 

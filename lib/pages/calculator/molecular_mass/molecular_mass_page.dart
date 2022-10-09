@@ -8,7 +8,9 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:flutter/material.dart';
@@ -64,11 +66,18 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         ).show(context);
       }
     } else {
-      // Client already reported an error in this case
       if (!mounted) return; // For security reasons
-      const QuimifyMessageDialog(
-        title: 'Sin resultado',
-      ).show(context);
+      checkInternetConnection().then(
+        (bool hasInternetConnection) {
+          if (hasInternetConnection) {
+            const QuimifyMessageDialog(
+              title: 'Sin resultado',
+            ).show(context);
+          } else {
+            quimifyNoInternetDialog.show(context);
+          }
+        },
+      );
     }
   }
 

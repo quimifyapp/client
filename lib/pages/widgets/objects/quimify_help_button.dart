@@ -8,6 +8,8 @@ class HelpButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.help_outline, size: 22),
       color: Theme.of(context).colorScheme.primary,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       // To remove padding:
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),

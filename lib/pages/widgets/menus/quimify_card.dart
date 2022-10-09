@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyCard extends StatelessWidget {
@@ -59,7 +59,7 @@ class QuimifyCard extends StatelessWidget {
                   builder: (BuildContext context) => page!,
                 ),
               )
-          : () => const QuimifyMessageDialog.locked().show(context),
+          : () => quimifyComingSoonDialog.show(context),
       child: Container(
         width: width,
         decoration: BoxDecoration(
@@ -74,7 +74,11 @@ class QuimifyCard extends StatelessWidget {
                 gradient: quimifyGradient,
               ),
               padding: const EdgeInsets.only(
-                  top: 17, bottom: 13, left: 25, right: 25),
+                top: 17,
+                bottom: 13,
+                left: 25,
+                right: 25,
+              ),
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
@@ -89,7 +93,11 @@ class QuimifyCard extends StatelessWidget {
               Container(
                 color: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.only(
-                    top: 15, bottom: 15, left: 25, right: 25),
+                  top: 15,
+                  bottom: 15,
+                  left: 25,
+                  right: 25,
+                ),
                 alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
