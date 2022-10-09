@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/organic/components/functional_group.dart';
@@ -7,13 +5,13 @@ import 'package:quimify_client/organic/components/substituent.dart';
 import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
 import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/functional_group_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -113,9 +111,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     }
   }
 
-  void _checkDone() {
-    setState(() => _done = _openChainStack.last.isDone());
-  }
+  void _checkDone() => setState(() => _done = _openChainStack.last.isDone());
 
   void _startEditing() {
     _openChainStack.add(_openChainStack.last.getCopy());
@@ -190,9 +186,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     });
   }
 
-  void _getRadical() {
-    RadicalGeneratorPopup(onSubmitted: _bondRadical).show(context);
-  }
+  void _getRadical() =>
+      RadicalFactoryDialog(onSubmitted: _bondRadical).show(context);
 
   void _bondFunction(FunctionalGroup function) {
     _startEditing();
@@ -437,278 +432,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               ),
             ),
           ],
-        ],
-      ),
-    );
-  }
-}
-
-class FunctionalGroupButton extends StatelessWidget {
-  const FunctionalGroupButton(
-      {Key? key,
-      required this.bonds,
-      required this.text,
-      required this.actionText,
-      required this.onPressed})
-      : super(key: key);
-
-  final int bonds;
-  final String text, actionText;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 15, left: 25, right: 25),
-      child: QuimifyButton(
-        height: 60,
-        onPressed: onPressed,
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        child: Row(
-          children: [
-            const SizedBox(width: 10),
-            Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Image.asset(
-                bonds == 1
-                    ? 'assets/images/icons/single-bond.png'
-                    : bonds == 2
-                        ? 'assets/images/icons/double-bond.png'
-                        : 'assets/images/icons/triple-bond.png',
-                color: Theme.of(context).colorScheme.primary,
-                width: 30,
-              ),
-            ),
-            const SizedBox(width: 15),
-            Text(
-              formatStructureInput(text),
-              style: const TextStyle(
-                letterSpacing: 1,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              actionText,
-              style: const TextStyle(
-                color: quimifyTeal,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 5),
-            const Icon(
-              Icons.add,
-              color: quimifyTeal,
-              size: 22,
-            ),
-            const SizedBox(width: 15),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class RadicalGeneratorPopup extends StatefulWidget {
-  const RadicalGeneratorPopup({Key? key, required this.onSubmitted})
-      : super(key: key);
-
-  final void Function(int, bool) onSubmitted;
-
-  Future<void> show(BuildContext context) async =>
-      await showQuimifyDialog(context: context, dialog: this);
-
-  @override
-  State<RadicalGeneratorPopup> createState() => _RadicalGeneratorPopupState();
-}
-
-class _RadicalGeneratorPopupState extends State<RadicalGeneratorPopup> {
-  late int _carbonCount;
-  late bool _isIso;
-
-  @override
-  void initState() {
-    _carbonCount = 1;
-    _isIso = false;
-    super.initState();
-  }
-
-  void _doneButton() {
-    widget.onSubmitted(_carbonCount, _isIso);
-    Navigator.of(context).pop();
-  }
-
-  void _addButton() => setState(() => _carbonCount++);
-
-  bool _canRemove() => _carbonCount > (_isIso ? 3 : 1);
-
-  void _removeButton() => setState(() => _carbonCount--);
-
-  void _switchButton(bool newValue) {
-    setState(() {
-      _isIso = newValue;
-      if (_isIso && _carbonCount <= 3) {
-        _carbonCount = 3;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(true),
-      child: QuimifyDialog(
-        title: 'Radical',
-        content: Wrap(
-          runSpacing: 25,
-          children: [
-            const QuimifySectionTitle.custom(
-              title: 'Carbonos:',
-              horizontalPadding: 0,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-            Center(
-              child: SizedBox(
-                height: 90,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 35),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        '$_carbonCount',
-                        style: const TextStyle(
-                          fontSize: 34,
-                          fontWeight: FontWeight.w500,
-                          fontFeatures: [FontFeature.tabularFigures()],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    SizedBox(
-                      width: 40,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 2),
-                          Expanded(
-                            child: QuimifyButton(
-                              height: 50,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 56, 133, 224),
-                              onPressed: _addButton,
-                              child: Text(
-                                '+',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                ),
-                                strutStyle: const StrutStyle(
-                                  fontSize: 24,
-                                  height: 1.2,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Expanded(
-                            child: QuimifyButton(
-                              height: 50,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 255, 96, 96),
-                              enabled: _canRemove(),
-                              onPressed: _removeButton,
-                              child: Text(
-                                '--',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w500,
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                ),
-                                strutStyle: const StrutStyle(
-                                  fontSize: 24,
-                                  height: 1.2,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const QuimifySectionTitle.custom(
-              title: 'Terminación:',
-              horizontalPadding: 0,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-            const SizedBox(height: 30),
-            Center(
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  IndexedStack(
-                    index: _isIso ? 1 : 0,
-                    children: [
-                      Image.asset(
-                        'assets/images/icons/straight-radical.png',
-                        height: 65,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      Image.asset(
-                        'assets/images/icons/iso-radical.png',
-                        height: 65,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 40),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: QuimifySwitch(
-                      value: _isIso,
-                      onChanged: _switchButton,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          QuimifyButton.gradient(
-            height: 50,
-            gradient: quimifyGradient,
-            onPressed: _doneButton,
-            child: Text(
-              'Enlazar',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
         ],
       ),
     );
