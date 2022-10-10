@@ -24,8 +24,8 @@ class Organic {
 
   static void orderByFunctions(List<Substituent> substituents) {
     for (int i = 0; i < substituents.length - 1;) {
-      if (Enum.compareByIndex(substituents[i].getFunction(),
-              substituents[i + 1].getFunction()) >
+      if (Enum.compareByIndex(substituents[i].getFunctionalGroup(),
+              substituents[i + 1].getFunctionalGroup()) >
           0) {
         Substituent temp = substituents[i];
         substituents[i] = substituents[i + 1];

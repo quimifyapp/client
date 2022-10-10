@@ -9,13 +9,15 @@ abstract class OpenChain extends Organic {
 
   bool isDone();
 
-  List<FunctionalGroup> getOrderedBondableGroups();
+  bool canBondCarbon();
 
   void bondCarbon();
 
   void bondSubstituent(Substituent substituent);
 
   void bondFunctionalGroup(FunctionalGroup function);
+
+  List<FunctionalGroup> getOrderedBondableGroups();
 
   String getStructure();
 }

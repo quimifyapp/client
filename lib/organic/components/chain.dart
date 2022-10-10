@@ -23,10 +23,20 @@ class Chain extends Organic {
 
   bool isDone() => getFreeBonds() == 0;
 
+  bool hasFunctionalGroup(FunctionalGroup functionalGroup) =>
+      _carbons.any((carbon) => carbon.hasFunctionalGroup(functionalGroup));
+
   void bondCarbon() {
-    Carbon last = _carbons.last;
-    last.bondCarbon();
-    _carbons.add(Carbon(last.getFreeBonds() + 1));
+    int previousBonds;
+
+    if (_carbons.isNotEmpty) {
+      _carbons.last.bondCarbon();
+      previousBonds = _carbons.last.getFreeBonds() + 1;
+    } else {
+      previousBonds = 0;
+    }
+
+    _carbons.add(Carbon(previousBonds));
   }
 
   void bondSubstituent(Substituent substituent) =>
@@ -34,6 +44,16 @@ class Chain extends Organic {
 
   void bondFunctionalGroup(FunctionalGroup functionalGroup) =>
       bondSubstituent(Substituent(functionalGroup));
+
+  Set<Substituent> getBondedSubstituents() {
+    Set<Substituent> bondedSubstituents = {};
+
+    for (Carbon carbon in _carbons) {
+      bondedSubstituents.addAll(carbon.getUniqueSubstituents());
+    }
+
+    return bondedSubstituents;
+  }
 
   @override
   String toString() {

@@ -64,7 +64,7 @@ class Substituent extends Organic {
       ? _carbonCount == other._carbonCount && _isIso == other._isIso
       : _function == other._function && _bondCount == other._bondCount;
 
-  FunctionalGroup getFunction() => _function;
+  FunctionalGroup getFunctionalGroup() => _function;
 
   int getBonds() => _bondCount;
 

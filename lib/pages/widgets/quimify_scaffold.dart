@@ -23,14 +23,15 @@ class QuimifyScaffold extends StatelessWidget {
             Expanded(
               child: Container(
                 // To avoid rounded corners overflow:
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(25),
-                    ),
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(25),
                   ),
-                  child: body),
+                ),
+                child: body,
+              ),
             ),
           ],
         ),

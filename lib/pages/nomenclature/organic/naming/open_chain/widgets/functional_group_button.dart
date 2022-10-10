@@ -19,7 +19,7 @@ class FunctionalGroupButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15, left: 25, right: 25),
+      margin: const EdgeInsets.only(bottom: 15),
       child: QuimifyButton(
         height: 60,
         onPressed: onPressed,

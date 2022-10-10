@@ -8,24 +8,61 @@ class Ether extends OpenChain {
   Ether(Simple firstChain) {
     _firstChain = firstChain.getChain();
     _firstChain.bondFunctionalGroup(FunctionalGroup.ether);
-    _secondChain = Chain(previousBonds: 1);
+
+    if (_firstChain.isDone()) {
+      _startSecondChain();
+    } else {
+      _secondChain = null;
+      _currentChain = _firstChain;
+    }
   }
 
-  Ether.from(Chain firstChain, Chain secondChain) {
+  Ether.from(Chain firstChain, Chain? secondChain) {
     _firstChain = Chain.from(firstChain);
-    _secondChain = Chain.from(secondChain);
+
+    if (secondChain != null) {
+      _secondChain = Chain.from(secondChain);
+      _currentChain = _secondChain!;
+    } else {
+      _secondChain = null;
+      _currentChain = _firstChain;
+    }
   }
 
-  late Chain _firstChain, _secondChain; // R, R'
+  late Chain _firstChain; // R
+  late Chain? _secondChain; // R'
+  late Chain _currentChain; // ->
 
   @override
   OpenChain getCopy() => Ether.from(_firstChain, _secondChain);
 
   @override
-  int getFreeBonds() => _secondChain.getFreeBonds();
+  int getFreeBonds() => _currentChain.getFreeBonds();
 
   @override
-  bool isDone() => _secondChain.isDone();
+  bool isDone() => _currentChain.isDone();
+
+  @override
+  bool canBondCarbon() =>
+      _currentChain == _secondChain && !_currentChain.isDone();
+
+  @override
+  void bondCarbon() => _currentChain.bondCarbon();
+
+  @override
+  void bondSubstituent(Substituent substituent) {
+    _currentChain.bondSubstituent(substituent);
+
+    if (_currentChain == _firstChain && _firstChain.isDone()) {
+      if (_currentChain.isDone()) {
+        _startSecondChain();
+      }
+    }
+  }
+
+  @override
+  void bondFunctionalGroup(FunctionalGroup function) =>
+      bondSubstituent(Substituent(function));
 
   @override
   List<FunctionalGroup> getOrderedBondableGroups() => getFreeBonds() > 0
@@ -41,16 +78,18 @@ class Ether extends OpenChain {
       : [];
 
   @override
-  void bondCarbon() => _secondChain.bondCarbon();
+  String getStructure() {
+    String firstChain = _firstChain.toString();
 
-  @override
-  void bondSubstituent(Substituent substituent) =>
-      _secondChain.bondSubstituent(substituent);
+    return _currentChain == _firstChain
+        ? firstChain.substring(0, firstChain.length - 1)
+        : firstChain + _secondChain.toString();
+  }
 
-  @override
-  void bondFunctionalGroup(FunctionalGroup function) =>
-      bondSubstituent(Substituent(function));
+  // Private:
 
-  @override
-  String getStructure() => _firstChain.toString() + _secondChain.toString();
+  void _startSecondChain() {
+    _secondChain = Chain(previousBonds: 1);
+    _currentChain = _secondChain!;
+  }
 }

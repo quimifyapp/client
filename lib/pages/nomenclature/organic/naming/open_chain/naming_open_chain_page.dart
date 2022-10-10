@@ -129,8 +129,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     _sequenceStack.add(List.from(_sequenceStack.last));
   }
 
-  bool _canBondCarbon() =>
-      [1, 2, 3].contains(_openChainStack.last.getFreeBonds());
+  bool _canBondCarbon() => _openChainStack.last.canBondCarbon();
 
   void _bondCarbon() {
     if (_canBondCarbon()) {
@@ -149,8 +148,9 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     if (_canHydrogenate()) {
       _startEditing();
       setState(() {
-        int limit = _openChainStack.last.getFreeBonds() > 1 ? 1 : 0;
-        while (_openChainStack.last.getFreeBonds() > limit) {
+        int amount = _openChainStack.last.getFreeBonds() > 1 ? 1 : 0;
+
+        for (int i = _openChainStack.last.getFreeBonds(); i > amount; i--) {
           int code = _openChainStack.last
               .getOrderedBondableGroups()
               .indexOf(FunctionalGroup.hydrogen);
@@ -424,24 +424,28 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
-            const SizedBox(height: 25),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25 + 0.5),
-              height: 1.5,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+            const SizedBox(height: 20),
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(top: 25, bottom: 10), // + 15=25
-                children: [
-                  ..._openChainStack.last
-                      .getOrderedBondableGroups()
-                      .map((function) => functionToButton[function]!)
-                      .toList()
-                      .reversed
-                      .toList(),
-                ],
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                // To avoid rounded corners overflow:
+                clipBehavior: Clip.hardEdge,
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.only(top: 5, bottom: 10), // +15=25
+                  children: [
+                    ..._openChainStack.last
+                        .getOrderedBondableGroups()
+                        .map((function) => functionToButton[function]!)
+                        .toList()
+                        .reversed
+                        .toList(),
+                  ],
+                ),
               ),
             ),
           ],

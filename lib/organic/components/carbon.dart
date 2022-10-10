@@ -50,20 +50,14 @@ class Carbon extends Organic {
     return uniqueSubstituents;
   }
 
-  bool contains(FunctionalGroup function) {
+  bool hasFunctionalGroup(FunctionalGroup function) {
     switch (function) {
       case FunctionalGroup.alkene:
-        return _freeBonds == 1; // Como en -CO=
+        return _freeBonds == 1; // As in -CO=
       case FunctionalGroup.alkyne:
-        return _freeBonds == 2; // Como en -CH#
+        return _freeBonds == 2; // As in -CH≡
       default:
-        for (Substituent substituent in _substituents) {
-          if (substituent.isLike(function)) {
-            return true;
-          }
-        }
-
-        return false;
+        return _substituents.any((substituent) => substituent.isLike(function));
     }
   }
 
@@ -73,7 +67,7 @@ class Carbon extends Organic {
   int getAmountOfFunction(FunctionalGroup functions) {
     int amount = 0;
 
-    if (contains(functions)) {
+    if (hasFunctionalGroup(functions)) {
       if (functions != FunctionalGroup.alkene &&
           functions != FunctionalGroup.alkyne) {
         for (Substituent substituent in _substituents) {
@@ -137,7 +131,7 @@ class Carbon extends Organic {
     }
 
     // Ether:
-    if (contains(FunctionalGroup.ether)) {
+    if (hasFunctionalGroup(FunctionalGroup.ether)) {
       result += Substituent(FunctionalGroup.ether).toString();
     }
 

@@ -24,6 +24,20 @@ class Simple extends OpenChain {
   bool isDone() => _chain.isDone();
 
   @override
+  bool canBondCarbon() => [1, 2, 3].contains(getFreeBonds());
+
+  @override
+  void bondCarbon() => _chain.bondCarbon();
+
+  @override
+  void bondFunctionalGroup(FunctionalGroup function) =>
+      bondSubstituent(Substituent(function));
+
+  @override
+  void bondSubstituent(Substituent substituent) =>
+      _chain.bondSubstituent(substituent);
+
+  @override
   List<FunctionalGroup> getOrderedBondableGroups() {
     List<FunctionalGroup> orderedBondableGroups = [];
 
@@ -46,7 +60,7 @@ class Simple extends OpenChain {
         FunctionalGroup.amine,
       ]);
 
-      if (getFreeBonds() == 1) {
+      if (_canBondEther()) {
         orderedBondableGroups.add(FunctionalGroup.ether);
       }
 
@@ -65,18 +79,17 @@ class Simple extends OpenChain {
   }
 
   @override
-  void bondCarbon() => _chain.bondCarbon();
-
-  @override
-  void bondFunctionalGroup(FunctionalGroup function) =>
-      bondSubstituent(Substituent(function));
-
-  @override
-  void bondSubstituent(Substituent substituent) =>
-      _chain.bondSubstituent(substituent);
-
-  @override
   String getStructure() => _chain.toString();
 
   Chain getChain() => _chain;
+
+  // Private:
+
+  Set<Substituent> _getBondedSubstituents() => _chain.getBondedSubstituents();
+
+  bool _canBondEther() =>
+      getFreeBonds() > 0 &&
+      !_getBondedSubstituents().any((substituent) =>
+          substituent.getFunctionalGroup().index <=
+          FunctionalGroup.ether.index);
 }

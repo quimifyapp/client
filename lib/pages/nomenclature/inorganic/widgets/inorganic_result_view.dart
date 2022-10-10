@@ -30,12 +30,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   void _pressedReportButton() {
     QuimifyReportDialog(
       details: 'Resultado de:\n"${widget.query}"',
-      reportLabel: 'Formulación inorgánica, resultado de "${widget.query}"',
+      reportLabel: 'Formulación inorgánica, resultado de "${widget.query}": '
+          '(${widget.inorganicResult.formula})',
     ).show(context);
   }
 
-  void _pressedShareButton() =>
-      quimifyComingSoonDialog.show(context);
+  void _pressedShareButton() => quimifyComingSoonDialog.show(context);
 
   void _onTap() => setState(() => _isCollapsed = !_isCollapsed);
 
