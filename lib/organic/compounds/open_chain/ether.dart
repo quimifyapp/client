@@ -6,11 +6,11 @@ import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
 
 class Ether extends OpenChain {
   Ether(Simple firstChain) {
-    _firstChain = firstChain.getChain();
-    _firstChain.bondFunctionalGroup(FunctionalGroup.ether);
+    _firstChain = firstChain.getChain(); // R -
+    _firstChain.bondFunctionalGroup(FunctionalGroup.ether); // R - O -
 
     if (_firstChain.isDone()) {
-      _startSecondChain();
+      _startSecondChain(); // - C
     } else {
       _secondChain = null;
       _currentChain = _firstChain;
@@ -47,7 +47,7 @@ class Ether extends OpenChain {
       _currentChain == _secondChain && !_currentChain.isDone();
 
   @override
-  void bondCarbon() => _currentChain.bondCarbon();
+  void bondCarbon() => _secondChain!.bondCarbon();
 
   @override
   void bondSubstituent(Substituent substituent) {
@@ -79,11 +79,11 @@ class Ether extends OpenChain {
 
   @override
   String getStructure() {
-    String firstChain = _firstChain.toString();
+    String firstChainStructure = _firstChain.toString();
 
     return _currentChain == _firstChain
-        ? firstChain.substring(0, firstChain.length - 1)
-        : firstChain + _secondChain.toString();
+        ? firstChainStructure.substring(0, firstChainStructure.length - 1)
+        : firstChainStructure + _secondChain.toString();
   }
 
   // Private:
