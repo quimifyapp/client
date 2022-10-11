@@ -99,7 +99,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                         if (organicResult.name != null)
                           'Nombre:': organicResult.name!,
                         if (organicResult.mass != null)
-                          'Masa molecular:': '${organicResult.mass!} g/mol',
+                          'Masa molecular:': '${formatMolecularMass(organicResult.mass!)} g/mol',
                         if (organicResult.structure != null)
                           'Fórmula:': formatStructure(organicResult.structure!),
                       },

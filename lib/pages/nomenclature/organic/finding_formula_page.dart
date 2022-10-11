@@ -29,7 +29,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     true,
     'COOH - COOH',
     'ácido etanodioico',
-    '102.09',
+    102.09,
     null,
     false,
   );
@@ -109,7 +109,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             fields: {
               if (_result.name != null) 'Búsqueda:': _result.name!,
               if (_result.mass != null)
-                'Masa molecular:': '${_result.mass!} g/mol',
+                'Masa molecular:': '${formatMolecularMass(_result.mass!)} g/mol',
               if (_result.structure != null)
                 'Fórmula:': formatStructure(_result.structure!),
             },

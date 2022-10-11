@@ -3,7 +3,8 @@ import 'dart:convert';
 class OrganicResult {
   final bool present;
 
-  final String? name, structure, mass, url2D;
+  final String? name, structure, url2D;
+  final num? mass;
 
   final bool? isInorganicSuggestion;
 
@@ -22,7 +23,7 @@ class OrganicResult {
       json['encontrado'] as bool,
       json['formula'] as String?,
       json['nombre'] as String?,
-      json['masa'] as String?,
+      json['masa'] as num?,
       json['url_2d'] as String?,
       json['es_inorganico_sugerencia'] as bool?,
     );
