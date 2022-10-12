@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
@@ -258,7 +259,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             ),
                           ),
                           const Spacer(),
-                          const HelpButton(),
+                          const HelpButton(
+                            dialog: quimifyComingSoonDialog,
+                          ),
                         ],
                       ),
                       const Spacer(),

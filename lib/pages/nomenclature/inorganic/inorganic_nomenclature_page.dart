@@ -83,17 +83,15 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        checkInternetConnection().then(
-              (bool hasInternetConnection) {
-            if (hasInternetConnection) {
-              const QuimifyMessageDialog(
-                title: 'Sin resultado',
-              ).show(context);
-            } else {
-              quimifyNoInternetDialog.show(context);
-            }
-          },
-        );
+        checkInternetConnection().then((bool hasInternetConnection) {
+          if (hasInternetConnection) {
+            const QuimifyMessageDialog(
+              title: 'Sin resultado',
+            ).show(context);
+          } else {
+            quimifyNoInternetDialog.show(context);
+          }
+        });
       }
     }
   }

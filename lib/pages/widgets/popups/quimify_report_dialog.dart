@@ -1,8 +1,8 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/dialog_button.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/dialog_content.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +63,7 @@ class QuimifyReportDialog extends StatelessWidget {
       child: QuimifyDialog(
         title: 'Reportar error',
         content: (details != null && details!.isNotEmpty)
-            ? DialogContent(text: details!)
+            ? QuimifyDialogContentText(text: details!)
             : null,
         actions: [
           Container(
@@ -116,7 +116,7 @@ class QuimifyReportDialog extends StatelessWidget {
               ),
             ),
           ),
-          DialogButton(
+          QuimifyDialogButton(
             onPressed: () => _pressedButton(context),
             text: 'Enviar',
           ),

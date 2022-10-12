@@ -49,10 +49,16 @@ class _InorganicResultViewState extends State<InorganicResultView> {
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(15)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(15),
+              ),
             ),
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.only(
+              top: 17,
+              bottom: 13,
+              left: 15,
+              right: 15,
+            ),
             child: Row(
               children: [
                 Text(

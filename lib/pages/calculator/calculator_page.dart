@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_home_bar.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,10 @@ class CalculatorPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: [
-            const QuimifySectionTitle(title: 'Calculadora'),
+            const QuimifySectionTitle(
+              title: 'Calculadora',
+              dialog: quimifyComingSoonDialog,
+            ),
             const SizedBox(height: 25),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -41,7 +45,7 @@ class CalculatorPage extends StatelessWidget {
                     page: const MolecularMassPage(),
                   ),
                   const SizedBox(height: 20),
-                  const QuimifyCard.locked(
+                  const QuimifyCard.comingSoon(
                     title: 'Ajustar reacción',
                   ),
                   // To keep it above navigation bar:

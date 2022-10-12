@@ -101,6 +101,7 @@ class OrganicResultView extends StatelessWidget {
               horizontalPadding: 0,
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              dialog: quimifyComingSoonDialog,
             ),
             const SizedBox(height: 25),
             Stack(

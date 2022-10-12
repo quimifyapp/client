@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 
 class HelpButton extends StatelessWidget {
-  const HelpButton({Key? key}) : super(key: key);
+  const HelpButton({Key? key, required this.dialog}) : super(key: key);
+
+  final Widget dialog;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class HelpButton extends StatelessWidget {
       // To remove padding:
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
-      onPressed: () {},
+      onPressed: () => showQuimifyDialog(context: context, dialog: dialog),
     );
   }
 }

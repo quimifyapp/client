@@ -3,6 +3,7 @@ import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/nami
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,10 @@ class NamingPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: [
-            const QuimifySectionTitle(title: 'Tipo de orgánico'),
+            const QuimifySectionTitle(
+              title: 'Tipo de orgánico',
+              dialog: quimifyComingSoonDialog,
+            ),
             const SizedBox(height: 25),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -36,11 +40,11 @@ class NamingPage extends StatelessWidget {
                     page: const NamingOpenChainPage(),
                   ),
                   const SizedBox(height: _cardVerticalPadding),
-                  const QuimifyCard.locked(
+                  const QuimifyCard.comingSoon(
                     title: 'Éster',
                   ),
                   const SizedBox(height: _cardVerticalPadding),
-                  const QuimifyCard.locked(
+                  const QuimifyCard.comingSoon(
                     title: 'Cíclico',
                   ),
                 ],

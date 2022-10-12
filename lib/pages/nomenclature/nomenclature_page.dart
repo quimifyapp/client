@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/finding_formula_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/naming_page.dart';
+import 'package:quimify_client/pages/nomenclature/widgets/inorganic_help_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/widgets/organic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_home_bar.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_horizontal_menu.dart';
@@ -25,11 +27,17 @@ class NomenclaturePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const QuimifySectionTitle(title: 'Inorgánica'),
+              const QuimifySectionTitle(
+                title: 'Inorgánica',
+                dialog: InorganicHelpDialog(),
+              ),
               const SizedBox(height: 25),
               InorganicMenu(autoSizeGroup: autoSizeGroup),
               const SizedBox(height: 25),
-              const QuimifySectionTitle(title: 'Orgánica'),
+              const QuimifySectionTitle(
+                title: 'Orgánica',
+                dialog: OrganicHelpDialog(),
+              ),
               const SizedBox(height: 25),
               OrganicMenu(autoSizeGroup: autoSizeGroup),
               // To keep it above navigation bar:
@@ -60,7 +68,7 @@ class InorganicMenu extends StatelessWidget {
           name: 'dióxido de hidrógeno',
           page: const InorganicNomenclaturePage(),
         ),
-        const QuimifyCard.locked(
+        const QuimifyCard.comingSoon(
           width: 290,
           title: 'Practicar',
         ),
@@ -116,7 +124,7 @@ class OrganicMenu extends StatelessWidget {
           name: '2-metilprop-1-en-1-ona',
           page: NamingPage(),
         ),
-        const QuimifyCard.locked(
+        const QuimifyCard.comingSoon(
           width: 290,
           title: 'Practicar',
         ),

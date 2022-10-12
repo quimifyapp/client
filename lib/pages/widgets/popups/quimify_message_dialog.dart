@@ -1,8 +1,8 @@
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/dialog_button.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/dialog_content.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
+import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -81,7 +81,7 @@ class QuimifyMessageDialog extends StatelessWidget {
       child: QuimifyDialog(
         title: title,
         content: details != null && details!.isNotEmpty
-            ? DialogContent(text: details!)
+            ? QuimifyDialogContentText(text: details!)
             : null,
         actions: [
           Row(
@@ -103,7 +103,7 @@ class QuimifyMessageDialog extends StatelessWidget {
                   ],
                 ),
               Expanded(
-                child: DialogButton(
+                child: QuimifyDialogButton(
                   onPressed: () => _pressedButton(context),
                   text: _hasLink ? linkName! : 'Entendido',
                 ),

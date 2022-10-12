@@ -29,7 +29,7 @@ class QuimifyCard extends StatelessWidget {
         structure = null,
         autoSizeGroup = null;
 
-  const QuimifyCard.locked({super.key, this.width, required this.title})
+  const QuimifyCard.comingSoon({super.key, this.width, required this.title})
       : _isCustom = false,
         _isLocked = true,
         customBody = null,
