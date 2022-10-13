@@ -32,103 +32,80 @@ class NomenclaturePage extends StatelessWidget {
                 dialog: InorganicHelpDialog(),
               ),
               const SizedBox(height: 25),
-              InorganicMenu(autoSizeGroup: autoSizeGroup),
+              QuimifyHorizontalMenu(
+                cards: [
+                  QuimifyCard(
+                    width: 290,
+                    title: 'Formular y nombrar',
+                    structure: 'H₂O',
+                    autoSizeGroup: autoSizeGroup,
+                    name: 'dióxido de hidrógeno',
+                    page: const InorganicNomenclaturePage(),
+                  ),
+                  const QuimifyCard.comingSoon(
+                    width: 290,
+                    title: 'Practicar',
+                  ),
+                ],
+              ),
               const SizedBox(height: 25),
               const QuimifySectionTitle(
                 title: 'Orgánica',
                 dialog: OrganicHelpDialog(),
               ),
               const SizedBox(height: 25),
-              OrganicMenu(autoSizeGroup: autoSizeGroup),
+              QuimifyHorizontalMenu(
+                cards: [
+                  QuimifyCard.custom(
+                    width: 290,
+                    title: 'Formular',
+                    customBody: Container(
+                      color: Theme.of(context).colorScheme.surface,
+                      padding: const EdgeInsets.only(
+                          top: 20, bottom: 15, left: 25, right: 25),
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/icons/2-chloroethylbenzene.png',
+                            color: quimifyTeal,
+                            height: 30,
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            '2-cloroetilbenceno',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    page: const FindingFormulaPage(),
+                  ),
+                  QuimifyCard(
+                    width: 290,
+                    title: 'Nombrar',
+                    structure: 'CH₃ - C(CH₃) = CO',
+                    autoSizeGroup: autoSizeGroup,
+                    name: '2-metilprop-1-en-1-ona',
+                    page: NamingPage(),
+                  ),
+                  const QuimifyCard.comingSoon(
+                    width: 290,
+                    title: 'Practicar',
+                  ),
+                ],
+              ),
               // To keep it above navigation bar:
               const SizedBox(height: 2 * 30 + 60),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class InorganicMenu extends StatelessWidget {
-  const InorganicMenu({Key? key, required this.autoSizeGroup})
-      : super(key: key);
-
-  final AutoSizeGroup autoSizeGroup;
-
-  @override
-  Widget build(BuildContext context) {
-    return QuimifyHorizontalMenu(
-      cards: [
-        QuimifyCard(
-          width: 290,
-          title: 'Formular o nombrar',
-          structure: 'H₂O',
-          autoSizeGroup: autoSizeGroup,
-          name: 'dióxido de hidrógeno',
-          page: const InorganicNomenclaturePage(),
-        ),
-        const QuimifyCard.comingSoon(
-          width: 290,
-          title: 'Practicar',
-        ),
-      ],
-    );
-  }
-}
-
-class OrganicMenu extends StatelessWidget {
-  const OrganicMenu({Key? key, required this.autoSizeGroup}) : super(key: key);
-
-  final AutoSizeGroup autoSizeGroup;
-
-  @override
-  Widget build(BuildContext context) {
-    return QuimifyHorizontalMenu(
-      cards: [
-        QuimifyCard.custom(
-          width: 290,
-          title: 'Formular',
-          customBody: Container(
-            color: Theme.of(context).colorScheme.surface,
-            padding:
-                const EdgeInsets.only(top: 20, bottom: 15, left: 25, right: 25),
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset(
-                  'assets/images/icons/2-chloroethylbenzene.png',
-                  color: quimifyTeal,
-                  height: 30,
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  '2-cloroetilbenceno',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          page: const FindingFormulaPage(),
-        ),
-        QuimifyCard(
-          width: 290,
-          title: 'Nombrar',
-          structure: 'CH₃ - C(CH₃) = CO',
-          autoSizeGroup: autoSizeGroup,
-          name: '2-metilprop-1-en-1-ona',
-          page: NamingPage(),
-        ),
-        const QuimifyCard.comingSoon(
-          width: 290,
-          title: 'Practicar',
-        ),
-      ],
     );
   }
 }
