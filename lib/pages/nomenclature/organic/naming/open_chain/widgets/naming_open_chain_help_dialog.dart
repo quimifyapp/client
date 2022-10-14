@@ -76,6 +76,18 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
               text: 'Ejemplo:',
               fontWeight: FontWeight.bold,
             ),
+            Center(
+              child: Image.asset(
+                'assets/images/icons/2-methylpropane.png',
+                height: 90,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            const Center(
+              child: QuimifyDialogContentText(
+                text: '(4-etil-2,4-dimetilhexano)',
+              ),
+            ),
           ],
         ),
         'Enlazar carbono': Wrap(

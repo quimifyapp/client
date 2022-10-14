@@ -23,6 +23,7 @@ class OrganicNamingHelpDialog extends StatelessWidget {
             Center(
               child: Image.asset(
                 'assets/images/icons/4-ethyl-2,4-dimethylhexane.png',
+                //'assets/images/icons/4-ethyl-2-methylhexane.png',
                 height: 120,
                 color: Theme.of(context).colorScheme.primary,
               ),
