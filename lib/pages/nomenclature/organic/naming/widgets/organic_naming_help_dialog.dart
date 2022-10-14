@@ -11,14 +11,26 @@ class OrganicNamingHelpDialog extends StatelessWidget {
       titleToContent: {
         'Cadena abierta': Wrap(
           runSpacing: 15,
-          children: const [
-            QuimifyDialogContentText(
+          children: [
+            const QuimifyDialogContentText(
               text: 'Los compuestos orgánicos de cadena abierta son los que no '
                   'forman ciclos.',
             ),
-            QuimifyDialogContentText(
+            const QuimifyDialogContentText(
               text: 'Ejemplo:',
               fontWeight: FontWeight.bold,
+            ),
+            Center(
+              child: Image.asset(
+                'assets/images/icons/4-ethyl-2,4-dimethylhexane.png',
+                height: 120,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            const Center(
+              child: QuimifyDialogContentText(
+                text: '(4-etil-2,4-dimetilhexano)',
+              ),
             ),
           ],
         ),

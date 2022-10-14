@@ -28,6 +28,9 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/https/certificate.crt
+    - assets/https/private.key
+
     - assets/images/icons/logo.png
     - assets/images/icons/search.png
     - assets/images/icons/branding-slim.png
@@ -47,8 +50,7 @@ flutter:
     - assets/images/icons/straight-radical.png
     - assets/images/icons/iso-radical.png
     - assets/images/icons/phenol.png
-    - assets/https/certificate.crt
-    - assets/https/private.key
+    - assets/images/icons/4-ethyl-2,4-dimethylhexane.png
 
   fonts:
     - family: CeraPro

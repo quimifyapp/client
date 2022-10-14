@@ -6,11 +6,11 @@ import 'package:quimify_client/utils/text.dart';
 class FunctionalGroupButton extends StatelessWidget {
   const FunctionalGroupButton(
       {Key? key,
-        required this.bonds,
-        required this.text,
-        required this.actionText,
-        this.altText,
-        required this.onPressed})
+      required this.bonds,
+      required this.text,
+      required this.actionText,
+      this.altText,
+      required this.onPressed})
       : super(key: key);
 
   final int bonds;
@@ -39,8 +39,8 @@ class FunctionalGroupButton extends StatelessWidget {
               bonds == 1
                   ? 'assets/images/icons/single-bond.png'
                   : bonds == 2
-                  ? 'assets/images/icons/double-bond.png'
-                  : 'assets/images/icons/triple-bond.png',
+                      ? 'assets/images/icons/double-bond.png'
+                      : 'assets/images/icons/triple-bond.png',
               color: Theme.of(context).colorScheme.primary,
               width: 30,
             ),
