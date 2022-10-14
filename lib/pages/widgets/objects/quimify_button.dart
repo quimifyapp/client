@@ -57,7 +57,7 @@ class QuimifyButton extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () {},
+                onPressed: onPressed,
                 child: child,
               ),
       ),

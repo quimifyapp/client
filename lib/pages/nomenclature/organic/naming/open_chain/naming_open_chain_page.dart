@@ -144,7 +144,22 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         _sequenceStack.last.add(-1);
         _checkDone();
       });
-    }
+    } else if (_openChainStack.last.getFreeBonds() == 4) {
+      const QuimifyMessageDialog(
+        title: 'No es posible',
+        details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
+            'solo pueden compartir hasta tres enlaces.\n\n'
+            'Prueba a enlazar un sustiuyente primero.',
+      ).show(context);
+    } else if (_openChainStack.last.getFreeBonds() == 0) {
+      const QuimifyMessageDialog(
+        title: 'No es posible',
+        details: 'Este carbono está completo y no tiene enlaces libres.\n\n'
+            'Para enlazar un carbono es necesario compartir al menos un enlace '
+            'de los cuatro que tiene cada carbono.\n\n'
+            'Prueba a deshacer el último cambio.',
+      ).show(context);
+    } else {}
   }
 
   bool _canHydrogenate() => _openChainStack.last.getFreeBonds() > 0;
@@ -166,6 +181,14 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
           }
         }
       });
+    } else {
+      const QuimifyMessageDialog(
+        title: 'No es posible',
+        details: 'Este carbono está completo y no tiene enlaces libres.\n\n'
+            'Para enlazar un hidrógeno es necesario compartir un enlace de los '
+            'cuatro que tiene cada carbono.\n\n'
+            'Prueba a deshacer el último cambio.',
+      ).show(context);
     }
   }
 
@@ -178,6 +201,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         _sequenceStack.removeLast();
         _checkDone();
       });
+    } else {
+      const QuimifyMessageDialog(
+        title: 'No es posible',
+        details: 'No hay ningún cambio que deshacer.\n\n'
+            'Prueba a comenzar la cadena enlazando un sustituyente.',
+      ).show(context);
     }
   }
 
@@ -236,7 +265,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
       FunctionalGroup.radical: FunctionalGroupButton(
         bonds: 1,
-        text: 'CH2 –– CH3',
+        text: 'CH2 – CH3',
         actionText: 'Radical',
         onPressed: _getRadical,
       ),
@@ -424,20 +453,22 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                   ),
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
-                  child: ListView(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(
-                      top: 5, // + 20 from above SizedBox = 25
-                      bottom: 10, // + 15 from last child's bottom padding = 25
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 5, // + 20 from above SizedBox = 25
+                        bottom: 10, // + 15 from Wrap's runSpacing = 25
+                      ),
+                      child: Wrap(
+                        runSpacing: 15,
+                        children: _openChainStack.last
+                            .getOrderedBondableGroups()
+                            .map((function) => functionToButton[function]!)
+                            .toList()
+                            .reversed
+                            .toList(),
+                      ),
                     ),
-                    children: [
-                      ..._openChainStack.last
-                          .getOrderedBondableGroups()
-                          .map((function) => functionToButton[function]!)
-                          .toList()
-                          .reversed
-                          .toList(),
-                    ],
                   ),
                 ),
               ),

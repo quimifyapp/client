@@ -17,23 +17,13 @@ class OrganicHelpDialog extends StatelessWidget {
                   'enlazados a hidrógenos.',
             ),
             QuimifyDialogContentText(
-              text: 'Ejemplos de fórmula:',
+              text: 'Ejemplos:',
               fontWeight: FontWeight.bold,
             ),
             Center(
               child: QuimifyDialogContentText(
-                text: 'CH₃ - CH₂ - COOH\n'
-                    'CH₂ = CH - CH₂ - CONH₂',
-              ),
-            ),
-            QuimifyDialogContentText(
-              text: 'Ejemplos de nombre:',
-              fontWeight: FontWeight.bold,
-            ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'ácido propanoico\n'
-                    'but-3-enamida',
+                text: 'ácido etanoico   ➔   CH₃ - COOH\n'
+                    'CH₃ - CH₂ - CH₃   ➔   propano',
               ),
             ),
           ],
