@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/widgets/organic_naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class NamingPage extends StatelessWidget {
           children: [
             const QuimifySectionTitle(
               title: 'Tipo de orgánico',
-              dialog: quimifyComingSoonDialog,
+              dialog: OrganicNamingHelpDialog(),
             ),
             const SizedBox(height: 25),
             Container(

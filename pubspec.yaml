@@ -45,6 +45,7 @@ flutter:
     - assets/images/icons/triple-bond.png
     - assets/images/icons/straight-radical.png
     - assets/images/icons/iso-radical.png
+    - assets/images/icons/phenol.png
     - assets/https/certificate.crt
     - assets/https/private.key
 

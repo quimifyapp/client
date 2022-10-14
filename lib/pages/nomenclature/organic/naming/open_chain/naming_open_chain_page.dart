@@ -5,14 +5,17 @@ import 'package:quimify_client/organic/components/substituent.dart';
 import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
 import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/functional_group_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
@@ -32,7 +35,7 @@ class NamingOpenChainPage extends StatefulWidget {
 }
 
 class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
-  static const String _title = 'Nombrar cadena abierta';
+  static const String _title = 'Nombrar orgánico';
 
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
@@ -361,44 +364,23 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               children: [
                 const SizedBox(width: 25),
                 Expanded(
-                  child: QuimifyButton(
-                    height: 40,
-                    backgroundColor: quimifyTeal,
-                    onPressed: _bondCarbon,
+                  child: AddCarbonButton(
                     enabled: _canBondCarbon(),
-                    child: Image.asset(
-                      'assets/images/icons/bond-carbon.png',
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      width: 26,
-                    ),
+                    onPressed: _bondCarbon,
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: QuimifyButton(
-                    height: 40,
-                    backgroundColor: const Color.fromARGB(255, 56, 133, 224),
+                  child: HydrogenateButton(
                     onPressed: _hydrogenate,
                     enabled: _canHydrogenate(),
-                    child: Image.asset(
-                      'assets/images/icons/hydrogenate.png',
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      width: 28,
-                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: QuimifyButton(
-                    height: 40,
-                    backgroundColor: const Color.fromARGB(255, 255, 96, 96),
+                  child: UndoButton(
                     onPressed: _undo,
                     enabled: _canUndo(),
-                    child: Icon(
-                      Icons.undo,
-                      size: 22,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
                   ),
                 ),
                 const SizedBox(width: 25),
@@ -430,7 +412,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                 horizontalPadding: 25,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                dialog: quimifyComingSoonDialog,
+                dialog: NamingOpenChainHelpDialog(),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -444,8 +426,10 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                   clipBehavior: Clip.hardEdge,
                   child: ListView(
                     shrinkWrap: true,
-                    padding:
-                        const EdgeInsets.only(top: 5, bottom: 10), // +15=25
+                    padding: const EdgeInsets.only(
+                      top: 5, // + 20 from above SizedBox = 25
+                      bottom: 10, // + 15 from last child's bottom padding = 25
+                    ),
                     children: [
                       ..._openChainStack.last
                           .getOrderedBondableGroups()

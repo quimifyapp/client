@@ -18,23 +18,13 @@ class InorganicHelpDialog extends StatelessWidget {
                 'como elemento principal.',
           ),
           QuimifyDialogContentText(
-            text: 'Ejemplos de fórmula:',
+            text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
             child: QuimifyDialogContentText(
-              text: 'CO₂\nFe(OH)₃\nH₂SO₄',
-            ),
-          ),
-          QuimifyDialogContentText(
-            text: 'Ejemplos de nombre:',
-            fontWeight: FontWeight.bold,
-          ),
-          Center(
-            child: QuimifyDialogContentText(
-              text: 'dióxido de carbono\n'
-                  'hidróxido de hierro(III)\n'
-                  'ácido sulfúrico',
+              text: 'ácido sulfúrico   ➔   H₂SO₄\n'
+              'CO₂   ➔   dióxido de carbono',
             ),
           ),
         ],
