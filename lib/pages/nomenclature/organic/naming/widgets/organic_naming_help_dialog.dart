@@ -22,15 +22,14 @@ class OrganicNamingHelpDialog extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                'assets/images/icons/4-ethyl-2,4-dimethylhexane.png',
-                //'assets/images/icons/4-ethyl-2-methylhexane.png',
-                height: 120,
+                'assets/images/icons/4-ethyl-2-methylhexane.png',
+                height: 90,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const Center(
               child: QuimifyDialogContentText(
-                text: '(4-etil-2,4-dimetilhexano)',
+                text: '(4-etil-2-metilhexano)',
               ),
             ),
           ],
