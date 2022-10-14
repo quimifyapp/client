@@ -15,7 +15,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       border: Border.all(
         color: Theme.of(context).colorScheme.tertiary,
-        width: 0.7,
+        width: 1,
       ),
     );
 
@@ -27,14 +27,15 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             Container(
               decoration: aroundFunctionalButtonDecoration,
               child: FunctionalGroupButton(
-                  bonds: 1,
-                  text: 'H',
-                  actionText: 'Hidrógeno',
-                  onPressed: () {}),
+                bonds: 1,
+                text: 'H',
+                actionText: 'Hidrógeno',
+                onPressed: () {},
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Los sustituyentes van enlazados a los carbonos. En la '
-                  'lista aparecen los que se pueden añadir al último carbono.'
+                  'lista aparecen los que se pueden añadir al último carbono.',
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -52,7 +53,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             ),
             const Center(
               child: QuimifyDialogContentText(
-                text: '(carbono con 3 hidrógenos)',
+                text: '(carbono con tres hidrógenos)',
               ),
             ),
           ],
@@ -63,10 +64,11 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             Container(
               decoration: aroundFunctionalButtonDecoration,
               child: FunctionalGroupButton(
-                  bonds: 1,
-                  text: 'CH2 – CH3',
-                  actionText: 'Radical',
-                  onPressed: () {}),
+                bonds: 1,
+                text: 'CH2 — CH3',
+                actionText: 'Radical',
+                onPressed: () {},
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Son otras cadenas de carbonos, ramificaciones de la '
@@ -85,7 +87,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             ),
             const Center(
               child: QuimifyDialogContentText(
-                text: '(4-etil-2,4-dimetilhexano)',
+                text: '(cadena con un radical metil)',
               ),
             ),
           ],

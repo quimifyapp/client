@@ -146,17 +146,16 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       });
     } else if (_openChainStack.last.getFreeBonds() == 4) {
       const QuimifyMessageDialog(
-        title: 'No es posible',
+        title: 'Faltan sustituyentes',
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
             'solo pueden compartir hasta tres enlaces.\n\n'
             'Prueba a enlazar un sustiuyente primero.',
       ).show(context);
     } else if (_openChainStack.last.getFreeBonds() == 0) {
       const QuimifyMessageDialog(
-        title: 'No es posible',
-        details: 'Este carbono está completo y no tiene enlaces libres.\n\n'
-            'Para enlazar un carbono es necesario compartir al menos un enlace '
-            'de los cuatro que tiene cada carbono.\n\n'
+        title: 'Cadena completa',
+        details: 'Para enlazar un carbono es necesario compartir al menos un '
+            'enlace de los cuatro que tiene cada carbono.\n\n'
             'Prueba a deshacer el último cambio.',
       ).show(context);
     } else {}
@@ -183,10 +182,9 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       });
     } else {
       const QuimifyMessageDialog(
-        title: 'No es posible',
-        details: 'Este carbono está completo y no tiene enlaces libres.\n\n'
-            'Para enlazar un hidrógeno es necesario compartir un enlace de los '
-            'cuatro que tiene cada carbono.\n\n'
+        title: 'Cadena completa',
+        details: 'Para enlazar un hidrógeno es necesario compartir un enlace '
+            'de los cuatro que tiene cada carbono.\n\n'
             'Prueba a deshacer el último cambio.',
       ).show(context);
     }
@@ -201,12 +199,6 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
         _sequenceStack.removeLast();
         _checkDone();
       });
-    } else {
-      const QuimifyMessageDialog(
-        title: 'No es posible',
-        details: 'No hay ningún cambio que deshacer.\n\n'
-            'Prueba a comenzar la cadena enlazando un sustituyente.',
-      ).show(context);
     }
   }
 
@@ -265,7 +257,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
       FunctionalGroup.radical: FunctionalGroupButton(
         bonds: 1,
-        text: 'CH2 – CH3',
+        text: 'CH2 -- CH3',
         actionText: 'Radical',
         onPressed: _getRadical,
       ),
