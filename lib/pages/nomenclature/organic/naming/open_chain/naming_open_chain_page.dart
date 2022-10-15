@@ -10,7 +10,7 @@ import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widg
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/functional_group_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';

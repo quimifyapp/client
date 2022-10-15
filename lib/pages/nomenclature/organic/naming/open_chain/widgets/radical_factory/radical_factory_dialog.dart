@@ -1,11 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory/carbons_help_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory/tip_shape_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
@@ -64,7 +65,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
             horizontalPadding: 0,
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            dialog: quimifyComingSoonDialog,
+            dialog: CarbonsHelpDialog(),
           ),
           Center(
             child: SizedBox(
@@ -151,9 +152,9 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
             horizontalPadding: 0,
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            dialog: quimifyComingSoonDialog,
+            dialog: TipShapeHelpDialog(),
           ),
-          const SizedBox(height: 30),
+          //const SizedBox(height: 15),
           Center(
             child: Wrap(
               direction: Axis.horizontal,
@@ -163,19 +164,19 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                   children: [
                     Image.asset(
                       'assets/images/icons/straight-radical.png',
-                      height: 65,
+                      height: 70,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     Image.asset(
                       'assets/images/icons/iso-radical.png',
-                      height: 65,
+                      height: 70,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ],
                 ),
                 const SizedBox(width: 40),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.only(top: 14),
                   child: QuimifySwitch(
                     value: _isIso,
                     onChanged: _switchButton,

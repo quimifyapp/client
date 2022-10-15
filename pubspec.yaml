@@ -52,6 +52,7 @@ flutter:
     - assets/images/icons/phenol.png
     - assets/images/icons/4-ethyl-2-methylhexane.png
     - assets/images/icons/2-methylpropane.png
+    - assets/images/icons/propyl.png
 
   fonts:
     - family: CeraPro
