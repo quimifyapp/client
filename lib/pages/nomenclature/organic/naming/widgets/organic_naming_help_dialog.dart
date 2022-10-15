@@ -48,7 +48,7 @@ class OrganicNamingHelpDialog extends StatelessWidget {
             Center(
               child: Image.asset(
                 'assets/images/icons/phenol.png',
-                height: 70,
+                height: 60,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
