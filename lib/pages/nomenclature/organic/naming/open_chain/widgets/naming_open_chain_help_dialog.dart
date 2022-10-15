@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/functional_group_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
@@ -11,7 +11,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BoxDecoration aroundFunctionalButtonDecoration = BoxDecoration(
+    BoxDecoration functionalButtonBorder = BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       border: Border.all(
         color: Theme.of(context).colorScheme.tertiary,
@@ -25,7 +25,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
           runSpacing: 15,
           children: [
             Container(
-              decoration: aroundFunctionalButtonDecoration,
+              decoration: functionalButtonBorder,
               child: FunctionalGroupButton(
                 bonds: 1,
                 text: 'H',
@@ -34,8 +34,8 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
               ),
             ),
             const QuimifyDialogContentText(
-              text: 'Los sustituyentes van enlazados a los carbonos. En la '
-                  'lista aparecen los que se pueden añadir al último carbono.',
+              text: 'En la lista aparecen los sustituyentes que se pueden '
+                  'enlazar al último carbono.',
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -62,7 +62,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
           runSpacing: 15,
           children: [
             Container(
-              decoration: aroundFunctionalButtonDecoration,
+              decoration: functionalButtonBorder,
               child: FunctionalGroupButton(
                 bonds: 1,
                 text: 'CH2 — CH3',
@@ -71,8 +71,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
               ),
             ),
             const QuimifyDialogContentText(
-              text: 'Son otras cadenas de carbonos, ramificaciones de la '
-                  'cadena principal.',
+              text: 'Son ramificaciones de la cadena principal de carbonos.',
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -87,7 +86,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             ),
             const Center(
               child: QuimifyDialogContentText(
-                text: '(cadena con un radical metil)',
+                text: '(2-metilpropano)',
               ),
             ),
           ],

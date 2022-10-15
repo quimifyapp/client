@@ -8,7 +8,7 @@ import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/functional_group_button.dart';
+import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
