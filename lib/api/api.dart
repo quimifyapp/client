@@ -3,7 +3,6 @@ import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/services.dart';
 
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
@@ -17,25 +16,13 @@ class Api {
 
   Api._internal();
 
-  late final http.Client _client;
+  late final http.Client _client = io.IOClient(io.HttpClient());
 
   static const _apiVersion = 1;
   static const _clientVersion = 1;
   static const _authority = 'api.quimify.com';
 
   static String? _lastUrl, _lastResponse;
-
-  Future<void> connect() async {
-    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
-
-    String dir = 'assets/https';
-    context.useCertificateChainBytes(
-        (await rootBundle.load('$dir/certificate.crt')).buffer.asUint8List());
-    context.usePrivateKeyBytes(
-        (await rootBundle.load('$dir/private.key')).buffer.asUint8List());
-
-    _client = io.IOClient(io.HttpClient(context: context));
-  }
 
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? response;
