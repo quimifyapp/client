@@ -23,8 +23,12 @@ class InorganicHelpDialog extends StatelessWidget {
           ),
           Center(
             child: QuimifyDialogContentText(
-              text: 'ácido sulfúrico   ➔   H₂SO₄\n'
-              'CO₂   ➔   dióxido de carbono',
+              text: 'ácido sulfúrico   ➔   H₂SO₄',
+            ),
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'CO₂   ➔   dióxido de carbono',
             ),
           ),
         ],

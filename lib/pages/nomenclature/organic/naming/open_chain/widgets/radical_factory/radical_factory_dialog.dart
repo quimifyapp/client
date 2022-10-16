@@ -42,7 +42,11 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
 
   bool _canRemove() => _carbonCount > (_isIso ? 3 : 1);
 
-  void _removeButton() => setState(() => _carbonCount--);
+  void _removeButton() {
+    if (_canRemove()) {
+      setState(() => _carbonCount--);
+    }
+  }
 
   void _switchButton(bool newValue) {
     setState(() {
@@ -106,8 +110,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
-                                color:
-                                    Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
                               strutStyle: const StrutStyle(
                                 fontSize: 24,
@@ -129,8 +132,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
-                                color:
-                                    Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
                               strutStyle: const StrutStyle(
                                 fontSize: 24,

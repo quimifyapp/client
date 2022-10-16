@@ -22,8 +22,11 @@ class OrganicHelpDialog extends StatelessWidget {
             ),
             Center(
               child: QuimifyDialogContentText(
-                text: 'ácido etanoico   ➔   CH₃ - COOH\n'
-                    'CH₃ - CH₂ - CH₃   ➔   propano',
+                  text: 'ácido etanoico   ➔   CH₃ - COOH'),
+            ),
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'CH₃ - CH₂ - CH₃   ➔   propano',
               ),
             ),
           ],
@@ -40,8 +43,12 @@ class OrganicHelpDialog extends StatelessWidget {
             ),
             Center(
               child: QuimifyDialogContentText(
-                text: 'etanol   ➔   CH₃ - CH₂(OH)\n'
-                    'propadieno   ➔   CH₂ = CH = CH₂',
+                text: 'etanol   ➔   CH₃ - CH₂(OH)',
+              ),
+            ),
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'propadieno   ➔   CH₂ = CH = CH₂',
               ),
             ),
           ],
@@ -58,8 +65,12 @@ class OrganicHelpDialog extends StatelessWidget {
             ),
             Center(
               child: QuimifyDialogContentText(
-                text: 'CH₃ - CH₂(OH)   ➔   etanol\n'
-                    'CH₂ = CH = CH₂   ➔   propadieno',
+                text: 'CH₃ - CH₂(OH)   ➔   etanol',
+              ),
+            ),
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'CH₂ = CH = CH₂   ➔   propadieno',
               ),
             ),
           ],

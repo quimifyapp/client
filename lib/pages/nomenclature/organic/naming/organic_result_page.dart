@@ -4,9 +4,11 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class OrganicResultPage extends StatelessWidget {
-  const OrganicResultPage(
-      {Key? key, required this.title, required this.organicResultView})
-      : super(key: key);
+  const OrganicResultPage({
+    Key? key,
+    required this.title,
+    required this.organicResultView,
+  }) : super(key: key);
 
   final String title;
   final OrganicResultView organicResultView;

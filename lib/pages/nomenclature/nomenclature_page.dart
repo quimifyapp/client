@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
-import 'package:quimify_client/pages/nomenclature/organic/finding_formula_page.dart';
+import 'package:quimify_client/pages/nomenclature/organic/finding_formula/finding_formula_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/naming_page.dart';
 import 'package:quimify_client/pages/nomenclature/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/nomenclature/widgets/organic_help_dialog.dart';

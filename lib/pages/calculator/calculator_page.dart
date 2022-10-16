@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
+import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_home_bar.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class CalculatorPage extends StatelessWidget {
           children: [
             const QuimifySectionTitle(
               title: 'Calculadora',
-              dialog: quimifyComingSoonDialog,
+              dialog: CalculatorHelpDialog(),
             ),
             const SizedBox(height: 25),
             Container(

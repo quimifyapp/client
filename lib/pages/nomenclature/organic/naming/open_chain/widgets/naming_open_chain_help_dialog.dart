@@ -35,7 +35,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             ),
             const QuimifyDialogContentText(
               text: 'En la lista aparecen los sustituyentes que se pueden '
-                  'enlazar al último carbono.',
+                  'enlazar al carbono.',
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -43,7 +43,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             ),
             Center(
               child: Text(
-                'CH₃ --',
+                'CH₃ —',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 28,
@@ -121,8 +121,8 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
               ),
             ),
             const QuimifyDialogContentText(
-              text: 'Este botón sirve para enlazar hidrógenos al último '
-                  'carbono hasta que solo quede un enlace libre.',
+              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
+                  'hasta que solo quede un enlace libre.',
             ),
           ],
         ),

@@ -148,7 +148,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       const QuimifyMessageDialog(
         title: 'Faltan sustituyentes',
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
-            'solo pueden compartir hasta tres enlaces.\n\n'
+            'pueden compartir un maximo de tres.\n\n'
             'Prueba a enlazar un sustiuyente primero.',
       ).show(context);
     } else if (_openChainStack.last.getFreeBonds() == 0) {
@@ -183,8 +183,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
     } else {
       const QuimifyMessageDialog(
         title: 'Cadena completa',
-        details: 'Para enlazar un hidrógeno es necesario compartir un enlace '
-            'de los cuatro que tiene cada carbono.\n\n'
+        details: 'Para enlazar un hidrógeno más es necesario compartir un '
+            'enlace, pero este carbono ya ha utilizado sus cuatro.\n\n'
             'Prueba a deshacer el último cambio.',
       ).show(context);
     }
@@ -257,7 +257,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       ),
       FunctionalGroup.radical: FunctionalGroupButton(
         bonds: 1,
-        text: 'CH2 -- CH3',
+        text: 'CH2 — CH3',
         actionText: 'Radical',
         onPressed: _getRadical,
       ),

@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify Client
 
-version: 3.1.0+51 # Only for Android
+version: 3.1.0+52 # Only for Android
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -53,6 +53,10 @@ flutter:
     - assets/images/icons/4-ethyl-2-methylhexane.png
     - assets/images/icons/2-methylpropane.png
     - assets/images/icons/propyl.png
+    - assets/images/icons/butane-diagram.png
+    - assets/images/icons/butane.png
+    - assets/images/icons/but-2-ene.png
+    - assets/images/icons/but-2-yne.png
 
   fonts:
     - family: CeraPro

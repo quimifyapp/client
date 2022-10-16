@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/nomenclature/organic/organic_image_page.dart';
+import 'package:quimify_client/pages/nomenclature/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
@@ -101,7 +102,7 @@ class OrganicResultView extends StatelessWidget {
               horizontalPadding: 0,
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              dialog: quimifyComingSoonDialog,
+              dialog: StructureHelpDialog(),
             ),
             const SizedBox(height: 25),
             Stack(
