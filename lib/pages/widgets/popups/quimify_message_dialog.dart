@@ -111,6 +111,7 @@ class QuimifyMessageDialog extends StatelessWidget {
             ],
           ),
         ],
+        closable: closable,
       ),
     );
   }

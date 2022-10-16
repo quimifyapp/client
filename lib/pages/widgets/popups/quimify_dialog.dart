@@ -22,11 +22,19 @@ class QuimifyDialog extends StatelessWidget {
     required this.title,
     required this.content,
     required this.actions,
+    this.closable = true,
   });
 
   final String title;
   final Widget? content;
   final List<Widget> actions;
+  final bool closable;
+
+  void _closeButtonPressed(BuildContext context) {
+    if(closable) {
+      Navigator.of(context).pop();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,7 @@ class QuimifyDialog extends StatelessWidget {
             children: [
               const Spacer(),
               IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => _closeButtonPressed(context),
                 alignment: Alignment.topRight,
                 padding: const EdgeInsets.only(top: 15, right: 15),
                 highlightColor: Colors.transparent,

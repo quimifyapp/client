@@ -19,8 +19,8 @@ class Api {
 
   late final http.Client _client;
 
-  static const _apiVersion = 1;
-  static const _clientVersion = 1;
+  static const _apiVersion = 0;
+  static const _clientVersion = 0;
   static const _authority = 'api.quimify.com';
 
   static String? _lastUrl, _lastResponse;
@@ -50,8 +50,7 @@ class Api {
       http.Response httpResponse = await _client.get(url);
 
       if (httpResponse.statusCode == 200) {
-        String body = utf8.decode(httpResponse.bodyBytes);
-        response = body;
+        response = utf8.decode(httpResponse.bodyBytes);
       } else {
         // Server bug or invalid URL:
         sendReport(
@@ -65,6 +64,7 @@ class Api {
       _lastResponse = response;
     } catch (_) {
       // No Internet connection, server down or client error.
+      print(_);
     }
 
     return response;
