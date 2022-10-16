@@ -33,9 +33,11 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'En la lista aparecen los sustituyentes que se pueden '
-                  'enlazar al carbono.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'En la lista aparecen los sustituyentes que se pueden '
+                    'enlazar al carbono.',
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -70,8 +72,10 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Son ramificaciones de la cadena principal de carbonos.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Son ramificaciones de la cadena principal de carbonos.',
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -103,8 +107,10 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Este botón sirve para añadir un carbono a la cadena.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Este botón sirve para añadir un carbono a la cadena.',
+              ),
             ),
           ],
         ),
@@ -120,9 +126,11 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
-                  'hasta que solo quede un enlace libre.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Este botón sirve para enlazar hidrógenos al carbono, '
+                    'hasta que solo quede un enlace libre.',
+              ),
             ),
           ],
         ),
@@ -138,8 +146,10 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Este botón sirve para deshacer el último cambio.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Este botón sirve para deshacer el último cambio.',
+              ),
             ),
           ],
         ),

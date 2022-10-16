@@ -12,9 +12,11 @@ class OrganicHelpDialog extends StatelessWidget {
         'Orgánica': Wrap(
           runSpacing: 15,
           children: const [
-            QuimifyDialogContentText(
-              text: 'Los compuestos orgánicos son los que contienen carbonos '
-                  'enlazados a hidrógenos.',
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'Los compuestos orgánicos son los que contienen carbonos '
+                    'enlazados a hidrógenos.',
+              ),
             ),
             QuimifyDialogContentText(
               text: 'Ejemplos:',
@@ -34,8 +36,10 @@ class OrganicHelpDialog extends StatelessWidget {
         'Formular': Wrap(
           runSpacing: 15,
           children: const [
-            QuimifyDialogContentText(
-              text: 'Formular consiste averiguar la fórmula dado el nombre.',
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'Formular consiste averiguar la fórmula dado el nombre.',
+              ),
             ),
             QuimifyDialogContentText(
               text: 'Ejemplos:',
@@ -56,8 +60,10 @@ class OrganicHelpDialog extends StatelessWidget {
         'Nombrar': Wrap(
           runSpacing: 15,
           children: const [
-            QuimifyDialogContentText(
-              text: 'Nombrar consiste averiguar el nombre dada la fórmula.',
+            Center(
+              child: QuimifyDialogContentText(
+                text: 'Nombrar consiste averiguar el nombre dada la fórmula.',
+              ),
             ),
             QuimifyDialogContentText(
               text: 'Ejemplos:',

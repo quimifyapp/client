@@ -13,8 +13,10 @@ class CarbonsHelpDialog extends StatelessWidget {
       content: Wrap(
         runSpacing: 15,
         children: [
-          const QuimifyDialogContentText(
-            text: 'La cantidad total de carbonos en el radical.',
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'La cantidad total de carbonos en el radical.',
+            ),
           ),
           const QuimifyDialogContentText(
             text: 'Ejemplos con tres carbonos:',

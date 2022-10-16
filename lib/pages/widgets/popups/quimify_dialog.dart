@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 Future<void> showQuimifyDialog({
@@ -10,10 +12,7 @@ Future<void> showQuimifyDialog({
     barrierDismissible: closable,
     barrierColor: Theme.of(context).colorScheme.shadow,
     anchorPoint: const Offset(0, 0),
-    // Centered
-    builder: (BuildContext context) {
-      return dialog;
-    },
+    builder: (BuildContext context) => dialog,
   );
 }
 
@@ -31,10 +30,18 @@ class QuimifyDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double maxWidth = 400;
+    final double shortestSide = MediaQuery.of(context).size.width;
+    final double padding = max(25, (shortestSide - maxWidth) / 2);
+
+    print(shortestSide);
+
     return AlertDialog(
-      insetPadding: const EdgeInsets.all(25),
+      insetPadding: EdgeInsets.symmetric(horizontal: padding),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       titlePadding: EdgeInsets.zero,
       title: Column(
         children: [
@@ -42,9 +49,9 @@ class QuimifyDialog extends StatelessWidget {
             children: [
               const Spacer(),
               IconButton(
+                onPressed: () => Navigator.of(context).pop(),
                 alignment: Alignment.topRight,
                 padding: const EdgeInsets.only(top: 15, right: 15),
-                onPressed: () => Navigator.of(context).pop(),
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 icon: Icon(

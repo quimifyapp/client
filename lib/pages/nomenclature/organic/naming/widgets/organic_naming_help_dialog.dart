@@ -12,9 +12,11 @@ class OrganicNamingHelpDialog extends StatelessWidget {
         'Cadena abierta': Wrap(
           runSpacing: 15,
           children: [
-            const QuimifyDialogContentText(
-              text: 'Los compuestos orgánicos de cadena abierta son los que no '
-                  'forman ciclos.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Los compuestos orgánicos de cadena abierta son los que no '
+                    'forman ciclos.',
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
@@ -37,9 +39,11 @@ class OrganicNamingHelpDialog extends StatelessWidget {
         'Cíclico': Wrap(
           runSpacing: 15,
           children: [
-            const QuimifyDialogContentText(
-              text: 'Los compuestos orgánicos cíclicos son aquellos con al '
-                  'menos una cadena en forma de anillo.',
+            const Center(
+              child: QuimifyDialogContentText(
+                text: 'Los compuestos orgánicos cíclicos son aquellos con al '
+                    'menos una cadena en forma de anillo.',
+              ),
             ),
             const QuimifyDialogContentText(
               text: 'Ejemplo:',
