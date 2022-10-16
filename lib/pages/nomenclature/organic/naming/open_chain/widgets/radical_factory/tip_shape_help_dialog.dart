@@ -22,16 +22,19 @@ class TipShapeHelpDialog extends StatelessWidget {
             text: 'Terminación normal:',
             fontWeight: FontWeight.bold,
           ),
-          Center(
-            child: Image.asset(
-              'assets/images/icons/propyl.png',
-              height: 19,
-              color: Theme.of(context).colorScheme.primary,
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/propyl.png',
+                height: 19,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: '(radical recto)',
+              text: '(radical propil)',
             ),
           ),
         ],

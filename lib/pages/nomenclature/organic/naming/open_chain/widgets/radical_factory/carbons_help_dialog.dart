@@ -22,17 +22,19 @@ class CarbonsHelpDialog extends StatelessWidget {
             text: 'Ejemplos con tres carbonos:',
             fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: 25),
-          Center(
-            child: Image.asset(
-              'assets/images/icons/propyl.png',
-              height: 19,
-              color: Theme.of(context).colorScheme.primary,
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/propyl.png',
+                height: 19,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: '(propil)',
+              text: '(radical propil)',
             ),
           ),
           const SizedBox(height: 25),
@@ -45,7 +47,7 @@ class CarbonsHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: '(isopropil)',
+              text: '(radical isopropil)',
             ),
           ),
         ],

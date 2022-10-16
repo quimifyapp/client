@@ -34,8 +34,6 @@ class QuimifyDialog extends StatelessWidget {
     final double shortestSide = MediaQuery.of(context).size.width;
     final double padding = max(25, (shortestSide - maxWidth) / 2);
 
-    print(shortestSide);
-
     return AlertDialog(
       insetPadding: EdgeInsets.symmetric(horizontal: padding),
       shape: RoundedRectangleBorder(
