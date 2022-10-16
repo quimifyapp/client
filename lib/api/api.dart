@@ -19,8 +19,8 @@ class Api {
 
   late final http.Client _client;
 
-  static const _apiVersion = 0;
-  static const _clientVersion = 0;
+  static const _apiVersion = 1;
+  static const _clientVersion = 1;
   static const _authority = 'api.quimify.com';
 
   static String? _lastUrl, _lastResponse;
@@ -64,7 +64,6 @@ class Api {
       _lastResponse = response;
     } catch (_) {
       // No Internet connection, server down or client error.
-      print(_);
     }
 
     return response;
