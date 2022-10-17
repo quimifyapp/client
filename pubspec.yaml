@@ -56,6 +56,10 @@ flutter:
     - assets/images/icons/but-2-yne.png
 
   fonts:
+    - family: CeraProBoldCustom
+      fonts:
+        - asset: assets/fonts/CeraProBoldCustom.otf
+
     - family: CeraPro
       fonts:
         - asset: assets/fonts/CeraProBlack.otf

@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/nomenclature/organic/organic_image_page.dart';
+import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
@@ -180,43 +180,6 @@ class OrganicResultView extends StatelessWidget {
           ],
         ],
       ),
-    );
-  }
-}
-
-class OrganicResultField extends StatelessWidget {
-  const OrganicResultField({Key? key, required this.title, required this.field})
-      : super(key: key);
-
-  final String title, field;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-          ),
-          strutStyle: const StrutStyle(fontSize: 16, height: 1.3),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: AutoSizeText(
-            field,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-            strutStyle: const StrutStyle(fontSize: 16, height: 1.3),
-          ),
-        ),
-      ],
     );
   }
 }

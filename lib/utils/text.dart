@@ -102,9 +102,9 @@ String noInitialAndFinalBlanks(String input) {
 
 String toSpacedBonds(String formula) {
   return formula
-      .replaceAll(RegExp(r'-'), ' - ')
+      .replaceAll(RegExp(r'-'), ' – ')
       .replaceAll(RegExp(r'='), ' = ')
-      .replaceAll(RegExp(r'≡'), ' ≡ ');
+      .replaceAll(RegExp(r'≡'), ' Ξ ');
 }
 
 String noBlanks(String input) => input.replaceAll(RegExp(r'\s+'), '');

@@ -371,7 +371,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                       style: const TextStyle(
                         color: quimifyTeal,
                         fontSize: 28,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: 'CeraProBoldCustom',
                       ),
                       strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
                     ),
