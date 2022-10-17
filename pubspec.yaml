@@ -56,7 +56,7 @@ flutter:
     - assets/images/icons/but-2-yne.png
 
   fonts:
-    - family: CeraProBoldCustom
+    - family: CeraProBoldCustom # For triple bond char
       fonts:
         - asset: assets/fonts/CeraProBoldCustom.otf
 

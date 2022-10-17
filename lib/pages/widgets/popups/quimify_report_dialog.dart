@@ -62,9 +62,10 @@ class QuimifyReportDialog extends StatelessWidget {
       onTap: _tapOutsideText,
       child: QuimifyDialog(
         title: 'Reportar error',
-        content: (details != null && details!.isNotEmpty)
-            ? QuimifyDialogContentText(text: details!)
-            : null,
+        content: [
+          if (details != null && details!.isNotEmpty)
+            QuimifyDialogContentText(text: details!),
+        ],
         actions: [
           Container(
             height: 50,

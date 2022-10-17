@@ -80,9 +80,10 @@ class QuimifyMessageDialog extends StatelessWidget {
       onWillPop: () => Future.value(closable),
       child: QuimifyDialog(
         title: title,
-        content: details != null && details!.isNotEmpty
-            ? QuimifyDialogContentText(text: details!)
-            : null,
+        content: [
+          if (details != null && details!.isNotEmpty)
+            QuimifyDialogContentText(text: details!),
+        ],
         actions: [
           Row(
             children: [

@@ -89,7 +89,7 @@ class NomenclaturePage extends StatelessWidget {
                   QuimifyCard(
                     width: 290,
                     title: 'Nombrar',
-                    structure: 'CH₃ - C(CH₃) = CO',
+                    structure: 'CH₃ – C(CH₃) = CO',
                     autoSizeGroup: autoSizeGroup,
                     name: '2-metilprop-1-en-1-ona',
                     page: NamingPage(),

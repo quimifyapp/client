@@ -43,7 +43,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'CH₃ —',
+              'CH₃ –',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 28,
@@ -62,7 +62,7 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
             decoration: functionalButtonBorder,
             child: FunctionalGroupButton(
               bonds: 1,
-              text: 'CH2 — CH3',
+              text: 'CH2 – CH3',
               actionText: 'Radical',
               onPressed: () {},
             ),

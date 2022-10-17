@@ -10,35 +10,32 @@ class TipShapeHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifyDialog(
       title: 'Terminación',
-      content: Wrap(
-        runSpacing: 15,
-        children: [
-          const Center(
-            child: QuimifyDialogContentText(
-              text: 'Es la forma de la punta del radical.',
+      content: [
+        const Center(
+          child: QuimifyDialogContentText(
+            text: 'Es la forma de la punta del radical.',
+          ),
+        ),
+        const QuimifyDialogContentText(
+          text: 'Terminación normal:',
+          fontWeight: FontWeight.bold,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Center(
+            child: Image.asset(
+              'assets/images/icons/propyl.png',
+              height: 19,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          const QuimifyDialogContentText(
-            text: 'Terminación normal:',
-            fontWeight: FontWeight.bold,
+        ),
+        const Center(
+          child: QuimifyDialogContentText(
+            text: '(radical propil)',
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Center(
-              child: Image.asset(
-                'assets/images/icons/propyl.png',
-                height: 19,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
-          const Center(
-            child: QuimifyDialogContentText(
-              text: '(radical propil)',
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
       actions: [
         QuimifyDialogButton(
           onPressed: () => Navigator.pop(context),

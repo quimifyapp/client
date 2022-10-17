@@ -32,11 +32,9 @@ class NamingPage extends StatelessWidget {
                 children: [
                   QuimifyCard(
                     title: 'Cadena abierta',
-                    structure: 'CH₃ - O - CH₂(F)',
-                    // 'CH₃ - C(CH₃) = CH₂',
+                    structure: 'CH₃ – O – CH₂(F)',
                     autoSizeGroup: _autoSizeGroup,
                     name: 'fluorometil metil éter',
-                    //'2-metilprop-1-eno',
                     page: const NamingOpenChainPage(),
                   ),
                   const SizedBox(height: _cardVerticalPadding),

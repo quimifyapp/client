@@ -34,17 +34,13 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onHorizontalDragEnd: (dragEndDetails) {
-        dragEndDetails.primaryVelocity! < 0
-            ? _goToNextSlide()
-            : _goToPreviousSlide();
-      },
+      onHorizontalDragEnd: (dragEndDetails) =>
+          dragEndDetails.primaryVelocity! < 0
+              ? _goToNextSlide()
+              : _goToPreviousSlide(),
       child: QuimifyDialog(
         title: widget.titleToContent.keys.elementAt(_currentSlide),
-        content: Wrap(
-          runSpacing: 15,
-          children: widget.titleToContent.values.elementAt(_currentSlide),
-        ),
+        content: widget.titleToContent.values.elementAt(_currentSlide),
         actions: [
           Center(
             child: AnimatedSmoothIndicator(

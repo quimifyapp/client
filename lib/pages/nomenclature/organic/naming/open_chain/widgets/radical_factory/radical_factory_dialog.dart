@@ -61,17 +61,17 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
   Widget build(BuildContext context) {
     return QuimifyDialog(
       title: 'Radical',
-      content: Wrap(
-        runSpacing: 25,
-        children: [
-          const QuimifySectionTitle.custom(
-            title: 'Carbonos:',
-            horizontalPadding: 0,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            dialog: CarbonsHelpDialog(),
-          ),
-          Center(
+      content: [
+        const QuimifySectionTitle.custom(
+          title: 'Carbonos:',
+          horizontalPadding: 0,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          dialog: CarbonsHelpDialog(),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Center(
             child: SizedBox(
               height: 90,
               child: Row(
@@ -128,7 +128,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                             enabled: _canRemove(),
                             onPressed: _removeButton,
                             child: Text(
-                              '--',
+                              '–',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
@@ -149,46 +149,46 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
               ),
             ),
           ),
-          const QuimifySectionTitle.custom(
-            title: 'Terminación:',
-            horizontalPadding: 0,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            dialog: TipShapeHelpDialog(),
-          ),
-          //const SizedBox(height: 15),
-          Center(
-            child: Wrap(
-              direction: Axis.horizontal,
-              children: [
-                IndexedStack(
-                  index: _isIso ? 1 : 0,
-                  children: [
-                    Image.asset(
-                      'assets/images/icons/straight-radical.png',
-                      height: 70,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    Image.asset(
-                      'assets/images/icons/iso-radical.png',
-                      height: 70,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 40),
-                Padding(
-                  padding: const EdgeInsets.only(top: 14),
-                  child: QuimifySwitch(
-                    value: _isIso,
-                    onChanged: _switchButton,
+        ),
+        const QuimifySectionTitle.custom(
+          title: 'Terminación:',
+          horizontalPadding: 0,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          dialog: TipShapeHelpDialog(),
+        ),
+        //const SizedBox(height: 15),
+        Center(
+          child: Wrap(
+            direction: Axis.horizontal,
+            children: [
+              IndexedStack(
+                index: _isIso ? 1 : 0,
+                children: [
+                  Image.asset(
+                    'assets/images/icons/straight-radical.png',
+                    height: 70,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
+                  Image.asset(
+                    'assets/images/icons/iso-radical.png',
+                    height: 70,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+              const SizedBox(width: 40),
+              Padding(
+                padding: const EdgeInsets.only(top: 14),
+                child: QuimifySwitch(
+                  value: _isIso,
+                  onChanged: _switchButton,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
       actions: [
         QuimifyButton.gradient(
           height: 50,

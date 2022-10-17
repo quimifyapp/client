@@ -11,7 +11,6 @@ Future<void> showQuimifyDialog({
     context: context,
     barrierDismissible: closable,
     barrierColor: Theme.of(context).colorScheme.shadow,
-    anchorPoint: const Offset(0, 0),
     builder: (BuildContext context) => dialog,
   );
 }
@@ -26,12 +25,12 @@ class QuimifyDialog extends StatelessWidget {
   });
 
   final String title;
-  final Widget? content;
+  final List<Widget> content;
   final List<Widget> actions;
   final bool closable;
 
   void _closeButtonPressed(BuildContext context) {
-    if(closable) {
+    if (closable) {
       Navigator.of(context).pop();
     }
   }
@@ -82,7 +81,10 @@ class QuimifyDialog extends StatelessWidget {
         left: 25,
         right: 25,
       ),
-      content: content,
+      content: Wrap(
+        runSpacing: 15,
+        children: content,
+      ),
       actionsPadding: const EdgeInsets.only(
         top: 20,
         bottom: 20,
