@@ -7,80 +7,71 @@ class OrganicHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QuimifySlidesDialog(
+    return const QuimifySlidesDialog(
       titleToContent: {
-        'Orgánica': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'Los compuestos orgánicos son los que contienen carbonos '
-                    'enlazados a hidrógenos.',
-              ),
+        'Orgánica': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'Los compuestos orgánicos son los que contienen carbonos '
+                  'enlazados a hidrógenos.',
             ),
-            QuimifyDialogContentText(
-              text: 'Ejemplos:',
-              fontWeight: FontWeight.bold,
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplos:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+                text: 'ácido etanoico   ➔   CH₃ - COOH'),
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'CH₃ - CH₂ - CH₃   ➔   propano',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                  text: 'ácido etanoico   ➔   CH₃ - COOH'),
+          ),
+        ],
+        'Formular': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'Formular consiste averiguar la fórmula dado el nombre.',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'CH₃ - CH₂ - CH₃   ➔   propano',
-              ),
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplos:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'etanol   ➔   CH₃ - CH₂(OH)',
             ),
-          ],
-        ),
-        'Formular': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'Formular consiste averiguar la fórmula dado el nombre.',
-              ),
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'propadieno   ➔   CH₂ = CH = CH₂',
             ),
-            QuimifyDialogContentText(
-              text: 'Ejemplos:',
-              fontWeight: FontWeight.bold,
+          ),
+        ],
+        'Nombrar': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'Nombrar consiste averiguar el nombre dada la fórmula.',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'etanol   ➔   CH₃ - CH₂(OH)',
-              ),
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplos:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'CH₃ - CH₂(OH)   ➔   etanol',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'propadieno   ➔   CH₂ = CH = CH₂',
-              ),
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'CH₂ = CH = CH₂   ➔   propadieno',
             ),
-          ],
-        ),
-        'Nombrar': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'Nombrar consiste averiguar el nombre dada la fórmula.',
-              ),
-            ),
-            QuimifyDialogContentText(
-              text: 'Ejemplos:',
-              fontWeight: FontWeight.bold,
-            ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'CH₃ - CH₂(OH)   ➔   etanol',
-              ),
-            ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'CH₂ = CH = CH₂   ➔   propadieno',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       },
     );
   }

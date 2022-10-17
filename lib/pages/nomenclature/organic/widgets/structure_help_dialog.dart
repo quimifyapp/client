@@ -9,123 +9,110 @@ class StructureHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifySlidesDialog(
       titleToContent: {
-        'Estructura': Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Cada vértice se corresponde con un carbono. Los '
-                    'hidrógenos se omiten.',
+        'Estructura': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Cada carbono es un vértice y los hidrógenos se omiten.',
+            ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/butane-diagram.png',
+                height: 130,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(butano)',
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/icons/butane-diagram.png',
-                  height: 130,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+          ),
+        ],
+        'Enlace simple': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Se representa con una línea.',
+            ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/butane.png',
+                height: 50,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(butano)',
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(butano)',
+            ),
+          ),
+        ],
+        'Enlace doble': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Se representa con dos líneas.',
+            ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/but-2-ene.png',
+                height: 50,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-          ],
-        ),
-        'Enlace simple': Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Se representa con una sola línea.',
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(but-2-eno)',
+            ),
+          ),
+        ],
+        'Enlace triple': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Se representa con tres líneas.',
+            ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: Image.asset(
+                'assets/images/icons/but-2-yne.png',
+                height: 50,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(but-2-ino)',
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/icons/butane.png',
-                  height: 50,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(butano)',
-              ),
-            ),
-          ],
-        ),
-        'Enlace doble' : Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Se representa con dos líneas.',
-              ),
-            ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/icons/but-2-ene.png',
-                  height: 50,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(but-2-eno)',
-              ),
-            ),
-          ],
-        ),
-        'Enlace triple' : Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Se representa con tres líneas.',
-              ),
-            ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/icons/but-2-yne.png',
-                  height: 50,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(but-2-ino)',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       },
     );
   }

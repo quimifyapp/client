@@ -21,138 +21,123 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
 
     return QuimifySlidesDialog(
       titleToContent: {
-        'Sustituyentes': Wrap(
-          runSpacing: 15,
-          children: [
-            Container(
-              decoration: functionalButtonBorder,
-              child: FunctionalGroupButton(
-                bonds: 1,
-                text: 'H',
-                actionText: 'Hidrógeno',
-                onPressed: () {},
-              ),
+        'Sustituyentes': [
+          Container(
+            decoration: functionalButtonBorder,
+            child: FunctionalGroupButton(
+              bonds: 1,
+              text: 'H',
+              actionText: 'Hidrógeno',
+              onPressed: () {},
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'En la lista aparecen los sustituyentes que se pueden '
-                    'enlazar al carbono.',
-              ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'En la lista aparecen los sustituyentes que se pueden '
+                  'enlazar al carbono.',
             ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
-            ),
-            Center(
-              child: Text(
-                'CH₃ —',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(carbono con tres hidrógenos)',
-              ),
-            ),
-          ],
-        ),
-        'Radicales': Wrap(
-          runSpacing: 15,
-          children: [
-            Container(
-              decoration: functionalButtonBorder,
-              child: FunctionalGroupButton(
-                bonds: 1,
-                text: 'CH2 — CH3',
-                actionText: 'Radical',
-                onPressed: () {},
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Son ramificaciones de la cadena principal de carbonos.',
-              ),
-            ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
-            ),
-            Center(
-              child: Image.asset(
-                'assets/images/icons/2-methylpropane.png',
-                height: 90,
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: Text(
+              'CH₃ —',
+              style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(2-metilpropano)',
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(carbono con tres hidrógenos)',
+            ),
+          ),
+        ],
+        'Radicales': [
+          Container(
+            decoration: functionalButtonBorder,
+            child: FunctionalGroupButton(
+              bonds: 1,
+              text: 'CH2 — CH3',
+              actionText: 'Radical',
+              onPressed: () {},
+            ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Son ramificaciones de la cadena principal de carbonos.',
+            ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: Image.asset(
+              'assets/images/icons/2-methylpropane.png',
+              height: 90,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(2-metilpropano)',
+            ),
+          ),
+        ],
+        'Enlazar carbono': [
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: AddCarbonButton(
+                enabled: true,
+                onPressed: () {},
               ),
             ),
-          ],
-        ),
-        'Enlazar carbono': Wrap(
-          runSpacing: 15,
-          children: [
-            Center(
-              child: SizedBox(
-                width: 100,
-                child: AddCarbonButton(
-                  enabled: true,
-                  onPressed: () {},
-                ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Este botón sirve para añadir un carbono a la cadena.',
+            ),
+          ),
+        ],
+        'Hidrogenar': [
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: HydrogenateButton(
+                enabled: true,
+                onPressed: () {},
               ),
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Este botón sirve para añadir un carbono a la cadena.',
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
+                  'hasta que solo quede un enlace libre.',
+            ),
+          ),
+        ],
+        'Deshacer': [
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: UndoButton(
+                enabled: true,
+                onPressed: () {},
               ),
             ),
-          ],
-        ),
-        'Hidrogenar': Wrap(
-          runSpacing: 15,
-          children: [
-            Center(
-              child: SizedBox(
-                width: 100,
-                child: HydrogenateButton(
-                  enabled: true,
-                  onPressed: () {},
-                ),
-              ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Este botón sirve para deshacer el último cambio.',
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Este botón sirve para enlazar hidrógenos al carbono, '
-                    'hasta que solo quede un enlace libre.',
-              ),
-            ),
-          ],
-        ),
-        'Deshacer': Wrap(
-          runSpacing: 15,
-          children: [
-            Center(
-              child: SizedBox(
-                width: 100,
-                child: UndoButton(
-                  enabled: true,
-                  onPressed: () {},
-                ),
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Este botón sirve para deshacer el último cambio.',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       },
     );
   }

@@ -7,80 +7,70 @@ class MolecularMassHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QuimifySlidesDialog(
+    return const QuimifySlidesDialog(
       titleToContent: {
-        'Concepto de mol': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
-                    ' como la constante de Avogadro.',
-              ),
+        'Concepto de mol': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
+                  'conoce como la constante de Avogadro.',
             ),
-            QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'Un mol de coches son 6.022 x 10²³ coches.',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'Un mol de coches son 6.022 x 10²³ coches.',
-              ),
+          ),
+        ],
+        'Átomos': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'La masa molecular de un átomo es la masa, en gramos, de '
+                  'un mol de ese átomo.',
             ),
-          ],
-        ),
-        'Átomos': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'La masa molecular de un átomo es la masa, en gramos, de '
-                    'un mol de ese átomo.',
-              ),
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplos:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'H (hidrógeno)   ➔   1.01 g/mol',
             ),
-            QuimifyDialogContentText(
-              text: 'Ejemplos:',
-              fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'O (oxígeno)   ➔   15.99 g/mol',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'H (hidrógeno)   ➔   1.008 g/mol',
-              ),
+          ),
+        ],
+        'Compuestos': [
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'La masa molecular de un compuesto es la suma de las '
+                  'masas de sus átomos.',
             ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'O (oxígeno)   ➔   15.994 g/mol',
-              ),
+          ),
+          QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'El agua (H₂O) tiene dos átomos de hidrógeno y uno de '
+                  'oxígeno en su molécula. Su masa molecular es:',
             ),
-          ],
-        ),
-        'Compuestos': Wrap(
-          runSpacing: 15,
-          children: const [
-            Center(
-              child: QuimifyDialogContentText(
-                text: 'La masa molecular de un compuesto es la suma de las '
-                    'masas de sus átomos.',
-              ),
+          ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: '2 x 1.01 + 1 x 15.99 = 18.00 g/mol',
             ),
-            QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
-            ),
-            Center(
-              child: QuimifyDialogContentText(
-                text:
-                    'El agua (H₂O) tiene dos átomos de hidrógeno y uno de '
-                    'oxígeno en su molécula. Su masa molecular es:',
-              ),
-            ),
-            Center(
-              child: QuimifyDialogContentText(
-                text: '2 x 1.008 + 1 x 15.994 = 18.01 g/mol',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       },
     );
   }

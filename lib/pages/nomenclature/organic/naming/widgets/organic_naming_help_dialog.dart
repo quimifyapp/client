@@ -9,60 +9,54 @@ class OrganicNamingHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifySlidesDialog(
       titleToContent: {
-        'Cadena abierta': Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Los compuestos orgánicos de cadena abierta son los que no '
-                    'forman ciclos.',
-              ),
+        'Cadena abierta': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Los compuestos orgánicos de cadena abierta son los que no '
+                  'forman ciclos.',
             ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: Image.asset(
+              'assets/images/icons/4-ethyl-2-methylhexane.png',
+              height: 100,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            Center(
-              child: Image.asset(
-                'assets/images/icons/4-ethyl-2-methylhexane.png',
-                height: 100,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(4-etil-2-metilhexano)',
             ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(4-etil-2-metilhexano)',
-              ),
+          ),
+        ],
+        'Cíclico': [
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Los compuestos orgánicos cíclicos son aquellos con al '
+                  'menos una cadena en forma de anillo.',
             ),
-          ],
-        ),
-        'Cíclico': Wrap(
-          runSpacing: 15,
-          children: [
-            const Center(
-              child: QuimifyDialogContentText(
-                text: 'Los compuestos orgánicos cíclicos son aquellos con al '
-                    'menos una cadena en forma de anillo.',
-              ),
+          ),
+          const QuimifyDialogContentText(
+            text: 'Ejemplo:',
+            fontWeight: FontWeight.bold,
+          ),
+          Center(
+            child: Image.asset(
+              'assets/images/icons/phenol.png',
+              height: 60,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            const QuimifyDialogContentText(
-              text: 'Ejemplo:',
-              fontWeight: FontWeight.bold,
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: '(hidroxibenceno)',
             ),
-            Center(
-              child: Image.asset(
-                'assets/images/icons/phenol.png',
-                height: 60,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            const Center(
-              child: QuimifyDialogContentText(
-                text: '(hidroxibenceno)',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       },
     );
   }
