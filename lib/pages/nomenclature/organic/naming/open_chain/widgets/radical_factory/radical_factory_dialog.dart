@@ -70,7 +70,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
       title: 'Radical',
       content: [
         const QuimifySectionTitle.custom(
-          title: 'Carbonos:',
+          title: 'Carbonos',
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -158,7 +158,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           ),
         ),
         const QuimifySectionTitle.custom(
-          title: 'Terminación:',
+          title: 'Terminación',
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,

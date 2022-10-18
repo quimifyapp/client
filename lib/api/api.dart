@@ -96,6 +96,9 @@ class Api {
     await _client.post(url);
   }
 
+  Future<String?> getInorcanicAutocompletion(String input) =>
+      _getResponse('inorganico/autocompletar', {'input': input});
+
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 

@@ -45,6 +45,20 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     ),
   ];
 
+  Future<List<String>> _suggestionsCallback(String input) async {
+    List<String> suggestions = [];
+
+    if (!isEmptyWithBlanks(input)) {
+      String? suggestion = await Api().getInorcanicAutocompletion(input);
+
+      if (suggestion != null && suggestion != '') {
+        suggestions.add(suggestion);
+      }
+    }
+
+    return suggestions;
+  }
+
   Future<void> _search(String input, bool photo) async {
     if (!isEmptyWithBlanks(input)) {
       startLoading(context);
@@ -125,6 +139,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                 controller: _textController,
                 focusNode: _textFocusNode,
                 corrector: formatInorganicFormulaOrName,
+                suggestionsCallBack: _suggestionsCallback,
                 onSubmitted: (input) => _search(input, false),
               ),
             ],

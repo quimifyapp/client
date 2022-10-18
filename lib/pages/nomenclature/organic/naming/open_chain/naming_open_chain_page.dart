@@ -234,11 +234,12 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
           _openChainStack.last.getOrderedBondableGroups().indexOf(function);
 
       if (code != -1) {
-        if (function != FunctionalGroup.ether) {
-          _openChainStack.last.bondFunctionalGroup(function);
-          _checkDone();
-        } else {
+        _openChainStack.last.bondFunctionalGroup(function);
+
+        if (function == FunctionalGroup.ether) {
           _openChainStack.last = Ether(_openChainStack.last as Simple);
+        } else {
+          _checkDone();
         }
 
         _sequenceStack.last.add(code);

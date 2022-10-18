@@ -6,11 +6,10 @@ import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
 
 class Ether extends OpenChain {
   Ether(Simple firstChain) {
-    _firstChain = firstChain.getChain(); // R -
-    _firstChain.bondFunctionalGroup(FunctionalGroup.ether); // R - O -
+    _firstChain = firstChain.getChain(); // [R - O] - R'
 
     if (_firstChain.isDone()) {
-      _startSecondChain(); // - C
+      _startSecondChain(); //  // R - O [- R']
     } else {
       _secondChain = null;
       _currentChain = _firstChain;
