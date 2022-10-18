@@ -76,9 +76,9 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           fontWeight: FontWeight.w500,
           dialog: CarbonsHelpDialog(),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Center(
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: SizedBox(
               height: 90,
               child: Row(
@@ -164,7 +164,6 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           fontWeight: FontWeight.w500,
           dialog: TipShapeHelpDialog(),
         ),
-        //const SizedBox(height: 15),
         Center(
           child: Wrap(
             direction: Axis.horizontal,

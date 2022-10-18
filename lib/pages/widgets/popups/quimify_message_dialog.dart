@@ -82,7 +82,9 @@ class QuimifyMessageDialog extends StatelessWidget {
         title: title,
         content: [
           if (details != null && details!.isNotEmpty)
-            QuimifyDialogContentText(text: details!),
+            Center(
+              child: QuimifyDialogContentText(text: details!),
+            ),
         ],
         actions: [
           Row(
