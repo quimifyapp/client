@@ -81,9 +81,11 @@ class QuimifyDialog extends StatelessWidget {
         left: 25,
         right: 25,
       ),
-      content: Wrap(
-        runSpacing: 15,
-        children: content,
+      content: SingleChildScrollView(
+        child: Wrap(
+          runSpacing: 15,
+          children: content,
+        ),
       ),
       actionsPadding: const EdgeInsets.only(
         top: 20,

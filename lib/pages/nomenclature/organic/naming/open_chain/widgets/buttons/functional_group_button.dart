@@ -1,17 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/utils/text.dart';
 
 class FunctionalGroupButton extends StatelessWidget {
-  const FunctionalGroupButton(
-      {Key? key,
-      required this.bonds,
-      required this.text,
-      required this.actionText,
-      this.altText,
-      required this.onPressed})
-      : super(key: key);
+  const FunctionalGroupButton({
+    Key? key,
+    required this.bonds,
+    required this.text,
+    required this.actionText,
+    this.altText,
+    required this.onPressed,
+  }) : super(key: key);
 
   final int bonds;
   final String text, actionText;
@@ -46,15 +47,19 @@ class FunctionalGroupButton extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          Text(
-            formatStructureInput(text),
-            style: const TextStyle(
-              letterSpacing: 1,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: AutoSizeText(
+              formatStructureInput(text),
+              maxLines: 1,
+              maxFontSize: 16,
+              minFontSize: 8,
+              stepGranularity: 0.1,
+              style: const TextStyle(
+                letterSpacing: 1,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
           ),
           const Spacer(),
           Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
@@ -24,11 +24,50 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
         'Sustituyentes': [
           Container(
             decoration: functionalButtonBorder,
-            child: FunctionalGroupButton(
-              bonds: 1,
-              text: 'H',
-              actionText: 'Hidrógeno',
-              onPressed: () {},
+            height: 60,
+            child: Row(
+              children: [
+                const SizedBox(width: 10),
+                Container(
+                  width: 40,
+                  height: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset(
+                    'assets/images/icons/single-bond.png',
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 30,
+                  ),
+                ),
+                const SizedBox(width: 15),
+                const Text(
+                  'H',
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                const Text(
+                  'Hidrógeno',
+                  style: TextStyle(
+                    color: quimifyTeal,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                const Icon(
+                  Icons.add,
+                  color: quimifyTeal,
+                  size: 22,
+                ),
+                const SizedBox(width: 15),
+              ],
             ),
           ),
           const Center(
@@ -58,15 +97,6 @@ class NamingOpenChainHelpDialog extends StatelessWidget {
           ),
         ],
         'Radicales': [
-          Container(
-            decoration: functionalButtonBorder,
-            child: FunctionalGroupButton(
-              bonds: 1,
-              text: 'CH2 – CH3',
-              actionText: 'Radical',
-              onPressed: () {},
-            ),
-          ),
           const Center(
             child: QuimifyDialogContentText(
               text: 'Son ramificaciones de la cadena principal de carbonos.',

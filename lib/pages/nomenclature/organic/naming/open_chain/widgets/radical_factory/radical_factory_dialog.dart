@@ -8,6 +8,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
   const RadicalFactoryDialog({Key? key, required this.onSubmitted})
@@ -45,6 +46,12 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
   void _removeButton() {
     if (_canRemove()) {
       setState(() => _carbonCount--);
+    } else {
+      QuimifyMessageDialog(
+        title: 'No existe',
+        details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}no puede '
+            'tener menos de ${_isIso ? 'tres carbonos' : 'un carbono'}.',
+      ).show(context);
     }
   }
 
