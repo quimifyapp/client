@@ -9,7 +9,7 @@ class HelpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.help_outline, size: 22), // TODO
+      icon: const Icon(Icons.help_outline, size: 26),
       color: Theme.of(context).colorScheme.primary,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,

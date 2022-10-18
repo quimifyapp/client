@@ -32,12 +32,15 @@ class QuimifySectionTitle extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       child: Row(
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: fontSize,
-              fontWeight: fontWeight,
+          Padding(
+            padding: const EdgeInsets.only(top: 5), // Vertically centered
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+              ),
             ),
           ),
           const Spacer(),
