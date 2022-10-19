@@ -117,7 +117,7 @@ class _MainPageState extends State<MainPage> {
                     borderRadius: BorderRadius.circular(35),
                     border: Border.all(
                       width: 2,
-                      strokeAlign: BorderSide.strokeAlignOutside,
+                      strokeAlign: StrokeAlign.outside,
                       color: Theme.of(context).colorScheme.background,
                     ),
                   ),
