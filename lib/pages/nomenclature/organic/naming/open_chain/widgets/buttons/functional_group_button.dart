@@ -61,7 +61,6 @@ class FunctionalGroupButton extends StatelessWidget {
               ),
             ),
           ),
-          const Spacer(),
           Text(
             actionText,
             style: const TextStyle(

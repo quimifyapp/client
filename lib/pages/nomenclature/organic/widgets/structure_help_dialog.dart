@@ -12,7 +12,7 @@ class StructureHelpDialog extends StatelessWidget {
         'Estructura': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Cada carbono es un vértice y los hidrógenos se omiten.',
+              text: 'Cada carbono es un vértice, y los hidrógenos se omiten.',
             ),
           ),
           const QuimifyDialogContentText(

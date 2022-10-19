@@ -13,8 +13,8 @@ class InorganicHelpDialog extends StatelessWidget {
       content: const [
         Center(
           child: QuimifyDialogContentText(
-            text: 'Los compuestos inorgánicos son los que no tienen al carbono '
-                'como elemento principal.',
+            text: 'Los compuestos inorgánicos son aquellos que no tienen al '
+                'carbono como elemento principal.',
           ),
         ),
         QuimifyDialogContentText(

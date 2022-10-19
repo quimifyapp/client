@@ -12,8 +12,8 @@ class OrganicNamingHelpDialog extends StatelessWidget {
         'Cadena abierta': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Los compuestos orgánicos de cadena abierta son los que no '
-                  'forman ciclos.',
+              text: 'Los compuestos orgánicos de cadena abierta son aquellos '
+                  'que no forman ciclos.',
             ),
           ),
           const QuimifyDialogContentText(

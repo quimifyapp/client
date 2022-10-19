@@ -12,8 +12,8 @@ class OrganicHelpDialog extends StatelessWidget {
         'Orgánica': [
           Center(
             child: QuimifyDialogContentText(
-              text: 'Los compuestos orgánicos son los que contienen carbonos '
-                  'enlazados a hidrógenos.',
+              text: 'Los compuestos orgánicos son aquellos que contienen '
+                  'carbonos enlazados a hidrógenos.',
             ),
           ),
           QuimifyDialogContentText(
