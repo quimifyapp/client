@@ -49,7 +49,8 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     List<String> suggestions = [];
 
     if (!isEmptyWithBlanks(input)) {
-      String? suggestion = await Api().getInorcanicAutocompletion(input);
+      String? suggestion =
+          await Api().getInorcanicAutocompletion(toDigits(input));
 
       if (suggestion != null && suggestion != '') {
         suggestions.add(suggestion);

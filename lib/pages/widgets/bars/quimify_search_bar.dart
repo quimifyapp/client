@@ -57,7 +57,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           Expanded(
             child: Container(
               height: 50,
-              padding: const EdgeInsets.only(right: 14),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Theme.of(context).colorScheme.surface,
@@ -88,6 +87,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                           style: BorderStyle.none,
                         ),
                       ),
+                      contentPadding: const EdgeInsets.only(right: 14),
                       // Search icon:
                       prefixIcon: Transform.scale(
                         scale: 0.7,
