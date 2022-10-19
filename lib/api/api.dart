@@ -99,6 +99,25 @@ class Api {
   Future<String?> getInorcanicAutocompletion(String input) =>
       _getResponse('inorganico/autocompletar', {'input': input});
 
+  Future<InorganicResult?> getInorganicFromCompletion(String completion) async {
+    InorganicResult? result;
+
+    String? response = await _getResponse(
+      'inorganico/autocompletar/buscar',
+      {
+        'complecion': completion,
+      },
+    );
+
+    if (response != null) {
+      try {
+        result = InorganicResult.fromJson(response);
+      } catch (_) {}
+    }
+
+    return result;
+  }
+
   Future<InorganicResult?> getInorganic(String input, bool photo) async {
     InorganicResult? result;
 

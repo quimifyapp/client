@@ -60,55 +60,64 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     return suggestions;
   }
 
-  Future<void> _search(String input, bool photo) async {
-    if (!isEmptyWithBlanks(input)) {
-      startLoading(context);
+  void _processResult(String query, InorganicResult? inorganicResult) {
+    stopLoading();
 
-      InorganicResult? result =
-          await Api().getInorganic(toDigits(input), photo);
-
-      stopLoading();
-
-      if (result != null) {
-        if (result.present) {
-          setState(
-            () => _results.add(
-              InorganicResultView(
-                query: input,
-                inorganicResult: result,
-              ),
+    if (inorganicResult != null) {
+      if (inorganicResult.present) {
+        setState(
+          () => _results.add(
+            InorganicResultView(
+              query: query,
+              inorganicResult: inorganicResult,
             ),
-          );
+          ),
+        );
 
-          // UI/UX actions:
+        // UI/UX actions:
 
-          _labelText = input; // Sets previous input as label
-          _textController.clear(); // Clears input
-          _textFocusNode.unfocus(); // Hides keyboard
+        _labelText = query; // Sets previous input as label
+        _textController.clear(); // Clears input
+        _textFocusNode.unfocus(); // Hides keyboard
 
-          _scrollToStart(); // Goes to the top of the page
-        } else {
-          if (!mounted) return; // For security reasons
-          QuimifyMessageDialog.reportable(
-            title: 'Sin resultado',
-            details: 'No se ha encontrado:\n"$input"',
-            reportLabel: 'Formulación inorgánica, búsqueda de "$input"',
-          ).show(context);
-        }
+        _scrollToStart(); // Goes to the top of the page
       } else {
-        // Client already reported an error in this case
-        if (!mounted) return; // For security reasons
-        checkInternetConnection().then((bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).show(context);
-          } else {
-            quimifyNoInternetDialog.show(context);
-          }
-        });
+        QuimifyMessageDialog.reportable(
+          title: 'Sin resultado',
+          details: 'No se ha encontrado:\n"$query"',
+          reportLabel: 'Formulación inorgánica, búsqueda de "$query"',
+        ).show(context);
       }
+    } else {
+      // Client already reported an error in this case
+      checkInternetConnection().then((bool hasInternetConnection) {
+        if (hasInternetConnection) {
+          const QuimifyMessageDialog(
+            title: 'Sin resultado',
+          ).show(context);
+        } else {
+          quimifyNoInternetDialog.show(context);
+        }
+      });
     }
+  }
+
+  Future<void> _searchFromCompletion(String completion) async {
+    startLoading(context);
+
+    InorganicResult? inorganicResult =
+        await Api().getInorganicFromCompletion(toDigits(completion));
+
+    _processResult(completion, inorganicResult);
+  }
+
+  Future<void> _searchFromQuery(String input, bool photo) async {
+    startLoading(context);
+
+    InorganicResult? inorganicResult =
+        await Api().getInorganic(toDigits(input), photo);
+
+    _processResult(input, inorganicResult);
   }
 
   void _scrollToStart() {
@@ -140,9 +149,10 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                 controller: _textController,
                 focusNode: _textFocusNode,
                 inputCorrector: formatInorganicFormulaOrName,
-                onSubmitted: (input) => _search(input, false),
-                suggestionsCorrector: formatInorganicFormulaOrName,
-                suggestionsCallBack: _suggestionsCallback,
+                onSubmitted: (input) => _searchFromQuery(input, false),
+                completionCorrector: formatInorganicFormulaOrName,
+                completionCallBack: _suggestionsCallback,
+                onCompletionPressed: _searchFromCompletion,
               ),
             ],
           ),

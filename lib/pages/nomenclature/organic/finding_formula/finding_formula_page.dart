@@ -101,8 +101,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 inputCorrector: formatOrganicName,
                 onSubmitted: (String input) => _search(input, false),
                 // Disabled:
-                suggestionsCorrector: (_) => _,
-                suggestionsCallBack: (_) async => [],
+                completionCorrector: (_) => _,
+                completionCallBack: (_) async => [],
+                onCompletionPressed: (_) {},
               ),
             ],
           ),
