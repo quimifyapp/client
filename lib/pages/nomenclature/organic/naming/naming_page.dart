@@ -16,7 +16,7 @@ class NamingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: const QuimifyPageBar(title: 'Nombrar orgánico'),
+      header: const QuimifyPageBar(title: 'Nombrar orgánicos'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(

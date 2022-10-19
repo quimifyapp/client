@@ -35,7 +35,7 @@ class NamingOpenChainPage extends StatefulWidget {
 }
 
 class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
-  static const String _title = 'Nombrar orgánico';
+  static const String _title = 'Nombrar orgánicos';
 
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;

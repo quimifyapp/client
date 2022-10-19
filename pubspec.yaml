@@ -57,6 +57,10 @@ flutter:
     - assets/images/icons/but-2-yne.png
 
   fonts:
+    - family: Geometos # For titles
+      fonts:
+        - asset: assets/fonts/Geometos.ttf
+
     - family: CeraProBoldCustom # For triple bond char
       fonts:
         - asset: assets/fonts/CeraProBoldCustom.otf

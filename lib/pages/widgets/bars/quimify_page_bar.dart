@@ -13,8 +13,12 @@ class QuimifyPageBar extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Container(
-        padding:
-            const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
+        padding: const EdgeInsets.only(
+          top: 15,
+          bottom: 25,
+          left: 25,
+          right: 25,
+        ),
         child: Row(
           children: [
             QuimifyIconButton.square(
@@ -38,6 +42,8 @@ class QuimifyPageBar extends StatelessWidget {
                 stepGranularity: 0.1,
                 maxFontSize: 20,
                 style: TextStyle(
+                  fontFamily: 'Gametos',
+                  letterSpacing: 0.5,
                   fontSize: 20,
                   color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
