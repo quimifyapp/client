@@ -72,6 +72,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     ),
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(right: 14),
                       // So vertical center works:
                       isCollapsed: true,
                       labelText: widget.label,
@@ -87,7 +88,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                           style: BorderStyle.none,
                         ),
                       ),
-                      contentPadding: const EdgeInsets.only(right: 14),
                       // Search icon:
                       prefixIcon: Transform.scale(
                         scale: 0.7,
@@ -119,7 +119,21 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                       widget.onSubmitted(input);
                     },
                   ),
+                  getImmediateSuggestions: true,
+                  suggestionsBoxVerticalOffset: 5,
+                  hideOnEmpty: true,
+                  hideOnError: true,
+                  hideOnLoading: true,
+                  debounceDuration: const Duration(milliseconds: 150),
                   suggestionsCallback: widget.suggestionsCallBack,
+                  onSuggestionSelected: (String suggestion) {
+                    // TODO
+                  },
+                  suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).colorScheme.surface,
+                    clipBehavior: Clip.hardEdge,
+                  ),
                   itemBuilder: (context, String suggestion) {
                     return Container(
                       height: 45,
@@ -139,7 +153,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1),
                               child: AutoSizeText(
-                                suggestion,
+                                widget.corrector(suggestion),
                                 maxLines: 1,
                                 stepGranularity: 0.1,
                                 style: TextStyle(
@@ -153,20 +167,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                       ),
                     );
                   },
-                  getImmediateSuggestions: true,
-                  suggestionsBoxVerticalOffset: 5,
-                  suggestionsBoxDecoration: SuggestionsBoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).colorScheme.surface,
-                    clipBehavior: Clip.hardEdge,
-                  ),
-                  onSuggestionSelected: (String suggestion) {
-                    // TODO
-                  },
-                  hideOnEmpty: true,
-                  hideOnError: true,
-                  hideOnLoading: true,
-                  debounceDuration: const Duration(milliseconds: 150),
                 ),
               ),
             ),
