@@ -116,8 +116,9 @@ class _MainPageState extends State<MainPage> {
                     gradient: quimifyGradient,
                     borderRadius: BorderRadius.circular(35),
                     border: Border.all(
+                      width: 2,
+                      strokeAlign: StrokeAlign.outside,
                       color: Theme.of(context).colorScheme.background,
-                      width: 0.5,
                     ),
                   ),
                   child: Stack(

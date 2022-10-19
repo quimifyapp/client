@@ -450,7 +450,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                         top: 5, // + 20 from above SizedBox = 25
-                        bottom: 10, // + 15 from Wrap's runSpacing = 25
+                        bottom: 25,
                       ),
                       child: Wrap(
                         runSpacing: 15,
