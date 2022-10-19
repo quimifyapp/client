@@ -96,9 +96,10 @@ class Carbon extends Organic {
 
     // Se escribe los hidrógenos:
     Substituent hydrogen = Substituent(FunctionalGroup.hydrogen);
-    int cantidad = getAmountOfFunction(FunctionalGroup.hydrogen);
-    if (cantidad > 0) {
-      result += hydrogen.toString() + Organic.molecularQuantifier(cantidad);
+    int hydrogenCount = getAmountOfFunction(FunctionalGroup.hydrogen);
+    if (hydrogenCount > 0) {
+      result +=
+          hydrogen.toString() + Organic.molecularQuantifier(hydrogenCount);
       uniqueSubstituents.removeLast(); // Se borra el hidrógeno de la lista
     }
 
@@ -112,11 +113,11 @@ class Carbon extends Organic {
 
       String text = unique.toString();
 
-      if ((unique.isLike(FunctionalGroup.ketone) ||
-              unique.isHalogen() ||
-              unique.getBonds() == 3) &&
-          !unique.isLike(FunctionalGroup.aldehyde)) {
-        result += text; // Like "CN", "CCl", "COOH", "C(O)(NH2)", "CHO"...
+      if (unique.getBonds() == 3 &&
+          !(unique.isLike(FunctionalGroup.aldehyde) && hydrogenCount > 0)) {
+        result += text; // COOH, CHO...
+      } else if (unique.isLike(FunctionalGroup.ketone) || unique.isHalogen()) {
+        result += text; // CO, CCl...
       } else {
         result += '($text)'; // Like "CH(OH)3"
       }
@@ -125,8 +126,9 @@ class Carbon extends Organic {
     } else if (uniqueSubstituents.length > 1) {
       // Hay más de un tipo además del hidrógeno y éter
       for (Substituent substituent in uniqueSubstituents) {
-        result +=
-            '($substituent)${Organic.molecularQuantifier(getAmountOfSubstituent(substituent))}'; // Like "C(OH)3(Cl)"
+        String count =
+            Organic.molecularQuantifier(getAmountOfSubstituent(substituent));
+        result += '($substituent)$count'; // Like "C(OH)3(Cl)"
       }
     }
 
