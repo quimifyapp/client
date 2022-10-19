@@ -42,8 +42,6 @@ class QuimifyPageBar extends StatelessWidget {
                 stepGranularity: 0.1,
                 maxFontSize: 20,
                 style: TextStyle(
-                  fontFamily: 'Gametos',
-                  letterSpacing: 0.5,
                   fontSize: 20,
                   color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
