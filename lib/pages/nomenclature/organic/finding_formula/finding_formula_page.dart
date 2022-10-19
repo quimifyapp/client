@@ -34,21 +34,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     false,
   );
 
-  Future<List<String>> _suggestionsCallback(String input) async {
-    List<String> suggestions = [];
-
-    if (!isEmptyWithBlanks(input)) {
-      String? suggestion = await Api()
-          .getInorcanicAutocompletion(toDigits(input)); // TODO organic
-
-      if (suggestion != null && suggestion != '') {
-        suggestions.add(suggestion);
-      }
-    }
-
-    return suggestions;
-  }
-
   Future<void> _search(String name, bool picture) async {
     if (!isEmptyWithBlanks(name)) {
       startLoading(context);
@@ -113,9 +98,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 label: _labelText,
                 controller: _textController,
                 focusNode: _textFocusNode,
-                corrector: formatOrganicName,
-                suggestionsCallBack: _suggestionsCallback,
-                onSubmitted: (input) => _search(input, false),
+                inputCorrector: formatOrganicName,
+                onSubmitted: (String input) => _search(input, false),
+                // Disabled:
+                suggestionsCorrector: (_) => _,
+                suggestionsCallBack: (_) async => [],
               ),
             ],
           ),

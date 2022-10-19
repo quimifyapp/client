@@ -12,15 +12,16 @@ class QuimifySearchBar extends StatefulWidget {
     required this.label,
     required this.controller,
     required this.focusNode,
-    required this.corrector,
+    required this.inputCorrector,
     required this.onSubmitted,
+    required this.suggestionsCorrector,
     required this.suggestionsCallBack,
   }) : super(key: key);
 
   final String label;
   final TextEditingController controller;
   final FocusNode focusNode;
-  final Function(String) corrector, onSubmitted;
+  final Function(String) inputCorrector, onSubmitted, suggestionsCorrector;
   final Future<List<String>> Function(String) suggestionsCallBack;
 
   @override
@@ -112,7 +113,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     controller: widget.controller,
                     onChanged: (String input) {
                       widget.controller.value = widget.controller.value
-                          .copyWith(text: widget.corrector(input));
+                          .copyWith(text: widget.inputCorrector(input));
                     },
                     onSubmitted: (String input) {
                       _eraseInitialAndFinalBlanks();
@@ -153,7 +154,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 1),
                               child: AutoSizeText(
-                                widget.corrector(suggestion),
+                                widget.suggestionsCorrector(suggestion),
                                 maxLines: 1,
                                 stepGranularity: 0.1,
                                 style: TextStyle(
