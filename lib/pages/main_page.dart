@@ -182,7 +182,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                       Container(
                         height: 40,
-                        width: 1.0,
+                        width: 1.25,
                         color: Theme.of(context).colorScheme.background,
                       ),
                     ],

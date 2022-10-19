@@ -29,11 +29,6 @@ class QuimifyScaffold extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(25),
                   ),
-                  border: Border.all(
-                    width: 2,
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                    color: Theme.of(context).colorScheme.background,
-                  ),
                 ),
                 child: body,
               ),
