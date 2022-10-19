@@ -31,7 +31,7 @@ class QuimifyScaffold extends StatelessWidget {
                   ),
                   border: Border.all(
                     width: 2,
-                    strokeAlign: StrokeAlign.outside,
+                    strokeAlign: BorderSide.strokeAlignOutside,
                     color: Theme.of(context).colorScheme.background,
                   ),
                 ),
