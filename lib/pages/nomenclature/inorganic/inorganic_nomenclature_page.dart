@@ -103,6 +103,10 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   }
 
   Future<void> _searchFromCompletion(String completion) async {
+    if(isEmptyWithBlanks(completion)) {
+      return;
+    }
+
     startLoading(context);
 
     InorganicResult? inorganicResult =
@@ -112,6 +116,10 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   }
 
   Future<void> _searchFromQuery(String input, bool photo) async {
+    if(isEmptyWithBlanks(input)) {
+      return;
+    }
+
     startLoading(context);
 
     InorganicResult? inorganicResult =
