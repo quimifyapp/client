@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io' as io;
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:quimify_client/api/results/access_result.dart';
@@ -16,7 +15,7 @@ class Api {
 
   Api._internal();
 
-  late final http.Client _client = io.IOClient(io.HttpClient());
+  late final http.Client _client = http.Client();
 
   static const _apiVersion = 1;
   static const _clientVersion = 1;
