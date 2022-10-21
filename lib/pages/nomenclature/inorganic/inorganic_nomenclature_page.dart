@@ -45,21 +45,6 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     ),
   ];
 
-  Future<List<String>> _suggestionsCallback(String input) async {
-    List<String> suggestions = [];
-
-    if (!isEmptyWithBlanks(input)) {
-      String? suggestion =
-          await Api().getInorcanicAutocompletion(toDigits(input));
-
-      if (suggestion != null && suggestion != '') {
-        suggestions.add(suggestion);
-      }
-    }
-
-    return suggestions;
-  }
-
   void _processResult(String query, InorganicResult? inorganicResult) {
     stopLoading();
 
@@ -103,7 +88,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   }
 
   Future<void> _searchFromCompletion(String completion) async {
-    if(isEmptyWithBlanks(completion)) {
+    if (isEmptyWithBlanks(completion)) {
       return;
     }
 
@@ -116,7 +101,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   }
 
   Future<void> _searchFromQuery(String input, bool photo) async {
-    if(isEmptyWithBlanks(input)) {
+    if (isEmptyWithBlanks(input)) {
       return;
     }
 
@@ -159,7 +144,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                 inputCorrector: formatInorganicFormulaOrName,
                 onSubmitted: (input) => _searchFromQuery(input, false),
                 completionCorrector: formatInorganicFormulaOrName,
-                completionCallBack: _suggestionsCallback,
+                completionCallBack: Api().getInorcanicCompletion,
                 onCompletionPressed: _searchFromCompletion,
               ),
             ],
