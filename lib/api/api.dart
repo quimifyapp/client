@@ -48,10 +48,8 @@ class Api {
       }
 
       // If reached, it could at least connect to the API:
-      _urlToResponse[url.toString()] = response;
-    } catch (_) {
-      // No Internet connection, server down or client error.
-    }
+      _urlToResponse[url.toString()] = response; // New entry
+    } catch (_) {} // No Internet connection, server down or client error.
 
     return response;
   }
