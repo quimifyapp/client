@@ -46,7 +46,7 @@ class CalculatorPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const QuimifyCard.comingSoon(
-                    title: 'Ajustar reacción',
+                    title: 'Ajustar reacciones',
                   ),
                   // To keep it above navigation bar:
                   const SizedBox(height: 2 * 30 + 60),

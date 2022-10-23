@@ -5,34 +5,34 @@ import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.d
 import 'package:flutter/material.dart';
 
 class QuimifyCard extends StatelessWidget {
-  const QuimifyCard(
-      {super.key,
-      this.width,
-      required this.title,
-      required this.structure,
-      required this.autoSizeGroup,
-      required this.name,
-      required this.page})
-      : _isCustom = false,
-        _isLocked = false,
+  const QuimifyCard({
+    super.key,
+    this.width,
+    required this.title,
+    required this.structure,
+    required this.autoSizeGroup,
+    required this.name,
+    required this.page,
+  })  : _isLocked = false,
         customBody = null;
 
-  const QuimifyCard.custom(
-      {super.key,
-      this.width,
-      required this.title,
-      required this.customBody,
-      required this.page})
-      : _isCustom = true,
-        _isLocked = false,
+  const QuimifyCard.custom({
+    super.key,
+    this.width,
+    required this.title,
+    required this.customBody,
+    required this.page,
+  })  : _isLocked = false,
         name = null,
         structure = null,
         autoSizeGroup = null;
 
-  const QuimifyCard.comingSoon({super.key, this.width, required this.title})
-      : _isCustom = false,
-        _isLocked = true,
-        customBody = null,
+  const QuimifyCard.comingSoon({
+    super.key,
+    this.width,
+    required this.title,
+    this.customBody,
+  })  : _isLocked = true,
         structure = null,
         autoSizeGroup = null,
         name = null,
@@ -47,7 +47,6 @@ class QuimifyCard extends StatelessWidget {
   final String? name;
   final Widget? page;
 
-  final bool _isCustom;
   final bool _isLocked;
 
   @override
@@ -74,8 +73,8 @@ class QuimifyCard extends StatelessWidget {
                 gradient: quimifyGradient,
               ),
               padding: const EdgeInsets.only(
-                top: 17,
-                bottom: 13,
+                top: 15 + 1,
+                bottom: 15 - 1,
                 left: 25,
                 right: 25,
               ),
@@ -89,7 +88,7 @@ class QuimifyCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (!_isCustom && !_isLocked)
+            if (customBody == null && !_isLocked)
               Container(
                 color: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.only(
@@ -125,7 +124,7 @@ class QuimifyCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (_isLocked)
+            if (customBody == null && _isLocked)
               Container(
                 color: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -153,7 +152,7 @@ class QuimifyCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (_isCustom) customBody!,
+            if (customBody != null) customBody!,
           ],
         ),
       ),

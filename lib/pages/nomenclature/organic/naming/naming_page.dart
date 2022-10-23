@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 class NamingPage extends StatelessWidget {
   NamingPage({Key? key}) : super(key: key);
 
-  static const double _cardVerticalPadding = 20;
   final AutoSizeGroup _autoSizeGroup = AutoSizeGroup();
 
   @override
@@ -37,11 +36,7 @@ class NamingPage extends StatelessWidget {
                     name: 'fluorometil metil éter',
                     page: const NamingOpenChainPage(),
                   ),
-                  const SizedBox(height: _cardVerticalPadding),
-                  const QuimifyCard.comingSoon(
-                    title: 'Éster',
-                  ),
-                  const SizedBox(height: _cardVerticalPadding),
+                  const SizedBox(height: 20),
                   const QuimifyCard.comingSoon(
                     title: 'Cíclico',
                   ),
