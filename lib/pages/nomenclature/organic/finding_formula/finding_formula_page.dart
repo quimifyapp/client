@@ -102,7 +102,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 onSubmitted: (String input) => _search(input, false),
                 // Disabled:
                 completionCorrector: (_) => _,
-                completionCallBack: (_) async => _,
+                completionCallBack: (_) async => null,
                 onCompletionPressed: (_) {},
               ),
             ],

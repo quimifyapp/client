@@ -31,6 +31,31 @@ class QuimifySearchBar extends StatefulWidget {
 }
 
 class _QuimifySearchBarState extends State<QuimifySearchBar> {
+  late String? _lastCompletion;
+  late bool _isLoadingCompletion = false;
+
+  Future<String?> _getCompletion(String input) async {
+    if (isEmptyWithBlanks(input)) {
+      return null;
+    } else if (_isLoadingCompletion) {
+      return _lastCompletion;
+    }
+
+    _isLoadingCompletion = true;
+
+    String? completion = await widget.completionCallBack(input);
+
+    _isLoadingCompletion = false;
+    _lastCompletion = completion;
+
+    return completion;
+  }
+
+  Future<List<String>> _getCompletions(String input) async {
+    String? completion = await _getCompletion(input);
+    return (completion == null || completion == '') ? [] : [completion];
+  }
+
   void _eraseInitialAndFinalBlanks() {
     setState(() => widget.controller.text =
         noInitialAndFinalBlanks(widget.controller.text)); // Clears input
@@ -44,33 +69,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
     } else {
       widget.focusNode.requestFocus();
     }
-  }
-
-  String? _lastCompletion;
-  bool _isLoadingCompletion = false;
-
-  Future<String?> _getCompletion(String input) async {
-    if (isEmptyWithBlanks(input)) {
-      return null;
-    } else if (_isLoadingCompletion) {
-      return _lastCompletion;
-    }
-
-    setState(() => _isLoadingCompletion = true);
-
-    String? completion = await widget.completionCallBack(input);
-
-    setState(() {
-      _isLoadingCompletion = false;
-      _lastCompletion = completion;
-    });
-
-    return completion;
-  }
-
-  Future<List<String>> _getCompletions(String input) async {
-    String? completion = await _getCompletion(input);
-    return (completion == null || completion == '') ? [] : [completion];
   }
 
   @override
