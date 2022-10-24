@@ -142,7 +142,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
               const QuimifyPageBar(title: 'Formulación inorgánica'),
               QuimifySearchBar(
                 label: _labelText,
-                controller: _textController,
+                textEditingController: _textController,
                 focusNode: _textFocusNode,
                 inputCorrector: formatInorganicFormulaOrName,
                 onSubmitted: (input) => _searchFromQuery(input, false),

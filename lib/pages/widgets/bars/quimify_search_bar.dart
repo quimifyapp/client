@@ -10,8 +10,8 @@ class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
     Key? key,
     required this.label,
-    required this.controller,
     required this.focusNode,
+    required this.textEditingController,
     required this.inputCorrector,
     required this.onSubmitted,
     required this.completionCallBack,
@@ -20,11 +20,11 @@ class QuimifySearchBar extends StatefulWidget {
   }) : super(key: key);
 
   final String label;
-  final TextEditingController controller;
   final FocusNode focusNode;
+  final TextEditingController textEditingController;
   final String Function(String) inputCorrector, completionCorrector;
-  final Function(String) onSubmitted, onCompletionPressed;
   final Future<String?> Function(String) completionCallBack;
+  final Function(String) onSubmitted, onCompletionPressed;
 
   @override
   State<QuimifySearchBar> createState() => _QuimifySearchBarState();
@@ -57,15 +57,15 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   }
 
   void _eraseInitialAndFinalBlanks() {
-    setState(() => widget.controller.text =
-        noInitialAndFinalBlanks(widget.controller.text)); // Clears input
+    setState(() => widget.textEditingController.text =
+        noInitialAndFinalBlanks(widget.textEditingController.text)); // Clears input
   }
 
   void _search() {
     if (widget.focusNode.hasPrimaryFocus) {
       widget.focusNode.unfocus();
       _eraseInitialAndFinalBlanks();
-      widget.onSubmitted(widget.controller.text);
+      widget.onSubmitted(widget.textEditingController.text);
     } else {
       widget.focusNode.requestFocus();
     }
@@ -189,9 +189,9 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                   ],
                   textInputAction: TextInputAction.search,
                   focusNode: widget.focusNode,
-                  controller: widget.controller,
-                  onChanged: (input) => widget.controller.value = widget
-                      .controller.value
+                  controller: widget.textEditingController,
+                  onChanged: (input) => widget.textEditingController.value = widget
+                      .textEditingController.value
                       .copyWith(text: widget.inputCorrector(input)),
                   onSubmitted: (input) {
                     _eraseInitialAndFinalBlanks();

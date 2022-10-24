@@ -96,7 +96,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
               const QuimifyPageBar(title: 'Formular orgánicos'),
               QuimifySearchBar(
                 label: _labelText,
-                controller: _textController,
+                textEditingController: _textController,
                 focusNode: _textFocusNode,
                 inputCorrector: formatOrganicName,
                 onSubmitted: (String input) => _search(input, false),
