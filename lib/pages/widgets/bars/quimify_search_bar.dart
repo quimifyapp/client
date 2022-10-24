@@ -111,7 +111,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).colorScheme.surface,
                 ),
-                itemBuilder: (context, String suggestion) {
+                itemBuilder: (context, String completion) {
                   return Container(
                     height: 45,
                     padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -130,7 +130,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 1),
                             child: AutoSizeText(
-                              suggestion,
+                              widget.completionCorrector(completion),
                               maxLines: 1,
                               stepGranularity: 0.1,
                               style: TextStyle(

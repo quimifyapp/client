@@ -45,6 +45,9 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     ),
   ];
 
+  Future<String?> _getCompletion(String input) =>
+      Api().getInorcanicCompletion(toDigits(input));
+
   void _processResult(String query, InorganicResult? inorganicResult) {
     stopLoading();
 
@@ -95,7 +98,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     startLoading(context);
 
     InorganicResult? inorganicResult =
-        await Api().getInorganicFromCompletion(toDigits(completion));
+        await Api().getInorganicFromCompletion(completion);
 
     _processResult(completion, inorganicResult);
   }
@@ -144,7 +147,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
                 inputCorrector: formatInorganicFormulaOrName,
                 onSubmitted: (input) => _searchFromQuery(input, false),
                 completionCorrector: formatInorganicFormulaOrName,
-                completionCallBack: Api().getInorcanicCompletion,
+                completionCallBack: _getCompletion,
                 onCompletionPressed: _searchFromCompletion,
               ),
             ],
