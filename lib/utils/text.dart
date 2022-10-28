@@ -1,4 +1,4 @@
-RegExp inputFormatter = RegExp(r'[A-zÁ-úñ\d \(\),\-=≡–Ξ'
+RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
