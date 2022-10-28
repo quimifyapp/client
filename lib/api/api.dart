@@ -17,8 +17,8 @@ class Api {
 
   late final http.Client _client = http.Client();
 
-  static const _apiVersion = 1;
-  static const _clientVersion = 1;
+  static const _apiVersion = 2;
+  static const _clientVersion = 2;
   static const _authority = 'api.quimify.com';
 
   static final Map _urlToResponse = <String, String>{};
@@ -64,10 +64,10 @@ class Api {
             : 0;
 
     String? response = await _getResponse(
-      'cliente',
+      'client/access-data',
       {
         'version': _clientVersion.toString(),
-        'plataforma': platform.toString(),
+        'platform': platform.toString(),
       },
     );
 
@@ -83,11 +83,11 @@ class Api {
   Future<void> sendReport({required String label, String? details}) async {
     Uri url = Uri.https(
       _authority,
-      'v$_apiVersion/reporte',
+      'v$_apiVersion/report',
       {
-        'version': _clientVersion.toString(),
-        'titulo': label,
-        'detalles': details,
+        'client-version': _clientVersion.toString(),
+        'title': label,
+        'details': details,
       },
     );
 
@@ -95,15 +95,15 @@ class Api {
   }
 
   Future<String?> getInorcanicCompletion(String input) =>
-      _getResponse('inorganico/autocompletar', {'input': input});
+      _getResponse('inorganic/completion', {'input': input});
 
   Future<InorganicResult?> getInorganicFromCompletion(String completion) async {
     InorganicResult? result;
 
     String? response = await _getResponse(
-      'inorganico/autocompletar/buscar',
+      'inorganic/from-completion',
       {
-        'complecion': completion,
+        'completion': completion,
       },
     );
 
@@ -116,14 +116,14 @@ class Api {
     return result;
   }
 
-  Future<InorganicResult?> getInorganic(String input, bool photo) async {
+  Future<InorganicResult?> getInorganic(String input, bool picture) async {
     InorganicResult? result;
 
     String? response = await _getResponse(
-      'inorganico',
+      'inorganic',
       {
         'input': input,
-        'foto': photo.toString(),
+        'picture': picture.toString(),
       },
     );
 
@@ -140,7 +140,7 @@ class Api {
     MolecularMassResult? result;
 
     String? response = await _getResponse(
-      'masamolecular',
+      'molecular-mass',
       {
         'formula': formula,
       },
@@ -159,7 +159,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getResponse(
-      'organic/name',
+      'organic/from-name',
       {
         'name': name,
         'picture': picture.toString(),
@@ -179,7 +179,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getResponse(
-      'organic/structure',
+      'organic/from-structure',
       {
         'structure-sequence': structureSequence.join(','),
       },

@@ -31,16 +31,13 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
       query: 'NaCl',
       inorganicResult: InorganicResult(
         true,
-        false,
         'NaCl',
         'cloruro de sodio',
         'monocloruro de sodio',
-        '58.44',
+        58.44,
         '2.16',
         '1074.15',
         '1686.15',
-        null,
-        null,
       ),
     ),
   ];

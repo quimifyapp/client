@@ -2,14 +2,14 @@ import 'dart:convert';
 
 class MolecularMassResult {
   final bool present;
-  final num? mass;
+  final num? molecularMass;
   final Map<String, num> elementToGrams;
   final Map<String, int> elementToMoles;
   final String? error;
 
   MolecularMassResult(
     this.present,
-    this.mass,
+    this.molecularMass,
     this.elementToGrams,
     this.elementToMoles,
     this.error,
@@ -18,10 +18,10 @@ class MolecularMassResult {
   factory MolecularMassResult.fromJson(String body) {
     dynamic json = jsonDecode(body);
     return MolecularMassResult(
-      json['encontrado'] as bool,
-      json['masa'] as num?,
-      (json['elemento_a_gramos'] ?? {}).cast<String, num>(),
-      (json['elemento_a_moles'] ?? {}).cast<String, int>(),
+      json['present'] as bool,
+      json['molecularMass'] as num?,
+      (json['elementToGrams'] ?? {}).cast<String, num>(),
+      (json['elementToMoles'] ?? {}).cast<String, int>(),
       json['error'] as String?,
     );
   }

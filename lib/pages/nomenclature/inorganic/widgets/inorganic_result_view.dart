@@ -125,12 +125,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     ),
                   ),
                 ),
-                if (widget.inorganicResult.synonym != null) ...[
+                if (widget.inorganicResult.alternativeName != null) ...[
                   const SizedBox(height: 2.5),
                   Container(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      'o ${widget.inorganicResult.synonym!}',
+                      'o ${widget.inorganicResult.alternativeName!}',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 20,
@@ -149,10 +149,11 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                         const SizedBox(height: 20),
                         InorganicResultFields(
                           fields: [
-                            if (widget.inorganicResult.mass != null)
+                            if (widget.inorganicResult.molecularMass != null)
                               InorganicResultField(
                                 title: 'Masa',
-                                quantity: widget.inorganicResult.mass!,
+                                quantity: formatMolecularMass(
+                                    widget.inorganicResult.molecularMass!),
                                 unit: 'g/mol',
                                 titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
                               ),

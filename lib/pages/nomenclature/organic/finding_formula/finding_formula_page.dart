@@ -31,7 +31,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     'ácido etanodioico',
     102.09,
     null,
-    false,
   );
 
   Future<void> _search(String name, bool picture) async {
@@ -110,9 +109,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           body: OrganicResultView(
             fields: {
               if (_result.name != null) 'Búsqueda:': _result.name!,
-              if (_result.mass != null)
+              if (_result.molecularMass != null)
                 'Masa molecular:':
-                    '${formatMolecularMass(_result.mass!)} g/mol',
+                    '${formatMolecularMass(_result.molecularMass!)} g/mol',
               if (_result.structure != null)
                 'Fórmula:': formatStructure(_result.structure!),
             },

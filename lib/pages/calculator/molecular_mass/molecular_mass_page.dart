@@ -266,7 +266,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                       ),
                       const Spacer(),
                       AutoSizeText(
-                        '${formatMolecularMass(_result.mass!)} g/mol',
+                        '${formatMolecularMass(_result.molecularMass!)} g/mol',
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: inputOutputStyle,
@@ -290,7 +290,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                 ),
                 const SizedBox(height: 25),
                 GraphSelector(
-                  mass: _result.mass!,
+                  mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams,
                   elementToMoles: _result.elementToMoles,
                 ),
