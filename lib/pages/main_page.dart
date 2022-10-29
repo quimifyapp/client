@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
           linkName: 'Actualizar',
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
-              : 'https://apps.apple.com/pa/app/youtube/id544007664',
+              : 'https://apps.apple.com/es/app/quimify/id6443752619',
           closable: optionalUpdate,
         ).show(context).then((value) => _showWelcomeMessagePopup());
       } else {
