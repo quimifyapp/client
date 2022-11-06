@@ -73,16 +73,16 @@ class QuimifyCard extends StatelessWidget {
                 gradient: quimifyGradient,
               ),
               padding: const EdgeInsets.only(
-                top: 15 + 1,
-                bottom: 15 - 1,
-                left: 25,
-                right: 25,
+                top: 13 + 1,
+                bottom: 13 - 1,
+                left: 20,
+                right: 20,
               ),
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 17,
                   color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
                 ),
@@ -92,10 +92,10 @@ class QuimifyCard extends StatelessWidget {
               Container(
                 color: Theme.of(context).colorScheme.surface,
                 padding: const EdgeInsets.only(
-                  top: 15,
-                  bottom: 15,
-                  left: 25,
-                  right: 25,
+                  top: 13 - 2,
+                  bottom: 13 + 2,
+                  left: 20,
+                  right: 20,
                 ),
                 alignment: Alignment.centerLeft,
                 child: Column(
@@ -127,7 +127,7 @@ class QuimifyCard extends StatelessWidget {
             if (customBody == null && _isLocked)
               Container(
                 color: Theme.of(context).colorScheme.surface,
-                padding: const EdgeInsets.symmetric(vertical: 15),
+                padding: const EdgeInsets.symmetric(vertical: 13),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
