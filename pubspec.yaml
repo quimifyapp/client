@@ -29,6 +29,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/ssl/isrg_x1.pem
+
     - assets/images/icons/logo.png
     - assets/images/icons/search.png
     - assets/images/icons/branding-slim.png

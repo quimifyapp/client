@@ -20,6 +20,7 @@ class FindingFormulaPage extends StatefulWidget {
 }
 
 class _FindingFormulaPageState extends State<FindingFormulaPage> {
+  final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
 
@@ -56,6 +57,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _labelText = name; // Sets previous input as label
           _textController.clear(); // Clears input
           _textFocusNode.unfocus(); // Hides keyboard
+          _scrollToStart(); // Goes to the top of the page
         } else {
           if (!mounted) return; // For security reasons
           QuimifyMessageDialog.reportable(
@@ -78,6 +80,17 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         });
       }
     }
+  }
+
+  void _scrollToStart() {
+    // Goes to the top of the page after a delay:
+    WidgetsBinding.instance.addPostFrameCallback(
+          (_) => _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 400),
+      ),
+    );
   }
 
   @override
@@ -107,6 +120,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             ],
           ),
           body: OrganicResultView(
+            scrollController: _scrollController,
             fields: {
               if (_result.name != null) 'Búsqueda:': _result.name!,
               if (_result.molecularMass != null)

@@ -38,14 +38,14 @@ class NomenclaturePage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Wrap(
-                    spacing: 20,
+                    spacing: 15,
                     children: [
                       QuimifyCard(
                         width: cardWidth,
                         title: 'Formular y nombrar',
                         structure: 'H₂O',
                         autoSizeGroup: autoSizeGroup,
-                        name: 'óxido de dihidrógeno',
+                        name: 'óxido de hidrógeno',
                         page: const InorganicNomenclaturePage(),
                       ),
                       QuimifyCard.comingSoon(
@@ -67,7 +67,7 @@ class NomenclaturePage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Wrap(
-                    spacing: 20,
+                    spacing: 15,
                     children: [
                       QuimifyCard.custom(
                         width: cardWidth,

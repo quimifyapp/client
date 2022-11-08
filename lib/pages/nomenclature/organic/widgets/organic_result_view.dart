@@ -11,11 +11,13 @@ import 'package:photo_view/photo_view.dart';
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
     Key? key,
+    this.scrollController,
     required this.fields,
     required this.imageProvider,
     required this.quimifyReportDialog,
   }) : super(key: key);
 
+  final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
   final QuimifyReportDialog quimifyReportDialog;
@@ -29,6 +31,7 @@ class OrganicResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: scrollController ?? ScrollController(),
       padding: const EdgeInsets.only(
         top: 30,
         bottom: 25,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/main_page.dart';
@@ -11,7 +13,16 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // Loading:
+  // Loading while splash screen:
+
+  // For old devices, a missing SSL certificate is set:
+  try {
+    // This is LetsEncrypt's self-signed trusted root certificate authority
+    // certificate, issued under common name: ISRG Root X1
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(
+        (await rootBundle.load('assets/ssl/isrg_x1.pem')).buffer.asUint8List());
+  } catch (_) {print(_);} // It's already present in modern devices
+
   AccessResult? accessResult = await Api().getAccess();
 
   // App launch:

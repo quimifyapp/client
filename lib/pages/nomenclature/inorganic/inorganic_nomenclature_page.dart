@@ -43,7 +43,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
   ];
 
   Future<String?> _getCompletion(String input) =>
-      Api().getInorcanicCompletion(toDigits(input));
+      Api().getInorganicCompletion(toDigits(input));
 
   void _processResult(String query, InorganicResult? inorganicResult) {
     stopLoading();
@@ -64,7 +64,6 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
         _labelText = query; // Sets previous input as label
         _textController.clear(); // Clears input
         _textFocusNode.unfocus(); // Hides keyboard
-
         _scrollToStart(); // Goes to the top of the page
       } else {
         QuimifyMessageDialog.reportable(
