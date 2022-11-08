@@ -21,7 +21,7 @@ Future<void> main() async {
     // certificate, issued under common name: ISRG Root X1
     SecurityContext.defaultContext.setTrustedCertificatesBytes(
         (await rootBundle.load('assets/ssl/isrg_x1.pem')).buffer.asUint8List());
-  } catch (_) {print(_);} // It's already present in modern devices
+  } catch (_) {} // It's already present in modern devices
 
   AccessResult? accessResult = await Api().getAccess();
 
