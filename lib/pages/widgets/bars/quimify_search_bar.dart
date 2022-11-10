@@ -57,8 +57,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   }
 
   void _eraseInitialAndFinalBlanks() {
-    setState(() => widget.textEditingController.text =
-        noInitialAndFinalBlanks(widget.textEditingController.text)); // Clears input
+    setState(() => widget.textEditingController.text = noInitialAndFinalBlanks(
+        widget.textEditingController.text)); // Clears input
   }
 
   void _search() {
@@ -90,6 +90,64 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                 color: Theme.of(context).colorScheme.surface,
               ),
               child: TypeAheadField(
+                // TextField:
+                textFieldConfiguration: TextFieldConfiguration(
+                  // Aspect:
+                  cursorColor: Theme.of(context).colorScheme.primary,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 18,
+                  ),
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(top: 2, right: 14),
+                    // So vertical center works:
+                    isCollapsed: true,
+                    alignLabelWithHint: true, // For label
+                    // Label:
+                    labelText: widget.label,
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    // So hint doesn't go up while typing:
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // To remove bottom border:
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    // Search icon:
+                    prefixIcon: Transform.scale(
+                      scale: 0.7,
+                      child: IconButton(
+                        icon: Image.asset(
+                          'assets/images/icons/search.png',
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        hoverColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onPressed: _search,
+                      ),
+                    ),
+                  ),
+                  // Logic:
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(inputFormatter),
+                  ],
+                  textInputAction: TextInputAction.search,
+                  focusNode: widget.focusNode,
+                  controller: widget.textEditingController,
+                  onChanged: (input) => widget.textEditingController.value =
+                      widget.textEditingController.value
+                          .copyWith(text: widget.inputCorrector(input)),
+                  onSubmitted: (input) {
+                    _eraseInitialAndFinalBlanks();
+                    widget.onSubmitted(input);
+                  },
+                ),
                 // To avoid flicker:
                 hideOnLoading: false,
                 debounceDuration: Duration.zero,
@@ -142,62 +200,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     ),
                   );
                 },
-                // TextField:
-                textFieldConfiguration: TextFieldConfiguration(
-                  // Aspect:
-                  cursorColor: Theme.of(context).colorScheme.primary,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 18,
-                  ),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(right: 14),
-                    // So vertical center works:
-                    isCollapsed: true,
-                    labelText: widget.label,
-                    labelStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-                    // So hint doesn't go up while typing:
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    // To remove bottom border:
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
-                    // Search icon:
-                    prefixIcon: Transform.scale(
-                      scale: 0.7,
-                      child: IconButton(
-                        icon: Image.asset(
-                          'assets/images/icons/search.png',
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        hoverColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onPressed: _search,
-                      ),
-                    ),
-                  ),
-                  // Logic:
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(inputFormatter),
-                  ],
-                  textInputAction: TextInputAction.search,
-                  focusNode: widget.focusNode,
-                  controller: widget.textEditingController,
-                  onChanged: (input) => widget.textEditingController.value = widget
-                      .textEditingController.value
-                      .copyWith(text: widget.inputCorrector(input)),
-                  onSubmitted: (input) {
-                    _eraseInitialAndFinalBlanks();
-                    widget.onSubmitted(input);
-                  },
-                ),
               ),
             ),
           ),
