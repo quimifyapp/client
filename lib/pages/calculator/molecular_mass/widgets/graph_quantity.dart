@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class GraphQuantity extends StatelessWidget {
-  const GraphQuantity({Key? key, required this.quantity}) : super(key: key);
+class GraphNumber extends StatelessWidget {
+  const GraphNumber({Key? key, required this.text}) : super(key: key);
 
-  final String quantity;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      quantity,
+      text,
       textAlign: TextAlign.right,
       style: TextStyle(
         color: Theme.of(context).colorScheme.primary,

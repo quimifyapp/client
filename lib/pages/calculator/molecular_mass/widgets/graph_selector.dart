@@ -32,24 +32,26 @@ class _GraphSelectorState extends State<GraphSelector> {
   @override
   Widget build(BuildContext context) {
     List<GraphSymbol> symbols = [];
+
     List<GraphBar> gramBars = [];
-    List<GraphQuantity> gramQuantities = [];
+    List<GraphNumber> gramQuantities = [];
 
     widget.elementToGrams.forEach((symbol, grams) {
       symbols.add(GraphSymbol(symbol: symbol));
       gramBars.add(GraphBar(quantity: grams, total: widget.mass));
-      gramQuantities.add(GraphQuantity(quantity: '${grams.round()} g'));
+      gramQuantities.add(GraphNumber(text: '${formatMolecularMass(grams)} g'));
     });
 
     String formula = '';
+
     List<GraphBar> molBars = [];
-    List<GraphQuantity> molQuantities = [];
+    List<GraphNumber> molQuantities = [];
 
     int totalMoles = widget.elementToMoles.values.reduce((sum, i) => sum + i);
     widget.elementToMoles.forEach((symbol, moles) {
       formula += moles > 1 ? '$symbol$moles' : symbol;
       molBars.add(GraphBar(quantity: moles, total: totalMoles));
-      molQuantities.add(GraphQuantity(quantity: '$moles mol'));
+      molQuantities.add(GraphNumber(text: '$moles mol'));
     });
 
     return Container(

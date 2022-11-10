@@ -4,16 +4,16 @@ import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_sym
 import 'package:flutter/material.dart';
 
 class Graph extends StatelessWidget {
-  const Graph(
-      {Key? key,
-        required this.symbols,
-        required this.bars,
-        required this.quantities})
-      : super(key: key);
+  const Graph({
+    Key? key,
+    required this.symbols,
+    required this.bars,
+    required this.quantities,
+  }) : super(key: key);
 
   final List<GraphSymbol> symbols;
   final List<GraphBar> bars;
-  final List<GraphQuantity> quantities;
+  final List<GraphNumber> quantities;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,12 @@ class Graph extends StatelessWidget {
           children: symbols
               .map(
                 (symbol) => Column(
-              children: [
-                symbol,
-                const SizedBox(height: 15),
-              ],
-            ),
-          )
+                  children: [
+                    symbol,
+                    const SizedBox(height: 15),
+                  ],
+                ),
+              )
               .toList(),
         ),
         const SizedBox(width: 15),
@@ -38,15 +38,15 @@ class Graph extends StatelessWidget {
             children: bars
                 .map(
                   (bar) => Container(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(
-                  children: [
-                    bar,
-                    const SizedBox(height: 15),
-                  ],
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(
+                      children: [
+                        bar,
+                        const SizedBox(height: 15),
+                      ],
+                    ),
+                  ),
+                )
                 .toList(),
           ),
         ),
@@ -56,12 +56,12 @@ class Graph extends StatelessWidget {
           children: quantities
               .map(
                 (amount) => Column(
-              children: [
-                amount,
-                const SizedBox(height: 15),
-              ],
-            ),
-          )
+                  children: [
+                    amount,
+                    const SizedBox(height: 15),
+                  ],
+                ),
+              )
               .toList(),
         ),
       ],

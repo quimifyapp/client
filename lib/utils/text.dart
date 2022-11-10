@@ -111,7 +111,7 @@ String noBlanks(String input) => input.replaceAll(RegExp(r'\s+'), '');
 
 bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 
-String formatMolecularMass(num mass) => mass.toStringAsFixed(3);
+String formatMolecularMass(num mass) => mass.toStringAsFixed(2);
 
 String formatInorganicFormulaOrName(String formulaOrName) =>
     toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
