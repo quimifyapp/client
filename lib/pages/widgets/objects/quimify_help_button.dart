@@ -9,7 +9,6 @@ class HelpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.help_outline, size: 26),
       color: Theme.of(context).colorScheme.primary,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -17,6 +16,7 @@ class HelpButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
       onPressed: () => showQuimifyDialog(context: context, dialog: dialog),
+      icon: const Icon(Icons.help_outline, size: 26),
     );
   }
 }

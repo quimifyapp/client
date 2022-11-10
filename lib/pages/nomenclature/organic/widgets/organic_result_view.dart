@@ -1,8 +1,8 @@
 import 'package:quimify_client/pages/nomenclature/organic/organic_image_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/nomenclature/organic/widgets/structure_help_dialog.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +39,7 @@ class OrganicResultView extends StatelessWidget {
         right: 25,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -98,18 +99,55 @@ class OrganicResultView extends StatelessWidget {
                   .toList(),
             ),
           ),
-          const SizedBox(height: 25),
           if (imageProvider != null) ...[
-            const QuimifySectionTitle.custom(
-              title: 'Estructura',
-              horizontalPadding: 0,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              dialog: StructureHelpDialog(),
+            const SizedBox(height: 25),
+            Text(
+              'Estructura',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(height: 25),
             Stack(
               children: [
+                // Top buttons:
+                Container(
+                  padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
+                  child: Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(top: 5),
+                        child: HelpButton(
+                          dialog: StructureHelpDialog(),
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        // To remove padding:
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return OrganicImagePage(
+                                imageProvider: imageProvider!,
+                              );
+                            },
+                          ),
+                        ),
+                        icon: Icon(
+                          size: 30,
+                          color: Theme.of(context).colorScheme.primary,
+                          Icons.fullscreen_rounded,
+                        ),
+                      ),
+                      const SizedBox(width: 5), // So it feels symmetrical
+                    ],
+                  ),
+                ),
+                // Picture:
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -119,66 +157,49 @@ class OrganicResultView extends StatelessWidget {
                   ),
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
-                  child: ColorFiltered(
-                    colorFilter: MediaQuery.of(context).platformBrightness ==
-                            Brightness.light
-                        ? const ColorFilter.matrix(
-                            [
-                              255 / 245, 0, 0, 0, 0, //
-                              0, 255 / 245, 0, 0, 0, //
-                              0, 0, 255 / 245, 0, 0, //
-                              0, 0, 0, 1, 0, //
-                            ],
-                          )
-                        : const ColorFilter.matrix(
-                            [
-                              -1, 0, 0, 0, 255, //
-                              0, -1, 0, 0, 255, //
-                              0, 0, -1, 0, 255, //
-                              0, 0, 0, 1, 0, //
-                            ],
-                          ),
-                    child: PhotoView(
-                      tightMode: true,
-                      backgroundDecoration: const BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      initialScale: 1.0,
-                      gaplessPlayback: true,
-                      disableGestures: true,
-                      imageProvider: imageProvider!,
-                      loadingBuilder: (context, event) => const Padding(
-                        padding: EdgeInsets.all(60),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 3.0,
-                            color: Colors.black, // Filter will turn it light
+                  child: AspectRatio(
+                    aspectRatio: 1.25,
+                    child: ColorFiltered(
+                      colorFilter: MediaQuery.of(context).platformBrightness ==
+                              Brightness.light
+                          ? const ColorFilter.matrix(
+                              [
+                                255 / 245, 0, 0, 0, 0, //
+                                0, 255 / 245, 0, 0, 0, //
+                                0, 0, 255 / 245, 0, 0, //
+                                0, 0, 0, 1, 0, //
+                              ],
+                            )
+                          : const ColorFilter.matrix(
+                              [
+                                -1, 0, 0, 0, 255, //
+                                0, -1, 0, 0, 255, //
+                                0, 0, -1, 0, 255, //
+                                0, 0, 0, 1, 0, //
+                              ],
+                            ),
+                      child: PhotoView(
+                        backgroundDecoration: const BoxDecoration(
+                          color: Colors.transparent,
+                        ),
+                        initialScale: 1.0,
+                        gaplessPlayback: true,
+                        disableGestures: true,
+                        imageProvider: imageProvider!,
+                        loadingBuilder: (context, event) => const Padding(
+                          padding: EdgeInsets.all(60),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3.0,
+                              color: Colors.black, // Filter will turn it light
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  child: IconButton(
-                    icon: Icon(
-                      size: 30,
-                      color: Theme.of(context).colorScheme.primary,
-                      Icons.fullscreen_rounded,
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return OrganicImagePage(
-                            imageProvider: imageProvider!,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ].reversed.toList(),
             ),
           ],
         ],
