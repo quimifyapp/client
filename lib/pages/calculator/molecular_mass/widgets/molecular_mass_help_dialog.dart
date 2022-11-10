@@ -7,9 +7,9 @@ class MolecularMassHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const QuimifySlidesDialog(
+    return QuimifySlidesDialog(
       titleToContent: {
-        'Concepto de mol': [
+        'Concepto de mol': const [
           Center(
             child: QuimifyDialogContentText(
               text: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
@@ -27,47 +27,91 @@ class MolecularMassHelpDialog extends StatelessWidget {
           ),
         ],
         'Átomos': [
-          Center(
+          const Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un átomo es la masa, en gramos, de '
                   'un mol de ese átomo.',
             ),
           ),
-          QuimifyDialogContentText(
+          const QuimifyDialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
-              text: 'H (hidrógeno)   ➔   1.01 g/mol',
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
+                ),
+                children: const [
+                  TextSpan(text: 'H (hidrógeno)   ➔   '),
+                  TextSpan(
+                    text: '1.01',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  TextSpan(text: ' g/mol'),
+                ],
+              ),
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
-              text: 'O (oxígeno)   ➔   15.99 g/mol',
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
+                ),
+                children: const [
+                  TextSpan(text: 'O (oxígeno)   ➔   '),
+                  TextSpan(
+                    text: '15.99',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  TextSpan(text: ' g/mol'),
+                ],
+              ),
             ),
           ),
         ],
         'Compuestos': [
-          Center(
+          const Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un compuesto es la suma de las '
                   'masas de sus átomos.',
             ),
           ),
-          QuimifyDialogContentText(
+          const QuimifyDialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
-          Center(
+          const Center(
             child: QuimifyDialogContentText(
-              text: 'El agua (H₂O) tiene dos átomos de hidrógeno y uno de '
+              text: 'El H₂O (agua) tiene dos átomos de hidrógeno y uno de '
                   'oxígeno en su molécula. Su masa molecular es:',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
-              text: '2 x 1.01 + 1 x 15.99 = 18.00 g/mol',
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 16,
+                ),
+                children: const [
+                  TextSpan(text: '2 x '),
+                  TextSpan(
+                    text: '1.01',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  TextSpan(text: ' + 1 x '),
+                  TextSpan(
+                    text: '15.99',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  TextSpan(text: ' = 18.00 g/mol'),
+                ],
+              ),
             ),
           ),
         ],
