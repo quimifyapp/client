@@ -150,6 +150,7 @@ class OrganicResultView extends StatelessWidget {
                 // Picture:
                 Container(
                   width: double.infinity,
+                  height: 300,
                   decoration: BoxDecoration(
                     // Diagram background:
                     color: Theme.of(context).colorScheme.surfaceTint,
@@ -157,42 +158,39 @@ class OrganicResultView extends StatelessWidget {
                   ),
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
-                  child: AspectRatio(
-                    aspectRatio: 1.25,
-                    child: ColorFiltered(
-                      colorFilter: MediaQuery.of(context).platformBrightness ==
-                              Brightness.light
-                          ? const ColorFilter.matrix(
-                              [
-                                255 / 245, 0, 0, 0, 0, //
-                                0, 255 / 245, 0, 0, 0, //
-                                0, 0, 255 / 245, 0, 0, //
-                                0, 0, 0, 1, 0, //
-                              ],
-                            )
-                          : const ColorFilter.matrix(
-                              [
-                                -1, 0, 0, 0, 255, //
-                                0, -1, 0, 0, 255, //
-                                0, 0, -1, 0, 255, //
-                                0, 0, 0, 1, 0, //
-                              ],
-                            ),
-                      child: PhotoView(
-                        backgroundDecoration: const BoxDecoration(
-                          color: Colors.transparent,
-                        ),
-                        initialScale: 1.0,
-                        gaplessPlayback: true,
-                        disableGestures: true,
-                        imageProvider: imageProvider!,
-                        loadingBuilder: (context, event) => const Padding(
-                          padding: EdgeInsets.all(60),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3.0,
-                              color: Colors.black, // Filter will turn it light
-                            ),
+                  child: ColorFiltered(
+                    colorFilter: MediaQuery.of(context).platformBrightness ==
+                            Brightness.light
+                        ? const ColorFilter.matrix(
+                            [
+                              255 / 245, 0, 0, 0, 0, //
+                              0, 255 / 245, 0, 0, 0, //
+                              0, 0, 255 / 245, 0, 0, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          )
+                        : const ColorFilter.matrix(
+                            [
+                              -1, 0, 0, 0, 255, //
+                              0, -1, 0, 0, 255, //
+                              0, 0, -1, 0, 255, //
+                              0, 0, 0, 1, 0, //
+                            ],
+                          ),
+                    child: PhotoView(
+                      backgroundDecoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      initialScale: 1.0,
+                      gaplessPlayback: true,
+                      disableGestures: true,
+                      imageProvider: imageProvider!,
+                      loadingBuilder: (context, event) => const Padding(
+                        padding: EdgeInsets.all(60),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            color: Colors.black, // Filter will turn it light
                           ),
                         ),
                       ),
