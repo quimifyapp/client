@@ -17,12 +17,13 @@ Future<void> main() async {
 
   // For old devices, a missing SSL certificate is set:
   try {
-    // This is LetsEncrypt's self-signed trusted root certificate authority
-    // certificate, issued under common name: ISRG Root X1
+    // This is LetsEncrypt's self-signed trusted root CA certificate, issued
+    // under common name: ISRG Root X1
     SecurityContext.defaultContext.setTrustedCertificatesBytes(
-        (await rootBundle.load('assets/ssl/isrg_x1.pem')).buffer.asUint8List());
+        (await rootBundle.load('assets/ssl/isrg_x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
+  Api().connect();
   AccessResult? accessResult = await Api().getAccess();
 
   // App launch:
@@ -41,16 +42,15 @@ class QuimifyApp extends StatelessWidget {
 
     // To get rid of status bar's tint:
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      ),
+      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
         // To set stretched scroll on all Android versions:
         scrollBehavior: const ScrollBehavior(
-            androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),
+          androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
+        ),
         // To ignore device's font scaling factor:
         builder: (context, child) {
           child = EasyLoading.init()(context, child);
@@ -81,7 +81,7 @@ class QuimifyApp extends StatelessWidget {
             // Graph background
             onSecondary: Color.fromARGB(13, 0, 0, 0),
             // Graph bar background
-            onSurface: Color.fromARGB(255, 241, 253, 250),
+            onSurface: Color.fromARGB(255, 233, 255, 249),
             // Inorganic amounts
 
             shadow: Color.fromARGB(25, 0, 0, 0),

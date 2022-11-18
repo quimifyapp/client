@@ -39,7 +39,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       startLoading(context);
 
       OrganicResult? result =
-          await Api().getOrganicByName(toDigits(name), picture);
+          await Api().getOrganicFromName(toDigits(name), picture);
 
       stopLoading();
 

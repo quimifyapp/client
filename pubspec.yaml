@@ -1,35 +1,14 @@
 name: quimify_client
-description: Quimify Client
+description: Quimify client
 
-version: 3.2.2+63 # Only for Android
-
-environment:
-  sdk: ">=2.17.6 <3.0.0"
-
-dependencies:
-  flutter_native_splash: ^2.2.8
-  auto_size_text: ^3.0.0
-  flutter:
-    sdk: flutter
-  http: ^0.13.5
-  url_launcher: ^6.1.5
-  photo_view: ^0.14.0
-  flutter_easyloading: ^3.0.5
-  smooth_page_indicator: ^1.0.0+2
-  flutter_typeahead: ^4.1.1
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_launcher_icons: "^0.10.0"
-  flutter_lints: ^2.0.1
+version: 3.3.1+66 # Only for Android
 
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/ssl/isrg_x1.pem
+    - assets/ssl/isrg_x1.crt
 
     - assets/images/icons/logo.png
     - assets/images/icons/search.png
@@ -96,6 +75,32 @@ flutter:
           style: italic
           weight: 100
 
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter_native_splash: ^2.2.8
+  auto_size_text: ^3.0.0
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+  url_launcher: ^6.1.5
+  photo_view: ^0.14.0
+  flutter_easyloading: ^3.0.5
+  smooth_page_indicator: ^1.0.0+2
+  flutter_typeahead: ^4.1.1
+  envied: ^0.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: "^0.10.0"
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.2
+  envied_generator: ^0.2.3+1
+
+# Icon:
+
 flutter_icons:
   image_path: "assets/images/launcher_icons/logo_white_extended.png"
   ios: true
@@ -103,6 +108,8 @@ flutter_icons:
   web:
     generate: true
     image_path: "assets/images/logo_white.png"
+
+# Flutter default:
 
 # The "flutter_lints" package below contains a set of recommended lints to
 # encourage good coding practices. The lint set provided by the package is

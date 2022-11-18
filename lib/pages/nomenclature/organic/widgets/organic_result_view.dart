@@ -77,11 +77,6 @@ class OrganicResultView extends StatelessWidget {
           ),
           const SizedBox(height: 25),
           Container(
-            height: 1.5,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          const SizedBox(height: 25),
-          Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(10),

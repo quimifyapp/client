@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'dart:io' as io;
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
+
+import 'env.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -15,10 +18,10 @@ class Api {
 
   Api._internal();
 
-  late final http.Client _client = http.Client();
+  late final http.Client _client;
 
-  static const _apiVersion = 2;
-  static const _clientVersion = 2;
+  static const _apiVersion = 3;
+  static const _clientVersion = 3;
   static const _authority = 'api.quimify.com';
 
   static final Map _urlToResponse = <String, String>{};
@@ -54,6 +57,26 @@ class Api {
     return response;
   }
 
+  // Public:
+
+  Future<void> connect() async {
+    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+      '${Env.apiKey}'
+      '\n-----END PRIVATE KEY-----\n',
+    ));
+
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+      '${Env.apiCertificate}'
+      '\n-----END CERTIFICATE-----\n',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
+
   Future<AccessResult?> getAccess() async {
     AccessResult? result;
 
@@ -74,7 +97,12 @@ class Api {
     if (response != null) {
       try {
         result = AccessResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Access JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;
@@ -110,7 +138,12 @@ class Api {
     if (response != null) {
       try {
         result = InorganicResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Inorganic from completion JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;
@@ -130,7 +163,12 @@ class Api {
     if (response != null) {
       try {
         result = InorganicResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Inorganic JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;
@@ -149,13 +187,18 @@ class Api {
     if (response != null) {
       try {
         result = MolecularMassResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Molecular mass JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;
   }
 
-  Future<OrganicResult?> getOrganicByName(String name, bool picture) async {
+  Future<OrganicResult?> getOrganicFromName(String name, bool picture) async {
     OrganicResult? result;
 
     String? response = await _getResponse(
@@ -169,26 +212,36 @@ class Api {
     if (response != null) {
       try {
         result = OrganicResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Organic from name JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;
   }
 
-  Future<OrganicResult?> getOrganic(List<int> structureSequence) async {
+  Future<OrganicResult?> getOrganicFromStructure(List<int> sequence) async {
     OrganicResult? result;
 
     String? response = await _getResponse(
       'organic/from-structure',
       {
-        'structure-sequence': structureSequence.join(','),
+        'structure-sequence': sequence.join(','),
       },
     );
 
     if (response != null) {
       try {
         result = OrganicResult.fromJson(response);
-      } catch (_) {}
+      } catch (error) {
+        sendReport(
+          label: 'Organic from structure JSON',
+          details: error.toString(),
+        );
+      }
     }
 
     return result;

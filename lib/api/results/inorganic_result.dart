@@ -2,16 +2,17 @@ import 'dart:convert';
 
 class InorganicResult {
   final bool present;
-  final String? formula, name;
-  final String? alternativeName;
-  final num? molecularMass;
-  final String? density, meltingPoint, boilingPoint;
+  final String? formula;
+  final String? stockName, systematicName, traditionalName, otherName;
+  final String? molecularMass, density, meltingPoint, boilingPoint;
 
   InorganicResult(
     this.present,
     this.formula,
-    this.name,
-    this.alternativeName,
+    this.stockName,
+    this.systematicName,
+    this.traditionalName,
+    this.otherName,
     this.molecularMass,
     this.density,
     this.meltingPoint,
@@ -23,9 +24,11 @@ class InorganicResult {
     return InorganicResult(
       json['present'] as bool,
       json['formula'] as String?,
-      json['name'] as String?,
-      json['alternativeName'] as String?,
-      json['molecularMass'] as num?,
+      json['stockName'] as String?,
+      json['systematicName'] as String?,
+      json['traditionalName'] as String?,
+      json['otherName'] as String?,
+      json['molecularMass'] as String?,
       json['density'] as String?,
       json['meltingPoint'] as String?,
       json['boilingPoint'] as String?,

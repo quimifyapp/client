@@ -1,5 +1,6 @@
-RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-'
-    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
+RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
+    r'\u207A\u207B]'); // Superscript + and -
 
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
@@ -114,10 +115,11 @@ bool isEmptyWithBlanks(String input) => noBlanks(input).isEmpty;
 String formatMolecularMass(num mass) => mass.toStringAsFixed(2);
 
 String formatInorganicFormulaOrName(String formulaOrName) =>
-    toSubscripts(toCapsAfterDigitOrParentheses(formulaOrName));
+    toSubscripts(toCapsAfterDigitOrParentheses(
+        formulaOrName.replaceAll('+', '⁺').replaceAll('-', '⁻')));
 
 String formatFormula(String formula) => toCapsAfterNotAnUppercaseLetter(
-    formatInorganicFormulaOrName(capFirst(formula)));
+    toSubscripts(toCapsAfterDigitOrParentheses((capFirst(formula)))));
 
 String formatOrganicName(String name) => toCapsExceptN(name);
 
@@ -127,4 +129,4 @@ String formatStructureInput(String structure) =>
 
 String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
-        formatInorganicFormulaOrName(capFirst(structure))));
+        toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));

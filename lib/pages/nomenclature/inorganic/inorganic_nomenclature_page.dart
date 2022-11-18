@@ -30,15 +30,16 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
     InorganicResultView(
       query: 'NaCl',
       inorganicResult: InorganicResult(
-        true,
-        'NaCl',
-        'cloruro de sodio',
-        'monocloruro de sodio',
-        58.44,
-        '2.16',
-        '1074.15',
-        '1686.15',
-      ),
+          true,
+          'NaCl',
+          'cloruro de sodio',
+          'monocloruro de sodio',
+          'cloruro sódico',
+          null,
+          '58.35',
+          '2.16',
+          '1074.15',
+          '1686.15'),
     ),
   ];
 

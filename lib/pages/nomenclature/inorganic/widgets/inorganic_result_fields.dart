@@ -2,8 +2,10 @@ import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_re
 import 'package:flutter/material.dart';
 
 class InorganicResultFields extends StatelessWidget {
-  const InorganicResultFields({Key? key, required this.fields})
-      : super(key: key);
+  const InorganicResultFields({
+    Key? key,
+    required this.fields,
+  }) : super(key: key);
 
   final List<InorganicResultField> fields;
 
@@ -53,7 +55,7 @@ class InorganicResultFields extends StatelessWidget {
                   ),
                 ],
               ],
-            )
+            ),
           ],
         ],
       ),

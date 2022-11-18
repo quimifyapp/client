@@ -56,7 +56,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
   Future<OrganicResult?> _search() async {
     startLoading(context);
 
-    OrganicResult? result = await Api().getOrganic(_sequenceStack.last);
+    OrganicResult? result = await Api().getOrganicFromStructure(_sequenceStack.last);
 
     stopLoading();
 

@@ -19,7 +19,6 @@ class NomenclaturePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return QuimifyScaffold(
       header: const QuimifyHomeBar(),
       body: SingleChildScrollView(
@@ -106,7 +105,7 @@ class NomenclaturePage extends StatelessWidget {
                       QuimifyCard(
                         width: cardWidth,
                         title: 'Nombrar',
-                        structure: 'CH₃ = CH(OH)',
+                        structure: 'CH₂ = CH(OH)',
                         autoSizeGroup: autoSizeGroup,
                         name: 'etenol',
                         page: const NamingOpenChainPage(),

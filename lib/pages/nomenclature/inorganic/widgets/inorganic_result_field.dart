@@ -2,13 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class InorganicResultField extends StatelessWidget {
-  const InorganicResultField(
-      {Key? key,
-        required this.title,
-        required this.quantity,
-        required this.unit,
-        required this.titleAutoSizeGroup})
-      : super(key: key);
+  const InorganicResultField({
+    Key? key,
+    required this.title,
+    required this.quantity,
+    required this.unit,
+    required this.titleAutoSizeGroup,
+  }) : super(key: key);
 
   final String title, quantity, unit;
   final AutoSizeGroup titleAutoSizeGroup;
@@ -38,7 +38,7 @@ class InorganicResultField extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
-        ),
+        )
       ],
     );
   }

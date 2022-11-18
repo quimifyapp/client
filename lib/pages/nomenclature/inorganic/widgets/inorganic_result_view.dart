@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
 import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
+import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_name.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
@@ -85,7 +86,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
           ),
           // Separator:
           const SizedBox(height: 2),
-          // Body:,
+          // Body:
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
@@ -104,40 +105,37 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 5),
+                  padding: const EdgeInsets.only(left: 2),
                   child: Text(
-                    toSubscripts(widget.inorganicResult.formula!),
+                    formatInorganicFormulaOrName(
+                        widget.inorganicResult.formula!),
                     style: const TextStyle(
                       color: quimifyTeal,
-                      fontSize: 26,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
-                Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    widget.inorganicResult.name!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 20,
-                    ),
+                if (widget.inorganicResult.stockName != null)
+                  InorganicResultName(
+                    label: 'Stock',
+                    name: widget.inorganicResult.stockName!,
                   ),
-                ),
-                if (widget.inorganicResult.alternativeName != null) ...[
-                  const SizedBox(height: 2.5),
-                  Container(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      'o ${widget.inorganicResult.alternativeName!}',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 20,
-                      ),
-                    ),
+                if (widget.inorganicResult.systematicName != null)
+                  InorganicResultName(
+                    label: 'Sistemática',
+                    name: widget.inorganicResult.systematicName!,
                   ),
-                ],
+                if (widget.inorganicResult.traditionalName != null)
+                  InorganicResultName(
+                    label: 'Tradicional',
+                    name: widget.inorganicResult.traditionalName!,
+                  ),
+                if (widget.inorganicResult.otherName != null)
+                  InorganicResultName(
+                    name: widget.inorganicResult.otherName!,
+                  ),
+                const SizedBox(height: 20),
                 AnimatedSize(
                   duration: Duration(milliseconds: _isCollapsed ? 150 : 300),
                   curve: Curves.easeOut,
@@ -146,14 +144,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     height: _isCollapsed ? 0 : null,
                     child: Column(
                       children: [
-                        const SizedBox(height: 20),
                         InorganicResultFields(
                           fields: [
                             if (widget.inorganicResult.molecularMass != null)
                               InorganicResultField(
                                 title: 'Masa',
-                                quantity: formatMolecularMass(
-                                    widget.inorganicResult.molecularMass!),
+                                quantity: widget.inorganicResult.molecularMass!,
                                 unit: 'g/mol',
                                 titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
                               ),

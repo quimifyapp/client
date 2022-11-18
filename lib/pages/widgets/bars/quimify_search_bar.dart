@@ -97,10 +97,11 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 18,
+                    height: 1.2, // Cursor height
                   ),
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(top: 2, right: 14),
+                    contentPadding: const EdgeInsets.only(right: 14),
                     // So vertical center works:
                     isCollapsed: true,
                     alignLabelWithHint: true, // For label
@@ -122,6 +123,12 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     prefixIcon: Transform.scale(
                       scale: 0.7,
                       child: IconButton(
+                        padding: const EdgeInsets.only(
+                          top: 8 + 1,
+                          bottom: 8 - 1,
+                          left: 8,
+                          right: 8,
+                        ),
                         icon: Image.asset(
                           'assets/images/icons/search.png',
                           color: Theme.of(context).colorScheme.primary,
