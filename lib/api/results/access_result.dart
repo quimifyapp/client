@@ -26,7 +26,7 @@ class AccessResult {
 
     return AccessResult(
       json['updateAvailable'] as bool,
-      json['updateMandatory'] as bool?,
+      json['updateNeeded'] as bool?,
       json['updateDetails'] as String?,
       json['messagePresent'] as bool,
       json['messageTitle'] as String?,
