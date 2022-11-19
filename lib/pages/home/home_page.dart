@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
-import 'package:quimify_client/pages/home/widgets/bart_button.dart';
+import 'package:quimify_client/pages/home/widgets/bar_button.dart';
 import 'package:quimify_client/pages/nomenclature/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_home_bar.dart';
