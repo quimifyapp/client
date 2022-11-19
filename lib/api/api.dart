@@ -246,8 +246,4 @@ class Api {
 
     return result;
   }
-
-  void close() {
-    _client.close();
-  }
 }

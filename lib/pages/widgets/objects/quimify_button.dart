@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class QuimifyButton extends StatelessWidget {
-  const QuimifyButton(
-      {Key? key,
-      required this.child,
-      this.width,
-      required this.height,
-      required this.backgroundColor,
-      this.gradient,
-      this.enabled = true,
-      required this.onPressed})
-      : super(key: key);
+  const QuimifyButton({
+    Key? key,
+    this.width,
+    required this.height,
+    required this.backgroundColor,
+    this.gradient,
+    this.enabled = true,
+    required this.onPressed,
+    required this.child,
+  }) : super(key: key);
 
-  const QuimifyButton.gradient(
-      {Key? key,
-      required this.child,
-      this.width,
-      required this.height,
-      this.backgroundColor,
-      required this.gradient,
-      this.enabled = true,
-      required this.onPressed})
-      : super(key: key);
+  const QuimifyButton.gradient({
+    Key? key,
+    this.width,
+    required this.height,
+    this.backgroundColor,
+    required this.gradient,
+    this.enabled = true,
+    required this.onPressed,
+    required this.child,
+  }) : super(key: key);
 
   final Widget child;
   final double? width;

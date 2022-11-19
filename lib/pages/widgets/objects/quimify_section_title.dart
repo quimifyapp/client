@@ -6,7 +6,7 @@ class QuimifySectionTitle extends StatelessWidget {
     super.key,
     required this.title,
     required this.dialog,
-  })  : horizontalPadding = 25,
+  })  : horizontalPadding = 20, // TODO
         fontSize = 18,
         fontWeight = FontWeight.bold;
 
