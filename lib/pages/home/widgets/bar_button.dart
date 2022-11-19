@@ -33,7 +33,7 @@ class BarButton extends StatelessWidget {
             style: TextStyle(
               color: selected
                   ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).colorScheme.tertiary,
+                  : Theme.of(context).colorScheme.tertiaryContainer,
               fontWeight: FontWeight.bold,
             ),
           ),

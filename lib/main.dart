@@ -69,6 +69,7 @@ class QuimifyApp extends StatelessWidget {
             primary: Color.fromARGB(255, 34, 34, 34),
             secondary: Colors.black12,
             tertiary: Colors.black45,
+            tertiaryContainer: Color.fromARGB(255, 57, 57, 57), // Top bar disabled text
 
             surface: Colors.white,
             background: Color.fromARGB(255, 247, 247, 247),
@@ -113,6 +114,7 @@ class QuimifyApp extends StatelessWidget {
             primary: Colors.white,
             secondary: Colors.white54,
             tertiary: Colors.white60,
+            tertiaryContainer: Colors.white60, // Top bar disabled text
 
             surface: Color.fromARGB(255, 30, 30, 30),
             background: Color.fromARGB(255, 18, 18, 18),
