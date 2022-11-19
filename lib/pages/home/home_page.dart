@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage> {
           body: Column(
             children: [
               Container(
-                height: 65,
-                padding: const EdgeInsets.all(10),
+                height: 60,
+                padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
