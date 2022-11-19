@@ -5,8 +5,10 @@ import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_butto
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class QuimifySlidesDialog extends StatefulWidget {
-  const QuimifySlidesDialog({Key? key, required this.titleToContent})
-      : super(key: key);
+  const QuimifySlidesDialog({
+    Key? key,
+    required this.titleToContent,
+  }) : super(key: key);
 
   final Map<String, List<Widget>> titleToContent;
 
@@ -22,12 +24,16 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
   void _goToNextSlide() {
     if (_currentSlide < widget.titleToContent.length - 1) {
       _goToSlide(_currentSlide + 1);
+    } else {
+      Navigator.pop(context);
     }
   }
 
   void _goToPreviousSlide() {
     if (_currentSlide > 0) {
       _goToSlide(_currentSlide - 1);
+    } else {
+      Navigator.pop(context);
     }
   }
 
@@ -36,8 +42,8 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
     return GestureDetector(
       onHorizontalDragEnd: (dragEndDetails) =>
           dragEndDetails.primaryVelocity! < 0
-              ? _goToNextSlide()
-              : _goToPreviousSlide(),
+              ? _goToNextSlide() // Swipe left
+              : _goToPreviousSlide(), // Swipe right
       child: QuimifyDialog(
         title: widget.titleToContent.keys.elementAt(_currentSlide),
         content: widget.titleToContent.values.elementAt(_currentSlide),
@@ -53,19 +59,15 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
                 activeDotColor: quimifyTeal,
                 dotColor: Theme.of(context).colorScheme.secondary,
               ),
-              onDotClicked: _goToSlide,
             ),
           ),
           const SizedBox(height: 20),
-          _currentSlide == widget.titleToContent.length - 1
-              ? QuimifyDialogButton(
-                  onPressed: () => Navigator.pop(context),
-                  text: 'Entendido',
-                )
-              : QuimifyDialogButton(
-                  onPressed: _goToNextSlide,
-                  text: 'Siguiente',
-                ),
+          QuimifyDialogButton(
+            onPressed: _goToNextSlide,
+            text: _currentSlide < widget.titleToContent.length - 1
+                ? 'Siguiente'
+                : 'Entendido',
+          ),
         ],
       ),
     );
