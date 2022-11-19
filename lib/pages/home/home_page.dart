@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/bart_button.dart';
@@ -77,8 +76,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 height: 65,
-                margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10),
