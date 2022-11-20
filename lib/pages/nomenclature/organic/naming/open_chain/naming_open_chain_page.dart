@@ -56,7 +56,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
   Future<OrganicResult?> _search() async {
     startLoading(context);
 
-    OrganicResult? result = await Api().getOrganicFromStructure(_sequenceStack.last);
+    OrganicResult? result =
+        await Api().getOrganicFromStructure(_sequenceStack.last);
 
     stopLoading();
 
@@ -349,124 +350,118 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       },
       child: QuimifyScaffold(
         header: const QuimifyPageBar(title: _title),
-        body: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 30, left: 25, right: 25),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                // So it follows while typing:
-                reverse: true,
-                // To remove Text widget default top padding:
-                padding: const EdgeInsets.only(top: 13, bottom: 17),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 25),
-                    Text(
-                      formatStructure(_openChainStack.last.getStructure()),
-                      style: const TextStyle(
-                        color: quimifyTeal,
-                        fontSize: 28,
-                        fontFamily: 'CeraProBoldCustom',
-                      ),
-                      strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
-                    ),
-                    const SizedBox(width: 25),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const SizedBox(width: 25),
-                Expanded(
-                  child: AddCarbonButton(
-                    enabled: _canBondCarbon(),
-                    onPressed: _bondCarbon,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: HydrogenateButton(
-                    onPressed: _hydrogenate,
-                    enabled: _canHydrogenate(),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: UndoButton(
-                    onPressed: _undo,
-                    enabled: _canUndo(),
-                  ),
-                ),
-                const SizedBox(width: 25),
-              ],
-            ),
-            if (_done) ...[
-              const SizedBox(height: 20),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: QuimifyButton.gradient(
-                  height: 50,
-                  gradient: quimifyGradient,
-                  onPressed: _pressedButton,
-                  child: Text(
-                    'Resolver',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  // So it follows while typing:
+                  reverse: true,
+                  // To remove Text widget default top padding:
+                  padding: const EdgeInsets.only(top: 13, bottom: 17),
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 25),
+                      Text(
+                        formatStructure(_openChainStack.last.getStructure()),
+                        style: const TextStyle(
+                          color: quimifyTeal,
+                          fontSize: 28,
+                          fontFamily: 'CeraProBoldCustom',
+                        ),
+                        strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
+                      ),
+                      const SizedBox(width: 25),
+                    ],
                   ),
                 ),
-              ),
-            ],
-            if (!_done) ...[
-              const SizedBox(height: 25),
-              const QuimifySectionTitle.custom(
-                title: 'Sustituyentes',
-                horizontalPadding: 25,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                dialog: NamingOpenChainHelpDialog(),
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(10),
+              Row(
+                children: [
+                  Expanded(
+                    child: AddCarbonButton(
+                      enabled: _canBondCarbon(),
+                      onPressed: _bondCarbon,
+                    ),
                   ),
-                  // To avoid rounded corners overflow:
-                  clipBehavior: Clip.hardEdge,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 5, // + 20 from above SizedBox = 25
-                        bottom: 25,
-                      ),
-                      child: Wrap(
-                        runSpacing: 15,
-                        children: _openChainStack.last
-                            .getOrderedBondableGroups()
-                            .map((function) => functionToButton[function]!)
-                            .toList()
-                            .reversed
-                            .toList(),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: HydrogenateButton(
+                      onPressed: _hydrogenate,
+                      enabled: _canHydrogenate(),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: UndoButton(
+                      onPressed: _undo,
+                      enabled: _canUndo(),
+                    ),
+                  ),
+                ],
+              ),
+              if (_done) ...[
+                const SizedBox(height: 20),
+                Container(
+                  child: QuimifyButton.gradient(
+                    height: 50,
+                    gradient: quimifyGradient,
+                    onPressed: _pressedButton,
+                    child: Text(
+                      'Resolver',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-              ),
+              ],
+              if (!_done) ...[
+                const SizedBox(height: 20),
+                const QuimifySectionTitle(
+                  title: 'Sustituyentes',
+                  dialog: NamingOpenChainHelpDialog(),
+                ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    // To avoid rounded corners overflow:
+                    clipBehavior: Clip.hardEdge,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 5, // + 20 from above SizedBox = 25
+                        ),
+                        child: Wrap(
+                          runSpacing: 15,
+                          children: _openChainStack.last
+                              .getOrderedBondableGroups()
+                              .map((function) => functionToButton[function]!)
+                              .toList()
+                              .reversed
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

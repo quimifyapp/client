@@ -8,8 +8,11 @@ class QuimifyHomeBar extends StatelessWidget {
     return SafeArea(
       bottom: false, // So it's not inside status bar
       child: Container(
-        padding:
-            const EdgeInsets.only(top: 15, bottom: 25, left: 25, right: 25),
+        padding: const EdgeInsets.only(
+          top: 10,
+          bottom: 20,
+          left: 20,
+        ),
         child: Row(
           children: [
             SizedBox(
@@ -30,7 +33,7 @@ class QuimifyHomeBar extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 15),
             Image.asset(
               'assets/images/icons/branding-slim.png',
               height: 17,

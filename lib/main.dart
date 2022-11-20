@@ -70,7 +70,7 @@ class QuimifyApp extends StatelessWidget {
             secondary: Colors.black12,
             tertiary: Colors.black45,
             tertiaryContainer:
-                Color.fromARGB(255, 160, 160, 160), // Top bar disabled text
+                Color.fromARGB(255, 150, 150, 150), // Top bar disabled text
 
             surface: Colors.white,
             background: Color.fromARGB(255, 247, 247, 247),

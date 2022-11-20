@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void _enterPage(int page) {
+  void _goToPage(int page) {
     if (_currentPage != page) {
       setState(() {
         _visitedPagesStack.remove(_currentPage);
@@ -66,53 +66,58 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        return _returnButtonPressed();
-      },
+      onWillPop: () async => _returnButtonPressed(),
       child: Scaffold(
         body: QuimifyScaffold(
           header: const QuimifyHomeBar(),
-          body: Column(
-            children: [
-              Container(
-                height: 60,
-                padding: const EdgeInsets.all(8),
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(10),
+          body: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Container(
+                  height: 60,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      BarButton(
+                        title: 'Inorgánica',
+                        selected: _currentPage == 0,
+                        onPressed: () => _goToPage(0),
+                      ),
+                      const SizedBox(width: 5),
+                      BarButton(
+                        title: 'Orgánica',
+                        selected: _currentPage == 1,
+                        onPressed: () => _goToPage(1),
+                      ),
+                      const SizedBox(width: 5),
+                      BarButton(
+                        title: 'Calculadora',
+                        selected: _currentPage == 2,
+                        onPressed: () => _goToPage(2),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  children: [
-                    BarButton(
-                      title: 'Inorgánica',
-                      selected: _currentPage == 0,
-                      onPressed: () => _enterPage(0),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: IndexedStack(
+                      index: _currentPage,
+                      children: [
+                        const InorganicPage(),
+                        const OrganicPage(),
+                        CalculatorPage(),
+                      ],
                     ),
-                    const SizedBox(width: 5),
-                    BarButton(
-                      title: 'Orgánica',
-                      selected: _currentPage == 1,
-                      onPressed: () => _enterPage(1),
-                    ),
-                    const SizedBox(width: 5),
-                    BarButton(
-                      title: 'Calculadora',
-                      selected: _currentPage == 2,
-                      onPressed: () => _enterPage(2),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              IndexedStack(
-                index: _currentPage,
-                children: [
-                  InorganicPage(),
-                  OrganicPage(),
-                  CalculatorPage(),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

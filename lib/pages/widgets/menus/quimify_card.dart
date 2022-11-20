@@ -1,5 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:flutter/material.dart';
@@ -7,153 +5,103 @@ import 'package:flutter/material.dart';
 class QuimifyCard extends StatelessWidget {
   const QuimifyCard({
     super.key,
-    this.width,
     required this.title,
-    required this.structure,
-    required this.autoSizeGroup,
-    required this.name,
+    required this.subtitle,
     required this.page,
-  })  : _isLocked = false,
-        customBody = null;
+  })  : customTitle = null,
+        _comingSoon = false;
 
   const QuimifyCard.custom({
     super.key,
-    this.width,
-    required this.title,
-    required this.customBody,
+    required this.customTitle,
+    this.subtitle,
     required this.page,
-  })  : _isLocked = false,
-        name = null,
-        structure = null,
-        autoSizeGroup = null;
+  })  : title = null,
+        _comingSoon = false;
 
   const QuimifyCard.comingSoon({
     super.key,
-    this.width,
-    required this.title,
-    this.customBody,
-  })  : _isLocked = true,
-        structure = null,
-        autoSizeGroup = null,
-        name = null,
-        page = null;
+    required this.customTitle,
+  })  : title = null,
+        subtitle = 'Próximamente',
+        page = null,
+        _comingSoon = true;
 
-  final double? width;
-
-  final String title;
-  final Widget? customBody;
-  final String? structure;
-  final AutoSizeGroup? autoSizeGroup;
-  final String? name;
+  final Widget? customTitle;
+  final String? title;
+  final String? subtitle;
+  final bool _comingSoon;
   final Widget? page;
 
-  final bool _isLocked;
+  void _onPressed(BuildContext context) {
+    if (page != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => page!,
+        ),
+      );
+    } else {
+      quimifyComingSoonDialog.show(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: page != null
-          ? () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) => page!,
-                ),
-              )
-          : () => quimifyComingSoonDialog.show(context),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
       child: Container(
-        width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
+          color: Theme.of(context).colorScheme.surface,
         ),
+        alignment: Alignment.centerLeft,
         // To avoid rounded corners overflow:
         clipBehavior: Clip.hardEdge,
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: quimifyGradient,
-              ),
-              padding: const EdgeInsets.only(
-                top: 13 + 1,
-                bottom: 13 - 1,
-                left: 20,
-                right: 20,
-              ),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            if (customBody == null && !_isLocked)
-              Container(
-                color: Theme.of(context).colorScheme.surface,
-                padding: const EdgeInsets.only(
-                  top: 13 - 2,
-                  bottom: 13 + 2,
-                  left: 20,
-                  right: 20,
-                ),
-                alignment: Alignment.centerLeft,
+        child: MaterialButton(
+          height: 100,
+          splashColor: Colors.transparent,
+          padding: const EdgeInsets.only(
+            top: 15,
+            bottom: 15,
+            left: 20,
+            right: 20,
+          ),
+          onPressed: () => _onPressed(context),
+          child: Row(
+            children: [
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AutoSizeText(
-                      structure!,
-                      maxLines: 1,
-                      stepGranularity: 0.1,
-                      group: autoSizeGroup,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                        color: quimifyTeal,
+                    if (customTitle == null && !_comingSoon)
+                      Text(
+                        title!,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                          color: quimifyTeal,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      name!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            if (customBody == null && _isLocked)
-              Container(
-                color: Theme.of(context).colorScheme.surface,
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Image.asset(
-                        'assets/images/icons/lock.png',
-                        height: 35,
-                        color: Theme.of(context).colorScheme.inverseSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Center(
-                      child: Text(
-                        'Próximamente',
+                    if (customTitle != null) customTitle!,
+                    if (subtitle != null)
+                      Text(
+                        subtitle ?? 'Próximamente',
                         style: TextStyle(
                           fontSize: 16,
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
-            if (customBody != null) customBody!,
-          ],
+              Icon(
+                !_comingSoon ? Icons.arrow_forward_rounded : Icons.lock_rounded,
+                size: !_comingSoon ? 30 : 26,
+                color: quimifyTeal,
+              )
+            ],
+          ),
         ),
       ),
     );

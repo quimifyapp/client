@@ -32,12 +32,7 @@ class OrganicResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: scrollController ?? ScrollController(),
-      padding: const EdgeInsets.only(
-        top: 30,
-        bottom: 25,
-        left: 25,
-        right: 25,
-      ),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

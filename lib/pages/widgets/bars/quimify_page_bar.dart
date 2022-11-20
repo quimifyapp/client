@@ -14,10 +14,10 @@ class QuimifyPageBar extends StatelessWidget {
       bottom: false,
       child: Container(
         padding: const EdgeInsets.only(
-          top: 15,
-          bottom: 25,
-          left: 25,
-          right: 25,
+          top: 10,
+          bottom: 20,
+          left: 20,
+          right: 20,
         ),
         child: Row(
           children: [

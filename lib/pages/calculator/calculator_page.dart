@@ -20,34 +20,20 @@ class CalculatorPage extends StatelessWidget {
             title: 'Calculadora',
             dialog: CalculatorHelpDialog(),
           ),
-          const SizedBox(height: 25),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              children: [
-                QuimifyCard.custom(
-                  title: 'Masa molecular',
-                  customBody: Container(
-                    alignment: Alignment.center,
-                    color: Theme.of(context).colorScheme.surface,
-                    padding: const EdgeInsets.all(17),
-                    child: Image.asset(
-                      'assets/images/icons/scale.png',
-                      height: 61,
-                      color: quimifyTeal,
-                    ),
-                  ),
-                  page: const MolecularMassPage(),
-                ),
-                const SizedBox(height: 20),
-                const QuimifyCard.comingSoon(
-                  title: 'Ajustar reacciones',
-                ),
-                // To keep it above navigation bar:
-                const SizedBox(height: 2 * 30 + 60),
-              ],
+          const SizedBox(height: 15),
+          // TODO NaCl XX g/mol ...
+          QuimifyCard.custom(
+            customTitle: Image.asset(
+              'assets/images/icons/scale.png',
+              color: quimifyTeal,
             ),
+            page: const MolecularMassPage(),
           ),
+          QuimifyCard.comingSoon(
+            customTitle: Container(),
+          ),
+          // To keep it above navigation bar:
+          const SizedBox(height: 2 * 30 + 60),
         ],
       ),
     );

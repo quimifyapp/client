@@ -151,12 +151,7 @@ class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
           ),
           body: SingleChildScrollView(
             controller: _scrollController,
-            padding: const EdgeInsets.only(
-              top: 30,
-              bottom: 25,
-              left: 25,
-              right: 25,
-            ),
+            padding: const EdgeInsets.all(20),
             child: Wrap(
               verticalDirection: VerticalDirection.up,
               runSpacing: 25,

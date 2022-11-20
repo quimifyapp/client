@@ -75,10 +75,9 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-        top: 5,
-        bottom: 30,
-        left: 25,
-        right: 25,
+        bottom: 20,
+        left: 20,
+        right: 20,
       ),
       child: Row(
         children: [
