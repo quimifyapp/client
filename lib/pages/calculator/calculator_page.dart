@@ -13,29 +13,27 @@ class CalculatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const QuimifySectionTitle(
-            title: 'Calculadora',
-            dialog: CalculatorHelpDialog(),
+    return Column(
+      children: [
+        const QuimifySectionTitle(
+          title: 'Calculadora',
+          dialog: CalculatorHelpDialog(),
+        ),
+        const SizedBox(height: 15),
+        // TODO NaCl XX g/mol ...
+        QuimifyCard.custom(
+          customTitle: Image.asset(
+            'assets/images/icons/scale.png',
+            color: quimifyTeal,
           ),
-          const SizedBox(height: 15),
-          // TODO NaCl XX g/mol ...
-          QuimifyCard.custom(
-            customTitle: Image.asset(
-              'assets/images/icons/scale.png',
-              color: quimifyTeal,
-            ),
-            page: const MolecularMassPage(),
-          ),
-          QuimifyCard.comingSoon(
-            customTitle: Container(),
-          ),
-          // To keep it above navigation bar:
-          const SizedBox(height: 2 * 30 + 60),
-        ],
-      ),
+          page: const MolecularMassPage(),
+        ),
+        QuimifyCard.comingSoon(
+          customTitle: Container(),
+        ),
+        // To keep it above navigation bar:
+        const SizedBox(height: 2 * 30 + 60),
+      ],
     );
   }
 }

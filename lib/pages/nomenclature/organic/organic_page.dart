@@ -11,42 +11,40 @@ class OrganicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const QuimifySectionTitle(
-            title: 'Orgánica',
-            dialog: OrganicHelpDialog(),
-          ),
-          const SizedBox(height: 15),
-          QuimifyCard.custom(
-            customTitle: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Image.asset(
-                'assets/images/icons/2-chloroethylbenzene.png',
-                color: quimifyTeal,
-                height: 28,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const QuimifySectionTitle(
+          title: 'Orgánica',
+          dialog: OrganicHelpDialog(),
+        ),
+        const SizedBox(height: 15),
+        QuimifyCard.custom(
+          customTitle: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Image.asset(
+              'assets/images/icons/2-chloroethylbenzene.png',
+              color: quimifyTeal,
+              height: 28,
             ),
-            subtitle: '2-cloroetilbenceno',
-            page: const FindingFormulaPage(),
           ),
-          const QuimifyCard(
-            title: 'CH₂ = CH(OH)',
-            subtitle: 'etenol',
-            page: NamingOpenChainPage(),
-          ),
-          const QuimifySectionTitle(
-            title: 'Practicar',
-            dialog: OrganicHelpDialog(),
-          ),
-          const SizedBox(height: 15),
-          QuimifyCard.comingSoon(
-            customTitle: Container(),
-          ),
-        ],
-      ),
+          subtitle: '2-cloroetilbenceno',
+          page: const FindingFormulaPage(),
+        ),
+        const QuimifyCard(
+          title: 'CH₂ = CH(OH)',
+          subtitle: 'etenol',
+          page: NamingOpenChainPage(),
+        ),
+        const QuimifySectionTitle(
+          title: 'Practicar',
+          dialog: OrganicHelpDialog(),
+        ),
+        const SizedBox(height: 15),
+        QuimifyCard.comingSoon(
+          customTitle: Container(),
+        ),
+      ],
     );
   }
 }

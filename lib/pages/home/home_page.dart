@@ -10,7 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.accessResult}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.accessResult,
+  }) : super(key: key);
 
   final AccessResult? accessResult;
 
