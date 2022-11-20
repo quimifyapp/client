@@ -39,7 +39,7 @@ class QuimifyDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     const double maxWidth = 400;
     final double shortestSide = MediaQuery.of(context).size.width;
-    final double padding = max(25, (shortestSide - maxWidth) / 2);
+    final double padding = max(20, (shortestSide - maxWidth) / 2);
 
     return AlertDialog(
       insetPadding: EdgeInsets.symmetric(horizontal: padding),
@@ -78,8 +78,8 @@ class QuimifyDialog extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.only(
         top: 20,
-        left: 25,
-        right: 25,
+        left: 20,
+        right: 20,
       ),
       content: SingleChildScrollView(
         child: Wrap(

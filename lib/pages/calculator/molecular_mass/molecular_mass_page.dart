@@ -161,7 +161,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           header: const QuimifyPageBar(title: 'Masa molecular'),
           body: SingleChildScrollView(
             controller: _scrollController,
-            padding: const EdgeInsets.all(25),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 const SizedBox(height: 5),
@@ -222,11 +222,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           scribbleEnabled: false,
                           focusNode: _textFocusNode,
                           controller: _textController,
-                          onChanged: (input) {
-                            _textController.value =
-                                _textController.value.copyWith(
-                              text: formatStructureInput(input),
-                            );
+                          onChanged: (String input) {
+                            _textController.value = _textController.value
+                                .copyWith(text: formatStructureInput(input));
                           },
                           textInputAction: TextInputAction.search,
                           onSubmitted: (_) => _submittedText(),

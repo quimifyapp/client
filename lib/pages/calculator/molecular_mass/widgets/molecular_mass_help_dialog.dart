@@ -26,7 +26,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Átomos': [
+        'Elementos': [
           const Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un átomo es la masa, en gramos, de '
@@ -74,7 +74,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Compuestos': [
+        'Masa molecular': [
           const Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un compuesto es la suma de las '

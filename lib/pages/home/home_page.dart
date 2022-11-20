@@ -22,6 +22,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<Widget> _pages = const [
+    InorganicPage(),
+    OrganicPage(),
+    CalculatorPage(),
+  ];
+
   late int _currentPage;
   late final List<int> _visitedPagesStack;
 
@@ -70,57 +76,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => _returnButtonPressed(),
-      child: Scaffold(
-        body: QuimifyScaffold(
-          header: const QuimifyHomeBar(),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      BarButton(
-                        title: 'Inorgánica',
-                        selected: _currentPage == 0,
-                        onPressed: () => _goToPage(0),
-                      ),
-                      const SizedBox(width: 5),
-                      BarButton(
-                        title: 'Orgánica',
-                        selected: _currentPage == 1,
-                        onPressed: () => _goToPage(1),
-                      ),
-                      const SizedBox(width: 5),
-                      BarButton(
-                        title: 'Calculadora',
-                        selected: _currentPage == 2,
-                        onPressed: () => _goToPage(2),
-                      ),
-                    ],
-                  ),
+      child: QuimifyScaffold(
+        header: const QuimifyHomeBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Container(
+                height: 60,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const SizedBox(height: 15),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: IndexedStack(
-                      index: _currentPage,
-                      children: [
-                        const InorganicPage(),
-                        const OrganicPage(),
-                        CalculatorPage(),
-                      ],
+                child: Row(
+                  children: [
+                    BarButton(
+                      title: 'Inorgánica',
+                      selected: _currentPage == 0,
+                      onPressed: () => _goToPage(0),
                     ),
+                    const SizedBox(width: 5),
+                    BarButton(
+                      title: 'Orgánica',
+                      selected: _currentPage == 1,
+                      onPressed: () => _goToPage(1),
+                    ),
+                    const SizedBox(width: 5),
+                    BarButton(
+                      title: 'Calculadora',
+                      selected: _currentPage == 2,
+                      onPressed: () => _goToPage(2),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              Expanded(
+                child: ScrollConfiguration(
+                  behavior: const ScrollBehavior().copyWith(
+                    overscroll: false, // To avoid weird behavior
+                  ),
+                  child: SingleChildScrollView(
+                    child: _pages[_currentPage],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 5), // + 15 from cards = 20
+            ],
           ),
         ),
       ),

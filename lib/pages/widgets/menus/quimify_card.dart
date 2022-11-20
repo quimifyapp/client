@@ -50,6 +50,7 @@ class QuimifyCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Container(
+        height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Theme.of(context).colorScheme.surface,
@@ -58,22 +59,18 @@ class QuimifyCard extends StatelessWidget {
         // To avoid rounded corners overflow:
         clipBehavior: Clip.hardEdge,
         child: MaterialButton(
-          height: 100,
           splashColor: Colors.transparent,
-          padding: const EdgeInsets.only(
-            top: 15,
-            bottom: 15,
-            left: 20,
-            right: 20,
-          ),
+          padding: const EdgeInsets.all(20),
           onPressed: () => _onPressed(context),
           child: Row(
             children: [
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (customTitle == null && !_comingSoon)
+                    if (customTitle != null) customTitle!,
+                    if (customTitle == null)
                       Text(
                         title!,
                         style: const TextStyle(
@@ -82,24 +79,32 @@ class QuimifyCard extends StatelessWidget {
                           color: quimifyTeal,
                         ),
                       ),
-                    if (customTitle != null) customTitle!,
-                    if (subtitle != null)
+                    if (subtitle != null) ...[
+                      const Spacer(),
                       Text(
-                        subtitle ?? 'Próximamente',
+                        subtitle!,
                         style: TextStyle(
                           fontSize: 16,
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                    ],
                   ],
                 ),
               ),
-              Icon(
-                !_comingSoon ? Icons.arrow_forward_rounded : Icons.lock_rounded,
-                size: !_comingSoon ? 30 : 26,
-                color: quimifyTeal,
-              )
+              if (!_comingSoon)
+                const Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 30,
+                  color: quimifyTeal,
+                ),
+              if (_comingSoon)
+                const Icon(
+                  Icons.lock_rounded,
+                  size: 26,
+                  color: quimifyTeal,
+                ),
             ],
           ),
         ),

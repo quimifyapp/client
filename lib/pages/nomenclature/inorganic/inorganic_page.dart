@@ -30,7 +30,7 @@ class InorganicPage extends StatelessWidget {
         QuimifyCard.comingSoon(
           customTitle: Icon(
             Icons.edit_note_rounded,
-            size: 30,
+            size: 36,
             color: quimifyTeal,
           ),
         ),

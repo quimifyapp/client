@@ -12,25 +12,26 @@ class OrganicPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const QuimifySectionTitle(
-          title: 'Orgánica',
+          title: 'Formular',
           dialog: OrganicHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
-          customTitle: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Image.asset(
-              'assets/images/icons/2-chloroethylbenzene.png',
-              color: quimifyTeal,
-              height: 28,
-            ),
+          customTitle: Image.asset(
+            'assets/images/icons/2-chloroethylbenzene.png',
+            height: 30,
+            color: quimifyTeal,
           ),
           subtitle: '2-cloroetilbenceno',
           page: const FindingFormulaPage(),
         ),
+        const QuimifySectionTitle(
+          title: 'Nombrar',
+          dialog: OrganicHelpDialog(),
+        ),
+        const SizedBox(height: 15),
         const QuimifyCard(
           title: 'CH₂ = CH(OH)',
           subtitle: 'etenol',
@@ -41,8 +42,12 @@ class OrganicPage extends StatelessWidget {
           dialog: OrganicHelpDialog(),
         ),
         const SizedBox(height: 15),
-        QuimifyCard.comingSoon(
-          customTitle: Container(),
+        const QuimifyCard.comingSoon(
+          customTitle: Icon(
+            Icons.edit_note_rounded,
+            size: 36,
+            color: quimifyTeal,
+          ),
         ),
       ],
     );
