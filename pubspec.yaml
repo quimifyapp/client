@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify client
 
-version: 3.3.2+68 # Only for Android
+version: 3.3.2+69 # Only for Android
 
 # The following section is specific to Flutter packages.
 flutter:
