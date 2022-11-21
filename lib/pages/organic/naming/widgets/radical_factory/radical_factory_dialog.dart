@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/radical_factory/carbons_help_dialog.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/radical_factory/tip_shape_help_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/carbons_help_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/tip_shape_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';

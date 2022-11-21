@@ -19,8 +19,14 @@ class InorganicPage extends StatelessWidget {
         ),
         SizedBox(height: 15),
         QuimifyCard(
-          title: 'H₂O',
-          subtitle: 'óxido de hidrógeno',
+          body: {
+            'H₂O' : 'óxido de hidrógeno',
+            'AuF₃' : 'trifluoruro de oro',
+            'HCl' : 'ácido clorhídrico',
+            'Fe₂S₃' : 'sulfuro de hierro(III)',
+            'PbBr₂' : 'dibromuro de plomo',
+            'H₂SO₃' : 'ácido sulfuroso',
+          },
           page: NamingAndFindingFormulaPage(),
         ),
         QuimifySectionTitle(
@@ -29,7 +35,7 @@ class InorganicPage extends StatelessWidget {
         ),
         SizedBox(height: 15),
         QuimifyCard.comingSoon(
-          customTitle: Icon(
+          comingSoonBody: Icon(
             Icons.edit_note_rounded,
             size: 36,
             color: quimifyTeal,

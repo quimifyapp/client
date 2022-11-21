@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
-import 'package:quimify_client/pages/home/widgets/bar_button.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
@@ -95,28 +95,31 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
                 Container(
                   height: 60,
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     children: [
-                      BarButton(
+                      QuimifyMenuButton(
                         title: 'Inorgánica',
                         selected: _currentPage == 0,
                         autoSizeGroup: autoSizeGroup,
                         onPressed: () => _goToPage(0),
                       ),
                       const SizedBox(width: 5),
-                      BarButton(
+                      QuimifyMenuButton(
                         title: 'Orgánica',
                         selected: _currentPage == 1,
                         autoSizeGroup: autoSizeGroup,
                         onPressed: () => _goToPage(1),
                       ),
                       const SizedBox(width: 5),
-                      BarButton(
+                      QuimifyMenuButton(
                         title: 'Calculadora',
                         selected: _currentPage == 2,
                         autoSizeGroup: autoSizeGroup,

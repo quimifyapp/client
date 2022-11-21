@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 
-class BarButton extends StatelessWidget {
-  const BarButton({
+class QuimifyMenuButton extends StatelessWidget {
+  const QuimifyMenuButton({
     Key? key,
     required this.title,
     required this.selected,

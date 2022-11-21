@@ -21,7 +21,7 @@ class InorganicResultFields extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         children: [
           Row(

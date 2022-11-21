@@ -5,12 +5,12 @@ import 'package:quimify_client/organic/components/substituent.dart';
 import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
 import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/widgets/radical_factory/radical_factory_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/buttons/functional_group_button.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/naming_help_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
@@ -27,14 +27,14 @@ import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 
-class NamingOpenChainPage extends StatefulWidget {
-  const NamingOpenChainPage({Key? key}) : super(key: key);
+class NamingPage extends StatefulWidget {
+  const NamingPage({Key? key}) : super(key: key);
 
   @override
-  State<NamingOpenChainPage> createState() => _NamingOpenChainPageState();
+  State<NamingPage> createState() => _NamingPageState();
 }
 
-class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
+class _NamingPageState extends State<NamingPage> {
   static const String _title = 'Nombrar orgánicos';
 
   late List<OpenChain> _openChainStack;
@@ -351,7 +351,11 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
       child: QuimifyScaffold(
         header: const QuimifyPageBar(title: _title),
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
           child: Column(
             children: [
               Container(
@@ -383,7 +387,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   Expanded(
@@ -428,7 +432,7 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                 const SizedBox(height: 20),
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
-                  dialog: NamingOpenChainHelpDialog(),
+                  dialog: NamingHelpDialog(),
                 ),
                 const SizedBox(height: 15),
                 Expanded(
@@ -442,7 +446,8 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.only(
-                          top: 5, // + 20 from above SizedBox = 25
+                          top: 5, // + 15 from above SizedBox = 20
+                          bottom: 20, // Bottom padding of the page
                         ),
                         child: Wrap(
                           runSpacing: 15,

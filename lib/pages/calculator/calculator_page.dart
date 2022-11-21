@@ -12,33 +12,30 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        const QuimifySectionTitle(
+      children: const [
+        QuimifySectionTitle(
           title: 'Masa molecular',
           dialog: CalculatorHelpDialog(),
         ),
-        const SizedBox(height: 15),
-        if (false) // TODO
-          const QuimifyCard(
-            title: 'NaCl',
-            subtitle: '17.42 g/mol',
-            page: MolecularMassPage(),
-          ),
-        QuimifyCard.custom(
-          customTitle: Image.asset(
-            'assets/images/icons/scale.png',
-            height: 40,
-            color: quimifyTeal,
-          ),
-          page: const MolecularMassPage(),
+        SizedBox(height: 15),
+        QuimifyCard(
+          body: {
+            'Fe₂O₃': '159.68 g/mol',
+            'C₅H₆O₂': '110.10 g/mol',
+            'NaCl': '58.35 g/mol',
+            'H₂S': '34.08 g/mol',
+            'CH₃CN': '41.05 g/mol',
+            'SiH₄': '32.12 g/mol',
+          },
+          page: MolecularMassPage(),
         ),
-        const QuimifySectionTitle(
+        QuimifySectionTitle(
           title: 'Ajustar reacciones',
           dialog: quimifyComingSoonDialog,
         ),
-        const SizedBox(height: 15),
-        const QuimifyCard.comingSoon(
-          customTitle: Text(
+        SizedBox(height: 15),
+        QuimifyCard.comingSoon(
+          comingSoonBody: Text(
             '⇄',
             style: TextStyle(
               height: 0.9,

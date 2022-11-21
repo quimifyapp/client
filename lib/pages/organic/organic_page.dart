@@ -1,5 +1,5 @@
 import 'package:quimify_client/pages/organic/finding_formula/finding_formula_page.dart';
-import 'package:quimify_client/pages/organic/naming/open_chain/naming_open_chain_page.dart';
+import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog.dart';
 import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
@@ -21,12 +21,13 @@ class OrganicPage extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
-          customTitle: Image.asset(
-            'assets/images/icons/2-chloroethylbenzene.png',
-            height: 30,
-            color: quimifyTeal,
-          ),
-          subtitle: '2-cloroetilbenceno',
+          customBody: {
+            Image.asset(
+              'assets/images/icons/2-chloroethylbenzene.png',
+              height: 30,
+              color: quimifyTeal,
+            ): '2-cloroetilbenceno',
+          },
           page: const FindingFormulaPage(),
         ),
         const QuimifySectionTitle(
@@ -35,9 +36,15 @@ class OrganicPage extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         const QuimifyCard(
-          title: 'CH₂ = CH(OH)',
-          subtitle: 'etenol',
-          page: NamingOpenChainPage(),
+          body: {
+            'CHO – CN': '2-oxoetanonitrilo',
+            'CH₂ – CONH₂': 'etanamida',
+            'CH₃ – O – CF₃': 'metil trifluorometil éter',
+            'CN – COOH': 'ácido cianometanoico',
+            'CH₃ – C Ξ CH': 'prop-1-ino',
+            'CH₂ = CBr₂': '1,1-dibromoeteno',
+          },
+          page: NamingPage(),
         ),
         const QuimifySectionTitle(
           title: 'Practicar',
@@ -45,7 +52,7 @@ class OrganicPage extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         const QuimifyCard.comingSoon(
-          customTitle: Icon(
+          comingSoonBody: Icon(
             Icons.edit_note_rounded,
             size: 36,
             color: quimifyTeal,

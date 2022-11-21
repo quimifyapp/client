@@ -94,18 +94,16 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 bottom: Radius.circular(15),
               ),
             ),
-            padding: const EdgeInsets.only(
-              top: 20,
-              bottom: 15,
-              left: 20,
-              right: 20,
+            padding: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 20,
             ),
             alignment: Alignment.centerLeft,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 2),
+                  padding: const EdgeInsets.symmetric(vertical: 2.5),
                   child: Text(
                     formatInorganicFormulaOrName(
                         widget.inorganicResult.formula!),
@@ -133,9 +131,10 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                   ),
                 if (widget.inorganicResult.otherName != null)
                   InorganicResultName(
+                    label: 'Nombre',
                     name: widget.inorganicResult.otherName!,
                   ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 AnimatedSize(
                   duration: Duration(milliseconds: _isCollapsed ? 150 : 300),
                   curve: Curves.easeOut,
@@ -229,11 +228,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 5),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 Center(
                   child: RotatedBox(
                     quarterTurns: _isCollapsed ? 2 : 0,
