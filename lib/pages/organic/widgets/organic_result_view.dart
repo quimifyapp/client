@@ -1,6 +1,6 @@
-import 'package:quimify_client/pages/nomenclature/organic/organic_image_page.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_field.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/structure_help_dialog.dart';
+import 'package:quimify_client/pages/organic/organic_image_page.dart';
+import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
+import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';

@@ -1,6 +1,6 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
-import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_view.dart';
+import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';

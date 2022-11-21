@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
-import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_field.dart';
-import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_fields.dart';
-import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_result_name.dart';
+import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.dart';
+import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_fields.dart';
+import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_name.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';

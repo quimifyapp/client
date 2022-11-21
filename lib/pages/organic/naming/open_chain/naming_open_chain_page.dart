@@ -5,14 +5,14 @@ import 'package:quimify_client/organic/components/substituent.dart';
 import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
 import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/radical_factory/radical_factory_dialog.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/organic_result_page.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/functional_group_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/undo_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/naming_open_chain_help_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/radical_factory/radical_factory_dialog.dart';
+import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
+import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -410,18 +410,16 @@ class _NamingOpenChainPageState extends State<NamingOpenChainPage> {
               ),
               if (_done) ...[
                 const SizedBox(height: 20),
-                Container(
-                  child: QuimifyButton.gradient(
-                    height: 50,
-                    gradient: quimifyGradient,
-                    onPressed: _pressedButton,
-                    child: Text(
-                      'Resolver',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                QuimifyButton.gradient(
+                  height: 50,
+                  gradient: quimifyGradient,
+                  onPressed: _pressedButton,
+                  child: Text(
+                    'Resolver',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

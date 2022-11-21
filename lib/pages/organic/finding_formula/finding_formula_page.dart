@@ -1,6 +1,6 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/organic_result_view.dart';
+import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';

@@ -1,7 +1,7 @@
-import 'package:quimify_client/pages/nomenclature/inorganic/inorganic_nomenclature_page.dart';
-import 'package:quimify_client/pages/nomenclature/inorganic/widgets/inorganic_help_dialog.dart';
+import 'package:quimify_client/pages/inorganic/inorganic_nomenclature_page.dart';
+import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';

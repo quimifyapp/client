@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/widgets/buttons/undo_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/add_carbon_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/hydrogenate_button.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';

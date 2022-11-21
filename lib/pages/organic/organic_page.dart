@@ -1,9 +1,9 @@
-import 'package:quimify_client/pages/nomenclature/organic/finding_formula/finding_formula_page.dart';
-import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/finding_formula_help_dialog.dart';
-import 'package:quimify_client/pages/nomenclature/organic/widgets/naming_help_dialog.dart';
+import 'package:quimify_client/pages/organic/finding_formula/finding_formula_page.dart';
+import 'package:quimify_client/pages/organic/naming/open_chain/naming_open_chain_page.dart';
+import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog.dart';
+import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
