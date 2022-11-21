@@ -25,7 +25,7 @@ class BarButton extends StatelessWidget {
           gradient: selected ? quimifyGradient : null,
         ),
         child: MaterialButton(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
@@ -35,7 +35,7 @@ class BarButton extends StatelessWidget {
             title,
             maxLines: 1,
             maxFontSize: 14,
-            minFontSize: 12,
+            minFontSize: 10,
             stepGranularity: 0.1,
             group: autoSizeGroup,
             style: TextStyle(
