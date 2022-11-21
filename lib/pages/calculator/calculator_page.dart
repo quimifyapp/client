@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -26,14 +27,14 @@ class CalculatorPage extends StatelessWidget {
         QuimifyCard.custom(
           customTitle: Image.asset(
             'assets/images/icons/scale.png',
-            height: 45,
+            height: 40,
             color: quimifyTeal,
           ),
           page: const MolecularMassPage(),
         ),
         const QuimifySectionTitle(
           title: 'Ajustar reacciones',
-          dialog: CalculatorHelpDialog(),
+          dialog: quimifyComingSoonDialog,
         ),
         const SizedBox(height: 15),
         const QuimifyCard.comingSoon(

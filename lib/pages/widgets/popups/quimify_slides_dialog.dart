@@ -40,8 +40,8 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onHorizontalDragEnd: (dragEndDetails) =>
-          dragEndDetails.primaryVelocity! < 0
+      onHorizontalDragEnd: (DragEndDetails dragEndDetails) =>
+      (dragEndDetails.primaryVelocity ?? 0) > 0
               ? _goToNextSlide() // Swipe left
               : _goToPreviousSlide(), // Swipe right
       child: QuimifyDialog(

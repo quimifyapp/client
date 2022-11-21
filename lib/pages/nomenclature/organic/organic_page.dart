@@ -1,10 +1,12 @@
 import 'package:quimify_client/pages/nomenclature/organic/finding_formula/finding_formula_page.dart';
 import 'package:quimify_client/pages/nomenclature/organic/naming/open_chain/naming_open_chain_page.dart';
-import 'package:quimify_client/pages/nomenclature/widgets/organic_help_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/organic/widgets/finding_formula_help_dialog.dart';
+import 'package:quimify_client/pages/nomenclature/organic/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/menus/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 
 class OrganicPage extends StatelessWidget {
   const OrganicPage({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class OrganicPage extends StatelessWidget {
       children: [
         const QuimifySectionTitle(
           title: 'Formular',
-          dialog: OrganicHelpDialog(),
+          dialog: FindingFormulaHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
@@ -29,7 +31,7 @@ class OrganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Nombrar',
-          dialog: OrganicHelpDialog(),
+          dialog: NamingHelpDialog(),
         ),
         const SizedBox(height: 15),
         const QuimifyCard(
@@ -39,7 +41,7 @@ class OrganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Practicar',
-          dialog: OrganicHelpDialog(),
+          dialog: quimifyComingSoonDialog,
         ),
         const SizedBox(height: 15),
         const QuimifyCard.comingSoon(

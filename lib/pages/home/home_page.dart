@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/bar_button.dart';
@@ -30,11 +32,13 @@ class _HomePageState extends State<HomePage> {
 
   late int _currentPage;
   late final List<int> _visitedPagesStack;
+  late final AutoSizeGroup autoSizeGroup;
 
   @override
   void initState() {
     _currentPage = 0;
     _visitedPagesStack = [];
+    autoSizeGroup = AutoSizeGroup();
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _showWelcomePopups(),
@@ -78,53 +82,63 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async => _returnButtonPressed(),
       child: QuimifyScaffold(
         header: const QuimifyHomeBar(),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Container(
-                height: 60,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    BarButton(
-                      title: 'Inorgánica',
-                      selected: _currentPage == 0,
-                      onPressed: () => _goToPage(0),
-                    ),
-                    const SizedBox(width: 5),
-                    BarButton(
-                      title: 'Orgánica',
-                      selected: _currentPage == 1,
-                      onPressed: () => _goToPage(1),
-                    ),
-                    const SizedBox(width: 5),
-                    BarButton(
-                      title: 'Calculadora',
-                      selected: _currentPage == 2,
-                      onPressed: () => _goToPage(2),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              Expanded(
-                child: ScrollConfiguration(
-                  behavior: const ScrollBehavior().copyWith(
-                    overscroll: false, // To avoid weird behavior
+        body: GestureDetector(
+          onHorizontalDragEnd: (DragEndDetails dragEndDetails) {
+            (dragEndDetails.primaryVelocity ?? 0) > 0
+                ? _goToPage(max(0, _currentPage - 1)) // Swipe left
+                : _goToPage(min(2, _currentPage + 1)); // Swipe right
+          }, // Swipe right
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Container(
+                  height: 60,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: SingleChildScrollView(
-                    child: _pages[_currentPage],
+                  child: Row(
+                    children: [
+                      BarButton(
+                        title: 'Inorgánica',
+                        selected: _currentPage == 0,
+                        autoSizeGroup: autoSizeGroup,
+                        onPressed: () => _goToPage(0),
+                      ),
+                      const SizedBox(width: 5),
+                      BarButton(
+                        title: 'Orgánica',
+                        selected: _currentPage == 1,
+                        autoSizeGroup: autoSizeGroup,
+                        onPressed: () => _goToPage(1),
+                      ),
+                      const SizedBox(width: 5),
+                      BarButton(
+                        title: 'Calculadora',
+                        selected: _currentPage == 2,
+                        autoSizeGroup: autoSizeGroup,
+                        onPressed: () => _goToPage(2),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 5), // + 15 from cards = 20
-            ],
+                const SizedBox(height: 15),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: const ScrollBehavior().copyWith(
+                      overscroll: false, // To avoid weird behavior
+                    ),
+                    child: SingleChildScrollView(
+                      child: _pages[_currentPage],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5), // + 15 from cards = 20
+              ],
+            ),
           ),
         ),
       ),

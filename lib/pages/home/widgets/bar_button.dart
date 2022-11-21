@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 
@@ -6,11 +7,13 @@ class BarButton extends StatelessWidget {
     Key? key,
     required this.title,
     required this.selected,
+    required this.autoSizeGroup,
     required this.onPressed,
   }) : super(key: key);
 
   final String title;
   final bool selected;
+  final AutoSizeGroup autoSizeGroup;
   final VoidCallback onPressed;
 
   @override
@@ -22,14 +25,19 @@ class BarButton extends StatelessWidget {
           gradient: selected ? quimifyGradient : null,
         ),
         child: MaterialButton(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: onPressed,
-          child: Text(
+          child: AutoSizeText(
             title,
+            maxLines: 1,
+            maxFontSize: 14,
+            minFontSize: 12,
+            stepGranularity: 0.1,
+            group: autoSizeGroup,
             style: TextStyle(
               color: selected
                   ? Theme.of(context).colorScheme.onPrimary
