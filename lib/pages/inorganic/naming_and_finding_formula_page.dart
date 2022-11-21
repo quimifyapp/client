@@ -11,15 +11,15 @@ import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
-class InorganicNomenclaturePage extends StatefulWidget {
-  const InorganicNomenclaturePage({Key? key}) : super(key: key);
+class NamingAndFindingFormulaPage extends StatefulWidget {
+  const NamingAndFindingFormulaPage({Key? key}) : super(key: key);
 
   @override
-  State<InorganicNomenclaturePage> createState() =>
-      _InorganicNomenclaturePageState();
+  State<NamingAndFindingFormulaPage> createState() =>
+      _NamingAndFindingFormulaPageState();
 }
 
-class _InorganicNomenclaturePageState extends State<InorganicNomenclaturePage> {
+class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();

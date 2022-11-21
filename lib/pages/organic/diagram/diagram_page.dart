@@ -6,17 +6,17 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class OrganicImagePage extends StatefulWidget {
-  const OrganicImagePage({Key? key, required this.imageProvider})
+class DiagramPage extends StatefulWidget {
+  const DiagramPage({Key? key, required this.imageProvider})
       : super(key: key);
 
   final ImageProvider imageProvider;
 
   @override
-  State<OrganicImagePage> createState() => _OrganicImagePageState();
+  State<DiagramPage> createState() => _DiagramPageState();
 }
 
-class _OrganicImagePageState extends State<OrganicImagePage> {
+class _DiagramPageState extends State<DiagramPage> {
   late PhotoViewControllerBase controller;
   late PhotoViewScaleStateController scaleStateController;
 

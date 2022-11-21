@@ -1,4 +1,4 @@
-import 'package:quimify_client/pages/inorganic/inorganic_nomenclature_page.dart';
+import 'package:quimify_client/pages/inorganic/naming_and_finding_formula_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
@@ -21,7 +21,7 @@ class InorganicPage extends StatelessWidget {
         QuimifyCard(
           title: 'H₂O',
           subtitle: 'óxido de hidrógeno',
-          page: InorganicNomenclaturePage(),
+          page: NamingAndFindingFormulaPage(),
         ),
         QuimifySectionTitle(
           title: 'Practicar',
