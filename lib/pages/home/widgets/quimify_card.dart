@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +50,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
 
     if(length > 0) {
       _timer = Timer.periodic(
-        const Duration(seconds: 3), // TODO
+        const Duration(seconds: 3),
             (_) {
           if (length != 0) {
             setState(() => _selector = (_selector + 1) % length);
@@ -101,7 +100,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
             children: [
               Expanded(
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800), // TODO
+                  duration: const Duration(milliseconds: 600),
                   transitionBuilder: (child, animation) =>
                       FadeTransition(opacity: animation, child: child),
                   child: Container(
