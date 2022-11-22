@@ -414,14 +414,14 @@ class _NamingPageState extends State<NamingPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20), // TODO 15?
+              const SizedBox(height: 20),
               // Substituents:
               if (!_done) ...[
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
                   dialog: NamingHelpDialog(),
                 ),
-                const SizedBox(height: 15), // TODO 10?
+                const SizedBox(height: 15),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(

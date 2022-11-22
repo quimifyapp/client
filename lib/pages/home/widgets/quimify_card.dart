@@ -35,36 +35,38 @@ class QuimifyCard extends StatefulWidget {
 }
 
 class _QuimifyCardState extends State<QuimifyCard> {
-  late final Timer _timer;
+  late final Timer? _timer;
   late int _selector;
 
   @override
   void initState() {
     _selector = 0;
 
-    int length = widget.body != null
+    int slides = widget.body != null
         ? widget.body!.length
         : widget.customBody != null
             ? widget.customBody!.length
-            : 0;
+            : 1;
 
-    if(length > 0) {
-      _timer = Timer.periodic(
-        const Duration(seconds: 3),
+    _timer = slides > 1
+        ? Timer.periodic(
+            const Duration(seconds: 3),
             (_) {
-          if (length != 0) {
-            setState(() => _selector = (_selector + 1) % length);
-          }
-        },
-      );
-    }
+              if (slides != 0) {
+                setState(() => _selector = (_selector + 1) % slides);
+              }
+            },
+          )
+        : null;
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_timer != null) {
+      _timer!.cancel();
+    }
     super.dispose();
   }
 
