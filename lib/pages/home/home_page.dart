@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/api/results/access_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
@@ -85,8 +84,8 @@ class _HomePageState extends State<HomePage> {
         body: GestureDetector(
           onHorizontalDragEnd: (DragEndDetails dragEndDetails) {
             (dragEndDetails.primaryVelocity ?? 0) > 0
-                ? _goToPage(max(0, _currentPage - 1)) // Swipe left
-                : _goToPage(min(2, _currentPage + 1)); // Swipe right
+                ? _goToPage((_currentPage - 1) % 3) // Swipe left
+                : _goToPage((_currentPage + 1) % 3); // Swipe right
           }, // Swipe right
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
