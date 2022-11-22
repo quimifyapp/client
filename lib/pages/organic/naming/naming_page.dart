@@ -358,6 +358,7 @@ class _NamingPageState extends State<NamingPage> {
           ),
           child: Column(
             children: [
+              // Input display:
               Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
@@ -388,6 +389,7 @@ class _NamingPageState extends State<NamingPage> {
                 ),
               ),
               const SizedBox(height: 15),
+              // Buttons:
               Row(
                 children: [
                   Expanded(
@@ -412,29 +414,14 @@ class _NamingPageState extends State<NamingPage> {
                   ),
                 ],
               ),
-              if (_done) ...[
-                const SizedBox(height: 20),
-                QuimifyButton.gradient(
-                  height: 50,
-                  gradient: quimifyGradient,
-                  onPressed: _pressedButton,
-                  child: Text(
-                    'Resolver',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              const SizedBox(height: 20), // TODO 15?
+              // Substituents:
               if (!_done) ...[
-                const SizedBox(height: 20),
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
                   dialog: NamingHelpDialog(),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 15), // TODO 10?
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -459,6 +446,22 @@ class _NamingPageState extends State<NamingPage> {
                               .toList(),
                         ),
                       ),
+                    ),
+                  ),
+                ),
+              ],
+              // 'Solve it' button:
+              if (_done) ...[
+                QuimifyButton.gradient(
+                  height: 50,
+                  gradient: quimifyGradient,
+                  onPressed: _pressedButton,
+                  child: Text(
+                    'Resolver',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

@@ -58,6 +58,7 @@ class OrganicPage extends StatelessWidget {
             color: quimifyTeal,
           ),
         ),
+        const SizedBox(height: 5), // + 15 from cards = 20
       ],
     );
   }

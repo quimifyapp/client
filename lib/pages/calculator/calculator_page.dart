@@ -45,6 +45,7 @@ class CalculatorPage extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 5), // + 15 from cards = 20
       ],
     );
   }

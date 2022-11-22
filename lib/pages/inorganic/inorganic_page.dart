@@ -41,6 +41,7 @@ class InorganicPage extends StatelessWidget {
             color: quimifyTeal,
           ),
         ),
+        SizedBox(height: 5), // + 15 from cards = 20
       ],
     );
   }

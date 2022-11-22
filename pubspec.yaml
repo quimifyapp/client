@@ -3,7 +3,6 @@ description: Quimify client
 
 version: 3.3.3+71 # Only for Android
 
-# The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
 
@@ -38,7 +37,7 @@ flutter:
     - assets/images/icons/but-2-yne.png
 
   fonts:
-    - family: CeraProBoldCustom # For triple bond char
+    - family: CeraProBoldCustom # To use 'Ξ' as a triple bond indicator
       fonts:
         - asset: assets/fonts/CeraProBoldCustom.otf
 
@@ -111,13 +110,5 @@ flutter_icons:
 
 # Flutter default:
 
-# The "flutter_lints" package below contains a set of recommended lints to
-# encourage good coding practices. The lint set provided by the package is
-# activated in the `analysis_options.yaml` file located at the root of your
-# package. See that file for information about deactivating specific lint
-# rules and activating additional ones.
 flutter_lints: ^2.0.0
-
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none'
