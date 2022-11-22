@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify client
 
-version: 3.3.3+73 # Only for Android
+version: 3.3.3+74 # Only for Android
 
 flutter:
   uses-material-design: true
