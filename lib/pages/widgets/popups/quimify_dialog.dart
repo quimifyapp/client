@@ -50,29 +50,32 @@ class QuimifyDialog extends StatelessWidget {
       titlePadding: EdgeInsets.zero,
       title: Column(
         children: [
-          Row(
-            children: [
-              const Spacer(),
-              IconButton(
-                onPressed: () => _closeButtonPressed(context),
-                alignment: Alignment.topRight,
-                padding: const EdgeInsets.only(top: 15, right: 15),
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                icon: Icon(
-                  Icons.close_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 17,
+          if (closable)
+            Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  padding: const EdgeInsets.only(top: 15, right: 15),
+                  alignment: Alignment.topRight,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: () => _closeButtonPressed(context),
+                  icon: Icon(
+                    Icons.close_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 17,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          if (!closable) const SizedBox(height: 35),
           Text(
             title,
             style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 22,
-                height: 0.6),
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 22,
+              height: 0.6,
+            ),
           )
         ],
       ),
