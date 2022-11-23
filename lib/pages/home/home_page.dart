@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -81,12 +82,9 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async => _returnButtonPressed(),
       child: QuimifyScaffold(
         header: const QuimifyHomeBar(),
-        body: GestureDetector(
-          onHorizontalDragEnd: (DragEndDetails dragEndDetails) {
-            (dragEndDetails.primaryVelocity ?? 0) > 0
-                ? _goToPage((_currentPage - 1) % 3) // Swipe left
-                : _goToPage((_currentPage + 1) % 3); // Swipe right
-          }, // Swipe right
+        body: QuimifySwipeDetector(
+          leftSwipe: () => _goToPage((_currentPage - 1) % 3),
+          rightSwipe: () => _goToPage((_currentPage + 1) % 3),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -100,9 +98,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
+                    key: ValueKey(_currentPage),
                     children: [
                       QuimifyMenuButton(
                         title: 'Inorgánica',

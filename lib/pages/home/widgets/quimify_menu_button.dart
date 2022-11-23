@@ -26,9 +26,9 @@ class QuimifyMenuButton extends StatelessWidget {
         ),
         child: MaterialButton(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          splashColor: Colors.transparent,
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
+          splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: onPressed,
           child: AutoSizeText(

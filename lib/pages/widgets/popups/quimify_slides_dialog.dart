@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -39,11 +40,9 @@ class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onHorizontalDragEnd: (DragEndDetails dragEndDetails) =>
-      (dragEndDetails.primaryVelocity ?? 0) > 0
-              ? _goToPreviousSlide() // Swipe left
-              : _goToNextSlide(), // Swipe right
+    return QuimifySwipeDetector(
+      leftSwipe: _goToPreviousSlide,
+      rightSwipe: _goToNextSlide, // Swipe right
       child: QuimifyDialog(
         title: widget.titleToContent.keys.elementAt(_currentSlide),
         content: widget.titleToContent.values.elementAt(_currentSlide),
