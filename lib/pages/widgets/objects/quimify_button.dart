@@ -41,9 +41,9 @@ class QuimifyButton extends StatelessWidget {
       // To avoid rounded corners overflow:
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: backgroundColor?.withOpacity(enabled ? 1 : _unselectedOpacity),
-        gradient: gradient,
         borderRadius: BorderRadius.circular(10),
+        gradient: gradient,
+        color: backgroundColor?.withOpacity(enabled ? 1 : _unselectedOpacity),
       ),
       child: SizedBox.expand(
         child: enabled

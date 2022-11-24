@@ -38,7 +38,7 @@ class CalculatorPage extends StatelessWidget {
           comingSoonBody: Text(
             '⇄',
             style: TextStyle(
-              height: 0.9,
+              height: 0.9, // TODO iOS?
               fontSize: 36,
               fontWeight: FontWeight.w600,
               color: quimifyTeal,

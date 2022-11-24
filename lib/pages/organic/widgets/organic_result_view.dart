@@ -70,7 +70,7 @@ class OrganicResultView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 15),
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
@@ -90,7 +90,7 @@ class OrganicResultView extends StatelessWidget {
             ),
           ),
           if (imageProvider != null) ...[
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
             Text(
               'Estructura',
               style: TextStyle(
@@ -99,12 +99,16 @@ class OrganicResultView extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 15),
             Stack(
               children: [
                 // Top buttons:
                 Container(
-                  padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 10,
+                    right: 10,
+                  ),
                   child: Row(
                     children: [
                       const Padding(

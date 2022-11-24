@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -7,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class DiagramPage extends StatefulWidget {
-  const DiagramPage({Key? key, required this.imageProvider})
-      : super(key: key);
+  const DiagramPage({
+    Key? key,
+    required this.imageProvider,
+  }) : super(key: key);
 
   final ImageProvider imageProvider;
 
@@ -68,7 +69,7 @@ class _DiagramPageState extends State<DiagramPage> {
                   backgroundDecoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
-                  // TODO el bug:
+                  // TODO bug:
                   //minScale: 0.75,
                   //maxScale: 2.5,
                   disableGestures: true,
@@ -76,9 +77,9 @@ class _DiagramPageState extends State<DiagramPage> {
               ),
             ),
             Positioned(
+              bottom: 40,
               left: 15,
               right: 15,
-              bottom: 40,
               child: StreamBuilder(
                 stream: controller.outputStateStream,
                 initialData: controller.value,
