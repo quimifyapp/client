@@ -137,8 +137,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 const SizedBox(height: 15),
                 AnimatedSize(
                   duration: Duration(milliseconds: _isCollapsed ? 150 : 300),
-                  curve: Curves.easeOut,
                   alignment: Alignment.topCenter,
+                  curve: Curves.easeOut,
                   child: SizedBox(
                     height: _isCollapsed ? 0 : null,
                     child: Column(
@@ -228,12 +228,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 15),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 5),
                 Center(
                   child: RotatedBox(
                     quarterTurns: _isCollapsed ? 2 : 0,
