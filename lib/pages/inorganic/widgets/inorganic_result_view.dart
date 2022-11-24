@@ -11,9 +11,11 @@ import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 
 class InorganicResultView extends StatefulWidget {
-  const InorganicResultView(
-      {Key? key, required this.query, required this.inorganicResult})
-      : super(key: key);
+  const InorganicResultView({
+    Key? key,
+    required this.query,
+    required this.inorganicResult,
+  }) : super(key: key);
 
   final String query;
   final InorganicResult inorganicResult;
@@ -24,9 +26,7 @@ class InorganicResultView extends StatefulWidget {
 
 class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
-
   late bool _isCollapsed = true;
-  late List<InorganicResultField> fields;
 
   void _pressedReportButton() {
     QuimifyReportDialog(
@@ -46,7 +46,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
       onTap: _onTap,
       child: Column(
         children: [
-          // Head: (Result of: ...)
+          // Head (Result of: ...):
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
@@ -84,7 +84,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               ],
             ),
           ),
-          // Separator:
+          // Horizontal break:
           const SizedBox(height: 2),
           // Body:
           Container(
@@ -103,7 +103,6 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 2.5),
                   child: Text(
                     formatInorganicFormulaOrName(
                         widget.inorganicResult.formula!),
@@ -141,30 +140,30 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                       children: [
                         InorganicResultFields(
                           fields: [
-                              InorganicResultField(
-                                title: 'Masa',
-                                quantity: widget.inorganicResult.molecularMass,
-                                unit: 'g/mol',
-                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                              ),
-                              InorganicResultField(
-                                title: 'Densidad',
-                                quantity: widget.inorganicResult.density,
-                                unit: 'g/cm³',
-                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                              ),
-                              InorganicResultField(
-                                title: 'P. de fusión',
-                                quantity: widget.inorganicResult.meltingPoint,
-                                unit: 'K',
-                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                              ),
-                              InorganicResultField(
-                                title: 'P. de ebullición',
-                                quantity: widget.inorganicResult.boilingPoint,
-                                unit: 'K',
-                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                              ),
+                            InorganicResultField(
+                              title: 'Masa',
+                              quantity: widget.inorganicResult.molecularMass,
+                              unit: 'g/mol',
+                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                            ),
+                            InorganicResultField(
+                              title: 'Densidad',
+                              quantity: widget.inorganicResult.density,
+                              unit: 'g/cm³',
+                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                            ),
+                            InorganicResultField(
+                              title: 'P. de fusión',
+                              quantity: widget.inorganicResult.meltingPoint,
+                              unit: 'K',
+                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                            ),
+                            InorganicResultField(
+                              title: 'P. de ebullición',
+                              quantity: widget.inorganicResult.boilingPoint,
+                              unit: 'K',
+                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                            ),
                           ],
                         ),
                         Row(
