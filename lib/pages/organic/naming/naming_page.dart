@@ -1,10 +1,10 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:quimify_client/organic/components/functional_group.dart';
-import 'package:quimify_client/organic/components/substituent.dart';
-import 'package:quimify_client/organic/compounds/open_chain/ether.dart';
-import 'package:quimify_client/organic/compounds/open_chain/open_chain.dart';
-import 'package:quimify_client/organic/compounds/open_chain/simple.dart';
+import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/substituent.dart';
+import 'package:quimify_client/api/organic/compounds/open_chain/ether.dart';
+import 'package:quimify_client/api/organic/compounds/open_chain/open_chain.dart';
+import 'package:quimify_client/api/organic/compounds/open_chain/simple.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/functional_group_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
@@ -37,9 +37,9 @@ class NamingPage extends StatefulWidget {
 class _NamingPageState extends State<NamingPage> {
   static const String _title = 'Nombrar orgánicos';
 
+  late bool _done;
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
-  late bool _done;
 
   void _reset() {
     _openChainStack = [Simple()];

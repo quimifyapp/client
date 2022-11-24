@@ -25,8 +25,8 @@ class InorganicResultView extends StatefulWidget {
 }
 
 class _InorganicResultViewState extends State<InorganicResultView> {
-  final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
   late bool _isCollapsed = true;
+  final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
 
   void _pressedReportButton() {
     QuimifyReportDialog(
@@ -55,8 +55,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               ),
             ),
             padding: const EdgeInsets.only(
-              top: 17,
-              bottom: 13,
+              top: 15 + 2,
+              bottom: 15 - 2,
               left: 15,
               right: 15,
             ),
@@ -102,15 +102,13 @@ class _InorganicResultViewState extends State<InorganicResultView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: Text(
-                    formatInorganicFormulaOrName(
-                        widget.inorganicResult.formula!),
-                    style: const TextStyle(
-                      color: quimifyTeal,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Text(
+                  formatInorganicFormulaOrName(
+                      widget.inorganicResult.formula!),
+                  style: const TextStyle(
+                    color: quimifyTeal,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 InorganicResultName(

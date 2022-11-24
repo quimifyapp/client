@@ -1,4 +1,4 @@
-import 'package:quimify_client/organic/components/substituent.dart';
+import 'package:quimify_client/api/organic/components/substituent.dart';
 
 import 'components/functional_group.dart';
 

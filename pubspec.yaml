@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify client
 
-version: 3.3.6+76 # Only for Android
+version: 3.3.6+76 # Android build code
 
 flutter:
   uses-material-design: true
@@ -99,7 +99,6 @@ dev_dependencies:
   envied_generator: ^0.2.3+1
 
 # Icon:
-
 flutter_icons:
   image_path: "assets/images/launcher_icons/logo_white_extended.png"
   ios: true
@@ -109,6 +108,5 @@ flutter_icons:
     image_path: "assets/images/logo_white.png"
 
 # Flutter default:
-
 flutter_lints: ^2.0.0
 publish_to: 'none'
