@@ -23,7 +23,7 @@ class InorganicResultView extends StatefulWidget {
 }
 
 class _InorganicResultViewState extends State<InorganicResultView> {
-  final AutoSizeGroup _quantityTitleAutoSizeGroup = AutoSizeGroup();
+  final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
 
   late bool _isCollapsed = true;
   late List<InorganicResultField> fields;
@@ -114,26 +114,22 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     ),
                   ),
                 ),
-                if (widget.inorganicResult.stockName != null)
-                  InorganicResultName(
-                    label: 'Stock',
-                    name: widget.inorganicResult.stockName!,
-                  ),
-                if (widget.inorganicResult.systematicName != null)
-                  InorganicResultName(
-                    label: 'Sistemática',
-                    name: widget.inorganicResult.systematicName!,
-                  ),
-                if (widget.inorganicResult.traditionalName != null)
-                  InorganicResultName(
-                    label: 'Tradicional',
-                    name: widget.inorganicResult.traditionalName!,
-                  ),
-                if (widget.inorganicResult.otherName != null)
-                  InorganicResultName(
-                    label: 'Nombre',
-                    name: widget.inorganicResult.otherName!,
-                  ),
+                InorganicResultName(
+                  label: 'Stock',
+                  name: widget.inorganicResult.stockName,
+                ),
+                InorganicResultName(
+                  label: 'Sistemática',
+                  name: widget.inorganicResult.systematicName,
+                ),
+                InorganicResultName(
+                  label: 'Tradicional',
+                  name: widget.inorganicResult.traditionalName,
+                ),
+                InorganicResultName(
+                  label: 'Nombre',
+                  name: widget.inorganicResult.otherName,
+                ),
                 const SizedBox(height: 15),
                 AnimatedSize(
                   duration: Duration(milliseconds: _isCollapsed ? 150 : 300),
@@ -145,33 +141,29 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                       children: [
                         InorganicResultFields(
                           fields: [
-                            if (widget.inorganicResult.molecularMass != null)
                               InorganicResultField(
                                 title: 'Masa',
-                                quantity: widget.inorganicResult.molecularMass!,
+                                quantity: widget.inorganicResult.molecularMass,
                                 unit: 'g/mol',
-                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.density != null)
                               InorganicResultField(
                                 title: 'Densidad',
-                                quantity: widget.inorganicResult.density!,
+                                quantity: widget.inorganicResult.density,
                                 unit: 'g/cm³',
-                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.meltingPoint != null)
                               InorganicResultField(
                                 title: 'P. de fusión',
-                                quantity: widget.inorganicResult.meltingPoint!,
+                                quantity: widget.inorganicResult.meltingPoint,
                                 unit: 'K',
-                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.boilingPoint != null)
                               InorganicResultField(
                                 title: 'P. de ebullición',
-                                quantity: widget.inorganicResult.boilingPoint!,
+                                quantity: widget.inorganicResult.boilingPoint,
                                 unit: 'K',
-                                titleAutoSizeGroup: _quantityTitleAutoSizeGroup,
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
                           ],
                         ),

@@ -10,7 +10,9 @@ class InorganicResultField extends StatelessWidget {
     required this.titleAutoSizeGroup,
   }) : super(key: key);
 
-  final String title, quantity, unit;
+  final String title;
+  final String? quantity;
+  final String unit;
   final AutoSizeGroup titleAutoSizeGroup;
 
   @override
@@ -18,27 +20,29 @@ class InorganicResultField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AutoSizeText(
-          title,
-          maxLines: 1,
-          stepGranularity: 0.1,
-          group: titleAutoSizeGroup,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 14,
+        if (quantity != null) ...[
+          AutoSizeText(
+            title,
+            maxLines: 1,
+            stepGranularity: 0.1,
+            group: titleAutoSizeGroup,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 14,
+            ),
           ),
-        ),
-        const SizedBox(height: 5),
-        AutoSizeText(
-          '$quantity $unit',
-          maxLines: 1,
-          stepGranularity: 0.1,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+          const SizedBox(height: 5),
+          AutoSizeText(
+            '$quantity $unit',
+            maxLines: 1,
+            stepGranularity: 0.1,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        )
+        ],
       ],
     );
   }

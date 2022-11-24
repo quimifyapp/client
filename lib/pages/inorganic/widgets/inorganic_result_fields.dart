@@ -11,54 +11,55 @@ class InorganicResultFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (fields.isEmpty) {
-      return Container();
-    }
+    // Not empty fields:
+    int fieldsLength = fields.where((field) => field.quantity != null).length;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSurface,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 50,
-                child: fields[0],
-              ),
-              if (fields.length > 1) ...[
-                const SizedBox(width: 20),
-                Expanded(
-                  flex: 50,
-                  child: fields[1],
-                ),
-              ],
-            ],
-          ),
-          if (fields.length > 2) ...[
-            const SizedBox(height: 20),
-            Row(
+    return fieldsLength == 0
+        ? Container()
+        : Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            margin: const EdgeInsets.only(bottom: 15),
+            padding: const EdgeInsets.all(20),
+            child: Column(
               children: [
-                Expanded(
-                  flex: 50,
-                  child: fields[2],
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 50,
+                      child: fields[0],
+                    ),
+                    if (fieldsLength > 1) ...[
+                      const SizedBox(width: 20),
+                      Expanded(
+                        flex: 50,
+                        child: fields[1],
+                      ),
+                    ],
+                  ],
                 ),
-                if (fields.length > 3) ...[
-                  const SizedBox(width: 20),
-                  Expanded(
-                    flex: 50,
-                    child: fields[3],
+                if (fieldsLength > 2) ...[
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 50,
+                        child: fields[2],
+                      ),
+                      if (fieldsLength > 3) ...[
+                        const SizedBox(width: 20),
+                        Expanded(
+                          flex: 50,
+                          child: fields[3],
+                        ),
+                      ],
+                    ],
                   ),
                 ],
               ],
             ),
-          ],
-        ],
-      ),
-    );
+          );
   }
 }
