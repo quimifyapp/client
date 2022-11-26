@@ -5,6 +5,8 @@ import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.d
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:diacritic/diacritic.dart';
+import 'package:collection/collection.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
@@ -34,6 +36,13 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   late String? _lastCompletion;
   late bool _isLoadingCompletion = false;
 
+  final Map<String, String> _normalizedToCompletion = {};
+
+  String _normalize(String text) => removeDiacritics(text)
+      .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
+      .replaceAll(RegExp(r'[^A-Za-z0-9]'), '') // Only alphanumeric
+      .toLowerCase();
+
   Future<String?> _getCompletion(String input) async {
     if (isEmptyWithBlanks(input)) {
       return null;
@@ -43,10 +52,24 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
 
     _isLoadingCompletion = true;
 
-    String? completion = await widget.completionCallBack(input);
+    String? completion;
 
-    _isLoadingCompletion = false;
+    // Search in cache:
+
+    String normalizedInput = _normalize(input);
+    completion = _normalizedToCompletion.keys.firstWhereOrNull(
+        (String normalizedCompletion) =>
+            normalizedCompletion.startsWith(normalizedInput));
+
+    // Request API:
+
+    if (completion == null) {
+      completion = await widget.completionCallBack(input);
+      _normalizedToCompletion[_normalize(completion!)] = completion;
+    }
+
     _lastCompletion = completion;
+    _isLoadingCompletion = false;
 
     return completion;
   }
