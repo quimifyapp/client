@@ -37,6 +37,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   late bool _isLoadingCompletion = false;
 
   final Map<String, String> _normalizedToCompletion = {};
+  final Set<String> _completionNotFoundNormalizedInputs = {};
 
   String _normalize(String text) => removeDiacritics(text)
       .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
@@ -46,7 +47,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   Future<String?> _getCompletion(String input) async {
     if (isEmptyWithBlanks(input)) {
       return null;
-    } else if (_isLoadingCompletion) {
+    }
+    if (_isLoadingCompletion) {
       return _lastCompletion;
     }
 
@@ -54,21 +56,34 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
 
     String? completion;
 
-    // Search in cache:
+    // Search in not founds cache: TODO separate methods
 
     String normalizedInput = _normalize(input);
-    completion = _normalizedToCompletion.keys.firstWhereOrNull(
-        (String normalizedCompletion) =>
-            normalizedCompletion.startsWith(normalizedInput));
 
-    // Request API:
+    Iterable<String> notFound = _completionNotFoundNormalizedInputs
+        .where((previousInput) => normalizedInput.startsWith(previousInput));
 
-    if (completion == null) {
-      completion = await widget.completionCallBack(input);
-      _normalizedToCompletion[_normalize(completion!)] = completion;
+    if (notFound.isEmpty) { // Input isn't an extension of wrong previous input
+      // Search in founds cache:
+      completion = _normalizedToCompletion.keys.firstWhereOrNull(
+              (normalizedCompletion) =>
+              normalizedCompletion.startsWith(normalizedInput));
+
+      // Request API:
+      if (completion == null) {
+        completion = await widget.completionCallBack(input);
+
+        // Cached:
+        if (completion != null) {
+          completion == ''
+              ? _completionNotFoundNormalizedInputs.add(normalizedInput)
+              : _normalizedToCompletion[_normalize(completion)] = completion;
+        }
+      }
+
+      _lastCompletion = completion;
     }
 
-    _lastCompletion = completion;
     _isLoadingCompletion = false;
 
     return completion;
