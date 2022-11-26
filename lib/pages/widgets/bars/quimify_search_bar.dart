@@ -39,46 +39,49 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   final Map<String, String> _normalizedToCompletion = {};
   final Set<String> _completionNotFoundNormalizedInputs = {};
 
+  void _storeCompletionInCache(String? completion, String normalizedInput) {
+    if (completion != null) {
+      completion == ''
+          ? _completionNotFoundNormalizedInputs.add(normalizedInput)
+          : _normalizedToCompletion[_normalize(completion)] = completion;
+    }
+  }
+
+  // Looks for a previous completion that could complete this input too
+  String? _getFromFoundCompletionsCache(String normalizedInput) =>
+      _normalizedToCompletion.keys.firstWhereOrNull((normalizedCompletion) =>
+          normalizedCompletion.startsWith(normalizedInput));
+
+  // Checks if this input is an extension of an uncompleted previous input
+  bool _isInNotFoundCompletionsCache(String normalizedInput) =>
+      _completionNotFoundNormalizedInputs
+          .where((previousInput) => normalizedInput.startsWith(previousInput))
+          .isNotEmpty;
+
   String _normalize(String text) => removeDiacritics(text)
       .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
       .replaceAll(RegExp(r'[^A-Za-z0-9]'), '') // Only alphanumeric
       .toLowerCase();
 
   Future<String?> _getCompletion(String input) async {
-    if (isEmptyWithBlanks(input)) {
-      return null;
-    }
     if (_isLoadingCompletion) {
       return _lastCompletion;
+    }
+    if (isEmptyWithBlanks(input)) {
+      return null;
     }
 
     _isLoadingCompletion = true;
 
     String? completion;
-
-    // Search in not founds cache: TODO separate methods
-
     String normalizedInput = _normalize(input);
 
-    Iterable<String> notFound = _completionNotFoundNormalizedInputs
-        .where((previousInput) => normalizedInput.startsWith(previousInput));
+    if (!_isInNotFoundCompletionsCache(normalizedInput)) {
+      completion = _getFromFoundCompletionsCache(normalizedInput);
 
-    if (notFound.isEmpty) { // Input isn't an extension of wrong previous input
-      // Search in founds cache:
-      completion = _normalizedToCompletion.keys.firstWhereOrNull(
-              (normalizedCompletion) =>
-              normalizedCompletion.startsWith(normalizedInput));
-
-      // Request API:
       if (completion == null) {
         completion = await widget.completionCallBack(input);
-
-        // Cached:
-        if (completion != null) {
-          completion == ''
-              ? _completionNotFoundNormalizedInputs.add(normalizedInput)
-              : _normalizedToCompletion[_normalize(completion)] = completion;
-        }
+        _storeCompletionInCache(completion, normalizedInput);
       }
 
       _lastCompletion = completion;
