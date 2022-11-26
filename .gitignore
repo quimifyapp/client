@@ -45,5 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+/local.properties
 /.env
 /lib/api/env.g.dart

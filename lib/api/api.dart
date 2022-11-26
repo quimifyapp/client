@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io' as io;
+
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -45,14 +46,14 @@ class Api {
       } else {
         // Server bug or invalid URL:
         sendReport(
-          label: 'HTTP código ${httpResponse.statusCode}',
+          label: 'HTTP code ${httpResponse.statusCode}',
           details: url.toString(),
         );
       }
 
       // If reached, it could at least connect to the API:
       _urlToResponse[url.toString()] = response; // New entry
-    } catch (_) {} // No Internet connection, server down or client error.
+    } catch (_) {} // No Internet connection, server down or client error
 
     return response;
   }
