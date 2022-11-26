@@ -25,18 +25,11 @@ class Api {
   static const _clientVersion = 3;
   static const _authority = 'api.quimify.com';
 
-  static final Map _urlToResponse = <String, String>{};
-
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? response;
 
     try {
       Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
-
-      // Looks it up in runtime cache:
-      if (_urlToResponse.containsKey(url.toString())) {
-        return _urlToResponse[url.toString()];
-      }
 
       // It's a new query in this session:
       http.Response httpResponse = await _client.get(url);
@@ -50,9 +43,6 @@ class Api {
           details: url.toString(),
         );
       }
-
-      // If reached, it could at least connect to the API:
-      _urlToResponse[url.toString()] = response; // New entry
     } catch (_) {} // No Internet connection, server down or client error
 
     return response;
