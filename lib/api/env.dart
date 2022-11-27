@@ -3,9 +3,10 @@ import 'package:envied/envied.dart';
 part 'env.g.dart';
 
 // Put variables in .env file:
-  // (Keys and certificates go without BEGIN-END blocks, newlines and '\n')
-  // API_CERTIFICATE="..."
-  // API_PRIVATE_KEY="..."
+  // VARIABLE=value
+  // Keys and certificates go without BEGIN-END blocks, newlines or '\n':
+    // API_CERTIFICATE="..."
+    // API_PRIVATE_KEY="..."
 
 // Set it up:
   // flutter clean
