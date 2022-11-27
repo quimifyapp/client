@@ -4,7 +4,10 @@ import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyPageBar extends StatelessWidget {
-  const QuimifyPageBar({Key? key, required this.title}) : super(key: key);
+  const QuimifyPageBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   final String title;
 
@@ -14,7 +17,7 @@ class QuimifyPageBar extends StatelessWidget {
       bottom: false,
       child: Container(
         padding: const EdgeInsets.only(
-          top: 10,
+          top: 15,
           bottom: 20,
           left: 20,
           right: 20,

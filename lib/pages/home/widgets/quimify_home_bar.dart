@@ -9,7 +9,7 @@ class QuimifyHomeBar extends StatelessWidget {
       bottom: false, // So it's not inside status bar
       child: Container(
         padding: const EdgeInsets.only(
-          top: 10,
+          top: 15,
           bottom: 20,
           left: 20,
         ),

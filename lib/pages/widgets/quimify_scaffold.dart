@@ -2,8 +2,11 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyScaffold extends StatelessWidget {
-  const QuimifyScaffold({Key? key, required this.header, required this.body})
-      : super(key: key);
+  const QuimifyScaffold({
+    Key? key,
+    required this.header,
+    required this.body,
+  }) : super(key: key);
 
   final Widget header, body;
 
