@@ -33,9 +33,11 @@ class QuimifySearchBar extends StatefulWidget {
 }
 
 class _QuimifySearchBarState extends State<QuimifySearchBar> {
+  // Completions stream:
   late String? _lastCompletion;
   late bool _isLoadingCompletion = false;
 
+  // Completions cache:
   final Map<String, String> _normalizedToCompletion = {};
   final Set<String> _completionNotFoundNormalizedInputs = {};
 
@@ -48,9 +50,13 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   }
 
   // Looks for a previous completion that could complete this input too
-  String? _getFromFoundCompletionsCache(String normalizedInput) =>
-      _normalizedToCompletion.keys.firstWhereOrNull((normalizedCompletion) =>
-          normalizedCompletion.startsWith(normalizedInput));
+  String? _getFromFoundCompletionsCache(String normalizedInput) {
+    String? key = _normalizedToCompletion.keys.firstWhereOrNull(
+        (String normalizedCompletion) =>
+            normalizedCompletion.startsWith(normalizedInput));
+
+    return key == null ? null : _normalizedToCompletion[key];
+  }
 
   // Checks if this input is an extension of an uncompleted previous input
   bool _isInNotFoundCompletionsCache(String normalizedInput) =>
