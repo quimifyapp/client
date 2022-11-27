@@ -2,11 +2,16 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in .env file, between " " and without BEGIN-END blocks
+// Put variables in .env file, keys and certificates without BEGIN-END blocks:
+  // API_CERTIFICATE="..."
+  // API_PRIVATE_KEY="..."
 
-// Run: flutter packages pub run build_runner build --delete-conflicting-outputs
+// Set it up:
+  // flutter packages pub run build_runner build --delete-conflicting-outputs
 
-// Usage: Env.apiKey, Env.apiCertificate
+// Usage:
+  // Env.apiPrivateKey
+  // Env.apiCertificate
 
 @Envied(path: '.env')
 abstract class Env {
@@ -14,7 +19,7 @@ abstract class Env {
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
   static final apiCertificate = _Env.apiCertificate;
 
-  @EnviedField(varName: 'API_KEY', obfuscate: true)
-  static final apiKey = _Env.apiKey;
+  @EnviedField(varName: 'API_PRIVATE_KEY', obfuscate: true)
+  static final apiPrivateKey = _Env.apiPrivateKey;
 
 }
