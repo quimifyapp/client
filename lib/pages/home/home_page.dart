@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/api/results/client_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
@@ -14,10 +14,10 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
-    required this.accessResult,
+    required this.clientResult,
   }) : super(key: key);
 
-  final AccessResult? accessResult;
+  final ClientResult? clientResult;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -146,31 +146,31 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showWelcomeMessagePopup() {
-    if (widget.accessResult!.messagePresent) {
-      if (widget.accessResult!.messageLinkPresent!) {
+    if (widget.clientResult!.messagePresent) {
+      if (widget.clientResult!.messageLinkPresent!) {
         QuimifyMessageDialog.linked(
-          title: widget.accessResult!.messageTitle!,
-          details: widget.accessResult!.messageDetails!,
-          linkName: widget.accessResult!.messageLinkName!,
-          link: widget.accessResult!.messageLink!,
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
+          linkName: widget.clientResult!.messageLinkName!,
+          link: widget.clientResult!.messageLink!,
         ).show(context);
       } else {
         QuimifyMessageDialog(
-          title: widget.accessResult!.messageTitle!,
-          details: widget.accessResult!.messageDetails!,
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
         ).show(context);
       }
     }
   }
 
   void _showWelcomePopups() {
-    if (widget.accessResult != null) {
-      if (widget.accessResult!.updateAvailable) {
-        bool optionalUpdate = !widget.accessResult!.updateMandatory!;
+    if (widget.clientResult != null) {
+      if (widget.clientResult!.updateAvailable) {
+        bool optionalUpdate = !widget.clientResult!.updateMandatory!;
 
         QuimifyMessageDialog.linked(
           title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-          details: widget.accessResult!.updateDetails,
+          details: widget.clientResult!.updateDetails,
           linkName: 'Actualizar',
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'

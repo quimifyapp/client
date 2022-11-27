@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/api/results/client_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
@@ -24,6 +24,24 @@ class Api {
   static const _apiVersion = 3;
   static const _clientVersion = 3;
   static const _authority = 'api.quimify.com';
+
+  Future<void> _setUpSecurity() async {
+    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+      '${Env.apiKey}'
+      '\n-----END PRIVATE KEY-----\n',
+    ));
+
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+      '${Env.apiCertificate}'
+      '\n-----END CERTIFICATE-----\n',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
 
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? response;
@@ -50,26 +68,10 @@ class Api {
 
   // Public:
 
-  Future<void> connect() async {
-    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
+  Future<ClientResult?> connect() async {
+    _setUpSecurity();
 
-    context.usePrivateKeyBytes(utf8.encode(
-      '-----BEGIN PRIVATE KEY-----\n'
-      '${Env.apiKey}'
-      '\n-----END PRIVATE KEY-----\n',
-    ));
-
-    context.useCertificateChainBytes(utf8.encode(
-      '-----BEGIN CERTIFICATE-----\n'
-      '${Env.apiCertificate}'
-      '\n-----END CERTIFICATE-----\n',
-    ));
-
-    _client = io.IOClient(io.HttpClient(context: context));
-  }
-
-  Future<AccessResult?> getAccess() async {
-    AccessResult? result;
+    ClientResult? result;
 
     int platform = kIsWeb
         ? 2
@@ -87,7 +89,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = AccessResult.fromJson(response);
+        result = ClientResult.fromJson(response);
       } catch (error) {
         sendReport(
           label: 'Access JSON',

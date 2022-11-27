@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/access_result.dart';
+import 'package:quimify_client/api/results/client_result.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,17 +23,19 @@ Future<void> main() async {
         (await rootBundle.load('assets/ssl/isrg_x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
-  Api().connect();
-  AccessResult? accessResult = await Api().getAccess();
+  ClientResult? client = await Api().connect();
 
   // App launch:
-  runApp(QuimifyApp(accessResult: accessResult));
+  runApp(QuimifyApp(clientResult: client));
 }
 
 class QuimifyApp extends StatelessWidget {
-  const QuimifyApp({Key? key, this.accessResult}) : super(key: key);
+  const QuimifyApp({
+    Key? key,
+    this.clientResult,
+  }) : super(key: key);
 
-  final AccessResult? accessResult;
+  final ClientResult? clientResult;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +153,7 @@ class QuimifyApp extends StatelessWidget {
           ),
         ),
         // App:
-        home: HomePage(accessResult: accessResult),
+        home: HomePage(clientResult: clientResult),
       ),
     );
   }

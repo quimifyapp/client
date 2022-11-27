@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-class AccessResult {
-  final bool updateAvailable, messagePresent;
-  final bool? updateMandatory, messageLinkPresent;
-  final String? updateDetails,
-      messageTitle,
-      messageDetails,
-      messageLinkName,
-      messageLink;
+class ClientResult {
+  final bool updateAvailable;
+  final bool? updateMandatory;
+  final String? updateDetails;
+  final bool messagePresent;
+  final String? messageTitle, messageDetails;
+  final bool? messageLinkPresent;
+  final String? messageLinkName, messageLink;
 
-  AccessResult(
+  ClientResult(
     this.updateAvailable,
     this.updateMandatory,
     this.updateDetails,
@@ -21,10 +21,10 @@ class AccessResult {
     this.messageLink,
   );
 
-  factory AccessResult.fromJson(String body) {
+  factory ClientResult.fromJson(String body) {
     dynamic json = jsonDecode(body);
 
-    return AccessResult(
+    return ClientResult(
       json['updateAvailable'] as bool,
       json['updateNeeded'] as bool?,
       json['updateDetails'] as String?,
