@@ -23,10 +23,11 @@ Future<void> main() async {
         (await rootBundle.load('assets/ssl/isrg_x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
-  ClientResult? client = await Api().connect();
+  Api().connect();
+  ClientResult? clientResult = await Api().getClientResult();
 
   // App launch:
-  runApp(QuimifyApp(clientResult: client));
+  runApp(QuimifyApp(clientResult: clientResult));
 }
 
 class QuimifyApp extends StatelessWidget {

@@ -2,11 +2,14 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in .env file, keys and certificates without BEGIN-END blocks:
+// Put variables in .env file:
+  // (Keys and certificates go without BEGIN-END blocks, newlines and '\n')
   // API_CERTIFICATE="..."
   // API_PRIVATE_KEY="..."
 
 // Set it up:
+  // flutter clean
+  // flutter pub get
   // flutter packages pub run build_runner build --delete-conflicting-outputs
 
 // Usage:

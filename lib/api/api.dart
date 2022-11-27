@@ -25,24 +25,6 @@ class Api {
   static const _clientVersion = 3;
   static const _authority = 'api.quimify.com';
 
-  Future<void> _setUpSecurity() async {
-    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
-
-    context.usePrivateKeyBytes(utf8.encode(
-      '-----BEGIN PRIVATE KEY-----\n'
-      '${Env.apiKey}'
-      '\n-----END PRIVATE KEY-----\n',
-    ));
-
-    context.useCertificateChainBytes(utf8.encode(
-      '-----BEGIN CERTIFICATE-----\n'
-      '${Env.apiCertificate}'
-      '\n-----END CERTIFICATE-----\n',
-    ));
-
-    _client = io.IOClient(io.HttpClient(context: context));
-  }
-
   Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
     String? response;
 
@@ -68,16 +50,32 @@ class Api {
 
   // Public:
 
-  Future<ClientResult?> connect() async {
-    _setUpSecurity();
+  Future<void> connect() async {
+    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
 
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+          '${Env.apiCertificate}'
+          '\n-----END CERTIFICATE-----\n',
+    ));
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+          '${Env.apiPrivateKey}'
+          '\n-----END PRIVATE KEY-----\n',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
+
+  Future<ClientResult?> getClientResult() async {
     ClientResult? result;
 
     int platform = kIsWeb
         ? 2
         : io.Platform.isIOS
-            ? 1
-            : 0;
+        ? 1
+        : 0;
 
     String? response = await _getResponse(
       'client/access-data',
