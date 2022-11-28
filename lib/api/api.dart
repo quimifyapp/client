@@ -25,11 +25,11 @@ class Api {
   static const _clientVersion = 4;
   static const _authority = 'api.quimify.com';
 
-  Future<String?> _getResponse(String path, Map<String, dynamic> params) async {
+  Future<String?> _getBody(String path, Map<String, dynamic> parameters) async {
     String? response;
 
     try {
-      Uri url = Uri.https(_authority, 'v$_apiVersion/$path', params);
+      Uri url = Uri.https(_authority, 'v$_apiVersion/$path', parameters);
 
       // It's a new query in this session:
       http.Response httpResponse = await _client.get(url);
@@ -55,14 +55,14 @@ class Api {
 
     context.useCertificateChainBytes(utf8.encode(
       '-----BEGIN CERTIFICATE-----\n'
-          '${Env.apiCertificate}'
-          '\n-----END CERTIFICATE-----\n',
+      '${Env.apiCertificate}'
+      '\n-----END CERTIFICATE-----\n',
     ));
 
     context.usePrivateKeyBytes(utf8.encode(
       '-----BEGIN PRIVATE KEY-----\n'
-          '${Env.apiPrivateKey}'
-          '\n-----END PRIVATE KEY-----\n',
+      '${Env.apiPrivateKey}'
+      '\n-----END PRIVATE KEY-----\n',
     ));
 
     _client = io.IOClient(io.HttpClient(context: context));
@@ -74,10 +74,10 @@ class Api {
     int platform = kIsWeb
         ? 2
         : io.Platform.isIOS
-        ? 1
-        : 0;
+            ? 1
+            : 0;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'client/access-data',
       {
         'version': _clientVersion.toString(),
@@ -114,12 +114,12 @@ class Api {
   }
 
   Future<String?> getInorganicCompletion(String input) =>
-      _getResponse('inorganic/completion', {'input': input});
+      _getBody('inorganic/completion', {'input': input});
 
   Future<InorganicResult?> getInorganicFromCompletion(String completion) async {
     InorganicResult? result;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'inorganic/from-completion',
       {
         'completion': completion,
@@ -143,7 +143,7 @@ class Api {
   Future<InorganicResult?> getInorganic(String input, bool picture) async {
     InorganicResult? result;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'inorganic',
       {
         'input': input,
@@ -168,7 +168,7 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'molecular-mass',
       {
         'formula': formula,
@@ -192,7 +192,7 @@ class Api {
   Future<OrganicResult?> getOrganicFromName(String name, bool picture) async {
     OrganicResult? result;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'organic/from-name',
       {
         'name': name,
@@ -217,7 +217,7 @@ class Api {
   Future<OrganicResult?> getOrganicFromStructure(List<int> sequence) async {
     OrganicResult? result;
 
-    String? response = await _getResponse(
+    String? response = await _getBody(
       'organic/from-structure',
       {
         'structure-sequence': sequence.join(','),
