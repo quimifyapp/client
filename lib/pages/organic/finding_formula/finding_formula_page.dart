@@ -36,12 +36,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   Future<void> _search(String name, bool picture) async {
     if (!isEmptyWithBlanks(name)) {
-      startLoading(context);
+      startQuimifyLoading(context);
 
       OrganicResult? result =
           await Api().getOrganicFromName(toDigits(name), picture);
 
-      stopLoading();
+      stopqQuimifyLoading();
 
       if (result != null) {
         if (result.present) {
@@ -97,7 +97,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        stopLoading();
+        stopqQuimifyLoading();
         return true;
       },
       child: GestureDetector(

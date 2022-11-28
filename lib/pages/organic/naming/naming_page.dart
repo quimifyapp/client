@@ -54,12 +54,12 @@ class _NamingPageState extends State<NamingPage> {
   }
 
   Future<OrganicResult?> _search() async {
-    startLoading(context);
+    startQuimifyLoading(context);
 
     OrganicResult? result =
         await Api().getOrganicFromStructure(_sequenceStack.last);
 
-    stopLoading();
+    stopqQuimifyLoading();
 
     if (result != null) {
       if (!result.present) {
@@ -345,7 +345,7 @@ class _NamingPageState extends State<NamingPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        stopLoading();
+        stopqQuimifyLoading();
         return true;
       },
       child: QuimifyScaffold(

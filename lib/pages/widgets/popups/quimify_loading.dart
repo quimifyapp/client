@@ -2,7 +2,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-void startLoading(context) {
+void startQuimifyLoading(BuildContext context) {
   // Popup customization:
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.ring
@@ -20,6 +20,6 @@ void startLoading(context) {
   EasyLoading.show();
 }
 
-void stopLoading() {
+void stopqQuimifyLoading() {
   EasyLoading.dismiss();
 }

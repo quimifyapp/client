@@ -47,7 +47,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
       Api().getInorganicCompletion(toDigits(input));
 
   void _processResult(String query, InorganicResult? inorganicResult) {
-    stopLoading();
+    stopqQuimifyLoading();
 
     if (inorganicResult != null) {
       if (inorganicResult.present) {
@@ -92,7 +92,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
       return;
     }
 
-    startLoading(context);
+    startQuimifyLoading(context);
 
     InorganicResult? inorganicResult =
         await Api().getInorganicFromCompletion(completion);
@@ -105,7 +105,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
       return;
     }
 
-    startLoading(context);
+    startQuimifyLoading(context);
 
     InorganicResult? inorganicResult =
         await Api().getInorganic(toDigits(input), photo);
@@ -128,7 +128,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        stopLoading();
+        stopqQuimifyLoading();
         return true;
       },
       child: GestureDetector(
