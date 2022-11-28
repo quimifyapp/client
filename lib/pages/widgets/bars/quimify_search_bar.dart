@@ -38,8 +38,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   late bool _isLoadingCompletion = false;
 
   // Completions cache:
-  final Map<String, String> _normalizedToCompletion = {};
-  final Set<String> _completionNotFoundNormalizedInputs = {};
+  static final Map<String, String> _normalizedToCompletion = {};
+  static final Set<String> _completionNotFoundNormalizedInputs = {};
 
   void _storeCompletionInCache(String? completion, String normalizedInput) {
     if (completion != null) {
