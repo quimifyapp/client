@@ -30,7 +30,7 @@ class QuimifyPageBar extends StatelessWidget {
                   Theme.of(context).colorScheme.onTertiaryContainer,
               onPressed: () {
                 Navigator.of(context).pop();
-                stopqQuimifyLoading();
+                stopQuimifyLoading();
               },
               icon: Icon(
                 Icons.arrow_back,

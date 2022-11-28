@@ -5,21 +5,21 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 void startQuimifyLoading(BuildContext context) {
   // Popup customization:
   EasyLoading.instance
-    ..indicatorType = EasyLoadingIndicatorType.ring
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = Theme.of(context).colorScheme.surface
+    ..dismissOnTap = false
+    ..userInteractions = true
+    ..indicatorSize = 25
+    ..radius = 13
+    ..indicatorType = EasyLoadingIndicatorType.ring
     ..indicatorColor = quimifyTeal
     ..maskType = EasyLoadingMaskType.custom
     ..maskColor = Theme.of(context).colorScheme.shadow
-    ..indicatorSize = 25
-    ..radius = 13
-    ..userInteractions = true
-    ..dismissOnTap = false
-    ..textColor = Colors.transparent; // No nullable
+    ..textColor = Colors.transparent // No nullable
+    ..backgroundColor = Theme.of(context).colorScheme.surface;
 
   EasyLoading.show();
 }
 
-void stopqQuimifyLoading() {
+void stopQuimifyLoading() {
   EasyLoading.dismiss();
 }

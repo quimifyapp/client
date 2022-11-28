@@ -47,7 +47,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
       Api().getInorganicCompletion(toDigits(input));
 
   void _processResult(String query, InorganicResult? inorganicResult) {
-    stopqQuimifyLoading();
+    stopQuimifyLoading();
 
     if (inorganicResult != null) {
       if (inorganicResult.present) {
@@ -128,7 +128,7 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        stopqQuimifyLoading();
+        stopQuimifyLoading();
         return true;
       },
       child: GestureDetector(

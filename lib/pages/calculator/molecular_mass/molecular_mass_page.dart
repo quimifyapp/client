@@ -47,7 +47,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
 
-    stopqQuimifyLoading();
+    stopQuimifyLoading();
 
     if (result != null) {
       if (result.present) {
@@ -152,7 +152,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        stopqQuimifyLoading();
+        stopQuimifyLoading();
         return true;
       },
       child: GestureDetector(
