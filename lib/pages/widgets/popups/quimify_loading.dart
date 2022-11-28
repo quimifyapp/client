@@ -12,9 +12,9 @@ void startQuimifyLoading(BuildContext context) {
     ..radius = 13
     ..indicatorType = EasyLoadingIndicatorType.ring
     ..indicatorColor = quimifyTeal
+    ..textColor = Colors.transparent // Can't be null
     ..maskType = EasyLoadingMaskType.custom
     ..maskColor = Theme.of(context).colorScheme.shadow
-    ..textColor = Colors.transparent // No nullable
     ..backgroundColor = Theme.of(context).colorScheme.surface;
 
   EasyLoading.show();
