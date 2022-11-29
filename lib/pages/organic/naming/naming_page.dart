@@ -92,8 +92,6 @@ class _NamingPageState extends State<NamingPage> {
       _search().then(
         (organicResult) {
           if (organicResult != null) {
-            setState(_reset);
-
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
@@ -113,7 +111,7 @@ class _NamingPageState extends State<NamingPage> {
                           ? NetworkImage(organicResult.url2D!)
                           : null,
                       quimifyReportDialog: QuimifyReportDialog(
-                        reportLabel: 'Cadena abierta, búsqueda de '
+                        reportLabel: 'Cadena abierta, resultado de '
                             '${_sequenceStack.last.toString()}',
                         details: 'Resultado:\n"${organicResult.name!}"',
                       ),
@@ -121,6 +119,8 @@ class _NamingPageState extends State<NamingPage> {
                   );
                 },
               ),
+            ).then(
+              (_) => setState(_reset),
             );
           }
         },
