@@ -37,7 +37,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
     ).show(context);
   }
 
-  void _pressedShareButton() => quimifyComingSoonDialog.show(context);
+  void _pressedShareButton() => quimifyComingSoonDialog.showIn(context);
 
   void _onTap() => setState(() => _isCollapsed = !_isCollapsed);
 

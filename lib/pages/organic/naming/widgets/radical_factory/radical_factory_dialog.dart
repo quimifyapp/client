@@ -51,7 +51,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
         title: 'No existe',
         details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}no puede '
             'tener menos de ${_isIso ? 'tres carbonos' : 'un carbono'}.',
-      ).show(context);
+      ).showIn(context);
     }
   }
 

@@ -31,7 +31,7 @@ class QuimifyReportDialog extends StatelessWidget {
     const QuimifyMessageDialog(
       title: 'Gracias por tu ayuda',
       details: 'Seguiremos mejorando.',
-    ).show(context);
+    ).showIn(context);
   }
 
   void _report(String details, BuildContext context) {

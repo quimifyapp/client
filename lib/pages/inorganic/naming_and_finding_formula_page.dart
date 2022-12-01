@@ -74,7 +74,7 @@ class _NamingAndFindingFormulaPageState
           details: 'No se ha encontrado:\n'
               '"${formatInorganicFormulaOrName(query)}"',
           reportLabel: 'Formulación inorgánica, búsqueda de "$query"',
-        ).show(context);
+        ).showIn(context);
       }
     } else {
       // Client already reported an error in this case
@@ -82,9 +82,9 @@ class _NamingAndFindingFormulaPageState
         if (hasInternetConnection) {
           const QuimifyMessageDialog(
             title: 'Sin resultado',
-          ).show(context);
+          ).showIn(context);
         } else {
-          quimifyNoInternetDialog.show(context);
+          quimifyNoInternetDialog.showIn(context);
         }
       });
     }

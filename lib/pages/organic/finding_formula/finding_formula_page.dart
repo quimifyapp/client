@@ -64,7 +64,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
             reportLabel: 'Formular orgánico, búsqueda de "$name"',
-          ).show(context);
+          ).showIn(context);
         }
       } else {
         // Client already reported an error in this case
@@ -73,9 +73,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).show(context);
+            ).showIn(context);
           } else {
-            quimifyNoInternetDialog.show(context);
+            quimifyNoInternetDialog.showIn(context);
           }
         });
       }

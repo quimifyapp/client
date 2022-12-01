@@ -153,12 +153,12 @@ class _HomePageState extends State<HomePage> {
           details: widget.clientResult!.messageDetails!,
           linkName: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
-        ).show(context);
+        ).showIn(context);
       } else {
         QuimifyMessageDialog(
           title: widget.clientResult!.messageTitle!,
           details: widget.clientResult!.messageDetails!,
-        ).show(context);
+        ).showIn(context);
       }
     }
   }
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
               : 'https://apps.apple.com/es/app/quimify/id6443752619',
           closable: optionalUpdate,
-        ).show(context).then((value) => _showWelcomeMessagePopup());
+        ).showIn(context).then((value) => _showWelcomeMessagePopup());
       } else {
         _showWelcomeMessagePopup();
       }

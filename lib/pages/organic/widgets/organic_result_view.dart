@@ -26,7 +26,7 @@ class OrganicResultView extends StatelessWidget {
       quimifyReportDialog.show(context);
 
   void _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.show(context);
+      quimifyComingSoonDialog.showIn(context);
 
   @override
   Widget build(BuildContext context) {

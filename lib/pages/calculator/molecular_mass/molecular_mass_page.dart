@@ -64,7 +64,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportLabel: 'Masa molecular, búsqueda de "$input"',
-        ).show(context);
+        ).showIn(context);
       }
     } else {
       if (!mounted) return; // For security reasons
@@ -73,9 +73,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).show(context);
+            ).showIn(context);
           } else {
-            quimifyNoInternetDialog.show(context);
+            quimifyNoInternetDialog.showIn(context);
           }
         },
       );

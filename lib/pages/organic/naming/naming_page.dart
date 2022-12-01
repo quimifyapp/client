@@ -64,7 +64,7 @@ class _NamingPageState extends State<NamingPage> {
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
-        const QuimifyMessageDialog(title: 'Sin resultado').show(context);
+        const QuimifyMessageDialog(title: 'Sin resultado').showIn(context);
 
         return null;
       }
@@ -76,9 +76,9 @@ class _NamingPageState extends State<NamingPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).show(context);
+            ).showIn(context);
           } else {
-            quimifyNoInternetDialog.show(context);
+            quimifyNoInternetDialog.showIn(context);
           }
         },
       );
@@ -152,14 +152,14 @@ class _NamingPageState extends State<NamingPage> {
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
             'pueden compartir un maximo de tres.\n\n'
             'Prueba a enlazar un sustiuyente primero.',
-      ).show(context);
+      ).showIn(context);
     } else if (_openChainStack.last.getFreeBonds() == 0) {
       const QuimifyMessageDialog(
         title: 'Cadena completa',
         details: 'Para enlazar un carbono es necesario compartir al menos un '
             'enlace de los cuatro que tiene cada carbono.\n\n'
             'Prueba a deshacer el último cambio.',
-      ).show(context);
+      ).showIn(context);
     } else {}
   }
 
@@ -188,7 +188,7 @@ class _NamingPageState extends State<NamingPage> {
         details: 'Para enlazar un hidrógeno más es necesario compartir un '
             'enlace, pero este carbono ya ha utilizado sus cuatro.\n\n'
             'Prueba a deshacer el último cambio.',
-      ).show(context);
+      ).showIn(context);
     }
   }
 
