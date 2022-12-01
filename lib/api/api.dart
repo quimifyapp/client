@@ -40,7 +40,7 @@ class Api {
         // Server bug or invalid URL:
         sendReport(
           label: 'HTTP code ${httpResponse.statusCode}',
-          details: url.toString(),
+          userMessage: url.toString(),
         );
       }
     } catch (_) {} // No Internet connection, server down or client error
@@ -91,7 +91,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Access JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }
@@ -99,14 +99,14 @@ class Api {
     return result;
   }
 
-  Future<void> sendReport({required String label, String? details}) async {
+  Future<void> sendReport({required String label, String? userMessage}) async {
     Uri url = Uri.https(
       _authority,
       'v$_apiVersion/report',
       {
         'client-version': _clientVersion.toString(),
         'title': label,
-        'details': details,
+        'details': userMessage,
       },
     );
 
@@ -132,7 +132,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Inorganic from completion JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }
@@ -157,7 +157,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Inorganic JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }
@@ -181,7 +181,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Molecular mass JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }
@@ -206,7 +206,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Organic from name JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }
@@ -230,7 +230,7 @@ class Api {
       } catch (error) {
         sendReport(
           label: 'Organic from structure JSON',
-          details: error.toString(),
+          userMessage: error.toString(),
         );
       }
     }

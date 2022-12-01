@@ -32,7 +32,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
     QuimifyReportDialog(
       details: 'Resultado de:\n'
           '"${formatInorganicFormulaOrName(widget.query)}"',
-      reportLabel: 'Formulación inorgánica, resultado de "${widget.query}": '
+      label: 'Formulación inorgánica, resultado de "${widget.query}": '
           '(${widget.inorganicResult.formula})',
     ).show(context);
   }

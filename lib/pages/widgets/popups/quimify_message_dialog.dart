@@ -70,7 +70,7 @@ class QuimifyMessageDialog extends StatelessWidget {
 
     QuimifyReportDialog(
       details: details,
-      reportLabel: reportLabel!,
+      label: reportLabel!,
     ).show(context);
   }
 

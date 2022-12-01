@@ -135,7 +135,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
             quimifyReportDialog: QuimifyReportDialog(
-              reportLabel: 'Formular orgánico, resultado de "${_result.name!}"',
+              label: 'Formular orgánico, resultado de "${_result.name!}"',
               details: 'Resultado de:\n"${_result.name!}"',
             ),
           ),

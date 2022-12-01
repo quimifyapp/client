@@ -113,7 +113,7 @@ class _NamingPageState extends State<NamingPage> {
                       quimifyReportDialog: QuimifyReportDialog(
                         details: 'Resultado de:\n"'
                             '${formatStructure(organicResult.structure!)}"',
-                        reportLabel: 'Cadena abierta, resultado de '
+                        label: 'Cadena abierta, resultado de '
                             '${_sequenceStack.last.toString()}',
                       ),
                     ),
