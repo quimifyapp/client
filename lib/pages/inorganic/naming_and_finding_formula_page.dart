@@ -19,7 +19,8 @@ class NamingAndFindingFormulaPage extends StatefulWidget {
       _NamingAndFindingFormulaPageState();
 }
 
-class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPage> {
+class _NamingAndFindingFormulaPageState
+    extends State<NamingAndFindingFormulaPage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -30,16 +31,17 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
     InorganicResultView(
       query: 'NaCl',
       inorganicResult: InorganicResult(
-          true,
-          'NaCl',
-          'cloruro de sodio',
-          'monocloruro de sodio',
-          'cloruro sódico',
-          null,
-          '58.35',
-          '2.16',
-          '1074.15',
-          '1686.15'),
+        true,
+        'NaCl',
+        'cloruro de sodio',
+        'monocloruro de sodio',
+        'cloruro sódico',
+        null,
+        '58.35',
+        '2.16',
+        '1074.15',
+        '1686.15',
+      ),
     ),
   ];
 
@@ -69,7 +71,8 @@ class _NamingAndFindingFormulaPageState extends State<NamingAndFindingFormulaPag
       } else {
         QuimifyMessageDialog.reportable(
           title: 'Sin resultado',
-          details: 'No se ha encontrado:\n"$query"',
+          details: 'No se ha encontrado:\n'
+              '"${formatInorganicFormulaOrName(query)}"',
           reportLabel: 'Formulación inorgánica, búsqueda de "$query"',
         ).show(context);
       }

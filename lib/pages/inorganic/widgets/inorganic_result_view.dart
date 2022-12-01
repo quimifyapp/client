@@ -30,7 +30,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   void _pressedReportButton() {
     QuimifyReportDialog(
-      details: 'Resultado de:\n"${widget.query}"',
+      details: 'Resultado de:\n'
+          '"${formatInorganicFormulaOrName(widget.query)}"',
       reportLabel: 'Formulación inorgánica, resultado de "${widget.query}": '
           '(${widget.inorganicResult.formula})',
     ).show(context);
@@ -71,10 +72,10 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 ),
                 Expanded(
                   child: AutoSizeText(
+                    formatInorganicFormulaOrName(widget.query),
                     maxLines: 1,
                     minFontSize: 12,
                     stepGranularity: 0.1,
-                    widget.query,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 14,
@@ -103,8 +104,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  formatInorganicFormulaOrName(
-                      widget.inorganicResult.formula!),
+                  formatInorganicFormulaOrName(widget.inorganicResult.formula!),
                   style: const TextStyle(
                     color: quimifyTeal,
                     fontSize: 28,
