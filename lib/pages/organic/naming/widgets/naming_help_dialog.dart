@@ -7,7 +7,12 @@ import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
-  const NamingHelpDialog({Key? key}) : super(key: key);
+  const NamingHelpDialog({
+    Key? key,
+    required this.buttonWidth,
+  }) : super(key: key);
+
+  final double buttonWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -121,12 +126,10 @@ class NamingHelpDialog extends StatelessWidget {
         ],
         'Enlazar carbono': [
           Center(
-            child: SizedBox(
-              width: 100,
-              child: AddCarbonButton(
-                enabled: true,
-                onPressed: () {},
-              ),
+            child: AddCarbonButton(
+              width: buttonWidth,
+              enabled: true,
+              onPressed: () {},
             ),
           ),
           const Center(
@@ -138,8 +141,8 @@ class NamingHelpDialog extends StatelessWidget {
         'Hidrogenar': [
           Center(
             child: SizedBox(
-              width: 100,
               child: HydrogenateButton(
+                width: buttonWidth,
                 enabled: true,
                 onPressed: () {},
               ),
@@ -154,12 +157,10 @@ class NamingHelpDialog extends StatelessWidget {
         ],
         'Deshacer': [
           Center(
-            child: SizedBox(
-              width: 100,
-              child: UndoButton(
-                enabled: true,
-                onPressed: () {},
-              ),
+            child: UndoButton(
+              width: buttonWidth,
+              enabled: true,
+              onPressed: () {},
             ),
           ),
           const Center(

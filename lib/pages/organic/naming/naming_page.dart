@@ -41,6 +41,10 @@ class _NamingPageState extends State<NamingPage> {
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
 
+  static const double _buttonCount = 3;
+  static const double _horizontalPadding = 20;
+  static const double _buttonSeparatorWidth = 10;
+
   void _reset() {
     _openChainStack = [Simple()];
     _sequenceStack = [[]];
@@ -344,6 +348,11 @@ class _NamingPageState extends State<NamingPage> {
       ),
     };
 
+    double buttonWidth = MediaQuery.of(context).size.width; // Screen width
+    buttonWidth -= (_buttonCount - 1) * _buttonSeparatorWidth; // Without breaks
+    buttonWidth -= 2 * _horizontalPadding; // Without horizontal padding
+    buttonWidth /= _buttonCount; // Per button
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -354,8 +363,8 @@ class _NamingPageState extends State<NamingPage> {
         body: Padding(
           padding: const EdgeInsets.only(
             top: 20,
-            left: 20,
-            right: 20,
+            left: _horizontalPadding,
+            right: _horizontalPadding,
           ),
           child: Column(
             children: [
@@ -368,21 +377,26 @@ class _NamingPageState extends State<NamingPage> {
                 alignment: Alignment.center,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  // So it follows while typing:
-                  reverse: true,
-                  // To remove Text widget default top padding:
-                  padding: const EdgeInsets.only(top: 13, bottom: 17),
+                  reverse: true, // So it follows while typing
+                  // To remove Text widget's default top padding:
+                  padding: const EdgeInsets.only(
+                    top: 15 - 2,
+                    bottom: 15 + 2,
+                  ),
                   child: Row(
                     children: [
                       const SizedBox(width: 25),
                       Text(
                         formatStructure(_openChainStack.last.getStructure()),
                         style: const TextStyle(
-                          color: quimifyTeal,
-                          fontSize: 28,
                           fontFamily: 'CeraProBoldCustom',
+                          fontSize: 28,
+                          color: quimifyTeal,
                         ),
-                        strutStyle: const StrutStyle(fontSize: 28, height: 1.4),
+                        strutStyle: const StrutStyle(
+                          fontSize: 28,
+                          height: 1.4,
+                        ),
                       ),
                       const SizedBox(width: 25),
                     ],
@@ -393,34 +407,51 @@ class _NamingPageState extends State<NamingPage> {
               // Buttons:
               Row(
                 children: [
-                  Expanded(
-                    child: AddCarbonButton(
+                  UndoButton(
+                    width: buttonWidth,
+                    onPressed: _undo,
+                    enabled: _canUndo(),
+                  ),
+                  const SizedBox(width: _buttonSeparatorWidth),
+                  if (!_done) ...[
+                    AddCarbonButton(
+                      width: buttonWidth,
                       enabled: _canBondCarbon(),
                       onPressed: _bondCarbon,
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: HydrogenateButton(
+                    const SizedBox(width: _buttonSeparatorWidth),
+                    HydrogenateButton(
+                      width: buttonWidth,
                       onPressed: _hydrogenate,
                       enabled: _canHydrogenate(),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: UndoButton(
-                      onPressed: _undo,
-                      enabled: _canUndo(),
+                  ],
+                  if (_done) // 'Solve it' button
+                    Expanded(
+                      child: QuimifyButton.gradient(
+                        height: 40,
+                        onPressed: _pressedButton,
+                        gradient: quimifyGradient,
+                        child: Text(
+                          'Resolver',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
                 ],
               ),
               const SizedBox(height: 20),
               // Substituents:
               if (!_done) ...[
-                const QuimifySectionTitle(
+                QuimifySectionTitle(
                   title: 'Sustituyentes',
-                  dialog: NamingHelpDialog(),
+                  dialog: NamingHelpDialog(
+                    buttonWidth: buttonWidth,
+                  ),
                 ),
                 const SizedBox(height: 15),
                 Expanded(
@@ -447,22 +478,6 @@ class _NamingPageState extends State<NamingPage> {
                               .toList(),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
-              // 'Solve it' button:
-              if (_done) ...[
-                QuimifyButton.gradient(
-                  height: 50,
-                  gradient: quimifyGradient,
-                  onPressed: _pressedButton,
-                  child: Text(
-                    'Resolver',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

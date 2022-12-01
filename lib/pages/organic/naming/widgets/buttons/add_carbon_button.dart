@@ -5,10 +5,12 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 class AddCarbonButton extends StatelessWidget {
   const AddCarbonButton({
     Key? key,
+    required this.width,
     required this.enabled,
     required this.onPressed,
   }) : super(key: key);
 
+  final double width;
   final bool enabled;
   final VoidCallback onPressed;
 
@@ -16,9 +18,10 @@ class AddCarbonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifyButton(
       height: 40,
-      backgroundColor: quimifyTeal,
+      width: width,
       enabled: enabled,
       onPressed: onPressed,
+      backgroundColor: quimifyTeal,
       child: Image.asset(
         'assets/images/icons/bond-carbon.png',
         color: Theme.of(context).colorScheme.onPrimary,
