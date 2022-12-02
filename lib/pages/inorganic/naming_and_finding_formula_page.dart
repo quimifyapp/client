@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
@@ -27,7 +29,7 @@ class _NamingAndFindingFormulaPageState
 
   String _labelText = 'NaCl, óxido de hierro...';
 
-  final List<InorganicResultView> _results = [
+  final List<InorganicResultView> _resultViews = [
     InorganicResultView(
       query: 'NaCl',
       inorganicResult: InorganicResult(
@@ -45,8 +47,55 @@ class _NamingAndFindingFormulaPageState
     ),
   ];
 
-  Future<String?> _getCompletion(String input) =>
-      Api().getInorganicCompletion(input);
+  // Completions cache:
+  static final Map<String, String> _normalizedToCompletion = {};
+  static final Set<String> _completionNotFoundNormalizedInputs = {};
+
+  void _storeCompletionInCache(String? completion, String normalizedInput) {
+    if (completion != null) {
+      completion == ''
+          ? _completionNotFoundNormalizedInputs.add(normalizedInput)
+          : _normalizedToCompletion[_normalize(completion)] = completion;
+    }
+  }
+
+  // Looks for a previous completion that could complete this input too
+  String? _getFromFoundCompletionsCache(String normalizedInput) {
+    String? key = _normalizedToCompletion.keys.firstWhereOrNull(
+            (String normalizedCompletion) =>
+            normalizedCompletion.startsWith(normalizedInput));
+
+    return key != null ? _normalizedToCompletion[key] : null;
+  }
+
+  // Checks if this input is an extension of an uncompleted previous input
+  bool _isInNotFoundCompletionsCache(String normalizedInput) =>
+      _completionNotFoundNormalizedInputs
+          .where((previousInput) => normalizedInput.startsWith(previousInput))
+          .isNotEmpty;
+
+  String _normalize(String text) => removeDiacritics(text)
+      .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
+      .replaceAll(RegExp(r'[^A-Za-z0-9]'), '') // Only alphanumeric
+      .toLowerCase();
+
+  Future<String?> _getCompletion(String input) async {
+    String? completion;
+
+    String inputWithoutSubscripts = toDigits(input);
+    String normalizedInput = _normalize(inputWithoutSubscripts);
+
+    if (!_isInNotFoundCompletionsCache(normalizedInput)) {
+      completion = _getFromFoundCompletionsCache(normalizedInput);
+
+      if (completion == null) {
+        completion = await Api().getInorganicCompletion(inputWithoutSubscripts);
+        _storeCompletionInCache(completion, normalizedInput);
+      }
+    }
+
+    return completion;
+  }
 
   void _processResult(String query, InorganicResult? inorganicResult) {
     stopQuimifyLoading();
@@ -54,7 +103,7 @@ class _NamingAndFindingFormulaPageState
     if (inorganicResult != null) {
       if (inorganicResult.present) {
         setState(
-          () => _results.add(
+          () => _resultViews.add(
             InorganicResultView(
               query: query,
               inorganicResult: inorganicResult,
@@ -158,7 +207,7 @@ class _NamingAndFindingFormulaPageState
             child: Wrap(
               verticalDirection: VerticalDirection.up,
               runSpacing: 25,
-              children: _results,
+              children: _resultViews,
             ),
           ),
         ),

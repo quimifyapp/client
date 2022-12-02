@@ -5,8 +5,6 @@ import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.d
 import 'package:quimify_client/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:diacritic/diacritic.dart';
-import 'package:collection/collection.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
@@ -37,64 +35,20 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
   late String? _lastCompletion;
   late bool _isLoadingCompletion = false;
 
-  // Completions cache:
-  static final Map<String, String> _normalizedToCompletion = {};
-  static final Set<String> _completionNotFoundNormalizedInputs = {};
-
-  void _storeCompletionInCache(String? completion, String normalizedInput) {
-    if (completion != null) {
-      completion == ''
-          ? _completionNotFoundNormalizedInputs.add(normalizedInput)
-          : _normalizedToCompletion[_normalize(completion)] = completion;
-    }
-  }
-
-  // Looks for a previous completion that could complete this input too
-  String? _getFromFoundCompletionsCache(String normalizedInput) {
-    String? key = _normalizedToCompletion.keys.firstWhereOrNull(
-        (String normalizedCompletion) =>
-            normalizedCompletion.startsWith(normalizedInput));
-
-    return key == null ? null : _normalizedToCompletion[key];
-  }
-
-  // Checks if this input is an extension of an uncompleted previous input
-  bool _isInNotFoundCompletionsCache(String normalizedInput) =>
-      _completionNotFoundNormalizedInputs
-          .where((previousInput) => normalizedInput.startsWith(previousInput))
-          .isNotEmpty;
-
-  String _normalize(String text) => removeDiacritics(text)
-      .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
-      .replaceAll(RegExp(r'[^A-Za-z0-9]'), '') // Only alphanumeric
-      .toLowerCase();
-
   Future<String?> _getCompletion(String input) async {
-    if (_isLoadingCompletion) {
-      return _lastCompletion;
-    }
     if (isEmptyWithBlanks(input)) {
       return null;
+    } else if (_isLoadingCompletion) {
+      return _lastCompletion;
     }
-
-    _isLoadingCompletion = true;
 
     String? completion;
-    String inputWithoutSubscripts = toDigits(input);
-    String normalizedInput = _normalize(inputWithoutSubscripts);
 
-    if (!_isInNotFoundCompletionsCache(normalizedInput)) {
-      completion = _getFromFoundCompletionsCache(normalizedInput);
-
-      if (completion == null) {
-        completion = await widget.completionCallBack(inputWithoutSubscripts);
-        _storeCompletionInCache(completion, normalizedInput);
-      }
-
-      _lastCompletion = completion;
-    }
-
+    _isLoadingCompletion = true;
+    completion = await widget.completionCallBack(input);
     _isLoadingCompletion = false;
+
+    _lastCompletion = completion;
 
     return completion;
   }
