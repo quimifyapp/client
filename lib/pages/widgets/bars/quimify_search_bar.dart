@@ -80,13 +80,14 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
     _isLoadingCompletion = true;
 
     String? completion;
-    String normalizedInput = _normalize(input);
+    String inputWithoutSubscripts = toDigits(input);
+    String normalizedInput = _normalize(inputWithoutSubscripts);
 
     if (!_isInNotFoundCompletionsCache(normalizedInput)) {
       completion = _getFromFoundCompletionsCache(normalizedInput);
 
       if (completion == null) {
-        completion = await widget.completionCallBack(input);
+        completion = await widget.completionCallBack(inputWithoutSubscripts);
         _storeCompletionInCache(completion, normalizedInput);
       }
 

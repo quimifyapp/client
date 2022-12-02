@@ -46,7 +46,7 @@ class _NamingAndFindingFormulaPageState
   ];
 
   Future<String?> _getCompletion(String input) =>
-      Api().getInorganicCompletion(toDigits(input));
+      Api().getInorganicCompletion(input);
 
   void _processResult(String query, InorganicResult? inorganicResult) {
     stopQuimifyLoading();
