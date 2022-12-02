@@ -1,8 +1,7 @@
+import 'package:quimify_client/api/organic/components/carbon.dart';
 import 'package:quimify_client/api/organic/components/functional_group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/organic.dart';
-
-import 'carbon.dart';
 
 class Chain extends Organic {
   Chain({required int previousBonds}) {
