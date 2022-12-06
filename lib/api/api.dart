@@ -10,7 +10,6 @@ import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 
-
 class Api {
   static final Api _singleton = Api._internal();
 

@@ -9,7 +9,7 @@ class Ether extends OpenChain {
     _firstChain = firstChain.getChain(); // [R - O] - R'
 
     if (_firstChain.isDone()) {
-      _startSecondChain(); //  // R - O [- R']
+      _startSecondChain(); // R - O [- R']
     } else {
       _secondChain = null;
       _currentChain = _firstChain;
