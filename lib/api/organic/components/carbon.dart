@@ -1,15 +1,15 @@
-import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/organic.dart';
 
 class Carbon extends Organic {
   Carbon(int previousBonds) {
-    _freeBonds = 4 - previousBonds;
+    _freeBondCount = 4 - previousBonds;
     _substituents = [];
   }
 
-  Carbon.from(Carbon otherCarbon) {
-    _freeBonds = otherCarbon._freeBonds;
+  Carbon.copyFrom(Carbon otherCarbon) {
+    _freeBondCount = otherCarbon._freeBondCount;
 
     _substituents = [];
     for (Substituent otherSubstituent in otherCarbon._substituents) {
@@ -17,19 +17,21 @@ class Carbon extends Organic {
     }
   }
 
-  late int _freeBonds;
+  late int _freeBondCount;
   late List<Substituent> _substituents;
+
+  // Interface:
+
+  int getFreeBondCount() => _freeBondCount;
 
   void bond(Substituent substituent) {
     _substituents.add(substituent);
-    _freeBonds -= substituent.getBonds();
+    _freeBondCount -= substituent.getBonds();
   }
 
-  void bondCarbon() => _freeBonds--;
+  void useBond() => _freeBondCount--;
 
-  int getFreeBonds() => _freeBonds;
-
-  List<Substituent> getUniqueSubstituents() {
+  List<Substituent> getUniqueSubstituents() { // TODO set?
     List<Substituent> uniqueSubstituents = [];
 
     for (Substituent substituent in _substituents) {
@@ -50,28 +52,24 @@ class Carbon extends Organic {
     return uniqueSubstituents;
   }
 
-  bool hasFunctionalGroup(FunctionalGroup function) {
-    switch (function) {
-      case FunctionalGroup.alkene:
-        return _freeBonds == 1; // As in -CO=
-      case FunctionalGroup.alkyne:
-        return _freeBonds == 2; // As in -CH≡
+  bool isBondedTo(Group group) {
+    switch (group) {
+      case Group.alkene:
+        return _freeBondCount == 1; // -CO=
+      case Group.alkyne:
+        return _freeBondCount == 2; // -CH≡
       default:
-        return _substituents.any((substituent) => substituent.isLike(function));
+        return _substituents.any((s) => s.getGroup() == group);
     }
   }
 
-  int getAmountOfSubstituent(Substituent substituent) =>
-      _substituents.where((listed) => listed.equals(substituent)).length;
-
-  int getAmountOfFunction(FunctionalGroup functions) {
+  int getAmountOfGroup(Group group) {
     int amount = 0;
 
-    if (hasFunctionalGroup(functions)) {
-      if (functions != FunctionalGroup.alkene &&
-          functions != FunctionalGroup.alkyne) {
+    if (isBondedTo(group)) {
+      if (group != Group.alkene && group != Group.alkyne) {
         for (Substituent substituent in _substituents) {
-          if (substituent.isLike(functions)) {
+          if (substituent.getGroup() == group) {
             amount += 1;
           }
         }
@@ -83,20 +81,22 @@ class Carbon extends Organic {
     return amount;
   }
 
+  int getAmountOfSubstituent(Substituent substituent) =>
+      _substituents.where((listed) => listed.equals(substituent)).length;
+
   @override
   String toString() {
     String result = 'C';
 
     // Se recogen los tipos de substituent:
-    List<Substituent> uniqueSubstituents =
-        getUniqueSubstituents(); // Sin repetirse
+    List<Substituent> uniqueSubstituents = getUniqueSubstituents();
 
     // Se ordenan según la prioridad de su función:
     Organic.orderByFunctions(uniqueSubstituents);
 
     // Se escribe los hidrógenos:
-    Substituent hydrogen = Substituent(FunctionalGroup.hydrogen);
-    int hydrogenCount = getAmountOfFunction(FunctionalGroup.hydrogen);
+    Substituent hydrogen = Substituent(Group.hydrogen);
+    int hydrogenCount = getAmountOfGroup(Group.hydrogen);
     if (hydrogenCount > 0) {
       result +=
           hydrogen.toString() + Organic.molecularQuantifier(hydrogenCount);
@@ -104,8 +104,7 @@ class Carbon extends Organic {
     }
 
     // Se escribe el resto de substituents excepto el éter:
-    uniqueSubstituents.removeWhere(
-        (substituent) => substituent.isLike(FunctionalGroup.ether));
+    uniqueSubstituents.removeWhere((s) => s.getGroup() == Group.ether);
 
     if (uniqueSubstituents.length == 1) {
       // Solo hay un tipo además del hidrógeno y éter
@@ -114,10 +113,12 @@ class Carbon extends Organic {
       String text = unique.toString();
 
       if (unique.getBonds() == 3 &&
-          !(unique.isLike(FunctionalGroup.aldehyde) && hydrogenCount > 0)) {
+          !(unique.getGroup() == Group.aldehyde && hydrogenCount > 0)) {
         result += text; // COOH, CHO...
-      } else if (unique.isLike(FunctionalGroup.ketone) || unique.isHalogen()) {
-        result += text; // CO, CCl...
+      } else if (unique.isHalogen()) {
+        result += text; // CHCl, CF...
+      } else if (unique.getGroup() == Group.ketone && hydrogenCount == 0) {
+        result += text; // CO
       } else {
         result += '($text)'; // Like "CH(OH)3"
       }
@@ -133,8 +134,8 @@ class Carbon extends Organic {
     }
 
     // Ether:
-    if (hasFunctionalGroup(FunctionalGroup.ether)) {
-      result += Substituent(FunctionalGroup.ether).toString();
+    if (isBondedTo(Group.ether)) {
+      result += Substituent(Group.ether).toString();
     }
 
     return result;

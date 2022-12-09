@@ -1,5 +1,5 @@
 import 'package:quimify_client/api/organic/components/carbon.dart';
-import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/organic.dart';
 
@@ -8,42 +8,45 @@ class Chain extends Organic {
     _carbons = [Carbon(previousBonds)];
   }
 
-  Chain.from(Chain other) {
+  Chain.copyFrom(Chain other) {
     _carbons = [];
 
     for (Carbon otherCarbon in other._carbons) {
-      _carbons.add(Carbon.from(otherCarbon));
+      _carbons.add(Carbon.copyFrom(otherCarbon));
     }
   }
 
   late List<Carbon> _carbons;
 
-  int getFreeBonds() => _carbons.last.getFreeBonds();
+  // Interface:
 
-  bool isDone() => getFreeBonds() == 0;
+  int getFreeBondCount() => _carbons.last.getFreeBondCount();
 
-  bool hasFunctionalGroup(FunctionalGroup functionalGroup) =>
-      _carbons.any((carbon) => carbon.hasFunctionalGroup(functionalGroup));
+  bool isDone() => getFreeBondCount() == 0;
 
-  void bondCarbon() {
-    _carbons.last.bondCarbon();
-    _carbons.add(Carbon(_carbons.last.getFreeBonds() + 1));
-  }
+  void bondGroup(Group functionalGroup) =>
+      bondSubstituent(Substituent(functionalGroup));
 
   void bondSubstituent(Substituent substituent) =>
       _carbons.last.bond(substituent);
 
-  void bondFunctionalGroup(FunctionalGroup functionalGroup) =>
-      bondSubstituent(Substituent(functionalGroup));
+  bool canBondCarbon() => [1, 2, 3].contains(getFreeBondCount());
 
-  Set<Substituent> getBondedSubstituents() {
-    Set<Substituent> bondedSubstituents = {};
+  void bondCarbon() {
+    _carbons.last.useBond();
+    _carbons.add(Carbon(_carbons.last.getFreeBondCount() + 1));
+  }
 
-    for (Carbon carbon in _carbons) {
-      bondedSubstituents.addAll(carbon.getUniqueSubstituents());
+  Group? getPriorityGroup() {
+    for (Group group in Group.values) {
+      for (Carbon carbon in _carbons) {
+        if (carbon.isBondedTo(group)) {
+          return group;
+        }
+      }
     }
 
-    return bondedSubstituents;
+    return null;
   }
 
   @override
@@ -55,12 +58,12 @@ class Chain extends Organic {
       structure += _carbons.first.toString(); // Like CH
 
       // The rest, with last carbon's bonds:
-      int lastOneFreeBonds = _carbons.first.getFreeBonds();
+      int lastOneFreeBonds = _carbons.first.getFreeBondCount();
       for (int i = 1; i < _carbons.length; i++) {
         structure += Organic.bondOfOrder(lastOneFreeBonds); // Like CH=
         structure += _carbons[i].toString(); // Like CH=CH
 
-        lastOneFreeBonds = _carbons[i].getFreeBonds();
+        lastOneFreeBonds = _carbons[i].getFreeBondCount();
       }
 
       // Last one's free bonds:

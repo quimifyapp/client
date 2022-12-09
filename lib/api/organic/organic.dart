@@ -1,6 +1,5 @@
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
-
-import 'components/functional_group.dart';
 
 // This class serves as a parent for any organic chemistry component.
 
@@ -24,8 +23,8 @@ class Organic {
 
   static void orderByFunctions(List<Substituent> substituents) {
     for (int i = 0; i < substituents.length - 1;) {
-      if (Enum.compareByIndex(substituents[i].getFunctionalGroup(),
-              substituents[i + 1].getFunctionalGroup()) >
+      if (Enum.compareByIndex(substituents[i].getGroup(),
+              substituents[i + 1].getGroup()) >
           0) {
         Substituent temp = substituents[i];
         substituents[i] = substituents[i + 1];
@@ -37,10 +36,10 @@ class Organic {
     }
   }
 
-  static bool isHalogen(FunctionalGroup function) => [
-        FunctionalGroup.bromine,
-        FunctionalGroup.chlorine,
-        FunctionalGroup.fluorine,
-        FunctionalGroup.iodine
+  static bool isHalogen(Group function) => [
+        Group.bromine,
+        Group.chlorine,
+        Group.fluorine,
+        Group.iodine
       ].contains(function);
 }

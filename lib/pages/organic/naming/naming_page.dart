@@ -1,8 +1,7 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
-import 'package:quimify_client/api/organic/compounds/open_chain/ether.dart';
 import 'package:quimify_client/api/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/api/organic/compounds/open_chain/simple.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
@@ -91,47 +90,51 @@ class _NamingPageState extends State<NamingPage> {
     return result;
   }
 
+  void _showResult(OrganicResult organicResult) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return OrganicResultPage(
+            title: _title,
+            organicResultView: OrganicResultView(
+              fields: {
+                if (organicResult.name != null) 'Nombre:': organicResult.name!,
+                if (organicResult.molecularMass != null)
+                  'Masa molecular:':
+                      '${formatMolecularMass(organicResult.molecularMass!)}'
+                          ' g/mol',
+                if (organicResult.structure != null)
+                  'Fórmula:': formatStructure(organicResult.structure!),
+              },
+              imageProvider: organicResult.url2D != null
+                  ? NetworkImage(organicResult.url2D!)
+                  : null,
+              quimifyReportDialog: QuimifyReportDialog(
+                details: 'Resultado de:\n"'
+                    '${formatStructure(organicResult.structure!)}"',
+                label: 'Cadena abierta, resultado de '
+                    '${_sequenceStack.last.toString()}',
+              ),
+            ),
+          );
+        },
+      ),
+    ).then(
+      (_) => setState(_reset),
+    );
+  }
+
   void _pressedButton() {
     if (_done) {
-      _search().then(
-        (organicResult) {
-          if (organicResult != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return OrganicResultPage(
-                    title: _title,
-                    organicResultView: OrganicResultView(
-                      fields: {
-                        if (organicResult.name != null)
-                          'Nombre:': organicResult.name!,
-                        if (organicResult.molecularMass != null)
-                          'Masa molecular:':
-                              '${formatMolecularMass(organicResult.molecularMass!)} g/mol',
-                        if (organicResult.structure != null)
-                          'Fórmula:': formatStructure(organicResult.structure!),
-                      },
-                      imageProvider: organicResult.url2D != null
-                          ? NetworkImage(organicResult.url2D!)
-                          : null,
-                      quimifyReportDialog: QuimifyReportDialog(
-                        details: 'Resultado de:\n"'
-                            '${formatStructure(organicResult.structure!)}"',
-                        label: 'Cadena abierta, resultado de '
-                            '${_sequenceStack.last.toString()}',
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ).then(
-              (_) => setState(_reset),
-            );
-          }
-        },
-      );
+      _search().then((organicResult) {
+        if (organicResult != null) {
+          _showResult(organicResult);
+        }
+      });
     }
   }
+
+  // Editing panel:
 
   void _checkDone() => setState(() => _done = _openChainStack.last.isDone());
 
@@ -150,50 +153,31 @@ class _NamingPageState extends State<NamingPage> {
         _sequenceStack.last.add(-1);
         _checkDone();
       });
-    } else if (_openChainStack.last.getFreeBonds() == 4) {
+    } else {
       const QuimifyMessageDialog(
         title: 'Faltan sustituyentes',
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
             'pueden compartir un maximo de tres.\n\n'
-            'Prueba a enlazar un sustiuyente primero.',
+            'Prueba a enlazar un sustiuyente.',
       ).showIn(context);
-    } else if (_openChainStack.last.getFreeBonds() == 0) {
-      const QuimifyMessageDialog(
-        title: 'Cadena completa',
-        details: 'Para enlazar un carbono es necesario compartir al menos un '
-            'enlace de los cuatro que tiene cada carbono.\n\n'
-            'Prueba a deshacer el último cambio.',
-      ).showIn(context);
-    } else {}
+    }
   }
 
-  bool _canHydrogenate() => _openChainStack.last.getFreeBonds() > 0;
-
   void _hydrogenate() {
-    if (_canHydrogenate()) {
       _startEditing();
-      setState(() {
-        int amount = _openChainStack.last.getFreeBonds() > 1 ? 1 : 0;
 
-        for (int i = _openChainStack.last.getFreeBonds(); i > amount; i--) {
-          int code = _openChainStack.last
-              .getOrderedBondableGroups()
-              .indexOf(FunctionalGroup.hydrogen);
+      setState(() {
+        int amount = _openChainStack.last.getFreeBondCount() > 1 ? 1 : 0;
+
+        for (int i = _openChainStack.last.getFreeBondCount(); i > amount; i--) {
+          int code =
+              _openChainStack.last.getBondableGroups().indexOf(Group.hydrogen);
           if (code != -1) {
-            _openChainStack.last.bondFunctionalGroup(FunctionalGroup.hydrogen);
-            _sequenceStack.last.add(code);
-            _checkDone();
+            _openChainStack.last.bondGroup(Group.hydrogen);
+
           }
         }
       });
-    } else {
-      const QuimifyMessageDialog(
-        title: 'Cadena completa',
-        details: 'Para enlazar un hidrógeno más es necesario compartir un '
-            'enlace, pero este carbono ya ha utilizado sus cuatro.\n\n'
-            'Prueba a deshacer el último cambio.',
-      ).showIn(context);
-    }
   }
 
   bool _canUndo() => _openChainStack.length > 1;
@@ -205,6 +189,11 @@ class _NamingPageState extends State<NamingPage> {
         _sequenceStack.removeLast();
         _checkDone();
       });
+    } else {
+      const QuimifyMessageDialog(
+        title: 'Nada que deshacer',
+        details: 'Prueba a enlazar un sustiuyente.',
+      ).showIn(context);
     }
   }
 
@@ -212,9 +201,8 @@ class _NamingPageState extends State<NamingPage> {
     _startEditing();
 
     setState(() {
-      int code = _openChainStack.last
-          .getOrderedBondableGroups()
-          .indexOf(FunctionalGroup.radical);
+      int code =
+          _openChainStack.last.getBondableGroups().indexOf(Group.radical);
 
       if (code != -1) {
         _openChainStack.last
@@ -232,119 +220,112 @@ class _NamingPageState extends State<NamingPage> {
   void _getRadical() =>
       RadicalFactoryDialog(onSubmitted: _bondRadical).show(context);
 
-  void _bondFunction(FunctionalGroup function) {
+  void _bondGroup(Group group) {
     _startEditing();
 
     setState(() {
-      int code =
-          _openChainStack.last.getOrderedBondableGroups().indexOf(function);
+      int code = _openChainStack.last.getBondableGroups().indexOf(group);
 
       if (code != -1) {
-        _openChainStack.last.bondFunctionalGroup(function);
-
-        if (function == FunctionalGroup.ether) {
-          _openChainStack.last = Ether(_openChainStack.last as Simple);
-        } else {
-          _checkDone();
-        }
-
+        _openChainStack.last = _openChainStack.last.bondGroup(group);
         _sequenceStack.last.add(code);
+        _checkDone();
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final Map<FunctionalGroup, FunctionalGroupButton> functionToButton = {
-      FunctionalGroup.hydrogen: FunctionalGroupButton(
+    final Map<Group, GroupButton> groupToButton = {
+      Group.hydrogen: GroupButton(
         bonds: 1,
         text: 'H',
         actionText: 'Hidrógeno',
-        onPressed: () => _bondFunction(FunctionalGroup.hydrogen),
+        onPressed: () => _bondGroup(Group.hydrogen),
       ),
-      FunctionalGroup.radical: FunctionalGroupButton(
+      Group.radical: GroupButton(
         bonds: 1,
         text: 'CH2 – CH3',
         actionText: 'Radical',
         onPressed: _getRadical,
       ),
-      FunctionalGroup.iodine: FunctionalGroupButton(
+      Group.iodine: GroupButton(
         bonds: 1,
         text: 'I',
         actionText: 'Yodo',
-        onPressed: () => _bondFunction(FunctionalGroup.iodine),
+        onPressed: () => _bondGroup(Group.iodine),
       ),
-      FunctionalGroup.fluorine: FunctionalGroupButton(
+      Group.fluorine: GroupButton(
         bonds: 1,
         text: 'F',
         actionText: 'Flúor',
-        onPressed: () => _bondFunction(FunctionalGroup.fluorine),
+        onPressed: () => _bondGroup(Group.fluorine),
       ),
-      FunctionalGroup.chlorine: FunctionalGroupButton(
+      Group.chlorine: GroupButton(
         bonds: 1,
         text: 'Cl',
         actionText: 'Cloro',
-        onPressed: () => _bondFunction(FunctionalGroup.chlorine),
+        onPressed: () => _bondGroup(Group.chlorine),
       ),
-      FunctionalGroup.bromine: FunctionalGroupButton(
+      Group.bromine: GroupButton(
         bonds: 1,
         text: 'Br',
         actionText: 'Bromo',
-        onPressed: () => _bondFunction(FunctionalGroup.bromine),
+        onPressed: () => _bondGroup(Group.bromine),
       ),
-      FunctionalGroup.nitro: FunctionalGroupButton(
+      Group.nitro: GroupButton(
         bonds: 1,
         text: 'NO2',
         actionText: 'Nitro',
-        onPressed: () => _bondFunction(FunctionalGroup.nitro),
+        onPressed: () => _bondGroup(Group.nitro),
       ),
-      FunctionalGroup.ether: FunctionalGroupButton(
+      Group.ether: GroupButton(
         bonds: 1,
         text: 'O',
         actionText: 'Éter',
-        onPressed: () => _bondFunction(FunctionalGroup.ether),
+        onPressed: () => _bondGroup(Group.ether),
       ),
-      FunctionalGroup.amine: FunctionalGroupButton(
+      Group.amine: GroupButton(
         bonds: 1,
         text: 'NH2',
         actionText: 'Amina',
-        onPressed: () => _bondFunction(FunctionalGroup.amine),
+        onPressed: () => _bondGroup(Group.amine),
       ),
-      FunctionalGroup.alcohol: FunctionalGroupButton(
+      Group.alcohol: GroupButton(
         bonds: 1,
         text: 'OH',
         actionText: 'Alcohol',
-        onPressed: () => _bondFunction(FunctionalGroup.alcohol),
+        onPressed: () => _bondGroup(Group.alcohol),
       ),
-      FunctionalGroup.ketone: FunctionalGroupButton(
+      Group.ketone: GroupButton(
         bonds: 2,
         text: 'O',
         actionText: 'Cetona',
-        onPressed: () => _bondFunction(FunctionalGroup.ketone),
+        onPressed: () => _bondGroup(Group.ketone),
       ),
-      FunctionalGroup.aldehyde: FunctionalGroupButton(
+      Group.aldehyde: GroupButton(
         bonds: 3,
         text: 'HO',
         actionText: 'Aldehído',
-        onPressed: () => _bondFunction(FunctionalGroup.aldehyde),
+        onPressed: () => _bondGroup(Group.aldehyde),
       ),
-      FunctionalGroup.nitrile: FunctionalGroupButton(
+      Group.nitrile: GroupButton(
         bonds: 3,
         text: 'N',
         actionText: 'Nitrilo',
-        onPressed: () => _bondFunction(FunctionalGroup.nitrile),
+        onPressed: () => _bondGroup(Group.nitrile),
       ),
-      FunctionalGroup.amide: FunctionalGroupButton(
+      Group.amide: GroupButton(
         bonds: 3,
         text: 'ONH2',
         actionText: 'Amida',
-        onPressed: () => _bondFunction(FunctionalGroup.amide),
+        onPressed: () => _bondGroup(Group.amide),
       ),
-      FunctionalGroup.acid: FunctionalGroupButton(
+      Group.acid: GroupButton(
         bonds: 3,
         text: 'OOH',
         actionText: 'Ácido',
-        onPressed: () => _bondFunction(FunctionalGroup.acid),
+        onPressed: () => _bondGroup(Group.acid),
       ),
     };
 
@@ -423,7 +404,7 @@ class _NamingPageState extends State<NamingPage> {
                     HydrogenateButton(
                       width: buttonWidth,
                       onPressed: _hydrogenate,
-                      enabled: _canHydrogenate(),
+                      enabled: true,
                     ),
                   ],
                   if (_done) // 'Solve it' button
@@ -471,8 +452,8 @@ class _NamingPageState extends State<NamingPage> {
                         child: Wrap(
                           runSpacing: 15,
                           children: _openChainStack.last
-                              .getOrderedBondableGroups()
-                              .map((function) => functionToButton[function]!)
+                              .getBondableGroups()
+                              .map((function) => groupToButton[function]!)
                               .toList()
                               .reversed
                               .toList(),

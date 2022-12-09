@@ -1,7 +1,6 @@
-enum FunctionalGroup {
+enum Group {
   // By priority:
   acid, // =O, -OH
-  carboxyl, // -COOH non-principal acid
   amide, // =O, -NH2
   carbamoyl, // -CONH2 non-principal amide
   nitrile, // ≡N

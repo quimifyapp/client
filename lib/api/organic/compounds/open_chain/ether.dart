@@ -1,26 +1,25 @@
 import 'package:quimify_client/api/organic/components/chain.dart';
-import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/compounds/open_chain/open_chain.dart';
-import 'package:quimify_client/api/organic/compounds/open_chain/simple.dart';
 
 class Ether extends OpenChain {
-  Ether(Simple firstChain) {
-    _firstChain = firstChain.getChain(); // [R - O] - R'
+  Ether(Chain firstChain) {
+    _firstChain = firstChain; // [R - O] - R'
 
     if (_firstChain.isDone()) {
-      _startSecondChain(); // R - O [- R']
+      _switchToSecondChain(); // R - O [- R']
     } else {
       _secondChain = null;
       _currentChain = _firstChain;
     }
   }
 
-  Ether.from(Chain firstChain, Chain? secondChain) {
-    _firstChain = Chain.from(firstChain);
+  Ether.copyFrom(Ether other) {
+    _firstChain = Chain.copyFrom(other._firstChain);
 
-    if (secondChain != null) {
-      _secondChain = Chain.from(secondChain);
+    if (other._secondChain != null) {
+      _secondChain = Chain.copyFrom(other._secondChain!);
       _currentChain = _secondChain!;
     } else {
       _secondChain = null;
@@ -32,49 +31,53 @@ class Ether extends OpenChain {
   late Chain? _secondChain; // R'
   late Chain _currentChain; // ->
 
-  @override
-  OpenChain getCopy() => Ether.from(_firstChain, _secondChain);
-
-  @override
-  int getFreeBonds() => _currentChain.getFreeBonds();
+  // Interface:
 
   @override
   bool isDone() => _currentChain.isDone();
 
   @override
-  bool canBondCarbon() =>
-      _currentChain == _secondChain && !_currentChain.isDone();
+  int getFreeBondCount() => _currentChain.getFreeBondCount();
 
   @override
-  void bondCarbon() => _secondChain!.bondCarbon();
+  List<Group> getBondableGroups() {
+    List<Group> bondableGroups = [];
 
-  @override
-  void bondSubstituent(Substituent substituent) {
-    _currentChain.bondSubstituent(substituent);
-
-    if (_currentChain == _firstChain && _firstChain.isDone()) {
-      if (_currentChain.isDone()) {
-        _startSecondChain();
-      }
+    if (_currentChain.getFreeBondCount() > 0) {
+      bondableGroups.addAll([
+        Group.nitro,
+        Group.bromine,
+        Group.chlorine,
+        Group.fluorine,
+        Group.iodine,
+        Group.radical,
+        Group.hydrogen,
+      ]);
     }
+
+    return bondableGroups;
   }
 
   @override
-  void bondFunctionalGroup(FunctionalGroup function) =>
-      bondSubstituent(Substituent(function));
+  OpenChain bondGroup(Group function) => bondSubstituent(Substituent(function));
 
   @override
-  List<FunctionalGroup> getOrderedBondableGroups() => getFreeBonds() > 0
-      ? [
-          FunctionalGroup.nitro,
-          FunctionalGroup.bromine,
-          FunctionalGroup.chlorine,
-          FunctionalGroup.fluorine,
-          FunctionalGroup.iodine,
-          FunctionalGroup.radical,
-          FunctionalGroup.hydrogen,
-        ]
-      : [];
+  OpenChain bondSubstituent(Substituent substituent) {
+    _currentChain.bondSubstituent(substituent);
+
+    if (_currentChain == _firstChain && _firstChain.isDone()) {
+        _switchToSecondChain();
+    }
+
+    return this;
+  }
+
+  @override
+  bool canBondCarbon() =>
+      _currentChain == _secondChain && _secondChain!.canBondCarbon();
+
+  @override
+  void bondCarbon() => _secondChain!.bondCarbon();
 
   @override
   String getStructure() {
@@ -85,9 +88,12 @@ class Ether extends OpenChain {
         : firstChainStructure + _secondChain.toString();
   }
 
+  @override
+  OpenChain getCopy() => Ether.copyFrom(this);
+
   // Private:
 
-  void _startSecondChain() {
+  void _switchToSecondChain() {
     _secondChain = Chain(previousBonds: 1);
     _currentChain = _secondChain!;
   }

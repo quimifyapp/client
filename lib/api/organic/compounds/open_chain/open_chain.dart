@@ -1,23 +1,23 @@
-import 'package:quimify_client/api/organic/components/functional_group.dart';
+import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/organic.dart';
 
 abstract class OpenChain extends Organic {
-  OpenChain getCopy();
-
-  int getFreeBonds();
-
   bool isDone();
+
+  int getFreeBondCount();
+
+  List<Group> getBondableGroups();
+
+  OpenChain bondSubstituent(Substituent substituent);
+
+  OpenChain bondGroup(Group function);
 
   bool canBondCarbon();
 
   void bondCarbon();
 
-  void bondSubstituent(Substituent substituent);
-
-  void bondFunctionalGroup(FunctionalGroup function);
-
-  List<FunctionalGroup> getOrderedBondableGroups();
-
   String getStructure();
+
+  OpenChain getCopy();
 }
