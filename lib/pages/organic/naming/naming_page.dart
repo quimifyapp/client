@@ -5,7 +5,7 @@ import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/compounds/open_chain/open_chain.dart';
 import 'package:quimify_client/api/organic/compounds/open_chain/simple.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
-import 'package:quimify_client/pages/organic/naming/widgets/buttons/functional_group_button.dart';
+import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/naming_help_dialog.dart';
@@ -239,92 +239,92 @@ class _NamingPageState extends State<NamingPage> {
     final Map<Group, GroupButton> groupToButton = {
       Group.hydrogen: GroupButton(
         bonds: 1,
-        text: 'H',
-        actionText: 'Hidrógeno',
+        structure: 'H',
+        name: 'Hidrógeno',
         onPressed: () => _bondGroup(Group.hydrogen),
       ),
       Group.radical: GroupButton(
         bonds: 1,
-        text: 'CH2 – CH3',
-        actionText: 'Radical',
+        structure: 'CH2 – CH3',
+        name: 'Radical',
         onPressed: _getRadical,
       ),
       Group.iodine: GroupButton(
         bonds: 1,
-        text: 'I',
-        actionText: 'Yodo',
+        structure: 'I',
+        name: 'Yodo',
         onPressed: () => _bondGroup(Group.iodine),
       ),
       Group.fluorine: GroupButton(
         bonds: 1,
-        text: 'F',
-        actionText: 'Flúor',
+        structure: 'F',
+        name: 'Flúor',
         onPressed: () => _bondGroup(Group.fluorine),
       ),
       Group.chlorine: GroupButton(
         bonds: 1,
-        text: 'Cl',
-        actionText: 'Cloro',
+        structure: 'Cl',
+        name: 'Cloro',
         onPressed: () => _bondGroup(Group.chlorine),
       ),
       Group.bromine: GroupButton(
         bonds: 1,
-        text: 'Br',
-        actionText: 'Bromo',
+        structure: 'Br',
+        name: 'Bromo',
         onPressed: () => _bondGroup(Group.bromine),
       ),
       Group.nitro: GroupButton(
         bonds: 1,
-        text: 'NO2',
-        actionText: 'Nitro',
+        structure: 'NO2',
+        name: 'Nitro',
         onPressed: () => _bondGroup(Group.nitro),
       ),
       Group.ether: GroupButton(
         bonds: 1,
-        text: 'O',
-        actionText: 'Éter',
+        structure: 'O',
+        name: 'Éter',
         onPressed: () => _bondGroup(Group.ether),
       ),
       Group.amine: GroupButton(
         bonds: 1,
-        text: 'NH2',
-        actionText: 'Amina',
+        structure: 'NH2',
+        name: 'Amina',
         onPressed: () => _bondGroup(Group.amine),
       ),
       Group.alcohol: GroupButton(
         bonds: 1,
-        text: 'OH',
-        actionText: 'Alcohol',
+        structure: 'OH',
+        name: 'Alcohol',
         onPressed: () => _bondGroup(Group.alcohol),
       ),
       Group.ketone: GroupButton(
         bonds: 2,
-        text: 'O',
-        actionText: 'Cetona',
+        structure: 'O',
+        name: 'Cetona',
         onPressed: () => _bondGroup(Group.ketone),
       ),
       Group.aldehyde: GroupButton(
         bonds: 3,
-        text: 'HO',
-        actionText: 'Aldehído',
+        structure: 'HO',
+        name: 'Aldehído',
         onPressed: () => _bondGroup(Group.aldehyde),
       ),
       Group.nitrile: GroupButton(
         bonds: 3,
-        text: 'N',
-        actionText: 'Nitrilo',
+        structure: 'N',
+        name: 'Nitrilo',
         onPressed: () => _bondGroup(Group.nitrile),
       ),
       Group.amide: GroupButton(
         bonds: 3,
-        text: 'ONH2',
-        actionText: 'Amida',
+        structure: 'ONH2',
+        name: 'Amida',
         onPressed: () => _bondGroup(Group.amide),
       ),
       Group.acid: GroupButton(
         bonds: 3,
-        text: 'OOH',
-        actionText: 'Ácido',
+        structure: 'OOH',
+        name: 'Ácido',
         onPressed: () => _bondGroup(Group.acid),
       ),
     };

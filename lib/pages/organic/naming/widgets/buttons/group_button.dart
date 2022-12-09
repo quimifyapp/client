@@ -4,19 +4,17 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/utils/text.dart';
 
-class FunctionalGroupButton extends StatelessWidget {
-  const FunctionalGroupButton({
+class GroupButton extends StatelessWidget {
+  const GroupButton({
     Key? key,
     required this.bonds,
-    required this.text,
-    required this.actionText,
-    this.altText,
+    required this.structure,
+    required this.name,
     required this.onPressed,
   }) : super(key: key);
 
   final int bonds;
-  final String text, actionText;
-  final String? altText;
+  final String structure, name;
   final VoidCallback onPressed;
 
   @override
@@ -49,7 +47,7 @@ class FunctionalGroupButton extends StatelessWidget {
           const SizedBox(width: 15),
           Expanded(
             child: AutoSizeText(
-              formatStructureInput(text),
+              formatStructureInput(structure),
               maxLines: 1,
               maxFontSize: 16,
               minFontSize: 8,
@@ -62,7 +60,7 @@ class FunctionalGroupButton extends StatelessWidget {
             ),
           ),
           Text(
-            actionText,
+            name,
             style: const TextStyle(
               color: quimifyTeal,
               fontSize: 16,
