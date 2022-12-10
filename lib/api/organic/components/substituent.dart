@@ -53,7 +53,7 @@ class Substituent extends Organic {
   };
 
   static final Map<Group, String> _groupToStructure = {
-    Group.acid: 'COOH',
+    Group.acid: 'OOH',
     Group.amide: 'ONH2',
     Group.carbamoyl: 'COHN2',
     Group.nitrile: 'N',
