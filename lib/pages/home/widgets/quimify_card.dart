@@ -126,16 +126,19 @@ class _QuimifyCardState extends State<QuimifyCard> {
                             ),
                           ),
                         const Spacer(), // Between title and subtitle
-                        Text(
-                          widget.customBody != null
-                              ? widget.customBody!.values.elementAt(_selector)
-                              : widget.body != null
-                                  ? widget.body!.values.elementAt(_selector)
-                                  : 'Próximamente',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2),
+                          child: Text(
+                            widget.customBody != null
+                                ? widget.customBody!.values.elementAt(_selector)
+                                : widget.body != null
+                                    ? widget.body!.values.elementAt(_selector)
+                                    : 'Próximamente',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],
