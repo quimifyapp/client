@@ -143,6 +143,23 @@ class _NamingPageState extends State<NamingPage> {
     _sequenceStack.add(List.from(_sequenceStack.last));
   }
 
+  bool _canUndo() => _openChainStack.length > 1;
+
+  void _undo() {
+    if (_canUndo()) {
+      setState(() {
+        _openChainStack.removeLast();
+        _sequenceStack.removeLast();
+        _checkDone();
+      });
+    } else {
+      const QuimifyMessageDialog(
+        title: 'Nada que deshacer',
+        details: 'Prueba a enlazar un sustiuyente.',
+      ).showIn(context);
+    }
+  }
+
   bool _canBondCarbon() => _openChainStack.last.canBondCarbon();
 
   void _bondCarbon() {
@@ -170,31 +187,16 @@ class _NamingPageState extends State<NamingPage> {
         int amount = _openChainStack.last.getFreeBondCount() > 1 ? 1 : 0;
 
         for (int i = _openChainStack.last.getFreeBondCount(); i > amount; i--) {
-          int code =
-              _openChainStack.last.getBondableGroups().indexOf(Group.hydrogen);
+          List<Group> bondableGroups = _openChainStack.last.getBondableGroups();
+
+          int code = bondableGroups.indexOf(Group.hydrogen);
           if (code != -1) {
             _openChainStack.last.bondGroup(Group.hydrogen);
-
+            _sequenceStack.last.add(code);
+            _checkDone();
           }
         }
       });
-  }
-
-  bool _canUndo() => _openChainStack.length > 1;
-
-  void _undo() {
-    if (_canUndo()) {
-      setState(() {
-        _openChainStack.removeLast();
-        _sequenceStack.removeLast();
-        _checkDone();
-      });
-    } else {
-      const QuimifyMessageDialog(
-        title: 'Nada que deshacer',
-        details: 'Prueba a enlazar un sustiuyente.',
-      ).showIn(context);
-    }
   }
 
   void _bondRadical(int carbonCount, bool isIso) {
