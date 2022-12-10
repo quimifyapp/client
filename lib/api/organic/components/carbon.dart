@@ -52,7 +52,7 @@ class Carbon extends Organic {
   }
 
   int getAmountOfSubstituent(Substituent substituent) =>
-      _substituents.where((listed) => listed.equals(substituent)).length;
+      _substituents.where((listed) => listed == substituent).length;
 
   // Text:
 

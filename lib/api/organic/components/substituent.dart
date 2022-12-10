@@ -73,14 +73,20 @@ class Substituent extends Organic {
 
   // Queries:
 
-  bool equals(Substituent other) => _group == Group.radical
-      ? _carbonCount == other._carbonCount && _isIso == other._isIso
-      : _group == other._group && _bondCount == other._bondCount;
+  @override
+  int get hashCode => Object.hash(_group, _bondCount, _carbonCount, _isIso);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Substituent &&
+      (_group == Group.radical
+          ? _carbonCount == other._carbonCount && _isIso == other._isIso
+          : _group == other._group && _bondCount == other._bondCount);
 
   // Text:
 
   String _getStructure() {
-    if(_group == Group.radical) {
+    if (_group == Group.radical) {
       return _isIso
           ? '${'CH2' * max(0, _carbonCount - 3)}CH(CH3)2'
           : '${'CH2' * max(0, _carbonCount - 1)}CH3';
