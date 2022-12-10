@@ -72,7 +72,7 @@ class Carbon extends Organic {
 
     Set<Substituent> uniqueSubstituents = _substituents.toSet();
     uniqueSubstituents.removeWhere((Substituent s) =>
-    s.getGroup() == Group.hydrogen || s.getGroup() == Group.hydrogen);
+    s.getGroup() == Group.hydrogen || s.getGroup() == Group.ether);
 
     List<Substituent> uniqueOrderedSubstituents = uniqueSubstituents
         .sorted((a, b) => a.getGroup().index.compareTo(b.getGroup().index));
