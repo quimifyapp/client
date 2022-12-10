@@ -1,9 +1,24 @@
 import 'package:quimify_client/api/organic/components/group.dart';
-import 'package:quimify_client/api/organic/components/substituent.dart';
 
-// This class serves as a parent for any organic chemistry component.
+// This class wraps up organic utilities.
 
 class Organic {
+  static final Set<Group> _halogenGroups = {
+    Group.bromine,
+    Group.chlorine,
+    Group.fluorine,
+    Group.iodine,
+  };
+
+  // Queries:
+
+  static bool isHalogen(Group group) => _halogenGroups.contains(group);
+
+  static bool isBond(Group group) =>
+      group == Group.alkene || group == Group.alkyne;
+
+  // Text:
+
   static String bondOfOrder(int order) {
     switch (order) {
       case 0:
@@ -17,29 +32,7 @@ class Organic {
     }
   }
 
-  static String molecularQuantifier(int amount) => (amount != 1)
-      ? amount.toString() // Como en "CO2"
-      : ''; // Como en "CO"
-
-  static void orderByFunctions(List<Substituent> substituents) {
-    for (int i = 0; i < substituents.length - 1;) {
-      if (Enum.compareByIndex(substituents[i].getGroup(),
-              substituents[i + 1].getGroup()) >
-          0) {
-        Substituent temp = substituents[i];
-        substituents[i] = substituents[i + 1];
-        substituents[i + 1] = temp;
-        i = 0; // get(i) > get(i + 1)
-      } else {
-        i++; // get(i) <= get(i + 1)
-      }
-    }
-  }
-
-  static bool isHalogen(Group function) => [
-        Group.bromine,
-        Group.chlorine,
-        Group.fluorine,
-        Group.iodine
-      ].contains(function);
+  static String molecularQuantifierFor(int amount) => (amount != 1)
+      ? amount.toString() // CO2
+      : ''; // CO
 }

@@ -49,8 +49,9 @@ class Chain extends Organic {
     return null;
   }
 
-  @override
-  String toString() {
+  // Text:
+
+  String _getStructure() {
     String structure = '';
 
     if (_carbons.isNotEmpty) {
@@ -75,4 +76,7 @@ class Chain extends Organic {
 
     return structure;
   }
+
+  @override
+  String toString() => _getStructure();
 }
