@@ -170,33 +170,39 @@ class _NamingPageState extends State<NamingPage> {
         _sequenceStack.last.add(-1);
         _checkDone();
       });
-    } else {
+    } else if (_openChainStack.last.getFreeBondCount() == 4) {
       const QuimifyMessageDialog(
         title: 'Faltan sustituyentes',
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
             'pueden compartir un maximo de tres.\n\n'
             'Prueba a enlazar un sustiuyente.',
       ).showIn(context);
+    } else {
+      const QuimifyMessageDialog(
+        title: 'No hace falta',
+        details: 'Se enlazará otro carbono al oxígeno cuando completes este '
+            'carbono.',
+      ).showIn(context);
     }
   }
 
   void _hydrogenate() {
-      _startEditing();
+    _startEditing();
 
-      setState(() {
-        int amount = _openChainStack.last.getFreeBondCount() > 1 ? 1 : 0;
+    setState(() {
+      int amount = _openChainStack.last.getFreeBondCount() > 1 ? 1 : 0;
 
-        for (int i = _openChainStack.last.getFreeBondCount(); i > amount; i--) {
-          List<Group> bondableGroups = _openChainStack.last.getBondableGroups();
+      for (int i = _openChainStack.last.getFreeBondCount(); i > amount; i--) {
+        List<Group> bondableGroups = _openChainStack.last.getBondableGroups();
 
-          int code = bondableGroups.indexOf(Group.hydrogen);
-          if (code != -1) {
-            _openChainStack.last.bondGroup(Group.hydrogen);
-            _sequenceStack.last.add(code);
-            _checkDone();
-          }
+        int code = bondableGroups.indexOf(Group.hydrogen);
+        if (code != -1) {
+          _openChainStack.last.bondGroup(Group.hydrogen);
+          _sequenceStack.last.add(code);
+          _checkDone();
         }
-      });
+      }
+    });
   }
 
   void _bondRadical(int carbonCount, bool isIso) {
