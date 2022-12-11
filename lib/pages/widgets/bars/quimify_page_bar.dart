@@ -17,7 +17,7 @@ class QuimifyPageBar extends StatelessWidget {
       bottom: false,
       child: Container(
         padding: const EdgeInsets.only(
-          top: 15,
+          top: 15, // TODO 17.5?
           bottom: 20,
           left: 20,
           right: 20,
