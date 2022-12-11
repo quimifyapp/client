@@ -24,12 +24,12 @@ class Substituent extends Organic {
   late int _carbonCount;
   late bool _isIso;
 
-  /* Examples:
-	-Cl           → { Group.chlorine, bondCount: 1, carbonCount: 0, isIso: false }
-	=O            → { Group.ketone,   bondCount: 2, carbonCount: 0, isIso: false }
-	-CH2-CH2-CH3  → { Group.radical,  bondCount: 1, carbonCount: 3, isIso: false }
-	-CH(CH3)-CH3  → { Group.radical,  bondCount: 1, carbonCount: 3, isIso: true  }
-	*/
+  // Examples:
+
+	// -Cl          → {Group.chlorine, bondCount: 1, carbonCount: 0, isIso: false}
+	// =O           → {Group.ketone,   bondCount: 2, carbonCount: 0, isIso: false}
+	// -CH2-CH2-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, isIso: false}
+	// -CH(CH3)-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, isIso: true }
 
   // Constants:
 

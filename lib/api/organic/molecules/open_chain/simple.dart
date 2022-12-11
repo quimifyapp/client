@@ -25,12 +25,12 @@ class Simple extends OpenChain {
 
   @override
   List<Group> getBondableGroups() {
-    List<Group> orderedBondableGroups = [];
+    List<Group> bondableGroups = [];
 
     int freeBondCount = _chain.getFreeBondCount();
 
     if (freeBondCount > 2) {
-      orderedBondableGroups.addAll([
+      bondableGroups.addAll([
         Group.acid,
         Group.amide,
         Group.nitrile,
@@ -39,20 +39,20 @@ class Simple extends OpenChain {
     }
 
     if (freeBondCount > 1) {
-      orderedBondableGroups.add(Group.ketone);
+      bondableGroups.add(Group.ketone);
     }
 
     if (freeBondCount > 0) {
-      orderedBondableGroups.addAll([
+      bondableGroups.addAll([
         Group.alcohol,
         Group.amine,
       ]);
 
       if (_wouldBePriority(Group.ether)) {
-        orderedBondableGroups.add(Group.ether);
+        bondableGroups.add(Group.ether);
       }
 
-      orderedBondableGroups.addAll([
+      bondableGroups.addAll([
         Group.nitro,
         Group.bromine,
         Group.chlorine,
@@ -63,7 +63,7 @@ class Simple extends OpenChain {
       ]);
     }
 
-    return orderedBondableGroups;
+    return bondableGroups;
   }
 
   @override
