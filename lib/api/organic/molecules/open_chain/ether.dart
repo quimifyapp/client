@@ -81,11 +81,11 @@ class Ether extends OpenChain {
 
   @override
   String getStructure() {
-    String firstChainStructure = _firstChain.toString();
+    String firstChain = _firstChain.toString();
 
     return _currentChain == _firstChain
-        ? firstChainStructure.substring(0, firstChainStructure.length - 1)
-        : firstChainStructure + _secondChain.toString();
+        ? firstChain.substring(0, firstChain.length - 1)
+        : firstChain + _secondChain.toString();
   }
 
   @override

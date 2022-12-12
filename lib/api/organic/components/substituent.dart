@@ -5,95 +5,123 @@ import 'package:quimify_client/api/organic/organic.dart';
 
 class Substituent extends Organic {
   Substituent(Group group) {
-    _build(group, _groupToBoundCount[group]!, 0, false);
-  }
+    if(group == Group.radical) {
+      throw ArgumentError('There is no unique substituent with functional '
+          'group: $_group');
+    }
 
-  Substituent.radical(int carbonCount, bool isIso) {
-    _build(Group.radical, 1, carbonCount, isIso);
-  }
-
-  void _build(Group group, int bondCount, int carbonCount, bool isIso) {
     _group = group;
-    _bondCount = bondCount;
+
+    switch (group) {
+      case Group.acid:
+      case Group.amide:
+      case Group.nitrile:
+      case Group.aldehyde:
+        _bondCount = 3;
+        break;
+      case Group.ketone:
+        _bondCount = 2;
+        break;
+      case Group.carbamoyl:
+      case Group.cyanide:
+      case Group.alcohol:
+      case Group.amine:
+      case Group.ether:
+      case Group.nitro:
+      case Group.bromine:
+      case Group.chlorine:
+      case Group.fluorine:
+      case Group.iodine:
+      case Group.hydrogen:
+        _bondCount = 1;
+        break;
+      default:
+        throw ArgumentError('There is no substituent with functional '
+            'group: $_group');
+    }
+
+    _carbonCount = 0;
+    _iso = false;
+  }
+
+  Substituent.radical(int carbonCount, bool iso) {
+    _group = Group.radical;
+    _bondCount = 1;
     _carbonCount = carbonCount;
-    _isIso = isIso;
+    _iso = iso;
   }
 
   late Group _group;
   late int _bondCount;
   late int _carbonCount;
-  late bool _isIso;
+  late bool _iso;
 
   // Examples:
 
-	// -Cl          → {Group.chlorine, bondCount: 1, carbonCount: 0, isIso: false}
-	// =O           → {Group.ketone,   bondCount: 2, carbonCount: 0, isIso: false}
-	// -CH2-CH2-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, isIso: false}
-	// -CH(CH3)-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, isIso: true }
-
-  // Constants:
-
-  static final Map<Group, int> _groupToBoundCount = {
-    Group.acid: 3,
-    Group.amide: 3,
-    Group.carbamoyl: 1,
-    Group.nitrile: 3,
-    Group.cyanide: 1,
-    Group.aldehyde: 3,
-    Group.ketone: 2,
-    Group.alcohol: 1,
-    Group.amine: 1,
-    Group.ether: 1,
-    Group.nitro: 1,
-    Group.bromine: 1,
-    Group.chlorine: 1,
-    Group.fluorine: 1,
-    Group.iodine: 1,
-    Group.hydrogen: 1,
-  };
-
-  static final Map<Group, String> _groupToStructure = {
-    Group.acid: 'OOH',
-    Group.amide: 'ONH2',
-    Group.carbamoyl: 'COHN2',
-    Group.nitrile: 'N',
-    Group.cyanide: 'CN',
-    Group.aldehyde: 'HO',
-    Group.ketone: 'O',
-    Group.alcohol: 'OH',
-    Group.amine: 'NH2',
-    Group.ether: '-O-',
-    Group.nitro: 'NO2',
-    Group.bromine: 'Br',
-    Group.chlorine: 'Cl',
-    Group.fluorine: 'F',
-    Group.iodine: 'I',
-    Group.hydrogen: 'H',
-  };
+  // -Cl          → {Group.chlorine, bondCount: 1, carbonCount: 0, iso: false}
+  // =O           → {Group.ketone,   bondCount: 2, carbonCount: 0, iso: false}
+  // -CH2-CH2-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, iso: false}
+  // -CH(CH3)-CH3 → {Group.radical,  bondCount: 1, carbonCount: 3, iso: true }
 
   // Queries:
 
   @override
-  int get hashCode => Object.hash(_group, _bondCount, _carbonCount, _isIso);
+  int get hashCode => Object.hash(_group, _bondCount, _carbonCount, _iso);
 
   @override
   bool operator ==(Object other) =>
       other is Substituent &&
       (_group == Group.radical
-          ? _carbonCount == other._carbonCount && _isIso == other._isIso
+          ? _carbonCount == other._carbonCount && _iso == other._iso
           : _group == other._group && _bondCount == other._bondCount);
 
   // Text:
 
   String _getStructure() {
-    if (_group == Group.radical) {
-      return _isIso
-          ? '${'CH2' * max(0, _carbonCount - 3)}CH(CH3)2'
-          : '${'CH2' * max(0, _carbonCount - 1)}CH3';
+    switch (_group) {
+      case Group.acid:
+        return 'OOH';
+      case Group.amide:
+        return 'ONH2';
+      case Group.carbamoyl:
+        return 'COHN2';
+      case Group.nitrile:
+        return 'N';
+      case Group.cyanide:
+        return 'CN';
+      case Group.aldehyde:
+        return 'HO';
+      case Group.ketone:
+        return 'O';
+      case Group.alcohol:
+        return 'OH';
+      case Group.amine:
+        return 'NH2';
+      case Group.ether:
+        return '-O-';
+      case Group.nitro:
+        return 'NO2';
+      case Group.bromine:
+        return 'Br';
+      case Group.chlorine:
+        return 'Cl';
+      case Group.fluorine:
+        return 'F';
+      case Group.iodine:
+        return 'I';
+      case Group.radical:
+        return _getRadicalStructure();
+      case Group.hydrogen:
+        return 'H';
+      default:
+        throw ArgumentError('Unknown structure for substituent with '
+            'functional group: $_group');
     }
-
-    return _groupToStructure[_group]!;
   }
+
+  String _getRadicalStructure() => _iso
+      ? '${'CH2' * max(0, _carbonCount - 3)}CH(CH3)2'
+      : '${'CH2' * max(0, _carbonCount - 1)}CH3';
 
   @override
   String toString() => _getStructure();

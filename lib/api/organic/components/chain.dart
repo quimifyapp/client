@@ -24,6 +24,18 @@ class Chain extends Organic {
 
   bool isDone() => getFreeBondCount() == 0;
 
+  Group? getPriorityGroup() {
+    for (Group group in Group.values) {
+      for (Carbon carbon in _carbons) {
+        if (carbon.isBondedTo(group)) {
+          return group;
+        }
+      }
+    }
+
+    return null;
+  }
+
   void bondGroup(Group functionalGroup) =>
       bondSubstituent(Substituent(functionalGroup));
 
@@ -35,18 +47,6 @@ class Chain extends Organic {
   void bondCarbon() {
     _carbons.last.useBond();
     _carbons.add(Carbon(_carbons.last.getFreeBondCount() + 1));
-  }
-
-  Group? getPriorityGroup() {
-    for (Group group in Group.values) {
-      for (Carbon carbon in _carbons) {
-        if (carbon.isBondedTo(group)) {
-          return group;
-        }
-      }
-    }
-
-    return null;
   }
 
   // Text:
