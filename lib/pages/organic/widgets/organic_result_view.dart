@@ -72,13 +72,19 @@ class OrganicResultView extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(
+              top: 20,
+              bottom: 20 - 15, // Without OrganicResultField's bottom padding
+              left: 20,
+              right: 20,
+            ),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: const EdgeInsets.all(20),
-            child: Wrap(
-              runSpacing: 13,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: fields.entries
                   .map(
                     (field) => OrganicResultField(

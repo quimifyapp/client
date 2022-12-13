@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class OrganicResultField extends StatelessWidget {
@@ -12,7 +11,7 @@ class OrganicResultField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -26,22 +25,20 @@ class OrganicResultField extends StatelessWidget {
             height: 1.3,
           ),
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: AutoSizeText(
-            field,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 16,
-              fontFamily: 'CeraProBoldCustom',
-            ),
-            strutStyle: const StrutStyle(
-              fontSize: 16,
-              height: 1.3,
-            ),
+        const SizedBox(height: 5),
+        Text(
+          field,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: 16,
+            fontFamily: 'CeraProBoldCustom',
+          ),
+          strutStyle: const StrutStyle(
+            fontSize: 16,
+            height: 1.3,
           ),
         ),
+        const SizedBox(height: 15),
       ],
     );
   }
