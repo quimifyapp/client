@@ -20,7 +20,7 @@ class Api {
   late final http.Client _client;
 
   static const _apiVersion = 3;
-  static const _clientVersion = 4;
+  static const _clientVersion = 5;
   static const _authority = 'api.quimify.com';
 
   Future<String?> _getBody(String path, Map<String, dynamic> parameters) async {
