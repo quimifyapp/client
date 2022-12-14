@@ -44,7 +44,7 @@ class Carbon extends Organic {
   }
 
   int getAmountOfGroup(Group group) {
-    if(Organic.isBond(group)) {
+    if (Organic.isBond(group)) {
       return isBondedTo(group) ? 1 : 0;
     }
 
@@ -72,7 +72,7 @@ class Carbon extends Organic {
 
     Set<Substituent> uniqueSubstituents = _substituents.toSet();
     uniqueSubstituents.removeWhere((Substituent s) =>
-    s.getGroup() == Group.hydrogen || s.getGroup() == Group.ether);
+        s.getGroup() == Group.hydrogen || s.getGroup() == Group.ether);
 
     List<Substituent> uniqueOrderedSubstituents = uniqueSubstituents
         .sorted((a, b) => a.getGroup().index.compareTo(b.getGroup().index));
@@ -80,17 +80,18 @@ class Carbon extends Organic {
     if (uniqueOrderedSubstituents.length == 1) {
       // Only one kind except for hydrogen and ether
       Substituent substituent = uniqueOrderedSubstituents.first;
+      Group group = substituent.getGroup();
 
-      bool isAldehyde = substituent.getGroup() == Group.aldehyde;
-
-      if (substituent.getBondCount() == 3 && !isAldehyde) {
-        result += substituent.toString();
-      } else if (isAldehyde && hydrogenCount == 0) {
+      if (substituent.getBondCount() == 3 && group != Group.aldehyde) {
+        result += substituent.toString(); // CHOOH, CONH2-...
+      } else if (group == Group.aldehyde && hydrogenCount == 0) {
         result += substituent.toString(); // CHO
-      } else if (Organic.isHalogen(substituent.getGroup())) {
-        result += substituent.toString(); // CHCl2, CF3...
+      } else if (group == Group.ketone && hydrogenCount == 0) {
+        result += substituent.toString(); // -CO-
+      } else if (Organic.isHalogen(group)) {
+        result += substituent.toString(); // CHCl2, CF3-...
       } else {
-        result += '(${substituent.toString()})'; // CH(HO), CH(CH3)3...
+        result += '(${substituent.toString()})'; // CH(HO), CH(CH3)3-...
       }
 
       int amount = getAmountOfSubstituent(substituent);
