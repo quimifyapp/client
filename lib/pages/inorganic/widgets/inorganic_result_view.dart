@@ -67,7 +67,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                   'Búsqueda: ',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.tertiary,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
                 Expanded(
@@ -78,7 +78,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     stepGranularity: 0.1,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ),
