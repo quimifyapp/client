@@ -30,11 +30,11 @@ class OrganicResultField extends StatelessWidget {
           field,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
+            fontSize: 18,
             fontFamily: 'CeraProBoldCustom',
           ),
           strutStyle: const StrutStyle(
-            fontSize: 16,
+            fontSize: 18,
             height: 1.3,
           ),
         ),
