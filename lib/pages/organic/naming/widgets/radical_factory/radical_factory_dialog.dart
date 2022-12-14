@@ -109,7 +109,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                         Expanded(
                           child: QuimifyButton(
                             height: 50,
-                            backgroundColor:
+                            color:
                                 const Color.fromARGB(255, 56, 133, 224),
                             onPressed: _addButton,
                             child: Text(
@@ -130,7 +130,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                         Expanded(
                           child: QuimifyButton(
                             height: 50,
-                            backgroundColor:
+                            color:
                                 const Color.fromARGB(255, 255, 96, 96),
                             enabled: _canRemove(),
                             onPressed: _removeButton,

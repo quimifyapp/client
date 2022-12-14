@@ -40,10 +40,6 @@ class _NamingPageState extends State<NamingPage> {
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
 
-  static const double _buttonCount = 3;
-  static const double _horizontalPadding = 20;
-  static const double _buttonSeparatorWidth = 10;
-
   void _reset() {
     _openChainStack = [Simple()];
     _sequenceStack = [[]];
@@ -119,8 +115,6 @@ class _NamingPageState extends State<NamingPage> {
           );
         },
       ),
-    ).then(
-      (_) => setState(_reset),
     );
   }
 
@@ -145,7 +139,7 @@ class _NamingPageState extends State<NamingPage> {
 
   bool _canUndo() => _openChainStack.length > 1;
 
-  void _undo() {
+  void _undoButton() {
     if (_canUndo()) {
       setState(() {
         _openChainStack.removeLast();
@@ -162,7 +156,7 @@ class _NamingPageState extends State<NamingPage> {
 
   bool _canBondCarbon() => _openChainStack.last.canBondCarbon();
 
-  void _bondCarbon() {
+  void _bondCarbonButton() {
     if (_canBondCarbon()) {
       _startEditing();
       setState(() {
@@ -186,7 +180,7 @@ class _NamingPageState extends State<NamingPage> {
     }
   }
 
-  void _hydrogenate() {
+  void _hydrogenateButton() {
     _startEditing();
 
     setState(() {
@@ -204,6 +198,10 @@ class _NamingPageState extends State<NamingPage> {
       }
     });
   }
+
+  void _resetButton() => setState(() => _reset());
+
+  // Below editing panel:
 
   void _bondRadical(int carbonCount, bool isIso) {
     _startEditing();
@@ -337,11 +335,6 @@ class _NamingPageState extends State<NamingPage> {
       ),
     };
 
-    double buttonWidth = MediaQuery.of(context).size.width; // Screen width
-    buttonWidth -= (_buttonCount - 1) * _buttonSeparatorWidth; // Without breaks
-    buttonWidth -= 2 * _horizontalPadding; // Without horizontal padding
-    buttonWidth /= _buttonCount; // Per button
-
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -352,8 +345,8 @@ class _NamingPageState extends State<NamingPage> {
         body: Padding(
           padding: const EdgeInsets.only(
             top: 20,
-            left: _horizontalPadding,
-            right: _horizontalPadding,
+            left: 20,
+            right: 20,
           ),
           child: Column(
             children: [
@@ -396,26 +389,44 @@ class _NamingPageState extends State<NamingPage> {
               // Buttons:
               Row(
                 children: [
-                  UndoButton(
-                    width: buttonWidth,
-                    onPressed: _undo,
-                    enabled: _canUndo(),
-                  ),
-                  const SizedBox(width: _buttonSeparatorWidth),
-                  if (!_done) ...[
-                    AddCarbonButton(
-                      width: buttonWidth,
-                      enabled: _canBondCarbon(),
-                      onPressed: _bondCarbon,
+                  Expanded(
+                    child: UndoButton(
+                      onPressed: _undoButton,
+                      enabled: _canUndo(),
                     ),
-                    const SizedBox(width: _buttonSeparatorWidth),
-                    HydrogenateButton(
-                      width: buttonWidth,
-                      onPressed: _hydrogenate,
-                      enabled: true,
+                  ),
+                  const SizedBox(width: 10),
+                  if (!_done) ...[
+                    Expanded(
+                      child: AddCarbonButton(
+                        enabled: _canBondCarbon(),
+                        onPressed: _bondCarbonButton,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: HydrogenateButton(
+                        onPressed: _hydrogenateButton,
+                        enabled: true,
+                      ),
                     ),
                   ],
-                  if (_done) // 'Solve it' button
+                  if (_done) ...[
+                    // Reset button:
+                    Expanded(
+                      child: QuimifyButton(
+                        height: 40,
+                        onPressed: _resetButton,
+                        color: const Color.fromARGB(255, 56, 133, 224),
+                        child: Icon(
+                          Icons.delete_rounded,
+                          size: 22,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    // 'Solve it' button:
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: 40,
@@ -431,16 +442,15 @@ class _NamingPageState extends State<NamingPage> {
                         ),
                       ),
                     ),
+                  ],
                 ],
               ),
               const SizedBox(height: 20),
               // Substituents:
               if (!_done) ...[
-                QuimifySectionTitle(
+                const QuimifySectionTitle(
                   title: 'Sustituyentes',
-                  dialog: NamingHelpDialog(
-                    buttonWidth: buttonWidth,
-                  ),
+                  dialog: NamingHelpDialog(),
                 ),
                 const SizedBox(height: 15),
                 Expanded(

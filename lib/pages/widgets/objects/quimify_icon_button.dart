@@ -34,7 +34,7 @@ class QuimifyIconButton extends StatelessWidget {
     return QuimifyButton(
       width: width,
       height: height,
-      backgroundColor: backgroundColor,
+      color: backgroundColor,
       onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

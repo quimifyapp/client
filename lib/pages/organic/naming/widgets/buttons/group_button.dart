@@ -22,7 +22,7 @@ class GroupButton extends StatelessWidget {
     return QuimifyButton(
       height: 60,
       onPressed: onPressed,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      color: Theme.of(context).colorScheme.surface,
       child: Row(
         children: [
           const SizedBox(width: 10),

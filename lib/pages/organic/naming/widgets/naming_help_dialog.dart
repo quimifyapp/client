@@ -7,12 +7,7 @@ import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
-  const NamingHelpDialog({
-    Key? key,
-    required this.buttonWidth,
-  }) : super(key: key);
-
-  final double buttonWidth;
+  const NamingHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,17 +119,16 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Enlazar carbono': [
+        'Deshacer': [
           Center(
-            child: AddCarbonButton(
-              width: buttonWidth,
+            child: UndoButton(
               enabled: true,
               onPressed: () {},
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para añadir un carbono a la cadena.',
+              text: 'Este botón sirve para deshacer el último cambio.',
             ),
           ),
         ],
@@ -142,7 +136,6 @@ class NamingHelpDialog extends StatelessWidget {
           Center(
             child: SizedBox(
               child: HydrogenateButton(
-                width: buttonWidth,
                 enabled: true,
                 onPressed: () {},
               ),
@@ -155,17 +148,16 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Deshacer': [
+        'Enlazar carbono': [
           Center(
-            child: UndoButton(
-              width: buttonWidth,
+            child: AddCarbonButton(
               enabled: true,
               onPressed: () {},
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para deshacer el último cambio.',
+              text: 'Este botón sirve para añadir un carbono a la cadena.',
             ),
           ),
         ],
