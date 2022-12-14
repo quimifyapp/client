@@ -120,10 +120,13 @@ class NamingHelpDialog extends StatelessWidget {
           ),
         ],
         'Deshacer': [
-          Center(
-            child: UndoButton(
-              enabled: true,
-              onPressed: () {},
+          SizedBox(
+            width: 100,
+            child: Center(
+              child: UndoButton(
+                enabled: true,
+                onPressed: () {},
+              ),
             ),
           ),
           const Center(
@@ -132,10 +135,11 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Hidrogenar': [
-          Center(
-            child: SizedBox(
-              child: HydrogenateButton(
+        'Enlazar carbono': [
+          SizedBox(
+            width: 100,
+            child: Center(
+              child: AddCarbonButton(
                 enabled: true,
                 onPressed: () {},
               ),
@@ -143,21 +147,26 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
-                  'hasta que solo quede un enlace libre.',
+              text: 'Este botón sirve para añadir un carbono a la cadena.',
             ),
           ),
         ],
-        'Enlazar carbono': [
-          Center(
-            child: AddCarbonButton(
-              enabled: true,
-              onPressed: () {},
+        'Hidrogenar': [
+          SizedBox(
+            width: 100,
+            child: Center(
+              child: SizedBox(
+                child: HydrogenateButton(
+                  enabled: true,
+                  onPressed: () {},
+                ),
+              ),
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para añadir un carbono a la cadena.',
+              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
+                  'hasta que solo quede un enlace libre.',
             ),
           ),
         ],
