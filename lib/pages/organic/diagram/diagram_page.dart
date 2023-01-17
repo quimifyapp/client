@@ -21,6 +21,10 @@ class _DiagramPageState extends State<DiagramPage> {
   late PhotoViewControllerBase controller;
   late PhotoViewScaleStateController scaleStateController;
 
+  static const double minScale = 0.75;
+  static const double maxScale = 2.5;
+  static const double step = 0.5;
+
   @override
   void initState() {
     controller = PhotoViewController(initialScale: 1.0);
@@ -92,25 +96,21 @@ class _DiagramPageState extends State<DiagramPage> {
     );
   }
 
+  void addToScale(double extraScale) {
+    if (controller.scale != null) {
+      double newScale = controller.scale! + extraScale;
+
+      controller.scale =
+          newScale < minScale ? minScale : min(newScale, maxScale);
+    }
+  }
+
   Widget _streamBuild(BuildContext context, AsyncSnapshot snapshot) {
-    const double minScale = 0.75;
-    const double maxScale = 2.5;
-    const double step = 0.5;
-
-    final PhotoViewControllerValue value = snapshot.data;
-
     if (snapshot.hasError || !snapshot.hasData) {
       return Container();
     }
 
-    void addToScale(double extraScale) {
-      if (controller.scale != null) {
-        double newScale = controller.scale! + extraScale;
-
-        controller.scale =
-            newScale < minScale ? minScale : min(newScale, maxScale);
-      }
-    }
+    final PhotoViewControllerValue value = snapshot.data;
 
     return Row(
       children: [
