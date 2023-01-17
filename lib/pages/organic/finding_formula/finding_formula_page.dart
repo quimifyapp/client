@@ -30,7 +30,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     true,
     'COOH - COOH',
     'ácido etanodioico',
-    102.09,
+    90.01,
     null,
   );
 
