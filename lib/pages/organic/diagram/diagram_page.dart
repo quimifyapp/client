@@ -55,8 +55,7 @@ class _DiagramPageState extends State<DiagramPage> {
                           247 / 245, 0, 0, 0, 0,
                           0, 247 / 245, 0, 0, 0,
                           0, 0, 247 / 245, 0, 0,
-                          0, 0, 0, 1,
-                          0, // Identity * [245 -> light background]
+                          0, 0, 0, 1, 0, // Identity * [245 -> light background]
                         ]
                       : [
                           -237 / 245, 0, 0, 0, 255,
@@ -74,9 +73,10 @@ class _DiagramPageState extends State<DiagramPage> {
                     color: Colors.transparent,
                   ),
                   // TODO bug:
+                  disableGestures: true,
                   //minScale: 0.75,
                   //maxScale: 2.5,
-                  disableGestures: true,
+                  //filterQuality: FilterQuality.high,
                 ),
               ),
             ),
