@@ -1,6 +1,6 @@
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_thanks_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:quimify_client/utils/text.dart';
@@ -22,28 +22,25 @@ class QuimifyReportDialog extends StatelessWidget {
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
-  Future<void> _sendReport(String details) async =>
-      await Api().sendReport(label: label, userMessage: details);
+  Future<void> _sendReport(String reportDetails) async =>
+      await Api().sendReport(label: label, userMessage: reportDetails);
 
-  void _exitWithThanks(BuildContext context) {
+  void _exitWithThanks(String reportDetails, BuildContext context) {
     Navigator.of(context).pop();
 
-    const QuimifyMessageDialog(
-      title: 'Gracias por tu ayuda',
-      details: 'Seguiremos mejorando.',
+    QuimifyThanksDialog(
+      reportLabel: label,
+      reportDetails: reportDetails,
     ).showIn(context);
   }
 
-  void _report(String details, BuildContext context) {
-    _exitWithThanks(context);
-    _sendReport(details);
+  void _submittedText(String text, BuildContext context) {
+    _exitWithThanks(text, context);
+    _sendReport(text);
   }
 
-  void _submittedText(String text, BuildContext context) =>
-      _report(text, context);
-
   void _pressedButton(BuildContext context) =>
-      _report(_textController.text, context);
+      _submittedText(_textController.text, context);
 
   void _tapOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard

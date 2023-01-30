@@ -34,6 +34,8 @@ flutter:
     - assets/images/icons/butane.png
     - assets/images/icons/but-2-ene.png
     - assets/images/icons/but-2-yne.png
+    - assets/images/discord.png
+    - assets/images/gmail.png
 
   fonts:
     - family: CeraProBoldCustom # To use 'Ξ' as a triple bond indicator
@@ -90,6 +92,7 @@ dependencies:
   envied: ^0.2.4
   diacritic: ^0.1.3
   collection: ^1.16.0
+  mailto: ^2.0.0
 
 dev_dependencies:
   flutter_test:
