@@ -54,8 +54,8 @@ class QuimifyThanksDialog extends StatelessWidget {
           children: [
             const Center(
               child: QuimifyDialogContentText(
-                text: 'Si necesitas ayuda, escríbenos y te contestaremos '
-                    'rápidamente.',
+                text: 'Si necesitas ayuda, chatea con nosotros y solucionaremos'
+                    ' tus dudas.',
               ),
             ),
             const SizedBox(height: 20),
