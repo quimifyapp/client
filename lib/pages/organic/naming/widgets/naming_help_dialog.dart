@@ -120,9 +120,9 @@ class NamingHelpDialog extends StatelessWidget {
           ),
         ],
         'Deshacer': [
-          SizedBox(
-            width: 100,
-            child: Center(
+          Center(
+            child: SizedBox(
+              width: 100,
               child: UndoButton(
                 enabled: true,
                 onPressed: () {},
@@ -136,9 +136,9 @@ class NamingHelpDialog extends StatelessWidget {
           ),
         ],
         'Enlazar carbono': [
-          SizedBox(
-            width: 100,
-            child: Center(
+          Center(
+            child: SizedBox(
+              width: 100,
               child: AddCarbonButton(
                 enabled: true,
                 onPressed: () {},
@@ -152,21 +152,19 @@ class NamingHelpDialog extends StatelessWidget {
           ),
         ],
         'Hidrogenar': [
-          SizedBox(
-            width: 100,
-            child: Center(
-              child: SizedBox(
-                child: HydrogenateButton(
-                  enabled: true,
-                  onPressed: () {},
-                ),
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: HydrogenateButton(
+                enabled: true,
+                onPressed: () {},
               ),
             ),
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para enlazar hidrógenos al carbono, '
-                  'hasta que solo quede un enlace libre.',
+              text: 'Este botón sirve para enlazar varios hidrógenos al '
+                  'carbono.',
             ),
           ),
         ],
