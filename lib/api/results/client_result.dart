@@ -32,7 +32,7 @@ class ClientResult {
       json['messageTitle'] as String?,
       json['messageDetails'] as String?,
       json['messageLinkPresent'] as bool?,
-      json['messageLinkName'] as String?,
+      json['messageLinkLabel'] as String?,
       json['messageLink'] as String?,
     );
   }
