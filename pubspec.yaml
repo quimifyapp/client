@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify client
 
-version: 3.4.6+87 # Android build code
+version: 3.4.7+88 # Android build code
 
 flutter:
   uses-material-design: true
