@@ -38,7 +38,10 @@ class Graph extends StatelessWidget {
             children: bars
                 .map(
                   (bar) => Container(
-                    padding: const EdgeInsets.only(top: 5, bottom: 5),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                    ),
                     child: Column(
                       children: [
                         bar,

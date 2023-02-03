@@ -55,7 +55,10 @@ class QuimifyDialog extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton(
-                  padding: const EdgeInsets.only(top: 15, right: 15),
+                  padding: const EdgeInsets.only(
+                    top: 15,
+                    right: 15,
+                  ),
                   alignment: Alignment.topRight,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
