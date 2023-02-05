@@ -7,8 +7,8 @@ import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_butto
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class QuimifySlidesDialog extends StatefulWidget {
-  const QuimifySlidesDialog({
+class QuimifyHelpSlidesDialog extends StatefulWidget {
+  const QuimifyHelpSlidesDialog({
     Key? key,
     required this.titleToContent,
   }) : super(key: key);
@@ -16,10 +16,10 @@ class QuimifySlidesDialog extends StatefulWidget {
   final Map<String, List<Widget>> titleToContent;
 
   @override
-  State<QuimifySlidesDialog> createState() => _QuimifySlidesDialogState();
+  State<QuimifyHelpSlidesDialog> createState() => _QuimifyHelpSlidesDialogState();
 }
 
-class _QuimifySlidesDialogState extends State<QuimifySlidesDialog> {
+class _QuimifyHelpSlidesDialogState extends State<QuimifyHelpSlidesDialog> {
   late Map<String, List<Widget>> titleToContent = {...widget.titleToContent};
   late int _currentSlide = 0;
 

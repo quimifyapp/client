@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_slides_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class MolecularMassHelpDialog extends StatelessWidget {
@@ -7,7 +7,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QuimifySlidesDialog(
+    return QuimifyHelpSlidesDialog(
       titleToContent: {
         'Concepto de mol': const [
           Center(
