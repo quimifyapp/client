@@ -38,7 +38,7 @@ class OrganicPage extends StatelessWidget {
         const QuimifyCard(
           body: {
             'CHO – CN': '2-oxoetanonitrilo',
-            'CH₂ – CONH₂': 'etanamida',
+            'CH₃ – CONH₂': 'etanamida',
             'CH₃ – O – CF₃': 'metil trifluorometil éter',
             'CN – COOH': 'ácido cianometanoico',
             'CH₃ – C Ξ CH': 'prop-1-ino',
