@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
@@ -8,9 +7,9 @@ class NamingHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return QuimifyDialog(
-        title: 'Nombrar',
-        content: const [
+    return const QuimifyHelpSlidesDialog(
+      titleToContent: {
+        'Nombrar': [
           Center(
             child: QuimifyDialogContentText(
               text: 'Consiste averiguar el nombre dada la fórmula.',
@@ -31,12 +30,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        actions: [
-          QuimifyDialogButton(
-            onPressed: () => Navigator.of(context).pop(),
-            text: 'Entendido',
-          ),
-        ],
-      );
+      },
+    );
   }
 }
