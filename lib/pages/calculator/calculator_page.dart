@@ -15,7 +15,7 @@ class CalculatorPage extends StatelessWidget {
       children: const [
         QuimifySectionTitle(
           title: 'Masa molecular',
-          dialog: CalculatorHelpDialog(),
+          helpDialog: CalculatorHelpDialog(),
         ),
         SizedBox(height: 15),
         QuimifyCard(
@@ -31,7 +31,7 @@ class CalculatorPage extends StatelessWidget {
         ),
         QuimifySectionTitle(
           title: 'Ajustar reacciones',
-          dialog: quimifyComingSoonDialog,
+          helpDialog: quimifyComingSoonDialog,
         ),
         SizedBox(height: 15),
         QuimifyCard.comingSoon(

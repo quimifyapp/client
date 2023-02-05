@@ -450,7 +450,7 @@ class _NamingPageState extends State<NamingPage> {
               if (!_done) ...[
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
-                  dialog: NamingHelpDialog(),
+                  helpDialog: NamingHelpDialog(),
                 ),
                 const SizedBox(height: 15),
                 Expanded(

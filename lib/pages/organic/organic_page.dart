@@ -17,7 +17,7 @@ class OrganicPage extends StatelessWidget {
       children: [
         const QuimifySectionTitle(
           title: 'Formular',
-          dialog: FindingFormulaHelpDialog(),
+          helpDialog: FindingFormulaHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
@@ -32,7 +32,7 @@ class OrganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Nombrar',
-          dialog: NamingHelpDialog(),
+          helpDialog: NamingHelpDialog(),
         ),
         const SizedBox(height: 15),
         const QuimifyCard(
@@ -48,7 +48,7 @@ class OrganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Practicar',
-          dialog: quimifyComingSoonDialog,
+          helpDialog: quimifyComingSoonDialog,
         ),
         const SizedBox(height: 15),
         const QuimifyCard.comingSoon(

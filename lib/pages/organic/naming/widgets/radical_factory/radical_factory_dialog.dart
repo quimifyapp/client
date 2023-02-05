@@ -74,7 +74,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
-          dialog: CarbonsHelpDialog(),
+          helpDialog: CarbonsHelpDialog(),
         ),
         Center(
           child: Padding(
@@ -162,7 +162,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
-          dialog: TipShapeHelpDialog(),
+          helpDialog: TipShapeHelpDialog(),
         ),
         Center(
           child: Wrap(

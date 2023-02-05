@@ -5,7 +5,7 @@ class QuimifySectionTitle extends StatelessWidget {
   const QuimifySectionTitle({
     super.key,
     required this.title,
-    required this.dialog,
+    required this.helpDialog,
   })  : horizontalPadding = 0,
         fontSize = 18,
         fontWeight = FontWeight.bold;
@@ -16,7 +16,7 @@ class QuimifySectionTitle extends StatelessWidget {
     required this.horizontalPadding,
     required this.fontSize,
     required this.fontWeight,
-    required this.dialog,
+    required this.helpDialog,
   });
 
   final String title;
@@ -24,7 +24,7 @@ class QuimifySectionTitle extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
 
-  final Widget dialog;
+  final Widget helpDialog;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class QuimifySectionTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          HelpButton(dialog: dialog),
+          HelpButton(dialog: helpDialog),
         ],
       ),
     );

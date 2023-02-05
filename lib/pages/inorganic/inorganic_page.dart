@@ -15,7 +15,7 @@ class InorganicPage extends StatelessWidget {
       children: const [
         QuimifySectionTitle(
           title: 'Formular y nombrar',
-          dialog: InorganicHelpDialog(),
+          helpDialog: InorganicHelpDialog(),
         ),
         SizedBox(height: 15),
         QuimifyCard(
@@ -31,7 +31,7 @@ class InorganicPage extends StatelessWidget {
         ),
         QuimifySectionTitle(
           title: 'Practicar',
-          dialog: quimifyComingSoonDialog,
+          helpDialog: quimifyComingSoonDialog,
         ),
         SizedBox(height: 15),
         QuimifyCard.comingSoon(
