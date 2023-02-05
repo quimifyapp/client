@@ -58,7 +58,7 @@ class QuimifyContactButtons extends StatelessWidget {
               height: _iconHeight,
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12.5),
           GestureDetector(
             onTap: () => _emailPressed(context),
             child: Image.asset(
