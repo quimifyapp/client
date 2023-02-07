@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:quimify_client/api/results/client_result.dart';
+import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
     required this.clientResult,
   }) : super(key: key);
 
-  final ClientResult? clientResult;
+  final AccessDataResult? clientResult;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -36,6 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
+
     _currentPage = 0;
     _visitedPagesStack = [];
     autoSizeGroup = AutoSizeGroup();
@@ -43,8 +45,6 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _showWelcomePopups(),
     );
-
-    super.initState();
   }
 
   void _goToPage(int page) {
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
         QuimifyMessageDialog.linked(
           title: widget.clientResult!.messageTitle!,
           details: widget.clientResult!.messageDetails!,
-          linkName: widget.clientResult!.messageLinkName!,
+          linkLabel: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
         ).showIn(context);
       } else {
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
         QuimifyMessageDialog.linked(
           title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
           details: widget.clientResult!.updateDetails,
-          linkName: 'Actualizar',
+          linkLabel: 'Actualizar',
           link: Platform.isAndroid
               ? 'https://play.google.com/store/apps/details?id=com.quimify'
               : 'https://apps.apple.com/es/app/quimify/id6443752619',

@@ -27,15 +27,17 @@ class _DiagramPageState extends State<DiagramPage> {
 
   @override
   void initState() {
+    super.initState();
+
     controller = PhotoViewController(initialScale: 1.0);
     scaleStateController = PhotoViewScaleStateController();
-    super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
     scaleStateController.dispose();
+
     super.dispose();
   }
 

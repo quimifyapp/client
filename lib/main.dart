@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/client_result.dart';
+import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +24,7 @@ Future<void> main() async {
   } catch (_) {} // It's already present in modern devices
 
   Api().connect();
-  ClientResult? clientResult = await Api().getClientResult();
+  AccessDataResult? clientResult = await Api().getAccessDataResult();
 
   // App launch:
   runApp(QuimifyApp(clientResult: clientResult));
@@ -36,7 +36,7 @@ class QuimifyApp extends StatelessWidget {
     this.clientResult,
   }) : super(key: key);
 
-  final ClientResult? clientResult;
+  final AccessDataResult? clientResult;
 
   @override
   Widget build(BuildContext context) {

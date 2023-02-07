@@ -9,12 +9,14 @@ import 'package:flutter/material.dart';
 class QuimifyReportDialog extends StatelessWidget {
   QuimifyReportDialog({
     Key? key,
-    required this.label,
     required this.details,
+    required this.reportContext,
+    required this.reportDetails,
   }) : super(key: key);
 
-  final String label;
   final String? details;
+  final String reportContext;
+  final String reportDetails;
 
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
@@ -22,15 +24,19 @@ class QuimifyReportDialog extends StatelessWidget {
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
-  Future<void> _sendReport(String reportDetails) async =>
-      await Api().sendReport(label: label, userMessage: reportDetails);
+  Future<void> _sendReport(String? userMessage) async {
+    await Api().sendReport(
+      context: reportContext,
+      details: reportDetails,
+      userMessage: userMessage,
+    );
+  }
 
-  void _exitWithThanks(String reportDetails, BuildContext context) {
+  void _exitWithThanks(String userMessage, BuildContext context) {
     Navigator.of(context).pop();
 
     QuimifyThanksDialog(
-      reportLabel: label,
-      reportDetails: reportDetails,
+      userMessage: userMessage,
     ).showIn(context);
   }
 

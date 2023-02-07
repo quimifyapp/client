@@ -24,4 +24,18 @@ class OrganicResult {
       json['url2D'] as String?
     );
   }
+
+  @override
+  String toString() {
+    List<String?> identifiers = [
+      structure,
+      name,
+      url2D,
+      molecularMass.toString(),
+    ];
+
+    identifiers.removeWhere((identifier) => identifier == null);
+
+    return identifiers.toString();
+  }
 }

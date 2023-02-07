@@ -3,7 +3,7 @@ import 'dart:convert';
 class InorganicResult {
   final bool present;
   final String? formula;
-  final String? stockName, systematicName, traditionalName, otherName;
+  final String? stockName, systematicName, traditionalName, commonName;
   final String? molecularMass, density, meltingPoint, boilingPoint;
 
   InorganicResult(
@@ -12,7 +12,7 @@ class InorganicResult {
     this.stockName,
     this.systematicName,
     this.traditionalName,
-    this.otherName,
+    this.commonName,
     this.molecularMass,
     this.density,
     this.meltingPoint,
@@ -27,11 +27,30 @@ class InorganicResult {
       json['stockName'] as String?,
       json['systematicName'] as String?,
       json['traditionalName'] as String?,
-      json['otherName'] as String?,
+      json['commonName'] as String?,
       json['molecularMass'] as String?,
       json['density'] as String?,
       json['meltingPoint'] as String?,
       json['boilingPoint'] as String?,
     );
+  }
+
+  @override
+  String toString() {
+    List<String?> identifiers = [
+      formula,
+      stockName,
+      systematicName,
+      traditionalName,
+      commonName,
+      molecularMass,
+      density,
+      meltingPoint,
+      boilingPoint,
+    ];
+
+    identifiers.removeWhere((identifier) => identifier == null);
+
+    return identifiers.toString();
   }
 }

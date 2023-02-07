@@ -12,9 +12,10 @@ class QuimifyMessageDialog extends StatelessWidget {
     required this.title,
     this.details,
     this.closable = true,
-  })  : linkName = null,
+  })  : linkLabel = null,
         link = null,
-        reportLabel = null,
+        reportContext = null,
+        reportDetails = null,
         _hasLink = false,
         _hasReportButton = false;
 
@@ -22,10 +23,11 @@ class QuimifyMessageDialog extends StatelessWidget {
     super.key,
     required this.title,
     this.details,
-    required this.linkName,
+    required this.linkLabel,
     required this.link,
     this.closable = true,
-  })  : reportLabel = null,
+  })  : reportContext = null,
+        reportDetails = null,
         _hasLink = true,
         _hasReportButton = false;
 
@@ -33,8 +35,9 @@ class QuimifyMessageDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.details,
-    required this.reportLabel,
-  })  : linkName = null,
+    required this.reportContext,
+    required this.reportDetails,
+  })  : linkLabel = null,
         link = null,
         closable = true,
         _hasLink = false,
@@ -42,7 +45,10 @@ class QuimifyMessageDialog extends StatelessWidget {
 
   final String title;
   final String? details;
-  final String? linkName, link, reportLabel;
+
+  final String? linkLabel, link;
+  final String? reportContext, reportDetails;
+
   final bool closable;
 
   final bool _hasLink, _hasReportButton;
@@ -70,7 +76,8 @@ class QuimifyMessageDialog extends StatelessWidget {
 
     QuimifyReportDialog(
       details: details,
-      label: reportLabel!,
+      reportContext: reportContext!,
+      reportDetails: reportDetails!,
     ).show(context);
   }
 
@@ -108,7 +115,7 @@ class QuimifyMessageDialog extends StatelessWidget {
               Expanded(
                 child: QuimifyDialogButton(
                   onPressed: () => _pressedButton(context),
-                  text: _hasLink ? linkName! : 'Entendido',
+                  text: _hasLink ? linkLabel! : 'Entendido',
                 ),
               ),
             ],

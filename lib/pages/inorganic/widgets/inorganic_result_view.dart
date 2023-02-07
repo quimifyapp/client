@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 class InorganicResultView extends StatefulWidget {
   const InorganicResultView({
     Key? key,
-    required this.query,
+    required this.formattedQuery,
     required this.inorganicResult,
   }) : super(key: key);
 
-  final String query;
+  final String formattedQuery;
   final InorganicResult inorganicResult;
 
   @override
@@ -30,10 +30,10 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   void _pressedReportButton() {
     QuimifyReportDialog(
-      details: 'Resultado de:\n'
-          '"${formatInorganicFormulaOrName(widget.query)}"',
-      label: 'Formulación inorgánica, resultado de "${widget.query}": '
-          '(${widget.inorganicResult.formula})',
+      details: 'Resultado de:\n"${widget.formattedQuery}"',
+      reportContext: 'Inorganic naming and finding formula',
+      reportDetails: 'Result of "${widget.formattedQuery}": '
+          '${widget.inorganicResult}',
     ).show(context);
   }
 
@@ -72,7 +72,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 ),
                 Expanded(
                   child: AutoSizeText(
-                    formatInorganicFormulaOrName(widget.query),
+                    formatInorganicFormulaOrName(widget.formattedQuery),
                     maxLines: 1,
                     minFontSize: 12,
                     stepGranularity: 0.1,
@@ -124,8 +124,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                   name: widget.inorganicResult.traditionalName,
                 ),
                 InorganicResultName(
-                  label: 'Nombre',
-                  name: widget.inorganicResult.otherName,
+                  label: 'Nombre común',
+                  name: widget.inorganicResult.commonName,
                 ),
                 const SizedBox(height: 15),
                 AnimatedSize(

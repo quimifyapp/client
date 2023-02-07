@@ -11,8 +11,10 @@ import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
-  const RadicalFactoryDialog({Key? key, required this.onSubmitted})
-      : super(key: key);
+  const RadicalFactoryDialog({
+    Key? key,
+    required this.onSubmitted,
+  }) : super(key: key);
 
   final void Function(int, bool) onSubmitted;
 
@@ -29,9 +31,10 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
 
   @override
   void initState() {
+    super.initState();
+
     _carbonCount = 1;
     _isIso = false;
-    super.initState();
   }
 
   void _doneButton() {
@@ -109,8 +112,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                         Expanded(
                           child: QuimifyButton(
                             height: 50,
-                            color:
-                                const Color.fromARGB(255, 56, 133, 224),
+                            color: const Color.fromARGB(255, 56, 133, 224),
                             onPressed: _addButton,
                             child: Text(
                               '+',
@@ -130,8 +132,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                         Expanded(
                           child: QuimifyButton(
                             height: 50,
-                            color:
-                                const Color.fromARGB(255, 255, 96, 96),
+                            color: const Color.fromARGB(255, 255, 96, 96),
                             enabled: _canRemove(),
                             onPressed: _removeButton,
                             child: Text(

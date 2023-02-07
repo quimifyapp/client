@@ -40,23 +40,27 @@ class _NamingPageState extends State<NamingPage> {
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
 
+  @override
+  void initState() {
+    super.initState();
+
+    _reset();
+  }
+
   void _reset() {
     _openChainStack = [Simple()];
     _sequenceStack = [[]];
     _done = false;
   }
 
-  @override
-  void initState() {
-    _reset();
-    super.initState();
-  }
+  OpenChain _openChain() => _openChainStack.last;
+
+  List<int> _sequence() => _sequenceStack.last;
 
   Future<OrganicResult?> _search() async {
     startQuimifyLoading(context);
 
-    OrganicResult? result =
-        await Api().getOrganicFromStructure(_sequenceStack.last);
+    OrganicResult? result = await Api().getOrganicFromStructure(_sequence());
 
     stopQuimifyLoading();
 
@@ -108,8 +112,9 @@ class _NamingPageState extends State<NamingPage> {
               quimifyReportDialog: QuimifyReportDialog(
                 details: 'Resultado de:\n"'
                     '${formatStructure(organicResult.structure!)}"',
-                label: 'Cadena abierta, resultado de '
-                    '${_sequenceStack.last.toString()}',
+                reportContext: 'Organic naming',
+                reportDetails:
+                    'Result of ${_sequence()}: $organicResult',
               ),
             ),
           );
@@ -130,11 +135,11 @@ class _NamingPageState extends State<NamingPage> {
 
   // Editing panel:
 
-  void _checkDone() => setState(() => _done = _openChainStack.last.isDone());
+  void _checkDone() => setState(() => _done = _openChain().isDone());
 
   void _startEditing() {
-    _openChainStack.add(_openChainStack.last.getCopy());
-    _sequenceStack.add(List.from(_sequenceStack.last));
+    _openChainStack.add(_openChain().getCopy());
+    _sequenceStack.add(List.from(_sequence()));
   }
 
   bool _canUndo() => _openChainStack.length > 1;
@@ -154,17 +159,17 @@ class _NamingPageState extends State<NamingPage> {
     }
   }
 
-  bool _canBondCarbon() => _openChainStack.last.canBondCarbon();
+  bool _canBondCarbon() => _openChain().canBondCarbon();
 
   void _bondCarbonButton() {
     if (_canBondCarbon()) {
       _startEditing();
       setState(() {
-        _openChainStack.last.bondCarbon();
-        _sequenceStack.last.add(-1);
+        _openChain().bondCarbon();
+        _sequence().add(-1);
         _checkDone();
       });
-    } else if (_openChainStack.last.getFreeBondCount() == 4) {
+    } else if (_openChain().getFreeBondCount() == 4) {
       const QuimifyMessageDialog(
         title: 'Faltan sustituyentes',
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
@@ -184,17 +189,16 @@ class _NamingPageState extends State<NamingPage> {
     _startEditing();
 
     setState(() {
-      int amount = _openChainStack.last.getFreeBondCount() > 1 ? 1 : 0;
+      int amount = _openChain().getFreeBondCount() > 1 ? 1 : 0;
 
-      for (int i = _openChainStack.last.getFreeBondCount(); i > amount; i--) {
-        List<Group> bondableGroups = _openChainStack.last.getBondableGroups();
-
-        int code = bondableGroups.indexOf(Group.hydrogen);
-        if (code != -1) {
-          _openChainStack.last.bondGroup(Group.hydrogen);
-          _sequenceStack.last.add(code);
-          _checkDone();
+      for (int i = _openChain().getFreeBondCount(); i > amount; i--) {
+        if (!_openChain().getBondableGroups().contains(Group.hydrogen)) {
+          break;
         }
+
+        _openChain().bondGroup(Group.hydrogen);
+        _sequence().add(Group.hydrogen.index);
+        _checkDone();
       }
     });
   }
@@ -206,20 +210,18 @@ class _NamingPageState extends State<NamingPage> {
   void _bondRadical(int carbonCount, bool isIso) {
     _startEditing();
 
+    if (!_openChain().getBondableGroups().contains(Group.radical)) {
+      return;
+    }
+
     setState(() {
-      int code =
-          _openChainStack.last.getBondableGroups().indexOf(Group.radical);
+      _openChain().bondSubstituent(Substituent.radical(carbonCount, isIso));
 
-      if (code != -1) {
-        _openChainStack.last
-            .bondSubstituent(Substituent.radical(carbonCount, isIso));
+      _sequence().add(Group.radical.index);
+      _sequence().add(isIso ? 1 : 0);
+      _sequence().add(carbonCount);
 
-        _sequenceStack.last.add(code);
-        _sequenceStack.last.add(isIso ? 1 : 0);
-        _sequenceStack.last.add(carbonCount);
-
-        _checkDone();
-      }
+      _checkDone();
     });
   }
 
@@ -229,14 +231,14 @@ class _NamingPageState extends State<NamingPage> {
   void _bondGroup(Group group) {
     _startEditing();
 
-    setState(() {
-      int code = _openChainStack.last.getBondableGroups().indexOf(group);
+    if (!_openChain().getBondableGroups().contains(group)) {
+      return;
+    }
 
-      if (code != -1) {
-        _openChainStack.last = _openChainStack.last.bondGroup(group);
-        _sequenceStack.last.add(code);
-        _checkDone();
-      }
+    setState(() {
+      _openChainStack.last = _openChain().bondGroup(group);
+      _sequence().add(group.index);
+      _checkDone();
     });
   }
 
@@ -369,7 +371,7 @@ class _NamingPageState extends State<NamingPage> {
                     children: [
                       const SizedBox(width: 25),
                       Text(
-                        formatStructure(_openChainStack.last.getStructure()),
+                        formatStructure(_openChain().getStructure()),
                         style: const TextStyle(
                           fontFamily: 'CeraProBoldCustom',
                           fontSize: 28,
@@ -469,7 +471,7 @@ class _NamingPageState extends State<NamingPage> {
                         ),
                         child: Wrap(
                           runSpacing: 15,
-                          children: _openChainStack.last
+                          children: _openChain()
                               .getBondableGroups()
                               .map((function) => groupToButton[function]!)
                               .toList()

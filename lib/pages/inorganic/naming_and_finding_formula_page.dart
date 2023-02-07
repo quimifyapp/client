@@ -31,14 +31,14 @@ class _NamingAndFindingFormulaPageState
 
   final List<InorganicResultView> _resultViews = [
     InorganicResultView(
-      query: 'NaCl',
+      formattedQuery: 'NaCl',
       inorganicResult: InorganicResult(
         true,
         'NaCl',
         'cloruro de sodio',
         'monocloruro de sodio',
         'cloruro sódico',
-        null,
+        'sal de mesa',
         '58.35',
         '2.16',
         '1074.15',
@@ -62,7 +62,7 @@ class _NamingAndFindingFormulaPageState
   // Looks for a previous completion that could complete this input too
   String? _getFromFoundCompletionsCache(String normalizedInput) {
     String? key = _normalizedToCompletion.keys.firstWhereOrNull(
-            (String normalizedCompletion) =>
+        (String normalizedCompletion) =>
             normalizedCompletion.startsWith(normalizedInput));
 
     return key != null ? _normalizedToCompletion[key] : null;
@@ -97,7 +97,7 @@ class _NamingAndFindingFormulaPageState
     return completion;
   }
 
-  void _processResult(String query, InorganicResult? inorganicResult) {
+  void _processResult(String formattedQuery, InorganicResult? inorganicResult) {
     stopQuimifyLoading();
 
     if (inorganicResult != null) {
@@ -105,7 +105,7 @@ class _NamingAndFindingFormulaPageState
         setState(
           () => _resultViews.add(
             InorganicResultView(
-              query: query,
+              formattedQuery: formattedQuery,
               inorganicResult: inorganicResult,
             ),
           ),
@@ -113,16 +113,16 @@ class _NamingAndFindingFormulaPageState
 
         // UI/UX actions:
 
-        _labelText = query; // Sets previous input as label
+        _labelText = formattedQuery; // Sets previous input as label
         _textController.clear(); // Clears input
         _textFocusNode.unfocus(); // Hides keyboard
         _scrollToStart(); // Goes to the top of the page
       } else {
         QuimifyMessageDialog.reportable(
           title: 'Sin resultado',
-          details: 'No se ha encontrado:\n'
-              '"${formatInorganicFormulaOrName(query)}"',
-          reportLabel: 'Formulación inorgánica, búsqueda de "$query"',
+          details: 'No se ha encontrado:\n"$formattedQuery"',
+          reportContext: 'Inorganic naming and finding formula',
+          reportDetails: 'Searched "$formattedQuery"',
         ).showIn(context);
       }
     } else {
@@ -149,7 +149,7 @@ class _NamingAndFindingFormulaPageState
     InorganicResult? inorganicResult =
         await Api().getInorganicFromCompletion(completion);
 
-    _processResult(completion, inorganicResult);
+    _processResult(formatInorganicFormulaOrName(completion), inorganicResult);
   }
 
   Future<void> _searchFromQuery(String input, bool photo) async {
@@ -160,7 +160,7 @@ class _NamingAndFindingFormulaPageState
     startQuimifyLoading(context);
 
     InorganicResult? inorganicResult =
-        await Api().getInorganic(toDigits(input), photo);
+        await Api().getInorganic(toDigits(input));
 
     _processResult(input, inorganicResult);
   }

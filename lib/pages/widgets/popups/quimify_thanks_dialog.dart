@@ -7,12 +7,10 @@ import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_conte
 class QuimifyThanksDialog extends StatelessWidget {
   const QuimifyThanksDialog({
     Key? key,
-    required this.reportLabel,
-    required this.reportDetails,
+    this.userMessage,
   }) : super(key: key);
 
-  final String reportLabel;
-  final String? reportDetails;
+  final String? userMessage;
 
   Future<void> showIn(BuildContext context) async =>
       await showQuimifyDialog(context: context, closable: true, dialog: this);
@@ -30,8 +28,7 @@ class QuimifyThanksDialog extends StatelessWidget {
           ),
         ),
         QuimifyContactButtons(
-          emailBody: '$reportLabel\n'
-              '${reportDetails != null ? '$reportDetails\n\n' : '\n'}',
+          emailBody: userMessage,
           afterClicked: () => _exit(context),
         ),
       ],

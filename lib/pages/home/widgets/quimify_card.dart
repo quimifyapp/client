@@ -40,6 +40,8 @@ class _QuimifyCardState extends State<QuimifyCard> {
 
   @override
   void initState() {
+    super.initState();
+
     _selector = 0;
 
     int slides = widget.body != null
@@ -58,8 +60,6 @@ class _QuimifyCardState extends State<QuimifyCard> {
             },
           )
         : null;
-
-    super.initState();
   }
 
   @override
@@ -67,6 +67,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
     if (_timer != null) {
       _timer!.cancel();
     }
+
     super.dispose();
   }
 

@@ -63,7 +63,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         QuimifyMessageDialog.reportable(
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
-          reportLabel: 'Masa molecular, búsqueda de "$input"',
+          reportContext: 'Molecular mass',
+          reportDetails: 'Searched "$input"',
         ).showIn(context);
       }
     } else {

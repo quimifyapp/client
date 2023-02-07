@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:quimify_client/api/env.dart';
-import 'package:quimify_client/api/results/client_result.dart';
+import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
@@ -19,8 +19,8 @@ class Api {
 
   late final http.Client _client;
 
-  static const _apiVersion = 3;
-  static const _clientVersion = 5;
+  static const _apiVersion = 4;
+  static const _clientVersion = 6;
   static const _authority = 'api.quimify.com';
 
   Future<String?> _getBody(String path, Map<String, dynamic> parameters) async {
@@ -35,13 +35,19 @@ class Api {
       if (httpResponse.statusCode == 200) {
         response = utf8.decode(httpResponse.bodyBytes);
       } else {
-        // Server bug or invalid URL:
-        sendReport(
-          label: 'HTTP code ${httpResponse.statusCode}',
-          userMessage: url.toString(),
+        // Server bug or invalid URL
+        sendError(
+          context: 'HTTP code ${httpResponse.statusCode}',
+          details: url.toString(),
         );
       }
-    } catch (_) {} // No Internet connection, server down or client error
+    } catch (error) {
+      // No Internet connection, server down or client error
+      sendError(
+        context: 'Exception during GET request',
+        details: error.toString(),
+      );
+    }
 
     return response;
   }
@@ -66,8 +72,8 @@ class Api {
     _client = io.IOClient(io.HttpClient(context: context));
   }
 
-  Future<ClientResult?> getClientResult() async {
-    ClientResult? result;
+  Future<AccessDataResult?> getAccessDataResult() async {
+    AccessDataResult? result;
 
     int platform = kIsWeb
         ? 2
@@ -76,20 +82,20 @@ class Api {
             : 0;
 
     String? response = await _getBody(
-      'client/access-data',
+      'access-data',
       {
-        'version': _clientVersion.toString(),
         'platform': platform.toString(),
+        'client-version': _clientVersion.toString(),
       },
     );
 
     if (response != null) {
       try {
-        result = ClientResult.fromJson(response);
+        result = AccessDataResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Access JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Access data JSON',
+          details: error.toString(),
         );
       }
     }
@@ -97,14 +103,36 @@ class Api {
     return result;
   }
 
-  Future<void> sendReport({required String label, String? userMessage}) async {
+  Future<void> sendError({
+    required String context,
+    required String details,
+  }) async {
+    Uri url = Uri.https(
+      _authority,
+      'v$_apiVersion/client-error',
+      {
+        'context': context,
+        'details': details,
+        'client-version': _clientVersion.toString(),
+      },
+    );
+
+    await _client.post(url);
+  }
+
+  Future<void> sendReport({
+    required String context,
+    required String details,
+    String? userMessage,
+  }) async {
     Uri url = Uri.https(
       _authority,
       'v$_apiVersion/report',
       {
+        'context': context,
+        'details': details,
+        'user-message': userMessage,
         'client-version': _clientVersion.toString(),
-        'title': label,
-        'details': userMessage,
       },
     );
 
@@ -128,9 +156,9 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Inorganic from completion JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Inorganic from completion JSON',
+          details: error.toString(),
         );
       }
     }
@@ -138,14 +166,13 @@ class Api {
     return result;
   }
 
-  Future<InorganicResult?> getInorganic(String input, bool picture) async {
+  Future<InorganicResult?> getInorganic(String input) async {
     InorganicResult? result;
 
     String? response = await _getBody(
       'inorganic',
       {
         'input': input,
-        'picture': picture.toString(),
       },
     );
 
@@ -153,9 +180,9 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Inorganic JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Inorganic JSON',
+          details: error.toString(),
         );
       }
     }
@@ -177,9 +204,9 @@ class Api {
       try {
         result = MolecularMassResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Molecular mass JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Molecular mass JSON',
+          details: error.toString(),
         );
       }
     }
@@ -187,14 +214,13 @@ class Api {
     return result;
   }
 
-  Future<OrganicResult?> getOrganicFromName(String name, bool picture) async {
+  Future<OrganicResult?> getOrganicFromName(String name) async {
     OrganicResult? result;
 
     String? response = await _getBody(
       'organic/from-name',
       {
         'name': name,
-        'picture': picture.toString(),
       },
     );
 
@@ -202,9 +228,9 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Organic from name JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Organic from name JSON',
+          details: error.toString(),
         );
       }
     }
@@ -226,9 +252,9 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendReport(
-          label: 'Organic from structure JSON',
-          userMessage: error.toString(),
+        sendError(
+          context: 'Organic from structure JSON',
+          details: error.toString(),
         );
       }
     }

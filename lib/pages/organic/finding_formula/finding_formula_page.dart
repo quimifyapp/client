@@ -34,12 +34,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     null,
   );
 
-  Future<void> _search(String name, bool picture) async {
+  Future<void> _search(String name) async {
     if (!isEmptyWithBlanks(name)) {
       startQuimifyLoading(context);
 
-      OrganicResult? result =
-          await Api().getOrganicFromName(toDigits(name), picture);
+      OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
 
       stopQuimifyLoading();
 
@@ -63,7 +62,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           QuimifyMessageDialog.reportable(
             title: 'Sin resultado',
             details: 'No se ha encontrado:\n"$name"',
-            reportLabel: 'Formular orgánico, búsqueda de "$name"',
+            reportContext: 'Organic finding formula',
+            reportDetails: 'Searched "$name"',
           ).showIn(context);
         }
       } else {
@@ -85,7 +85,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   void _scrollToStart() {
     // Goes to the top of the page after a delay:
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) => _scrollController.animateTo(
+      (_) => _scrollController.animateTo(
         _scrollController.position.minScrollExtent,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 400),
@@ -111,7 +111,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 textEditingController: _textController,
                 focusNode: _textFocusNode,
                 inputCorrector: formatOrganicName,
-                onSubmitted: (String input) => _search(input, false),
+                onSubmitted: (String input) => _search(input),
                 // Disabled:
                 completionCorrector: (_) => _,
                 completionCallBack: (_) async => null,
@@ -135,8 +135,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
             quimifyReportDialog: QuimifyReportDialog(
-              label: 'Formular orgánico, resultado de "${_result.name!}"',
               details: 'Resultado de:\n"${_result.name!}"',
+              reportContext: 'Organic finding formula',
+              reportDetails:
+                  'Result of "${_result.name!}": $_result',
             ),
           ),
         ),
