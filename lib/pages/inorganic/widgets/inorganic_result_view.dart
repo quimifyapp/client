@@ -138,30 +138,34 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                       children: [
                         InorganicResultFields(
                           fields: [
-                            InorganicResultField(
-                              title: 'Masa',
-                              quantity: widget.inorganicResult.molecularMass,
-                              unit: 'g/mol',
-                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                            ),
-                            InorganicResultField(
-                              title: 'Densidad',
-                              quantity: widget.inorganicResult.density,
-                              unit: 'g/cm³',
-                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                            ),
-                            InorganicResultField(
-                              title: 'P. de fusión',
-                              quantity: widget.inorganicResult.meltingPoint,
-                              unit: 'K',
-                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                            ),
-                            InorganicResultField(
-                              title: 'P. de ebullición',
-                              quantity: widget.inorganicResult.boilingPoint,
-                              unit: 'K',
-                              titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
-                            ),
+                            if (widget.inorganicResult.molecularMass != null)
+                              InorganicResultField(
+                                title: 'Masa',
+                                quantity: widget.inorganicResult.molecularMass,
+                                unit: 'g/mol',
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.density != null)
+                              InorganicResultField(
+                                title: 'Densidad',
+                                quantity: widget.inorganicResult.density,
+                                unit: 'g/cm³',
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.meltingPoint != null)
+                              InorganicResultField(
+                                title: 'P. de fusión',
+                                quantity: widget.inorganicResult.meltingPoint,
+                                unit: 'K',
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                              ),
+                            if (widget.inorganicResult.boilingPoint != null)
+                              InorganicResultField(
+                                title: 'P. de ebullición',
+                                quantity: widget.inorganicResult.boilingPoint,
+                                unit: 'K',
+                                titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
+                              ),
                           ],
                         ),
                         Row(
