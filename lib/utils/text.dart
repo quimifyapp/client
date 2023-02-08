@@ -88,24 +88,23 @@ String toDigits(String input) {
   for (int rune in input.runes) {
     String char = String.fromCharCode(rune);
     result += digitToSubscript.keys.singleWhere(
-        (keys) => digitToSubscript[keys] == char,
-        orElse: () => char);
+      (keys) => digitToSubscript[keys] == char,
+      orElse: () => char,
+    );
   }
 
   return result;
 }
 
 String noInitialAndFinalBlanks(String input) {
-  String result =
-      input.replaceAll(RegExp(r'^\s+'), '').replaceAll(RegExp(r'\s+$'), '');
-  return result;
+  input = input.replaceAll(RegExp(r'^\s+'), ''); // Initial blanks
+  return input.replaceAll(RegExp(r'\s+$'), ''); // Final blanks
 }
 
 String toSpacedBonds(String formula) {
-  return formula
-      .replaceAll(RegExp(r'-'), ' – ')
-      .replaceAll(RegExp(r'='), ' = ')
-      .replaceAll(RegExp(r'≡'), ' Ξ ');
+  formula = formula.replaceAll(RegExp(r'-'), ' – ');
+  formula = formula.replaceAll(RegExp(r'='), ' = ');
+  return formula.replaceAll(RegExp(r'≡'), ' Ξ ');
 }
 
 String noBlanks(String input) => input.replaceAll(RegExp(r'\s+'), '');
