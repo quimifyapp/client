@@ -1,4 +1,4 @@
-import 'package:quimify_client/pages/inorganic/naming_and_finding_formula_page.dart';
+import 'package:quimify_client/pages/inorganic/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';

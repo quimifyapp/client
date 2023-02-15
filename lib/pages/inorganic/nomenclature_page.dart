@@ -188,7 +188,7 @@ class _NamingAndFindingFormulaPageState
         child: QuimifyScaffold(
           header: Column(
             children: [
-              const QuimifyPageBar(title: 'Formulación inorgánica'),
+              const QuimifyPageBar(title: 'Nomenclatura inorgánica'),
               QuimifySearchBar(
                 label: _labelText,
                 textEditingController: _textController,
