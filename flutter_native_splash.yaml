@@ -4,20 +4,20 @@ flutter_native_splash:
   #web: false
 
   color: "#FFFFFF"
-  image: assets/images/splash/logo_splash.png
-  branding: assets/images/splash/branding_splash.png
+  image: assets/images/splash/logo-splash.png
+  branding: assets/images/splash/branding-splash.png
   branding_mode: bottom # Default value
   color_dark: "#121212"
-  image_dark: assets/images/splash/logo_splash.png
-  branding_dark: assets/images/splash/branding_splash.png
+  image_dark: assets/images/splash/logo-splash.png
+  branding_dark: assets/images/splash/branding-splash.png
 
   android_12:
     color: "#FFFFFF"
-    image: assets/images/splash/logo_splash12.png
-    branding: assets/images/splash/branding_splash12.png # This one doesn't work, it's set manually
+    image: assets/images/splash/logo-splash12.png
+    branding: assets/images/splash/branding-splash12.png # This one doesn't work, it's set manually
     color_dark: "#121212"
-    image_dark: assets/images/splash/logo_splash12.png
-    branding_dark: assets/images/splash/branding_splash12.png # This one doesn't work, it's set manually
+    image_dark: assets/images/splash/logo-splash12.png
+    branding_dark: assets/images/splash/branding-splash12.png # This one doesn't work, it's set manually
 
   # ################################################################################################
 

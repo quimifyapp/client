@@ -20,7 +20,7 @@ Future<void> main() async {
     // This is LetsEncrypt's self-signed trusted root CA certificate, issued
     // under common name: ISRG Root X1
     SecurityContext.defaultContext.setTrustedCertificatesBytes(
-        (await rootBundle.load('assets/ssl/isrg_x1.crt')).buffer.asUint8List());
+        (await rootBundle.load('assets/ssl/isrg-x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
   Api().connect();
