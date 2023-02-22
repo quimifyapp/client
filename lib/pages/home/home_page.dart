@@ -164,22 +164,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showWelcomePopups() {
-    if (widget.clientResult != null) {
-      if (widget.clientResult!.updateAvailable) {
-        bool optionalUpdate = !widget.clientResult!.updateMandatory!;
-
-        QuimifyMessageDialog.linked(
-          title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-          details: widget.clientResult!.updateDetails,
-          linkLabel: 'Actualizar',
-          link: Platform.isAndroid
-              ? 'https://play.google.com/store/apps/details?id=com.quimify'
-              : 'https://apps.apple.com/es/app/quimify/id6443752619',
-          closable: optionalUpdate,
-        ).showIn(context).then((value) => _showWelcomeMessagePopup());
-      } else {
-        _showWelcomeMessagePopup();
-      }
+    if (widget.clientResult == null) {
+      return;
     }
+
+    if (!widget.clientResult!.updateAvailable) {
+      _showWelcomeMessagePopup();
+      return;
+    }
+
+    bool optionalUpdate = !widget.clientResult!.updateMandatory!;
+
+    QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
+      title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
+      details: widget.clientResult!.updateDetails,
+      linkLabel: 'Actualizar',
+      link: Platform.isAndroid
+          ? 'https://play.google.com/store/apps/details?id=com.quimify'
+          : 'https://apps.apple.com/es/app/quimify/id6443752619',
+      closable: optionalUpdate,
+    );
+
+    updateDialog.showIn(context).then((value) => _showWelcomeMessagePopup());
   }
 }
