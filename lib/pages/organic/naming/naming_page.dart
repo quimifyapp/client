@@ -113,8 +113,7 @@ class _NamingPageState extends State<NamingPage> {
                 details: 'Resultado de:\n"'
                     '${formatStructure(organicResult.structure!)}"',
                 reportContext: 'Organic naming',
-                reportDetails:
-                    'Result of ${_sequence()}: $organicResult',
+                reportDetails: 'Result of ${_sequence()}: $organicResult',
               ),
             ),
           );
@@ -186,21 +185,9 @@ class _NamingPageState extends State<NamingPage> {
   }
 
   void _hydrogenateButton() {
-    _startEditing();
-
-    setState(() {
-      int amount = _openChain().getFreeBondCount() > 1 ? 1 : 0;
-
-      for (int i = _openChain().getFreeBondCount(); i > amount; i--) {
-        if (!_openChain().getBondableGroups().contains(Group.hydrogen)) {
-          break;
-        }
-
-        _openChain().bondGroup(Group.hydrogen);
-        _sequence().add(Group.hydrogen.index);
-        _checkDone();
-      }
-    });
+    do {
+      _bondGroup(Group.hydrogen);
+    } while (_openChain().getFreeBondCount() > 1);
   }
 
   void _resetButton() => setState(() => _reset());
