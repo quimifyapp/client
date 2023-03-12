@@ -47,6 +47,49 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showWelcomeMessagePopup() {
+    if (widget.clientResult!.messagePresent) {
+      if (widget.clientResult!.messageLinkPresent!) {
+        QuimifyMessageDialog.linked(
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
+          linkLabel: widget.clientResult!.messageLinkName!,
+          link: widget.clientResult!.messageLink!,
+        ).showIn(context);
+      } else {
+        QuimifyMessageDialog(
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
+        ).showIn(context);
+      }
+    }
+  }
+
+  void _showWelcomePopups() {
+    if (widget.clientResult == null) {
+      return;
+    }
+
+    if (!widget.clientResult!.updateAvailable) {
+      _showWelcomeMessagePopup();
+      return;
+    }
+
+    bool optionalUpdate = !widget.clientResult!.updateMandatory!;
+
+    QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
+      title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
+      details: widget.clientResult!.updateDetails,
+      linkLabel: 'Actualizar',
+      link: Platform.isAndroid
+          ? 'https://play.google.com/store/apps/details?id=com.quimify'
+          : 'https://apps.apple.com/es/app/quimify/id6443752619',
+      closable: optionalUpdate,
+    );
+
+    updateDialog.showIn(context).then((value) => _showWelcomeMessagePopup());
+  }
+
   void _goToPage(int page) {
     if (_currentPage != page) {
       setState(() {
@@ -143,48 +186,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  void _showWelcomeMessagePopup() {
-    if (widget.clientResult!.messagePresent) {
-      if (widget.clientResult!.messageLinkPresent!) {
-        QuimifyMessageDialog.linked(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
-          linkLabel: widget.clientResult!.messageLinkName!,
-          link: widget.clientResult!.messageLink!,
-        ).showIn(context);
-      } else {
-        QuimifyMessageDialog(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
-        ).showIn(context);
-      }
-    }
-  }
-
-  void _showWelcomePopups() {
-    if (widget.clientResult == null) {
-      return;
-    }
-
-    if (!widget.clientResult!.updateAvailable) {
-      _showWelcomeMessagePopup();
-      return;
-    }
-
-    bool optionalUpdate = !widget.clientResult!.updateMandatory!;
-
-    QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
-      title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-      details: widget.clientResult!.updateDetails,
-      linkLabel: 'Actualizar',
-      link: Platform.isAndroid
-          ? 'https://play.google.com/store/apps/details?id=com.quimify'
-          : 'https://apps.apple.com/es/app/quimify/id6443752619',
-      closable: optionalUpdate,
-    );
-
-    updateDialog.showIn(context).then((value) => _showWelcomeMessagePopup());
   }
 }

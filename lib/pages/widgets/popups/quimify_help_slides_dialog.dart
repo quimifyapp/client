@@ -16,7 +16,8 @@ class QuimifyHelpSlidesDialog extends StatefulWidget {
   final Map<String, List<Widget>> titleToContent;
 
   @override
-  State<QuimifyHelpSlidesDialog> createState() => _QuimifyHelpSlidesDialogState();
+  State<QuimifyHelpSlidesDialog> createState() =>
+      _QuimifyHelpSlidesDialogState();
 }
 
 class _QuimifyHelpSlidesDialogState extends State<QuimifyHelpSlidesDialog> {

@@ -22,7 +22,8 @@ class InorganicHelpDialog extends StatelessWidget {
           ),
           Center(
             child: QuimifyDialogContentText(
-                text: 'CO₂'),
+              text: 'CO₂',
+            ),
           ),
           Center(
             child: QuimifyDialogContentText(

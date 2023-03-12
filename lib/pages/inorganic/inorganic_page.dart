@@ -20,12 +20,12 @@ class InorganicPage extends StatelessWidget {
         SizedBox(height: 15),
         QuimifyCard(
           body: {
-            'H₂O' : 'óxido de hidrógeno',
-            'AuF₃' : 'trifluoruro de oro',
-            'HCl' : 'ácido clorhídrico',
-            'Fe₂S₃' : 'sulfuro de hierro(III)',
-            'PbBr₂' : 'dibromuro de plomo',
-            'H₂SO₃' : 'ácido sulfuroso',
+            'H₂O': 'óxido de hidrógeno',
+            'AuF₃': 'trifluoruro de oro',
+            'HCl': 'ácido clorhídrico',
+            'Fe₂S₃': 'sulfuro de hierro(III)',
+            'PbBr₂': 'dibromuro de plomo',
+            'H₂SO₃': 'ácido sulfuroso',
           },
           page: NamingAndFindingFormulaPage(),
         ),

@@ -137,8 +137,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             quimifyReportDialog: QuimifyReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
-              reportDetails:
-                  'Result of "${_result.name!}": $_result',
+              reportDetails: 'Result of "${_result.name!}": $_result',
             ),
           ),
         ),
