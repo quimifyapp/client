@@ -160,7 +160,7 @@ class _NamingPageState extends State<NamingPage> {
 
   bool _canBondCarbon() => _openChain().canBondCarbon();
 
-  void _bondCarbonButton() {
+  void _pressedBondCarbonButton() {
     if (_canBondCarbon()) {
       _startEditing();
       setState(() {
@@ -184,15 +184,18 @@ class _NamingPageState extends State<NamingPage> {
     }
   }
 
-  void _hydrogenateButton() {
+  void _pressedHydrogenateButton() {
     do {
-      _bondGroup(Group.hydrogen);
+      _pressedGroupButton(Group.hydrogen);
     } while (_openChain().getFreeBondCount() > 1);
   }
 
-  void _resetButton() => setState(() => _reset());
+  void _pressedResetButton() => setState(() => _reset());
 
   // Below editing panel:
+
+  void _pressedRadicalButton() =>
+      RadicalFactoryDialog(onSubmitted: _bondRadical).show(context);
 
   void _bondRadical(int carbonCount, bool isIso) {
     _startEditing();
@@ -212,10 +215,7 @@ class _NamingPageState extends State<NamingPage> {
     });
   }
 
-  void _getRadical() =>
-      RadicalFactoryDialog(onSubmitted: _bondRadical).show(context);
-
-  void _bondGroup(Group group) {
+  void _pressedGroupButton(Group group) {
     _startEditing();
 
     if (!_openChain().getBondableGroups().contains(group)) {
@@ -236,91 +236,91 @@ class _NamingPageState extends State<NamingPage> {
         bonds: 1,
         structure: 'H',
         name: 'Hidrógeno',
-        onPressed: () => _bondGroup(Group.hydrogen),
+        onPressed: () => _pressedGroupButton(Group.hydrogen),
       ),
       Group.radical: GroupButton(
         bonds: 1,
         structure: 'CH2 – CH3',
         name: 'Radical',
-        onPressed: _getRadical,
+        onPressed: _pressedRadicalButton,
       ),
       Group.iodine: GroupButton(
         bonds: 1,
         structure: 'I',
         name: 'Yodo',
-        onPressed: () => _bondGroup(Group.iodine),
+        onPressed: () => _pressedGroupButton(Group.iodine),
       ),
       Group.fluorine: GroupButton(
         bonds: 1,
         structure: 'F',
         name: 'Flúor',
-        onPressed: () => _bondGroup(Group.fluorine),
+        onPressed: () => _pressedGroupButton(Group.fluorine),
       ),
       Group.chlorine: GroupButton(
         bonds: 1,
         structure: 'Cl',
         name: 'Cloro',
-        onPressed: () => _bondGroup(Group.chlorine),
+        onPressed: () => _pressedGroupButton(Group.chlorine),
       ),
       Group.bromine: GroupButton(
         bonds: 1,
         structure: 'Br',
         name: 'Bromo',
-        onPressed: () => _bondGroup(Group.bromine),
+        onPressed: () => _pressedGroupButton(Group.bromine),
       ),
       Group.nitro: GroupButton(
         bonds: 1,
         structure: 'NO2',
         name: 'Nitro',
-        onPressed: () => _bondGroup(Group.nitro),
+        onPressed: () => _pressedGroupButton(Group.nitro),
       ),
       Group.ether: GroupButton(
         bonds: 1,
         structure: 'O',
         name: 'Éter',
-        onPressed: () => _bondGroup(Group.ether),
+        onPressed: () => _pressedGroupButton(Group.ether),
       ),
       Group.amine: GroupButton(
         bonds: 1,
         structure: 'NH2',
         name: 'Amina',
-        onPressed: () => _bondGroup(Group.amine),
+        onPressed: () => _pressedGroupButton(Group.amine),
       ),
       Group.alcohol: GroupButton(
         bonds: 1,
         structure: 'OH',
         name: 'Alcohol',
-        onPressed: () => _bondGroup(Group.alcohol),
+        onPressed: () => _pressedGroupButton(Group.alcohol),
       ),
       Group.ketone: GroupButton(
         bonds: 2,
         structure: 'O',
         name: 'Cetona',
-        onPressed: () => _bondGroup(Group.ketone),
+        onPressed: () => _pressedGroupButton(Group.ketone),
       ),
       Group.aldehyde: GroupButton(
         bonds: 3,
         structure: 'HO',
         name: 'Aldehído',
-        onPressed: () => _bondGroup(Group.aldehyde),
+        onPressed: () => _pressedGroupButton(Group.aldehyde),
       ),
       Group.nitrile: GroupButton(
         bonds: 3,
         structure: 'N',
         name: 'Nitrilo',
-        onPressed: () => _bondGroup(Group.nitrile),
+        onPressed: () => _pressedGroupButton(Group.nitrile),
       ),
       Group.amide: GroupButton(
         bonds: 3,
         structure: 'ONH2',
         name: 'Amida',
-        onPressed: () => _bondGroup(Group.amide),
+        onPressed: () => _pressedGroupButton(Group.amide),
       ),
       Group.acid: GroupButton(
         bonds: 3,
         structure: 'OOH',
         name: 'Ácido',
-        onPressed: () => _bondGroup(Group.acid),
+        onPressed: () => _pressedGroupButton(Group.acid),
       ),
     };
 
@@ -389,13 +389,13 @@ class _NamingPageState extends State<NamingPage> {
                     Expanded(
                       child: AddCarbonButton(
                         enabled: _canBondCarbon(),
-                        onPressed: _bondCarbonButton,
+                        onPressed: _pressedBondCarbonButton,
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: HydrogenateButton(
-                        onPressed: _hydrogenateButton,
+                        onPressed: _pressedHydrogenateButton,
                         enabled: true,
                       ),
                     ),
@@ -405,7 +405,7 @@ class _NamingPageState extends State<NamingPage> {
                     Expanded(
                       child: QuimifyButton(
                         height: 40,
-                        onPressed: _resetButton,
+                        onPressed: _pressedResetButton,
                         color: const Color.fromARGB(255, 56, 133, 224),
                         child: Icon(
                           Icons.delete_rounded,

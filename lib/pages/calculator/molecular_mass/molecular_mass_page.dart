@@ -108,7 +108,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _tapOutsideText() {
+  void _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_textController.text)) {
@@ -157,7 +157,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         return true;
       },
       child: GestureDetector(
-        onTap: _tapOutsideText,
+        onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           header: const QuimifyPageBar(title: 'Masa molecular'),
           body: SingleChildScrollView(

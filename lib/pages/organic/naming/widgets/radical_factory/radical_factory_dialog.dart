@@ -37,16 +37,16 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
     _isIso = false;
   }
 
-  void _doneButton() {
+  void _pressedDoneButton() {
     widget.onSubmitted(_carbonCount, _isIso);
     Navigator.of(context).pop();
   }
 
-  void _addButton() => setState(() => _carbonCount++);
+  void _pressedAddButton() => setState(() => _carbonCount++);
 
   bool _canRemove() => _carbonCount > (_isIso ? 3 : 1);
 
-  void _removeButton() {
+  void _pressedRemoveButton() {
     if (_canRemove()) {
       setState(() => _carbonCount--);
     } else {
@@ -58,7 +58,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
     }
   }
 
-  void _switchButton(bool newValue) {
+  void _pressedSwitchButton(bool newValue) {
     setState(() {
       _isIso = newValue;
       if (_isIso && _carbonCount <= 3) {
@@ -113,7 +113,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                           child: QuimifyButton(
                             height: 50,
                             color: const Color.fromARGB(255, 56, 133, 224),
-                            onPressed: _addButton,
+                            onPressed: _pressedAddButton,
                             child: Text(
                               '+',
                               style: TextStyle(
@@ -134,7 +134,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                             height: 50,
                             color: const Color.fromARGB(255, 255, 96, 96),
                             enabled: _canRemove(),
-                            onPressed: _removeButton,
+                            onPressed: _pressedRemoveButton,
                             child: Text(
                               '–',
                               style: TextStyle(
@@ -189,7 +189,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                 padding: const EdgeInsets.only(top: 14),
                 child: QuimifySwitch(
                   value: _isIso,
-                  onChanged: _switchButton,
+                  onChanged: _pressedSwitchButton,
                 ),
               ),
             ],
@@ -200,7 +200,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
         QuimifyButton.gradient(
           height: 50,
           gradient: quimifyGradient,
-          onPressed: _doneButton,
+          onPressed: _pressedDoneButton,
           child: Text(
             'Enlazar',
             style: TextStyle(

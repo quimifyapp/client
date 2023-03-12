@@ -39,12 +39,12 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   void _pressedShareButton() => quimifyComingSoonDialog.showIn(context);
 
-  void _onTap() => setState(() => _isCollapsed = !_isCollapsed);
+  void _tappedBox() => setState(() => _isCollapsed = !_isCollapsed);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _onTap,
+      onTap: _tappedBox,
       child: Column(
         children: [
           // Head (Result of: ...):

@@ -22,7 +22,7 @@ class QuimifyContactButtons extends StatelessWidget {
     }
   }
 
-  void _discordPressed(BuildContext context) {
+  void _pressedDiscordButton(BuildContext context) {
     _launchUrl(Uri.parse(_discordUrl), context);
 
     if (afterClicked != null) {
@@ -30,7 +30,7 @@ class QuimifyContactButtons extends StatelessWidget {
     }
   }
 
-  void _emailPressed(BuildContext context) {
+  void _pressedEmailButton(BuildContext context) {
     final mailtoLink = Mailto(
       to: [_emailAddress],
       subject: 'Necesito ayuda',
@@ -52,7 +52,7 @@ class QuimifyContactButtons extends StatelessWidget {
         children: [
           const Spacer(),
           GestureDetector(
-            onTap: () => _discordPressed(context),
+            onTap: () => _pressedDiscordButton(context),
             child: Image.asset(
               'assets/images/discord.png',
               height: _iconHeight,
@@ -60,7 +60,7 @@ class QuimifyContactButtons extends StatelessWidget {
           ),
           const SizedBox(width: 12.5),
           GestureDetector(
-            onTap: () => _emailPressed(context),
+            onTap: () => _pressedEmailButton(context),
             child: Image.asset(
               'assets/images/gmail.png',
               height: _iconHeight - 1, // Optical illusion

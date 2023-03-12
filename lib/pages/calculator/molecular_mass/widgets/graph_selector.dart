@@ -27,9 +27,9 @@ class GraphSelector extends StatefulWidget {
 class _GraphSelectorState extends State<GraphSelector> {
   bool _molesGraph = false;
 
-  void _pressedGraph() => setState(() => _molesGraph = !_molesGraph);
+  void _tappedGraph() => setState(() => _molesGraph = !_molesGraph);
 
-  void _pressedSwitchButton(bool newValue) =>
+  void _pressedSwitch(bool newValue) =>
       setState(() => _molesGraph = newValue);
 
   @override
@@ -58,7 +58,7 @@ class _GraphSelectorState extends State<GraphSelector> {
     });
 
     return GestureDetector(
-      onTap: _pressedGraph,
+      onTap: _tappedGraph,
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onBackground,
@@ -93,7 +93,7 @@ class _GraphSelectorState extends State<GraphSelector> {
                 ),
                 QuimifySwitch(
                   value: _molesGraph,
-                  onChanged: _pressedSwitchButton,
+                  onChanged: _pressedSwitch,
                 ),
                 Text(
                   'Pasar a mol',

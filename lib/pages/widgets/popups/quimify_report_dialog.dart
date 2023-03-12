@@ -48,7 +48,7 @@ class QuimifyReportDialog extends StatelessWidget {
   void _pressedButton(BuildContext context) =>
       _submittedText(_textController.text, context);
 
-  void _tapOutsideText() {
+  void _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_textController.text)) {
@@ -62,7 +62,7 @@ class QuimifyReportDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _tapOutsideText,
+      onTap: _tappedOutsideText,
       child: QuimifyDialog(
         title: 'Reportar error',
         content: [
