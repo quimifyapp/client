@@ -27,7 +27,10 @@ class GraphSelector extends StatefulWidget {
 class _GraphSelectorState extends State<GraphSelector> {
   bool _molesGraph = false;
 
-  void _switchButton(bool newValue) => setState(() => _molesGraph = newValue);
+  void _pressedGraph() => setState(() => _molesGraph = !_molesGraph);
+
+  void _pressedSwitchButton(bool newValue) =>
+      setState(() => _molesGraph = newValue);
 
   @override
   Widget build(BuildContext context) {
@@ -54,71 +57,74 @@ class _GraphSelectorState extends State<GraphSelector> {
       molQuantities.add(GraphNumber(text: '$moles mol'));
     });
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onBackground,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: AutoSizeText(
-                  toSubscripts(formula),
-                  minFontSize: 18,
-                  overflowReplacement: const Text(
-                    'Proporciones',
+    return GestureDetector(
+      onTap: _pressedGraph,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: AutoSizeText(
+                    toSubscripts(formula),
+                    minFontSize: 18,
+                    overflowReplacement: const Text(
+                      'Proporciones',
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: quimifyTeal,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    stepGranularity: 0.1,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: quimifyTeal,
-                      fontSize: 18,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  stepGranularity: 0.1,
-                  maxLines: 1,
-                  style: const TextStyle(
-                    color: quimifyTeal,
-                    fontSize: 22,
+                ),
+                QuimifySwitch(
+                  value: _molesGraph,
+                  onChanged: _pressedSwitchButton,
+                ),
+                Text(
+                  'Pasar a mol',
+                  style: TextStyle(
+                    color: _molesGraph
+                        ? quimifyTeal
+                        : Theme.of(context).colorScheme.secondary,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              QuimifySwitch(
-                value: _molesGraph,
-                onChanged: _switchButton,
-              ),
-              Text(
-                'Pasar a mol',
-                style: TextStyle(
-                  color: _molesGraph
-                      ? quimifyTeal
-                      : Theme.of(context).colorScheme.secondary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              ],
+            ),
+            const SizedBox(height: 15),
+            IndexedStack(
+              index: _molesGraph ? 1 : 0,
+              children: [
+                Graph(
+                  symbols: symbols,
+                  bars: gramBars,
+                  quantities: gramQuantities,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          IndexedStack(
-            index: _molesGraph ? 1 : 0,
-            children: [
-              Graph(
-                symbols: symbols,
-                bars: gramBars,
-                quantities: gramQuantities,
-              ),
-              Graph(
-                symbols: symbols,
-                bars: molBars,
-                quantities: molQuantities,
-              ),
-            ],
-          ),
-        ],
+                Graph(
+                  symbols: symbols,
+                  bars: molBars,
+                  quantities: molQuantities,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
