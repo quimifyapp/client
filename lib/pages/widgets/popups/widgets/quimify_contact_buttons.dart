@@ -13,7 +13,7 @@ class QuimifyContactButtons extends StatelessWidget {
   final VoidCallback? afterClicked;
 
   static const double _iconHeight = 35;
-  static const String _discordUrl = 'https://discord.gg/VNUqxfSn';
+  static const String _discordUrl = 'https://quimify.com/discord';
   static const String _emailAddress = 'soporte@quimify.com';
 
   void _launchUrl(Uri url, BuildContext context) async {
