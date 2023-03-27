@@ -140,7 +140,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                           fields: [
                             if (widget.inorganicResult.molecularMass != null)
                               InorganicResultField(
-                                title: 'Masa',
+                                title: 'Masa molecular',
                                 quantity: widget.inorganicResult.molecularMass,
                                 unit: 'g/mol',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
