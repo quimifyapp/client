@@ -24,8 +24,8 @@ class QuimifyReportDialog extends StatelessWidget {
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
-  Future<void> _sendReport(String? userMessage) async {
-    await Api().sendReport(
+  void _sendReport(String? userMessage) async {
+    Api().sendReportWithRetry(
       context: reportContext,
       details: reportDetails,
       userMessage: userMessage,

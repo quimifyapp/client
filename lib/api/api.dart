@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io' as io;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:quimify_client/api/env.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
@@ -15,35 +15,61 @@ class Api {
 
   factory Api() => _singleton;
 
-  Api._internal();
+  // Constants:
 
-  late final http.Client _client;
-
+  static const httpStatusCodeOk = 200;
   static const _apiVersion = 4;
   static const _clientVersion = 6;
   static const _authority = 'api.quimify.com';
+  static const _mirrorAuthority = 'api2.quimify.com';
 
-  Future<String?> _getBody(String path, Map<String, dynamic> parameters) async {
+  late final http.Client _client;
+
+  // Private constructor for singleton pattern:
+
+  Api._internal() {
+    var context = io.SecurityContext(withTrustedRoots: true);
+
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+      '${Env.apiCertificate}\n'
+      '-----END CERTIFICATE-----',
+    ));
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+      '${Env.apiPrivateKey}\n'
+      '-----END PRIVATE KEY-----',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
+
+  // Private:
+
+  String _versionedPath(String path) => 'v$_apiVersion/$path';
+
+  Future<String?> _getBody(String authority, String path, parameters) async {
     String? response;
 
     try {
-      Uri url = Uri.https(_authority, 'v$_apiVersion/$path', parameters);
+      Uri url = Uri.https(authority, path, parameters);
 
       // It's a new query in this session:
       http.Response httpResponse = await _client.get(url);
 
-      if (httpResponse.statusCode == 200) {
+      if (httpResponse.statusCode == httpStatusCodeOk) {
         response = utf8.decode(httpResponse.bodyBytes);
       } else {
         // Server bug or invalid URL
-        sendError(
+        sendErrorWithRetry(
           context: 'HTTP code ${httpResponse.statusCode}',
           details: url.toString(),
         );
       }
     } catch (error) {
       // No Internet connection, server down or client error
-      sendError(
+      sendErrorWithRetry(
         context: 'Exception during GET request',
         details: error.toString(),
       );
@@ -52,25 +78,66 @@ class Api {
     return response;
   }
 
-  // Public:
+  Future<String?> _getBodyWithRetry(String path, parameters) async {
+    path = _versionedPath(path);
 
-  Future<void> connect() async {
-    io.SecurityContext context = io.SecurityContext(withTrustedRoots: true);
-
-    context.useCertificateChainBytes(utf8.encode(
-      '-----BEGIN CERTIFICATE-----\n'
-      '${Env.apiCertificate}'
-      '\n-----END CERTIFICATE-----\n',
-    ));
-
-    context.usePrivateKeyBytes(utf8.encode(
-      '-----BEGIN PRIVATE KEY-----\n'
-      '${Env.apiPrivateKey}'
-      '\n-----END PRIVATE KEY-----\n',
-    ));
-
-    _client = io.IOClient(io.HttpClient(context: context));
+    return await _getBody(_authority, path, parameters) ??
+        await _getBody(_mirrorAuthority, path, parameters); // Retry
   }
+
+  Future<bool> _post(Uri url) async {
+    bool posted;
+
+    try {
+      http.Response httpResponse = await _client.post(url);
+      posted = httpResponse.statusCode == httpStatusCodeOk;
+    } catch (error) {
+      // No Internet connection, server down or client error
+      posted = false;
+    }
+
+    return posted;
+  }
+
+  Future<bool> _sendError({
+    required String authority,
+    required String context,
+    required String details,
+  }) {
+    Uri url = Uri.https(
+      authority,
+      _versionedPath('client-error'),
+      {
+        'context': context,
+        'details': details,
+        'client-version': _clientVersion.toString(),
+      },
+    );
+
+    return _post(url);
+  }
+
+  Future<bool> _sendReport({
+    required String authority,
+    required String context,
+    required String details,
+    String? userMessage,
+  }) {
+    Uri url = Uri.https(
+      authority,
+      _versionedPath('report'),
+      {
+        'context': context,
+        'details': details,
+        'user-message': userMessage,
+        'client-version': _clientVersion.toString(),
+      },
+    );
+
+    return _post(url);
+  }
+
+  // Public:
 
   Future<AccessDataResult?> getAccessDataResult() async {
     AccessDataResult? result;
@@ -81,7 +148,7 @@ class Api {
             ? 1
             : 0;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'access-data',
       {
         'platform': platform.toString(),
@@ -93,7 +160,7 @@ class Api {
       try {
         result = AccessDataResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Access data JSON',
           details: error.toString(),
         );
@@ -103,49 +170,56 @@ class Api {
     return result;
   }
 
-  Future<void> sendError({
+  void sendErrorWithRetry({
     required String context,
     required String details,
   }) async {
-    Uri url = Uri.https(
-      _authority,
-      'v$_apiVersion/client-error',
-      {
-        'context': context,
-        'details': details,
-        'client-version': _clientVersion.toString(),
-      },
+    bool posted = await _sendError(
+      authority: _authority,
+      context: context,
+      details: details,
     );
 
-    await _client.post(url);
+    if (!posted) {
+      // Retry:
+      await _sendError(
+        authority: _mirrorAuthority,
+        context: context,
+        details: details,
+      );
+    }
   }
 
-  Future<void> sendReport({
+  void sendReportWithRetry({
     required String context,
     required String details,
     String? userMessage,
   }) async {
-    Uri url = Uri.https(
-      _authority,
-      'v$_apiVersion/report',
-      {
-        'context': context,
-        'details': details,
-        'user-message': userMessage,
-        'client-version': _clientVersion.toString(),
-      },
+    bool posted = await _sendReport(
+      authority: _authority,
+      context: context,
+      details: details,
+      userMessage: userMessage,
     );
 
-    await _client.post(url);
+    if (!posted) {
+      // Retry:
+      await _sendReport(
+        authority: _mirrorAuthority,
+        context: context,
+        details: details,
+        userMessage: userMessage,
+      );
+    }
   }
 
   Future<String?> getInorganicCompletion(String input) =>
-      _getBody('inorganic/completion', {'input': input});
+      _getBodyWithRetry('inorganic/completion', {'input': input});
 
   Future<InorganicResult?> getInorganicFromCompletion(String completion) async {
     InorganicResult? result;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'inorganic/from-completion',
       {
         'completion': completion,
@@ -156,7 +230,7 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Inorganic from completion JSON',
           details: error.toString(),
         );
@@ -169,7 +243,7 @@ class Api {
   Future<InorganicResult?> getInorganic(String input) async {
     InorganicResult? result;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'inorganic',
       {
         'input': input,
@@ -180,7 +254,7 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Inorganic JSON',
           details: error.toString(),
         );
@@ -193,7 +267,7 @@ class Api {
   Future<MolecularMassResult?> getMolecularMass(String formula) async {
     MolecularMassResult? result;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'molecular-mass',
       {
         'formula': formula,
@@ -204,7 +278,7 @@ class Api {
       try {
         result = MolecularMassResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Molecular mass JSON',
           details: error.toString(),
         );
@@ -217,7 +291,7 @@ class Api {
   Future<OrganicResult?> getOrganicFromName(String name) async {
     OrganicResult? result;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'organic/from-name',
       {
         'name': name,
@@ -228,7 +302,7 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Organic from name JSON',
           details: error.toString(),
         );
@@ -241,7 +315,7 @@ class Api {
   Future<OrganicResult?> getOrganicFromStructure(List<int> sequence) async {
     OrganicResult? result;
 
-    String? response = await _getBody(
+    String? response = await _getBodyWithRetry(
       'organic/from-structure',
       {
         'structure-sequence': sequence.join(','),
@@ -252,7 +326,7 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendError(
+        sendErrorWithRetry(
           context: 'Organic from structure JSON',
           details: error.toString(),
         );

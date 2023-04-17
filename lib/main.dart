@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/access_data_result.dart';
-import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:quimify_client/api/api.dart';
+import 'package:quimify_client/api/results/access_data_result.dart';
+import 'package:quimify_client/pages/home/home_page.dart';
 
 Future<void> main() async {
   // Show splash screen UNTIL stated otherwise:
@@ -23,11 +23,10 @@ Future<void> main() async {
         (await rootBundle.load('assets/ssl/isrg-x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
-  Api().connect();
   AccessDataResult? clientResult = await Api().getAccessDataResult();
 
   // App launch:
-  runApp(QuimifyApp(clientResult: clientResult));
+  runApp(QuimifyApp(clientResult: clientResult)); // Will hide splash screen
 }
 
 class QuimifyApp extends StatelessWidget {
@@ -72,15 +71,16 @@ class QuimifyApp extends StatelessWidget {
             primary: Color.fromARGB(255, 34, 34, 34),
             secondary: Colors.black12,
             tertiary: Colors.black45,
-            tertiaryContainer:
-                Color.fromARGB(255, 150, 150, 150), // Top bar disabled text
+            tertiaryContainer: Color.fromARGB(255, 150, 150, 150),
+            // Top bar disabled text
 
             surface: Colors.white,
             background: Color.fromARGB(255, 247, 247, 247),
 
-            onPrimary: Colors.white, // White text
-            onPrimaryContainer:
-                Color.fromARGB(255, 220, 220, 220), // Unselected text
+            onPrimary: Colors.white,
+            // White text
+            onPrimaryContainer: Color.fromARGB(255, 220, 220, 220),
+            // Unselected text
 
             onBackground: Color.fromARGB(255, 231, 246, 247),
             // Graph background
@@ -103,8 +103,8 @@ class QuimifyApp extends StatelessWidget {
             errorContainer: Color.fromARGB(255, 239, 246, 253),
             // Background
 
-            surfaceTint:
-                Color.fromARGB(255, 255, 255, 255), // Diagram background
+            surfaceTint: Color.fromARGB(255, 255, 255, 255),
+            // Diagram background
 
             onTertiaryContainer: Color.fromARGB(255, 106, 233, 218), // [<-]
           ),
@@ -118,14 +118,16 @@ class QuimifyApp extends StatelessWidget {
             primary: Colors.white,
             secondary: Colors.white54,
             tertiary: Colors.white60,
-            tertiaryContainer: Colors.white60, // Top bar disabled text
+            tertiaryContainer: Colors.white60,
+            // Top bar disabled text
 
             surface: Color.fromARGB(255, 30, 30, 30),
             background: Color.fromARGB(255, 18, 18, 18),
 
-            onPrimary: Color.fromARGB(255, 18, 18, 18), // Black text
-            onPrimaryContainer:
-                Color.fromARGB(255, 90, 90, 90), // Unselected text
+            onPrimary: Color.fromARGB(255, 18, 18, 18),
+            // Black text
+            onPrimaryContainer: Color.fromARGB(255, 90, 90, 90),
+            // Unselected text
 
             onBackground: Color.fromARGB(255, 10, 38, 34),
             // Graph background
@@ -139,16 +141,19 @@ class QuimifyApp extends StatelessWidget {
             inverseSurface: Color.fromARGB(255, 235, 235, 235),
             // Lock icon
 
-            onError: Color.fromARGB(255, 18, 18, 18), // Black text
+            onError: Color.fromARGB(255, 18, 18, 18),
+            // Black text
             // Error color
             error: Color.fromARGB(255, 255, 96, 96),
             // Background
-            onErrorContainer: Color.fromARGB(255, 18, 18, 18), // Black text
+            onErrorContainer: Color.fromARGB(255, 18, 18, 18),
+            // Black text
             // Share color
             errorContainer: Color.fromARGB(255, 56, 133, 224),
             // Background
 
-            surfaceTint: Color.fromARGB(255, 10, 10, 10), // Diagram background
+            surfaceTint: Color.fromARGB(255, 10, 10, 10),
+            // Diagram background
 
             onTertiaryContainer: Color.fromARGB(255, 118, 252, 237), // [<-]
           ),
