@@ -19,7 +19,7 @@ class Api {
 
   static const httpStatusCodeOk = 200;
   static const _apiVersion = 4;
-  static const _clientVersion = 6;
+  static const _clientVersion = 7;
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
