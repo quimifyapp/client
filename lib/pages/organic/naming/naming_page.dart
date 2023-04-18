@@ -74,7 +74,7 @@ class _NamingPageState extends State<NamingPage> {
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      checkInternetConnection().then(
+      hasInternetConnection().then(
         (bool hasInternetConnection) {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(

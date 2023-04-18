@@ -127,7 +127,7 @@ class _NamingAndFindingFormulaPageState
       }
     } else {
       // Client already reported an error in this case
-      checkInternetConnection().then((bool hasInternetConnection) {
+      hasInternetConnection().then((bool hasInternetConnection) {
         if (hasInternetConnection) {
           const QuimifyMessageDialog(
             title: 'Sin resultado',

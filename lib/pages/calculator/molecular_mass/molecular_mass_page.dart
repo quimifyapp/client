@@ -69,7 +69,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       }
     } else {
       if (!mounted) return; // For security reasons
-      checkInternetConnection().then(
+      hasInternetConnection().then(
         (bool hasInternetConnection) {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(

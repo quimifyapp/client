@@ -69,7 +69,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       } else {
         // Client already reported an error in this case
         if (!mounted) return; // For security reasons
-        checkInternetConnection().then((bool hasInternetConnection) {
+        hasInternetConnection().then((bool hasInternetConnection) {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
