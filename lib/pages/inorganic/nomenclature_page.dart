@@ -32,7 +32,7 @@ class _NamingAndFindingFormulaPageState
   final FocusNode _textFocusNode = FocusNode();
 
   late SharedPreferences _prefs;
-  bool _isLoading = true; // Added flag to track loading state
+  bool _isLoading = true; // flag to track loading state
 
   //Initialize the preferences & load cached views
   @override
@@ -108,7 +108,8 @@ class _NamingAndFindingFormulaPageState
       List<InorganicResultView> resultViews) async {
     final List<String> serializedViews =
         resultViews.map((view) => jsonEncode(view.toJson())).toList();
-    await _prefs.setStringList('resultViews', serializedViews);
+    await _prefs.setStringList('cachedViews',
+        serializedViews); // * cachedViews is the key in the cache
   }
 
   // This method is for saving the views in the cache before the widget is disposed (closed)
@@ -125,7 +126,8 @@ class _NamingAndFindingFormulaPageState
           .toList();
       final jsonMap = {'views': serializedViews};
       final jsonString = jsonEncode(jsonMap);
-      _prefs.setString('cachedViews', jsonString);
+      _prefs.setString(
+          'cachedViews', jsonString); // * cachedViews is the key in the cache
     } catch (e) {
       print('Error saving views to cache: $e');
     }
@@ -186,6 +188,11 @@ class _NamingAndFindingFormulaPageState
 
     if (inorganicResult != null) {
       if (inorganicResult.present) {
+        // Search if it's already in cache
+        _resultViews.removeWhere((view) =>
+            removeDiacritics(view.inorganicResult.formula!.toLowerCase()) ==
+            removeDiacritics(inorganicResult.formula!.toLowerCase()));
+
         setState(() {
           _resultViews.add(
             InorganicResultView(
