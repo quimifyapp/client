@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_fields.dart';
@@ -8,7 +9,6 @@ import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:flutter/material.dart';
 
 class InorganicResultView extends StatefulWidget {
   const InorganicResultView({
@@ -16,6 +16,23 @@ class InorganicResultView extends StatefulWidget {
     required this.formattedQuery,
     required this.inorganicResult,
   }) : super(key: key);
+
+  // Add the fromJson method to deserialize the object
+  factory InorganicResultView.fromJson(Map<String, dynamic> json) {
+    return InorganicResultView(
+      formattedQuery: json['formattedQuery'] as String,
+      inorganicResult: InorganicResult.fromJson(
+          json['inorganicResult'] as Map<String, dynamic>),
+    );
+  }
+
+  // Add the toJson method to serialize the object
+  Map<String, dynamic> toJson() {
+    return {
+      'formattedQuery': formattedQuery,
+      'inorganicResult': inorganicResult.toJson(),
+    };
+  }
 
   final String formattedQuery;
   final InorganicResult inorganicResult;

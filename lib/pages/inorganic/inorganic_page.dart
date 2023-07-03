@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 
 class InorganicPage extends StatelessWidget {
@@ -11,8 +11,8 @@ class InorganicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         QuimifySectionTitle(
           title: 'Formular y nombrar',
           helpDialog: InorganicHelpDialog(),

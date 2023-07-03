@@ -9,6 +9,7 @@ import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -17,6 +18,7 @@ class Api {
 
   // Constants:
 
+  SharedPreferences? _prefs;
   static const httpStatusCodeOk = 200;
   static const _apiVersion = 4;
   static const _clientVersion = 7;
@@ -228,7 +230,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = InorganicResult.fromJson(response);
+        result = InorganicResult.fromJson(jsonDecode(response));
       } catch (error) {
         sendErrorWithRetry(
           context: 'Inorganic from completion JSON',
@@ -252,7 +254,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = InorganicResult.fromJson(response);
+        result = InorganicResult.fromJson(jsonDecode(response));
       } catch (error) {
         sendErrorWithRetry(
           context: 'Inorganic JSON',

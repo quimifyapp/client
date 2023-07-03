@@ -1,17 +1,20 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
-import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NamingAndFindingFormulaPage extends StatefulWidget {
   const NamingAndFindingFormulaPage({Key? key}) : super(key: key);
@@ -21,31 +24,112 @@ class NamingAndFindingFormulaPage extends StatefulWidget {
       _NamingAndFindingFormulaPageState();
 }
 
+// * NEW: Added a loading state & caching system
 class _NamingAndFindingFormulaPageState
     extends State<NamingAndFindingFormulaPage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
 
+  late SharedPreferences _prefs;
+  bool _isLoading = true; // Added flag to track loading state
+
+  //Initialize the preferences & load cached views
+  @override
+  void initState() {
+    super.initState();
+    _initializePreferences();
+  }
+
+  Future<void> _initializePreferences() async {
+    _prefs = await SharedPreferences.getInstance();
+    await _loadResultViewsFromCache(); // Await the cache loading
+    setState(() {
+      _isLoading = false; // Update the loading state
+    });
+  }
+
   String _labelText = 'NaCl, óxido de hierro...';
 
-  final List<InorganicResultView> _resultViews = [
-    InorganicResultView(
-      formattedQuery: 'NaCl',
-      inorganicResult: InorganicResult(
-        true,
-        'NaCl',
-        'cloruro de sodio',
-        'monocloruro de sodio',
-        'cloruro sódico',
-        'sal de mesa',
-        '58.35',
-        '2.16',
-        '1074.15',
-        '1686.15',
-      ),
-    ),
-  ];
+  // * Variable where the results will be stored
+  final List<InorganicResultView> _resultViews = [];
+
+  //Cache the views
+  Future<void> _loadResultViewsFromCache() async {
+    // print('Cargando vistas de resultados desde la caché');
+    try {
+      final String? cachedViews = _prefs.getString('cachedViews');
+      if (cachedViews != null) {
+        //Using Map<String, dynamic> instead of simple String for better performance & readability
+        final jsonMap = jsonDecode(cachedViews) as Map<String, dynamic>;
+        final List<dynamic> jsonList = jsonMap['views'];
+        final List<InorganicResultView> loadedResultViews =
+            jsonList.map((json) => InorganicResultView.fromJson(json)).toList();
+        setState(() {
+          _resultViews.clear();
+          _resultViews.addAll(loadedResultViews);
+        });
+      }
+    } catch (e) {
+      print('Error loading cached views: $e');
+    }
+
+    if (_resultViews.isEmpty) {
+      _addDefaultResultView();
+    }
+  }
+
+  //For new users, in order to show something in the results list
+  void _addDefaultResultView() {
+    setState(() {
+      _resultViews.clear();
+      _resultViews.add(
+        InorganicResultView(
+          formattedQuery: 'NaCl',
+          inorganicResult: InorganicResult(
+            present: true,
+            formula: 'NaCl',
+            stockName: 'cloruro de sodio',
+            systematicName: 'monocloruro de sodio',
+            traditionalName: 'cloruro sódico',
+            commonName: 'sal de mesa',
+            molecularMass: '58.35',
+            density: '2.16',
+            meltingPoint: '1074.15',
+            boilingPoint: '1686.15',
+          ),
+        ),
+      );
+    });
+  }
+
+  // * Save the views in the cache
+  Future<void> _saveResultViewsToCache(
+      List<InorganicResultView> resultViews) async {
+    final List<String> serializedViews =
+        resultViews.map((view) => jsonEncode(view.toJson())).toList();
+    await _prefs.setStringList('resultViews', serializedViews);
+  }
+
+  // This method is for saving the views in the cache before the widget is disposed (closed)
+  @override
+  void dispose() {
+    _storeResultViewsInCache();
+    super.dispose(); //Call dispose on the super class
+  }
+
+  void _storeResultViewsInCache() {
+    try {
+      final List<Map<String, dynamic>> serializedViews = _resultViews
+          .map((InorganicResultView view) => view.toJson())
+          .toList();
+      final jsonMap = {'views': serializedViews};
+      final jsonString = jsonEncode(jsonMap);
+      _prefs.setString('cachedViews', jsonString);
+    } catch (e) {
+      print('Error saving views to cache: $e');
+    }
+  }
 
   // Completions cache:
   static final Map<String, String> _normalizedToCompletion = {};
@@ -102,14 +186,15 @@ class _NamingAndFindingFormulaPageState
 
     if (inorganicResult != null) {
       if (inorganicResult.present) {
-        setState(
-          () => _resultViews.add(
+        setState(() {
+          _resultViews.add(
             InorganicResultView(
               formattedQuery: formattedQuery,
               inorganicResult: inorganicResult,
             ),
-          ),
-        );
+          );
+          _saveResultViewsToCache(_resultViews);
+        });
 
         // UI/UX actions:
 
@@ -201,15 +286,17 @@ class _NamingAndFindingFormulaPageState
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            controller: _scrollController,
-            padding: const EdgeInsets.all(20),
-            child: Wrap(
-              verticalDirection: VerticalDirection.up,
-              runSpacing: 25,
-              children: _resultViews,
-            ),
-          ),
+          body: _isLoading // Show loading indicator while loading
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(20),
+                  child: Wrap(
+                    verticalDirection: VerticalDirection.up,
+                    runSpacing: 25,
+                    children: _resultViews,
+                  ),
+                ),
         ),
       ),
     );
