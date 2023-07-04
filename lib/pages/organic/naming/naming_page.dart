@@ -1,30 +1,32 @@
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/molecules/open_chain/open_chain.dart';
 import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
+import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radical_factory_dialog.dart';
-import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:flutter/material.dart';
+
+import '../../../api/cache.dart';
 
 class NamingPage extends StatefulWidget {
   const NamingPage({Key? key}) : super(key: key);
@@ -39,6 +41,8 @@ class _NamingPageState extends State<NamingPage> {
   late bool _done;
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
+  // * Added Cache Manager
+  final CacheManager cacheManager = CacheManager();
 
   @override
   void initState() {
@@ -71,6 +75,8 @@ class _NamingPageState extends State<NamingPage> {
 
         return null;
       }
+      // Saving organic Result to cache
+      cacheManager.saveOrganicResult(result);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons

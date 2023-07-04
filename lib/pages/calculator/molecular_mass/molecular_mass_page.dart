@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
@@ -6,6 +8,7 @@ import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
@@ -13,9 +16,8 @@ import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.d
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import '../../../api/cache.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -45,12 +47,15 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
     startQuimifyLoading(context);
 
+    // Result not found in cache, make an API call
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
 
     stopQuimifyLoading();
 
     if (result != null) {
       if (result.present) {
+        // Save to local cache
+        await CacheManager().saveMolecularMassResult(result);
         setState(() => _result = result);
 
         // UI/UX actions:
@@ -58,6 +63,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _textController.clear(); // Clears input
 
         _textFocusNode.unfocus();
+
+        // Save the result to cache
       } else {
         if (!mounted) return; // For security reasons
         QuimifyMessageDialog.reportable(

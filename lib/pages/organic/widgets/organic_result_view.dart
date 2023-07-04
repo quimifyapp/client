@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
+import 'package:quimify_client/pages/record/record_page.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
@@ -21,12 +22,15 @@ class OrganicResultView extends StatelessWidget {
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
   final QuimifyReportDialog quimifyReportDialog;
+  final RecordPage recordPage = const RecordPage();
 
   void _pressedReportButton(BuildContext context) =>
       quimifyReportDialog.show(context);
 
   void _pressedShareButton(BuildContext context) =>
       quimifyComingSoonDialog.showIn(context);
+
+  void _pressedHistoryButton(BuildContext context) => showRecordPage(context);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +70,18 @@ class OrganicResultView extends StatelessWidget {
                   Icons.share_outlined,
                   color: Theme.of(context).colorScheme.onErrorContainer,
                   size: 18,
+                ),
+              ),
+              // * Added History Button
+              const SizedBox(width: 12),
+              QuimifyIconButton.square(
+                height: 44,
+                onPressed: () => _pressedHistoryButton(context),
+                backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                icon: Icon(
+                  Icons.history,
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                  size: 24,
                 ),
               ),
             ],

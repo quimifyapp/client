@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
-import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
@@ -10,7 +11,8 @@ import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:flutter/material.dart';
+
+import '../../../api/cache.dart';
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);
@@ -33,6 +35,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     90.01,
     null,
   );
+
+  //* New: Added Cache Manager
+  final CacheManager cacheManager = CacheManager();
 
   Future<void> _search(String name) async {
     if (!isEmptyWithBlanks(name)) {
@@ -57,6 +62,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _textController.clear(); // Clears input
           _textFocusNode.unfocus(); // Hides keyboard
           _scrollToStart(); // Goes to the top of the page
+
+          // Save the organic result in cache
+          cacheManager.saveOrganicResult(result);
         } else {
           if (!mounted) return; // For security reasons
           QuimifyMessageDialog.reportable(
