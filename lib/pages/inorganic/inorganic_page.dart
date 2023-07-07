@@ -11,8 +11,8 @@ class InorganicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
+    return Column(
+      children: const [
         QuimifySectionTitle(
           title: 'Formular y nombrar',
           helpDialog: InorganicHelpDialog(),

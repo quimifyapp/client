@@ -44,8 +44,8 @@ class RecordPage extends StatelessWidget {
           final List<Map<String, String>> history = snapshot.data ?? [];
 
           return QuimifyScaffold(
-            header: const Column(
-              children: [
+            header: Column(
+              children: const [
                 QuimifyPageBar(title: 'Historial'),
               ],
             ),
