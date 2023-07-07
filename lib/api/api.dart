@@ -9,7 +9,6 @@ import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -18,8 +17,8 @@ class Api {
 
   // Constants:
 
-  SharedPreferences? _prefs;
-  static const httpStatusCodeOk = 200;
+  static const _httpStatusCodeOk = 200;
+
   static const _apiVersion = 4;
   static const _clientVersion = 7;
   static const _authority = 'api.quimify.com';
@@ -60,7 +59,7 @@ class Api {
       // It's a new query in this session:
       http.Response httpResponse = await _client.get(url);
 
-      if (httpResponse.statusCode == httpStatusCodeOk) {
+      if (httpResponse.statusCode == _httpStatusCodeOk) {
         response = utf8.decode(httpResponse.bodyBytes);
       } else {
         // Server bug or invalid URL
@@ -92,7 +91,7 @@ class Api {
 
     try {
       http.Response httpResponse = await _client.post(url);
-      posted = httpResponse.statusCode == httpStatusCodeOk;
+      posted = httpResponse.statusCode == _httpStatusCodeOk;
     } catch (error) {
       // No Internet connection, server down or client error
       posted = false;
