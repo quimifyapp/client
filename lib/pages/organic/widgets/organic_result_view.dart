@@ -22,7 +22,7 @@ class OrganicResultView extends StatelessWidget {
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
   final QuimifyReportDialog quimifyReportDialog;
-  final RecordPage recordPage = const RecordPage();
+  final RecordPage recordPage = const RecordPage(organic: true);
 
   void _pressedReportButton(BuildContext context) =>
       quimifyReportDialog.show(context);
@@ -30,7 +30,8 @@ class OrganicResultView extends StatelessWidget {
   void _pressedShareButton(BuildContext context) =>
       quimifyComingSoonDialog.showIn(context);
 
-  void _pressedHistoryButton(BuildContext context) => showRecordPage(context);
+  void _pressedHistoryButton(BuildContext context) =>
+      showRecordPage(context, organic: true);
 
   @override
   Widget build(BuildContext context) {

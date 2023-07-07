@@ -5,17 +5,19 @@ import '../../api/cache.dart';
 import '../widgets/bars/quimify_page_bar.dart';
 import '../widgets/quimify_scaffold.dart';
 
-void showRecordPage(BuildContext context) {
+void showRecordPage(BuildContext context, {required bool organic}) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (BuildContext context) => const RecordPage(),
+      builder: (BuildContext context) => RecordPage(organic: organic),
     ),
   );
 }
 
 class RecordPage extends StatelessWidget {
-  const RecordPage({Key? key}) : super(key: key);
+  final bool organic;
+
+  const RecordPage({Key? key, required this.organic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class RecordPage extends StatelessWidget {
     final CacheManager cacheManager = CacheManager();
 
     return FutureBuilder<List<Map<String, String>>>(
-      future: cacheManager.getAllHistory(),
+      future: organic
+          ? cacheManager.getOrganicFormulas()
+          : cacheManager.getMolecularMasses(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Loading while getting record

@@ -18,6 +18,8 @@ import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
 import '../../../api/cache.dart';
+import '../../record/record_page.dart';
+import '../../widgets/objects/quimify_icon_button.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -158,6 +160,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   @override
   Widget build(BuildContext context) {
+    const RecordPage recordPage = RecordPage(organic: false);
+    void _pressedHistoryButton(BuildContext context) =>
+        showRecordPage(context, organic: false);
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -262,6 +268,21 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               fontSize: 18,
                               color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          //HistoryButtom
+                          const SizedBox(width: 124),
+                          QuimifyIconButton.square(
+                            height: 29,
+                            onPressed: () => _pressedHistoryButton(context),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.errorContainer,
+                            icon: Icon(
+                              Icons.history,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onErrorContainer,
+                              size: 24,
                             ),
                           ),
                           const Spacer(),
