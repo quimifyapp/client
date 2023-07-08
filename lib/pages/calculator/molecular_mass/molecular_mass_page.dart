@@ -17,6 +17,7 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
+import '../../../api/ads.dart';
 import '../../../api/cache.dart';
 import '../../record/record_page.dart';
 import '../../widgets/objects/quimify_icon_button.dart';
@@ -65,6 +66,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _textController.clear(); // Clears input
 
         _textFocusNode.unfocus();
+
+        // Mostrar anuncio emergente (popup) con un 30% de probabilidad
+        AdManager.showInterstitialAd();
 
         // Save the result to cache
       } else {
@@ -160,10 +164,18 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+    final bannerAdWidth = screenWidth -
+        40; // Ancho del banner igual al ancho de los otros elementos - 40 (espacio de padding)
     const RecordPage recordPage = RecordPage(organic: false);
+
     void _pressedHistoryButton(BuildContext context) =>
         showRecordPage(context, organic: false);
 
+    final bannerAdHeight = (bannerAdWidth / 320) *
+        50; // Altura del banner proporcional al ancho (320x50 es el tamaño del banner)
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -320,6 +332,12 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams,
                   elementToMoles: _result.elementToMoles,
+                ),
+                const SizedBox(height: 25),
+                SizedBox(
+                  width: double.infinity,
+                  height: bannerAdHeight,
+                  child: AdManager.getBannerAdWidget(),
                 ),
               ],
             ),

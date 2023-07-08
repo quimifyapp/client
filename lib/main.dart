@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
@@ -12,6 +13,8 @@ Future<void> main() async {
   // Show splash screen UNTIL stated otherwise:
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  AdManager.initialize();
 
   // Loading while splash screen:
 
