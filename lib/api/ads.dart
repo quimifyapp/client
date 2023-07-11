@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdManager {
-  static late BannerAd _bannerAd;
+  static BannerAd? _bannerAd;
   static late InterstitialAd _interstitialAd;
 
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     await MobileAds.instance.initialize();
-// MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-// testDeviceIds: [
-// '3681BD2E0063F9636687A46C105FF29A'
-// ])); //TODO: Production remove this
-    await _loadBannerAd();
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+      testDeviceIds: [
+        '3681BD2E0063F9636687A46C105FF29A',
+      ],
+    )); //TODO: Production remove this
     await _loadInterstitialAd();
   }
 
@@ -34,32 +34,34 @@ class AdManager {
     );
   }
 
-  static Future<void> _loadBannerAd() async {
+  static Future<void> loadBannerAd(double bannerAdWidth) async {
     const adUnitId = 'ca-app-pub-3940256099942544/6300978111';
+    final adSize = AdSize(
+      width: bannerAdWidth.toInt(),
+      height: 50,
+    );
+
     _bannerAd = BannerAd(
       adUnitId: adUnitId,
       request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          // Banner ad successfully loaded.
-        },
-        onAdFailedToLoad: (ad, error) {
-          debugPrint('BannerAd failed to load: $error');
-          ad.dispose(); // Dispose the ad to free resources.
-        },
-      ),
-    )..load();
+      size: adSize,
+      listener: const BannerAdListener(),
+    );
+
+    await _bannerAd!.load();
   }
 
-  static Future<void> _reloadBannerAd() async {
-    await _loadBannerAd();
+  static Widget getBannerAdWidget() {
+    return AdWidget(ad: _bannerAd!);
   }
 
-  static AdWidget getBannerAdWidget() {
-    final currentBannerAd = _bannerAd;
-    _reloadBannerAd();
-    return AdWidget(ad: currentBannerAd);
+  static BannerAd? getBannerAd() {
+    return _bannerAd;
+  }
+
+  static void disposeBannerAd() {
+    _bannerAd?.dispose();
+    _bannerAd = null;
   }
 
   static void showInterstitialAd() {

@@ -82,7 +82,6 @@ class _NamingAndFindingFormulaPageState
   //For new users, in order to show something in the results list
   void _addDefaultResultView() {
     setState(() {
-      _resultViews.clear();
       _resultViews.add(
         InorganicResultView(
           formattedQuery: 'NaCl',
@@ -200,7 +199,8 @@ class _NamingAndFindingFormulaPageState
               inorganicResult: inorganicResult,
             ),
           );
-          _saveResultViewsToCache(_resultViews);
+          _saveResultViewsToCache(_resultViews)
+              .then((value) => {_storeResultViewsInCache()});
         });
 
         // UI/UX actions:

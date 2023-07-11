@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
@@ -30,6 +31,7 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
+  late bool _isBannerAdLoaded = false;
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -163,19 +165,30 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   );
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     final mediaQuery = MediaQuery.of(context);
     final screenWidth = mediaQuery.size.width;
-    final screenHeight = mediaQuery.size.height;
-    final bannerAdWidth = screenWidth -
-        40; // Ancho del banner igual al ancho de los otros elementos - 40 (espacio de padding)
-    const RecordPage recordPage = RecordPage(organic: false);
+    final bannerAdWidth = screenWidth - 40;
 
-    void _pressedHistoryButton(BuildContext context) =>
+    AdManager.loadBannerAd(bannerAdWidth).then((_) {
+      setState(() {
+        _isBannerAdLoaded = true;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    AdManager.disposeBannerAd();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    void pressedHistoryButton(BuildContext context) =>
         showRecordPage(context, organic: false);
-
-    final bannerAdHeight = (bannerAdWidth / 320) *
-        50; // Altura del banner proporcional al ancho (320x50 es el tamaño del banner)
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -286,7 +299,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           const SizedBox(width: 124),
                           QuimifyIconButton.square(
                             height: 29,
-                            onPressed: () => _pressedHistoryButton(context),
+                            onPressed: () => pressedHistoryButton(context),
                             backgroundColor:
                                 Theme.of(context).colorScheme.errorContainer,
                             icon: Icon(
@@ -334,10 +347,15 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   elementToMoles: _result.elementToMoles,
                 ),
                 const SizedBox(height: 25),
-                SizedBox(
+                Container(
+                  color: Theme.of(context).colorScheme.background,
                   width: double.infinity,
-                  height: bannerAdHeight,
-                  child: AdManager.getBannerAdWidget(),
+                  height: _isBannerAdLoaded
+                      ? AdManager.getBannerAd()!.size.height.toDouble()
+                      : 0,
+                  child: _isBannerAdLoaded
+                      ? AdWidget(ad: AdManager.getBannerAd()!)
+                      : const SizedBox(),
                 ),
               ],
             ),
