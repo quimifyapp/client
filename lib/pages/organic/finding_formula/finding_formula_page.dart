@@ -12,6 +12,7 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
+import '../../../api/ads.dart';
 import '../../../api/cache.dart';
 
 class FindingFormulaPage extends StatefulWidget {
@@ -62,6 +63,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           _textController.clear(); // Clears input
           _textFocusNode.unfocus(); // Hides keyboard
           _scrollToStart(); // Goes to the top of the page
+          // Mostrar anuncio emergente (popup) con un 80% de probabilidad
+          AdManager.showInterstitialAd();
 
           // Save the organic result in cache
           cacheManager.saveOrganicResult(result);

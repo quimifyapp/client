@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
@@ -202,6 +203,9 @@ class _NamingAndFindingFormulaPageState
           _saveResultViewsToCache(_resultViews)
               .then((value) => {_storeResultViewsInCache()});
         });
+
+        // Mostrar anuncio emergente (popup) con un 80% de probabilidad
+        AdManager.showInterstitialAd();
 
         // UI/UX actions:
 

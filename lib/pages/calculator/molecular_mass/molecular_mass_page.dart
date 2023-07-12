@@ -69,7 +69,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
         _textFocusNode.unfocus();
 
-        // Mostrar anuncio emergente (popup) con un 30% de probabilidad
+        // Mostrar anuncio emergente (popup) con un 80% de probabilidad
         AdManager.showInterstitialAd();
 
         // Save the result to cache

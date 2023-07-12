@@ -26,6 +26,7 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
+import '../../../api/ads.dart';
 import '../../../api/cache.dart';
 
 class NamingPage extends StatefulWidget {
@@ -133,6 +134,8 @@ class _NamingPageState extends State<NamingPage> {
       _search().then((organicResult) {
         if (organicResult != null) {
           _showResult(organicResult);
+          // Mostrar anuncio emergente (popup) con un 80% de probabilidad
+          AdManager.showInterstitialAd();
         }
       });
     }
