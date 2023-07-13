@@ -18,6 +18,7 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
+// TODO refactor this imports:
 import '../../../api/ads.dart';
 import '../../../api/cache.dart';
 import '../../record/record_page.dart';
