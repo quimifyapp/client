@@ -161,6 +161,7 @@ class RecordResultName extends StatelessWidget {
     switch (label) {
       case 'structure':
         label = 'Estructura';
+        name = formatStructure(name!);
         break;
       case 'molecularMass':
         label = 'Masa Molecular';
