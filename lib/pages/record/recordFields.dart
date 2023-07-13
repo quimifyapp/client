@@ -46,23 +46,29 @@ class RecordFields extends StatelessWidget {
 
   Widget _buildRecordFields(Map<String, String> record) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: const BorderRadius.vertical(
+          bottom: Radius.circular(15),
+        ),
         color: Theme.of(context).colorScheme.surface,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 20,
+      padding: const EdgeInsets.only(
+        top: 20,
+        bottom: 20 - 15, // Without OrganicResultField's bottom padding
+        left: 20,
+        right: 20,
       ),
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            formatInorganicFormulaOrName(
-                record['name'] ?? record['elementToMoles']!),
+            formatOrganicName(record['name'] ??
+                record['elementToMoles']!), //Formatting Organic Name
             style: const TextStyle(
               color: quimifyTeal,
+              fontFamily: 'CeraProBoldCustom',
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),

@@ -14,11 +14,12 @@ class AdManager {
       testDeviceIds: [
         '3681BD2E0063F9636687A46C105FF29A',
       ],
-    )); //TODO: Production remove this
+    )); //TODO: (PRODUCTION) remove testing devices
     await _loadInterstitialAd();
   }
 
   static Future<void> _loadInterstitialAd() async {
+    // TODO (PRODUCTION): Replace with: const adUnitId =  env.interstitialUnitId
     const adUnitId = 'ca-app-pub-3940256099942544/1033173712';
     await InterstitialAd.load(
       adUnitId: adUnitId,
@@ -35,6 +36,7 @@ class AdManager {
   }
 
   static Future<void> loadBannerAd(double bannerAdWidth) async {
+    // TODO (PRODUCTION): Replace with: const adUnitId =  env.bannerUnitId
     const adUnitId = 'ca-app-pub-3940256099942544/6300978111';
     final adSize = AdSize(
       width: bannerAdWidth.toInt(),

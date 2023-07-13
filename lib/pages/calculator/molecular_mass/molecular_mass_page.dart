@@ -295,10 +295,10 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          //HistoryButtom
-                          const SizedBox(width: 124),
+                          const Spacer(),
                           QuimifyIconButton.square(
-                            height: 29,
+                            //TODO: Revisar si el fix ha arreglado el overflow
+                            height: 40,
                             onPressed: () => pressedHistoryButton(context),
                             backgroundColor:
                                 Theme.of(context).colorScheme.errorContainer,
@@ -310,10 +310,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               size: 24,
                             ),
                           ),
-                          const Spacer(),
+                          const SizedBox(
+                            width: 7,
+                          ),
                           const HelpButton(
                             dialog: MolecularMassHelpDialog(),
                           ),
+                          //HistoryButtom
                         ],
                       ),
                       const Spacer(),

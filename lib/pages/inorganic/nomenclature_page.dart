@@ -190,7 +190,8 @@ class _NamingAndFindingFormulaPageState
       if (inorganicResult.present) {
         // Search if it's already in cache
         _resultViews.removeWhere((view) =>
-            removeDiacritics(view.inorganicResult.formula!.toLowerCase()) ==
+            removeDiacritics(view.inorganicResult.formula!
+                .toLowerCase()) == // Todo: Cambiar y comparar el objeto (Fórmula y nombre)
             removeDiacritics(inorganicResult.formula!.toLowerCase()));
 
         setState(() {
