@@ -12,7 +12,10 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
+// TODO fix import
 import '../../../api/cache.dart';
+
+// TODO fix weird scroll that should be there (?)
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);
