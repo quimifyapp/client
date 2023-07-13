@@ -10,11 +10,13 @@ class AdManager {
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     await MobileAds.instance.initialize();
-    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-      testDeviceIds: [
-        '3681BD2E0063F9636687A46C105FF29A',
-      ],
-    )); //TODO: Production remove this
+    MobileAds.instance.updateRequestConfiguration(
+      RequestConfiguration(
+        testDeviceIds: [
+          '3681BD2E0063F9636687A46C105FF29A',
+        ],
+      ),
+    ); // TODO: Production remove this
     await _loadInterstitialAd();
   }
 
@@ -35,7 +37,7 @@ class AdManager {
   }
 
   static Future<void> loadBannerAd(double bannerAdWidth) async {
-    const adUnitId = 'ca-app-pub-3940256099942544/6300978111';
+    const adUnitId = 'ca-app-pub-3940256099942544/6300978111'; // Put in SECRETS
     final adSize = AdSize(
       width: bannerAdWidth.toInt(),
       height: 50,
