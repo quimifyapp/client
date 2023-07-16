@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AdManager {
+class AdManager { // TODO rename
   static BannerAd? _bannerAd;
   static late InterstitialAd _interstitialAd;
 
