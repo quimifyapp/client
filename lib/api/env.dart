@@ -19,10 +19,10 @@ part 'env.g.dart';
 
 @Envied(path: '.env')
 abstract class Env {
-  @EnviedField(varName: 'interstitialUnitId', obfuscate: true)
+  @EnviedField(varName: 'INTERSTITIAL_UNIT_ID', obfuscate: true)
   static const interstitialUnitId = _Env.interstitialUnitId;
 
-  @EnviedField(varName: 'bannerUnitId', obfuscate: true)
+  @EnviedField(varName: 'BANNER_UNIT_ID', obfuscate: true)
   static const bannerUnitId = _Env.bannerUnitId;
 
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
