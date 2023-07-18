@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
@@ -43,6 +44,16 @@ class RecordFields extends StatelessWidget {
 
     return recordFieldsList;
   }
+  String formulaViewer(elementToMoles) {
+    String formula = '';
+    // Process elementToMoles
+    int totalMoles = elementToMoles.values.reduce((sum, i) => sum + i);
+    elementToMoles.forEach((symbol, moles) {
+      formula += moles > 1 ? '$symbol$moles' : symbol;
+    });
+
+    return formula;
+  }
 
   Widget _buildRecordFields(Map<String, String> record) {
     return Container(
@@ -63,13 +74,24 @@ class RecordFields extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            formatOrganicName(record['name'] ??
-                record['elementToMoles']!), //Formatting Organic Name
+          AutoSizeText(
+            toSubscripts(formatOrganicName(record['name'] ??
+                formulaViewer(jsonDecode(record['elementToMoles']!)))),
+            minFontSize: 10,
+            overflowReplacement: const Text(
+              'Proporciones',
+              maxLines: 1,
+              style: TextStyle(
+                color: quimifyTeal,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            stepGranularity: 0.1,
+            maxLines: 1,
             style: const TextStyle(
               color: quimifyTeal,
-              fontFamily: 'CeraProBoldCustom',
-              fontSize: 28,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
