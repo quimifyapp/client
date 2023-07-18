@@ -4,7 +4,7 @@ part 'env.g.dart';
 
 // Put variables in .env file:
 // VARIABLE=value
-// Keys and certificates go without BEGIN-END blocks, newlines or '\n':
+// Keys and certs. go quoted, without BEGIN-END blocks and in a single line:
 // API_CERTIFICATE="..."
 // API_PRIVATE_KEY="..."
 
@@ -20,10 +20,10 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
   @EnviedField(varName: 'INTERSTITIAL_UNIT_ID', obfuscate: true)
-  static const interstitialUnitId = _Env.interstitialUnitId;
+  static final interstitialUnitId = _Env.interstitialUnitId;
 
   @EnviedField(varName: 'BANNER_UNIT_ID', obfuscate: true)
-  static const bannerUnitId = _Env.bannerUnitId;
+  static final bannerUnitId = _Env.bannerUnitId;
 
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
   static final apiCertificate = _Env.apiCertificate;
