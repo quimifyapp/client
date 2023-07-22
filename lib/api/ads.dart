@@ -5,40 +5,53 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdManager { // TODO rename
   static BannerAd? _bannerAd;
-  static late InterstitialAd _interstitialAd;
+  static InterstitialAd? _interstitialAd;
 
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     await MobileAds.instance.initialize();
-    MobileAds.instance.updateRequestConfiguration(
-      RequestConfiguration(
-        testDeviceIds: [
-          '3681BD2E0063F9636687A46C105FF29A',
-        ],
-      ),
-    ); // TODO: Production remove this
     await _loadInterstitialAd();
   }
 
   static Future<void> _loadInterstitialAd() async {
+    print("Loaded new InterstitialAd");
     // TODO (PRODUCTION): Replace with: const adUnitId =  env.interstitialUnitId
-    const adUnitId = 'ca-app-pub-3940256099942544/1033173712';
+    const adUnitId = 'ca-app-pub-8671969439707812/9624458985';
     await InterstitialAd.load(
       adUnitId: adUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
+        onAdLoaded: (InterstitialAd ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            // Called when the ad showed the full screen content.
+              onAdShowedFullScreenContent: (ad) {},
+              // Called when an impression occurs on the ad.
+              onAdImpression: (ad) {},
+              // Called when the ad failed to show full screen content.
+              onAdFailedToShowFullScreenContent: (ad, err) {
+                ad.dispose();
+              },
+              // Called when the ad dismissed full screen content.
+              onAdDismissedFullScreenContent: (ad) {
+                ad.dispose();
+              },
+              // Called when a click is recorded for an ad.
+              onAdClicked: (ad) {});
+
+          // Keep a reference to the ad so you can show it later.
           _interstitialAd = ad;
         },
-        onAdFailedToLoad: (error) {
-          debugPrint('InterstitialAd failed to load: $error');
+        // Called when an ad request failed.
+        onAdFailedToLoad: (LoadAdError error) {
+          // ignore: avoid_print
+          print('InterstitialAd failed to load: $error');
         },
       ),
     );
   }
 
   static Future<void> loadBannerAd(double bannerAdWidth) async {
-    const adUnitId = 'ca-app-pub-3940256099942544/6300978111'; // Put in SECRETS
+    const adUnitId = 'ca-app-pub-8671969439707812/1546255460'; // Put in SECRETS
     final adSize = AdSize(
       width: bannerAdWidth.toInt(),
       height: 50,
@@ -68,8 +81,13 @@ class AdManager { // TODO rename
   }
 
   static void showInterstitialAd() {
-    if (Random().nextInt(100) < 80) {
-      _interstitialAd.show();
+    if (_interstitialAd == null) {
+      _loadInterstitialAd().then((_) {
+        _interstitialAd!.show();
+        _loadInterstitialAd();
+      });
+    } else {
+      _interstitialAd!.show();
       _loadInterstitialAd();
     }
   }
