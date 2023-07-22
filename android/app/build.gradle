@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
+    compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger() // TODO fix
     ndkVersion flutter.ndkVersion
 
     compileOptions {
