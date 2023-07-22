@@ -11,6 +11,8 @@ import '../organic/widgets/structure_help_dialog.dart';
 import '../widgets/appearance/quimify_teal.dart';
 import '../widgets/objects/quimify_help_button.dart';
 
+// TODO overflow de Matthew
+
 class RecordFields extends StatelessWidget {
   const RecordFields({
     Key? key,
@@ -44,6 +46,7 @@ class RecordFields extends StatelessWidget {
 
     return recordFieldsList;
   }
+
   String formulaViewer(elementToMoles) {
     String formula = '';
     // Process elementToMoles
