@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'env.dart';
+
 class AdManager { // TODO rename
   static BannerAd? _bannerAd;
   static InterstitialAd? _interstitialAd;
@@ -14,11 +16,8 @@ class AdManager { // TODO rename
   }
 
   static Future<void> _loadInterstitialAd() async {
-    print("Loaded new InterstitialAd");
-    // TODO (PRODUCTION): Replace with: const adUnitId =  env.interstitialUnitId
-    const adUnitId = 'ca-app-pub-8671969439707812/9624458985';
     await InterstitialAd.load(
-      adUnitId: adUnitId,
+      adUnitId: Env.interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -44,21 +43,20 @@ class AdManager { // TODO rename
         // Called when an ad request failed.
         onAdFailedToLoad: (LoadAdError error) {
           // ignore: avoid_print
-          print('InterstitialAd failed to load: $error');
+          print('InterstitialAd failed to load: $error'); // TODO remove and other prints
         },
       ),
     );
   }
 
   static Future<void> loadBannerAd(double bannerAdWidth) async {
-    const adUnitId = 'ca-app-pub-8671969439707812/1546255460'; // Put in SECRETS
     final adSize = AdSize(
       width: bannerAdWidth.toInt(),
       height: 50,
     );
 
     _bannerAd = BannerAd(
-      adUnitId: adUnitId,
+      adUnitId: Env.bannerUnitId,
       request: const AdRequest(),
       size: adSize,
       listener: const BannerAdListener(),
