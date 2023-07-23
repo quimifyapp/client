@@ -42,8 +42,6 @@ class _NamingPageState extends State<NamingPage> {
   late bool _done;
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
-  // * Added Cache Manager
-  final CacheManager cacheManager = CacheManager();
 
   @override
   void initState() {
@@ -77,7 +75,7 @@ class _NamingPageState extends State<NamingPage> {
         return null;
       }
       // Saving organic Result to cache
-      cacheManager.saveOrganicResult(result);
+      CacheManager().saveOrganicResult(result);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons

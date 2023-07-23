@@ -37,9 +37,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     null,
   );
 
-  //* New: Added Cache Manager
-  final CacheManager cacheManager = CacheManager();
-
   Future<void> _search(String name) async {
     if (!isEmptyWithBlanks(name)) {
       startQuimifyLoading(context);
@@ -67,7 +64,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           AdManager.showInterstitialAd();
 
           // Save the organic result in cache
-          cacheManager.saveOrganicResult(result);
+          CacheManager().saveOrganicResult(result);
         } else {
           if (!mounted) return; // For security reasons
           QuimifyMessageDialog.reportable(

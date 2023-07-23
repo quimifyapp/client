@@ -22,12 +22,11 @@ class RecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
-    final CacheManager cacheManager = CacheManager();
 
     return FutureBuilder<List<Map<String, String>>>(
       future: organic
-          ? cacheManager.getOrganicFormulas()
-          : cacheManager.getMolecularMasses(),
+          ? CacheManager().getOrganicFormulas()
+          : CacheManager().getMolecularMasses(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Loading while getting record

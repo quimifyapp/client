@@ -5,10 +5,17 @@ import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheManager {
-  // * New: Caching System Added by Rubén :D
+  static final CacheManager _singleton = CacheManager._internal();
+
+  factory CacheManager() => _singleton;
+
+  CacheManager._internal();
+
+  // Constants:
+
   static const String keyOrganicFormulas = 'organic_formulas';
   static const String keyMolecularMasses = 'molecular_masses';
-  static const String keyCompoundNames = 'compound_names';
+  static const String keyCompoundNames = 'compound_names'; // TODO ??
 
   Future<List<Map<String, String>>> getOrganicFormulas() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
