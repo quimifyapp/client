@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/record/recordFields.dart';
 
-import '../../api/cache.dart';
-import '../widgets/bars/quimify_page_bar.dart';
-import '../widgets/quimify_scaffold.dart';
+import 'package:quimify_client/api/cache.dart';
+import 'package:quimify_client/pages/record/record_fields.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
-void showRecordPage(BuildContext context, {required bool organic}) {
+void showRecordPage(BuildContext context, {required bool organic}) { // TODO move
   Navigator.push(
     context,
     MaterialPageRoute(
