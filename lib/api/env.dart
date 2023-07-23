@@ -3,7 +3,9 @@ import 'package:envied/envied.dart';
 part 'env.g.dart';
 
 // Put variables in .env file:
-// VARIABLE=value
+// INTERSTITIAL_UNIT_ID=
+// BANNER_UNIT_ID=
+
 // Keys and certs. go quoted, without BEGIN-END blocks and in a single line:
 // API_CERTIFICATE="..."
 // API_PRIVATE_KEY="..."
