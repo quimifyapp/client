@@ -15,6 +15,8 @@ class Api {
 
   factory Api() => _singleton;
 
+  late final http.Client _client;
+
   // Constants:
 
   static const _httpStatusCodeOk = 200;
@@ -23,8 +25,6 @@ class Api {
   static const _clientVersion = 7;
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
-
-  late final http.Client _client;
 
   // Private constructor for singleton pattern:
 
