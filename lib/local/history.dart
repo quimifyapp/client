@@ -4,12 +4,14 @@ import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CacheManager {
-  static final CacheManager _singleton = CacheManager._internal();
+// TODO create Preferences class
 
-  factory CacheManager() => _singleton;
+class History {
+  static final History _singleton = History._internal();
 
-  CacheManager._internal();
+  factory History() => _singleton;
+
+  History._internal();
 
   // Constants:
 
@@ -106,10 +108,5 @@ class CacheManager {
 
     final String molecularMassesString = jsonEncode(currentMolecularMasses);
     await prefs.setString(keyMolecularMasses, molecularMassesString);
-  }
-
-  Future<void> clearHistory() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('history');
   }
 }

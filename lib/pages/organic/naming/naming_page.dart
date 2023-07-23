@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/organic/components/group.dart';
 import 'package:quimify_client/api/organic/components/substituent.dart';
@@ -23,11 +24,9 @@ import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart'
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-
-import '../../../api/ads.dart';
-import '../../../api/cache.dart';
 
 class NamingPage extends StatefulWidget {
   const NamingPage({Key? key}) : super(key: key);
@@ -75,7 +74,7 @@ class _NamingPageState extends State<NamingPage> {
         return null;
       }
       // Saving organic Result to cache
-      CacheManager().saveOrganicResult(result);
+      History().saveOrganicResult(result);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons

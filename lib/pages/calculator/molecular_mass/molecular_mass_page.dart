@@ -2,27 +2,25 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
+import 'package:quimify_client/pages/record/record_page.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
-
-// TODO refactor this imports:
-import '../../../api/ads.dart';
-import '../../../api/cache.dart';
-import '../../record/record_page.dart';
-import '../../widgets/objects/quimify_icon_button.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -61,7 +59,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     if (result != null) {
       if (result.present) {
         // Save to local cache
-        await CacheManager().saveMolecularMassResult(result);
+        await History().saveMolecularMassResult(result);
         setState(() => _result = result);
 
         // UI/UX actions:

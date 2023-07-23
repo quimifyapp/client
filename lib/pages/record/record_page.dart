@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'package:quimify_client/api/cache.dart';
 import 'package:quimify_client/pages/record/record_fields.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/local/history.dart';
 
-void showRecordPage(BuildContext context, {required bool organic}) { // TODO move
+void showRecordPage(BuildContext context, {required bool organic}) {
+  // TODO move?
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -25,8 +25,8 @@ class RecordPage extends StatelessWidget {
 
     return FutureBuilder<List<Map<String, String>>>(
       future: organic
-          ? CacheManager().getOrganicFormulas()
-          : CacheManager().getMolecularMasses(),
+          ? History().getOrganicFormulas()
+          : History().getMolecularMasses(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Loading while getting record
