@@ -37,37 +37,4 @@ class MolecularMassResult {
       json['error'] as String?,
     );
   }
-  static Future<MolecularMassResult?> search(
-      BuildContext context, String structure) async {
-    startQuimifyLoading(context);
-    MolecularMassResult? result = await Api().getMolecularMass(structure);
-
-    stopQuimifyLoading();
-
-    if (result != null) {
-      if (!result.present) {
-        const QuimifyMessageDialog(title: 'Sin resultado')
-            .showIn(context); //TODO, search why this warning
-
-        return null;
-      }
-      // Saving organic Result to cache
-      History.saveMolecularMass(result);
-    } else {
-      // Client already reported an error in this case
-      hasInternetConnection().then(
-        (bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).showIn(context);
-          } else {
-            quimifyNoInternetDialog.showIn(context);
-          }
-        },
-      );
-    }
-
-    return result;
-  }
 }

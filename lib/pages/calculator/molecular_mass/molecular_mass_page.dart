@@ -23,9 +23,7 @@ import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
 class MolecularMassPage extends StatefulWidget {
-  final MolecularMassResult?
-      initialResult; // Add the optional initial result parameter
-  const MolecularMassPage({Key? key, this.initialResult}) : super(key: key);
+  const MolecularMassPage({Key? key}) : super(key: key);
 
   @override
   State<MolecularMassPage> createState() => _MolecularMassPageState();
@@ -49,17 +47,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     null,
   );
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.initialResult != null) {
-      // Use the provided initial result
-      _result = widget.initialResult!;
-    }
-  }
-
-  Future<void> _calculate() async {
-    String input = _textController.text;
+  Future<void> _calculate({String? input}) async {
+    input ??= _textController.text;
 
     startQuimifyLoading(context);
 

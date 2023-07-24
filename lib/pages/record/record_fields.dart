@@ -47,59 +47,13 @@ class RecordFields extends StatelessWidget {
     return recordFieldsList;
   }
 
-  void _pushOrganicPage(OrganicResult result) {
-    const String title = 'Historial';
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrganicResultPage(
-        title: title,
-        organicResultView: OrganicResultView(
-          fields: {
-            if (result.name != null) 'Nombre:': result.name!,
-            if (result.molecularMass != null)
-              'Masa molecular:':
-                  '${formatMolecularMass(result.molecularMass!)} g/mol',
-            if (result.structure != null)
-              'Fórmula:': formatStructure(result.structure!),
-          },
-          imageProvider:
-              result.url2D != null ? NetworkImage(result.url2D!) : null,
-          quimifyReportDialog: QuimifyReportDialog(
-            details: 'Resultado de:\n"${formatStructure(result.structure!)}"',
-            reportContext: 'Organic naming',
-            reportDetails: 'Result of $result',
-          ),
-        ),
-      );
-    }));
-  }
-
-  void _pushMolecularMassPage(MolecularMassResult result) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return MolecularMassPage(initialResult: result);
-    }));
-  }
-
   Widget _buildRecordFields(Map<String, String> record) {
     return GestureDetector(
         onTap: () async {
           if (record['structure'] != null) {
-            final OrganicResult? result = await OrganicResult.search(
-              context,
-              record['name']!,
-            );
-            if (result != null) {
-              _pushOrganicPage(result);
-            }
-          } else if (record['formula'] != null) {
-            final MolecularMassResult? result =
-                await MolecularMassResult.search(
-              context,
-              record['formula']!,
-            );
-            if (result != null) {
-              _pushMolecularMassPage(result);
-            }
-          }
+            //TODO method
+            Navigator.of(context).pop();
+          } else if (record['formula'] != null) {}
         },
         child: Container(
           width: double.infinity,

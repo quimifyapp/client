@@ -1,14 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/src/widgets/framework.dart';
-
-import '../../local/history.dart';
-import '../../pages/widgets/popups/quimify_loading.dart';
-import '../../pages/widgets/popups/quimify_message_dialog.dart';
-import '../../pages/widgets/popups/quimify_no_internet_dialog.dart';
-import '../../utils/internet.dart';
-import '../api.dart';
-
 class OrganicResult {
   final bool present;
 
@@ -39,39 +30,5 @@ class OrganicResult {
     identifiers.removeWhere((identifier) => identifier == null);
 
     return identifiers.toString();
-  }
-
-  static Future<OrganicResult?> search(
-      BuildContext context, String structure) async {
-    startQuimifyLoading(context);
-    OrganicResult? result = await Api().getOrganicFromName(structure);
-
-    stopQuimifyLoading();
-
-    if (result != null) {
-      if (!result.present) {
-        const QuimifyMessageDialog(title: 'Sin resultado')
-            .showIn(context); //TODO, search why this warning
-
-        return null;
-      }
-      // Saving organic Result to cache
-      History.saveOrganic(result);
-    } else {
-      // Client already reported an error in this case
-      hasInternetConnection().then(
-        (bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).showIn(context);
-          } else {
-            quimifyNoInternetDialog.showIn(context);
-          }
-        },
-      );
-    }
-
-    return result;
   }
 }
