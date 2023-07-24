@@ -2,14 +2,16 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
+import 'package:quimify_client/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
 
-import '../organic/diagram/diagram_page.dart';
-import '../organic/widgets/structure_help_dialog.dart';
+import '../../api/results/organic_result.dart';
+import '../organic/naming/organic_result_page.dart';
+import '../organic/widgets/organic_result_view.dart';
 import '../widgets/appearance/quimify_teal.dart';
-import '../widgets/objects/quimify_help_button.dart';
 
 // TODO overflow de Matthew
 
@@ -32,7 +34,6 @@ class RecordFields extends StatelessWidget {
 
   List<Widget> _buildRecordFieldsList() {
     final List<Widget> recordFieldsList = [];
-
     for (final record in records) {
       recordFieldsList.add(
         Column(
@@ -43,93 +44,137 @@ class RecordFields extends StatelessWidget {
         ),
       );
     }
-
     return recordFieldsList;
   }
 
-  String formulaViewer(elementToMoles) {
-    String formula = '';
-    // Process elementToMoles
-    int totalMoles = elementToMoles.values.reduce((sum, i) => sum + i);
-    elementToMoles.forEach((symbol, moles) {
-      formula += moles > 1 ? '$symbol$moles' : symbol;
-    });
+  void _pushOrganicPage(OrganicResult result) {
+    const String _title = 'Historial';
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return OrganicResultPage(
+        title: _title,
+        organicResultView: OrganicResultView(
+          fields: {
+            if (result.name != null) 'Nombre:': result.name!,
+            if (result.molecularMass != null)
+              'Masa molecular:':
+                  '${formatMolecularMass(result.molecularMass!)} g/mol',
+            if (result.structure != null)
+              'Fórmula:': formatStructure(result.structure!),
+          },
+          imageProvider:
+              result.url2D != null ? NetworkImage(result.url2D!) : null,
+          quimifyReportDialog: QuimifyReportDialog(
+            details: 'Resultado de:\n"${formatStructure(result.structure!)}"',
+            reportContext: 'Organic naming',
+            reportDetails: 'Result of $result',
+          ),
+        ),
+      );
+    }));
+  }
 
-    return formula;
+  void _pushMolecularMassPage(MolecularMassResult result) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return MolecularMassPage(initialResult: result);
+    }));
   }
 
   Widget _buildRecordFields(Map<String, String> record) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(15),
-        ),
-        color: Theme.of(context).colorScheme.surface,
-      ),
-      padding: const EdgeInsets.only(
-        top: 20,
-        bottom: 20 - 15, // Without OrganicResultField's bottom padding
-        left: 20,
-        right: 20,
-      ),
-      alignment: Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AutoSizeText(
-            toSubscripts(formatOrganicName(record['name'] ??
-                formulaViewer(jsonDecode(record['elementToMoles']!)))),
-            minFontSize: 10,
-            overflowReplacement: const Text(
-              'Proporciones',
-              maxLines: 1,
-              style: TextStyle(
-                color: quimifyTeal,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+    return GestureDetector(
+        onTap: () async {
+          if (record['structure'] != null) {
+            final OrganicResult? result = await OrganicResult.search(
+              context,
+              record['name']!,
+            );
+            if (result != null) {
+              _pushOrganicPage(result);
+            }
+          } else if (record['formula'] != null) {
+            final MolecularMassResult? result =
+                await MolecularMassResult.search(
+              context,
+              record['formula']!,
+            );
+            if (result != null) {
+              _pushMolecularMassPage(result);
+            }
+          }
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(15),
             ),
-            stepGranularity: 0.1,
-            maxLines: 1,
-            style: const TextStyle(
-              color: quimifyTeal,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            color: Theme.of(context).colorScheme.surface,
           ),
-          ...record.entries.map((entry) {
-            if (entry.key == 'elementToMoles' || entry.key == 'elementToMass') {
-              Map<String, num> elementToGrams =
-                  Map<String, num>.from(jsonDecode(record['elementToGrams']!))
+          padding: const EdgeInsets.only(
+            top: 20,
+            bottom: 20 - 15, // Without OrganicResultField's bottom padding
+            left: 20,
+            right: 20,
+          ),
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                toSubscripts(
+                    formatOrganicName(record['name'] ?? record['formula']!)),
+                minFontSize: 10,
+                overflowReplacement: const Text(
+                  'Proporciones',
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: quimifyTeal,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                stepGranularity: 0.1,
+                maxLines: 1,
+                style: const TextStyle(
+                  color: quimifyTeal,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              ...record.entries.map((entry) {
+                if (entry.key == 'elementToMoles' ||
+                    entry.key == 'elementToMass') {
+                  Map<String, num> elementToGrams = Map<String, num>.from(
+                          jsonDecode(record['elementToGrams']!))
                       .cast<String, num>();
-              Map<String, int> elementToMoles =
-                  Map<String, int>.from(jsonDecode(record['elementToMoles']!))
+                  Map<String, int> elementToMoles = Map<String, int>.from(
+                          jsonDecode(record['elementToMoles']!))
                       .cast<String, int>();
 
-              return GraphSelector(
-                mass: double.parse(record['molecularMass']!),
-                elementToGrams: elementToGrams,
-                elementToMoles: elementToMoles,
-              );
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RecordResultName(
-                    label: entry.key,
-                    name: entry.value,
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              );
-            }
-          }),
-        ],
-      ),
-    );
+                  return GraphSelector(
+                    mass: double.parse(record['molecularMass']!),
+                    elementToGrams: elementToGrams,
+                    elementToMoles: elementToMoles,
+                  );
+                } else {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RecordResultName(
+                        label: entry.key,
+                        name: entry.value,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  );
+                }
+              }),
+            ],
+          ),
+        ));
   }
 }
+
+final ScrollController _scrollController = ScrollController();
 
 class RecordField extends StatelessWidget {
   const RecordField({
@@ -197,123 +242,10 @@ class RecordResultName extends StatelessWidget {
     }
     if (label == 'name' ||
         label == 'url2D' ||
-        label == 'fecha' ||
+        label == 'date' ||
         label == 'elementToGrams' ||
         label == 'elementToMoles') {
-      if (label == 'url2D') {
-        if (imageProvider != null) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Text(
-                'Estructura',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 15),
-              Stack(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                      left: 10,
-                      right: 10,
-                    ),
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 5),
-                          child: HelpButton(
-                            dialog: StructureHelpDialog(),
-                          ),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return DiagramPage(
-                                  imageProvider: imageProvider!,
-                                );
-                              },
-                            ),
-                          ),
-                          icon: Icon(
-                            size: 30,
-                            color: Theme.of(context).colorScheme.primary,
-                            Icons.fullscreen_rounded,
-                          ),
-                        ),
-                        const SizedBox(width: 5), // So it feels symmetrical
-                      ],
-                    ),
-                  ),
-                  // Picture:
-                  Container(
-                    width: double.infinity,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      // Diagram background:
-                      color: Theme.of(context).colorScheme.surfaceTint,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
-                    child: ColorFiltered(
-                      colorFilter: MediaQuery.of(context).platformBrightness ==
-                              Brightness.light
-                          ? const ColorFilter.matrix(
-                              [
-                                255 / 245, 0, 0, 0, 0, //
-                                0, 255 / 245, 0, 0, 0, //
-                                0, 0, 255 / 245, 0, 0, //
-                                0, 0, 0, 1, 0, //
-                              ],
-                            )
-                          : const ColorFilter.matrix(
-                              [
-                                -1, 0, 0, 0, 255, //
-                                0, -1, 0, 0, 255, //
-                                0, 0, -1, 0, 255, //
-                                0, 0, 0, 1, 0, //
-                              ],
-                            ),
-                      child: PhotoView(
-                        backgroundDecoration: const BoxDecoration(
-                          color: Colors.transparent,
-                        ),
-                        initialScale: 1.0,
-                        gaplessPlayback: true,
-                        disableGestures: true,
-                        imageProvider: imageProvider!,
-                        loadingBuilder: (context, event) => const Padding(
-                          padding: EdgeInsets.all(60),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3.0,
-                              color: Colors.black, // Filter will turn it light
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ].reversed.toList(),
-              ),
-            ],
-          );
-        } else {
-          return const SizedBox();
-        }
-      } else {
-        return const SizedBox();
-      }
+      return const SizedBox();
     }
 
     return Column(
