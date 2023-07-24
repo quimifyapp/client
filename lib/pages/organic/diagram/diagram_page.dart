@@ -26,7 +26,7 @@ class _DiagramPageState extends State<DiagramPage> {
   static const double step = 0.5;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     controller = PhotoViewController(initialScale: 1.0);
@@ -34,7 +34,7 @@ class _DiagramPageState extends State<DiagramPage> {
   }
 
   @override
-  void dispose() {
+  dispose() {
     controller.dispose();
     scaleStateController.dispose();
 
@@ -98,7 +98,7 @@ class _DiagramPageState extends State<DiagramPage> {
     );
   }
 
-  void addToScale(double extraScale) {
+  addToScale(double extraScale) {
     if (controller.scale != null) {
       double newScale = controller.scale! + extraScale;
 

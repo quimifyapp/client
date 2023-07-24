@@ -24,15 +24,15 @@ class _QuimifyHelpSlidesDialogState extends State<QuimifyHelpSlidesDialog> {
   late Map<String, List<Widget>> titleToContent = {...widget.titleToContent};
   late int _currentSlide = 0;
 
-  void _exit(BuildContext context) => Navigator.of(context).pop();
+  _exit(BuildContext context) => Navigator.of(context).pop();
 
-  void _goToSlide(int slide) => setState(() => _currentSlide = slide);
+  _goToSlide(int slide) => setState(() => _currentSlide = slide);
 
-  void _goToNextSlide() => _currentSlide < titleToContent.length - 1
+  _goToNextSlide() => _currentSlide < titleToContent.length - 1
       ? _goToSlide(_currentSlide + 1)
       : _exit(context);
 
-  void _goToPreviousSlide() =>
+  _goToPreviousSlide() =>
       _currentSlide > 0 ? _goToSlide(_currentSlide - 1) : _exit(context);
 
   @override

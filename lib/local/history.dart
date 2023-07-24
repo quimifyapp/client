@@ -2,111 +2,77 @@ import 'dart:convert';
 
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-// TODO create Preferences class
+import 'package:quimify_client/local/cache.dart';
 
 class History {
-  static final History _singleton = History._internal();
-
-  factory History() => _singleton;
-
-  History._internal();
-
   // Constants:
 
-  static const String keyOrganicFormulas = 'organic_formulas';
-  static const String keyMolecularMasses = 'molecular_masses';
-  static const String keyCompoundNames = 'compound_names'; // TODO ??
+  static const String _organicFormulasKey = 'organic-formulas';
+  static const String _molecularMassesKey = 'molecular-masses';
 
-  Future<List<Map<String, String>>> getOrganicFormulas() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? organicFormulasString = prefs.getString(keyOrganicFormulas);
-    if (organicFormulasString != null) {
-      final List<dynamic> organicFormulasJson =
-          jsonDecode(organicFormulasString);
-      return organicFormulasJson
-          .map((json) => Map<String, String>.from(json))
-          .toList();
+  static Future<List<Map<String, String>>> getOrganicFormulas() async {
+    // TODO return type?
+    final String? organicFormulas = Cache().get(_organicFormulasKey);
+
+    if (organicFormulas == null) {
+      return [];
     }
-    return [];
+
+    final List<dynamic> organicFormulasJson = jsonDecode(organicFormulas);
+
+    return organicFormulasJson
+        .map((json) => Map<String, String>.from(json))
+        .toList();
   }
 
-  Future<List<Map<String, String>>> getMolecularMasses() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? molecularMassesString = prefs.getString(keyMolecularMasses);
-    if (molecularMassesString != null) {
-      final List<dynamic> molecularMassesJson =
-          jsonDecode(molecularMassesString);
-      return molecularMassesJson
-          .map((json) => Map<String, String>.from(json))
-          .toList();
+  static Future<List<Map<String, String>>> getMolecularMasses() async {
+    final String? molecularMassesString = Cache().get(_molecularMassesKey);
+
+    if (molecularMassesString == null) {
+      return [];
     }
-    return [];
+
+    final List<dynamic> molecularMassesJson = jsonDecode(molecularMassesString);
+
+    return molecularMassesJson
+        .map((json) => Map<String, String>.from(json))
+        .toList();
   }
 
-  Future<List<Map<String, String>>> getAllHistory() async {
-    final List<Map<String, String>> allHistory = [];
+  static Future<void> saveOrganic(OrganicResult result) async {
+    // TODO separar en los 2 menús de orgánica
+    String structure = result.structure!;
 
-    final List<Map<String, String>> organicFormulas =
-        await getOrganicFormulas();
-    final List<Map<String, String>> molecularMasses =
-        await getMolecularMasses();
+    dynamic organicResults = await getOrganicFormulas();
 
-    allHistory.addAll(organicFormulas);
-    allHistory.addAll(molecularMasses);
+    organicResults
+        .removeWhere((existing) => existing['structure'] == structure);
 
-    allHistory.sort((a, b) {
-      final DateTime dateA = DateTime.parse(a['fecha']!);
-      final DateTime dateB = DateTime.parse(b['fecha']!);
-      return dateB.compareTo(dateA);
+    organicResults.insert(0, {
+      'date': DateTime.now().toString(),
+      'name': result.name!,
+      'structure': structure,
     });
 
-    return allHistory;
+    await Cache().save(_organicFormulasKey, jsonEncode(organicResults));
   }
 
-  Future<void> saveOrganicResult(OrganicResult result) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<Map<String, String>> currentOrganicFormulas =
-        await getOrganicFormulas();
+  static Future<void> saveMolecularMass(MolecularMassResult result) async {
+    String formula = result.formula!;
+    String molecularMass = result.molecularMass!.toString(); // TODO test
 
-    final Map<String, String> resultData = {
-      // 'present': result.present.toString(),
-      'structure': result.structure ?? '',
-      'name': result.name ?? '',
-      'molecularMass': result.molecularMass?.toString() ?? '',
-      'url2D': result.url2D ?? '',
-      'fecha': DateTime.now().toString(),
-    };
+    dynamic molecularMassResults = await getMolecularMasses(); // TODO rename
 
-    final String newItemFormula = resultData['name']!;
-    currentOrganicFormulas
-        .removeWhere((existingItem) => existingItem['name'] == newItemFormula);
-    currentOrganicFormulas.insert(0, resultData);
+    molecularMassResults.removeWhere((existing) =>
+        existing['formula'] == formula &&
+        existing['molecularMass'] == molecularMass);
 
-    final String organicFormulasString = jsonEncode(currentOrganicFormulas);
-    await prefs.setString(keyOrganicFormulas, organicFormulasString);
-  }
+    molecularMassResults.insert(0, {
+      'date': DateTime.now().toString(),
+      'formula': formula,
+      'molecularMass': molecularMass,
+    });
 
-  Future<void> saveMolecularMassResult(MolecularMassResult result) async {
-    print(result);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<Map<String, String>> currentMolecularMasses =
-        await getMolecularMasses();
-
-    final Map<String, String> resultData = {
-      'molecularMass': result.molecularMass?.toString() ?? '',
-      'elementToGrams': jsonEncode(result.elementToGrams),
-      'elementToMoles': jsonEncode(result.elementToMoles),
-      'fecha': DateTime.now().toString(),
-    };
-
-    final String newItemCompound = resultData['elementToMoles']!;
-    currentMolecularMasses.removeWhere(
-        (existingItem) => existingItem['elementToMoles'] == newItemCompound);
-    currentMolecularMasses.insert(0, resultData);
-
-    final String molecularMassesString = jsonEncode(currentMolecularMasses);
-    await prefs.setString(keyMolecularMasses, molecularMassesString);
+    await Cache().save(_molecularMassesKey, jsonEncode(molecularMassResults));
   }
 }

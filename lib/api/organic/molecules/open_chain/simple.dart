@@ -90,7 +90,7 @@ class Simple extends OpenChain {
   bool canBondCarbon() => _chain.canBondCarbon();
 
   @override
-  void bondCarbon() => _chain.bondCarbon();
+  bondCarbon() => _chain.bondCarbon();
 
   @override
   String getStructure() => _chain.toString();

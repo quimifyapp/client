@@ -25,12 +25,12 @@ class Carbon extends Organic {
 
   int getFreeBondCount() => _freeBondCount;
 
-  void bond(Substituent substituent) {
+  bond(Substituent substituent) {
     _substituents.add(substituent);
     _freeBondCount -= substituent.getBondCount();
   }
 
-  void useBond() => _freeBondCount--;
+  useBond() => _freeBondCount--;
 
   bool isBondedTo(Group group) {
     switch (group) {

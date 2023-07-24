@@ -16,7 +16,7 @@ class RadicalFactoryDialog extends StatefulWidget {
     required this.onSubmitted,
   }) : super(key: key);
 
-  final void Function(int, bool) onSubmitted;
+  final Function(int, bool) onSubmitted;
 
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
@@ -30,23 +30,23 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
   late bool _isIso;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     _carbonCount = 1;
     _isIso = false;
   }
 
-  void _pressedDoneButton() {
+  _pressedDoneButton() {
     widget.onSubmitted(_carbonCount, _isIso);
     Navigator.of(context).pop();
   }
 
-  void _pressedAddButton() => setState(() => _carbonCount++);
+  _pressedAddButton() => setState(() => _carbonCount++);
 
   bool _canRemove() => _carbonCount > (_isIso ? 3 : 1);
 
-  void _pressedRemoveButton() {
+  _pressedRemoveButton() {
     if (_canRemove()) {
       setState(() => _carbonCount--);
     } else {
@@ -58,7 +58,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
     }
   }
 
-  void _pressedSwitchButton(bool newValue) {
+  _pressedSwitchButton(bool newValue) {
     setState(() {
       _isIso = newValue;
       if (_isIso && _carbonCount <= 3) {

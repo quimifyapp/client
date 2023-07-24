@@ -24,7 +24,7 @@ class QuimifyReportDialog extends StatelessWidget {
   Future<void> show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
-  void _sendReport(String? userMessage) async {
+  _sendReport(String? userMessage) async {
     Api().sendReportWithRetry(
       context: reportContext,
       details: reportDetails,
@@ -32,7 +32,7 @@ class QuimifyReportDialog extends StatelessWidget {
     );
   }
 
-  void _exitWithThanks(String userMessage, BuildContext context) {
+  _exitWithThanks(String userMessage, BuildContext context) {
     Navigator.of(context).pop();
 
     QuimifyThanksDialog(
@@ -40,15 +40,15 @@ class QuimifyReportDialog extends StatelessWidget {
     ).showIn(context);
   }
 
-  void _submittedText(String text, BuildContext context) {
+  _submittedText(String text, BuildContext context) {
     _exitWithThanks(text, context);
     _sendReport(text);
   }
 
-  void _pressedButton(BuildContext context) =>
+  _pressedButton(BuildContext context) =>
       _submittedText(_textController.text, context);
 
-  void _tappedOutsideText() {
+  _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_textController.text)) {

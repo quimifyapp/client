@@ -43,13 +43,13 @@ class _NamingPageState extends State<NamingPage> {
   late List<List<int>> _sequenceStack;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     _reset();
   }
 
-  void _reset() {
+  _reset() {
     _openChainStack = [Simple()];
     _sequenceStack = [[]];
     _done = false;
@@ -74,7 +74,7 @@ class _NamingPageState extends State<NamingPage> {
         return null;
       }
       // Saving organic Result to cache
-      History().saveOrganicResult(result);
+      History.saveOrganic(result);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
@@ -94,7 +94,7 @@ class _NamingPageState extends State<NamingPage> {
     return result;
   }
 
-  void _showResult(OrganicResult organicResult) {
+  _showResult(OrganicResult organicResult) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -126,7 +126,7 @@ class _NamingPageState extends State<NamingPage> {
     );
   }
 
-  void _pressedButton() {
+  _pressedButton() {
     if (_done) {
       _search().then((organicResult) {
         if (organicResult != null) {
@@ -140,16 +140,16 @@ class _NamingPageState extends State<NamingPage> {
 
   // Editing panel:
 
-  void _checkDone() => setState(() => _done = _openChain().isDone());
+  _checkDone() => setState(() => _done = _openChain().isDone());
 
-  void _startEditing() {
+  _startEditing() {
     _openChainStack.add(_openChain().getCopy());
     _sequenceStack.add(List.from(_sequence()));
   }
 
   bool _canUndo() => _openChainStack.length > 1;
 
-  void _undoButton() {
+  _undoButton() {
     if (_canUndo()) {
       setState(() {
         _openChainStack.removeLast();
@@ -166,7 +166,7 @@ class _NamingPageState extends State<NamingPage> {
 
   bool _canBondCarbon() => _openChain().canBondCarbon();
 
-  void _pressedBondCarbonButton() {
+  _pressedBondCarbonButton() {
     if (_canBondCarbon()) {
       _startEditing();
       setState(() {
@@ -190,20 +190,20 @@ class _NamingPageState extends State<NamingPage> {
     }
   }
 
-  void _pressedHydrogenateButton() {
+  _pressedHydrogenateButton() {
     do {
       _pressedGroupButton(Group.hydrogen);
     } while (_openChain().getFreeBondCount() > 1);
   }
 
-  void _pressedResetButton() => setState(() => _reset());
+  _pressedResetButton() => setState(() => _reset());
 
   // Below editing panel:
 
-  void _pressedRadicalButton() =>
+  _pressedRadicalButton() =>
       RadicalFactoryDialog(onSubmitted: _bondRadical).show(context);
 
-  void _bondRadical(int carbonCount, bool isIso) {
+  _bondRadical(int carbonCount, bool isIso) {
     _startEditing();
 
     if (!_openChain().getBondableGroups().contains(Group.radical)) {
@@ -221,7 +221,7 @@ class _NamingPageState extends State<NamingPage> {
     });
   }
 
-  void _pressedGroupButton(Group group) {
+  _pressedGroupButton(Group group) {
     _startEditing();
 
     if (!_openChain().getBondableGroups().contains(group)) {

@@ -56,12 +56,12 @@ class QuimifyMessageDialog extends StatelessWidget {
   Future<void> showIn(BuildContext context) async => await showQuimifyDialog(
       context: context, closable: closable, dialog: this);
 
-  void _exit(BuildContext context) => Navigator.of(context).pop();
+  _exit(BuildContext context) => Navigator.of(context).pop();
 
-  void _openLink(BuildContext context) =>
+  _openLink(BuildContext context) =>
       launchUrl(Uri.parse(link!), mode: LaunchMode.externalApplication);
 
-  void _pressedButton(BuildContext context) {
+  _pressedButton(BuildContext context) {
     if (_hasLink) {
       _openLink(context);
     }
@@ -71,7 +71,7 @@ class QuimifyMessageDialog extends StatelessWidget {
     }
   }
 
-  void _pressedReportButton(BuildContext context) {
+  _pressedReportButton(BuildContext context) {
     _exit(context);
 
     QuimifyReportDialog(

@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   late final AutoSizeGroup autoSizeGroup;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     _currentPage = 0;
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showWelcomeMessagePopup() {
+  _showWelcomeMessagePopup() {
     if (widget.clientResult!.messagePresent) {
       if (widget.clientResult!.messageLinkPresent!) {
         QuimifyMessageDialog.linked(
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _showWelcomePopups() {
+  _showWelcomePopups() {
     if (widget.clientResult == null) {
       return;
     }
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     updateDialog.showIn(context).then((value) => _showWelcomeMessagePopup());
   }
 
-  void _goToPage(int page) {
+  _goToPage(int page) {
     if (_currentPage != page) {
       setState(() {
         _visitedPagesStack.remove(_currentPage);

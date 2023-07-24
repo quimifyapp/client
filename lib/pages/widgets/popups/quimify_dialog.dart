@@ -29,7 +29,7 @@ class QuimifyDialog extends StatelessWidget {
   final List<Widget> actions;
   final bool closable;
 
-  void _closeButtonPressed(BuildContext context) {
+  _closeButtonPressed(BuildContext context) {
     if (closable) {
       Navigator.of(context).pop();
     }

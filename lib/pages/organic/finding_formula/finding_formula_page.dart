@@ -63,7 +63,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           AdManager.showInterstitialAd();
 
           // Save the organic result in cache
-          History().saveOrganicResult(result);
+          History.saveOrganic(result);
         } else {
           if (!mounted) return; // For security reasons
           QuimifyMessageDialog.reportable(
@@ -89,7 +89,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     }
   }
 
-  void _scrollToStart() {
+  _scrollToStart() {
     // Goes to the top of the page after a delay:
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollController.animateTo(

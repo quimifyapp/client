@@ -15,7 +15,7 @@ class QuimifyThanksDialog extends StatelessWidget {
   Future<void> showIn(BuildContext context) async =>
       await showQuimifyDialog(context: context, closable: true, dialog: this);
 
-  void _exit(BuildContext context) => Navigator.of(context).pop();
+  _exit(BuildContext context) => Navigator.of(context).pop();
 
   @override
   Widget build(BuildContext context) {

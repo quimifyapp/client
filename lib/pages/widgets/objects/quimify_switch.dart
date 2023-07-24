@@ -6,7 +6,7 @@ class QuimifySwitch extends StatelessWidget {
       : super(key: key);
 
   final bool value;
-  final void Function(bool) onChanged;
+  final Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {

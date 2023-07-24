@@ -16,13 +16,13 @@ class QuimifyContactButtons extends StatelessWidget {
   static const String _discordUrl = 'https://quimify.com/discord';
   static const String _emailAddress = 'soporte@quimify.com';
 
-  void _launchUrl(Uri url, BuildContext context) async {
+  _launchUrl(Uri url, BuildContext context) async {
     if (await canLaunchUrl(url)) {
       launchUrl(url, mode: LaunchMode.externalApplication);
     }
   }
 
-  void _pressedDiscordButton(BuildContext context) {
+  _pressedDiscordButton(BuildContext context) {
     _launchUrl(Uri.parse(_discordUrl), context);
 
     if (afterClicked != null) {
@@ -30,7 +30,7 @@ class QuimifyContactButtons extends StatelessWidget {
     }
   }
 
-  void _pressedEmailButton(BuildContext context) {
+  _pressedEmailButton(BuildContext context) {
     final mailtoLink = Mailto(
       to: [_emailAddress],
       subject: 'Necesito ayuda',

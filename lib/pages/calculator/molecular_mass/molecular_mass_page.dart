@@ -40,6 +40,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   String _labelText = 'H₂SO₄';
   MolecularMassResult _result = MolecularMassResult(
     true,
+    'H₂SO₄',
     97.96737971,
     {'H': 2.01588, 'S': 32.066, 'O': 63.976},
     {'H': 2, 'S': 1, 'O': 4},
@@ -59,7 +60,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     if (result != null) {
       if (result.present) {
         // Save to local cache
-        await History().saveMolecularMassResult(result);
+        await History.saveMolecularMass(result);
         setState(() => _result = result);
 
         // UI/UX actions:
@@ -97,7 +98,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _pressedButton() {
+  _pressedButton() {
     _eraseInitialAndFinalBlanks();
 
     if (isEmptyWithBlanks(_textController.text)) {
@@ -111,7 +112,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _submittedText() {
+  _submittedText() {
     // Keyboard will be hidden afterwards
     _eraseInitialAndFinalBlanks();
 
@@ -122,7 +123,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _tappedOutsideText() {
+  _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_textController.text)) {
@@ -132,7 +133,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  void _scrollToStart() {
+  _scrollToStart() {
     // Goes to the top of the page after a delay:
     Future.delayed(
       const Duration(milliseconds: 200),
@@ -146,13 +147,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     );
   }
 
-  void _startTyping() {
+  _startTyping() {
     // Like if the TextField was tapped:
     _textFocusNode.requestFocus();
     _scrollToStart();
   }
 
-  void _eraseInitialAndFinalBlanks() {
+  _eraseInitialAndFinalBlanks() {
     _textController.text =
         noInitialAndFinalBlanks(_textController.text); // Clears input
   }
@@ -164,7 +165,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   );
 
   @override
-  void didChangeDependencies() {
+  didChangeDependencies() {
     super.didChangeDependencies();
 
     final mediaQuery = MediaQuery.of(context);
@@ -179,14 +180,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   @override
-  void dispose() {
+  dispose() {
     AdManager.disposeBannerAd();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    void pressedHistoryButton(BuildContext context) =>
+    pressedHistoryButton(BuildContext context) =>
         showRecordPage(context, organic: false);
     return WillPopScope(
       onWillPop: () async {
@@ -345,8 +346,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                 const SizedBox(height: 25),
                 GraphSelector(
                   mass: _result.molecularMass!,
-                  elementToGrams: _result.elementToGrams,
-                  elementToMoles: _result.elementToMoles,
+                  elementToGrams: _result.elementToGrams!,
+                  elementToMoles: _result.elementToMoles!,
                 ),
                 const SizedBox(height: 25),
                 Container(

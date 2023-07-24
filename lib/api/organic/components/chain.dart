@@ -36,15 +36,15 @@ class Chain extends Organic {
     return null;
   }
 
-  void bondGroup(Group functionalGroup) =>
+  bondGroup(Group functionalGroup) =>
       bondSubstituent(Substituent(functionalGroup));
 
-  void bondSubstituent(Substituent substituent) =>
+  bondSubstituent(Substituent substituent) =>
       _carbons.last.bond(substituent);
 
   bool canBondCarbon() => [1, 2, 3].contains(getFreeBondCount());
 
-  void bondCarbon() {
+  bondCarbon() {
     _carbons.last.useBond();
     _carbons.add(Carbon(_carbons.last.getFreeBondCount() + 1));
   }

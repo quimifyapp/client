@@ -37,7 +37,7 @@ class _NamingAndFindingFormulaPageState
 
   //Initialize the preferences & load cached views
   @override
-  void initState() {
+  initState() {
     super.initState();
     _initializePreferences();
   }
@@ -81,7 +81,7 @@ class _NamingAndFindingFormulaPageState
   }
 
   //For new users, in order to show something in the results list
-  void _addDefaultResultView() {
+  _addDefaultResultView() {
     setState(() {
       _resultViews.add(
         InorganicResultView(
@@ -114,12 +114,12 @@ class _NamingAndFindingFormulaPageState
 
   // This method is for saving the views in the cache before the widget is disposed (closed)
   @override
-  void dispose() {
+  dispose() {
     _storeResultViewsInCache();
     super.dispose(); //Call dispose on the super class
   }
 
-  void _storeResultViewsInCache() {
+  _storeResultViewsInCache() {
     try {
       final List<Map<String, dynamic>> serializedViews = _resultViews
           .map((InorganicResultView view) => view.toJson())
@@ -137,7 +137,7 @@ class _NamingAndFindingFormulaPageState
   static final Map<String, String> _normalizedToCompletion = {};
   static final Set<String> _completionNotFoundNormalizedInputs = {};
 
-  void _storeCompletionInCache(String? completion, String normalizedInput) {
+  _storeCompletionInCache(String? completion, String normalizedInput) {
     if (completion != null) {
       completion == ''
           ? _completionNotFoundNormalizedInputs.add(normalizedInput)
@@ -183,7 +183,7 @@ class _NamingAndFindingFormulaPageState
     return completion;
   }
 
-  void _processResult(String formattedQuery, InorganicResult? inorganicResult) {
+  _processResult(String formattedQuery, InorganicResult? inorganicResult) {
     stopQuimifyLoading();
 
     if (inorganicResult != null) {
@@ -262,7 +262,7 @@ class _NamingAndFindingFormulaPageState
     _processResult(input, inorganicResult);
   }
 
-  void _scrollToStart() {
+  _scrollToStart() {
     // Goes to the top of the page after a delay:
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollController.animateTo(

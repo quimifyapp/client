@@ -58,12 +58,12 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
     return (completion == null || completion == '') ? [] : [completion];
   }
 
-  void _eraseInitialAndFinalBlanks() {
+  _eraseInitialAndFinalBlanks() {
     setState(() => widget.textEditingController.text = noInitialAndFinalBlanks(
         widget.textEditingController.text)); // Clears input
   }
 
-  void _search() {
+  _search() {
     if (widget.focusNode.hasPrimaryFocus) {
       widget.focusNode.unfocus();
       _eraseInitialAndFinalBlanks();

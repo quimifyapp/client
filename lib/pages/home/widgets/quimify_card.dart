@@ -39,7 +39,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
   late int _selector;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     _selector = 0;
@@ -63,7 +63,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
   }
 
   @override
-  void dispose() {
+  dispose() {
     if (_timer != null) {
       _timer!.cancel();
     }
@@ -71,7 +71,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
     super.dispose();
   }
 
-  void _onPressed(BuildContext context) {
+  _onPressed(BuildContext context) {
     if (widget.page != null) {
       Navigator.of(context).push(
         MaterialPageRoute(

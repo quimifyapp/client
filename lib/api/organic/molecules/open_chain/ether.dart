@@ -77,7 +77,7 @@ class Ether extends OpenChain {
       _currentChain == _secondChain && _secondChain!.canBondCarbon();
 
   @override
-  void bondCarbon() => _secondChain!.bondCarbon();
+  bondCarbon() => _secondChain!.bondCarbon();
 
   @override
   String getStructure() {
@@ -93,7 +93,7 @@ class Ether extends OpenChain {
 
   // Private:
 
-  void _switchToSecondChain() {
+  _switchToSecondChain() {
     _secondChain = Chain(previousBonds: 1);
     _currentChain = _secondChain!;
   }

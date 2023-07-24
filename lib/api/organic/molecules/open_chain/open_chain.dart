@@ -15,7 +15,7 @@ abstract class OpenChain extends Organic {
 
   bool canBondCarbon();
 
-  void bondCarbon();
+  bondCarbon();
 
   String getStructure();
 

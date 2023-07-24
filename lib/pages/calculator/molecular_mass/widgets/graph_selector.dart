@@ -27,9 +27,9 @@ class GraphSelector extends StatefulWidget {
 class _GraphSelectorState extends State<GraphSelector> {
   bool _molesGraph = false;
 
-  void _tappedGraph() => setState(() => _molesGraph = !_molesGraph);
+  _tappedGraph() => setState(() => _molesGraph = !_molesGraph);
 
-  void _pressedSwitch(bool newValue) =>
+  _pressedSwitch(bool newValue) =>
       setState(() => _molesGraph = newValue);
 
   @override

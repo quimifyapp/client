@@ -45,7 +45,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   late bool _isCollapsed = true;
   final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
 
-  void _pressedReportButton() {
+  _pressedReportButton() {
     QuimifyReportDialog(
       details: 'Resultado de:\n"${widget.formattedQuery}"',
       reportContext: 'Inorganic naming and finding formula',
@@ -54,9 +54,9 @@ class _InorganicResultViewState extends State<InorganicResultView> {
     ).show(context);
   }
 
-  void _pressedShareButton() => quimifyComingSoonDialog.showIn(context);
+  _pressedShareButton() => quimifyComingSoonDialog.showIn(context);
 
-  void _tappedBox() => setState(() => _isCollapsed = !_isCollapsed);
+  _tappedBox() => setState(() => _isCollapsed = !_isCollapsed);
 
   @override
   Widget build(BuildContext context) {

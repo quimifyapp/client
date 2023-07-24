@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'env.dart';
 
-class AdManager { // TODO rename
+class AdManager {
+  // TODO rename
   static BannerAd? _bannerAd;
   static InterstitialAd? _interstitialAd;
 
@@ -22,7 +21,7 @@ class AdManager { // TODO rename
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
-            // Called when the ad showed the full screen content.
+              // Called when the ad showed the full screen content.
               onAdShowedFullScreenContent: (ad) {},
               // Called when an impression occurs on the ad.
               onAdImpression: (ad) {},
@@ -43,7 +42,8 @@ class AdManager { // TODO rename
         // Called when an ad request failed.
         onAdFailedToLoad: (LoadAdError error) {
           // ignore: avoid_print
-          print('InterstitialAd failed to load: $error'); // TODO remove and other prints
+          print(
+              'InterstitialAd failed to load: $error'); // TODO remove and other prints
         },
       ),
     );
@@ -73,12 +73,12 @@ class AdManager { // TODO rename
     return _bannerAd;
   }
 
-  static void disposeBannerAd() {
+  static disposeBannerAd() {
     _bannerAd?.dispose();
     _bannerAd = null;
   }
 
-  static void showInterstitialAd() {
+  static showInterstitialAd() {
     if (_interstitialAd == null) {
       _loadInterstitialAd().then((_) {
         _interstitialAd!.show();

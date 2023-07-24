@@ -15,6 +15,10 @@ class Api {
 
   factory Api() => _singleton;
 
+  Api._internal() {
+    _loadClient();
+  }
+
   late final http.Client _client;
 
   // Constants:
@@ -26,9 +30,9 @@ class Api {
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
-  // Private constructor for singleton pattern:
+  // Private:
 
-  Api._internal() {
+  _loadClient() {
     var context = io.SecurityContext(withTrustedRoots: true);
 
     context.useCertificateChainBytes(utf8.encode(
@@ -45,8 +49,6 @@ class Api {
 
     _client = io.IOClient(io.HttpClient(context: context));
   }
-
-  // Private:
 
   String _versionedPath(String path) => 'v$_apiVersion/$path';
 
@@ -171,7 +173,7 @@ class Api {
     return result;
   }
 
-  void sendErrorWithRetry({
+  sendErrorWithRetry({
     required String context,
     required String details,
   }) async {
@@ -191,7 +193,7 @@ class Api {
     }
   }
 
-  void sendReportWithRetry({
+  sendReportWithRetry({
     required String context,
     required String details,
     String? userMessage,
@@ -277,7 +279,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = MolecularMassResult.fromJson(response);
+        result = MolecularMassResult.fromJson(response, formula);
       } catch (error) {
         sendErrorWithRetry(
           context: 'Molecular mass JSON',
