@@ -48,10 +48,10 @@ class RecordFields extends StatelessWidget {
   }
 
   void _pushOrganicPage(OrganicResult result) {
-    const String _title = 'Historial';
+    const String title = 'Historial';
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return OrganicResultPage(
-        title: _title,
+        title: title,
         organicResultView: OrganicResultView(
           fields: {
             if (result.name != null) 'Nombre:': result.name!,
@@ -173,8 +173,6 @@ class RecordFields extends StatelessWidget {
         ));
   }
 }
-
-final ScrollController _scrollController = ScrollController();
 
 class RecordField extends StatelessWidget {
   const RecordField({

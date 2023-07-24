@@ -58,8 +58,8 @@ class History {
   }
 
   static Future<void> saveMolecularMass(MolecularMassResult result) async {
-    String formula = result.formula!;
-    String molecularMass = result.molecularMass!.toString(); // TODO test
+    String formula = result.formula;
+    String molecularMass = result.molecularMass!.toString(); //tested
 
     dynamic molecularMassResults = await getMolecularMasses(); // TODO rename
 

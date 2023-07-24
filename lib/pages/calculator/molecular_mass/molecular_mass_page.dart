@@ -308,7 +308,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           ),
                           const Spacer(),
                           QuimifyIconButton.square(
-                            //TODO: Revisar si el fix ha arreglado el overflow
                             height: 40,
                             onPressed: () => pressedHistoryButton(context),
                             backgroundColor:
