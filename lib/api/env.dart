@@ -22,14 +22,14 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
   @EnviedField(varName: 'INTERSTITIAL_UNIT_ID', obfuscate: true)
-  static final interstitialUnitId = _Env.interstitialUnitId;
+  static final String interstitialUnitId = _Env.interstitialUnitId;
 
   @EnviedField(varName: 'BANNER_UNIT_ID', obfuscate: true)
-  static final bannerUnitId = _Env.bannerUnitId;
+  static final String bannerUnitId = _Env.bannerUnitId;
 
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
-  static final apiCertificate = _Env.apiCertificate;
+  static final String apiCertificate = _Env.apiCertificate;
 
   @EnviedField(varName: 'API_PRIVATE_KEY', obfuscate: true)
-  static final apiPrivateKey = _Env.apiPrivateKey;
+  static final String apiPrivateKey = _Env.apiPrivateKey;
 }
