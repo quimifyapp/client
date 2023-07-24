@@ -11,7 +11,7 @@ import '../api.dart';
 
 class MolecularMassResult {
   final bool present;
-  final String formula;
+  final String? formula;
   final num? molecularMass;
   final Map<String, num>? elementToGrams;
   final Map<String, int>? elementToMoles;
@@ -30,7 +30,7 @@ class MolecularMassResult {
     dynamic json = jsonDecode(body);
     return MolecularMassResult(
       json['present'] as bool,
-      formula, // TODO get it from API
+      formula, // TODO get it from API + null check
       json['molecularMass'] as num?,
       json['elementToGrams']?.cast<String, num>(),
       json['elementToMoles']?.cast<String, int>(),
