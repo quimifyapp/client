@@ -37,7 +37,7 @@ class QuimifyReportDialog extends StatelessWidget {
 
     QuimifyThanksDialog(
       userMessage: userMessage,
-    ).showIn(context);
+    ).show(context);
   }
 
   _submittedText(String text, BuildContext context) {

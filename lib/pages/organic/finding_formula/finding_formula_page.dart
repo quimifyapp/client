@@ -71,7 +71,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             details: 'No se ha encontrado:\n"$name"',
             reportContext: 'Organic finding formula',
             reportDetails: 'Searched "$name"',
-          ).showIn(context);
+          ).show(context);
         }
       } else {
         // Client already reported an error in this case
@@ -80,9 +80,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).showIn(context);
+            ).show(context);
           } else {
-            quimifyNoInternetDialog.showIn(context);
+            quimifyNoInternetDialog.show(context);
           }
         });
       }

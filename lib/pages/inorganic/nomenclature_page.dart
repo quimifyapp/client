@@ -220,7 +220,7 @@ class _NamingAndFindingFormulaPageState
           details: 'No se ha encontrado:\n"$formattedQuery"',
           reportContext: 'Inorganic naming and finding formula',
           reportDetails: 'Searched "$formattedQuery"',
-        ).showIn(context);
+        ).show(context);
       }
     } else {
       // Client already reported an error in this case
@@ -228,9 +228,9 @@ class _NamingAndFindingFormulaPageState
         if (hasInternetConnection) {
           const QuimifyMessageDialog(
             title: 'Sin resultado',
-          ).showIn(context);
+          ).show(context);
         } else {
-          quimifyNoInternetDialog.showIn(context);
+          quimifyNoInternetDialog.show(context);
         }
       });
     }

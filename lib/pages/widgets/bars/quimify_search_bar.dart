@@ -215,7 +215,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           QuimifyIconButton.square(
             height: 50,
             backgroundColor: Theme.of(context).colorScheme.surface,
-            onPressed: () => quimifyComingSoonDialog.showIn(context),
+            onPressed: () => quimifyComingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
               color: Theme.of(context).colorScheme.primary,

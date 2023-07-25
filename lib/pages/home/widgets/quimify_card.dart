@@ -79,7 +79,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
         ),
       );
     } else {
-      quimifyComingSoonDialog.showIn(context);
+      quimifyComingSoonDialog.show(context);
     }
   }
 

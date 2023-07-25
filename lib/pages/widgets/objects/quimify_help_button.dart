@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 
 class QuimifyHelpButton extends StatelessWidget {
-  const QuimifyHelpButton({Key? key, required this.dialog}) : super(key: key);
+  const QuimifyHelpButton({
+    Key? key,
+    required this.dialog,
+  }) : super(key: key);
 
   final Widget dialog;
 

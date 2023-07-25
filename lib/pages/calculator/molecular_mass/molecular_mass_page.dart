@@ -81,7 +81,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportContext: 'Molecular mass',
           reportDetails: 'Searched "$input"',
-        ).showIn(context);
+        ).show(context);
       }
     } else {
       if (!mounted) return; // For security reasons
@@ -90,9 +90,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).showIn(context);
+            ).show(context);
           } else {
-            quimifyNoInternetDialog.showIn(context);
+            quimifyNoInternetDialog.show(context);
           }
         },
       );
@@ -160,7 +160,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.showIn(context);
+      quimifyComingSoonDialog.show(context);
 
   _pressedHistoryButton(BuildContext context) =>
       showRecordPage(context, organic: false);

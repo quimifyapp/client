@@ -69,7 +69,7 @@ class _NamingPageState extends State<NamingPage> {
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
-        const QuimifyMessageDialog(title: 'Sin resultado').showIn(context);
+        const QuimifyMessageDialog(title: 'Sin resultado').show(context);
 
         return null;
       }
@@ -83,9 +83,9 @@ class _NamingPageState extends State<NamingPage> {
           if (hasInternetConnection) {
             const QuimifyMessageDialog(
               title: 'Sin resultado',
-            ).showIn(context);
+            ).show(context);
           } else {
-            quimifyNoInternetDialog.showIn(context);
+            quimifyNoInternetDialog.show(context);
           }
         },
       );
@@ -160,7 +160,7 @@ class _NamingPageState extends State<NamingPage> {
       const QuimifyMessageDialog(
         title: 'Nada que deshacer',
         details: 'Prueba a enlazar un sustiuyente.',
-      ).showIn(context);
+      ).show(context);
     }
   }
 
@@ -180,13 +180,13 @@ class _NamingPageState extends State<NamingPage> {
         details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
             'pueden compartir un maximo de tres.\n\n'
             'Prueba a enlazar un sustiuyente.',
-      ).showIn(context);
+      ).show(context);
     } else {
       const QuimifyMessageDialog(
         title: 'No hace falta',
         details: 'Se enlazará otro carbono al oxígeno cuando completes este '
             'carbono.',
-      ).showIn(context);
+      ).show(context);
     }
   }
 

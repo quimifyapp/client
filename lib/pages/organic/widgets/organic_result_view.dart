@@ -30,7 +30,7 @@ class OrganicResultView extends StatelessWidget {
       quimifyReportDialog.show(context);
 
   _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.showIn(context);
+      quimifyComingSoonDialog.show(context);
 
   _pressedHistoryButton(BuildContext context) =>
       showRecordPage(context, organic: true);

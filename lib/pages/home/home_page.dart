@@ -55,12 +55,12 @@ class _HomePageState extends State<HomePage> {
           details: widget.clientResult!.messageDetails!,
           linkLabel: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
-        ).showIn(context);
+        ).show(context);
       } else {
         QuimifyMessageDialog(
           title: widget.clientResult!.messageTitle!,
           details: widget.clientResult!.messageDetails!,
-        ).showIn(context);
+        ).show(context);
       }
     }
   }
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       closable: optionalUpdate,
     );
 
-    updateDialog.showIn(context).then((value) => _showWelcomeMessagePopup());
+    updateDialog.show(context).then((value) => _showWelcomeMessagePopup());
   }
 
   _goToPage(int page) {
