@@ -15,7 +15,7 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  Cache().initialize();
+  Storage().initialize();
   AdManager.initialize();
 
   // Loading while splash screen:

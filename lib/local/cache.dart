@@ -3,12 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 // TODO rename Storage
 // TODO test on iOS
 
-class Cache {
-  static final Cache _singleton = Cache._internal();
+class Storage {
+  static final Storage _singleton = Storage._internal();
 
-  factory Cache() => _singleton;
+  factory Storage() => _singleton;
 
-  Cache._internal();
+  Storage._internal();
 
   late final SharedPreferences sharedPreferences;
 

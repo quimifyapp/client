@@ -17,7 +17,7 @@ class History {
   // Private:
 
   static List<dynamic> _fetch(String key, Function(String) fromJson) {
-    final String? data = Cache().get(key);
+    final String? data = Storage().get(key);
 
     if (data == null) {
       return [];
@@ -30,7 +30,7 @@ class History {
     localResults.remove(localResult);
     localResults.insert(0, localResult);
 
-    Cache().save(key, jsonEncode(localResults.map((e) => e.toJson()).toList()));
+    Storage().save(key, jsonEncode(localResults.map((e) => e.toJson()).toList()));
   }
 
   // Public:
