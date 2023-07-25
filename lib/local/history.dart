@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
-import 'package:quimify_client/local/cache.dart';
 import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
 import 'package:quimify_client/local/results/organic_local_result.dart';
+import 'package:quimify_client/local/storage.dart';
 
 class History {
   // Constants:
@@ -30,7 +30,9 @@ class History {
     localResults.remove(localResult);
     localResults.insert(0, localResult);
 
-    Storage().save(key, jsonEncode(localResults.map((e) => e.toJson()).toList()));
+    dynamic data = jsonEncode(localResults.map((e) => e.toJson()));
+
+    Storage().save(key, data.toList());
   }
 
   // Public:
