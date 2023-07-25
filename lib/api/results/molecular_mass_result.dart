@@ -1,14 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-
-import '../../local/history.dart';
-import '../../pages/widgets/popups/quimify_loading.dart';
-import '../../pages/widgets/popups/quimify_message_dialog.dart';
-import '../../pages/widgets/popups/quimify_no_internet_dialog.dart';
-import '../../utils/internet.dart';
-import '../api.dart';
-
 class MolecularMassResult {
   final bool present;
   final String? formula;

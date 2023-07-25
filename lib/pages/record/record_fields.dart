@@ -2,15 +2,9 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/api/results/molecular_mass_result.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
 
-import '../../api/results/organic_result.dart';
-import '../organic/naming/organic_result_page.dart';
-import '../organic/widgets/organic_result_view.dart';
 import '../widgets/appearance/quimify_teal.dart';
 
 // TODO overflow de Matthew
