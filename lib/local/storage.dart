@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-// TODO rename Storage
 // TODO test on iOS
 
 class Storage {

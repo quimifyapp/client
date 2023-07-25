@@ -48,7 +48,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     null,
   );
 
-  Future<void> _calculate({String? input}) async {
+  _calculate({String? input}) async {
     input ??= _textController.text;
 
     startQuimifyLoading(context);

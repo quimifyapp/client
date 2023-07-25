@@ -36,7 +36,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     null,
   );
 
-  Future<void> _search(String name) async {
+  _search(String name) async {
     if (!isEmptyWithBlanks(name)) {
       startQuimifyLoading(context);
 

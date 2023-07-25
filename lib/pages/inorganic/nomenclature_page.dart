@@ -42,7 +42,7 @@ class _NamingAndFindingFormulaPageState
     _initializePreferences();
   }
 
-  Future<void> _initializePreferences() async {
+  _initializePreferences() async {
     _prefs = await SharedPreferences.getInstance();
     await _loadResultViewsFromCache(); // Await the cache loading
     setState(() {
@@ -56,7 +56,7 @@ class _NamingAndFindingFormulaPageState
   final List<InorganicResultView> _resultViews = [];
 
   //Cache the views
-  Future<void> _loadResultViewsFromCache() async {
+  _loadResultViewsFromCache() async {
     // print('Cargando vistas de resultados desde la caché');
     try {
       final String? cachedViews = _prefs.getString('cachedViews');
@@ -104,7 +104,7 @@ class _NamingAndFindingFormulaPageState
   }
 
   // * Save the views in the cache
-  Future<void> _saveResultViewsToCache(
+  _saveResultViewsToCache(
       List<InorganicResultView> resultViews) async {
     final List<String> serializedViews =
         resultViews.map((view) => jsonEncode(view.toJson())).toList();
@@ -236,7 +236,7 @@ class _NamingAndFindingFormulaPageState
     }
   }
 
-  Future<void> _searchFromCompletion(String completion) async {
+  _searchFromCompletion(String completion) async {
     if (isEmptyWithBlanks(completion)) {
       return;
     }
@@ -249,7 +249,7 @@ class _NamingAndFindingFormulaPageState
     _processResult(formatInorganicFormulaOrName(completion), inorganicResult);
   }
 
-  Future<void> _searchFromQuery(String input, bool photo) async {
+  _searchFromQuery(String input, bool photo) async {
     if (isEmptyWithBlanks(input)) {
       return;
     }

@@ -18,7 +18,7 @@ class RadicalFactoryDialog extends StatefulWidget {
 
   final Function(int, bool) onSubmitted;
 
-  Future<void> show(BuildContext context) async =>
+  show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
   @override

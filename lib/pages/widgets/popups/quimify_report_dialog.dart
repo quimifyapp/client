@@ -21,7 +21,7 @@ class QuimifyReportDialog extends StatelessWidget {
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
 
-  Future<void> show(BuildContext context) async =>
+  show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
   _sendReport(String? userMessage) async {

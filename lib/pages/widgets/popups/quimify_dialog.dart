@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-Future<void> showQuimifyDialog({
+showQuimifyDialog({
   required BuildContext context,
   required Widget dialog,
   bool closable = true,

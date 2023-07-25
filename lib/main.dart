@@ -10,7 +10,7 @@ import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/local/storage.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 
-Future<void> main() async {
+main() async {
   // Show splash screen UNTIL stated otherwise:
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

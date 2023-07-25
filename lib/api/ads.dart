@@ -8,13 +8,13 @@ class AdManager {
   static BannerAd? _bannerAd;
   static InterstitialAd? _interstitialAd;
 
-  static Future<void> initialize() async {
+  static initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     await MobileAds.instance.initialize();
     await _loadInterstitialAd();
   }
 
-  static Future<void> _loadInterstitialAd() async {
+  static _loadInterstitialAd() async {
     await InterstitialAd.load(
       adUnitId: Env.interstitialUnitId,
       request: const AdRequest(),
@@ -47,7 +47,7 @@ class AdManager {
     );
   }
 
-  static Future<void> loadBannerAd(double bannerAdWidth) async {
+  static loadBannerAd(double bannerAdWidth) async {
     final adSize = AdSize(
       width: bannerAdWidth.toInt(),
       height: 50,
