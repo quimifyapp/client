@@ -73,8 +73,8 @@ class _NamingPageState extends State<NamingPage> {
 
         return null;
       }
-      // Saving organic Result to cache
-      History.saveOrganic(result);
+
+      History.saveOrganicName(result);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons

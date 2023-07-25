@@ -3,75 +3,65 @@ import 'dart:convert';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/cache.dart';
+import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
+import 'package:quimify_client/local/results/organic_local_result.dart';
 
 class History {
   // Constants:
 
+  // TODO: inorganic
   static const String _organicFormulasKey = 'organic-formulas';
+  static const String _organicNamesKey = 'organic-names';
   static const String _molecularMassesKey = 'molecular-masses';
 
-  static Future<List<Map<String, String>>> getOrganicFormulas() async {
-    final String? organicFormulas = Cache().get(_organicFormulasKey);
+  // Private:
 
-    if (organicFormulas == null) {
+  static List<dynamic> _fetch(String key, Function(String) fromJson) {
+    final String? data = Cache().get(key);
+
+    if (data == null) {
       return [];
     }
 
-    final List<dynamic> organicFormulasJson = jsonDecode(organicFormulas);
-
-    return organicFormulasJson
-        .map((json) => Map<String, String>.from(json))
-        .toList();
+    return jsonDecode(data).map((e) => fromJson(e)).toList();
   }
 
-  static Future<List<Map<String, String>>> getMolecularMasses() async {
-    final String? molecularMassesString = Cache().get(_molecularMassesKey);
+  static _save(String key, dynamic localResult, List<dynamic> localResults) {
+    localResults.remove(localResult);
+    localResults.insert(0, localResult);
 
-    if (molecularMassesString == null) {
-      return [];
-    }
-
-    final List<dynamic> molecularMassesJson = jsonDecode(molecularMassesString);
-
-    return molecularMassesJson
-        .map((json) => Map<String, String>.from(json))
-        .toList();
+    Cache().save(key, jsonEncode(localResults.map((e) => e.toJson()).toList()));
   }
 
-  static Future<void> saveOrganic(OrganicResult result) async {
-    // TODO separar en los 2 menús de orgánica
-    String structure = result.structure!;
+  // Public:
 
-    dynamic organicResults = await getOrganicFormulas();
+  static List<OrganicLocalResult> getOrganicFormulas() =>
+      _fetch(_organicFormulasKey, OrganicLocalResult.fromJson)
+          .cast<OrganicLocalResult>();
 
-    organicResults
-        .removeWhere((existing) => existing['structure'] == structure);
+  static saveOrganicFormula(OrganicResult result) => _save(
+        _organicFormulasKey,
+        OrganicLocalResult.fromResult(result),
+        getOrganicFormulas(),
+      );
 
-    organicResults.insert(0, {
-      'date': DateTime.now().toString(),
-      'name': result.name!,
-      'structure': structure,
-    });
+  static List<OrganicLocalResult> getOrganicNames() =>
+      _fetch(_organicNamesKey, OrganicLocalResult.fromJson)
+          .cast<OrganicLocalResult>();
 
-    await Cache().save(_organicFormulasKey, jsonEncode(organicResults));
-  }
+  static saveOrganicName(OrganicResult result) => _save(
+        _organicNamesKey,
+        OrganicLocalResult.fromResult(result),
+        getOrganicNames(),
+      );
 
-  static Future<void> saveMolecularMass(MolecularMassResult result) async {
-    String formula = result.formula!;
-    String molecularMass = result.molecularMass!.toString();
+  static List<MolecularMassLocalResult> getMolecularMasses() =>
+      _fetch(_molecularMassesKey, MolecularMassLocalResult.fromJson)
+          .cast<MolecularMassLocalResult>();
 
-    dynamic molecularMassResults = await getMolecularMasses(); // TODO rename
-
-    molecularMassResults.removeWhere((existing) =>
-        existing['formula'] == formula &&
-        existing['molecularMass'] == molecularMass);
-
-    molecularMassResults.insert(0, {
-      'date': DateTime.now().toString(),
-      'formula': formula,
-      'molecularMass': molecularMass,
-    });
-
-    await Cache().save(_molecularMassesKey, jsonEncode(molecularMassResults));
-  }
+  static saveMolecularMass(MolecularMassResult result) => _save(
+        _molecularMassesKey,
+        MolecularMassLocalResult.fromResult(result),
+        getMolecularMasses(),
+      );
 }

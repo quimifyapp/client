@@ -46,6 +46,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
       if (result != null) {
         if (result.present) {
+          AdManager.showInterstitialAd();
+
           setState(() {
             _result = result;
             if (_firstSearch) {
@@ -53,17 +55,14 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             }
           });
 
+          History.saveOrganicFormula(result);
+
           // UI/UX actions:
 
           _labelText = name; // Sets previous input as label
           _textController.clear(); // Clears input
           _textFocusNode.unfocus(); // Hides keyboard
           _scrollToStart(); // Goes to the top of the page
-          // Mostrar anuncio emergente (popup) con un 80% de probabilidad
-          AdManager.showInterstitialAd();
-
-          // Save the organic result in cache
-          History.saveOrganic(result);
         } else {
           if (!mounted) return; // For security reasons
           QuimifyMessageDialog.reportable(
