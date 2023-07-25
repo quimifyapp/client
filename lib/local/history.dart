@@ -11,7 +11,6 @@ class History {
   static const String _molecularMassesKey = 'molecular-masses';
 
   static Future<List<Map<String, String>>> getOrganicFormulas() async {
-    // TODO return type?
     final String? organicFormulas = Cache().get(_organicFormulasKey);
 
     if (organicFormulas == null) {
