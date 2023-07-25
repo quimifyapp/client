@@ -44,7 +44,7 @@ class QuimifySectionTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          HelpButton(dialog: helpDialog),
+          QuimifyHelpButton(dialog: helpDialog),
         ],
       ),
     );

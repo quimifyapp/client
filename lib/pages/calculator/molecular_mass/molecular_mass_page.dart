@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/record/record_page.dart';
@@ -13,12 +14,12 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
+import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
@@ -158,14 +159,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         noInitialAndFinalBlanks(_textController.text); // Clears input
   }
 
-  TextStyle inputOutputStyle = const TextStyle(
-    fontSize: 26,
-    color: quimifyTeal,
-    fontWeight: FontWeight.bold,
-  );
+  _pressedShareButton(BuildContext context) =>
+      quimifyComingSoonDialog.showIn(context);
+
+  _pressedHistoryButton(BuildContext context) =>
+      showRecordPage(context, organic: false);
 
   @override
-  didChangeDependencies() {
+  didChangeDependencies() { // TODO review
     super.didChangeDependencies();
 
     final mediaQuery = MediaQuery.of(context);
@@ -180,15 +181,19 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   @override
-  dispose() {
+  dispose() { // TODO review
     AdManager.disposeBannerAd();
     super.dispose();
   }
 
+  TextStyle inputOutputStyle = const TextStyle(
+    fontSize: 26,
+    color: quimifyTeal,
+    fontWeight: FontWeight.bold,
+  );
+
   @override
   Widget build(BuildContext context) {
-    pressedHistoryButton(BuildContext context) =>
-        showRecordPage(context, organic: false);
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -217,13 +222,21 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Fórmula',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              'Fórmula',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Spacer(),
+                            const QuimifyHelpButton(
+                              dialog: MolecularMassHelpDialog(),
+                            ),
+                          ],
                         ),
                         const Spacer(),
                         TextField(
@@ -296,26 +309,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             ),
                           ),
                           const Spacer(),
-                          QuimifyIconButton.square(
-                            height: 40,
-                            onPressed: () => pressedHistoryButton(context),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.errorContainer,
-                            icon: Icon(
-                              Icons.history,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onErrorContainer,
-                              size: 24,
-                            ),
+                          IconButton(
+                            color: Theme.of(context).colorScheme.primary,
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            // To remove padding:
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            onPressed: () => _pressedShareButton(context),
+                            icon: const Icon(Icons.share_outlined, size: 26),
                           ),
-                          const SizedBox(
-                            width: 7,
-                          ),
-                          const HelpButton(
-                            dialog: MolecularMassHelpDialog(),
-                          ),
-                          //HistoryButtom
                         ],
                       ),
                       const Spacer(),
@@ -329,18 +332,29 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   ),
                 ),
                 const SizedBox(height: 25),
-                QuimifyButton.gradient(
-                  height: 50,
-                  gradient: quimifyGradient,
-                  onPressed: _pressedButton,
-                  child: Text(
-                    'Calcular',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  children: [
+                    Expanded(
+                      child: QuimifyButton.gradient(
+                        height: 50,
+                        gradient: quimifyGradient,
+                        onPressed: _pressedButton,
+                        child: Text(
+                          'Calcular',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 12),
+                    QuimifyHistoryButton(
+                      height: 50,
+                      onPressed: () => _pressedHistoryButton(context),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 25),
                 GraphSelector(

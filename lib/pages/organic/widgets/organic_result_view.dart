@@ -5,7 +5,9 @@ import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/record/record_page.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_share_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 
@@ -63,27 +65,14 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              QuimifyIconButton.square(
+              QuimifyShareButton(
                 height: 44,
                 onPressed: () => _pressedShareButton(context),
-                backgroundColor: Theme.of(context).colorScheme.errorContainer,
-                icon: Icon(
-                  Icons.share_outlined,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                  size: 18,
-                ),
               ),
-              // * Added History Button
               const SizedBox(width: 12),
-              QuimifyIconButton.square(
+              QuimifyHistoryButton(
                 height: 44,
                 onPressed: () => _pressedHistoryButton(context),
-                backgroundColor: Theme.of(context).colorScheme.errorContainer,
-                icon: Icon(
-                  Icons.history,
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                  size: 24,
-                ),
               ),
             ],
           ),
@@ -136,7 +125,7 @@ class OrganicResultView extends StatelessWidget {
                     children: [
                       const Padding(
                         padding: EdgeInsets.only(top: 5),
-                        child: HelpButton(
+                        child: QuimifyHelpButton(
                           dialog: StructureHelpDialog(),
                         ),
                       ),
