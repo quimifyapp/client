@@ -15,9 +15,7 @@ class Api {
 
   factory Api() => _singleton;
 
-  Api._internal() {
-    _loadClient();
-  }
+  Api._internal();
 
   late final http.Client _client;
 
@@ -31,24 +29,6 @@ class Api {
   static const _mirrorAuthority = 'api2.quimify.com';
 
   // Private:
-
-  _loadClient() {
-    var context = io.SecurityContext(withTrustedRoots: true);
-
-    context.useCertificateChainBytes(utf8.encode(
-      '-----BEGIN CERTIFICATE-----\n'
-      '${Env.apiCertificate}\n'
-      '-----END CERTIFICATE-----',
-    ));
-
-    context.usePrivateKeyBytes(utf8.encode(
-      '-----BEGIN PRIVATE KEY-----\n'
-      '${Env.apiPrivateKey}\n'
-      '-----END PRIVATE KEY-----',
-    ));
-
-    _client = io.IOClient(io.HttpClient(context: context));
-  }
 
   String _versionedPath(String path) => 'v$_apiVersion/$path';
 
@@ -141,6 +121,24 @@ class Api {
   }
 
   // Public:
+
+  initialize() {
+    var context = io.SecurityContext(withTrustedRoots: true);
+
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+          '${Env.apiCertificate}\n'
+          '-----END CERTIFICATE-----',
+    ));
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+          '${Env.apiPrivateKey}\n'
+          '-----END PRIVATE KEY-----',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
 
   Future<AccessDataResult?> getAccessDataResult() async {
     AccessDataResult? result;
