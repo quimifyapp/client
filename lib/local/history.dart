@@ -30,9 +30,9 @@ class History {
     localResults.remove(localResult);
     localResults.insert(0, localResult);
 
-    dynamic data = jsonEncode(localResults.map((e) => e.toJson()));
+    List<dynamic> data = localResults.map((e) => e.toJson()).toList();
 
-    Storage().save(key, data.toList());
+    Storage().save(key, jsonEncode(data));
   }
 
   // Public:
