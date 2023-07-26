@@ -20,12 +20,12 @@ class MolecularMassResult {
   factory MolecularMassResult.fromJson(String body, String formula) {
     dynamic json = jsonDecode(body);
     return MolecularMassResult(
-      json['present'] as bool,
-      formula, // TODO get it from API + null check
-      json['molecularMass'] as num?,
+      json['present'],
+      formula, // TODO get it from API + make it non-nullable
+      json['molecularMass'],
       json['elementToGrams']?.cast<String, num>(),
       json['elementToMoles']?.cast<String, int>(),
-      json['error'] as String?,
+      json['error'],
     );
   }
 }

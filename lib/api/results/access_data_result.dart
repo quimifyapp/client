@@ -25,15 +25,15 @@ class AccessDataResult {
     dynamic json = jsonDecode(body);
 
     return AccessDataResult(
-      json['updateAvailable'] as bool,
-      json['updateNeeded'] as bool?,
-      json['updateDetails'] as String?,
-      json['messagePresent'] as bool,
-      json['messageTitle'] as String?,
-      json['messageDetails'] as String?,
-      json['messageLinkPresent'] as bool?,
-      json['messageLinkLabel'] as String?,
-      json['messageLink'] as String?,
+      json['updateAvailable'],
+      json['updateNeeded'],
+      json['updateDetails'],
+      json['messagePresent'],
+      json['messageTitle'],
+      json['messageDetails'],
+      json['messageLinkPresent'],
+      json['messageLinkLabel'],
+      json['messageLink'],
     );
   }
 }

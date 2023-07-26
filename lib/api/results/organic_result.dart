@@ -19,11 +19,12 @@ class OrganicResult {
   factory OrganicResult.fromJson(String body) {
     dynamic json = jsonDecode(body);
     return OrganicResult(
-        json['present'] as bool,
-        json['structure'] as String?,
-        json['name'] as String?,
-        json['molecularMass'] as num?,
-        json['url2D'] as String?);
+      json['present'],
+      json['structure'],
+      json['name'],
+      json['molecularMass'],
+      json['url2D'],
+    );
   }
 
   // Used for reports
