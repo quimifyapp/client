@@ -388,24 +388,6 @@ class _NamingPageState extends State<NamingPage> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  const Expanded(
-                    child: QuimifyHistoryButton(
-                      height: buttonHeight,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: UndoButton(
-                      height: buttonHeight,
-                      onPressed: _undoButton,
-                      enabled: _canUndo(),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
                   if (!_done) ...[
                     Expanded(
                       child: AddCarbonButton(
@@ -455,6 +437,24 @@ class _NamingPageState extends State<NamingPage> {
                       ),
                     ),
                   ],
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Expanded(
+                    child: QuimifyHistoryButton(
+                      height: buttonHeight,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: UndoButton(
+                      height: buttonHeight,
+                      onPressed: _undoButton,
+                      enabled: _canUndo(),
+                    ),
+                  ),
                 ],
               ),
               // Substituents:
