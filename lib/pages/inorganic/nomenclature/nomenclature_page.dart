@@ -211,7 +211,7 @@ class _NamingAndFindingFormulaPageState
         return true;
       },
       child: GestureDetector(
-        onTap: () => _textFocusNode.unfocus(),
+        onTap: _textFocusNode.unfocus,
         child: QuimifyScaffold(
           header: Column(
             children: [
