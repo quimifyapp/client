@@ -60,20 +60,18 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
     if (result != null) {
       if (result.present) {
-        // Save to local cache
-        await History.saveMolecularMass(result);
+        AdManager.showInterstitialAd();
+
         setState(() => _result = result);
 
+        History.saveMolecularMass(result);
+
         // UI/UX actions:
+
         _labelText = input; // Sets previous input as label
         _textController.clear(); // Clears input
 
         _textFocusNode.unfocus();
-
-        // Mostrar anuncio emergente (popup) con un 80% de probabilidad
-        AdManager.showInterstitialAd();
-
-        // Save the result to cache
       } else {
         if (!mounted) return; // For security reasons
         QuimifyMessageDialog.reportable(
