@@ -164,7 +164,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       showRecordPage(context, organic: false);
 
   @override
-  didChangeDependencies() { // TODO review
+  didChangeDependencies() {
+    // TODO review
     super.didChangeDependencies();
 
     final mediaQuery = MediaQuery.of(context);
@@ -179,7 +180,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   }
 
   @override
-  dispose() { // TODO review
+  dispose() {
+    // TODO review
     AdManager.disposeBannerAd();
     super.dispose();
   }
@@ -192,6 +194,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 50;
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -332,9 +336,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                 const SizedBox(height: 25),
                 Row(
                   children: [
+                    const QuimifyHistoryButton(
+                      height: buttonHeight,
+                    ),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: QuimifyButton.gradient(
-                        height: 50,
+                        height: buttonHeight,
                         gradient: quimifyGradient,
                         onPressed: _pressedButton,
                         child: Text(
@@ -346,11 +354,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    QuimifyHistoryButton(
-                      height: 50,
-                      onPressed: () => _pressedHistoryButton(context),
                     ),
                   ],
                 ),

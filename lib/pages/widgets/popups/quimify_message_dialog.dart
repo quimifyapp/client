@@ -99,7 +99,7 @@ class QuimifyMessageDialog extends StatelessWidget {
               if (_hasReportButton)
                 Row(
                   children: [
-                    QuimifyIconButton.square(
+                    QuimifyIconButton.square( // TODO poner en común
                       height: 50,
                       backgroundColor: Theme.of(context).colorScheme.error,
                       onPressed: () => _pressedReportButton(context),

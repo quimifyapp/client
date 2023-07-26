@@ -173,29 +173,6 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                             Expanded(
                               child: QuimifyIconButton(
                                 height: 50,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.error,
-                                onPressed: _pressedReportButton,
-                                icon: Image.asset(
-                                  'assets/images/icons/report.png',
-                                  color: Theme.of(context).colorScheme.onError,
-                                  width: 18,
-                                ),
-                                text: Text(
-                                  'Reportar',
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.onError,
-                                    fontSize: 15,
-                                    //fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 15),
-                            Expanded(
-                              child: QuimifyIconButton(
-                                height: 50,
                                 onPressed: _pressedShareButton,
                                 backgroundColor: Theme.of(context)
                                     .colorScheme
@@ -213,6 +190,29 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                     color: Theme.of(context)
                                         .colorScheme
                                         .onErrorContainer,
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: QuimifyIconButton(
+                                height: 50,
+                                backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                                onPressed: _pressedReportButton,
+                                icon: Image.asset(
+                                  'assets/images/icons/report.png',
+                                  color: Theme.of(context).colorScheme.onError,
+                                  width: 18,
+                                ),
+                                text: Text(
+                                  'Reportar',
+                                  style: TextStyle(
+                                    color:
+                                    Theme.of(context).colorScheme.onError,
                                     fontSize: 15,
                                     //fontWeight: FontWeight.bold
                                   ),

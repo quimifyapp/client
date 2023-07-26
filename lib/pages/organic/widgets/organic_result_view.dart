@@ -37,6 +37,8 @@ class OrganicResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 44;
+
     return SingleChildScrollView(
       controller: scrollController ?? ScrollController(),
       padding: const EdgeInsets.all(20),
@@ -54,8 +56,18 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
+              const QuimifyHistoryButton(
+                height: buttonHeight,
+                iconSize: 20,
+              ),
+              const SizedBox(width: 12),
+              QuimifyShareButton(
+                height: buttonHeight,
+                onPressed: () => _pressedShareButton(context),
+              ),
+              const SizedBox(width: 12),
               QuimifyIconButton.square(
-                height: 44,
+                height: buttonHeight,
                 backgroundColor: Theme.of(context).colorScheme.error,
                 onPressed: () => _pressedReportButton(context),
                 icon: Image.asset(
@@ -63,16 +75,6 @@ class OrganicResultView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onError,
                   width: 18,
                 ),
-              ),
-              const SizedBox(width: 12),
-              QuimifyShareButton(
-                height: 44,
-                onPressed: () => _pressedShareButton(context),
-              ),
-              const SizedBox(width: 12),
-              QuimifyHistoryButton(
-                height: 44,
-                onPressed: () => _pressedHistoryButton(context),
               ),
             ],
           ),

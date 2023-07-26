@@ -6,6 +6,7 @@ import 'package:quimify_client/api/organic/components/substituent.dart';
 import 'package:quimify_client/api/organic/molecules/open_chain/open_chain.dart';
 import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
@@ -18,13 +19,13 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
@@ -237,6 +238,8 @@ class _NamingPageState extends State<NamingPage> {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 40;
+
     final Map<Group, GroupButton> groupToButton = {
       Group.hydrogen: GroupButton(
         bonds: 1,
@@ -380,20 +383,33 @@ class _NamingPageState extends State<NamingPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 15),
               // Buttons:
+              // TODO order of rows?
+              const SizedBox(height: 10),
               Row(
                 children: [
+                  const Expanded(
+                    child: QuimifyHistoryButton(
+                      height: buttonHeight,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: UndoButton(
+                      height: buttonHeight,
                       onPressed: _undoButton,
                       enabled: _canUndo(),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
                   if (!_done) ...[
                     Expanded(
                       child: AddCarbonButton(
+                        height: buttonHeight,
                         enabled: _canBondCarbon(),
                         onPressed: _pressedBondCarbonButton,
                       ),
@@ -401,6 +417,7 @@ class _NamingPageState extends State<NamingPage> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: HydrogenateButton(
+                        height: buttonHeight,
                         onPressed: _pressedHydrogenateButton,
                         enabled: true,
                       ),
@@ -410,7 +427,7 @@ class _NamingPageState extends State<NamingPage> {
                     // Reset button:
                     Expanded(
                       child: QuimifyButton(
-                        height: 40,
+                        height: buttonHeight,
                         onPressed: _pressedResetButton,
                         color: const Color.fromARGB(255, 56, 133, 224),
                         child: Icon(
@@ -424,7 +441,7 @@ class _NamingPageState extends State<NamingPage> {
                     // 'Solve it' button:
                     Expanded(
                       child: QuimifyButton.gradient(
-                        height: 40,
+                        height: buttonHeight,
                         onPressed: _pressedButton,
                         gradient: quimifyGradient,
                         child: Text(
@@ -440,12 +457,14 @@ class _NamingPageState extends State<NamingPage> {
                   ],
                 ],
               ),
-              const SizedBox(height: 20),
               // Substituents:
+              const SizedBox(height: 20),
               if (!_done) ...[
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
-                  helpDialog: NamingHelpDialog(),
+                  helpDialog: NamingHelpDialog(
+                      buttonHeight:
+                          buttonHeight), // TODO new buttons or button order
                 ),
                 const SizedBox(height: 15),
                 Expanded(

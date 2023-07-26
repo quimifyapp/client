@@ -7,7 +7,12 @@ import 'package:quimify_client/pages/widgets/popups/quimify_help_slides_dialog.d
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
-  const NamingHelpDialog({Key? key}) : super(key: key);
+  const NamingHelpDialog({
+    Key? key,
+    required this.buttonHeight,
+  }) : super(key: key);
+
+  final double buttonHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +129,7 @@ class NamingHelpDialog extends StatelessWidget {
             child: SizedBox(
               width: 100,
               child: UndoButton(
+                height: buttonHeight,
                 enabled: true,
                 onPressed: () {},
               ),
@@ -140,6 +146,7 @@ class NamingHelpDialog extends StatelessWidget {
             child: SizedBox(
               width: 100,
               child: AddCarbonButton(
+                height: buttonHeight,
                 enabled: true,
                 onPressed: () {},
               ),
@@ -156,6 +163,7 @@ class NamingHelpDialog extends StatelessWidget {
             child: SizedBox(
               width: 100,
               child: HydrogenateButton(
+                height: buttonHeight,
                 enabled: true,
                 onPressed: () {},
               ),

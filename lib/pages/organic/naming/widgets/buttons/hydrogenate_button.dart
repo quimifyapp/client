@@ -5,17 +5,19 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 class HydrogenateButton extends StatelessWidget {
   const HydrogenateButton({
     Key? key,
+    required this.height,
     required this.enabled,
     required this.onPressed,
   }) : super(key: key);
 
+  final double height;
   final bool enabled;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return QuimifyButton.gradient(
-      height: 40,
+      height: height,
       enabled: enabled,
       onPressed: onPressed,
       gradient: quimifyGradient,
