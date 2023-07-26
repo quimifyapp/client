@@ -25,4 +25,19 @@ class OrganicResult {
         json['molecularMass'] as num?,
         json['url2D'] as String?);
   }
+
+  // Used for reports
+  @override
+  String toString() {
+    List<String?> identifiers = [
+      structure,
+      name,
+      url2D,
+      molecularMass.toString(),
+    ];
+
+    identifiers.removeWhere((identifier) => identifier == null);
+
+    return identifiers.toString();
+  }
 }
