@@ -1,5 +1,7 @@
 import 'dart:io';
 
+// TODO: not good, doesn't guarantee Internet connection. Remake
+
 // The domain 'example.com' is owned by ICANN and can be used as a reliable
 // internet connection checker.
 const String testingDomain = 'example.com';
