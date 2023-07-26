@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_thanks_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:quimify_client/utils/text.dart';
-import 'package:flutter/material.dart';
 
 class QuimifyReportDialog extends StatelessWidget {
   QuimifyReportDialog({
@@ -61,6 +61,8 @@ class QuimifyReportDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 50;
+
     return GestureDetector(
       onTap: _tappedOutsideText,
       child: QuimifyDialog(
@@ -123,6 +125,7 @@ class QuimifyReportDialog extends StatelessWidget {
             ),
           ),
           QuimifyDialogButton(
+            height: buttonHeight,
             onPressed: () => _pressedButton(context),
             text: 'Enviar',
           ),

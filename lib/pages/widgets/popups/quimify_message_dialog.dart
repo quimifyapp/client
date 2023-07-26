@@ -1,9 +1,9 @@
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_report_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class QuimifyMessageDialog extends StatelessWidget {
@@ -83,6 +83,8 @@ class QuimifyMessageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 50;
+
     return WillPopScope(
       onWillPop: () => Future.value(closable),
       child: QuimifyDialog(
@@ -99,21 +101,18 @@ class QuimifyMessageDialog extends StatelessWidget {
               if (_hasReportButton)
                 Row(
                   children: [
-                    QuimifyIconButton.square( // TODO poner en común
-                      height: 50,
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      onPressed: () => _pressedReportButton(context),
-                      icon: Image.asset(
-                        'assets/images/icons/report.png',
-                        width: 20,
-                        color: Theme.of(context).colorScheme.onError,
-                      ),
+                    QuimifyReportButton(
+                      height: buttonHeight,
+                      size: 20,
+                      onPressed: () =>
+                          _pressedReportButton(context),
                     ),
                     const SizedBox(width: 8),
                   ],
                 ),
               Expanded(
                 child: QuimifyDialogButton(
+                  height: buttonHeight,
                   onPressed: () => _pressedButton(context),
                   text: _hasLink ? linkLabel! : 'Entendido',
                 ),

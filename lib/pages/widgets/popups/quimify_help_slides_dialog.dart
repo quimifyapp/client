@@ -37,6 +37,8 @@ class _QuimifyHelpSlidesDialogState extends State<QuimifyHelpSlidesDialog> {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 50;
+
     titleToContent['¿Necesitas ayuda?'] = [
       const Center(
         child: QuimifyDialogContentText(
@@ -70,6 +72,7 @@ class _QuimifyHelpSlidesDialogState extends State<QuimifyHelpSlidesDialog> {
           ),
           const SizedBox(height: 20),
           QuimifyDialogButton(
+            height: buttonHeight,
             onPressed: _goToNextSlide,
             text: _currentSlide < titleToContent.length - 1
                 ? 'Siguiente'

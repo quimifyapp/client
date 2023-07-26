@@ -1,11 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:flutter/material.dart';
 
 class QuimifyDialogButton extends StatelessWidget {
-  const QuimifyDialogButton({Key? key, required this.onPressed, required this.text})
-      : super(key: key);
+  const QuimifyDialogButton({
+    Key? key,
+    required this.height,
+    required this.onPressed,
+    required this.text,
+  }) : super(key: key);
 
+  final double height;
   final VoidCallback onPressed;
   final String text;
 

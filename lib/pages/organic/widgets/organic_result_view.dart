@@ -6,7 +6,7 @@ import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart'
 import 'package:quimify_client/pages/record/record_page.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_share_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
@@ -66,15 +66,10 @@ class OrganicResultView extends StatelessWidget {
                 onPressed: () => _pressedShareButton(context),
               ),
               const SizedBox(width: 12),
-              QuimifyIconButton.square(
+              QuimifyReportButton(
                 height: buttonHeight,
-                backgroundColor: Theme.of(context).colorScheme.error,
+                size: 18,
                 onPressed: () => _pressedReportButton(context),
-                icon: Image.asset(
-                  'assets/images/icons/report.png',
-                  color: Theme.of(context).colorScheme.onError,
-                  width: 18,
-                ),
               ),
             ],
           ),
