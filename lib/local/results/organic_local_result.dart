@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:quimify_client/api/results/organic_result.dart';
 
 class OrganicLocalResult {
-  late final String structure;
+  late final String? structure;
   late final String name;
 
   OrganicLocalResult(
@@ -13,7 +13,7 @@ class OrganicLocalResult {
 
   factory OrganicLocalResult.fromResult(OrganicResult result) =>
       OrganicLocalResult(
-        result.structure!,
+        result.structure,
         result.name!,
       );
 
