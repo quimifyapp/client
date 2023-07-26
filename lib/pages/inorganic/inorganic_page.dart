@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
-import 'package:quimify_client/pages/inorganic/nomenclature_page.dart';
+import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';

@@ -127,14 +127,14 @@ class Api {
 
     context.useCertificateChainBytes(utf8.encode(
       '-----BEGIN CERTIFICATE-----\n'
-          '${Env.apiCertificate}\n'
-          '-----END CERTIFICATE-----',
+      '${Env.apiCertificate}\n'
+      '-----END CERTIFICATE-----',
     ));
 
     context.usePrivateKeyBytes(utf8.encode(
       '-----BEGIN PRIVATE KEY-----\n'
-          '${Env.apiPrivateKey}\n'
-          '-----END PRIVATE KEY-----',
+      '${Env.apiPrivateKey}\n'
+      '-----END PRIVATE KEY-----',
     ));
 
     _client = io.IOClient(io.HttpClient(context: context));
@@ -229,7 +229,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = InorganicResult.fromJson(jsonDecode(response));
+        result = InorganicResult.fromJson(response);
       } catch (error) {
         sendErrorWithRetry(
           context: 'Inorganic from completion JSON',
@@ -253,7 +253,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = InorganicResult.fromJson(jsonDecode(response));
+        result = InorganicResult.fromJson(response);
       } catch (error) {
         sendErrorWithRetry(
           context: 'Inorganic JSON',

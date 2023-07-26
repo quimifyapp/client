@@ -14,28 +14,11 @@ class InorganicResultView extends StatefulWidget {
   const InorganicResultView({
     Key? key,
     required this.formattedQuery,
-    required this.inorganicResult,
+    required this.result,
   }) : super(key: key);
 
-  // Add the fromJson method to deserialize the object
-  factory InorganicResultView.fromJson(Map<String, dynamic> json) {
-    return InorganicResultView(
-      formattedQuery: json['formattedQuery'] as String,
-      inorganicResult: InorganicResult.fromJson(
-          json['inorganicResult'] as Map<String, dynamic>),
-    );
-  }
-
-  // Add the toJson method to serialize the object
-  Map<String, dynamic> toJson() {
-    return {
-      'formattedQuery': formattedQuery,
-      'inorganicResult': inorganicResult.toJson(),
-    };
-  }
-
   final String formattedQuery;
-  final InorganicResult inorganicResult;
+  final InorganicResult result;
 
   @override
   State<InorganicResultView> createState() => _InorganicResultViewState();
@@ -50,7 +33,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
       details: 'Resultado de:\n"${widget.formattedQuery}"',
       reportContext: 'Inorganic naming and finding formula',
       reportDetails: 'Result of "${widget.formattedQuery}": '
-          '${widget.inorganicResult}',
+          '${widget.result}',
     ).show(context);
   }
 
@@ -121,7 +104,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  formatInorganicFormulaOrName(widget.inorganicResult.formula!),
+                  formatInorganicFormulaOrName(widget.result.formula!),
                   style: const TextStyle(
                     color: quimifyTeal,
                     fontSize: 28,
@@ -130,19 +113,19 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 ),
                 InorganicResultName(
                   label: 'Stock',
-                  name: widget.inorganicResult.stockName,
+                  name: widget.result.stockName,
                 ),
                 InorganicResultName(
                   label: 'Sistemática',
-                  name: widget.inorganicResult.systematicName,
+                  name: widget.result.systematicName,
                 ),
                 InorganicResultName(
                   label: 'Tradicional',
-                  name: widget.inorganicResult.traditionalName,
+                  name: widget.result.traditionalName,
                 ),
                 InorganicResultName(
                   label: 'Nombre común',
-                  name: widget.inorganicResult.commonName,
+                  name: widget.result.commonName,
                 ),
                 const SizedBox(height: 15),
                 AnimatedSize(
@@ -155,31 +138,31 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                       children: [
                         InorganicResultFields(
                           fields: [
-                            if (widget.inorganicResult.molecularMass != null)
+                            if (widget.result.molecularMass != null)
                               InorganicResultField(
                                 title: 'Masa molecular',
-                                quantity: widget.inorganicResult.molecularMass,
+                                quantity: widget.result.molecularMass,
                                 unit: 'g/mol',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.density != null)
+                            if (widget.result.density != null)
                               InorganicResultField(
                                 title: 'Densidad',
-                                quantity: widget.inorganicResult.density,
+                                quantity: widget.result.density,
                                 unit: 'g/cm³',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.meltingPoint != null)
+                            if (widget.result.meltingPoint != null)
                               InorganicResultField(
                                 title: 'P. de fusión',
-                                quantity: widget.inorganicResult.meltingPoint,
+                                quantity: widget.result.meltingPoint,
                                 unit: 'K',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
-                            if (widget.inorganicResult.boilingPoint != null)
+                            if (widget.result.boilingPoint != null)
                               InorganicResultField(
                                 title: 'P. de ebullición',
-                                quantity: widget.inorganicResult.boilingPoint,
+                                quantity: widget.result.boilingPoint,
                                 unit: 'K',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),

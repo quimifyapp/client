@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:quimify_client/api/results/inorganic_result.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/local/results/inorganic_local_result.dart';
 import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
 import 'package:quimify_client/local/results/organic_local_result.dart';
 import 'package:quimify_client/local/storage.dart';
@@ -9,8 +11,8 @@ import 'package:quimify_client/local/storage.dart';
 class History {
   // Constants:
 
-  // TODO: inorganic
   // TODO: test organic
+  static const String _inorganicsKey = 'inorganics';
   static const String _organicFormulasKey = 'organic-formulas';
   static const String _organicNamesKey = 'organic-names';
   static const String _molecularMassesKey = 'molecular-masses';
@@ -37,6 +39,16 @@ class History {
   }
 
   // Public:
+
+  static List<InorganicLocalResult> getInorganics() =>
+      _fetch(_inorganicsKey, InorganicLocalResult.fromJson)
+          .cast<InorganicLocalResult>();
+
+  static saveInorganic(InorganicResult result, String formattedQuery) => _save(
+        _inorganicsKey,
+        InorganicLocalResult.fromResult(result, formattedQuery),
+        getInorganics(),
+      );
 
   static List<OrganicLocalResult> getOrganicFormulas() =>
       _fetch(_organicFormulasKey, OrganicLocalResult.fromJson)
