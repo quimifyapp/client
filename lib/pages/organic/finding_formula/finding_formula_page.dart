@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
@@ -10,7 +12,6 @@ import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart'
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
 
@@ -22,6 +23,8 @@ class FindingFormulaPage extends StatefulWidget {
 }
 
 class _FindingFormulaPageState extends State<FindingFormulaPage> {
+  static const String _title = 'Formular orgánicos';
+
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -101,6 +104,16 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   @override
   Widget build(BuildContext context) {
+    final HistoryPage historyPage = HistoryPage(
+      title: _title,
+      entries: History.getOrganicFormulas()
+          .map((e) => {
+                'Búsqueda': e.name,
+                'Fórmula': e.structure,
+              })
+          .toList(),
+    );
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -111,7 +124,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         child: QuimifyScaffold(
           header: Column(
             children: [
-              const QuimifyPageBar(title: 'Formular orgánicos'),
+              const QuimifyPageBar(title: _title),
               QuimifySearchBar(
                 label: _labelText,
                 textEditingController: _textController,
@@ -140,6 +153,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
+            historyPage: historyPage,
             quimifyReportDialog: ReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',

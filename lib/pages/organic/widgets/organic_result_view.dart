@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
-import 'package:quimify_client/pages/record/record_page.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
@@ -17,23 +17,21 @@ class OrganicResultView extends StatelessWidget {
     this.scrollController,
     required this.fields,
     required this.imageProvider,
+    required this.historyPage,
     required this.quimifyReportDialog,
   }) : super(key: key);
 
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
+  final HistoryPage historyPage;
   final ReportDialog quimifyReportDialog;
-  final RecordPage recordPage = const RecordPage(organic: true);
 
   _pressedReportButton(BuildContext context) =>
       quimifyReportDialog.show(context);
 
   _pressedShareButton(BuildContext context) =>
       quimifyComingSoonDialog.show(context);
-
-  _pressedHistoryButton(BuildContext context) =>
-      showRecordPage(context, organic: true);
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,10 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const HistoryButton(
+              HistoryButton(
                 height: buttonHeight,
                 iconSize: 20,
+                historyPage: historyPage,
               ),
               const SizedBox(width: 12),
               ShareButton(

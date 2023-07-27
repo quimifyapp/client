@@ -26,7 +26,7 @@ class History {
       return [];
     }
 
-    return jsonDecode(data).map((e) => fromJson(e)).toList();
+    return jsonDecode(data).map((e) => fromJson(e)).toList().reversed.toList();
   }
 
   static _save(String key, dynamic localResult, List<dynamic> localResults) {

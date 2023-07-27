@@ -8,13 +8,13 @@ import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
-import 'package:quimify_client/pages/record/record_page.dart';
+import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
@@ -31,6 +31,8 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
+  static const String _title = 'Masa molecular';
+
   late bool _isBannerAdLoaded = false;
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
@@ -160,9 +162,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   _pressedShareButton(BuildContext context) =>
       quimifyComingSoonDialog.show(context);
 
-  _pressedHistoryButton(BuildContext context) =>
-      showRecordPage(context, organic: false);
-
   @override
   didChangeDependencies() {
     // TODO review
@@ -196,6 +195,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
+    final HistoryPage historyPage = HistoryPage(
+      title: _title,
+      entries: History.getMolecularMasses()
+          .map((e) => {
+                'Fórmula': e.formula,
+                'Masa molecular': e.molecularMass.toString(),
+              })
+          .toList(),
+    );
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -204,7 +213,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       child: GestureDetector(
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
-          header: const QuimifyPageBar(title: 'Masa molecular'),
+          header: const QuimifyPageBar(title: _title),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),
@@ -336,8 +345,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                 const SizedBox(height: 25),
                 Row(
                   children: [
-                    const HistoryButton(
+                    HistoryButton(
                       height: buttonHeight,
+                      historyPage: historyPage,
                     ),
                     const SizedBox(width: 12),
                     Expanded(

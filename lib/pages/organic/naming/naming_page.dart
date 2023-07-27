@@ -7,6 +7,7 @@ import 'package:quimify_client/api/organic/molecules/open_chain/open_chain.dart'
 import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
@@ -42,6 +43,8 @@ class _NamingPageState extends State<NamingPage> {
   late bool _done;
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
+
+  // TODO rethink how history is handled here so the most recent result is in it
 
   @override
   initState() {
@@ -95,7 +98,7 @@ class _NamingPageState extends State<NamingPage> {
     return result;
   }
 
-  _showResult(OrganicResult organicResult) {
+  _showResult(OrganicResult organicResult, HistoryPage historyPage) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -114,6 +117,7 @@ class _NamingPageState extends State<NamingPage> {
               imageProvider: organicResult.url2D != null
                   ? NetworkImage(organicResult.url2D!)
                   : null,
+              historyPage: historyPage,
               quimifyReportDialog: ReportDialog(
                 details: 'Resultado de:\n"'
                     '${formatStructure(organicResult.structure!)}"',
@@ -127,11 +131,12 @@ class _NamingPageState extends State<NamingPage> {
     );
   }
 
-  _pressedButton() {
+  _pressedButton(HistoryPage historyPage) {
+    // TODO here? as an arg?
     if (_done) {
       _search().then((organicResult) {
         if (organicResult != null) {
-          _showResult(organicResult);
+          _showResult(organicResult, historyPage);
           // Mostrar anuncio emergente (popup) con un 80% de probabilidad
           AdManager.showInterstitialAd();
         }
@@ -239,6 +244,16 @@ class _NamingPageState extends State<NamingPage> {
   @override
   Widget build(BuildContext context) {
     const double buttonHeight = 40;
+
+    final HistoryPage historyPage = HistoryPage(
+      title: _title,
+      entries: History.getOrganicNames()
+          .map((e) => {
+                'Búsqueda': e.structure,
+                'Nombre': e.name,
+              })
+          .toList(),
+    );
 
     final Map<Group, GroupButton> groupToButton = {
       Group.hydrogen: GroupButton(
@@ -384,7 +399,6 @@ class _NamingPageState extends State<NamingPage> {
                 ),
               ),
               // Buttons:
-              // TODO order of rows?
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -424,7 +438,7 @@ class _NamingPageState extends State<NamingPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        onPressed: _pressedButton,
+                        onPressed: () => _pressedButton(historyPage),
                         gradient: quimifyGradient,
                         child: Text(
                           'Resolver',
@@ -442,9 +456,10 @@ class _NamingPageState extends State<NamingPage> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: HistoryButton(
                       height: buttonHeight,
+                      historyPage: historyPage,
                     ),
                   ),
                   const SizedBox(width: 10),
