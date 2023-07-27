@@ -3,7 +3,7 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_b
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_help_slides_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
@@ -24,7 +24,7 @@ class NamingHelpDialog extends StatelessWidget {
       ),
     );
 
-    return QuimifyHelpSlidesDialog(
+    return HelpSlidesDialog(
       titleToContent: {
         'Sustituyentes': [
           Container(

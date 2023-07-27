@@ -7,7 +7,7 @@ import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_name.dar
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 import 'package:quimify_client/utils/text.dart';
 
 class InorganicResultView extends StatefulWidget {
@@ -29,7 +29,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
   final AutoSizeGroup _fieldTitleAutoSizeGroup = AutoSizeGroup();
 
   _pressedReportButton() {
-    QuimifyReportDialog(
+    ReportDialog(
       details: 'Resultado de:\n"${widget.formattedQuery}"',
       reportContext: 'Inorganic naming and finding formula',
       reportDetails: 'Result of "${widget.formattedQuery}": '

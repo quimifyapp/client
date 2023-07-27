@@ -8,7 +8,7 @@ import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/utils/internet.dart';
@@ -140,7 +140,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
-            quimifyReportDialog: QuimifyReportDialog(
+            quimifyReportDialog: ReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
               reportDetails: 'Result of "${_result.name!}": $_result',

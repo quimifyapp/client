@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 
-class QuimifyReportButton extends StatelessWidget {
-  const QuimifyReportButton({
+class ReportButton extends StatelessWidget {
+  const ReportButton({
     Key? key,
     required this.height,
     required this.size,

@@ -4,8 +4,8 @@ import 'package:quimify_client/pages/widgets/popups/widgets/quimify_contact_butt
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
-class QuimifyThanksDialog extends StatelessWidget {
-  const QuimifyThanksDialog({
+class ThanksDialog extends StatelessWidget {
+  const ThanksDialog({
     Key? key,
     this.userMessage,
   }) : super(key: key);

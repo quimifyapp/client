@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 
-class QuimifyShareButton extends StatelessWidget {
-  const QuimifyShareButton({
+class ShareButton extends StatelessWidget {
+  const ShareButton({
     Key? key,
     required this.height,
     required this.onPressed,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_help_slides_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
 class CalculatorHelpDialog extends StatelessWidget {
@@ -7,7 +7,7 @@ class CalculatorHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const QuimifyHelpSlidesDialog(
+    return const HelpSlidesDialog(
       titleToContent: {
         'Masa molecular': [
           Center(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_thanks_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/thanks_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 import 'package:quimify_client/utils/text.dart';
 
-class QuimifyReportDialog extends StatelessWidget {
-  QuimifyReportDialog({
+class ReportDialog extends StatelessWidget {
+  ReportDialog({
     Key? key,
     required this.details,
     required this.reportContext,
@@ -35,7 +35,7 @@ class QuimifyReportDialog extends StatelessWidget {
   _exitWithThanks(String userMessage, BuildContext context) {
     Navigator.of(context).pop();
 
-    QuimifyThanksDialog(
+    ThanksDialog(
       userMessage: userMessage,
     ).show(context);
   }

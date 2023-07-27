@@ -4,12 +4,12 @@ import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/record/record_page.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_report_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_share_button.dart';
+import 'package:quimify_client/pages/widgets/objects/help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
+import 'package:quimify_client/pages/widgets/objects/report_button.dart';
+import 'package:quimify_client/pages/widgets/objects/share_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
@@ -23,7 +23,7 @@ class OrganicResultView extends StatelessWidget {
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
-  final QuimifyReportDialog quimifyReportDialog;
+  final ReportDialog quimifyReportDialog;
   final RecordPage recordPage = const RecordPage(organic: true);
 
   _pressedReportButton(BuildContext context) =>
@@ -56,17 +56,17 @@ class OrganicResultView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const QuimifyHistoryButton(
+              const HistoryButton(
                 height: buttonHeight,
                 iconSize: 20,
               ),
               const SizedBox(width: 12),
-              QuimifyShareButton(
+              ShareButton(
                 height: buttonHeight,
                 onPressed: () => _pressedShareButton(context),
               ),
               const SizedBox(width: 12),
-              QuimifyReportButton(
+              ReportButton(
                 height: buttonHeight,
                 size: 18,
                 onPressed: () => _pressedReportButton(context),
@@ -122,7 +122,7 @@ class OrganicResultView extends StatelessWidget {
                     children: [
                       const Padding(
                         padding: EdgeInsets.only(top: 5),
-                        child: QuimifyHelpButton(
+                        child: HelpButton(
                           dialog: StructureHelpDialog(),
                         ),
                       ),

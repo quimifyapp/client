@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 
-class QuimifyHistoryButton extends StatelessWidget {
-  const QuimifyHistoryButton({
+class HistoryButton extends StatelessWidget {
+  const HistoryButton({
     Key? key,
     this.width,
     required this.height,

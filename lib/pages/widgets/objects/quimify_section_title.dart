@@ -1,5 +1,5 @@
-import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 
 class QuimifySectionTitle extends StatelessWidget {
   const QuimifySectionTitle({
@@ -44,7 +44,7 @@ class QuimifySectionTitle extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          QuimifyHelpButton(dialog: helpDialog),
+          HelpButton(dialog: helpDialog),
         ],
       ),
     );

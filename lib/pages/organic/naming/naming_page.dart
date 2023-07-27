@@ -18,13 +18,13 @@ import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_report_dialog.dart';
+import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
@@ -114,7 +114,7 @@ class _NamingPageState extends State<NamingPage> {
               imageProvider: organicResult.url2D != null
                   ? NetworkImage(organicResult.url2D!)
                   : null,
-              quimifyReportDialog: QuimifyReportDialog(
+              quimifyReportDialog: ReportDialog(
                 details: 'Resultado de:\n"'
                     '${formatStructure(organicResult.structure!)}"',
                 reportContext: 'Organic naming',
@@ -443,7 +443,7 @@ class _NamingPageState extends State<NamingPage> {
               Row(
                 children: [
                   const Expanded(
-                    child: QuimifyHistoryButton(
+                    child: HistoryButton(
                       height: buttonHeight,
                     ),
                   ),

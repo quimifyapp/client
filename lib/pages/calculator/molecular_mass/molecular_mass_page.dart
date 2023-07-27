@@ -13,8 +13,8 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_help_button.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_history_button.dart';
+import 'package:quimify_client/pages/widgets/objects/help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
@@ -235,7 +235,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               ),
                             ),
                             const Spacer(),
-                            const QuimifyHelpButton(
+                            const HelpButton(
                               dialog: MolecularMassHelpDialog(),
                             ),
                           ],
@@ -336,7 +336,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                 const SizedBox(height: 25),
                 Row(
                   children: [
-                    const QuimifyHistoryButton(
+                    const HistoryButton(
                       height: buttonHeight,
                     ),
                     const SizedBox(width: 12),
