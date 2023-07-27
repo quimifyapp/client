@@ -50,6 +50,29 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     null,
   );
 
+  @override
+  didChangeDependencies() {
+    // TODO review
+    super.didChangeDependencies();
+
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final bannerAdWidth = screenWidth - 40;
+
+    AdManager.loadBannerAd(bannerAdWidth).then((_) {
+      setState(() {
+        _isBannerAdLoaded = true;
+      });
+    });
+  }
+
+  @override
+  dispose() {
+    // TODO review
+    AdManager.disposeBannerAd();
+    super.dispose();
+  }
+
   _calculate({String? input}) async {
     input ??= _textController.text;
 
@@ -98,6 +121,18 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       );
     }
   }
+
+  HistoryPage _historyPageBuilder() => HistoryPage(
+        title: _title,
+        entries: History.getMolecularMasses()
+            .map((e) => {
+                  'Fórmula': e.formula,
+                  'Masa molecular': e.molecularMass.toString(),
+                })
+            .toList(),
+      );
+
+  // Interface:
 
   _pressedButton() {
     _eraseInitialAndFinalBlanks();
@@ -163,46 +198,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       quimifyComingSoonDialog.show(context);
 
   @override
-  didChangeDependencies() {
-    // TODO review
-    super.didChangeDependencies();
-
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
-    final bannerAdWidth = screenWidth - 40;
-
-    AdManager.loadBannerAd(bannerAdWidth).then((_) {
-      setState(() {
-        _isBannerAdLoaded = true;
-      });
-    });
-  }
-
-  @override
-  dispose() {
-    // TODO review
-    AdManager.disposeBannerAd();
-    super.dispose();
-  }
-
-  TextStyle inputOutputStyle = const TextStyle(
-    fontSize: 26,
-    color: quimifyTeal,
-    fontWeight: FontWeight.bold,
-  );
-
-  @override
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    final HistoryPage historyPage = HistoryPage(
-      title: _title,
-      entries: History.getMolecularMasses()
-          .map((e) => {
-                'Fórmula': e.formula,
-                'Masa molecular': e.molecularMass.toString(),
-              })
-          .toList(),
+    TextStyle inputOutputStyle = const TextStyle(
+      fontSize: 26,
+      color: quimifyTeal,
+      fontWeight: FontWeight.bold,
     );
 
     return WillPopScope(
@@ -347,7 +349,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   children: [
                     HistoryButton(
                       height: buttonHeight,
-                      historyPage: historyPage,
+                      historyPageBuilder: _historyPageBuilder,
                     ),
                     const SizedBox(width: 12),
                     Expanded(

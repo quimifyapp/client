@@ -13,14 +13,6 @@ class HistoryPage extends StatelessWidget {
   final String title;
   final List<Map<String, String?>> entries;
 
-  show(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) => this,
-      ),
-    );
-  }
-
   // TODO onPressed to search it
   // TODO handle when it's empty
   // TODO design
@@ -28,7 +20,7 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<HistoryEntry> historyEntries =
-        entries.map((entry) => HistoryEntry(fields: entry)).toList();
+        entries.reversed.map((entry) => HistoryEntry(fields: entry)).toList();
 
     return QuimifyScaffold(
       header: QuimifyPageBar(

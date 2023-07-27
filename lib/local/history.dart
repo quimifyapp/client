@@ -11,7 +11,6 @@ import 'package:quimify_client/local/storage.dart';
 class History {
   // Constants:
 
-  // TODO: test organic
   static const String _inorganicsKey = 'inorganics';
   static const String _organicFormulasKey = 'organic-formulas';
   static const String _organicNamesKey = 'organic-names';
@@ -26,7 +25,7 @@ class History {
       return [];
     }
 
-    return jsonDecode(data).map((e) => fromJson(e)).toList().reversed.toList();
+    return jsonDecode(data).map((e) => fromJson(e)).toList().toList();
   }
 
   static _save(String key, dynamic localResult, List<dynamic> localResults) {

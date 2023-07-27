@@ -8,20 +8,24 @@ class HistoryButton extends StatelessWidget {
     this.width,
     required this.height,
     this.iconSize = 24,
-    required this.historyPage,
+    required this.historyPageBuilder,
   }) : super(key: key);
 
   final double? width;
   final double height;
   final double iconSize;
-  final HistoryPage historyPage;
+  final HistoryPage Function() historyPageBuilder;
 
   @override
   Widget build(BuildContext context) {
     return QuimifyIconButton.square(
       height: height,
       backgroundColor: Theme.of(context).colorScheme.surface,
-      onPressed: () => historyPage.show(context),
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => historyPageBuilder(),
+        ),
+      ),
       icon: Icon(
         Icons.history,
         color: Theme.of(context).colorScheme.primary,

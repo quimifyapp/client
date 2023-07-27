@@ -44,8 +44,6 @@ class _NamingPageState extends State<NamingPage> {
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
 
-  // TODO rethink how history is handled here so the most recent result is in it
-
   @override
   initState() {
     super.initState();
@@ -63,7 +61,7 @@ class _NamingPageState extends State<NamingPage> {
 
   List<int> _sequence() => _sequenceStack.last;
 
-  Future<OrganicResult?> _search() async {
+  _search() async {
     startQuimifyLoading(context);
 
     OrganicResult? result = await Api().getOrganicFromStructure(_sequence());
@@ -77,6 +75,10 @@ class _NamingPageState extends State<NamingPage> {
 
         return null;
       }
+
+      AdManager.showInterstitialAd();
+
+      _showResult(result);
 
       History.saveOrganicName(result);
     } else {
@@ -98,7 +100,7 @@ class _NamingPageState extends State<NamingPage> {
     return result;
   }
 
-  _showResult(OrganicResult organicResult, HistoryPage historyPage) {
+  _showResult(OrganicResult organicResult) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -117,7 +119,7 @@ class _NamingPageState extends State<NamingPage> {
               imageProvider: organicResult.url2D != null
                   ? NetworkImage(organicResult.url2D!)
                   : null,
-              historyPage: historyPage,
+              historyPageBuilder: _historyPageBuilder,
               quimifyReportDialog: ReportDialog(
                 details: 'Resultado de:\n"'
                     '${formatStructure(organicResult.structure!)}"',
@@ -131,18 +133,15 @@ class _NamingPageState extends State<NamingPage> {
     );
   }
 
-  _pressedButton(HistoryPage historyPage) {
-    // TODO here? as an arg?
-    if (_done) {
-      _search().then((organicResult) {
-        if (organicResult != null) {
-          _showResult(organicResult, historyPage);
-          // Mostrar anuncio emergente (popup) con un 80% de probabilidad
-          AdManager.showInterstitialAd();
-        }
-      });
-    }
-  }
+  HistoryPage _historyPageBuilder() => HistoryPage(
+        title: _title,
+        entries: History.getOrganicNames()
+            .map((e) => {
+                  'Búsqueda': e.structure,
+                  'Nombre': e.name,
+                })
+            .toList(),
+      );
 
   // Editing panel:
 
@@ -244,16 +243,6 @@ class _NamingPageState extends State<NamingPage> {
   @override
   Widget build(BuildContext context) {
     const double buttonHeight = 40;
-
-    final HistoryPage historyPage = HistoryPage(
-      title: _title,
-      entries: History.getOrganicNames()
-          .map((e) => {
-                'Búsqueda': e.structure,
-                'Nombre': e.name,
-              })
-          .toList(),
-    );
 
     final Map<Group, GroupButton> groupToButton = {
       Group.hydrogen: GroupButton(
@@ -438,7 +427,7 @@ class _NamingPageState extends State<NamingPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        onPressed: () => _pressedButton(historyPage),
+                        onPressed: _search,
                         gradient: quimifyGradient,
                         child: Text(
                           'Resolver',
@@ -459,7 +448,7 @@ class _NamingPageState extends State<NamingPage> {
                   Expanded(
                     child: HistoryButton(
                       height: buttonHeight,
-                      historyPage: historyPage,
+                      historyPageBuilder: _historyPageBuilder,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -500,9 +489,8 @@ class _NamingPageState extends State<NamingPage> {
                           runSpacing: 15,
                           children: _openChain()
                               .getBondableGroups()
-                              .map((function) => groupToButton[function]!)
-                              .toList()
                               .reversed
+                              .map((function) => groupToButton[function]!)
                               .toList(),
                         ),
                       ),

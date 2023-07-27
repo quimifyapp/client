@@ -91,6 +91,18 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     }
   }
 
+  HistoryPage _historyPageBuilder() => HistoryPage(
+        title: _title,
+        entries: History.getOrganicFormulas()
+            .map((e) => {
+                  'Búsqueda': e.name,
+                  'Fórmula': e.structure,
+                })
+            .toList(),
+      );
+
+  // Interface:
+
   _scrollToStart() {
     // Goes to the top of the page after a delay:
     WidgetsBinding.instance.addPostFrameCallback(
@@ -104,16 +116,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   @override
   Widget build(BuildContext context) {
-    final HistoryPage historyPage = HistoryPage(
-      title: _title,
-      entries: History.getOrganicFormulas()
-          .map((e) => {
-                'Búsqueda': e.name,
-                'Fórmula': e.structure,
-              })
-          .toList(),
-    );
-
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -153,7 +155,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
-            historyPage: historyPage,
+            historyPageBuilder: _historyPageBuilder,
             quimifyReportDialog: ReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',

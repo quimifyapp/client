@@ -62,6 +62,7 @@ class _NamingAndFindingFormulaPageState
     _labelText = _defaultLabelText;
 
     _resultViews = History.getInorganics()
+        .reversed
         .map((localResult) => InorganicResultView(
               formattedQuery: localResult.formattedQuery,
               result: InorganicResult.fromLocal(localResult),

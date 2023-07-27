@@ -17,14 +17,14 @@ class OrganicResultView extends StatelessWidget {
     this.scrollController,
     required this.fields,
     required this.imageProvider,
-    required this.historyPage,
+    required this.historyPageBuilder,
     required this.quimifyReportDialog,
   }) : super(key: key);
 
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
-  final HistoryPage historyPage;
+  final HistoryPage Function() historyPageBuilder;
   final ReportDialog quimifyReportDialog;
 
   _pressedReportButton(BuildContext context) =>
@@ -57,7 +57,7 @@ class OrganicResultView extends StatelessWidget {
               HistoryButton(
                 height: buttonHeight,
                 iconSize: 20,
-                historyPage: historyPage,
+                historyPageBuilder: historyPageBuilder,
               ),
               const SizedBox(width: 12),
               ShareButton(
