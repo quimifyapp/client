@@ -477,8 +477,8 @@ class _NamingPageState extends State<NamingPage> {
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
                   helpDialog: NamingHelpDialog(
-                      buttonHeight:
-                          buttonHeight), // TODO new buttons or button order
+                    buttonHeight: buttonHeight,
+                  ),
                 ),
                 const SizedBox(height: 15),
                 Expanded(

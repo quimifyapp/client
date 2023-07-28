@@ -124,23 +124,6 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Deshacer': [
-          Center(
-            child: SizedBox(
-              width: 100,
-              child: UndoButton(
-                height: buttonHeight,
-                enabled: true,
-                onPressed: () {},
-              ),
-            ),
-          ),
-          const Center(
-            child: QuimifyDialogContentText(
-              text: 'Este botón sirve para deshacer el último cambio.',
-            ),
-          ),
-        ],
         'Enlazar carbono': [
           Center(
             child: SizedBox(
@@ -173,6 +156,24 @@ class NamingHelpDialog extends StatelessWidget {
             child: QuimifyDialogContentText(
               text: 'Este botón sirve para enlazar varios hidrógenos al '
                   'carbono.',
+            ),
+          ),
+        ],
+        // TODO history button?
+        'Deshacer': [
+          Center(
+            child: SizedBox(
+              width: 100,
+              child: UndoButton(
+                height: buttonHeight,
+                enabled: true,
+                onPressed: () {},
+              ),
+            ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Este botón sirve para deshacer el último cambio.',
             ),
           ),
         ],
