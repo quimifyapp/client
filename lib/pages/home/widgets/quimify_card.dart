@@ -52,7 +52,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
 
     _timer = slides > 1
         ? Timer.periodic(
-            const Duration(seconds: 3),
+            const Duration(seconds: 2),
             (_) {
               if (slides != 0) {
                 setState(() => _selector = (_selector + 1) % slides);
