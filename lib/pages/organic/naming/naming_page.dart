@@ -472,7 +472,7 @@ class _NamingPageState extends State<NamingPage> {
                 ],
               ),
               // Substituents:
-              const SizedBox(height: 20),
+              const SizedBox(height: 15 + 5),
               if (!_done) ...[
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
