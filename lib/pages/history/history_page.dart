@@ -13,7 +13,6 @@ class HistoryPage extends StatelessWidget {
   final String title;
   final List<HistoryEntry> entries;
 
-  // TODO onPressed to search it
   // TODO handle when it's empty
   // TODO design
 
