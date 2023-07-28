@@ -39,7 +39,10 @@ class HistoryEntry extends StatelessWidget {
         onPressed: () => _pressed(context),
         child: Row(
           children: [
-            Column(
+            Wrap(
+              direction: Axis.vertical,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              spacing: 10,
               children: historyFields,
             ),
             const Spacer(),

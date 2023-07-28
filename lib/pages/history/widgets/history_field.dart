@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 
 class HistoryField extends StatelessWidget {
   const HistoryField({
@@ -13,23 +14,34 @@ class HistoryField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // TODO redesign. Maybe based on InorganicResultName?
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 14,
+          style: const TextStyle(
+            color: quimifyTeal,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
           ),
         ),
         const SizedBox(height: 5),
-        Text(
-          value,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                value,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 18,
+                ),
+              ),
+            ],
           ),
         ),
       ],

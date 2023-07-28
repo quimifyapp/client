@@ -12,7 +12,7 @@ class HistoryPage extends StatelessWidget {
   final List<HistoryEntry> entries;
 
   // TODO handle when it's empty
-  // TODO design
+  // TODO receive formatted fields
 
   @override
   Widget build(BuildContext context) {
