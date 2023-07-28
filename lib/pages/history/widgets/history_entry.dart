@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/history/widgets/history_field.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 
 class HistoryEntry extends StatelessWidget {
   const HistoryEntry({
     Key? key,
+    required this.query,
     required this.fields,
+    required this.onPressed,
   }) : super(key: key);
 
+  final dynamic query;
   final Map<String, String?> fields;
+  final void Function(dynamic) onPressed;
+
+  _pressed(BuildContext context) {
+    Navigator.of(context).pop();
+    onPressed(query);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +28,28 @@ class HistoryEntry extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(15),
+      ),
+      // To avoid rounded corners overflow:
+      clipBehavior: Clip.hardEdge,
+      child: MaterialButton(
+        padding: const EdgeInsets.all(20),
+        splashColor: Colors.transparent,
+        onPressed: () => _pressed(context),
+        child: Row(
+          children: [
+            Column(
+              children: historyFields,
+            ),
+            const Spacer(),
+            const Icon(
+              Icons.arrow_forward_rounded,
+              size: 30,
+              color: quimifyTeal,
+            ),
+          ],
         ),
-      ),
-      padding: const EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 20,
-      ),
-      alignment: Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: historyFields,
       ),
     );
   }

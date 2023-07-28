@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
@@ -14,18 +13,28 @@ import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
     Key? key,
+    required this.isInFullPage,
     this.scrollController,
     required this.fields,
     required this.imageProvider,
-    required this.historyPageBuilder,
+    required this.onHistoryPressed,
     required this.quimifyReportDialog,
   }) : super(key: key);
 
+  final bool isInFullPage;
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
-  final HistoryPage Function() historyPageBuilder;
+  final VoidCallback onHistoryPressed;
   final ReportDialog quimifyReportDialog;
+
+  _pressedHistoryButton(BuildContext context) {
+    if(isInFullPage) {
+      Navigator.of(context).pop();
+    }
+
+    onHistoryPressed();
+  }
 
   _pressedReportButton(BuildContext context) =>
       quimifyReportDialog.show(context);
@@ -57,7 +66,7 @@ class OrganicResultView extends StatelessWidget {
               HistoryButton(
                 height: buttonHeight,
                 iconSize: 20,
-                historyPageBuilder: historyPageBuilder,
+                onPressed: () => _pressedHistoryButton(context),
               ),
               const SizedBox(width: 12),
               ShareButton(
@@ -132,11 +141,9 @@ class OrganicResultView extends StatelessWidget {
                         constraints: const BoxConstraints(),
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return DiagramPage(
-                                imageProvider: imageProvider!,
-                              );
-                            },
+                            builder: (BuildContext context) => DiagramPage(
+                              imageProvider: imageProvider!,
+                            ),
                           ),
                         ),
                         icon: Icon(

@@ -8,6 +8,7 @@ import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
+import 'package:quimify_client/pages/history/widgets/history_entry.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
@@ -61,10 +62,10 @@ class _NamingPageState extends State<NamingPage> {
 
   List<int> _sequence() => _sequenceStack.last;
 
-  _search() async {
+  _search(List<int> sequence) async {
     startQuimifyLoading(context);
 
-    OrganicResult? result = await Api().getOrganicFromStructure(_sequence());
+    OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
     stopQuimifyLoading();
 
@@ -80,7 +81,7 @@ class _NamingPageState extends State<NamingPage> {
 
       _showResult(result);
 
-      History.saveOrganicName(result);
+      History.saveOrganicName(result, sequence);
     } else {
       // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
@@ -103,45 +104,54 @@ class _NamingPageState extends State<NamingPage> {
   _showResult(OrganicResult organicResult) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (BuildContext context) {
-          return OrganicResultPage(
-            title: _title,
-            organicResultView: OrganicResultView(
-              fields: {
-                if (organicResult.name != null) 'Nombre:': organicResult.name!,
-                if (organicResult.molecularMass != null)
-                  'Masa molecular:':
-                      '${formatMolecularMass(organicResult.molecularMass!)}'
-                          ' g/mol',
-                if (organicResult.structure != null)
-                  'Fórmula:': formatStructure(organicResult.structure!),
-              },
-              imageProvider: organicResult.url2D != null
-                  ? NetworkImage(organicResult.url2D!)
-                  : null,
-              historyPageBuilder: _historyPageBuilder,
-              quimifyReportDialog: ReportDialog(
-                details: 'Resultado de:\n"'
-                    '${formatStructure(organicResult.structure!)}"',
-                reportContext: 'Organic naming',
-                reportDetails: 'Result of ${_sequence()}: $organicResult',
-              ),
+        builder: (BuildContext context) => OrganicResultPage(
+          title: _title,
+          organicResultView: OrganicResultView(
+            isInFullPage: true,
+            fields: {
+              if (organicResult.name != null) 'Nombre:': organicResult.name!,
+              if (organicResult.molecularMass != null)
+                'Masa molecular:':
+                    '${formatMolecularMass(organicResult.molecularMass!)}'
+                        ' g/mol',
+              if (organicResult.structure != null)
+                'Fórmula:': formatStructure(organicResult.structure!),
+            },
+            imageProvider: organicResult.url2D != null
+                ? NetworkImage(organicResult.url2D!)
+                : null,
+            onHistoryPressed: _showHistory,
+            quimifyReportDialog: ReportDialog(
+              details: 'Resultado de:\n"'
+                  '${formatStructure(organicResult.structure!)}"',
+              reportContext: 'Organic naming',
+              reportDetails: 'Result of ${_sequence()}: $organicResult',
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
 
-  HistoryPage _historyPageBuilder() => HistoryPage(
-        title: _title,
-        entries: History.getOrganicNames()
-            .map((e) => {
-                  'Búsqueda': e.structure,
-                  'Nombre': e.name,
-                })
-            .toList(),
-      );
+  _showHistory() {
+    return Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => HistoryPage(
+          title: _title,
+          entries: History.getOrganicNames()
+              .map((e) => HistoryEntry(
+                    query: e.sequence,
+                    fields: {
+                      'Búsqueda': e.structure,
+                      'Nombre': e.name,
+                    },
+                    onPressed: (sequence) => _search(sequence),
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
 
   // Editing panel:
 
@@ -427,7 +437,7 @@ class _NamingPageState extends State<NamingPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        onPressed: _search,
+                        onPressed: () => _search(_sequence()),
                         gradient: quimifyGradient,
                         child: Text(
                           'Resolver',
@@ -448,7 +458,7 @@ class _NamingPageState extends State<NamingPage> {
                   Expanded(
                     child: HistoryButton(
                       height: buttonHeight,
-                      historyPageBuilder: _historyPageBuilder,
+                      onPressed: _showHistory,
                     ),
                   ),
                   const SizedBox(width: 10),

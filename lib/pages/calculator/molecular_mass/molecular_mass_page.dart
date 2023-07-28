@@ -9,6 +9,7 @@ import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
+import 'package:quimify_client/pages/history/widgets/history_entry.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -73,9 +74,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     super.dispose();
   }
 
-  _calculate({String? input}) async {
-    input ??= _textController.text;
-
+  void _calculate(String input) async {
     startQuimifyLoading(context);
 
     // Result not found in cache, make an API call
@@ -122,15 +121,25 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     }
   }
 
-  HistoryPage _historyPageBuilder() => HistoryPage(
-        title: _title,
-        entries: History.getMolecularMasses()
-            .map((e) => {
-                  'Fórmula': e.formula,
-                  'Masa molecular': e.molecularMass.toString(),
-                })
-            .toList(),
-      );
+  _showHistory() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => HistoryPage(
+          title: _title,
+          entries: History.getMolecularMasses()
+              .map((e) => HistoryEntry(
+                    query: e.formula,
+                    fields: {
+                      'Fórmula': e.formula,
+                      'Masa molecular': e.molecularMass.toString(),
+                    },
+                    onPressed: (formula) => _calculate(formula),
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
 
   // Interface:
 
@@ -144,7 +153,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _startTyping();
       }
     } else {
-      _calculate();
+      _calculate(_textController.text);
     }
   }
 
@@ -155,7 +164,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     if (isEmptyWithBlanks(_textController.text)) {
       _textController.clear(); // Clears input
     } else {
-      _calculate();
+      _calculate(_textController.text);
     }
   }
 
@@ -349,7 +358,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   children: [
                     HistoryButton(
                       height: buttonHeight,
-                      historyPageBuilder: _historyPageBuilder,
+                      onPressed: _showHistory,
                     ),
                     const SizedBox(width: 12),
                     Expanded(

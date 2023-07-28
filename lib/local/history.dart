@@ -5,7 +5,8 @@ import 'package:quimify_client/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/results/inorganic_local_result.dart';
 import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
-import 'package:quimify_client/local/results/organic_local_result.dart';
+import 'package:quimify_client/local/results/organic_formula_local_result.dart';
+import 'package:quimify_client/local/results/organic_name_local_result.dart';
 import 'package:quimify_client/local/storage.dart';
 
 class History {
@@ -49,23 +50,23 @@ class History {
         getInorganics(),
       );
 
-  static List<OrganicLocalResult> getOrganicFormulas() =>
-      _fetch(_organicFormulasKey, OrganicLocalResult.fromJson)
-          .cast<OrganicLocalResult>();
+  static List<OrganicFormulaLocalResult> getOrganicFormulas() =>
+      _fetch(_organicFormulasKey, OrganicFormulaLocalResult.fromJson)
+          .cast<OrganicFormulaLocalResult>();
 
   static saveOrganicFormula(OrganicResult result) => _save(
         _organicFormulasKey,
-        OrganicLocalResult.fromResult(result),
+        OrganicFormulaLocalResult.fromResult(result),
         getOrganicFormulas(),
       );
 
-  static List<OrganicLocalResult> getOrganicNames() =>
-      _fetch(_organicNamesKey, OrganicLocalResult.fromJson)
-          .cast<OrganicLocalResult>();
+  static List<OrganicNameLocalResult> getOrganicNames() =>
+      _fetch(_organicNamesKey, OrganicNameLocalResult.fromJson)
+          .cast<OrganicNameLocalResult>();
 
-  static saveOrganicName(OrganicResult result) => _save(
+  static saveOrganicName(OrganicResult result, List<int> sequence) => _save(
         _organicNamesKey,
-        OrganicLocalResult.fromResult(result),
+        OrganicNameLocalResult.fromResult(result, sequence),
         getOrganicNames(),
       );
 

@@ -11,7 +11,7 @@ class HistoryPage extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final List<Map<String, String?>> entries;
+  final List<HistoryEntry> entries;
 
   // TODO onPressed to search it
   // TODO handle when it's empty
@@ -19,9 +19,6 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<HistoryEntry> historyEntries =
-        entries.reversed.map((entry) => HistoryEntry(fields: entry)).toList();
-
     return QuimifyScaffold(
       header: QuimifyPageBar(
         title: title,
@@ -31,7 +28,7 @@ class HistoryPage extends StatelessWidget {
         child: Wrap(
           verticalDirection: VerticalDirection.up,
           runSpacing: 25,
-          children: historyEntries,
+          children: entries.reversed.toList(),
         ),
       ),
     );
