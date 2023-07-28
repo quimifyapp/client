@@ -24,8 +24,6 @@ class FindingFormulaPage extends StatefulWidget {
 }
 
 class _FindingFormulaPageState extends State<FindingFormulaPage> {
-  static const String _title = 'Formular orgánicos';
-
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -96,7 +94,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          title: _title,
           entries: History.getOrganicFormulas()
               .map((e) => HistoryEntry(
                     query: e.name,
@@ -137,7 +134,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         child: QuimifyScaffold(
           header: Column(
             children: [
-              const QuimifyPageBar(title: _title),
+              const QuimifyPageBar(title: 'Formular orgánicos'),
               QuimifySearchBar(
                 label: _labelText,
                 textEditingController: _textController,

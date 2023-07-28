@@ -32,8 +32,6 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
-  static const String _title = 'Masa molecular';
-
   late bool _isBannerAdLoaded = false;
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
@@ -125,7 +123,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          title: _title,
           entries: History.getMolecularMasses()
               .map((e) => HistoryEntry(
                     query: e.formula,
@@ -224,7 +221,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       child: GestureDetector(
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
-          header: const QuimifyPageBar(title: _title),
+          header: const QuimifyPageBar(title: 'Masa molecular'),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),

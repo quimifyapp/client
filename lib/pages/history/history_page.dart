@@ -6,11 +6,9 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 class HistoryPage extends StatelessWidget {
   const HistoryPage({
     Key? key,
-    required this.title,
     required this.entries,
   }) : super(key: key);
 
-  final String title;
   final List<HistoryEntry> entries;
 
   // TODO handle when it's empty
@@ -19,9 +17,7 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
-      header: QuimifyPageBar(
-        title: title,
-      ),
+      header: const QuimifyPageBar(title: 'Historial'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Wrap(
