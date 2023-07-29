@@ -95,6 +95,7 @@ dependencies:
   mailto: ^2.0.0
   shared_preferences: ^2.2.0 #Saving in Cache
   google_mobile_ads: ^3.0.0
+  connectivity_plus: ^4.0.1
 
 dev_dependencies:
   flutter_test:
