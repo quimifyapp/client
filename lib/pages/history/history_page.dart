@@ -14,8 +14,6 @@ class HistoryPage extends StatelessWidget {
   final List<HistoryEntry> entries;
   final void Function(dynamic) onEntryPressed;
 
-  // TODO receive formatted fields
-
   @override
   Widget build(BuildContext context) {
     List<HistoryEntryView> entryViews = entries.reversed

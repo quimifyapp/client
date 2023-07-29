@@ -127,7 +127,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
               .map((e) => HistoryEntry(
                     query: e.formula,
                     fields: {
-                      'Fórmula': e.formula,
+                      'Fórmula': toSubscripts(e.formula),
                       'Masa molecular': e.molecularMass.toString(),
                     },
                   ))

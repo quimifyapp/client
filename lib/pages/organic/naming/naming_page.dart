@@ -140,7 +140,8 @@ class _NamingPageState extends State<NamingPage> {
               .map((e) => HistoryEntry(
                     query: e.sequence,
                     fields: {
-                      'Búsqueda': e.structure,
+                      if (e.structure != null)
+                        'Búsqueda': formatStructure(e.structure!),
                       'Nombre': e.name,
                     },
                   ))

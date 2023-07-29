@@ -99,7 +99,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     query: e.name,
                     fields: {
                       'Búsqueda': e.name,
-                      'Fórmula': e.structure,
+                      if (e.structure != null)
+                        'Fórmula': formatStructure(e.structure!),
                     },
                   ))
               .toList(),

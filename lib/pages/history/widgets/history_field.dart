@@ -39,6 +39,7 @@ class HistoryField extends StatelessWidget {
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 18,
+                  fontFamily: 'CeraProBoldCustom',
                 ),
               ),
             ],
