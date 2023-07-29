@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/widgets/history_field.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 
-class HistoryEntry extends StatelessWidget {
-  const HistoryEntry({
+class HistoryEntryView extends StatelessWidget {
+  const HistoryEntryView({
     Key? key,
-    required this.query,
-    required this.fields,
+    required this.entry,
     required this.onPressed,
   }) : super(key: key);
 
-  final dynamic query;
-  final Map<String, String?> fields;
+  final HistoryEntry entry;
   final void Function(dynamic) onPressed;
-
-  _pressed(BuildContext context) {
-    Navigator.of(context).pop();
-    onPressed(query);
-  }
 
   @override
   Widget build(BuildContext context) {
-    List<HistoryField> historyFields = fields.entries
+    List<HistoryField> historyFields = entry.fields.entries
         .where((element) => element.value != null)
         .map((e) => HistoryField(title: e.key, value: e.value!))
         .toList();
@@ -36,7 +30,7 @@ class HistoryEntry extends StatelessWidget {
       child: MaterialButton(
         padding: const EdgeInsets.all(20),
         splashColor: Colors.transparent,
-        onPressed: () => _pressed(context),
+        onPressed: () => onPressed(entry.query),
         child: Row(
           children: [
             Wrap(

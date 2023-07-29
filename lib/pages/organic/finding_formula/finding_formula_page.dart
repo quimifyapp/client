@@ -3,8 +3,8 @@ import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
-import 'package:quimify_client/pages/history/widgets/history_entry.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
@@ -101,9 +101,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                       'Búsqueda': e.name,
                       'Fórmula': e.structure,
                     },
-                    onPressed: (name) => _search(name),
                   ))
               .toList(),
+          onEntryPressed: (name) => _search(name),
         ),
       ),
     );
@@ -149,7 +149,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             ],
           ),
           body: OrganicResultView(
-            isInFullPage: false,
             scrollController: _scrollController,
             fields: {
               if (_result.name != null) 'Búsqueda:': _result.name!,
@@ -164,7 +163,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
-            onHistoryPressed: _showHistory,
+            onHistoryPressed: (resultPageContext) => _showHistory,
             quimifyReportDialog: ReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',

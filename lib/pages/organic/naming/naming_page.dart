@@ -7,8 +7,8 @@ import 'package:quimify_client/api/organic/molecules/open_chain/open_chain.dart'
 import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
-import 'package:quimify_client/pages/history/widgets/history_entry.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/group_button.dart';
@@ -107,7 +107,6 @@ class _NamingPageState extends State<NamingPage> {
         builder: (BuildContext context) => OrganicResultPage(
           title: _title,
           organicResultView: OrganicResultView(
-            isInFullPage: true,
             fields: {
               if (organicResult.name != null) 'Nombre:': organicResult.name!,
               if (organicResult.molecularMass != null)
@@ -133,7 +132,7 @@ class _NamingPageState extends State<NamingPage> {
     );
   }
 
-  _showHistory() {
+  _showHistory(BuildContext? resultPageContext) {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
@@ -144,9 +143,15 @@ class _NamingPageState extends State<NamingPage> {
                       'Búsqueda': e.structure,
                       'Nombre': e.name,
                     },
-                    onPressed: (sequence) => _search(sequence),
                   ))
               .toList(),
+          onEntryPressed: (sequence) {
+            if (resultPageContext != null) {
+              Navigator.of(resultPageContext).pop();
+            }
+
+            _search(sequence);
+          },
         ),
       ),
     );
@@ -454,11 +459,10 @@ class _NamingPageState extends State<NamingPage> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  // TODO change order?
                   Expanded(
                     child: HistoryButton(
                       height: buttonHeight,
-                      onPressed: _showHistory,
+                      onPressed: () => _showHistory(null),
                     ),
                   ),
                   const SizedBox(width: 10),

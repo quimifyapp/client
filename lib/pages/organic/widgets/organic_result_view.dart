@@ -13,7 +13,6 @@ import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
     Key? key,
-    required this.isInFullPage,
     this.scrollController,
     required this.fields,
     required this.imageProvider,
@@ -21,20 +20,13 @@ class OrganicResultView extends StatelessWidget {
     required this.quimifyReportDialog,
   }) : super(key: key);
 
-  final bool isInFullPage;
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
-  final VoidCallback onHistoryPressed;
+  final Function(BuildContext) onHistoryPressed;
   final ReportDialog quimifyReportDialog;
 
-  _pressedHistoryButton(BuildContext context) {
-    if(isInFullPage) {
-      Navigator.of(context).pop();
-    }
-
-    onHistoryPressed();
-  }
+  _pressedHistoryButton(BuildContext context) => onHistoryPressed(context);
 
   _pressedReportButton(BuildContext context) =>
       quimifyReportDialog.show(context);
