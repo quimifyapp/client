@@ -18,7 +18,7 @@ class MolecularMassResult {
   );
 
   factory MolecularMassResult.fromJson(String body, String formula) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return MolecularMassResult(
       json['present'],
       formula, // TODO get it from API + make it non-nullable

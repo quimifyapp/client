@@ -22,7 +22,7 @@ class InorganicResult {
   );
 
   factory InorganicResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return InorganicResult(
       json['present'],
       json['formula'],

@@ -17,7 +17,7 @@ class OrganicResult {
   );
 
   factory OrganicResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return OrganicResult(
       json['present'],
       json['structure'],

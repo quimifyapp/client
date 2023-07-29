@@ -37,7 +37,7 @@ class InorganicLocalResult {
       );
 
   factory InorganicLocalResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return InorganicLocalResult(
       json['formattedQuery'],
       json['formula'],

@@ -18,7 +18,7 @@ class MolecularMassLocalResult {
       );
 
   factory MolecularMassLocalResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return MolecularMassLocalResult(
       json['formula'],
       json['molecularMass'],

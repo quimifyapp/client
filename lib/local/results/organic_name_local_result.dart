@@ -22,7 +22,7 @@ class OrganicNameLocalResult {
       );
 
   factory OrganicNameLocalResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return OrganicNameLocalResult(
       json['sequence'].cast<int>(),
       json['structure'],

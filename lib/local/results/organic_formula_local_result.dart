@@ -18,7 +18,7 @@ class OrganicFormulaLocalResult {
       );
 
   factory OrganicFormulaLocalResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
+    var json = jsonDecode(body);
     return OrganicFormulaLocalResult(
       json['structure'],
       json['name'],

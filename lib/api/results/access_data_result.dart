@@ -22,8 +22,7 @@ class AccessDataResult {
   );
 
   factory AccessDataResult.fromJson(String body) {
-    dynamic json = jsonDecode(body);
-
+    var json = jsonDecode(body);
     return AccessDataResult(
       json['updateAvailable'],
       json['updateNeeded'],
