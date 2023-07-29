@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   late int _currentPage;
   late final List<int> _visitedPagesStack;
-  late final AutoSizeGroup autoSizeGroup;
+  late final AutoSizeGroup _autoSizeGroup;
 
   @override
   initState() {
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
     _currentPage = 0;
     _visitedPagesStack = [];
-    autoSizeGroup = AutoSizeGroup();
+    _autoSizeGroup = AutoSizeGroup();
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _showWelcomePopups(),
@@ -149,21 +149,21 @@ class _HomePageState extends State<HomePage> {
                       QuimifyMenuButton(
                         title: 'Inorgánica',
                         selected: _currentPage == 0,
-                        autoSizeGroup: autoSizeGroup,
+                        autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(0),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
                         title: 'Orgánica',
                         selected: _currentPage == 1,
-                        autoSizeGroup: autoSizeGroup,
+                        autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(1),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
                         title: 'Calculadora',
                         selected: _currentPage == 2,
-                        autoSizeGroup: autoSizeGroup,
+                        autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(2),
                       ),
                     ],

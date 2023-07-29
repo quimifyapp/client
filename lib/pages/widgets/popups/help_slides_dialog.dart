@@ -16,19 +16,20 @@ class HelpSlidesDialog extends StatefulWidget {
   final Map<String, List<Widget>> titleToContent;
 
   @override
-  State<HelpSlidesDialog> createState() =>
-      _HelpSlidesDialogState();
+  State<HelpSlidesDialog> createState() => _HelpSlidesDialogState();
 }
 
 class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
-  late Map<String, List<Widget>> titleToContent = {...widget.titleToContent};
+  late final Map<String, List<Widget>> _titleToContent = {
+    ...widget.titleToContent
+  };
   late int _currentSlide = 0;
 
   _exit(BuildContext context) => Navigator.of(context).pop();
 
   _goToSlide(int slide) => setState(() => _currentSlide = slide);
 
-  _goToNextSlide() => _currentSlide < titleToContent.length - 1
+  _goToNextSlide() => _currentSlide < _titleToContent.length - 1
       ? _goToSlide(_currentSlide + 1)
       : _exit(context);
 
@@ -39,7 +40,7 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    titleToContent['¿Necesitas ayuda?'] = [
+    _titleToContent['¿Necesitas ayuda?'] = [
       const Center(
         child: QuimifyDialogContentText(
           text: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
@@ -54,13 +55,13 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
       leftSwipe: _goToPreviousSlide,
       rightSwipe: _goToNextSlide, // Swipe right
       child: QuimifyDialog(
-        title: titleToContent.keys.elementAt(_currentSlide),
-        content: titleToContent.values.elementAt(_currentSlide),
+        title: _titleToContent.keys.elementAt(_currentSlide),
+        content: _titleToContent.values.elementAt(_currentSlide),
         actions: [
           Center(
             child: AnimatedSmoothIndicator(
               activeIndex: _currentSlide,
-              count: titleToContent.length,
+              count: _titleToContent.length,
               duration: const Duration(milliseconds: 0),
               effect: ColorTransitionEffect(
                 dotWidth: 10,
@@ -74,7 +75,7 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
           QuimifyDialogButton(
             height: buttonHeight,
             onPressed: _goToNextSlide,
-            text: _currentSlide < titleToContent.length - 1
+            text: _currentSlide < _titleToContent.length - 1
                 ? 'Siguiente'
                 : 'Entendido',
           ),
