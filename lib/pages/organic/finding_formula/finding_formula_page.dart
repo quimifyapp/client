@@ -163,7 +163,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
-            onHistoryPressed: (resultPageContext) => _showHistory,
+            onHistoryPressed: (resultPageContext) => _showHistory(),
             quimifyReportDialog: ReportDialog(
               details: 'Resultado de:\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
