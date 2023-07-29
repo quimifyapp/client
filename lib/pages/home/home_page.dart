@@ -14,10 +14,10 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
-    required this.clientResult,
+    required this.accessDataResult,
   }) : super(key: key);
 
-  final AccessDataResult? clientResult;
+  final AccessDataResult? accessDataResult;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,38 +48,38 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showWelcomeMessagePopup() {
-    if (widget.clientResult!.messagePresent) {
-      if (widget.clientResult!.messageLinkPresent!) {
+    if (widget.accessDataResult!.messagePresent) {
+      if (widget.accessDataResult!.messageLinkPresent!) {
         QuimifyMessageDialog.linked(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
-          linkLabel: widget.clientResult!.messageLinkName!,
-          link: widget.clientResult!.messageLink!,
+          title: widget.accessDataResult!.messageTitle!,
+          details: widget.accessDataResult!.messageDetails!,
+          linkLabel: widget.accessDataResult!.messageLinkName!,
+          link: widget.accessDataResult!.messageLink!,
         ).show(context);
       } else {
         QuimifyMessageDialog(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
+          title: widget.accessDataResult!.messageTitle!,
+          details: widget.accessDataResult!.messageDetails!,
         ).show(context);
       }
     }
   }
 
   _showWelcomePopups() {
-    if (widget.clientResult == null) {
+    if (widget.accessDataResult == null) {
       return;
     }
 
-    if (!widget.clientResult!.updateAvailable) {
+    if (!widget.accessDataResult!.updateAvailable) {
       _showWelcomeMessagePopup();
       return;
     }
 
-    bool optionalUpdate = !widget.clientResult!.updateMandatory!;
+    bool optionalUpdate = !widget.accessDataResult!.updateMandatory!;
 
     QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
       title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-      details: widget.clientResult!.updateDetails,
+      details: widget.accessDataResult!.updateDetails,
       linkLabel: 'Actualizar',
       link: Platform.isAndroid
           ? 'https://play.google.com/store/apps/details?id=com.quimify'

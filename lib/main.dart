@@ -29,19 +29,21 @@ main() async {
         (await rootBundle.load('assets/ssl/isrg-x1.crt')).buffer.asUint8List());
   } catch (_) {} // It's already present in modern devices
 
-  AccessDataResult? clientResult = await Api().getAccessDataResult();
+  AccessDataResult? accessDataResult = await Api().getAccessDataResult();
 
-  // App launch:
-  runApp(QuimifyApp(clientResult: clientResult)); // Will hide splash screen
+  // App launch (it will hide splash screen):
+  runApp(QuimifyApp(
+    accessDataResult: accessDataResult,
+  ));
 }
 
 class QuimifyApp extends StatelessWidget {
   const QuimifyApp({
     Key? key,
-    this.clientResult,
+    this.accessDataResult,
   }) : super(key: key);
 
-  final AccessDataResult? clientResult;
+  final AccessDataResult? accessDataResult;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +167,7 @@ class QuimifyApp extends StatelessWidget {
           ),
         ),
         // App:
-        home: HomePage(clientResult: clientResult),
+        home: HomePage(accessDataResult: accessDataResult),
       ),
     );
   }
