@@ -39,55 +39,55 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   );
 
   _search(String name) async {
-    if (!isEmptyWithBlanks(name)) {
-      startQuimifyLoading(context);
+    if (isEmptyWithBlanks(name)) {
+      return;
+    }
 
-      OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
+    startQuimifyLoading(context);
 
-      stopQuimifyLoading();
+    OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
 
-      if (result != null) {
-        if (result.present) {
-          AdManager.showInterstitialAd();
+    if (result != null) {
+      if (result.present) {
+        AdManager.showInterstitialAd();
 
-          setState(() {
-            _result = result;
-            if (_firstSearch) {
-              _firstSearch = false;
-            }
-          });
-
-          History.saveOrganicFormula(result);
-
-          // UI/UX actions:
-
-          _labelText = name; // Sets previous input as label
-          _textController.clear(); // Clears input
-          _textFocusNode.unfocus(); // Hides keyboard
-          _scrollToStart(); // Goes to the top of the page
-        } else {
-          if (!mounted) return; // For security reasons
-          QuimifyMessageDialog.reportable(
-            title: 'Sin resultado',
-            details: 'No se ha encontrado:\n"$name"',
-            reportContext: 'Organic finding formula',
-            reportDetails: 'Searched "$name"',
-          ).show(context);
-        }
-      } else {
-        // Client already reported an error in this case
-        if (!mounted) return; // For security reasons
-        hasInternetConnection().then((bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).show(context);
-          } else {
-            quimifyNoInternetDialog.show(context);
+        setState(() {
+          _result = result;
+          if (_firstSearch) {
+            _firstSearch = false;
           }
         });
+
+        History.saveOrganicFormula(result);
+
+        // UI/UX actions:
+
+        _labelText = name; // Sets previous input as label
+        _textController.clear(); // Clears input
+        _textFocusNode.unfocus(); // Hides keyboard
+        _scrollToStart(); // Goes to the top of the page
+      } else {
+        if (!mounted) return; // For security reasons
+        QuimifyMessageDialog.reportable(
+          title: 'Sin resultado',
+          details: 'No se ha encontrado:\n"$name"',
+          reportContext: 'Organic finding formula',
+          reportDetails: 'Searched "$name"',
+        ).show(context);
+      }
+    } else {
+      if (!mounted) return; // For security reasons
+
+      if (await hasInternetConnection()) {
+        const QuimifyMessageDialog(
+          title: 'Sin resultado',
+        ).show(context);
+      } else {
+        quimifyNoInternetDialog.show(context);
       }
     }
+
+    stopQuimifyLoading();
   }
 
   _showHistory() {

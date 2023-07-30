@@ -67,8 +67,6 @@ class _NamingPageState extends State<NamingPage> {
 
     OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
-    stopQuimifyLoading();
-
     if (result != null) {
       if (!result.present) {
         if (!mounted) return null; // For security reasons
@@ -83,20 +81,18 @@ class _NamingPageState extends State<NamingPage> {
 
       History.saveOrganicName(result, sequence);
     } else {
-      // Client already reported an error in this case
       if (!mounted) return null; // For security reasons
-      hasInternetConnection().then(
-        (bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).show(context);
-          } else {
-            quimifyNoInternetDialog.show(context);
-          }
-        },
-      );
+
+      if (await hasInternetConnection()) {
+        const QuimifyMessageDialog(
+          title: 'Sin resultado',
+        ).show(context);
+      } else {
+        quimifyNoInternetDialog.show(context);
+      }
     }
+
+    stopQuimifyLoading();
 
     return result;
   }

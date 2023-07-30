@@ -78,8 +78,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     // Result not found in cache, make an API call
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
 
-    stopQuimifyLoading();
-
     if (result != null) {
       if (result.present) {
         AdManager.showInterstitialAd();
@@ -105,18 +103,17 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       }
     } else {
       if (!mounted) return; // For security reasons
-      hasInternetConnection().then(
-        (bool hasInternetConnection) {
-          if (hasInternetConnection) {
-            const QuimifyMessageDialog(
-              title: 'Sin resultado',
-            ).show(context);
-          } else {
-            quimifyNoInternetDialog.show(context);
-          }
-        },
-      );
+
+      if (await hasInternetConnection()) {
+        const QuimifyMessageDialog(
+          title: 'Sin resultado',
+        ).show(context);
+      } else {
+        quimifyNoInternetDialog.show(context);
+      }
     }
+
+    stopQuimifyLoading();
   }
 
   _showHistory() {

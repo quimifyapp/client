@@ -120,9 +120,7 @@ class _NamingAndFindingFormulaPageState
     return completion;
   }
 
-  _processResult(InorganicResult? result, String formattedQuery) {
-    stopQuimifyLoading();
-
+  _processResult(InorganicResult? result, String formattedQuery) async {
     if (result != null) {
       if (result.present) {
         AdManager.showInterstitialAd();
@@ -153,16 +151,13 @@ class _NamingAndFindingFormulaPageState
         ).show(context);
       }
     } else {
-      // Client already reported an error in this case
-      hasInternetConnection().then((bool hasInternetConnection) {
-        if (hasInternetConnection) {
-          const QuimifyMessageDialog(
-            title: 'Sin resultado',
-          ).show(context);
-        } else {
-          quimifyNoInternetDialog.show(context);
-        }
-      });
+      if (await hasInternetConnection()) {
+        const QuimifyMessageDialog(
+          title: 'Sin resultado',
+        ).show(context);
+      } else {
+        quimifyNoInternetDialog.show(context);
+      }
     }
   }
 
@@ -173,10 +168,11 @@ class _NamingAndFindingFormulaPageState
 
     startQuimifyLoading(context);
 
-    InorganicResult? result =
-        await Api().getInorganicFromCompletion(completion);
+    var result = await Api().getInorganicFromCompletion(completion);
 
-    _processResult(result, formatInorganicFormulaOrName(completion));
+    await _processResult(result, formatInorganicFormulaOrName(completion));
+
+    stopQuimifyLoading();
   }
 
   _searchFromQuery(String input) async {
@@ -186,9 +182,11 @@ class _NamingAndFindingFormulaPageState
 
     startQuimifyLoading(context);
 
-    InorganicResult? result = await Api().getInorganic(toDigits(input));
+    var result = await Api().getInorganic(toDigits(input));
 
-    _processResult(result, input);
+    await _processResult(result, input);
+
+    stopQuimifyLoading();
   }
 
   _scrollToStart() {
