@@ -11,8 +11,8 @@ class CalculatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         QuimifySectionTitle(
           title: 'Masa molecular',
           helpDialog: CalculatorHelpDialog(),
@@ -45,7 +45,6 @@ class CalculatorPage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 5), // + 15 from cards = 20
       ],
     );
   }

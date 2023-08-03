@@ -11,8 +11,8 @@ class InorganicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         QuimifySectionTitle(
           title: 'Formular y nombrar',
           helpDialog: InorganicHelpDialog(),
@@ -41,7 +41,6 @@ class InorganicPage extends StatelessWidget {
             color: quimifyTeal,
           ),
         ),
-        SizedBox(height: 5), // + 15 from cards = 20
       ],
     );
   }
