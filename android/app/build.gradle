@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 33 // TODO fix?
+    compileSdkVersion 33 // TODO test
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -44,8 +44,8 @@ android {
         applicationId "com.quimify"
         // You can update the following values to match your application needs. 
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion 19 // TODO fix?
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 19 // TODO test
+        targetSdkVersion 33 // TODO test + this should suffice for Play Store complaint
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
