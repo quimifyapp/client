@@ -11,6 +11,11 @@ class Ads {
   Ads._internal();
 
   InterstitialAd? _interstitialAd;
+  int _interstitialAdsShown = 0;
+
+  // Constants:
+
+  static const int _interstitialAdPeriod = 4;
 
   // Initialize:
 
@@ -21,13 +26,16 @@ class Ads {
 
   // Private:
 
+  bool _canShowInterstitialAd() =>
+      ++_interstitialAdsShown % _interstitialAdPeriod == 0;
+
   _loadInterstitialAd() async {
     await InterstitialAd.load(
       adUnitId: Env.interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) => _interstitialAd = ad,
-        onAdFailedToLoad: (error) => _interstitialAd = null,
+        onAdFailedToLoad: (_) => {},
       ),
     );
   }
@@ -35,11 +43,15 @@ class Ads {
   // Public:
 
   showInterstitialAd() {
-    if (_interstitialAd != null) {
-      _interstitialAd!.show();
+    if (_interstitialAd == null) {
+      _loadInterstitialAd();
+      return;
     }
 
-    _loadInterstitialAd();
+    if (_canShowInterstitialAd()) {
+      _interstitialAd!.show();
+      _loadInterstitialAd();
+    }
   }
 
   Future<Widget> getBannerAd(Size size, VoidCallback onAdLoaded) async {
