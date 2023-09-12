@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-// TODO test on iOS
-
 class Storage {
   static final Storage _singleton = Storage._internal();
 
@@ -10,6 +8,8 @@ class Storage {
   Storage._internal();
 
   late final SharedPreferences sharedPreferences;
+
+  // Public:
 
   initialize() async =>
       sharedPreferences = await SharedPreferences.getInstance();

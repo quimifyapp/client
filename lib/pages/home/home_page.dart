@@ -1,14 +1,15 @@
 import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
-import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HomePage extends StatefulWidget {
@@ -124,6 +125,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => _returnButtonPressed(),
       child: QuimifyScaffold(
+        showBannerAd: false,
         header: const QuimifyHomeBar(),
         body: QuimifySwipeDetector(
           leftSwipe: () => _goToPage((_currentPage - 1) % 3),

@@ -65,6 +65,8 @@ class _NamingPageState extends State<NamingPage> {
   _search(List<int> sequence) async {
     startQuimifyLoading(context);
 
+    Ads().showInterstitialAd(); // There will be a result most of the times
+
     OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
     if (result != null) {
@@ -75,11 +77,9 @@ class _NamingPageState extends State<NamingPage> {
         return null;
       }
 
-      AdManager.showInterstitialAd();
-
       _showResult(result);
 
-      History.saveOrganicName(result, sequence);
+      History().saveOrganicName(result, sequence);
     } else {
       if (!mounted) return null; // For security reasons
 
@@ -132,7 +132,8 @@ class _NamingPageState extends State<NamingPage> {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          entries: History.getOrganicNames()
+          entries: History()
+              .getOrganicNames()
               .map((e) => HistoryEntry(
                     query: e.sequence,
                     fields: {

@@ -49,7 +49,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
     if (result != null) {
       if (result.present) {
-        AdManager.showInterstitialAd();
+        Ads().showInterstitialAd();
 
         setState(() {
           _result = result;
@@ -58,7 +58,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           }
         });
 
-        History.saveOrganicFormula(result);
+        History().saveOrganicFormula(result);
 
         // UI/UX actions:
 
@@ -94,7 +94,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          entries: History.getOrganicFormulas()
+          entries: History()
+              .getOrganicFormulas()
               .map((e) => HistoryEntry(
                     query: e.name,
                     fields: {

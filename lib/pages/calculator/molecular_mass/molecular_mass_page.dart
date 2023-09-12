@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/molecular_mass_result.dart';
@@ -32,7 +31,6 @@ class MolecularMassPage extends StatefulWidget {
 }
 
 class _MolecularMassPageState extends State<MolecularMassPage> {
-  late bool _isBannerAdLoaded = false;
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -49,29 +47,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     null,
   );
 
-  @override
-  didChangeDependencies() {
-    // TODO review
-    super.didChangeDependencies();
-
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
-    final bannerAdWidth = screenWidth - 40;
-
-    AdManager.loadBannerAd(bannerAdWidth).then((_) {
-      setState(() {
-        _isBannerAdLoaded = true;
-      });
-    });
-  }
-
-  @override
-  dispose() {
-    // TODO review
-    AdManager.disposeBannerAd();
-    super.dispose();
-  }
-
   void _calculate(String input) async {
     startQuimifyLoading(context);
 
@@ -80,11 +55,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
     if (result != null) {
       if (result.present) {
-        AdManager.showInterstitialAd();
+        Ads().showInterstitialAd();
 
         setState(() => _result = result);
 
-        History.saveMolecularMass(result);
+        History().saveMolecularMass(result);
 
         // UI/UX actions:
 
@@ -120,7 +95,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          entries: History.getMolecularMasses()
+          entries: History()
+              .getMolecularMasses()
               .map((e) => HistoryEntry(
                     query: toSubscripts(e.formula),
                     fields: {
@@ -377,17 +353,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams!,
                   elementToMoles: _result.elementToMoles!,
-                ),
-                const SizedBox(height: 25),
-                Container(
-                  color: Theme.of(context).colorScheme.background,
-                  width: double.infinity,
-                  height: _isBannerAdLoaded
-                      ? AdManager.getBannerAd()?.size.height.toDouble()
-                      : 0,
-                  child: _isBannerAdLoaded
-                      ? AdWidget(ad: AdManager.getBannerAd()!)
-                      : const SizedBox(),
                 ),
               ],
             ),

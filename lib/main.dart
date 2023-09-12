@@ -17,7 +17,7 @@ main() async {
 
   Storage().initialize();
   Api().initialize();
-  AdManager.initialize();
+  Ads().initialize();
 
   // Loading while splash screen:
 

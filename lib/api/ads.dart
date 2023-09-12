@@ -3,88 +3,78 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'env.dart';
 
-class AdManager {
-  // TODO rename
-  static BannerAd? _bannerAd;
-  static InterstitialAd? _interstitialAd;
+class Ads {
+  static final Ads _singleton = Ads._internal();
 
-  static initialize() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  factory Ads() => _singleton;
+
+  Ads._internal();
+
+  InterstitialAd? _interstitialAd;
+  int _interstitialAdsShown = 0;
+
+  // Constants:
+
+  static const int _interstitialAdPeriod = 4;
+
+  // Initialize:
+
+  initialize() async {
     await MobileAds.instance.initialize();
     await _loadInterstitialAd();
   }
 
-  static _loadInterstitialAd() async {
+  // Private:
+
+  bool _canShowInterstitialAd() =>
+      ++_interstitialAdsShown % _interstitialAdPeriod == 0;
+
+  _loadInterstitialAd() async {
     await InterstitialAd.load(
       adUnitId: Env.interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-              // Called when the ad showed the full screen content.
-              onAdShowedFullScreenContent: (ad) {},
-              // Called when an impression occurs on the ad.
-              onAdImpression: (ad) {},
-              // Called when the ad failed to show full screen content.
-              onAdFailedToShowFullScreenContent: (ad, err) {
-                ad.dispose();
-              },
-              // Called when the ad dismissed full screen content.
-              onAdDismissedFullScreenContent: (ad) {
-                ad.dispose();
-              },
-              // Called when a click is recorded for an ad.
-              onAdClicked: (ad) {});
-
-          // Keep a reference to the ad so you can show it later.
-          _interstitialAd = ad;
-        },
-        // Called when an ad request failed.
-        onAdFailedToLoad: (LoadAdError error) {
-          //TODO Handle this??
+        onAdLoaded: (ad) => _interstitialAd = ad,
+        onAdFailedToLoad: (error) {
+          // TODO handle
         },
       ),
     );
   }
 
-  static loadBannerAd(double bannerAdWidth) async {
-    final adSize = AdSize(
-      width: bannerAdWidth.toInt(),
-      height: 50,
-    );
+  // Public:
 
-    _bannerAd = BannerAd(
-      adUnitId: Env.bannerUnitId,
-      request: const AdRequest(),
-      size: adSize,
-      listener: const BannerAdListener(),
-    );
-
-    await _bannerAd!.load();
-  }
-
-  static Widget getBannerAdWidget() {
-    return AdWidget(ad: _bannerAd!);
-  }
-
-  static BannerAd? getBannerAd() {
-    return _bannerAd;
-  }
-
-  static disposeBannerAd() {
-    _bannerAd?.dispose();
-    _bannerAd = null;
-  }
-
-  static showInterstitialAd() {
+  showInterstitialAd() {
     if (_interstitialAd == null) {
-      _loadInterstitialAd().then((_) {
-        _interstitialAd!.show();
-        _loadInterstitialAd();
-      });
-    } else {
+      _loadInterstitialAd();
+      return;
+    }
+
+    if (_canShowInterstitialAd()) {
       _interstitialAd!.show();
       _loadInterstitialAd();
     }
+  }
+
+  Future<Widget> getBannerAd(Size size, VoidCallback onAdLoaded) async {
+    BannerAd bannerAd = BannerAd(
+      adUnitId: Env.bannerUnitId,
+      request: const AdRequest(),
+      size: AdSize(
+        width: size.width.toInt(),
+        height: size.height.toInt(),
+      ),
+      listener: BannerAdListener(
+        onAdLoaded: (_) => onAdLoaded(),
+      ),
+    );
+
+    bannerAd.load();
+
+    return SizedBox(
+      width: bannerAd.size.width.toDouble(),
+      height: bannerAd.size.height.toDouble(),
+      child: AdWidget(ad: bannerAd),
+    );
   }
 }

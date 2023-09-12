@@ -61,7 +61,8 @@ class _NamingAndFindingFormulaPageState
 
     _labelText = _defaultLabelText;
 
-    _resultViews = History.getInorganics()
+    _resultViews = History()
+        .getInorganics()
         .reversed
         .map((localResult) => InorganicResultView(
               formattedQuery: localResult.formattedQuery,
@@ -123,7 +124,7 @@ class _NamingAndFindingFormulaPageState
   _processResult(InorganicResult? result, String formattedQuery) async {
     if (result != null) {
       if (result.present) {
-        AdManager.showInterstitialAd();
+        Ads().showInterstitialAd();
 
         setState(
           () => _resultViews.add(
@@ -134,7 +135,7 @@ class _NamingAndFindingFormulaPageState
           ),
         );
 
-        History.saveInorganic(result, formattedQuery);
+        History().saveInorganic(result, formattedQuery);
 
         // UI/UX actions:
 
@@ -211,6 +212,7 @@ class _NamingAndFindingFormulaPageState
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,
         child: QuimifyScaffold(
+          showBannerAd: true,
           header: Column(
             children: [
               const QuimifyPageBar(title: 'Nomenclatura inorgánica'),

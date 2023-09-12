@@ -10,6 +10,12 @@ import 'package:quimify_client/local/results/organic_name_local_result.dart';
 import 'package:quimify_client/local/storage.dart';
 
 class History {
+  static final History _singleton = History._internal();
+
+  factory History() => _singleton;
+
+  History._internal();
+
   // Constants:
 
   static const String _inorganicsKey = 'inorganics';
@@ -19,7 +25,7 @@ class History {
 
   // Private:
 
-  static List<dynamic> _fetch(String key, Function(String) fromJson) {
+  List<dynamic> _fetch(String key, Function(String) fromJson) {
     final String? data = Storage().get(key);
 
     if (data == null) {
@@ -29,7 +35,7 @@ class History {
     return jsonDecode(data).map((e) => fromJson(e)).toList().toList();
   }
 
-  static _save(String key, dynamic localResult, List<dynamic> localResults) {
+  _save(String key, dynamic localResult, List<dynamic> localResults) {
     localResults.remove(localResult);
     localResults.insert(0, localResult);
 
@@ -40,41 +46,41 @@ class History {
 
   // Public:
 
-  static List<InorganicLocalResult> getInorganics() =>
+  List<InorganicLocalResult> getInorganics() =>
       _fetch(_inorganicsKey, InorganicLocalResult.fromJson)
           .cast<InorganicLocalResult>();
 
-  static saveInorganic(InorganicResult result, String formattedQuery) => _save(
+  saveInorganic(InorganicResult result, String formattedQuery) => _save(
         _inorganicsKey,
         InorganicLocalResult.fromResult(result, formattedQuery),
         getInorganics(),
       );
 
-  static List<OrganicFormulaLocalResult> getOrganicFormulas() =>
+  List<OrganicFormulaLocalResult> getOrganicFormulas() =>
       _fetch(_organicFormulasKey, OrganicFormulaLocalResult.fromJson)
           .cast<OrganicFormulaLocalResult>();
 
-  static saveOrganicFormula(OrganicResult result) => _save(
+  saveOrganicFormula(OrganicResult result) => _save(
         _organicFormulasKey,
         OrganicFormulaLocalResult.fromResult(result),
         getOrganicFormulas(),
       );
 
-  static List<OrganicNameLocalResult> getOrganicNames() =>
+  List<OrganicNameLocalResult> getOrganicNames() =>
       _fetch(_organicNamesKey, OrganicNameLocalResult.fromJson)
           .cast<OrganicNameLocalResult>();
 
-  static saveOrganicName(OrganicResult result, List<int> sequence) => _save(
+  saveOrganicName(OrganicResult result, List<int> sequence) => _save(
         _organicNamesKey,
         OrganicNameLocalResult.fromResult(result, sequence),
         getOrganicNames(),
       );
 
-  static List<MolecularMassLocalResult> getMolecularMasses() =>
+  List<MolecularMassLocalResult> getMolecularMasses() =>
       _fetch(_molecularMassesKey, MolecularMassLocalResult.fromJson)
           .cast<MolecularMassLocalResult>();
 
-  static saveMolecularMass(MolecularMassResult result) => _save(
+  saveMolecularMass(MolecularMassResult result) => _save(
         _molecularMassesKey,
         MolecularMassLocalResult.fromResult(result),
         getMolecularMasses(),
