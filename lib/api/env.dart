@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in .env file:
+// Put variables in lib/api/.env file:
 // INTERSTITIAL_UNIT_ID=
 // BANNER_UNIT_ID=
 
@@ -19,7 +19,7 @@ part 'env.g.dart';
 // Env.apiPrivateKey
 // Env.apiCertificate
 
-@Envied(path: '.env')
+@Envied(path: 'lib/api/.env')
 abstract class Env {
   @EnviedField(varName: 'INTERSTITIAL_UNIT_ID', obfuscate: true)
   static final String interstitialUnitId = _Env.interstitialUnitId;

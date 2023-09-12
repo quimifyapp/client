@@ -89,21 +89,21 @@ dependencies:
   flutter_easyloading: ^3.0.5
   smooth_page_indicator: ^1.0.0+2
   flutter_typeahead: ^4.1.1
-  envied: ^0.2.4
   diacritic: ^0.1.3
   collection: ^1.16.0
   mailto: ^2.0.0
   shared_preferences: ^2.2.0
   google_mobile_ads: ^3.0.0
   connectivity_plus: ^3.0.6
+  envied: ^0.3.0+3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.10.0"
   flutter_lints: ^2.0.1
-  build_runner: ^2.3.2
-  envied_generator: ^0.2.3+1
+  build_runner: ^2.4.6
+  envied_generator: ^0.3.0+3
 
 # Icon:
 flutter_icons:
