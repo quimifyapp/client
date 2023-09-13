@@ -28,14 +28,19 @@ class HistoryPage extends StatelessWidget {
 
     return QuimifyScaffold(
       header: const QuimifyPageBar(title: 'Historial'),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Wrap(
-          verticalDirection: VerticalDirection.up,
-          runSpacing: 25,
-          children: entryViews.toList(),
-        ),
-      ),
+      body: entries.isNotEmpty
+          ? SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Wrap(
+                verticalDirection: VerticalDirection.up,
+                runSpacing: 25,
+                children: entryViews.toList(),
+              ),
+            )
+          : Container(
+              // TODO replace with explanatory graphic
+              width: double.infinity,
+            ),
     );
   }
 }
