@@ -44,6 +44,7 @@ class _DiagramPageState extends State<DiagramPage> {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
+      showBannerAd: false,
       header: const QuimifyPageBar(title: 'Estructura'),
       body: Container(
         color: Theme.of(context).colorScheme.background,
