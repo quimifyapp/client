@@ -3,6 +3,7 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_b
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/popups/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
 
@@ -16,11 +17,12 @@ class NamingHelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BoxDecoration functionalButtonBorder = BoxDecoration(
+    BoxDecoration exampleButtonBorder = BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       border: Border.all(
-        color: Theme.of(context).colorScheme.tertiary,
         width: 1,
+        color: Theme.of(context).colorScheme.tertiary,
+        strokeAlign: BorderSide.strokeAlignOutside, // So size doesn't change
       ),
     );
 
@@ -28,7 +30,7 @@ class NamingHelpDialog extends StatelessWidget {
       titleToContent: {
         'Sustituyentes': [
           Container(
-            decoration: functionalButtonBorder,
+            decoration: exampleButtonBorder,
             height: 60,
             child: Row(
               children: [
@@ -159,7 +161,23 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        // TODO history button?
+        'Historial': [
+          Center(
+            child: Container(
+              width: 100,
+              decoration: exampleButtonBorder,
+              child: HistoryButton(
+                height: buttonHeight,
+                onPressed: () {},
+              ),
+            ),
+          ),
+          const Center(
+            child: QuimifyDialogContentText(
+              text: 'Este botón sirve para ver todos tus resultados.',
+            ),
+          ),
+        ],
         'Deshacer': [
           Center(
             child: SizedBox(
