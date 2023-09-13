@@ -18,7 +18,7 @@ class QuimifyScaffold extends StatefulWidget {
 }
 
 class _QuimifyScaffoldState extends State<QuimifyScaffold> {
-  static const double _bannerAdHeight = 50;
+  static const double _bannerAdMaxHeight = 50;
 
   Widget? _bannerAd;
   bool _loadedBannerAd = false;
@@ -26,7 +26,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
   _onBannerAdLoaded() => setState(() => _loadedBannerAd = true);
 
   _loadBannerAd(double screenWidth) async => _bannerAd = await Ads()
-      .getBannerAd(Size(screenWidth, _bannerAdHeight), _onBannerAdLoaded);
+      .getBannerAd(Size(screenWidth, _bannerAdMaxHeight), _onBannerAdLoaded);
 
   @override
   Widget build(BuildContext context) {
