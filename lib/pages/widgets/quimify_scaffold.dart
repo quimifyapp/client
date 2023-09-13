@@ -61,7 +61,10 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
             if (_loadedBannerAd)
               Container(
                 color: Theme.of(context).colorScheme.background,
-                child: _bannerAd!,
+                child: SafeArea(
+                  top: false,
+                  child: _bannerAd!,
+                ),
               ),
           ],
         ),
