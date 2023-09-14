@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
-import 'package:quimify_client/pages/home/widgets/quimify_home_bar.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
@@ -126,7 +125,44 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async => _returnButtonPressed(),
       child: QuimifyScaffold(
         showBannerAd: false,
-        header: const QuimifyHomeBar(),
+        header: SafeArea(
+          bottom: false, // So it's not inside status bar
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: 15, // TODO 17.5?
+              bottom: 20,
+              left: 20,
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: IconButton(
+                    icon: Image.asset(
+                      'assets/images/icons/logo.png',
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    // To remove native effects:
+                    hoverColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    // So it fills container (48 x 48):
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    onPressed: () {},
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Image.asset(
+                  'assets/images/icons/branding-slim.png',
+                  height: 17,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ],
+            ),
+          ),
+        ),
         body: QuimifySwipeDetector(
           leftSwipe: () => _goToPage((_currentPage - 1) % 3),
           rightSwipe: () => _goToPage((_currentPage + 1) % 3),
@@ -137,10 +173,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
                 Container(
                   height: 60,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 6,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(15),

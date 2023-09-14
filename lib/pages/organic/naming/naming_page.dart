@@ -486,7 +486,6 @@ class _NamingPageState extends State<NamingPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     // To avoid rounded corners overflow:

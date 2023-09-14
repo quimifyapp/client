@@ -72,9 +72,7 @@ class _DiagramPageState extends State<DiagramPage> {
                   controller: controller,
                   scaleStateController: scaleStateController,
                   enableRotation: true,
-                  backgroundDecoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                  backgroundDecoration: const BoxDecoration(), // Needed
                   // TODO bug:
                   disableGestures: true,
                   //minScale: 0.75,

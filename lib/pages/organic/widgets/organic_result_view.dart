@@ -180,9 +180,7 @@ class OrganicResultView extends StatelessWidget {
                             ],
                           ),
                     child: PhotoView(
-                      backgroundDecoration: const BoxDecoration(
-                        color: Colors.transparent,
-                      ),
+                      backgroundDecoration: const BoxDecoration(), // Needed
                       initialScale: 1.0,
                       gaplessPlayback: true,
                       disableGestures: true,
