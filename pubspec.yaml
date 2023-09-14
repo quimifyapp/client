@@ -1,7 +1,7 @@
 name: quimify_client
 description: Quimify client
 
-version: 3.6.2+96 # Android build code
+version: 3.6.2+99 # Android build code
 
 flutter:
   uses-material-design: true
@@ -96,6 +96,7 @@ dependencies:
   google_mobile_ads: ^3.0.0
   connectivity_plus: ^3.0.6
   envied: ^0.3.0+3
+  signed_spacing_flex: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +105,7 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   build_runner: ^2.4.6
   envied_generator: ^0.3.0+3
+  dependency_validator: ^3.0.0
 
 # Icon:
 flutter_icons:

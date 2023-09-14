@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class QuimifyScaffold extends StatefulWidget {
   const QuimifyScaffold({
@@ -18,6 +19,7 @@ class QuimifyScaffold extends StatefulWidget {
 }
 
 class _QuimifyScaffoldState extends State<QuimifyScaffold> {
+  static const double _bodyRoundedCornersRadius = 25;
   static const double _bannerAdMaxHeight = 50;
 
   Widget? _bannerAd;
@@ -34,40 +36,46 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
       _loadBannerAd(MediaQuery.of(context).size.width);
     }
 
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: quimifyGradient,
-      ),
-      child: Scaffold(
-        // To avoid keyboard resizing:
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            widget.header,
-            Expanded(
-              child: Container(
-                // To avoid rounded corners overflow:
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(25),
-                  ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false, // To avoid keyboard resizing
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: SignedSpacingColumn(
+        spacing: -_bodyRoundedCornersRadius,
+        stackingOrder: StackingOrder.lastOnTop,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: quimifyGradient,
+            ),
+            padding: const EdgeInsets.only(
+              bottom: _bodyRoundedCornersRadius,
+            ),
+            child: widget.header,
+          ),
+          Expanded(
+            child: Container(
+              clipBehavior: Clip.hardEdge,
+              // To avoid rounded corners overflow
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(_bodyRoundedCornersRadius),
                 ),
-                child: widget.body,
+              ),
+              child: widget.body,
+            ),
+          ),
+          if (_loadedBannerAd)
+            Padding(
+              padding: const EdgeInsets.only(
+                top: _bodyRoundedCornersRadius, // To counter overlap
+              ),
+              child: SafeArea(
+                top: false,
+                child: _bannerAd!,
               ),
             ),
-            if (_loadedBannerAd)
-              Container(
-                color: Theme.of(context).colorScheme.background,
-                child: SafeArea(
-                  top: false,
-                  child: _bannerAd!,
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
