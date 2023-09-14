@@ -200,7 +200,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const SizedBox(height: 5),
                 GestureDetector(
                   onTap: _startTyping, // As if the TextField was tapped
                   child: Container(
