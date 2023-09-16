@@ -99,7 +99,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: '(carbono con tres hidrógenos)',
+              text: '(carbono con 3 hidrógenos)',
             ),
           ),
         ],
@@ -174,7 +174,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Este botón sirve para ver todos tus resultados.',
+              text: 'Este botón sirve para ver tus resultados anteriores.',
             ),
           ),
         ],

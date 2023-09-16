@@ -12,7 +12,7 @@ class StructureHelpDialog extends StatelessWidget {
         'Estructura': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Cada carbono es un vértice, y los hidrógenos se omiten.',
+              text: 'Cada carbono es un vértice. Los hidrógenos se omiten.',
             ),
           ),
           const QuimifyDialogContentText(
@@ -38,7 +38,7 @@ class StructureHelpDialog extends StatelessWidget {
         'Enlace simple': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Se representa con una línea.',
+              text: 'Se representa con 1 línea.',
             ),
           ),
           const QuimifyDialogContentText(
@@ -64,7 +64,7 @@ class StructureHelpDialog extends StatelessWidget {
         'Enlace doble': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Se representa con dos líneas.',
+              text: 'Se representa con 2 líneas.',
             ),
           ),
           const QuimifyDialogContentText(
@@ -90,7 +90,7 @@ class StructureHelpDialog extends StatelessWidget {
         'Enlace triple': [
           const Center(
             child: QuimifyDialogContentText(
-              text: 'Se representa con tres líneas.',
+              text: 'Se representa con 3 líneas.',
             ),
           ),
           const QuimifyDialogContentText(

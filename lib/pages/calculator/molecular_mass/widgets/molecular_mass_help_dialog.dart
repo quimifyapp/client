@@ -87,7 +87,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: QuimifyDialogContentText(
-              text: 'El H₂O (agua) tiene dos átomos de hidrógeno y uno de '
+              text: 'El H₂O (agua) tiene 2 átomos de hidrógeno y 1 de '
                   'oxígeno en su molécula. Su masa molecular es:',
             ),
           ),

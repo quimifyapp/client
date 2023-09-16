@@ -51,8 +51,8 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
     } else {
       QuimifyMessageDialog(
         title: 'No existe',
-        details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}no puede '
-            'tener menos de ${_isIso ? 'tres carbonos' : 'un carbono'}.',
+        details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}debe '
+            'tener al menos ${_isIso ? '3 carbonos' : '1 carbono'}.',
       ).show(context);
     }
   }

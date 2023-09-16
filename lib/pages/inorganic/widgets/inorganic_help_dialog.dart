@@ -30,6 +30,11 @@ class InorganicHelpDialog extends StatelessWidget {
               text: 'ácido sulfúrico',
             ),
           ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'NaCl',
+            ),
+          ),
         ],
         'Formular': [
           Center(

@@ -28,6 +28,11 @@ class FindingFormulaHelpDialog extends StatelessWidget {
           Center(
             child: QuimifyDialogContentText(text: 'ácido etanoico'),
           ),
+          Center(
+            child: QuimifyDialogContentText(
+              text: 'CH₂ = CH – CONH₂',
+            ),
+          ),
         ],
         'Formular': [
           Center(

@@ -197,10 +197,9 @@ class _NamingPageState extends State<NamingPage> {
       });
     } else if (_openChain().getFreeBondCount() == 4) {
       const QuimifyMessageDialog(
-        title: 'Faltan sustituyentes',
-        details: 'Este carbono tiene cuatro enlaces libres, pero dos carbonos '
-            'pueden compartir un maximo de tres.\n\n'
-            'Prueba a enlazar un sustiuyente.',
+        title: 'Molécula vacía',
+        details: 'Todavía no es posible enlazar otro carbono. Prueba a enlazar '
+            'un sustiuyente.',
       ).show(context);
     } else {
       const QuimifyMessageDialog(
