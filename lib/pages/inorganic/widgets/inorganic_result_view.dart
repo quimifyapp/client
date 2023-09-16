@@ -30,7 +30,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   _pressedReportButton() {
     ReportDialog(
-      details: 'Resultado de:\n"${widget.formattedQuery}"',
+      details: 'Resultado de\n"${widget.formattedQuery}"',
       reportContext: 'Inorganic naming and finding formula',
       reportDetails: 'Result of "${widget.formattedQuery}": '
           '${widget.result}',

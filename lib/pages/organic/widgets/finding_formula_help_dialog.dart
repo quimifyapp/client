@@ -32,7 +32,7 @@ class FindingFormulaHelpDialog extends StatelessWidget {
         'Formular': [
           Center(
             child: QuimifyDialogContentText(
-              text: 'Consiste averiguar la fórmula dado el nombre.',
+              text: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
           QuimifyDialogContentText(

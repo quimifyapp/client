@@ -167,7 +167,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     : null,
             onHistoryPressed: (resultPageContext) => _showHistory(),
             quimifyReportDialog: ReportDialog(
-              details: 'Resultado de:\n"${_result.name!}"',
+              details: 'Resultado de\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
               reportDetails: 'Result of "${_result.name!}": $_result',
             ),

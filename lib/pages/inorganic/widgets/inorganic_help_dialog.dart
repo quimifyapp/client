@@ -34,7 +34,7 @@ class InorganicHelpDialog extends StatelessWidget {
         'Formular': [
           Center(
             child: QuimifyDialogContentText(
-              text: 'Consiste averiguar la fórmula dado el nombre.',
+              text: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
           QuimifyDialogContentText(
@@ -55,7 +55,7 @@ class InorganicHelpDialog extends StatelessWidget {
         'Nombrar': [
           Center(
             child: QuimifyDialogContentText(
-              text: 'Consiste averiguar el nombre dada la fórmula.',
+              text: 'Consiste en averiguar el nombre dada la fórmula.',
             ),
           ),
           QuimifyDialogContentText(

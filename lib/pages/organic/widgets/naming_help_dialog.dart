@@ -12,7 +12,7 @@ class NamingHelpDialog extends StatelessWidget {
         'Nombrar': [
           Center(
             child: QuimifyDialogContentText(
-              text: 'Consiste averiguar el nombre dada la fórmula.',
+              text: 'Consiste en averiguar el nombre dada la fórmula.',
             ),
           ),
           QuimifyDialogContentText(

@@ -119,7 +119,7 @@ class _NamingPageState extends State<NamingPage> {
                 : null,
             onHistoryPressed: _showHistory,
             quimifyReportDialog: ReportDialog(
-              details: 'Resultado de:\n"'
+              details: 'Resultado de\n"'
                   '${formatStructure(organicResult.structure!)}"',
               reportContext: 'Organic naming',
               reportDetails: 'Result of ${_sequence()}: $organicResult',
