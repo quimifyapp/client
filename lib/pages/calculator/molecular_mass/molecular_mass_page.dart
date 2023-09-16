@@ -9,7 +9,6 @@ import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_sel
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
@@ -333,7 +332,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        gradient: quimifyGradient,
                         onPressed: _pressedButton,
                         child: Text(
                           'Calcular',

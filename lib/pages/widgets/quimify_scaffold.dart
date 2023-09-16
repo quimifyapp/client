@@ -44,8 +44,8 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
         stackingOrder: StackingOrder.lastOnTop,
         children: [
           Container(
-            decoration: const BoxDecoration(
-              gradient: quimifyGradient,
+            decoration: BoxDecoration(
+              gradient: quimifyGradient(),
             ),
             padding: const EdgeInsets.only(
               bottom: _bodyRoundedCornersRadius,
@@ -65,7 +65,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
               child: widget.body,
             ),
           ),
-          if (_loadedBannerAd)
+          if (_loadedBannerAd) // TODO constant banner?
             Padding(
               padding: const EdgeInsets.only(
                 top: _bodyRoundedCornersRadius, // To counter overlap

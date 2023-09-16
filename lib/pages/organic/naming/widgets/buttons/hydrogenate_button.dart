@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 
 class HydrogenateButton extends StatelessWidget {
@@ -20,7 +19,6 @@ class HydrogenateButton extends StatelessWidget {
       height: height,
       enabled: enabled,
       onPressed: onPressed,
-      gradient: quimifyGradient,
       child: Image.asset(
         'assets/images/icons/hydrogenate.png',
         color: Theme.of(context).colorScheme.onPrimary,

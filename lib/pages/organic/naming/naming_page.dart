@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/api/api.dart';
@@ -17,7 +18,6 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.
 import 'package:quimify_client/pages/organic/naming/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
@@ -44,6 +44,8 @@ class _NamingPageState extends State<NamingPage> {
   late bool _done;
   late List<OpenChain> _openChainStack;
   late List<List<int>> _sequenceStack;
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -183,6 +185,8 @@ class _NamingPageState extends State<NamingPage> {
 
   bool _canBondCarbon() => _openChain().canBondCarbon();
 
+  bool _canHydrogenate() => !_done;
+
   _pressedBondCarbonButton() {
     if (_canBondCarbon()) {
       _startEditing();
@@ -208,9 +212,16 @@ class _NamingPageState extends State<NamingPage> {
   }
 
   _pressedHydrogenateButton() {
-    do {
-      _pressedGroupButton(Group.hydrogen);
-    } while (_openChain().getFreeBondCount() > 1);
+    if (_canHydrogenate()) {
+      do {
+        _pressedGroupButton(Group.hydrogen);
+      } while (_openChain().getFreeBondCount() > 1);
+    } else {
+      const QuimifyMessageDialog(
+        title: 'Molécula completa',
+        details: 'No quedan valencias libres para enlazar más hidrógenos.',
+      ).show(context);
+    }
   }
 
   _pressedResetButton() => setState(() => _reset());
@@ -349,6 +360,68 @@ class _NamingPageState extends State<NamingPage> {
       ),
     };
 
+    if (_done) {
+      _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
+    }
+
+    final Container doneDialog = Container(
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.topCenter,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15),
+        ),
+      ),
+      child: Column(
+        children: [
+          Image.asset( // TODO hide in small screens?
+            'assets/images/completed.png',
+            height: 150,
+          ),
+          const SizedBox(height: 20),
+          AutoSizeText(
+            '¡Enhorabuena!',
+            maxLines: 1,
+            stepGranularity: 0.1,
+            maxFontSize: 20,
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'La molecula está completa. Ya puedes resolverla.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 16,
+            ),
+            strutStyle: const StrutStyle(height: 1.5),
+          ),
+          const SizedBox(height: 20),
+          QuimifyButton.gradient(
+            height: 50,
+            onPressed: () => _search(_sequence()),
+            child: Text(
+              'Resolver',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -403,7 +476,7 @@ class _NamingPageState extends State<NamingPage> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  if (!_done) ...[
+                  if (!_done)
                     Expanded(
                       child: AddCarbonButton(
                         height: buttonHeight,
@@ -411,17 +484,7 @@ class _NamingPageState extends State<NamingPage> {
                         onPressed: _pressedBondCarbonButton,
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: HydrogenateButton(
-                        height: buttonHeight,
-                        onPressed: _pressedHydrogenateButton,
-                        enabled: true,
-                      ),
-                    ),
-                  ],
-                  if (_done) ...[
-                    // Reset button:
+                  if (_done)
                     Expanded(
                       child: QuimifyButton(
                         height: buttonHeight,
@@ -434,24 +497,14 @@ class _NamingPageState extends State<NamingPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    // 'Solve it' button:
-                    Expanded(
-                      child: QuimifyButton.gradient(
-                        height: buttonHeight,
-                        onPressed: () => _search(_sequence()),
-                        gradient: quimifyGradient,
-                        child: Text(
-                          'Resolver',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: HydrogenateButton(
+                      height: buttonHeight,
+                      enabled: _canHydrogenate(),
+                      onPressed: _pressedHydrogenateButton,
                     ),
-                  ],
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -483,32 +536,35 @@ class _NamingPageState extends State<NamingPage> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    // To avoid rounded corners overflow:
-                    clipBehavior: Clip.hardEdge,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 5, // + 15 from above SizedBox = 20
-                          bottom: 20, // Bottom padding of the page
-                        ),
-                        child: Wrap(
-                          runSpacing: 15,
-                          children: _openChain()
-                              .getBondableGroups()
-                              .reversed
-                              .map((function) => groupToButton[function]!)
-                              .toList(),
-                        ),
+              ],
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // To avoid rounded corners overflow:
+                  clipBehavior: Clip.hardEdge,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 5, // + 15 from above SizedBox = 20
+                        bottom: 20, // Bottom padding of the page
                       ),
+                      child: !_done
+                          ? Wrap(
+                              runSpacing: 15,
+                              children: _openChain()
+                                  .getBondableGroups()
+                                  .reversed
+                                  .map((function) => groupToButton[function]!)
+                                  .toList(),
+                            )
+                          : doneDialog,
                     ),
                   ),
                 ),
-              ],
+              ),
             ],
           ),
         ),

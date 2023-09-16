@@ -111,7 +111,6 @@ class QuimifyMessageDialog extends StatelessWidget {
                 ),
               Expanded(
                 child: QuimifyDialogButton(
-                  height: buttonHeight,
                   onPressed: () => _pressedButton(context),
                   text: _hasLink ? linkLabel! : 'Entendido',
                 ),

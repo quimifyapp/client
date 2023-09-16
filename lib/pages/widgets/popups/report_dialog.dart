@@ -61,8 +61,6 @@ class ReportDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonHeight = 50;
-
     return GestureDetector(
       onTap: _tappedOutsideText,
       child: QuimifyDialog(
@@ -125,7 +123,6 @@ class ReportDialog extends StatelessWidget {
             ),
           ),
           QuimifyDialogButton(
-            height: buttonHeight,
             onPressed: () => _pressedButton(context),
             text: 'Enviar',
           ),

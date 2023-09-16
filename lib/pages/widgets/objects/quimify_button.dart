@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 
 class QuimifyButton extends StatelessWidget {
   const QuimifyButton({
-    Key? key,
+    super.key,
     this.width,
     required this.height,
     required this.color,
-    this.gradient,
     this.enabled = true,
     required this.onPressed,
     required this.child,
-  }) : super(key: key);
+  }) : gradient = false;
 
   const QuimifyButton.gradient({
-    Key? key,
+    super.key,
     this.width,
     required this.height,
-    this.color,
-    required this.gradient,
     this.enabled = true,
     required this.onPressed,
     required this.child,
-  }) : super(key: key);
+  })  : color = null,
+        gradient = true;
 
   final Widget child;
   final double? width;
   final double height;
   final Color? color;
-  final Gradient? gradient;
   final bool enabled;
+  final bool gradient;
   final VoidCallback onPressed;
 
   static const double _unselectedOpacity = 0.5;
 
   @override
   Widget build(BuildContext context) {
+    double opacity = enabled ? 1 : _unselectedOpacity;
+
     return Container(
       width: width,
       height: height,
@@ -42,8 +43,8 @@ class QuimifyButton extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        gradient: gradient,
-        color: color?.withOpacity(enabled ? 1 : _unselectedOpacity),
+        gradient: gradient ? quimifyGradient(opacity: opacity) : null,
+        color: color?.withOpacity(opacity),
       ),
       child: SizedBox.expand(
         child: enabled

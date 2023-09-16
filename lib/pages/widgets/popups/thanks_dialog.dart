@@ -19,8 +19,6 @@ class ThanksDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonHeight = 50;
-
     return QuimifyDialog(
       title: '¿Necesitas ayuda?',
       content: [
@@ -36,7 +34,6 @@ class ThanksDialog extends StatelessWidget {
       ],
       actions: [
         QuimifyDialogButton(
-          height: buttonHeight,
           onPressed: () => _exit(context),
           text: 'Entendido',
         ),

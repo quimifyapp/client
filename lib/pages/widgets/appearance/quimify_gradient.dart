@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-const LinearGradient quimifyGradient = LinearGradient(
+LinearGradient quimifyGradient({double opacity = 1}) => LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
   colors: [
-    Color.fromARGB(255, 55, 224, 211),
-    Color.fromARGB(255, 72, 232, 167),
+    const Color.fromARGB(255, 55, 224, 211).withOpacity(opacity),
+    const Color.fromARGB(255, 72, 232, 167).withOpacity(opacity),
   ],
 );

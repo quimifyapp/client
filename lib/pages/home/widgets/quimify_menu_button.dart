@@ -22,7 +22,7 @@ class QuimifyMenuButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          gradient: selected ? quimifyGradient : null,
+          gradient: selected ? quimifyGradient() : null,
         ),
         child: MaterialButton(
           padding: const EdgeInsets.symmetric(horizontal: 8),

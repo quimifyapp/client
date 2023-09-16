@@ -79,7 +79,7 @@ class QuimifyDialog extends StatelessWidget {
               fontSize: 22,
               height: 0.6,
             ),
-          )
+          ),
         ],
       ),
       contentPadding: const EdgeInsets.only(
