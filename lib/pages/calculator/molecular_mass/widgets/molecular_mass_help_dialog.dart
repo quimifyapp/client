@@ -30,7 +30,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
           const Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un átomo es la masa, en gramos, de '
-                  'un mol de ese átomo.',
+                  '1 mol de ese átomo.',
             ),
           ),
           const QuimifyDialogContentText(

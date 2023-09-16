@@ -13,7 +13,7 @@ class CalculatorHelpDialog extends StatelessWidget {
           Center(
             child: QuimifyDialogContentText(
               text: 'La masa molecular de un compuesto es la masa, en gramos, '
-                  'de un mol de ese compuesto.',
+                  'de 1 mol de ese compuesto.',
             ),
           ),
           QuimifyDialogContentText(
