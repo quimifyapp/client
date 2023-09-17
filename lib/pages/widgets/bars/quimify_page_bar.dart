@@ -37,7 +37,7 @@ class QuimifyPageBar extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 15),
             Expanded(
               child: AutoSizeText(
                 title,
