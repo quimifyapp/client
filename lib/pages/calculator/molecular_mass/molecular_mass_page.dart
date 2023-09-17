@@ -105,7 +105,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     ),
                     secondField: HistoryField(
                       'Masa molecular',
-                      e.molecularMass.toString(),
+                      '${e.molecularMass.toString()} g/mol',
                     ),
                   ))
               .toList(),
