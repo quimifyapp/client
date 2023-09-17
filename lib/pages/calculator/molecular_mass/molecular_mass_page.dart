@@ -281,7 +281,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 Container(
                   height: 115,
                   padding: const EdgeInsets.all(20),
@@ -326,14 +326,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     HistoryButton(
                       height: buttonHeight,
                       onPressed: _showHistory,
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 12.5),
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
@@ -350,7 +350,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 GraphSelector(
                   mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams!,
