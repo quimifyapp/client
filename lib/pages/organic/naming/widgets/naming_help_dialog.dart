@@ -4,8 +4,8 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
-import 'package:quimify_client/pages/widgets/popups/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
   const NamingHelpDialog({

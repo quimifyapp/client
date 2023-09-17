@@ -21,13 +21,13 @@ import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radi
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
@@ -139,14 +139,16 @@ class _NamingPageState extends State<NamingPage> {
               .getOrganicNames()
               .map((e) => HistoryEntry(
                     query: e.sequence,
-                    firstField: HistoryField(
-                      'Fórmula',
-                      formatStructure(e.structure!),
-                    ),
-                    secondField: HistoryField(
-                      'Nombre',
-                      e.name,
-                    ),
+                    fields: [
+                      HistoryField(
+                        'Fórmula',
+                        formatStructure(e.structure!),
+                      ),
+                      HistoryField(
+                        'Nombre',
+                        e.name,
+                      ),
+                    ],
                   ))
               .toList(),
           onEntryPressed: (sequence) {

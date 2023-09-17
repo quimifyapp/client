@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyPageBar extends StatelessWidget {

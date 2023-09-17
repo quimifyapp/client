@@ -4,7 +4,7 @@ import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.d
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);

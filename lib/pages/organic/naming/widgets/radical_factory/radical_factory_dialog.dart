@@ -6,8 +6,8 @@ import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/tip_
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
   const RadicalFactoryDialog({

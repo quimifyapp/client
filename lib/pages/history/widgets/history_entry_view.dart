@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
-import 'package:quimify_client/pages/history/widgets/history_field_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
+import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class HistoryEntryView extends StatelessWidget {
   const HistoryEntryView({
@@ -29,15 +30,18 @@ class HistoryEntryView extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Column(
+              child: SignedSpacingColumn(
+                spacing: 15,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HistoryFieldView(field: entry.firstField),
-                  if (entry.secondField != null) ...[
-                    const SizedBox(height: 15),
-                    HistoryFieldView(field: entry.secondField!),
-                  ]
-                ],
+                children: entry.fields
+                    .map(
+                      (field) => QuimifyField(
+                        title: field.title,
+                        value: field.value,
+                        titleColor: quimifyTeal,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
             const SizedBox(width: 15),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/popups/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
 
 class InorganicHelpDialog extends StatelessWidget {
   const InorganicHelpDialog({Key? key}) : super(key: key);

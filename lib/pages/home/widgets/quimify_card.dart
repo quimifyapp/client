@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuimifyCard extends StatefulWidget {

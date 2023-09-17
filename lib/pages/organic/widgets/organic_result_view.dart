@@ -7,8 +7,9 @@ import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
+import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class OrganicResultView extends StatelessWidget {
   const OrganicResultView({
@@ -82,9 +83,9 @@ class OrganicResultView extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Wrap(
-              direction: Axis.vertical,
+            child: SignedSpacingColumn(
               spacing: 15,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: fields.entries
                   .map(
                     (field) => QuimifyField(

@@ -15,10 +15,10 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
@@ -99,14 +99,16 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
               .getMolecularMasses()
               .map((e) => HistoryEntry(
                     query: toSubscripts(e.formula),
-                    firstField: HistoryField(
-                      'Búsqueda',
-                      toSubscripts(e.formula),
-                    ),
-                    secondField: HistoryField(
-                      'Masa molecular',
-                      '${e.molecularMass.toString()} g/mol',
-                    ),
+                    fields: [
+                      HistoryField(
+                        'Búsqueda',
+                        toSubscripts(e.formula),
+                      ),
+                      HistoryField(
+                        'Masa molecular',
+                        '${e.molecularMass.toString()} g/mol',
+                      ),
+                    ],
                   ))
               .toList(),
           onEntryPressed: (formula) => _calculate(formula),

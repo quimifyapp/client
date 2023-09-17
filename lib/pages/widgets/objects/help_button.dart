@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 
 class HelpButton extends StatelessWidget {
   const HelpButton({

@@ -9,10 +9,10 @@ import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/internet.dart';
 import 'package:quimify_client/utils/text.dart';
@@ -99,16 +99,17 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
               .getOrganicFormulas()
               .map((e) => HistoryEntry(
                     query: e.name,
-                    firstField: HistoryField(
-                      'Búsqueda',
-                      e.name,
-                    ),
-                    secondField: e.structure != null
-                        ? HistoryField(
-                            'Fórmula',
-                            formatStructure(e.structure!),
-                          )
-                        : null,
+                    fields: [
+                      HistoryField(
+                        'Búsqueda',
+                        e.name,
+                      ),
+                      if (e.structure != null)
+                        HistoryField(
+                          'Fórmula',
+                          formatStructure(e.structure!),
+                        )
+                    ],
                   ))
               .toList(),
           onEntryPressed: (name) => _search(name),

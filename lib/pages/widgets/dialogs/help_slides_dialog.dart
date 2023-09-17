@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_contact_buttons.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/popups/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_contact_buttons.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HelpSlidesDialog extends StatefulWidget {

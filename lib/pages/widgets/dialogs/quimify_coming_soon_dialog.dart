@@ -1,4 +1,4 @@
-import 'package:quimify_client/pages/widgets/popups/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 
 const quimifyComingSoonDialog = QuimifyMessageDialog(
   title: '¡Estamos en ello!',

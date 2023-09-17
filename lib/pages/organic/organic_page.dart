@@ -6,7 +6,7 @@ import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog
 import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 
 class OrganicPage extends StatelessWidget {
   const OrganicPage({Key? key}) : super(key: key);
