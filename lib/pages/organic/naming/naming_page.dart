@@ -9,6 +9,7 @@ import 'package:quimify_client/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
+import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/naming/organic_result_page.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
@@ -106,13 +107,13 @@ class _NamingPageState extends State<NamingPage> {
           title: _title,
           organicResultView: OrganicResultView(
             fields: {
-              if (organicResult.name != null) 'Nombre:': organicResult.name!,
+              if (organicResult.name != null) 'Nombre': organicResult.name!,
               if (organicResult.molecularMass != null)
-                'Masa molecular:':
+                'Masa molecular':
                     '${formatMolecularMass(organicResult.molecularMass!)}'
                         ' g/mol',
               if (organicResult.structure != null)
-                'Fórmula:': formatStructure(organicResult.structure!),
+                'Fórmula': formatStructure(organicResult.structure!),
             },
             imageProvider: organicResult.url2D != null
                 ? NetworkImage(organicResult.url2D!)
@@ -138,11 +139,14 @@ class _NamingPageState extends State<NamingPage> {
               .getOrganicNames()
               .map((e) => HistoryEntry(
                     query: e.sequence,
-                    fields: {
-                      if (e.structure != null)
-                        'Búsqueda': formatStructure(e.structure!),
-                      'Nombre': e.name,
-                    },
+                    firstField: HistoryField(
+                      'Fórmula',
+                      formatStructure(e.structure!),
+                    ),
+                    secondField: HistoryField(
+                      'Nombre',
+                      e.name,
+                    ),
                   ))
               .toList(),
           onEntryPressed: (sequence) {
@@ -378,7 +382,8 @@ class _NamingPageState extends State<NamingPage> {
       ),
       child: Column(
         children: [
-          Image.asset( // TODO hide in small screens?
+          Image.asset(
+            // TODO hide in small screens?
             'assets/images/completed.png',
             height: 150,
           ),
@@ -538,8 +543,10 @@ class _NamingPageState extends State<NamingPage> {
               ],
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(10),
+                    ),
                   ),
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,

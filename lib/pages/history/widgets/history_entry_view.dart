@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
-import 'package:quimify_client/pages/history/widgets/history_field.dart';
+import 'package:quimify_client/pages/history/widgets/history_field_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 
 class HistoryEntryView extends StatelessWidget {
@@ -15,11 +15,6 @@ class HistoryEntryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<HistoryField> historyFields = entry.fields.entries
-        .where((element) => element.value != null)
-        .map((e) => HistoryField(title: e.key, value: e.value!))
-        .toList();
-
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -33,13 +28,19 @@ class HistoryEntryView extends StatelessWidget {
         onPressed: () => onPressed(entry.query),
         child: Row(
           children: [
-            Wrap(
-              direction: Axis.vertical,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              spacing: 10,
-              children: historyFields,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HistoryFieldView(field: entry.firstField),
+                  if (entry.secondField != null) ...[
+                    const SizedBox(height: 15),
+                    HistoryFieldView(field: entry.secondField!),
+                  ]
+                ],
+              ),
             ),
-            const Spacer(),
+            const SizedBox(width: 15),
             const Icon(
               Icons.arrow_forward_rounded,
               size: 30,

@@ -8,6 +8,7 @@ import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
+import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -98,10 +99,14 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
               .getMolecularMasses()
               .map((e) => HistoryEntry(
                     query: toSubscripts(e.formula),
-                    fields: {
-                      'Fórmula': toSubscripts(e.formula),
-                      'Masa molecular': e.molecularMass.toString(),
-                    },
+                    firstField: HistoryField(
+                      'Búsqueda',
+                      toSubscripts(e.formula),
+                    ),
+                    secondField: HistoryField(
+                      'Masa molecular',
+                      e.molecularMass.toString(),
+                    ),
                   ))
               .toList(),
           onEntryPressed: (formula) => _calculate(formula),

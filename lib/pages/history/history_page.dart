@@ -35,7 +35,7 @@ class HistoryPage extends StatelessWidget {
         child: entries.isNotEmpty
             ? Wrap(
                 verticalDirection: VerticalDirection.up,
-                runSpacing: 25,
+                runSpacing: 15,
                 children: entryViews.toList(),
               )
             : Column(

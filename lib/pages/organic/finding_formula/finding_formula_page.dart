@@ -4,6 +4,7 @@ import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
+import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -98,11 +99,16 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
               .getOrganicFormulas()
               .map((e) => HistoryEntry(
                     query: e.name,
-                    fields: {
-                      'Búsqueda': e.name,
-                      if (e.structure != null)
-                        'Fórmula': formatStructure(e.structure!),
-                    },
+                    firstField: HistoryField(
+                      'Búsqueda',
+                      e.name,
+                    ),
+                    secondField: e.structure != null
+                        ? HistoryField(
+                            'Fórmula',
+                            formatStructure(e.structure!),
+                          )
+                        : null,
                   ))
               .toList(),
           onEntryPressed: (name) => _search(name),
@@ -153,12 +159,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           body: OrganicResultView(
             scrollController: _scrollController,
             fields: {
-              if (_result.name != null) 'Búsqueda:': _result.name!,
+              if (_result.name != null) 'Búsqueda': _result.name!,
               if (_result.molecularMass != null)
-                'Masa molecular:':
+                'Masa molecular':
                     '${formatMolecularMass(_result.molecularMass!)} g/mol',
               if (_result.structure != null)
-                'Fórmula:': formatStructure(_result.structure!),
+                'Fórmula': formatStructure(_result.structure!),
             },
             imageProvider: _firstSearch
                 ? const AssetImage('assets/images/dietanoic-acid.png')

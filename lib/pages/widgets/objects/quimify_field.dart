@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-class OrganicResultField extends StatelessWidget {
-  const OrganicResultField({
+class QuimifyField extends StatelessWidget {
+  const QuimifyField({
     Key? key,
     required this.title,
-    required this.field,
+    required this.value,
+    required this.titleColor,
   }) : super(key: key);
 
-  final String title, field;
+  final String title;
+  final String value;
+  final Color titleColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class OrganicResultField extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
+            color: titleColor,
             fontSize: 16,
           ),
           strutStyle: const StrutStyle(
@@ -25,9 +28,8 @@ class OrganicResultField extends StatelessWidget {
             height: 1.3,
           ),
         ),
-        const SizedBox(height: 5),
         Text(
-          field,
+          value,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 18,
@@ -38,7 +40,6 @@ class OrganicResultField extends StatelessWidget {
             height: 1.3,
           ),
         ),
-        const SizedBox(height: 15),
       ],
     );
   }

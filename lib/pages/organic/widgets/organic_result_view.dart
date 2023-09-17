@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
-import 'package:quimify_client/pages/organic/widgets/organic_result_field.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
 import 'package:quimify_client/pages/widgets/popups/quimify_coming_soon_dialog.dart';
@@ -77,23 +77,20 @@ class OrganicResultView extends StatelessWidget {
           const SizedBox(height: 15),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.only(
-              top: 20,
-              bottom: 20 - 15, // Without OrganicResultField's bottom padding
-              left: 20,
-              right: 20,
-            ),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: 15,
               children: fields.entries
                   .map(
-                    (field) => OrganicResultField(
+                    (field) => QuimifyField(
                       title: field.key,
-                      field: field.value,
+                      value: field.value,
+                      titleColor: Theme.of(context).colorScheme.primary,
                     ),
                   )
                   .toList(),
@@ -180,7 +177,8 @@ class OrganicResultView extends StatelessWidget {
                             ],
                           ),
                     child: PhotoView(
-                      backgroundDecoration: const BoxDecoration(), // Needed
+                      backgroundDecoration: const BoxDecoration(),
+                      // Needed
                       initialScale: 1.0,
                       gaplessPlayback: true,
                       disableGestures: true,
