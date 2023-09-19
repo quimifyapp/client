@@ -403,7 +403,7 @@ class _NamingPageState extends State<NamingPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            'La molecula está completa. Ya puedes resolverla.',
+            'La molecula está completa.\nYa puedes ver el resultado.',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
