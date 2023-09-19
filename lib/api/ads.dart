@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -10,6 +12,9 @@ class Ads {
 
   Ads._internal();
 
+  late String interstitialUnitId;
+  late String bannerUnitId;
+
   InterstitialAd? _interstitialAd;
   int _interstitialAdsShown = 0;
 
@@ -21,6 +26,15 @@ class Ads {
 
   initialize() async {
     await MobileAds.instance.initialize();
+
+    if (Platform.isAndroid) {
+      interstitialUnitId = Env.androidInterstitialUnitId;
+      bannerUnitId = Env.androidBannerUnitId;
+    } else {
+      interstitialUnitId = Env.iosInterstitialUnitId;
+      bannerUnitId = Env.iosBannerUnitId;
+    }
+
     await _loadInterstitialAd();
   }
 
@@ -31,7 +45,7 @@ class Ads {
 
   _loadInterstitialAd() async {
     await InterstitialAd.load(
-      adUnitId: Env.interstitialUnitId,
+      adUnitId: interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) => _interstitialAd = ad,
@@ -56,7 +70,7 @@ class Ads {
 
   Future<Widget> getBannerAd(Size size, VoidCallback onAdLoaded) async {
     BannerAd bannerAd = BannerAd(
-      adUnitId: Env.bannerUnitId,
+      adUnitId: bannerUnitId,
       request: const AdRequest(),
       size: AdSize(
         width: size.width.toInt(),
