@@ -97,7 +97,7 @@ class QuimifyApp extends StatelessWidget {
             onSurface: Color.fromARGB(255, 244, 255, 249),
             // Inorganic amounts
 
-            shadow: Color.fromARGB(25, 0, 0, 0),
+            shadow: Color.fromARGB(150, 0, 0, 0),
             // Dialog barrier
             inverseSurface: Color.fromARGB(255, 60, 60, 60),
             // Lock icon
@@ -144,7 +144,7 @@ class QuimifyApp extends StatelessWidget {
             onSurface: Color.fromARGB(255, 7, 56, 53),
             // Inorganic amounts
 
-            shadow: Color.fromARGB(100, 0, 0, 0),
+            shadow: Color.fromARGB(175, 0, 0, 0),
             // Dialog barrier
             inverseSurface: Color.fromARGB(255, 235, 235, 235),
             // Lock icon
