@@ -37,8 +37,9 @@ class HistoryEntryView extends StatelessWidget {
                     .map(
                       (field) => QuimifyField(
                         title: field.title,
-                        value: field.value,
                         titleColor: quimifyTeal,
+                        value: field.value,
+                        valueBold: false,
                       ),
                     )
                     .toList(),

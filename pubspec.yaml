@@ -40,7 +40,11 @@ flutter:
     - assets/images/empty.png
 
   fonts:
-    - family: CeraProBoldCustom # To use 'Ξ' as a triple bond indicator
+    - family: CeraProMediumCustom # Modified so 'Ξ' looks like a triple bond chemical symbol
+      fonts:
+        - asset: assets/fonts/CeraProMediumCustom.otf
+
+    - family: CeraProBoldCustom # Same, but bold
       fonts:
         - asset: assets/fonts/CeraProBoldCustom.otf
 

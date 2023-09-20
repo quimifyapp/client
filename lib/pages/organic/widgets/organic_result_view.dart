@@ -90,8 +90,9 @@ class OrganicResultView extends StatelessWidget {
                   .map(
                     (field) => QuimifyField(
                       title: field.key,
-                      value: field.value,
                       titleColor: Theme.of(context).colorScheme.primary,
+                      value: field.value,
+                      valueBold: true,
                     ),
                   )
                   .toList(),

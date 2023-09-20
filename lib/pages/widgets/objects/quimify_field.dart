@@ -4,13 +4,15 @@ class QuimifyField extends StatelessWidget {
   const QuimifyField({
     Key? key,
     required this.title,
-    required this.value,
     required this.titleColor,
+    required this.value,
+    required this.valueBold,
   }) : super(key: key);
 
   final String title;
-  final String value;
   final Color titleColor;
+  final String value;
+  final bool valueBold;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,8 @@ class QuimifyField extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontSize: 18,
-            fontFamily: 'CeraProBoldCustom',
+            fontFamily:
+                valueBold ? 'CeraProBoldCustom' : 'CeraProMediumCustom',
           ),
           strutStyle: const StrutStyle(
             fontSize: 18,
