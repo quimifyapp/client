@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:signed_spacing_flex/signed_spacing_flex.dart';
+
+// TODO fix split screen not centered (test empty project)
 
 showQuimifyDialog({
   required BuildContext context,
@@ -10,7 +13,8 @@ showQuimifyDialog({
   await showDialog<void>(
     context: context,
     barrierDismissible: closable,
-    barrierColor: Theme.of(context).colorScheme.shadow,
+    barrierColor:
+        Theme.of(context).colorScheme.shadow,
     builder: (BuildContext context) => dialog,
   );
 }
@@ -37,17 +41,24 @@ class QuimifyDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    const double padding = 20;
+    const double contentPadding = 20;
+
     const double maxWidth = 400;
-    final double shortestSide = MediaQuery.of(context).size.width;
-    final double padding = max(20, (shortestSide - maxWidth) / 2);
+    const totalPadding = 2 * (padding + contentPadding);
+
+    final double contentDesiredWidth = screenWidth - totalPadding;
+    const double contentMaxWidth = maxWidth - totalPadding;
 
     return AlertDialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: padding),
+      insetPadding: const EdgeInsets.symmetric(horizontal: padding),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      titlePadding: EdgeInsets.zero,
+      titlePadding: const EdgeInsets.only(bottom: 20),
       title: Column(
         children: [
           if (closable)
@@ -83,22 +94,23 @@ class QuimifyDialog extends StatelessWidget {
         ],
       ),
       contentPadding: const EdgeInsets.only(
-        top: 20,
-        left: 20,
-        right: 20,
+        left: contentPadding,
+        right: contentPadding,
       ),
-      content: SingleChildScrollView(
-        child: Wrap(
-          runSpacing: 15,
-          children: content,
+      content: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: contentMaxWidth,
+          minWidth: min(contentDesiredWidth, contentMaxWidth), // I.E.: tablet
+        ),
+        child: SingleChildScrollView(
+          child: SignedSpacingColumn(
+            spacing: 15,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: content,
+          ),
         ),
       ),
-      actionsPadding: const EdgeInsets.only(
-        top: 20,
-        bottom: 20,
-        left: 15,
-        right: 15,
-      ),
+      actionsPadding: const EdgeInsets.all(padding),
       actions: actions,
     );
   }
