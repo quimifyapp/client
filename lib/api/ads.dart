@@ -16,17 +16,15 @@ class Ads {
   late String bannerUnitId;
 
   InterstitialAd? _interstitialAd;
-  int _interstitialAdsShown = 0;
 
   // Constants:
 
-  static const int _interstitialAdPeriod = 4;
+  static const int _interstitialAdPeriod = 3;
+  static const int _interstitialAdOffset = 1; // So 1st is shown 2nd, not 3rd
 
   // Initialize:
 
   initialize() async {
-    await MobileAds.instance.initialize();
-
     if (Platform.isAndroid) {
       interstitialUnitId = Env.androidInterstitialUnitId;
       bannerUnitId = Env.androidBannerUnitId;
@@ -35,13 +33,16 @@ class Ads {
       bannerUnitId = Env.iosBannerUnitId;
     }
 
+    await MobileAds.instance.initialize();
     await _loadInterstitialAd();
   }
 
   // Private:
 
+  int _interstitialAdChanceCounter = _interstitialAdOffset;
+
   bool _canShowInterstitialAd() =>
-      ++_interstitialAdsShown % _interstitialAdPeriod == 0;
+      ++_interstitialAdChanceCounter % _interstitialAdPeriod == 0;
 
   _loadInterstitialAd() async {
     await InterstitialAd.load(
