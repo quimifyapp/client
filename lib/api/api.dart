@@ -28,20 +28,20 @@ class Api {
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
+  static const _timeout = Duration(seconds: 10);
+
   // Private:
 
   String _versionedPath(String path) => 'v$_apiVersion/$path';
 
   Future<String?> _getBody(String authority, String path, parameters) async {
-    // TODO timeout
-
     String? response;
 
     try {
       Uri url = Uri.https(authority, path, parameters);
 
       // It's a new query in this session:
-      http.Response httpResponse = await _client.get(url);
+      http.Response httpResponse = await _client.get(url).timeout(_timeout);
 
       if (httpResponse.statusCode == _httpStatusCodeOk) {
         response = utf8.decode(httpResponse.bodyBytes);
