@@ -9,6 +9,7 @@ import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/local/storage.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 main() async {
   // Show splash screen UNTIL stated otherwise:
@@ -61,12 +62,20 @@ class QuimifyApp extends StatelessWidget {
         scrollBehavior: const ScrollBehavior(
           androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
         ),
-        // To ignore device's font scaling factor:
         builder: (context, child) {
+          // To ignore device's font scaling factor:
           child = EasyLoading.init()(context, child);
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: child,
+            // To set responsive layout:
+            child: ResponsiveBreakpoints.builder(
+              child: child,
+              breakpoints: [
+                const Breakpoint(start: 0, end: 360, name: 'EXTRA_SMALL'),
+                const Breakpoint(
+                    start: 361, end: double.infinity, name: MOBILE),
+              ],
+            ),
           );
         },
         // Themes:

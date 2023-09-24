@@ -103,6 +103,7 @@ dependencies:
   connectivity_plus: ^3.0.6
   envied: ^0.3.0+3
   signed_spacing_flex: ^1.0.0
+  responsive_framework: ^1.1.1
 
 dev_dependencies:
   flutter_test:
