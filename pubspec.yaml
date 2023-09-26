@@ -104,6 +104,7 @@ dependencies:
   envied: ^0.3.0+3
   signed_spacing_flex: ^1.0.0
   responsive_framework: ^1.1.1
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:
