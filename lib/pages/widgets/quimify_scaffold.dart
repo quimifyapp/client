@@ -37,13 +37,15 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
     if (widget.showBannerAd && !_loadedBannerAd) {
       _loadBannerAd(MediaQuery.of(context).size.width);
     }
-final small = MobileSmallView(
+
+    final small = MobileSmallView(
       bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
       header: widget.header,
       body: widget.body,
       loadedBannerAd: _loadedBannerAd,
       bannerAd: _bannerAd,
     );
+
     final mobile = MobileView(
       bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
       header: widget.header,
@@ -77,6 +79,7 @@ class MobileSmallView extends StatelessWidget {
   final double _bodyRoundedCornersRadius;
   final Widget header;
   final Widget body;
+
   final bool _loadedBannerAd;
   final Widget? _bannerAd;
 
@@ -97,10 +100,10 @@ class MobileSmallView extends StatelessWidget {
                 bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
                 body: body,
               ),
-              if (_loadedBannerAd) // TODO constant banner?
+              if (_loadedBannerAd)
                 _BannerAd(
                   bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-                  bannerAd: _bannerAd,
+                  bannerAd: _bannerAd!,
                 ),
             ],
           ),
@@ -125,6 +128,7 @@ class MobileView extends StatelessWidget {
   final double _bodyRoundedCornersRadius;
   final Widget header;
   final Widget body;
+
   final bool _loadedBannerAd;
   final Widget? _bannerAd;
 
@@ -147,9 +151,32 @@ class MobileView extends StatelessWidget {
         if (_loadedBannerAd) // TODO constant banner?
           _BannerAd(
             bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-            bannerAd: _bannerAd,
+            bannerAd: _bannerAd!,
           ),
       ],
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    required double bodyRoundedCornersRadius,
+    required this.header,
+  }) : _bodyRoundedCornersRadius = bodyRoundedCornersRadius;
+
+  final double _bodyRoundedCornersRadius;
+  final Widget header;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: quimifyGradient(),
+      ),
+      padding: EdgeInsets.only(
+        bottom: _bodyRoundedCornersRadius,
+      ),
+      child: header,
     );
   }
 }
@@ -182,38 +209,15 @@ class _Body extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({
-    required double bodyRoundedCornersRadius,
-    required this.header,
-  }) : _bodyRoundedCornersRadius = bodyRoundedCornersRadius;
-
-  final double _bodyRoundedCornersRadius;
-  final Widget header;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: quimifyGradient(),
-      ),
-      padding: EdgeInsets.only(
-        bottom: _bodyRoundedCornersRadius,
-      ),
-      child: header,
-    );
-  }
-}
-
 class _BannerAd extends StatelessWidget {
   const _BannerAd({
     required double bodyRoundedCornersRadius,
-    required Widget? bannerAd,
+    required Widget bannerAd,
   })  : _bodyRoundedCornersRadius = bodyRoundedCornersRadius,
         _bannerAd = bannerAd;
 
   final double _bodyRoundedCornersRadius;
-  final Widget? _bannerAd;
+  final Widget _bannerAd;
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +227,7 @@ class _BannerAd extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: _bannerAd!,
+        child: _bannerAd, // TODO constant banner?
       ),
     );
   }

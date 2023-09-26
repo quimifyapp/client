@@ -7,12 +7,10 @@ import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
-import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/quimify_responsive_utils.dart';
-import 'package:responsive_framework/responsive_value.dart';
-import 'package:responsive_framework/utils/responsive_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

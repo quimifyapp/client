@@ -64,9 +64,9 @@ class QuimifyApp extends StatelessWidget {
           androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
         ),
         builder: (context, child) {
-          // To ignore device's font scaling factor:
           child = EasyLoading.init()(context, child);
           return MediaQuery(
+            // To ignore device's font scaling factor:
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
             // To set responsive layout:
             child: ResponsiveBreakpoints.builder(
