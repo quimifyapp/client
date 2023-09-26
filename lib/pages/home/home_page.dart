@@ -10,7 +10,7 @@ import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/utils/quimify_responsive_utils.dart';
+import 'package:quimify_client/utils/quimify_responsive.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
           bottom: false, // So it's not inside status bar
           child: Container(
             /// Example of use of a [ResponsiveValue] extension
-            padding: context.whenSmallDevice<EdgeInsetsGeometry>(
+            padding: context.responsiveSmallSelector<EdgeInsetsGeometry>(
               defaultValue: const EdgeInsets.only(
                 top: 15, // TODO 17.5?
                 bottom: 20,

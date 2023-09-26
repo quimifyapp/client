@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/utils/quimify_text.dart';
 
 class GroupButton extends StatelessWidget {
   const GroupButton({

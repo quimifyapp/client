@@ -14,8 +14,8 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/utils/internet.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/utils/quimify_internet.dart';
+import 'package:quimify_client/utils/quimify_text.dart';
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);

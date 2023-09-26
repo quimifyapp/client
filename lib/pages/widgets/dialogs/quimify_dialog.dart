@@ -13,8 +13,7 @@ showQuimifyDialog({
   await showDialog<void>(
     context: context,
     barrierDismissible: closable,
-    barrierColor:
-        Theme.of(context).colorScheme.shadow,
+    barrierColor: Theme.of(context).colorScheme.shadow,
     builder: (BuildContext context) => dialog,
   );
 }
@@ -41,6 +40,7 @@ class QuimifyDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO use new responsive utils
     final double screenWidth = MediaQuery.of(context).size.width;
 
     const double padding = 20;

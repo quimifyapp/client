@@ -9,7 +9,7 @@ import 'package:quimify_client/api/api.dart';
 import 'package:quimify_client/api/results/access_data_result.dart';
 import 'package:quimify_client/local/storage.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
-import 'package:quimify_client/utils/quimify_responsive_utils.dart';
+import 'package:quimify_client/utils/quimify_responsive.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 main() async {
@@ -70,7 +70,7 @@ class QuimifyApp extends StatelessWidget {
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
             // To set responsive layout:
             child: ResponsiveBreakpoints.builder(
-              breakpoints: QuimifyResponsiveUtils.responsiveBreakpoints,
+              breakpoints: responsiveBreakpoints,
               child: child,
             ),
           );
