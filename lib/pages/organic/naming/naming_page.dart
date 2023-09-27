@@ -553,7 +553,9 @@ class _NamingPageState extends State<NamingPage> {
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   child: SingleChildScrollView(
-                    controller: _scrollController,
+                    /// With the scrollController set, the list won't be able to fetch the main scroll controller
+                    /// and the hidding of the header while scrolling won't work.
+                    // controller: _scrollController,
                     child: Padding(
                       padding: const EdgeInsets.only(
                         top: 5, // + 15 from above SizedBox = 20

@@ -229,7 +229,9 @@ class _NamingAndFindingFormulaPageState
             ],
           ),
           body: SingleChildScrollView(
-            controller: _scrollController,
+            /// With the scrollController set, the list won't be able to fetch the main scroll controller
+            /// and the hidding of the header while scrolling won't work.
+            // controller: _scrollController,
             padding: const EdgeInsets.all(20),
             child: Wrap(
               verticalDirection: VerticalDirection.up,
