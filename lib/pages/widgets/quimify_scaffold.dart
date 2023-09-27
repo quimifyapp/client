@@ -27,10 +27,16 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
   Widget? _bannerAd;
   bool _loadedBannerAd = false;
 
-  _onBannerAdLoaded() => setState(() => _loadedBannerAd = true);
+  _onBannerAdLoaded() => setState(
+        () => _loadedBannerAd = true,
+      );
 
-  _loadBannerAd(double screenWidth) async => _bannerAd = await Ads()
-      .getBannerAd(Size(screenWidth, _bannerAdMaxHeight), _onBannerAdLoaded);
+  _loadBannerAd(double screenWidth) async {
+    return _bannerAd = await Ads().getBannerAd(
+      Size(screenWidth, _bannerAdMaxHeight),
+      _onBannerAdLoaded,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +95,18 @@ class MobileSmallView extends StatelessWidget {
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           SliverToBoxAdapter(
-            child: _Header(
-              bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-              header: header,
+            child: Column(
+              children: [
+                _Header(
+                  bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
+                  header: header,
+                ),
+                if (_loadedBannerAd) // TODO constant banner?
+                  _BannerAd(
+                    bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
+                    bannerAd: _bannerAd,
+                  )
+              ],
             ),
           ),
         ];
@@ -100,12 +115,6 @@ class MobileSmallView extends StatelessWidget {
         bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
         body: body,
       ),
-
-      // if (_loadedBannerAd) // TODO constant banner?
-      //   _BannerAd(
-      //     bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-      //     bannerAd: _bannerAd,
-      //   ),
     );
   }
 }
