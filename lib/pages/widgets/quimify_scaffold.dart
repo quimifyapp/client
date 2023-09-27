@@ -85,30 +85,27 @@ class MobileSmallView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverToBoxAdapter(
-          child: _Header(
-            bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-            header: header,
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          SliverToBoxAdapter(
+            child: _Header(
+              bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
+              header: header,
+            ),
           ),
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate.fixed(
-            [
-              _Body(
-                bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-                body: body,
-              ),
-              if (_loadedBannerAd)
-                _BannerAd(
-                  bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-                  bannerAd: _bannerAd!,
-                ),
-            ],
-          ),
-        ),
-      ],
+        ];
+      },
+      body: _Body(
+        bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
+        body: body,
+      ),
+
+      // if (_loadedBannerAd) // TODO constant banner?
+      //   _BannerAd(
+      //     bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
+      //     bannerAd: _bannerAd,
+      //   ),
     );
   }
 }
