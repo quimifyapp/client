@@ -104,7 +104,7 @@ class MobileSmallView extends StatelessWidget {
                 if (_loadedBannerAd) // TODO constant banner?
                   _BannerAd(
                     bodyRoundedCornersRadius: _bodyRoundedCornersRadius,
-                    bannerAd: _bannerAd,
+                    bannerAd: _bannerAd!,
                   )
               ],
             ),
