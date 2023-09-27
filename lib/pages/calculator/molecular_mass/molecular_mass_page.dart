@@ -21,6 +21,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/quimify_internet.dart';
+import 'package:quimify_client/utils/quimify_responsive.dart';
 import 'package:quimify_client/utils/quimify_text.dart';
 
 class MolecularMassPage extends StatefulWidget {
@@ -202,7 +203,9 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         child: QuimifyScaffold(
           header: const QuimifyPageBar(title: 'Masa molecular'),
           body: SingleChildScrollView(
-            controller: _scrollController,
+            /// With the scrollController set, the list won't be able to fetch the main scroll controller
+            /// and the hidding of the header while scrolling won't work.
+            // controller:  _scrollController,
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [

@@ -158,7 +158,9 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             ],
           ),
           body: OrganicResultView(
-            scrollController: _scrollController,
+            /// With the scrollController set, the list won't be able to fetch the main scroll controller
+            /// and the hidding of the header while scrolling won't work.
+            // scrollController: _scrollController,
             fields: {
               if (_result.name != null) 'Búsqueda': _result.name!,
               if (_result.molecularMass != null)
