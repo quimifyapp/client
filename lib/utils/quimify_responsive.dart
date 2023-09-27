@@ -36,9 +36,26 @@ extension QuimifyResponsiveExtensions on BuildContext {
       conditionalValues: [
         Condition.smallerThan(
           value: extraSmallValue,
+          name: MOBILE,
+        )
+      ],
+    ).value;
+  }
+
+  /// With the scrollController set, the list won't be able to fetch the main scroll controller
+  /// and the hidding of the header while scrolling won't work.
+  ScrollController? responsiveScrollController(
+      ScrollController scrollController) {
+    return ResponsiveValue<ScrollController?>(
+      this,
+      defaultValue: null,
+      conditionalValues: [
+        Condition.largerThan(
+          value: scrollController,
           name: extraSmall,
         )
       ],
     ).value;
   }
+
 }

@@ -15,6 +15,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.
 import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/quimify_internet.dart';
+import 'package:quimify_client/utils/quimify_responsive.dart';
 import 'package:quimify_client/utils/quimify_text.dart';
 
 class FindingFormulaPage extends StatefulWidget {
@@ -158,9 +159,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             ],
           ),
           body: OrganicResultView(
-            /// With the scrollController set, the list won't be able to fetch the main scroll controller
-            /// and the hidding of the header while scrolling won't work.
-            // scrollController: _scrollController,
+            scrollController:
+                context.responsiveScrollController(_scrollController),
             fields: {
               if (_result.name != null) 'Búsqueda': _result.name!,
               if (_result.molecularMass != null)

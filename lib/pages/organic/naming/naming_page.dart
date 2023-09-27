@@ -30,6 +30,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/utils/quimify_internet.dart';
+import 'package:quimify_client/utils/quimify_responsive.dart';
 import 'package:quimify_client/utils/quimify_text.dart';
 
 class NamingPage extends StatefulWidget {
@@ -553,9 +554,8 @@ class _NamingPageState extends State<NamingPage> {
                   // To avoid rounded corners overflow:
                   clipBehavior: Clip.hardEdge,
                   child: SingleChildScrollView(
-                    /// With the scrollController set, the list won't be able to fetch the main scroll controller
-                    /// and the hidding of the header while scrolling won't work.
-                    // controller: _scrollController,
+                    controller:
+                        context.responsiveScrollController(_scrollController),
                     child: Padding(
                       padding: const EdgeInsets.only(
                         top: 5, // + 15 from above SizedBox = 20
