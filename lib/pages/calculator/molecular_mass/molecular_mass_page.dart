@@ -237,6 +237,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         ),
                         const Spacer(),
                         TextField(
+                          autocorrect: false,
+                          enableSuggestions: false,
                           // Aspect:
                           cursorColor: Theme.of(context).colorScheme.primary,
                           style: inputOutputStyle,

@@ -93,6 +93,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
               child: TypeAheadField(
                 // TextField:
                 textFieldConfiguration: TextFieldConfiguration(
+                  autocorrect: false,
+                  enableSuggestions: false,
                   // Aspect:
                   cursorColor: Theme.of(context).colorScheme.primary,
                   style: TextStyle(
