@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -32,9 +34,14 @@ main() async {
   AccessDataResult? accessDataResult = await Api().getAccessDataResult();
 
   // App launch (it will hide splash screen):
-  runApp(QuimifyApp(
-    accessDataResult: accessDataResult,
-  ));
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => QuimifyApp(
+        accessDataResult: accessDataResult,
+      ), // Wrap your app
+    ),
+  );
 }
 
 class QuimifyApp extends StatelessWidget {
