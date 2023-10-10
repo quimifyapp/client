@@ -12,10 +12,10 @@ class Ads {
 
   Ads._internal();
 
-  late String interstitialUnitId;
-  late String bannerUnitId;
+  late String _interstitialUnitId;
+  late String _bannerUnitId;
 
-  InterstitialAd? _interstitialAd;
+  InterstitialAd? _nextInterstitialAd;
 
   // Constants:
 
@@ -24,32 +24,38 @@ class Ads {
 
   // Initialize:
 
-  initialize() async {
+  initialize() {
     if (Platform.isAndroid) {
-      interstitialUnitId = Env.androidInterstitialUnitId;
-      bannerUnitId = Env.androidBannerUnitId;
+      _interstitialUnitId = Env.androidInterstitialUnitId;
+      _bannerUnitId = Env.androidBannerUnitId;
     } else {
-      interstitialUnitId = Env.iosInterstitialUnitId;
-      bannerUnitId = Env.iosBannerUnitId;
+      _interstitialUnitId = Env.iosInterstitialUnitId;
+      _bannerUnitId = Env.iosBannerUnitId;
     }
 
-    await MobileAds.instance.initialize();
-    await _loadInterstitialAd();
+    MobileAds.instance.initialize();
   }
 
   // Private:
 
-  int _interstitialAdChanceCounter = _interstitialAdOffset;
+  int _interstitialAdAttempts = _interstitialAdOffset;
 
   bool _canShowInterstitialAd() =>
-      ++_interstitialAdChanceCounter % _interstitialAdPeriod == 0;
+      ++_interstitialAdAttempts % _interstitialAdPeriod == 0;
 
   _loadInterstitialAd() async {
     await InterstitialAd.load(
-      adUnitId: interstitialUnitId,
+      adUnitId: _interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) => _interstitialAd = ad,
+        onAdLoaded: (ad) {
+          _nextInterstitialAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
+            onAdDismissedFullScreenContent: (ad) => ad.dispose(),
+          );
+        },
         onAdFailedToLoad: (_) => {},
       ),
     );
@@ -58,36 +64,25 @@ class Ads {
   // Public:
 
   showInterstitialAd() {
-    if (_interstitialAd == null) {
-      _loadInterstitialAd();
-      return;
+    if (_canShowInterstitialAd()) {
+      _nextInterstitialAd?.show();
     }
 
-    if (_canShowInterstitialAd()) {
-      _interstitialAd!.show();
-      _loadInterstitialAd();
-    }
+    _loadInterstitialAd();
   }
 
-  Future<Widget> getBannerAd(Size size, VoidCallback onAdLoaded) async {
-    BannerAd bannerAd = BannerAd(
-      adUnitId: bannerUnitId,
+  loadBannerAd(Size size, void Function(Ad) onAdLoaded) async {
+    BannerAd(
+      adUnitId: _bannerUnitId,
       request: const AdRequest(),
       size: AdSize(
         width: size.width.toInt(),
         height: size.height.toInt(),
       ),
       listener: BannerAdListener(
-        onAdLoaded: (_) => onAdLoaded(),
+        onAdLoaded: (ad) => onAdLoaded(ad),
+        onAdFailedToLoad: (ad, err) => ad.dispose(),
       ),
-    );
-
-    bannerAd.load();
-
-    return SizedBox(
-      width: bannerAd.size.width.toDouble(),
-      height: bannerAd.size.height.toDouble(),
-      child: AdWidget(ad: bannerAd),
-    );
+    ).load();
   }
 }

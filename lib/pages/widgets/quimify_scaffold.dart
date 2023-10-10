@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/api/ads.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
@@ -20,20 +21,23 @@ class QuimifyScaffold extends StatefulWidget {
 
 class _QuimifyScaffoldState extends State<QuimifyScaffold> {
   static const double _bodyRoundedCornersRadius = 25;
-  static const double _bannerAdMaxHeight = 50;
+  static const double _bannerAdMaxHeight = 60; // TODO responsive, 50 smaller
 
-  Widget? _bannerAd;
-  bool _loadedBannerAd = false;
+  BannerAd? _bannerAd;
 
-  _onBannerAdLoaded() => setState(() => _loadedBannerAd = true);
-
-  _loadBannerAd(double screenWidth) async => _bannerAd = await Ads()
-      .getBannerAd(Size(screenWidth, _bannerAdMaxHeight), _onBannerAdLoaded);
+  @override
+  dispose() {
+    super.dispose();
+    _bannerAd?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.showBannerAd && !_loadedBannerAd) {
-      _loadBannerAd(MediaQuery.of(context).size.width);
+    if (widget.showBannerAd && _bannerAd == null) {
+      Ads().loadBannerAd(
+        Size(MediaQuery.of(context).size.width, _bannerAdMaxHeight),
+        (Ad ad) => setState(() => _bannerAd = ad as BannerAd),
+      );
     }
 
     return Scaffold(
@@ -65,14 +69,18 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
               child: widget.body,
             ),
           ),
-          if (_loadedBannerAd) // TODO constant banner?
+          if (_bannerAd != null)
             Padding(
               padding: const EdgeInsets.only(
                 top: _bodyRoundedCornersRadius, // To counter overlap
               ),
               child: SafeArea(
                 top: false,
-                child: _bannerAd!,
+                child: SizedBox(
+                  width: _bannerAd!.size.width.toDouble(),
+                  height: _bannerAd!.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd!),
+                ),
               ),
             ),
         ],
