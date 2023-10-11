@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in lib/api/.env file:
+// Put variables in lib/connections/.env file:
 // ANDROID_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
 // ANDROID_BANNER_UNIT_ID=ca-app-pub-.../...
 // IOS_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
@@ -22,7 +22,7 @@ part 'env.g.dart';
 // Env.apiCertificate
 // ...
 
-@Envied(path: 'lib/api/.env')
+@Envied(path: 'lib/connections/.env')
 abstract class Env {
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
   static final String apiCertificate = _Env.apiCertificate;

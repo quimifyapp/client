@@ -1,8 +1,8 @@
-import 'package:quimify_client/api/organic/components/chain.dart';
-import 'package:quimify_client/api/organic/components/group.dart';
-import 'package:quimify_client/api/organic/components/substituent.dart';
-import 'package:quimify_client/api/organic/molecules/open_chain/ether.dart';
-import 'package:quimify_client/api/organic/molecules/open_chain/open_chain.dart';
+import 'package:quimify_client/connections/organic/components/chain.dart';
+import 'package:quimify_client/connections/organic/components/group.dart';
+import 'package:quimify_client/connections/organic/components/substituent.dart';
+import 'package:quimify_client/connections/organic/molecules/open_chain/ether.dart';
+import 'package:quimify_client/connections/organic/molecules/open_chain/open_chain.dart';
 
 class Simple extends OpenChain {
   Simple() {

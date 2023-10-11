@@ -5,7 +5,7 @@ import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_qua
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/text/text.dart';
 import 'package:flutter/material.dart';
 
 class GraphSelector extends StatefulWidget {

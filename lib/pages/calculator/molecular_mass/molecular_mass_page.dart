@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quimify_client/api/ads.dart';
-import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/connections/ads.dart';
+import 'package:quimify_client/connections/api.dart';
+import 'package:quimify_client/connections/results/molecular_mass_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
@@ -20,8 +20,8 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/utils/internet.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/connections/connection_checker.dart';
+import 'package:quimify_client/text/text.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);

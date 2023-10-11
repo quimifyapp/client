@@ -1,4 +1,4 @@
-import 'package:quimify_client/api/organic/components/group.dart';
+import 'package:quimify_client/connections/organic/components/group.dart';
 
 // This class wraps up organic utilities.
 

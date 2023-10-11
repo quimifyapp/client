@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:quimify_client/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/connections/results/molecular_mass_result.dart';
 
 class MolecularMassLocalResult {
   late final String formula;

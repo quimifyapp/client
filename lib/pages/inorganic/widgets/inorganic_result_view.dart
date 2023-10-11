@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/api/results/inorganic_result.dart';
+import 'package:quimify_client/connections/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_fields.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_name.dart';
@@ -8,7 +8,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/text/text.dart';
 
 class InorganicResultView extends StatefulWidget {
   const InorganicResultView({

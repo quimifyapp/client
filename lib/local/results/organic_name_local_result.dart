@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:quimify_client/api/results/organic_result.dart';
+import 'package:quimify_client/connections/results/organic_result.dart';
 
 class OrganicNameLocalResult {
   late final List<int> sequence;

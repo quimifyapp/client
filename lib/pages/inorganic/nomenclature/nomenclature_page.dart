@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/api/ads.dart';
-import 'package:quimify_client/api/api.dart';
-import 'package:quimify_client/api/results/inorganic_result.dart';
+import 'package:quimify_client/connections/ads.dart';
+import 'package:quimify_client/connections/api.dart';
+import 'package:quimify_client/connections/results/inorganic_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -12,8 +12,8 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/utils/internet.dart';
-import 'package:quimify_client/utils/text.dart';
+import 'package:quimify_client/connections/connection_checker.dart';
+import 'package:quimify_client/text/text.dart';
 
 class NamingAndFindingFormulaPage extends StatefulWidget {
   const NamingAndFindingFormulaPage({Key? key}) : super(key: key);
