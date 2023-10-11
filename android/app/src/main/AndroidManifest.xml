@@ -22,7 +22,7 @@
         android:label="Quimify">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8671969439707812~5206298876"/>
+            android:value="ca-app-pub-8575538787782344~9545246787"/>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
