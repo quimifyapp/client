@@ -29,7 +29,7 @@ import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/connections/connection_checker.dart';
+import 'package:quimify_client/connections/connections.dart';
 import 'package:quimify_client/text/text.dart';
 
 class NamingPage extends StatefulWidget {

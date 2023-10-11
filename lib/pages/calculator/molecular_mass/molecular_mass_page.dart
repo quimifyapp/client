@@ -20,7 +20,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/connections/connection_checker.dart';
+import 'package:quimify_client/connections/connections.dart';
 import 'package:quimify_client/text/text.dart';
 
 class MolecularMassPage extends StatefulWidget {
