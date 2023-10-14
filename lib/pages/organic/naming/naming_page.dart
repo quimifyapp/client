@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/connections/ads.dart';
-import 'package:quimify_client/connections/api.dart';
-import 'package:quimify_client/connections/organic/components/group.dart';
-import 'package:quimify_client/connections/organic/components/substituent.dart';
-import 'package:quimify_client/connections/organic/molecules/open_chain/open_chain.dart';
-import 'package:quimify_client/connections/organic/molecules/open_chain/simple.dart';
-import 'package:quimify_client/connections/results/organic_result.dart';
+import 'package:quimify_client/internet/ads/ads.dart';
+import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/api/organic/components/group.dart';
+import 'package:quimify_client/internet/api/organic/components/substituent.dart';
+import 'package:quimify_client/internet/api/organic/molecules/open_chain/open_chain.dart';
+import 'package:quimify_client/internet/api/organic/molecules/open_chain/simple.dart';
+import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/local/history.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
@@ -29,7 +29,7 @@ import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/connections/connections.dart';
+import 'package:quimify_client/internet/connection.dart';
 import 'package:quimify_client/text/text.dart';
 
 class NamingPage extends StatefulWidget {

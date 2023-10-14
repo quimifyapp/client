@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:quimify_client/connections/organic/components/group.dart';
-import 'package:quimify_client/connections/organic/organic.dart';
+import 'package:quimify_client/internet/api/organic/components/group.dart';
+import 'package:quimify_client/internet/api/organic/organic.dart';
 
 class Substituent extends Organic {
   Substituent(Group group) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:quimify_client/connections/ads.dart';
+import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 

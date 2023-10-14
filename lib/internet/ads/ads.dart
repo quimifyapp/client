@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'env.dart';
+import 'package:quimify_client/internet/ads/env.dart';
 
 class Ads {
   static final Ads _singleton = Ads._internal();

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:quimify_client/connections/results/inorganic_result.dart';
-import 'package:quimify_client/connections/results/molecular_mass_result.dart';
-import 'package:quimify_client/connections/results/organic_result.dart';
+import 'package:quimify_client/internet/api/results/inorganic_result.dart';
+import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/local/results/inorganic_local_result.dart';
 import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
 import 'package:quimify_client/local/results/organic_formula_local_result.dart';

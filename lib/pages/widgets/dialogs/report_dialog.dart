@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/connections/api.dart';
+import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/thanks_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';

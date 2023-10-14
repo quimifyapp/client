@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:quimify_client/connections/results/inorganic_result.dart';
+import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 
 class InorganicLocalResult {
   final String formattedQuery;

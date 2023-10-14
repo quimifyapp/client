@@ -4,11 +4,11 @@ import 'dart:io' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
-import 'package:quimify_client/connections/env.dart';
-import 'package:quimify_client/connections/results/access_data_result.dart';
-import 'package:quimify_client/connections/results/inorganic_result.dart';
-import 'package:quimify_client/connections/results/molecular_mass_result.dart';
-import 'package:quimify_client/connections/results/organic_result.dart';
+import 'package:quimify_client/internet/api/env.dart';
+import 'package:quimify_client/internet/api/results/access_data_result.dart';
+import 'package:quimify_client/internet/api/results/inorganic_result.dart';
+import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
+import 'package:quimify_client/internet/api/results/organic_result.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
