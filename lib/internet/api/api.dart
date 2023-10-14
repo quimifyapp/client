@@ -4,7 +4,7 @@ import 'dart:io' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
-import 'package:quimify_client/internet/api/env.dart';
+import 'package:quimify_client/internet/api/env/env.dart';
 import 'package:quimify_client/internet/api/results/access_data_result.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';

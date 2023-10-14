@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in lib/internet/api/api.env file:
+// Put variables in lib/internet/api/env/api.env file:
   // Format: quoted and without BEGIN-END blocks or any line breaks
   // API_CERTIFICATE="..."
   // API_PRIVATE_KEY="..."
@@ -16,7 +16,7 @@ part 'env.g.dart';
   // Env.apiPrivateKey
   // Env.apiCertificate
 
-@Envied(path: 'lib/internet/api/api.env')
+@Envied(path: 'lib/internet/api/env/api.env')
 abstract class Env {
   @EnviedField(varName: 'API_CERTIFICATE', obfuscate: true)
   static final String apiCertificate = _Env.apiCertificate;

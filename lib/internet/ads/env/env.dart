@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Put variables in lib/internet/ads/ads.env file:
+// Put variables in lib/internet/ads/env/ads.env file:
   // ANDROID_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
   // ANDROID_BANNER_UNIT_ID=ca-app-pub-.../...
   // IOS_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
@@ -18,7 +18,7 @@ part 'env.g.dart';
   // Env.iosBannerUnitId
   // ...
 
-@Envied(path: 'lib/internet/ads/ads.env')
+@Envied(path: 'lib/internet/ads/env/ads.env')
 abstract class Env {
   @EnviedField(varName: 'ANDROID_INTERSTITIAL_UNIT_ID', obfuscate: true)
   static final String androidInterstitialUnitId =

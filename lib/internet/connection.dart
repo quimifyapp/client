@@ -14,18 +14,6 @@ final List<String> _dnsIps = [
   _googleDnsIp,
 ];
 
-Future<bool> _hasNoConnection() async =>
-    await Connectivity().checkConnectivity() == ConnectivityResult.none;
-
-Future<bool> _isReachable(String ip) async {
-  try {
-    (await Socket.connect(ip, _dnsPort, timeout: _timeout)).close();
-    return true;
-  } catch (_) {
-    return false;
-  }
-}
-
 Future<bool> hasInternetConnection() async {
   if (await _hasNoConnection()) {
     return false;
@@ -38,4 +26,16 @@ Future<bool> hasInternetConnection() async {
   }
 
   return false;
+}
+
+Future<bool> _hasNoConnection() async =>
+    await Connectivity().checkConnectivity() == ConnectivityResult.none;
+
+Future<bool> _isReachable(String ip) async {
+  try {
+    (await Socket.connect(ip, _dnsPort, timeout: _timeout)).close();
+    return true;
+  } catch (_) {
+    return false;
+  }
 }
