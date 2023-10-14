@@ -17,7 +17,8 @@ main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  Storage().initialize();
+  await Storage().initialize();
+
   Api().initialize();
   Ads().initialize();
 
