@@ -24,6 +24,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
   static const double _bannerAdMaxHeight = 60; // TODO responsive, 50 smaller
 
   BannerAd? _bannerAd;
+  bool _triedLoadingBannerAd = false;
 
   @override
   dispose() {
@@ -33,8 +34,10 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.showBannerAd && _bannerAd == null) {
-      Ads().loadBannerAd(
+    if (widget.showBannerAd && !_triedLoadingBannerAd) {
+      _triedLoadingBannerAd = true;
+
+      Ads().loadBanner(
         Size(MediaQuery.of(context).size.width, _bannerAdMaxHeight),
         (Ad ad) => setState(() => _bannerAd = ad as BannerAd),
       );

@@ -55,7 +55,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
 
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitialAd();
+        Ads().showInterstitial();
 
         setState(() => _result = result);
 

@@ -124,7 +124,7 @@ class _NamingAndFindingFormulaPageState
   _processResult(InorganicResult? result, String formattedQuery) async {
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitialAd();
+        Ads().showInterstitial();
 
         setState(
           () => _resultViews.add(

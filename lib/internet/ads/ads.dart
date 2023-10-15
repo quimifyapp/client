@@ -14,12 +14,12 @@ class Ads {
   late String _interstitialUnitId;
   late String _bannerUnitId;
 
-  InterstitialAd? _nextInterstitialAd;
+  InterstitialAd? _nextInterstitial;
 
   // Constants:
 
-  static const int _interstitialAdPeriod = 3;
-  static const int _interstitialAdOffset = 1; // So 1st is shown 2nd, not 3rd
+  static const int _interstitialPeriod = 3; // Must be > 1
+  static const int _interstitialOffset = 1; // Must be > 0
 
   // Initialize:
 
@@ -37,18 +37,21 @@ class Ads {
 
   // Private:
 
-  int _interstitialAdAttempts = _interstitialAdOffset;
+  int _interstitialAttempts = _interstitialOffset;
 
-  bool _canShowInterstitialAd() =>
-      ++_interstitialAdAttempts % _interstitialAdPeriod == 0;
+  bool _timeToLoadInterstitial() =>
+      (_interstitialAttempts + 1) % _interstitialPeriod == 0;
 
-  _loadInterstitialAd() async {
+  bool _timeToShowInterstitial() =>
+      _interstitialAttempts % _interstitialPeriod == 0;
+
+  _loadInterstitial() async {
     await InterstitialAd.load(
       adUnitId: _interstitialUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
-          _nextInterstitialAd = ad;
+          _nextInterstitial = ad;
 
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
@@ -62,15 +65,18 @@ class Ads {
 
   // Public:
 
-  showInterstitialAd() {
-    if (_canShowInterstitialAd()) {
-      _nextInterstitialAd?.show();
-    }
+  showInterstitial() {
+    _interstitialAttempts += 1;
 
-    _loadInterstitialAd();
+    if(_timeToLoadInterstitial()) {
+      _loadInterstitial();
+    }
+    else if(_timeToShowInterstitial()) {
+      _nextInterstitial?.show();
+    }
   }
 
-  loadBannerAd(Size size, void Function(Ad) onAdLoaded) async {
+  loadBanner(Size size, void Function(Ad) onLoaded) async {
     BannerAd(
       adUnitId: _bannerUnitId,
       request: const AdRequest(),
@@ -79,7 +85,7 @@ class Ads {
         height: size.height.toInt(),
       ),
       listener: BannerAdListener(
-        onAdLoaded: (ad) => onAdLoaded(ad),
+        onAdLoaded: (ad) => onLoaded(ad),
         onAdFailedToLoad: (ad, err) => ad.dispose(),
       ),
     ).load();

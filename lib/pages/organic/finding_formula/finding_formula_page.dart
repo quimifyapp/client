@@ -50,7 +50,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitialAd();
+        Ads().showInterstitial();
 
         setState(() {
           _result = result;

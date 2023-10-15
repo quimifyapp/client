@@ -68,7 +68,7 @@ class _NamingPageState extends State<NamingPage> {
   _search(List<int> sequence) async {
     startQuimifyLoading(context);
 
-    Ads().showInterstitialAd(); // There will be a result most of the times
+    Ads().showInterstitial(); // There will be a result most of the times
 
     OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
