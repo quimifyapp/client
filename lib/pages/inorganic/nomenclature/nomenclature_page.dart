@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
-import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
@@ -12,7 +12,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/connection.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/text/text.dart';
 
 class NamingAndFindingFormulaPage extends StatefulWidget {

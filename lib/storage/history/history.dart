@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
-import 'package:quimify_client/local/results/inorganic_local_result.dart';
-import 'package:quimify_client/local/results/molecular_mass_local_result.dart';
-import 'package:quimify_client/local/results/organic_formula_local_result.dart';
-import 'package:quimify_client/local/results/organic_name_local_result.dart';
-import 'package:quimify_client/local/storage.dart';
+import 'package:quimify_client/storage/history/results/inorganic_local_result.dart';
+import 'package:quimify_client/storage/history/results/molecular_mass_local_result.dart';
+import 'package:quimify_client/storage/history/results/organic_formula_local_result.dart';
+import 'package:quimify_client/storage/history/results/organic_name_local_result.dart';
+import 'package:quimify_client/storage/storage.dart';
 
 class History {
   static final History _singleton = History._internal();

@@ -9,7 +9,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/access_data_result.dart';
-import 'package:quimify_client/local/storage.dart';
+import 'package:quimify_client/storage/storage.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 
 main() async {

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
-import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
@@ -20,7 +20,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/connection.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/text/text.dart';
 
 class MolecularMassPage extends StatefulWidget {

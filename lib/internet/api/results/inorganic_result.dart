@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:quimify_client/local/results/inorganic_local_result.dart';
+import 'package:quimify_client/storage/history/results/inorganic_local_result.dart';
 
 class InorganicResult {
   final bool present;

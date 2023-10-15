@@ -24,6 +24,8 @@ class Ads {
   // Initialize:
 
   initialize() {
+    MobileAds.instance.initialize();
+
     if (Platform.isAndroid) {
       _interstitialUnitId = Env.androidInterstitialUnitId;
       _bannerUnitId = Env.androidBannerUnitId;
@@ -31,8 +33,6 @@ class Ads {
       _interstitialUnitId = Env.iosInterstitialUnitId;
       _bannerUnitId = Env.iosBannerUnitId;
     }
-
-    MobileAds.instance.initialize();
   }
 
   // Private:

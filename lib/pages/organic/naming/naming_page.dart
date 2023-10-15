@@ -7,7 +7,7 @@ import 'package:quimify_client/internet/api/organic/components/substituent.dart'
 import 'package:quimify_client/internet/api/organic/molecules/open_chain/open_chain.dart';
 import 'package:quimify_client/internet/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
-import 'package:quimify_client/local/history.dart';
+import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
@@ -29,7 +29,7 @@ import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/connection.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/text/text.dart';
 
 class NamingPage extends StatefulWidget {
