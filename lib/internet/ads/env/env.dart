@@ -9,7 +9,7 @@ part 'env.g.dart';
   // IOS_BANNER_UNIT_ID=ca-app-pub-.../...
 
 // Set it up:
-  // flutter clean
+  // flutter clean (important or cache will play you)
   // flutter pub get
   // flutter packages pub run build_runner build --delete-conflicting-outputs
 

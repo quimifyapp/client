@@ -8,7 +8,7 @@ part 'env.g.dart';
   // API_PRIVATE_KEY="..."
 
 // Set it up:
-  // flutter clean
+  // flutter clean (important or cache will play you)
   // flutter pub get
   // flutter packages pub run build_runner build --delete-conflicting-outputs
 
