@@ -35,10 +35,6 @@ android {
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
-    dependencies {
-        implementation 'com.google.ads.mediation:facebook:6.14.0.0'
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
