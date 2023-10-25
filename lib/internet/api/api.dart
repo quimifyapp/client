@@ -37,10 +37,9 @@ class Api {
   Future<String?> _getBody(String authority, String path, parameters) async {
     String? response;
 
-    try {
-      Uri url = Uri.https(authority, path, parameters);
+    Uri url = Uri.https(authority, path, parameters);
 
-      // It's a new query in this session:
+    try {
       http.Response httpResponse = await _client.get(url).timeout(_timeout);
 
       if (httpResponse.statusCode == _httpStatusCodeOk) {
@@ -53,9 +52,10 @@ class Api {
         );
       }
     } catch (error) {
+      // TODO check internet connection first?
       // No Internet connection, server down or client error
       sendErrorWithRetry(
-        context: 'Exception during GET request',
+        context: 'Exception during GET request: $url',
         details: error.toString(),
       );
     }
