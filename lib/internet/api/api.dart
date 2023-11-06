@@ -9,6 +9,7 @@ import 'package:quimify_client/internet/api/results/access_data_result.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
+import 'package:quimify_client/internet/internet.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -46,18 +47,21 @@ class Api {
         response = utf8.decode(httpResponse.bodyBytes);
       } else {
         // Server bug or invalid URL
-        sendErrorWithRetry(
+        sendError(
           context: 'HTTP code ${httpResponse.statusCode}',
           details: url.toString(),
         );
       }
     } catch (error) {
-      // TODO check internet connection first?
-      // No Internet connection, server down or client error
-      sendErrorWithRetry(
-        context: 'Exception during GET request: $url',
-        details: error.toString(),
-      );
+      hasInternetConnection().then((hasInternetConnection) {
+        if (hasInternetConnection) {
+          // Server down or client error
+          sendError(
+            context: 'Error during GET request',
+            details: 'Error: "$error", URL: "$url", ',
+          );
+        }
+      });
     }
 
     return response;
@@ -163,7 +167,7 @@ class Api {
       try {
         result = AccessDataResult.fromJson(response);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Access data JSON',
           details: error.toString(),
         );
@@ -173,7 +177,7 @@ class Api {
     return result;
   }
 
-  sendErrorWithRetry({
+  sendError({
     required String context,
     required String details,
   }) async {
@@ -233,7 +237,7 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Inorganic from completion JSON',
           details: error.toString(),
         );
@@ -257,7 +261,7 @@ class Api {
       try {
         result = InorganicResult.fromJson(response);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Inorganic JSON',
           details: error.toString(),
         );
@@ -281,7 +285,7 @@ class Api {
       try {
         result = MolecularMassResult.fromJson(response, formula);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Molecular mass JSON',
           details: error.toString(),
         );
@@ -305,7 +309,7 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Organic from name JSON',
           details: error.toString(),
         );
@@ -329,7 +333,7 @@ class Api {
       try {
         result = OrganicResult.fromJson(response);
       } catch (error) {
-        sendErrorWithRetry(
+        sendError(
           context: 'Organic from structure JSON',
           details: error.toString(),
         );
