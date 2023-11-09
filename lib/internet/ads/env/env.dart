@@ -21,8 +21,7 @@ part 'env.g.dart';
 @Envied(path: 'lib/internet/ads/env/ads.env')
 abstract class Env {
   @EnviedField(varName: 'ANDROID_INTERSTITIAL_UNIT_ID', obfuscate: true)
-  static final String androidInterstitialUnitId =
-      _Env.androidInterstitialUnitId;
+  static final String androidInterstitialUnitId = _Env.androidInterstitialUnitId;
 
   @EnviedField(varName: 'ANDROID_BANNER_UNIT_ID', obfuscate: true)
   static final String androidBannerUnitId = _Env.androidBannerUnitId;
