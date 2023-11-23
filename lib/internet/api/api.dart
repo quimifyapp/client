@@ -29,7 +29,7 @@ class Api {
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
-  static const _timeout = Duration(seconds: 10);
+  static const _timeout = Duration(seconds: 15);
 
   // Private:
 
@@ -57,8 +57,8 @@ class Api {
         if (hasInternetConnection) {
           // Server down or client error
           sendError(
-            context: 'Error during GET request',
-            details: 'Error: "$error", URL: "$url", ',
+            context: 'Error attempting GET request: $error',
+            details: url.toString(),
           );
         }
       });
