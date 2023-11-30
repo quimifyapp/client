@@ -31,6 +31,26 @@ class Api {
 
   static const _timeout = Duration(seconds: 15);
 
+  // Initialize:
+
+  initialize() {
+    var context = io.SecurityContext(withTrustedRoots: true);
+
+    context.useCertificateChainBytes(utf8.encode(
+      '-----BEGIN CERTIFICATE-----\n'
+      '${Env.apiCertificate}\n'
+      '-----END CERTIFICATE-----',
+    ));
+
+    context.usePrivateKeyBytes(utf8.encode(
+      '-----BEGIN PRIVATE KEY-----\n'
+      '${Env.apiPrivateKey}\n'
+      '-----END PRIVATE KEY-----',
+    ));
+
+    _client = io.IOClient(io.HttpClient(context: context));
+  }
+
   // Private:
 
   String _versionedPath(String path) => 'v$_apiVersion/$path';
@@ -127,24 +147,6 @@ class Api {
   }
 
   // Public:
-
-  initialize() {
-    var context = io.SecurityContext(withTrustedRoots: true);
-
-    context.useCertificateChainBytes(utf8.encode(
-      '-----BEGIN CERTIFICATE-----\n'
-      '${Env.apiCertificate}\n'
-      '-----END CERTIFICATE-----',
-    ));
-
-    context.usePrivateKeyBytes(utf8.encode(
-      '-----BEGIN PRIVATE KEY-----\n'
-      '${Env.apiPrivateKey}\n'
-      '-----END PRIVATE KEY-----',
-    ));
-
-    _client = io.IOClient(io.HttpClient(context: context));
-  }
 
   Future<AccessDataResult?> getAccessDataResult() async {
     AccessDataResult? result;

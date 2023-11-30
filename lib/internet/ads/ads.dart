@@ -1,7 +1,8 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:applovin_max/applovin_max.dart';
+import 'package:flutter/foundation.dart';
 import 'package:quimify_client/internet/ads/env/env.dart';
 
 class Ads {
@@ -11,83 +12,76 @@ class Ads {
 
   Ads._internal();
 
-  late String _interstitialUnitId;
   late String _bannerUnitId;
+  late String _interstitialUnitId;
 
-  InterstitialAd? _nextInterstitial;
+  int _interstitialAttempts = 0;
 
   // Constants:
 
-  static const int _interstitialPeriod = 3; // Must be > 1
-  static const int _interstitialOffset = 1; // Must be > 0
+  static const int _interstitialFreeAttempts = 3;
+
 
   // Initialize:
 
   initialize() {
-    MobileAds.instance.initialize();
+    AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
     if (Platform.isAndroid) {
-      _interstitialUnitId = Env.androidInterstitialUnitId;
       _bannerUnitId = Env.androidBannerUnitId;
+      _interstitialUnitId = Env.androidInterstitialUnitId;
     } else {
-      _interstitialUnitId = Env.iosInterstitialUnitId;
       _bannerUnitId = Env.iosBannerUnitId;
+      _interstitialUnitId = Env.iosInterstitialUnitId;
     }
+
+    _initializeInterstitial();
+    _loadInterstitial();
   }
 
   // Private:
 
-  int _interstitialAttempts = _interstitialOffset;
+  _initializeInterstitial() => AppLovinMAX.setInterstitialListener(
+        InterstitialListener(
+          onAdLoadedCallback: (ad) {},
+          onAdLoadFailedCallback: (id, error) => developer.log(error.message),
+          onAdDisplayedCallback: (ad) {},
+          onAdDisplayFailedCallback: (ad, error) {},
+          onAdClickedCallback: (ad) {},
+          onAdHiddenCallback: (ad) => _loadInterstitial(),
+        ),
+      );
 
-  bool _timeToLoadInterstitial() =>
-      (_interstitialAttempts + 1) % _interstitialPeriod == 0;
-
-  bool _timeToShowInterstitial() =>
-      _interstitialAttempts % _interstitialPeriod == 0;
-
-  _loadInterstitial() async {
-    await InterstitialAd.load(
-      adUnitId: _interstitialUnitId,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
-          _nextInterstitial = ad;
-
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
-            onAdDismissedFullScreenContent: (ad) => ad.dispose(),
-          );
-        },
-        onAdFailedToLoad: (_) => {},
-      ),
-    );
-  }
+  _loadInterstitial() => AppLovinMAX.loadInterstitial(_interstitialUnitId);
 
   // Public:
+
+  MaxAdView banner(String placementName, bool visible, VoidCallback onLoaded) =>
+      MaxAdView(
+        placement: placementName,
+        adUnitId: _bannerUnitId,
+        adFormat: AdFormat.banner,
+        visible: visible,
+        listener: AdViewAdListener(
+          onAdLoadedCallback: (ad) => onLoaded(),
+          onAdLoadFailedCallback: (ad, error) => developer.log(error.message),
+          onAdClickedCallback: (ad) {},
+          onAdExpandedCallback: (ad) {},
+          onAdCollapsedCallback: (ad) {},
+        ),
+      );
 
   showInterstitial() {
     _interstitialAttempts += 1;
 
-    if(_timeToLoadInterstitial()) {
-      _loadInterstitial();
+    if (_interstitialAttempts > _interstitialFreeAttempts) {
+      AppLovinMAX.isInterstitialReady(_interstitialUnitId).then((isReady) {
+        if (isReady ?? false) {
+          AppLovinMAX.showInterstitial(_interstitialUnitId);
+        } else {
+          _loadInterstitial();
+        }
+      });
     }
-    else if(_timeToShowInterstitial()) {
-      _nextInterstitial?.show();
-    }
-  }
-
-  loadBanner(Size size, void Function(Ad) onLoaded) async {
-    BannerAd(
-      adUnitId: _bannerUnitId,
-      request: const AdRequest(),
-      size: AdSize(
-        width: size.width.toInt(),
-        height: size.height.toInt(),
-      ),
-      listener: BannerAdListener(
-        onAdLoaded: (ad) => onLoaded(ad),
-        onAdFailedToLoad: (ad, err) => ad.dispose(),
-      ),
-    ).load();
   }
 }

@@ -27,7 +27,7 @@ class InorganicPage extends StatelessWidget {
             'PbBr₂': 'dibromuro de plomo',
             'H₂SO₃': 'ácido sulfuroso',
           },
-          page: NamingAndFindingFormulaPage(),
+          page: NomenclaturePage(),
         ),
         QuimifySectionTitle(
           title: 'Practicar',

@@ -3,10 +3,8 @@ import 'package:envied/envied.dart';
 part 'env.g.dart';
 
 // Put variables in lib/internet/ads/env/ads.env file:
-  // ANDROID_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
-  // ANDROID_BANNER_UNIT_ID=ca-app-pub-.../...
-  // IOS_INTERSTITIAL_UNIT_ID=ca-app-pub-.../...
-  // IOS_BANNER_UNIT_ID=ca-app-pub-.../...
+  // APPLOVIN_MAX_SDK_KEY=...
+  // ANDROID_BANNER_UNIT_ID=...
 
 // Set it up:
   // flutter clean (important or cache will play you)
@@ -20,15 +18,18 @@ part 'env.g.dart';
 
 @Envied(path: 'lib/internet/ads/env/ads.env')
 abstract class Env {
-  @EnviedField(varName: 'ANDROID_INTERSTITIAL_UNIT_ID', obfuscate: true)
-  static final String androidInterstitialUnitId = _Env.androidInterstitialUnitId;
+  @EnviedField(varName: 'APPLOVIN_MAX_SDK_KEY', obfuscate: true)
+  static final String applovinMaxSdkKey = _Env.applovinMaxSdkKey;
 
   @EnviedField(varName: 'ANDROID_BANNER_UNIT_ID', obfuscate: true)
   static final String androidBannerUnitId = _Env.androidBannerUnitId;
 
-  @EnviedField(varName: 'IOS_INTERSTITIAL_UNIT_ID', obfuscate: true)
-  static final String iosInterstitialUnitId = _Env.iosInterstitialUnitId;
+  @EnviedField(varName: 'ANDROID_INTERSTITIAL_UNIT_ID', obfuscate: true)
+  static final String androidInterstitialUnitId = _Env.androidInterstitialUnitId;
 
   @EnviedField(varName: 'IOS_BANNER_UNIT_ID', obfuscate: true)
   static final String iosBannerUnitId = _Env.iosBannerUnitId;
+
+  @EnviedField(varName: 'IOS_INTERSTITIAL_UNIT_ID', obfuscate: true)
+  static final String iosInterstitialUnitId = _Env.iosInterstitialUnitId;
 }

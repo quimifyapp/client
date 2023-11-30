@@ -16,6 +16,7 @@ class OrganicResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold(
+      adPlacementName: runtimeType.toString(),
       header: QuimifyPageBar(title: title),
       body: organicResultView,
     );

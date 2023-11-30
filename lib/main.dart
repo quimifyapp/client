@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,41 +8,43 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/access_data_result.dart';
-import 'package:quimify_client/storage/storage.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
+import 'package:quimify_client/storage/storage.dart';
 
 main() async {
-  // Show splash screen UNTIL stated otherwise:
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  _showLoadingScreen();
 
   await Storage().initialize();
-
   Api().initialize();
   Ads().initialize();
 
-  // Loading while splash screen:
-
-  // For old devices, a missing SSL certificate is set:
   try {
-    // This is LetsEncrypt's self-signed trusted root CA certificate, issued
-    // under common name: ISRG Root X1
-    SecurityContext.defaultContext.setTrustedCertificatesBytes(
-        (await rootBundle.load('assets/ssl/isrg-x1.crt')).buffer.asUint8List());
-  } catch (_) {} // It's already present in modern devices
+    // Sets ISRG Root X1 certificate, not present in old devices
+    var certificate = await rootBundle.load('assets/ssl/isrg-x1.crt');
+    var bytes = certificate.buffer.asUint8List();
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
+  } catch (_) {} // It's already present in modern devices anyways
 
   AccessDataResult? accessDataResult = await Api().getAccessDataResult();
 
-  // App launch (it will hide splash screen):
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: false, // !kReleaseMode,
       builder: (context) => QuimifyApp(
         accessDataResult: accessDataResult,
       ), // Wrap your app
     ),
   );
+
+  _hideLoadingScreen();
 }
+
+_showLoadingScreen() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+}
+
+_hideLoadingScreen() => FlutterNativeSplash.remove();
 
 class QuimifyApp extends StatelessWidget {
   const QuimifyApp({
@@ -55,14 +56,12 @@ class QuimifyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Hide splash screen:
-    FlutterNativeSplash.remove();
-
     // To get rid of status bar's tint:
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
+        home: HomePage(accessDataResult: accessDataResult),
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
         // To set stretched scroll on all Android versions:
@@ -77,7 +76,6 @@ class QuimifyApp extends StatelessWidget {
             child: child,
           );
         },
-        // Themes:
         theme: ThemeData(
           brightness: Brightness.light,
           fontFamily: 'CeraPro',
@@ -174,8 +172,6 @@ class QuimifyApp extends StatelessWidget {
             onTertiaryContainer: Color.fromARGB(255, 118, 252, 237), // [<-]
           ),
         ),
-        // App:
-        home: HomePage(accessDataResult: accessDataResult),
       ),
     );
   }

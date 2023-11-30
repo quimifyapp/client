@@ -123,8 +123,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => _returnButtonPressed(),
-      child: QuimifyScaffold(
-        showBannerAd: false,
+      child: QuimifyScaffold.noAd(
         header: SafeArea(
           bottom: false, // So it's not inside status bar
           child: Container(

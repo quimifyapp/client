@@ -15,16 +15,16 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/text/text.dart';
 
-class NamingAndFindingFormulaPage extends StatefulWidget {
-  const NamingAndFindingFormulaPage({Key? key}) : super(key: key);
+class NomenclaturePage extends StatefulWidget {
+  const NomenclaturePage({Key? key}) : super(key: key);
 
   @override
-  State<NamingAndFindingFormulaPage> createState() =>
-      _NamingAndFindingFormulaPageState();
+  State<NomenclaturePage> createState() =>
+      _NomenclaturePageState();
 }
 
-class _NamingAndFindingFormulaPageState
-    extends State<NamingAndFindingFormulaPage> {
+class _NomenclaturePageState
+    extends State<NomenclaturePage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -212,6 +212,7 @@ class _NamingAndFindingFormulaPageState
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,
         child: QuimifyScaffold(
+          adPlacementName: runtimeType.toString(),
           showBannerAd: true,
           header: Column(
             children: [
