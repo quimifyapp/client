@@ -534,7 +534,7 @@ class _NamingPageState extends State<NamingPage> {
                 ],
               ),
               // Substituents:
-              const SizedBox(height: 15 + 5),
+              const SizedBox(height: 15),
               if (!_done) ...[
                 const QuimifySectionTitle(
                   title: 'Sustituyentes',
@@ -542,8 +542,10 @@ class _NamingPageState extends State<NamingPage> {
                     buttonHeight: buttonHeight,
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 15 + 5),
               ],
+              if (_done)
+                const SizedBox(height: 5),
               Expanded(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -557,7 +559,6 @@ class _NamingPageState extends State<NamingPage> {
                     controller: _scrollController,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        top: 5, // + 15 from above SizedBox = 20
                         bottom: 20, // Bottom padding of the page
                       ),
                       child: !_done
