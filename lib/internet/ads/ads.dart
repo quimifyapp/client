@@ -12,15 +12,17 @@ class Ads {
 
   Ads._internal();
 
+  // Constants:
+
+  static const int _interstitialPeriod = 2; // Minimum attempts before next one
+  static const int _interstitialOffset = 3; // Minimum attempts before 1st one
+
+  // Fields:
+
   late String _bannerUnitId;
   late String _interstitialUnitId;
 
-  int _interstitialAttempts = 0;
-
-  // Constants:
-
-  static const int _interstitialFreeAttempts = 3;
-
+  int _interstitialAttempts = _interstitialPeriod - _interstitialOffset;
 
   // Initialize:
 
@@ -72,16 +74,17 @@ class Ads {
       );
 
   showInterstitial() {
-    _interstitialAttempts += 1;
-
-    if (_interstitialAttempts > _interstitialFreeAttempts) {
-      AppLovinMAX.isInterstitialReady(_interstitialUnitId).then((isReady) {
-        if (isReady ?? false) {
-          AppLovinMAX.showInterstitial(_interstitialUnitId);
-        } else {
-          _loadInterstitial();
-        }
-      });
+    if (_interstitialAttempts++ < _interstitialPeriod) {
+      return;
     }
+
+    AppLovinMAX.isInterstitialReady(_interstitialUnitId).then((isReady) {
+      if (isReady ?? false) {
+        AppLovinMAX.showInterstitial(_interstitialUnitId);
+        _interstitialAttempts = 0;
+      } else {
+        _loadInterstitial();
+      }
+    });
   }
 }
