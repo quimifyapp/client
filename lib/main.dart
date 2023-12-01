@@ -19,7 +19,7 @@ main() async {
   Ads().initialize();
 
   try {
-    // Sets ISRG Root X1 certificate, not present in old devices
+    // Sets ISRG Root X1 certificate, not present in Android < 25
     var certificate = await rootBundle.load('assets/ssl/isrg-x1.crt');
     var bytes = certificate.buffer.asUint8List();
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
