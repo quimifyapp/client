@@ -37,15 +37,13 @@ class Ads {
 
     _initializeInterstitial();
 
-    AppLovinMAX.initialize(Env.applovinMaxSdkKey).then((_) {
-      _loadInterstitial();
-    });
+    AppLovinMAX.initialize(Env.applovinMaxSdkKey)
+        .then((_) => _loadInterstitial());
   }
 
   // Private:
 
   _initializeInterstitial() {
-    print('Hola');
     AppLovinMAX.setInterstitialListener(
       InterstitialListener(
         onAdLoadedCallback: (ad) {},
