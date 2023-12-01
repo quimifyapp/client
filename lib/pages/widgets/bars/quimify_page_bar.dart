@@ -17,7 +17,7 @@ class QuimifyPageBar extends StatelessWidget {
       bottom: false,
       child: Container(
         padding: const EdgeInsets.only(
-          top: 15, // TODO 17.5?
+          top: 15, // TODO 17.5? Any way to make it symmetrical in all devices?
           bottom: 20,
           left: 20,
           right: 20,
