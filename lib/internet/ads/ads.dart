@@ -27,8 +27,6 @@ class Ads {
   // Initialize:
 
   initialize() {
-    AppLovinMAX.initialize(Env.applovinMaxSdkKey);
-
     if (Platform.isAndroid) {
       _bannerUnitId = Env.androidBannerUnitId;
       _interstitialUnitId = Env.androidInterstitialUnitId;
@@ -38,21 +36,27 @@ class Ads {
     }
 
     _initializeInterstitial();
-    _loadInterstitial();
+
+    AppLovinMAX.initialize(Env.applovinMaxSdkKey).then((_) {
+      _loadInterstitial();
+    });
   }
 
   // Private:
 
-  _initializeInterstitial() => AppLovinMAX.setInterstitialListener(
-        InterstitialListener(
-          onAdLoadedCallback: (ad) {},
-          onAdLoadFailedCallback: (id, error) => developer.log(error.message),
-          onAdDisplayedCallback: (ad) {},
-          onAdDisplayFailedCallback: (ad, error) {},
-          onAdClickedCallback: (ad) {},
-          onAdHiddenCallback: (ad) => _loadInterstitial(),
-        ),
-      );
+  _initializeInterstitial() {
+    print('Hola');
+    AppLovinMAX.setInterstitialListener(
+      InterstitialListener(
+        onAdLoadedCallback: (ad) {},
+        onAdLoadFailedCallback: (id, error) => developer.log(error.message),
+        onAdDisplayedCallback: (ad) {},
+        onAdDisplayFailedCallback: (ad, error) {},
+        onAdClickedCallback: (ad) {},
+        onAdHiddenCallback: (ad) => _loadInterstitial(),
+      ),
+    );
+  }
 
   _loadInterstitial() => AppLovinMAX.loadInterstitial(_interstitialUnitId);
 
