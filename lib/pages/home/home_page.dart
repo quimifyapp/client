@@ -7,8 +7,8 @@ import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
-import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HomePage extends StatefulWidget {
@@ -70,24 +70,23 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    if (!widget.accessDataResult!.updateAvailable) {
+    if (widget.accessDataResult!.updateAvailable) {
+      bool optionalUpdate = !widget.accessDataResult!.updateMandatory!;
+
+      QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
+        title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
+        details: widget.accessDataResult!.updateDetails,
+        linkLabel: 'Actualizar',
+        link: Platform.isAndroid
+            ? 'https://quimify.com/android'
+            : 'https://quimify.com/ios',
+        closable: optionalUpdate,
+      );
+
+      updateDialog.show(context).then((value) => _showWelcomeMessagePopup());
+    } else {
       _showWelcomeMessagePopup();
-      return;
     }
-
-    bool optionalUpdate = !widget.accessDataResult!.updateMandatory!;
-
-    QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
-      title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-      details: widget.accessDataResult!.updateDetails,
-      linkLabel: 'Actualizar',
-      link: Platform.isAndroid
-          ? 'https://play.google.com/store/apps/details?id=com.quimify'
-          : 'https://apps.apple.com/es/app/quimify/id6443752619',
-      closable: optionalUpdate,
-    );
-
-    updateDialog.show(context).then((value) => _showWelcomeMessagePopup());
   }
 
   _goToPage(int page) {
