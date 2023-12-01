@@ -124,8 +124,6 @@ class _NomenclaturePageState
   _processResult(InorganicResult? result, String formattedQuery) async {
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitial();
-
         setState(
           () => _resultViews.add(
             InorganicResultView(
@@ -167,6 +165,8 @@ class _NomenclaturePageState
       return;
     }
 
+    Ads().showInterstitial(); // There will be a result most of the times
+
     startQuimifyLoading(context);
 
     var result = await Api().getInorganicFromCompletion(completion);
@@ -184,6 +184,10 @@ class _NomenclaturePageState
     startQuimifyLoading(context);
 
     var result = await Api().getInorganic(toDigits(input));
+
+    if (result != null && result.present) {
+      Ads().showInterstitial();
+    }
 
     await _processResult(result, input);
 
