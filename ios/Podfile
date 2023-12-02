@@ -47,6 +47,7 @@ target 'Runner' do
 
   pod 'AppLovinSDK'
   pod 'AppLovinMediationGoogleAdapter'
+  pod 'AppLovinMediationIronSourceAdapter'
 
   # ] AppLovin
 
