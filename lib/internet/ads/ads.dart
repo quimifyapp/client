@@ -26,7 +26,7 @@ class Ads {
 
   // Initialize:
 
-  initialize() {
+  initialize() async {
     if (Platform.isAndroid) {
       _bannerUnitId = Env.androidBannerUnitId;
       _interstitialUnitId = Env.androidInterstitialUnitId;
@@ -35,26 +35,24 @@ class Ads {
       _interstitialUnitId = Env.iosInterstitialUnitId;
     }
 
-    _initializeInterstitial();
+    await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
-    AppLovinMAX.initialize(Env.applovinMaxSdkKey)
-        .then((_) => _loadInterstitial());
+    _initializeInterstitial();
+    _loadInterstitial();
   }
 
   // Private:
 
-  _initializeInterstitial() {
-    AppLovinMAX.setInterstitialListener(
-      InterstitialListener(
-        onAdLoadedCallback: (ad) {},
-        onAdLoadFailedCallback: (id, error) => developer.log(error.message),
-        onAdDisplayedCallback: (ad) {},
-        onAdDisplayFailedCallback: (ad, error) {},
-        onAdClickedCallback: (ad) {},
-        onAdHiddenCallback: (ad) => _loadInterstitial(),
-      ),
-    );
-  }
+  _initializeInterstitial() => AppLovinMAX.setInterstitialListener(
+        InterstitialListener(
+          onAdLoadedCallback: (ad) {},
+          onAdLoadFailedCallback: (id, error) => developer.log(error.message),
+          onAdDisplayedCallback: (ad) {},
+          onAdDisplayFailedCallback: (ad, error) {},
+          onAdClickedCallback: (ad) {},
+          onAdHiddenCallback: (ad) => _loadInterstitial(),
+        ),
+      );
 
   _loadInterstitial() => AppLovinMAX.loadInterstitial(_interstitialUnitId);
 
@@ -75,18 +73,19 @@ class Ads {
         ),
       );
 
-  showInterstitial() {
-    if (_interstitialFreeAttempts++ < _interstitialPeriod) {
-      return;
-    }
+  showInterstitial() async {
+    bool? ready = await AppLovinMAX.isInterstitialReady(_interstitialUnitId);
 
-    AppLovinMAX.isInterstitialReady(_interstitialUnitId).then((isReady) {
-      if (isReady ?? false) {
+    if (ready ?? false) {
+      if (_interstitialFreeAttempts >= _interstitialPeriod) {
         AppLovinMAX.showInterstitial(_interstitialUnitId);
         _interstitialFreeAttempts = 0;
       } else {
-        _loadInterstitial();
+        _interstitialFreeAttempts += 1;
       }
-    });
+    } else {
+      _loadInterstitial();
+      _interstitialFreeAttempts += 1;
+    }
   }
 }
