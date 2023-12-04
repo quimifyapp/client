@@ -19,12 +19,10 @@ class NomenclaturePage extends StatefulWidget {
   const NomenclaturePage({Key? key}) : super(key: key);
 
   @override
-  State<NomenclaturePage> createState() =>
-      _NomenclaturePageState();
+  State<NomenclaturePage> createState() => _NomenclaturePageState();
 }
 
-class _NomenclaturePageState
-    extends State<NomenclaturePage> {
+class _NomenclaturePageState extends State<NomenclaturePage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
