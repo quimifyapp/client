@@ -37,8 +37,6 @@ class Ads {
 
     await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
-    AppLovinMAX.setMuted(true);
-
     _initializeInterstitial();
     _loadInterstitial();
   }
