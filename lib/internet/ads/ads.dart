@@ -37,8 +37,6 @@ class Ads {
 
     await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
-    AppLovinMAX.showMediationDebugger();
-
     _initializeInterstitial();
     _loadInterstitial();
   }
