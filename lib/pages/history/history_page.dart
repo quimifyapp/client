@@ -29,6 +29,7 @@ class HistoryPage extends StatelessWidget {
         .toList();
 
     return QuimifyScaffold(
+      showBannerAd: entries.isNotEmpty,
       bannerAdName: runtimeType.toString(),
       header: const QuimifyPageBar(title: 'Historial'),
       body: SingleChildScrollView(
