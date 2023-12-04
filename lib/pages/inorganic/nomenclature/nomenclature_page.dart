@@ -56,7 +56,7 @@ class _NomenclaturePageState
   );
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     _labelText = _defaultLabelText;

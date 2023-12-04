@@ -47,7 +47,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     null,
   );
 
-  void _calculate(String input) async {
+  _calculate(String input) async {
     startQuimifyLoading(context);
 
     // Result not found in cache, make an API call

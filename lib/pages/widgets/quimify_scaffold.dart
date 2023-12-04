@@ -33,7 +33,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
 
   bool _bannerAdLoaded = false;
 
-  void _onBannerAdLoaded() {
+  _onBannerAdLoaded() {
     if (!_bannerAdLoaded) {
       setState(() => _bannerAdLoaded = true);
     }
