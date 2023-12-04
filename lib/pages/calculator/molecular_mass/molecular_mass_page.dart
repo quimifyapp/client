@@ -200,7 +200,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       child: GestureDetector(
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
-          adPlacementName: runtimeType.toString(),
+          bannerAdName: runtimeType.toString(),
           header: const QuimifyPageBar(title: 'Masa molecular'),
           body: SingleChildScrollView(
             controller: _scrollController,

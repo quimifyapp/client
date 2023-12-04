@@ -37,6 +37,8 @@ class Ads {
 
     await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
+    AppLovinMAX.showMediationDebugger();
+
     _initializeInterstitial();
     _loadInterstitial();
   }
@@ -58,9 +60,9 @@ class Ads {
 
   // Public:
 
-  MaxAdView banner(String placementName, bool visible, VoidCallback onLoaded) =>
+  MaxAdView getBanner(String name, bool visible, VoidCallback onLoaded) =>
       MaxAdView(
-        placement: placementName,
+        placement: name,
         adUnitId: _bannerUnitId,
         adFormat: AdFormat.banner,
         visible: visible,

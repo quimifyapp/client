@@ -7,7 +7,7 @@ class QuimifyScaffold extends StatefulWidget {
   const QuimifyScaffold({
     Key? key,
     this.showBannerAd = true,
-    required this.adPlacementName,
+    required this.bannerAdName,
     required this.header,
     required this.body,
   }) : super(key: key);
@@ -17,9 +17,9 @@ class QuimifyScaffold extends StatefulWidget {
     required this.header,
     required this.body,
   })  : showBannerAd = false,
-        adPlacementName = '';
+        bannerAdName = '';
 
-  final String adPlacementName;
+  final String bannerAdName;
   final Widget header, body;
 
   final bool showBannerAd;
@@ -78,8 +78,8 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
               child: SizedBox(
                 child: SafeArea(
                   top: false,
-                  child: Ads().banner(
-                    widget.adPlacementName,
+                  child: Ads().getBanner(
+                    widget.bannerAdName,
                     _bannerAdLoaded,
                     _onBannerAdLoaded,
                   ),

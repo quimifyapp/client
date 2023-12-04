@@ -141,7 +141,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),
         child: QuimifyScaffold(
-          adPlacementName: runtimeType.toString(),
+          bannerAdName: runtimeType.toString(),
           header: Column(
             children: [
               const QuimifyPageBar(title: 'Formular orgánicos'),

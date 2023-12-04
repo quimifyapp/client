@@ -214,7 +214,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,
         child: QuimifyScaffold(
-          adPlacementName: runtimeType.toString(),
+          bannerAdName: runtimeType.toString(),
           showBannerAd: true,
           header: Column(
             children: [

@@ -434,7 +434,7 @@ class _NamingPageState extends State<NamingPage> {
         return true;
       },
       child: QuimifyScaffold(
-        adPlacementName: runtimeType.toString(),
+        bannerAdName: runtimeType.toString(),
         header: const QuimifyPageBar(title: _title),
         body: Padding(
           padding: const EdgeInsets.only(
