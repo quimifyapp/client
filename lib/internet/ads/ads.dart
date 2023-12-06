@@ -14,7 +14,7 @@ class Ads {
 
   // Constants:
 
-  static const int _interstitialPeriod = 3; // Minimum attempts before next one
+  static const int _interstitialPeriod = 4; // Minimum attempts before next one
   static const int _interstitialOffset = 2; // Minimum attempts before 1st one
 
   // Fields:
