@@ -47,6 +47,7 @@ android {
         implementation 'com.applovin:applovin-sdk:+'
         implementation 'com.applovin.mediation:google-adapter:+'
         implementation 'com.applovin.mediation:ironsource-adapter:+'
+        implementation 'com.applovin.mediation:google-ad-manager-adapter:+'
     }
 
     // ] AppLovin
