@@ -31,6 +31,8 @@ flutter_ios_podfile_setup
 
 # Sources
 source 'https://cdn.cocoapods.org/'
+source 'https://github.com/CocoaPods/Specs.git'
+
 # Settings
 use_frameworks!
 inhibit_all_warnings!
@@ -48,6 +50,7 @@ target 'Runner' do
   pod 'AppLovinSDK'
   pod 'AppLovinMediationGoogleAdapter'
   pod 'AppLovinMediationIronSourceAdapter'
+  pod 'AppLovinMediationGoogleAdManagerAdapter'
 
   # ] AppLovin
 
