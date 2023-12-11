@@ -37,22 +37,27 @@ class Ads {
 
     await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
 
-    _initializeInterstitial();
+    _initializeInterstitials();
+
     _loadInterstitial();
   }
 
   // Private:
 
-  _initializeInterstitial() => AppLovinMAX.setInterstitialListener(
-        InterstitialListener(
-          onAdLoadedCallback: (ad) {},
-          onAdLoadFailedCallback: (id, error) => developer.log(error.message),
-          onAdDisplayedCallback: (ad) {},
-          onAdDisplayFailedCallback: (ad, error) {},
-          onAdClickedCallback: (ad) {},
-          onAdHiddenCallback: (ad) => _loadInterstitial(),
-        ),
-      );
+  _initializeInterstitials() {
+    AppLovinMAX.setMuted(true);
+
+    AppLovinMAX.setInterstitialListener(
+      InterstitialListener(
+        onAdLoadedCallback: (ad) {},
+        onAdLoadFailedCallback: (id, error) => developer.log(error.message),
+        onAdDisplayedCallback: (ad) {},
+        onAdDisplayFailedCallback: (ad, error) {},
+        onAdClickedCallback: (ad) {},
+        onAdHiddenCallback: (ad) => _loadInterstitial(),
+      ),
+    );
+  }
 
   _loadInterstitial() => AppLovinMAX.loadInterstitial(_interstitialUnitId);
 
