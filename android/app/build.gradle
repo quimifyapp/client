@@ -48,6 +48,7 @@ android {
         implementation 'com.applovin.mediation:google-adapter:+'
         implementation 'com.applovin.mediation:ironsource-adapter:+'
         implementation 'com.applovin.mediation:google-ad-manager-adapter:+'
+        implementation 'com.applovin.mediation:facebook-adapter:+'
     }
 
     // ] AppLovin
