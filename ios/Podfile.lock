@@ -5,6 +5,9 @@ PODS:
   - AppLovinMediationGoogleAdapter (10.14.0.0):
     - AppLovinSDK
     - Google-Mobile-Ads-SDK (= 10.14.0)
+  - AppLovinMediationGoogleAdManagerAdapter (10.14.0.0):
+    - AppLovinSDK
+    - Google-Mobile-Ads-SDK (= 10.14.0)
   - AppLovinMediationIronSourceAdapter (7.6.0.0.0):
     - AppLovinSDK
     - IronSourceSDK (= 7.6.0.0)
@@ -75,6 +78,7 @@ PODS:
 DEPENDENCIES:
   - applovin_max (from `.symlinks/plugins/applovin_max/ios`)
   - AppLovinMediationGoogleAdapter
+  - AppLovinMediationGoogleAdManagerAdapter
   - AppLovinMediationIronSourceAdapter
   - AppLovinSDK
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
@@ -87,6 +91,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppLovinMediationGoogleAdapter
+    - AppLovinMediationGoogleAdManagerAdapter
     - AppLovinMediationIronSourceAdapter
     - AppLovinSDK
     - Google-Mobile-Ads-SDK
@@ -117,6 +122,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   applovin_max: 3ea0f880770d9d98cfddd3ab6c405c2746db7a41
   AppLovinMediationGoogleAdapter: d9ff20f127123813de1367b9e57207281222b631
+  AppLovinMediationGoogleAdManagerAdapter: 5bb0d2e3e485a9af80b062f63fc5d394476c0bb8
   AppLovinMediationIronSourceAdapter: 63bfac161bb23f0db4a8e5e7accd271ef9486a2f
   AppLovinSDK: 86ac2d11e3fda1d2cb5b235fb8a4bbd39ab0ebee
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
@@ -134,6 +140,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: dc0ed7e43a209fd5a34449f60f079c3d567ff462
+PODFILE CHECKSUM: ef8657af2023d71577d6618f68f5e800a3d21aef
 
 COCOAPODS: 1.13.0
