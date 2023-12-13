@@ -2,6 +2,9 @@ PODS:
   - applovin_max (3.3.0):
     - AppLovinSDK (= 11.11.2)
     - Flutter
+  - AppLovinMediationFacebookAdapter (6.14.0.1):
+    - AppLovinSDK
+    - FBAudienceNetwork (= 6.14.0)
   - AppLovinMediationGoogleAdapter (10.14.0.0):
     - AppLovinSDK
     - Google-Mobile-Ads-SDK (= 10.14.0)
@@ -15,6 +18,7 @@ PODS:
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
+  - FBAudienceNetwork (6.14.0)
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
@@ -77,6 +81,7 @@ PODS:
 
 DEPENDENCIES:
   - applovin_max (from `.symlinks/plugins/applovin_max/ios`)
+  - AppLovinMediationFacebookAdapter
   - AppLovinMediationGoogleAdapter
   - AppLovinMediationGoogleAdManagerAdapter
   - AppLovinMediationIronSourceAdapter
@@ -90,10 +95,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AppLovinMediationFacebookAdapter
     - AppLovinMediationGoogleAdapter
     - AppLovinMediationGoogleAdManagerAdapter
     - AppLovinMediationIronSourceAdapter
     - AppLovinSDK
+    - FBAudienceNetwork
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
@@ -121,11 +128,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   applovin_max: 3ea0f880770d9d98cfddd3ab6c405c2746db7a41
+  AppLovinMediationFacebookAdapter: f70e731ddb976feb6b74fa3cf98d7296e0bd085a
   AppLovinMediationGoogleAdapter: d9ff20f127123813de1367b9e57207281222b631
   AppLovinMediationGoogleAdManagerAdapter: 5bb0d2e3e485a9af80b062f63fc5d394476c0bb8
   AppLovinMediationIronSourceAdapter: 63bfac161bb23f0db4a8e5e7accd271ef9486a2f
   AppLovinSDK: 86ac2d11e3fda1d2cb5b235fb8a4bbd39ab0ebee
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
+  FBAudienceNetwork: 4d6223a9a88a22e9dca8c9e6c1829a8745b86228
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
@@ -140,6 +149,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: ef8657af2023d71577d6618f68f5e800a3d21aef
+PODFILE CHECKSUM: 59e63bbfed5bfb060b128970f735afe61caa40ec
 
 COCOAPODS: 1.13.0
