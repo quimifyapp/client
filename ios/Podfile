@@ -51,6 +51,7 @@ target 'Runner' do
   pod 'AppLovinMediationGoogleAdapter'
   pod 'AppLovinMediationIronSourceAdapter'
   pod 'AppLovinMediationGoogleAdManagerAdapter'
+  pod 'AppLovinMediationFacebookAdapter'
 
   # ] AppLovin
 
