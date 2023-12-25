@@ -59,11 +59,7 @@ class Ads {
       (consentForm) async {
         final status = await ConsentInformation.instance.getConsentStatus();
         if (status == ConsentStatus.required) {
-          consentForm.show((formError) {
-            // Call this method again, if the user has already selected an
-            // option the message will not be displayed again.
-            _loadConsentForm();
-          });
+          consentForm.show((formError) => _loadConsentForm());
         }
       },
       (FormError? error) => developer.log(error?.message ?? ''),
@@ -82,11 +78,12 @@ class Ads {
               onAdDismissedFullScreenContent: (ad) => ad.dispose(),
             );
           },
-          onAdFailedToLoad: (_) => {},
+          onAdFailedToLoad: (error) => developer.log(error.message),
         ),
       );
 
   // Public:
+
   showInterstitial() {
     if (_nextInterstitial != null) {
       if (_interstitialFreeAttempts >= _interstitialPeriod) {
@@ -113,7 +110,10 @@ class Ads {
         ),
         listener: BannerAdListener(
           onAdLoaded: (ad) => onLoaded(ad),
-          onAdFailedToLoad: (ad, err) => ad.dispose(),
+          onAdFailedToLoad: (ad, error) {
+            ad.dispose();
+            developer.log(error.message);
+          },
         ),
       ).load();
 }
