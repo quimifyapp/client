@@ -1,8 +1,7 @@
-import 'dart:developer' as developer;
 import 'dart:io';
+import 'dart:ui';
 
-import 'package:applovin_max/applovin_max.dart';
-import 'package:flutter/foundation.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/env/env.dart';
 
 class Ads {
@@ -14,19 +13,23 @@ class Ads {
 
   // Constants:
 
-  static const int _interstitialPeriod = 3; // Minimum attempts before next one
-  static const int _interstitialOffset = 2; // Minimum attempts before 1st one
+  static const int _interstitialPeriod = 2; // Minimum attempts before next one
+  static const int _interstitialOffset = 1; // Minimum attempts before 1st one
 
   // Fields:
 
   late String _bannerUnitId;
   late String _interstitialUnitId;
 
+  InterstitialAd? _nextInterstitial;
+
   int _interstitialFreeAttempts = _interstitialPeriod - _interstitialOffset;
 
   // Initialize:
 
-  initialize() async {
+  initialize() {
+    MobileAds.instance.initialize();
+
     if (Platform.isAndroid) {
       _bannerUnitId = Env.androidBannerUnitId;
       _interstitialUnitId = Env.androidInterstitialUnitId;
@@ -35,55 +38,36 @@ class Ads {
       _interstitialUnitId = Env.iosInterstitialUnitId;
     }
 
-    await AppLovinMAX.initialize(Env.applovinMaxSdkKey);
-
-    _initializeInterstitials();
-
     _loadInterstitial();
   }
 
   // Private:
 
-  _initializeInterstitials() {
-    AppLovinMAX.setMuted(true);
+  _loadInterstitial() => InterstitialAd.load(
+        adUnitId: _interstitialUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            _nextInterstitial = ad;
 
-    AppLovinMAX.setInterstitialListener(
-      InterstitialListener(
-        onAdLoadedCallback: (ad) {},
-        onAdLoadFailedCallback: (id, error) => developer.log(error.message),
-        onAdDisplayedCallback: (ad) {},
-        onAdDisplayFailedCallback: (ad, error) {},
-        onAdClickedCallback: (ad) {},
-        onAdHiddenCallback: (ad) => _loadInterstitial(),
-      ),
-    );
-  }
-
-  _loadInterstitial() => AppLovinMAX.loadInterstitial(_interstitialUnitId);
-
-  // Public:
-
-  MaxAdView getBanner(String name, bool visible, VoidCallback onLoaded) =>
-      MaxAdView(
-        placement: name,
-        adUnitId: _bannerUnitId,
-        adFormat: AdFormat.banner,
-        visible: visible,
-        listener: AdViewAdListener(
-          onAdLoadedCallback: (ad) => onLoaded(),
-          onAdLoadFailedCallback: (ad, error) => developer.log(error.message),
-          onAdClickedCallback: (ad) {},
-          onAdExpandedCallback: (ad) {},
-          onAdCollapsedCallback: (ad) {},
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
+              onAdDismissedFullScreenContent: (ad) => ad.dispose(),
+            );
+          },
+          onAdFailedToLoad: (_) => {},
         ),
       );
 
-  showInterstitial() async {
-    bool? ready = await AppLovinMAX.isInterstitialReady(_interstitialUnitId);
+  // Public:
 
-    if (ready ?? false) {
+  showInterstitial() {
+    if (_nextInterstitial != null) {
       if (_interstitialFreeAttempts >= _interstitialPeriod) {
-        AppLovinMAX.showInterstitial(_interstitialUnitId);
+        _nextInterstitial!.show();
+        _nextInterstitial = null;
+
+        _loadInterstitial();
         _interstitialFreeAttempts = 0;
       } else {
         _interstitialFreeAttempts += 1;
@@ -93,4 +77,17 @@ class Ads {
       _interstitialFreeAttempts += 1;
     }
   }
+
+  loadBanner(Size size, void Function(Ad) onLoaded) => BannerAd(
+        adUnitId: _bannerUnitId,
+        request: const AdRequest(),
+        size: AdSize(
+          width: size.width.toInt(),
+          height: size.height.toInt(),
+        ),
+        listener: BannerAdListener(
+          onAdLoaded: (ad) => onLoaded(ad),
+          onAdFailedToLoad: (ad, err) => ad.dispose(),
+        ),
+      ).load();
 }

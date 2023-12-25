@@ -103,7 +103,7 @@ dependencies:
   envied: ^0.3.0+3
   signed_spacing_flex: ^1.0.0
   device_preview: ^1.1.0
-  applovin_max: ^3.3.0
+  google_mobile_ads: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -18,9 +18,6 @@ part 'env.g.dart';
 
 @Envied(path: 'lib/internet/ads/env/ads.env')
 abstract class Env {
-  @EnviedField(varName: 'APPLOVIN_MAX_SDK_KEY', obfuscate: true)
-  static final String applovinMaxSdkKey = _Env.applovinMaxSdkKey;
-
   @EnviedField(varName: 'ANDROID_BANNER_UNIT_ID', obfuscate: true)
   static final String androidBannerUnitId = _Env.androidBannerUnitId;
 
