@@ -39,32 +39,32 @@ class Ads {
       _interstitialUnitId = Env.iosInterstitialUnitId;
     }
 
-    ConsentInformation.instance.requestConsentInfoUpdate(
-      ConsentRequestParameters(),
-      () async {
-        if (await ConsentInformation.instance.isConsentFormAvailable()) {
-          _loadConsentForm();
-        }
-      },
-      (error) => developer.log(error.message),
-    );
+    _loadConsentForm();
 
     _loadInterstitial();
   }
 
   // Private:
 
-  _loadConsentForm() {
-    ConsentForm.loadConsentForm(
-      (consentForm) async {
-        final status = await ConsentInformation.instance.getConsentStatus();
-        if (status == ConsentStatus.required) {
-          consentForm.show((formError) => _loadConsentForm());
-        }
-      },
-      (FormError? error) => developer.log(error?.message ?? ''),
-    );
-  }
+  _loadConsentForm() => ConsentInformation.instance.requestConsentInfoUpdate(
+        ConsentRequestParameters(),
+        () async {
+          if (await ConsentInformation.instance.isConsentFormAvailable()) {
+            _showConsentForm();
+          }
+        },
+        (error) => developer.log(error.message),
+      );
+
+  _showConsentForm() => ConsentForm.loadConsentForm(
+        (consentForm) async {
+          final status = await ConsentInformation.instance.getConsentStatus();
+          if (status == ConsentStatus.required) {
+            consentForm.show((formError) => _showConsentForm());
+          }
+        },
+        (FormError? error) => developer.log(error?.message ?? ''),
+      );
 
   _loadInterstitial() => InterstitialAd.load(
         adUnitId: _interstitialUnitId,
