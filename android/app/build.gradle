@@ -40,10 +40,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dependencies {
-        implementation 'com.google.ads.mediation:facebook:6.11.0.1'
-    }
-
     defaultConfig {
         applicationId "com.quimify"
         // You can update the following values to match your application needs. 
