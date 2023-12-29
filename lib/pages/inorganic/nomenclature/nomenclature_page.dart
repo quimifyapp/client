@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
-import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
@@ -12,7 +12,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text/text.dart';
 
 class NomenclaturePage extends StatefulWidget {
@@ -85,17 +85,16 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   // Looks for a previous completion that could complete this input too
   String? _getFromFoundCompletionsCache(String normalizedInput) {
     String? key = _normalizedToCompletion.keys.firstWhereOrNull(
-        (String normalizedCompletion) =>
-            normalizedCompletion.startsWith(normalizedInput));
+        (cachedNormalizedCompletion) =>
+            cachedNormalizedCompletion.startsWith(normalizedInput));
 
     return key != null ? _normalizedToCompletion[key] : null;
   }
 
   // Checks if this input is an extension of an uncompleted previous input
   bool _isInNotFoundCompletionsCache(String normalizedInput) =>
-      _completionNotFoundNormalizedInputs
-          .where((previousInput) => normalizedInput.startsWith(previousInput))
-          .isNotEmpty;
+      _completionNotFoundNormalizedInputs.any(
+          (cachedNormalizedInput) => normalizedInput == cachedNormalizedInput);
 
   String _normalize(String text) => removeDiacritics(text)
       .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
