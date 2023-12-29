@@ -101,7 +101,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     query: toSubscripts(e.formula),
                     fields: [
                       HistoryField(
-                        'Búsqueda',
+                        'Fórmula',
                         toSubscripts(e.formula),
                       ),
                       HistoryField(
@@ -238,7 +238,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           cursorColor: Theme.of(context).colorScheme.primary,
                           style: TextStyle(
                             fontSize: 26,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primary, // TODO choose
                             fontWeight: FontWeight.bold,
                           ),
                           keyboardType: TextInputType.visiblePassword,
