@@ -186,12 +186,6 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    TextStyle inputOutputStyle = const TextStyle(
-      fontSize: 26,
-      color: quimifyTeal,
-      fontWeight: FontWeight.bold,
-    );
-
     return WillPopScope(
       onWillPop: () async {
         stopQuimifyLoading();
@@ -242,7 +236,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           enableSuggestions: false,
                           // Aspect:
                           cursorColor: Theme.of(context).colorScheme.primary,
-                          style: inputOutputStyle,
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
                           keyboardType: TextInputType.visiblePassword,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
@@ -326,7 +324,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         '${formatMolecularMass(_result.molecularMass!)} g/mol',
                         stepGranularity: 0.1,
                         maxLines: 1,
-                        style: inputOutputStyle,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          color: quimifyTeal,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
