@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
-import 'package:quimify_client/internet/api/results/access_data_result.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/storage/storage.dart';
 
@@ -16,7 +16,6 @@ main() async {
 
   await Storage().initialize();
   Api().initialize();
-  Ads().initialize();
 
   try {
     // Sets ISRG Root X1 certificate, not present in Android < 25
@@ -25,13 +24,15 @@ main() async {
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
   } catch (_) {} // It's already present in modern devices anyways
 
-  AccessDataResult? accessDataResult = await Api().getAccessDataResult();
+  ClientResult? clientResult = await Api().getClient();
+
+  Ads().initialize(clientResult);
 
   runApp(
     DevicePreview(
       enabled: false, // !kReleaseMode,
       builder: (context) => QuimifyApp(
-        accessDataResult: accessDataResult,
+        clientResult: clientResult,
       ), // Wrap your app
     ),
   );
@@ -49,10 +50,10 @@ _hideLoadingScreen() => FlutterNativeSplash.remove();
 class QuimifyApp extends StatelessWidget {
   const QuimifyApp({
     Key? key,
-    this.accessDataResult,
+    this.clientResult,
   }) : super(key: key);
 
-  final AccessDataResult? accessDataResult;
+  final ClientResult? clientResult;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class QuimifyApp extends StatelessWidget {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
-        home: HomePage(accessDataResult: accessDataResult),
+        home: HomePage(clientResult: clientResult),
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
         // To set stretched scroll on all Android versions:

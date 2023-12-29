@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io' as io;
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:quimify_client/internet/api/env/env.dart';
-import 'package:quimify_client/internet/api/results/access_data_result.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
@@ -148,29 +147,23 @@ class Api {
 
   // Public:
 
-  Future<AccessDataResult?> getAccessDataResult() async {
-    AccessDataResult? result;
-
-    int platform = kIsWeb
-        ? 2
-        : io.Platform.isIOS
-            ? 1
-            : 0;
+  Future<ClientResult?> getClient() async {
+    ClientResult? result;
 
     String? response = await _getBodyWithRetry(
-      'access-data',
+      'client',
       {
-        'platform': platform.toString(),
-        'client-version': _clientVersion.toString(),
+        'platform': io.Platform.isAndroid ? 'android' : 'ios',
+        'version': _clientVersion.toString(),
       },
     );
 
     if (response != null) {
       try {
-        result = AccessDataResult.fromJson(response);
+        result = ClientResult.fromJson(response);
       } catch (error) {
         sendError(
-          context: 'Access data JSON',
+          context: 'Client JSON',
           details: error.toString(),
         );
       }

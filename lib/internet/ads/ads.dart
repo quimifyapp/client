@@ -1,9 +1,9 @@
 import 'dart:developer' as developer;
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/env/env.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
 
 class Ads {
   static final Ads _singleton = Ads._internal();
@@ -12,55 +12,69 @@ class Ads {
 
   Ads._internal();
 
-  // Constants:
-
-  static const int _interstitialPeriod = 2; // Minimum attempts before next one
-  static const int _interstitialOffset = 1; // Minimum attempts before 1st one
-
   // Fields:
 
-  late String _bannerUnitId;
-  late String _interstitialUnitId;
+  late bool _showBanner = true;
+  late String _bannerUnitId = Env.defaultBannerUnitId;
+
+  late bool _showInterstitial = true;
+  late int _interstitialPeriod = 2; // Minimum attempts before next one
+  late int _interstitialOffset = 1; // Minimum attempts before 1st one
+  late String _interstitialUnitId = Env.defaultInterstitialUnitId;
+
+  late int _interstitialFreeAttempts;
 
   InterstitialAd? _nextInterstitial;
 
-  int _interstitialFreeAttempts = _interstitialPeriod - _interstitialOffset;
-
   // Initialize:
 
-  initialize() {
+  initialize(ClientResult? clientResult) {
     MobileAds.instance.initialize();
 
-    if (Platform.isAndroid) {
-      _bannerUnitId = Env.androidBannerUnitId;
-      _interstitialUnitId = Env.androidInterstitialUnitId;
-    } else {
-      _bannerUnitId = Env.iosBannerUnitId;
-      _interstitialUnitId = Env.iosInterstitialUnitId;
+    if (clientResult != null) {
+      _showBanner = clientResult.bannerAdPresent;
+
+      if (_showBanner) {
+        _bannerUnitId = clientResult.bannerAdUnitId!;
+      }
+
+      _showInterstitial = clientResult.interstitialAdPresent;
+
+      if (_showInterstitial) {
+        _interstitialPeriod = clientResult.interstitialAdPeriod!;
+        _interstitialOffset = clientResult.interstitialAdOffset!;
+        _interstitialUnitId = clientResult.interstitialAdUnitId!;
+      }
     }
 
-    _loadConsentForm();
+    _interstitialFreeAttempts = _interstitialPeriod - _interstitialOffset;
 
-    _loadInterstitial();
+    if (_showBanner || _showInterstitial) {
+      _showGdrpForm();
+    }
+
+    if (_showInterstitial) {
+      _loadInterstitial();
+    }
   }
 
   // Private:
 
-  _loadConsentForm() => ConsentInformation.instance.requestConsentInfoUpdate(
+  _showGdrpForm() => ConsentInformation.instance.requestConsentInfoUpdate(
         ConsentRequestParameters(),
         () async {
           if (await ConsentInformation.instance.isConsentFormAvailable()) {
-            _showConsentForm();
+            _displayGdrpForm();
           }
         },
         (error) => developer.log(error.message),
       );
 
-  _showConsentForm() => ConsentForm.loadConsentForm(
+  _displayGdrpForm() => ConsentForm.loadConsentForm(
         (consentForm) async {
           final status = await ConsentInformation.instance.getConsentStatus();
           if (status == ConsentStatus.required) {
-            consentForm.show((formError) => _showConsentForm());
+            consentForm.show((formError) => _displayGdrpForm());
           }
         },
         (FormError? error) => developer.log(error?.message ?? ''),
@@ -84,7 +98,35 @@ class Ads {
 
   // Public:
 
+  loadBanner(Size size, void Function(Ad) onLoaded) {
+    if (!_showBanner) {
+      return;
+    }
+
+    BannerAd bannerAd = BannerAd(
+      adUnitId: _bannerUnitId,
+      request: const AdRequest(),
+      size: AdSize(
+        width: size.width.toInt(),
+        height: size.height.toInt(),
+      ),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) => onLoaded(ad),
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          developer.log(error.message);
+        },
+      ),
+    );
+
+    bannerAd.load();
+  }
+
   showInterstitial() {
+    if (!_showInterstitial) {
+      return;
+    }
+
     if (_nextInterstitial != null) {
       if (_interstitialFreeAttempts >= _interstitialPeriod) {
         _nextInterstitial!.show();
@@ -100,20 +142,4 @@ class Ads {
       _interstitialFreeAttempts += 1;
     }
   }
-
-  loadBanner(Size size, void Function(Ad) onLoaded) => BannerAd(
-        adUnitId: _bannerUnitId,
-        request: const AdRequest(),
-        size: AdSize(
-          width: size.width.toInt(),
-          height: size.height.toInt(),
-        ),
-        listener: BannerAdListener(
-          onAdLoaded: (ad) => onLoaded(ad),
-          onAdFailedToLoad: (ad, error) {
-            ad.dispose();
-            developer.log(error.message);
-          },
-        ),
-      ).load();
 }
