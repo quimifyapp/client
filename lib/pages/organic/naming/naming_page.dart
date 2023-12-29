@@ -73,7 +73,7 @@ class _NamingPageState extends State<NamingPage> {
     OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
     if (result != null) {
-      if (!result.present) {
+      if (!result.found) {
         if (!mounted) return null; // For security reasons
         const QuimifyMessageDialog(title: 'Sin resultado').show(context);
 

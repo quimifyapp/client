@@ -342,7 +342,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getBodyWithRetry(
-      'organic/from-name',
+      'organic/structure',
       {
         'name': name,
       },
@@ -366,7 +366,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getBodyWithRetry(
-      'organic/from-structure',
+      'organic/name',
       {
         'structure-sequence': sequence.join(','),
       },

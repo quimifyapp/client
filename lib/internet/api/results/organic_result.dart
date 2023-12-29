@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class OrganicResult {
-  final bool present;
+  final bool found;
 
   final String? structure;
   final String? name;
@@ -10,7 +10,7 @@ class OrganicResult {
   final String? url2D;
 
   OrganicResult(
-    this.present,
+    this.found,
 
     this.structure,
     this.name,
@@ -22,7 +22,7 @@ class OrganicResult {
   factory OrganicResult.fromJson(String body) {
     var json = jsonDecode(body);
     return OrganicResult(
-      json['present'],
+      json['found'],
 
       json['structure'],
       json['name'],

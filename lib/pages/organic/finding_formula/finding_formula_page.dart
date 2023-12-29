@@ -49,7 +49,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
 
     if (result != null) {
-      if (result.present) {
+      if (result.found) {
         Ads().showInterstitial();
 
         setState(() {
