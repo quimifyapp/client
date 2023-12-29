@@ -41,6 +41,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     formattedQuery: 'NaCl',
     result: InorganicResult(
       true,
+      null,
       'NaCl',
       'cloruro de sodio',
       'monocloruro de sodio',
@@ -121,7 +122,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   _processResult(InorganicResult? result, String formattedQuery) async {
     if (result != null) {
-      if (result.present) {
+      if (result.found) {
         setState(
           () => _resultViews.add(
             InorganicResultView(
@@ -181,9 +182,9 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
     startQuimifyLoading(context);
 
-    var result = await Api().getInorganic(toDigits(input));
+    var result = await Api().searchInorganic(toDigits(input));
 
-    if (result != null && result.present) {
+    if (result != null && result.found) {
       Ads().showInterstitial();
     }
 

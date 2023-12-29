@@ -3,13 +3,15 @@ import 'dart:convert';
 import 'package:quimify_client/storage/history/results/inorganic_local_result.dart';
 
 class InorganicResult {
-  final bool present;
+  final bool found;
+  final String? suggestion;
   final String? formula;
   final String? stockName, systematicName, traditionalName, commonName;
   final String? molecularMass, density, meltingPoint, boilingPoint;
 
   InorganicResult(
-    this.present,
+    this.found,
+    this.suggestion,
     this.formula,
     this.stockName,
     this.systematicName,
@@ -24,7 +26,8 @@ class InorganicResult {
   factory InorganicResult.fromJson(String body) {
     var json = jsonDecode(body);
     return InorganicResult(
-      json['present'],
+      json['found'],
+      json['suggestion'],
       json['formula'],
       json['stockName'],
       json['systematicName'],
@@ -40,6 +43,7 @@ class InorganicResult {
   factory InorganicResult.fromLocal(InorganicLocalResult localResult) =>
       InorganicResult(
         true,
+        null,
         localResult.formula,
         localResult.stockName,
         localResult.systematicName,
