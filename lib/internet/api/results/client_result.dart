@@ -44,14 +44,17 @@ class ClientResult {
       json['updateAvailable'],
       json['updateNeeded'],
       json['updateDetails'],
+
       json['messagePresent'],
       json['messageTitle'],
       json['messageDetails'],
       json['messageLinkPresent'],
       json['messageLinkLabel'],
       json['messageLink'],
+
       json['bannerAdPresent'],
       json['bannerAdUnitId'],
+
       json['interstitialAdPresent'],
       json['interstitialAdPeriod'],
       json['interstitialAdOffset'],

@@ -5,13 +5,16 @@ class OrganicResult {
 
   final String? structure;
   final String? name;
+
   final num? molecularMass;
   final String? url2D;
 
   OrganicResult(
     this.present,
+
     this.structure,
     this.name,
+
     this.molecularMass,
     this.url2D,
   );
@@ -20,8 +23,10 @@ class OrganicResult {
     var json = jsonDecode(body);
     return OrganicResult(
       json['present'],
+
       json['structure'],
       json['name'],
+
       json['molecularMass'],
       json['url2D'],
     );
@@ -33,6 +38,7 @@ class OrganicResult {
     List<String?> identifiers = [
       structure,
       name,
+
       url2D,
       molecularMass.toString(),
     ];
