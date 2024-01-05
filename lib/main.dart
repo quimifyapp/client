@@ -63,6 +63,19 @@ class QuimifyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Quimify',
         home: HomePage(clientResult: clientResult),
+        routes: {
+          "/home": (context) => HomePage(accessDataResult: accessDataResult),
+          // Inorganic
+          "/inorganic": (context) => InorganicPage(),
+          "/nomenclature": (context) => NomenclaturePage(),
+          // Organic
+          "/organic": (context) => OrganicPage(),
+          "/naming": (context) => NamingPage(),
+          "/finding_formula": (context) => FindingFormulaPage(),
+          // MolecularMass
+          "/molecular_mass": (context) => CalculatorPage(),
+          "/molecular_mass_result": (context) => MolecularMassPage(),
+        },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
         // To set stretched scroll on all Android versions:
