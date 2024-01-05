@@ -8,7 +8,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
+import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
+import 'package:quimify_client/pages/organic/finding_formula/finding_formula_page.dart';
+import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/storage/storage.dart';
 
 main() async {
@@ -64,17 +68,10 @@ class QuimifyApp extends StatelessWidget {
         title: 'Quimify',
         home: HomePage(clientResult: clientResult),
         routes: {
-          "/home": (context) => HomePage(accessDataResult: accessDataResult),
-          // Inorganic
-          "/inorganic": (context) => InorganicPage(),
-          "/nomenclature": (context) => NomenclaturePage(),
-          // Organic
-          "/organic": (context) => OrganicPage(),
-          "/naming": (context) => NamingPage(),
-          "/finding_formula": (context) => FindingFormulaPage(),
-          // MolecularMass
-          "/molecular_mass": (context) => CalculatorPage(),
-          "/molecular_mass_result": (context) => MolecularMassPage(),
+          "inorganic/nomenclature": (context) => NomenclaturePage(),
+          "organic/naming": (context) => NamingPage(),
+          "organic/finding-formula": (context) => FindingFormulaPage(),
+          "calculator/molecular-mass": (context) => MolecularMassPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
