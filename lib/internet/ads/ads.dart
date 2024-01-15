@@ -31,6 +31,8 @@ class Ads {
   initialize() {
     MobileAds.instance.initialize();
 
+    MobileAds.instance.setAppMuted(true);
+
     if (Platform.isAndroid) {
       _bannerUnitId = Env.androidBannerUnitId;
       _interstitialUnitId = Env.androidInterstitialUnitId;
