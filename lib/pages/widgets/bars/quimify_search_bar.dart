@@ -63,6 +63,16 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
         widget.textEditingController.text)); // Clears input
   }
 
+  _tappedOutsideText() {
+    widget.focusNode.unfocus(); // Hides keyboard
+
+    if (isEmptyWithBlanks(widget.textEditingController.text)) {
+      widget.textEditingController.clear(); // Clears input
+    } else {
+      _eraseInitialAndFinalBlanks();
+    }
+  }
+
   _search() {
     if (widget.focusNode.hasPrimaryFocus) {
       widget.focusNode.unfocus();
@@ -91,6 +101,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                 color: Theme.of(context).colorScheme.surface,
               ),
               child: TypeAheadField(
+                focusNode: widget.focusNode,
+                controller: widget.textEditingController,
                 builder: (context, controller, focusNode) => TextField(
                   controller: controller,
                   focusNode: focusNode,
@@ -158,6 +170,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     _eraseInitialAndFinalBlanks();
                     widget.onSubmitted(input);
                   },
+                  onTapOutside: (_) => _tappedOutsideText(),
                 ),
                 debounceDuration: Duration.zero,
                 // To remove animation:
