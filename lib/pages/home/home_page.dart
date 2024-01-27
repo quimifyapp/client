@@ -204,13 +204,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 15),
                 Expanded(
-                  child: ScrollConfiguration(
-                    behavior: const ScrollBehavior().copyWith(
-                      overscroll: false, // To avoid weird behavior
-                    ),
-                    child: SingleChildScrollView(
-                      child: _pages[_currentPage],
-                    ),
+                  child: SingleChildScrollView(
+                    child: _pages[_currentPage],
                   ),
                 ),
                 const SizedBox(height: 5), // + 15 from cards = 20

@@ -82,7 +82,13 @@ class QuimifyApp extends StatelessWidget {
             data: MediaQuery.of(context).copyWith(
               textScaler: TextScaler.linear(1.0),
             ),
-            child: child,
+            // To fix a single overscroll behavior across al platforms:
+            child: ScrollConfiguration(
+              behavior: const ScrollBehavior().copyWith(
+                overscroll: false,
+              ),
+              child: child,
+            ),
           );
         },
         theme: ThemeData(
