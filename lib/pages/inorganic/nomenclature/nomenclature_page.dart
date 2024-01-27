@@ -205,11 +205,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // TODO in disposal method instead?
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
         stopQuimifyLoading();
-        return true;
       },
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,

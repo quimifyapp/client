@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 
 class QuimifyPageBar extends StatelessWidget {
   const QuimifyPageBar({
@@ -28,10 +27,7 @@ class QuimifyPageBar extends StatelessWidget {
               height: 50,
               backgroundColor:
                   Theme.of(context).colorScheme.onTertiaryContainer,
-              onPressed: () {
-                Navigator.of(context).pop();
-                stopQuimifyLoading();
-              },
+              onPressed: () => Navigator.of(context).pop(),
               icon: Icon(
                 Icons.arrow_back,
                 color: Theme.of(context).colorScheme.onPrimary,

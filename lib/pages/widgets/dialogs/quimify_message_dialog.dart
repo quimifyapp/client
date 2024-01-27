@@ -85,8 +85,8 @@ class QuimifyMessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    return WillPopScope(
-      onWillPop: () => Future.value(closable),
+    return PopScope(
+      canPop: closable,
       child: QuimifyDialog(
         title: title,
         content: [

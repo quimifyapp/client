@@ -186,10 +186,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
         stopQuimifyLoading();
-        return true;
       },
       child: GestureDetector(
         onTap: _tappedOutsideText,

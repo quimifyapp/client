@@ -133,10 +133,13 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
         stopQuimifyLoading();
-        return true;
       },
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),

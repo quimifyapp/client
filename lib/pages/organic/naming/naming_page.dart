@@ -428,10 +428,13 @@ class _NamingPageState extends State<NamingPage> {
       ),
     );
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
         stopQuimifyLoading();
-        return true;
       },
       child: QuimifyScaffold(
         bannerAdName: runtimeType.toString(),
