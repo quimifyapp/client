@@ -75,19 +75,18 @@ class QuimifyApp extends StatelessWidget {
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
-        // To set stretched scroll on all Android versions:
-        scrollBehavior: const ScrollBehavior(
-          androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
-        ),
         // To ignore device's font scaling factor:
         builder: (context, child) {
           child = EasyLoading.init()(context, child);
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(1.0),
+            ),
             child: child,
           );
         },
         theme: ThemeData(
+          useMaterial3: false,
           brightness: Brightness.light,
           fontFamily: 'CeraPro',
           colorScheme: const ColorScheme(
@@ -135,6 +134,7 @@ class QuimifyApp extends StatelessWidget {
           ),
         ),
         darkTheme: ThemeData(
+          useMaterial3: false,
           brightness: Brightness.dark,
           fontFamily: 'CeraPro',
           colorScheme: const ColorScheme(
