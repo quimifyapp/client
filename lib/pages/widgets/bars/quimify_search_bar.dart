@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/text/text.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
@@ -91,8 +91,10 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                 color: Theme.of(context).colorScheme.surface,
               ),
               child: TypeAheadField(
-                // TextField:
-                textFieldConfiguration: TextFieldConfiguration(
+                builder: (context, controller, focusNode) => TextField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  // Settings:
                   autocorrect: false,
                   enableSuggestions: false,
                   // Aspect:
@@ -107,7 +109,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     contentPadding: const EdgeInsets.only(right: 14),
                     // So vertical center works:
                     isCollapsed: true,
-                    alignLabelWithHint: true, // For label
+                    alignLabelWithHint: true,
+                    // For label
                     // Label:
                     labelText: widget.label,
                     labelStyle: TextStyle(
@@ -148,8 +151,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     FilteringTextInputFormatter.allow(inputFormatter),
                   ],
                   textInputAction: TextInputAction.search,
-                  focusNode: widget.focusNode,
-                  controller: widget.textEditingController,
                   onChanged: (input) => widget.textEditingController.value =
                       widget.textEditingController.value
                           .copyWith(text: widget.inputCorrector(input)),
@@ -158,24 +159,22 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     widget.onSubmitted(input);
                   },
                 ),
-                // To avoid flicker:
-                hideOnLoading: false,
                 debounceDuration: Duration.zero,
-                animationDuration: Duration.zero,
+                // To remove animation:
+                transitionBuilder: (context, animation, child) => child,
                 // To set them empty:
                 hideOnEmpty: true,
                 hideOnError: true,
-                // To make sure they're empty (the latter it's not enough):
-                noItemsFoundBuilder: (context) => const SizedBox.shrink(),
-                loadingBuilder: (context) => const SizedBox.shrink(),
+                hideOnLoading: true,
                 // Completions logic:
                 suggestionsCallback: _getCompletions,
-                onSuggestionSelected: widget.onCompletionPressed,
+                onSelected: widget.onCompletionPressed,
                 // Completions menu:
-                suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                decorationBuilder: (context, child) => Material(
                   clipBehavior: Clip.hardEdge,
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).colorScheme.surface,
+                  child: child,
                 ),
                 itemBuilder: (context, String completion) {
                   return Container(
