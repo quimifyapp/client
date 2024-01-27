@@ -65,7 +65,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
   @override
   dispose() {
     if (_timer != null) {
-      _timer!.cancel();
+      _timer.cancel();
     }
 
     super.dispose();
