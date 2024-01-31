@@ -174,22 +174,17 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                               child: QuimifyIconButton(
                                 height: 50,
                                 onPressed: _pressedShareButton,
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .errorContainer,
+                                backgroundColor:
+                                    QuimifyColors.blueBackground(context),
                                 icon: Icon(
                                   Icons.share_outlined,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onErrorContainer,
+                                  color: QuimifyColors.onBlueText(context),
                                   size: 18,
                                 ),
                                 text: Text(
                                   'Compartir',
                                   style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onErrorContainer,
+                                    color: QuimifyColors.onBlueText(context),
                                     fontSize: 15,
                                     //fontWeight: FontWeight.bold
                                   ),
