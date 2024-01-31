@@ -8,6 +8,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
   const RadicalFactoryDialog({
@@ -89,7 +90,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 35),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
+                      color: QuimifyColors.background(context),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     alignment: Alignment.center,
@@ -118,7 +119,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: QuimifyColors.inverseText(context),
                               ),
                               strutStyle: const StrutStyle(
                                 fontSize: 24,
@@ -139,7 +140,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: QuimifyColors.inverseText(context),
                               ),
                               strutStyle: const StrutStyle(
                                 fontSize: 24,
@@ -174,12 +175,12 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
                   Image.asset(
                     'assets/images/icons/straight-radical.png',
                     height: 70,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                   ),
                   Image.asset(
                     'assets/images/icons/iso-radical.png',
                     height: 70,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                   ),
                 ],
               ),
@@ -202,7 +203,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           child: Text(
             'Enlazar',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: QuimifyColors.inverseText(context),
               fontSize: 17,
               fontWeight: FontWeight.bold,
             ),

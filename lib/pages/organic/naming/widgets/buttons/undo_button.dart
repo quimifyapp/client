@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class UndoButton extends StatelessWidget {
   const UndoButton({
@@ -22,7 +23,7 @@ class UndoButton extends StatelessWidget {
       color: const Color.fromARGB(255, 255, 96, 96),
       child: Icon(
         Icons.undo,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: QuimifyColors.inverseText(context),
         size: 22,
       ),
     );

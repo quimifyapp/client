@@ -4,10 +4,10 @@ import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_fields.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_name.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
 
 class InorganicResultView extends StatefulWidget {
@@ -50,7 +50,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
           // Head (Result of: ...):
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: QuimifyColors.foreground(context),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(15),
               ),
@@ -66,7 +66,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                 Text(
                   'Búsqueda: ',
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: QuimifyColors.secondary(context),
                     fontSize: 16,
                   ),
                 ),
@@ -77,7 +77,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                     minFontSize: 12,
                     stepGranularity: 0.1,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: QuimifyColors.primary(context),
                       fontSize: 16,
                     ),
                   ),
@@ -90,7 +90,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
           // Body:
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: QuimifyColors.foreground(context),
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(15),
               ),
@@ -105,8 +105,8 @@ class _InorganicResultViewState extends State<InorganicResultView> {
               children: [
                 Text(
                   formatInorganicFormulaOrName(widget.result.formula!),
-                  style: const TextStyle(
-                    color: quimifyTeal,
+                  style: TextStyle(
+                    color: QuimifyColors.teal(),
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
@@ -201,18 +201,17 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                               child: QuimifyIconButton(
                                 height: 50,
                                 backgroundColor:
-                                Theme.of(context).colorScheme.error,
+                                    QuimifyColors.redBackground(context),
                                 onPressed: _pressedReportButton,
                                 icon: Image.asset(
                                   'assets/images/icons/report.png',
-                                  color: Theme.of(context).colorScheme.onError,
+                                  color: QuimifyColors.onRedText(context),
                                   width: 18,
                                 ),
                                 text: Text(
                                   'Reportar',
                                   style: TextStyle(
-                                    color:
-                                    Theme.of(context).colorScheme.onError,
+                                    color: QuimifyColors.onRedText(context),
                                     fontSize: 15,
                                     //fontWeight: FontWeight.bold
                                   ),

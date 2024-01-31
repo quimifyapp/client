@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/widgets/history_entry_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -46,7 +47,7 @@ class HistoryPage extends StatelessWidget {
                     padding: const EdgeInsets.all(20),
                     alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: QuimifyColors.foreground(context),
                       borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
@@ -66,7 +67,7 @@ class HistoryPage extends StatelessWidget {
                           maxFontSize: 20,
                           style: TextStyle(
                             fontSize: 20,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: QuimifyColors.primary(context),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -76,7 +77,7 @@ class HistoryPage extends StatelessWidget {
                           'hagas tu primera consulta.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: QuimifyColors.primary(context),
                             fontSize: 16,
                           ),
                           strutStyle: const StrutStyle(height: 1.5),
@@ -88,7 +89,7 @@ class HistoryPage extends StatelessWidget {
                           child: Text(
                             'Comenzar',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: QuimifyColors.inverseText(context),
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),

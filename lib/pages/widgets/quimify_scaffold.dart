@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class QuimifyScaffold extends StatefulWidget {
@@ -55,14 +55,14 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false, // To avoid keyboard resizing
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: QuimifyColors.background(context),
       body: SignedSpacingColumn(
         spacing: -_bodyRoundedCornersRadius,
         stackingOrder: StackingOrder.lastOnTop,
         children: [
           Container(
             decoration: BoxDecoration(
-              gradient: quimifyGradient(),
+              gradient: QuimifyColors.gradient(),
             ),
             padding: const EdgeInsets.only(
               bottom: _bodyRoundedCornersRadius,
@@ -74,7 +74,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
               clipBehavior: Clip.hardEdge,
               // To avoid rounded corners overflow
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: QuimifyColors.background(context),
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(_bodyRoundedCornersRadius),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 showLoadingIndicator(BuildContext context) {
   // Popup customization:
@@ -11,11 +11,11 @@ showLoadingIndicator(BuildContext context) {
     ..indicatorSize = 25
     ..radius = 13
     ..indicatorType = EasyLoadingIndicatorType.ring
-    ..indicatorColor = quimifyTeal
+    ..indicatorColor = QuimifyColors.teal()
     ..textColor = Colors.transparent // Can't be null
     ..maskType = EasyLoadingMaskType.custom
-    ..maskColor = Theme.of(context).colorScheme.shadow
-    ..backgroundColor = Theme.of(context).colorScheme.surface;
+    ..maskColor = QuimifyColors.dialogBackdrop(context)
+    ..backgroundColor = QuimifyColors.foreground(context);
 
   EasyLoading.show();
 }

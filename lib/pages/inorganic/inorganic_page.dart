@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class InorganicPage extends StatelessWidget {
   const InorganicPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         QuimifySectionTitle(
           title: 'Formular y nombrar',
@@ -38,7 +38,7 @@ class InorganicPage extends StatelessWidget {
           comingSoonBody: Icon(
             Icons.edit_note_rounded,
             size: 36,
-            color: quimifyTeal,
+            color: QuimifyColors.teal(),
           ),
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class HelpButton extends StatelessWidget {
   const HelpButton({
@@ -12,7 +13,7 @@ class HelpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      color: Theme.of(context).colorScheme.primary,
+      color: QuimifyColors.primary(context),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       // To remove padding:

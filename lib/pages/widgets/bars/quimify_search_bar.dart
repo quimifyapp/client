@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
 
 class QuimifySearchBar extends StatefulWidget {
@@ -98,7 +99,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).colorScheme.surface,
+                color: QuimifyColors.foreground(context),
               ),
               child: TypeAheadField(
                 focusNode: widget.focusNode,
@@ -110,9 +111,9 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                   autocorrect: false,
                   enableSuggestions: false,
                   // Aspect:
-                  cursorColor: Theme.of(context).colorScheme.primary,
+                  cursorColor: QuimifyColors.primary(context),
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                     fontSize: 18,
                     height: 1.2, // Cursor height
                   ),
@@ -126,7 +127,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     // Label:
                     labelText: widget.label,
                     labelStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: QuimifyColors.secondary(context),
                     ),
                     // So hint doesn't go up while typing:
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -149,7 +150,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                         ),
                         icon: Image.asset(
                           'assets/images/icons/search.png',
-                          color: Theme.of(context).colorScheme.primary,
+                          color: QuimifyColors.primary(context),
                         ),
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
@@ -186,7 +187,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                 decorationBuilder: (context, child) => Material(
                   clipBehavior: Clip.hardEdge,
                   borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.surface,
+                  color: QuimifyColors.foreground(context),
                   child: child,
                 ),
                 itemBuilder: (context, String completion) {
@@ -200,7 +201,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                           child: Icon(
                             Icons.subdirectory_arrow_right_rounded,
                             size: 26,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: QuimifyColors.primary(context),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -212,7 +213,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                               maxLines: 1,
                               stepGranularity: 0.1,
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: QuimifyColors.primary(context),
                                 fontSize: 16,
                               ),
                             ),
@@ -228,11 +229,11 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           const SizedBox(width: 8),
           QuimifyIconButton.square(
             height: 50,
-            backgroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: QuimifyColors.foreground(context),
             onPressed: () => comingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
             ),
           ),
         ],

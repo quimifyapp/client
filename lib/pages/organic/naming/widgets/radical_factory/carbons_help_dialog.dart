@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class CarbonsHelpDialog extends StatelessWidget {
   const CarbonsHelpDialog({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class CarbonsHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/propyl.png',
                 height: 19,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
@@ -39,7 +40,7 @@ class CarbonsHelpDialog extends StatelessWidget {
             child: Image.asset(
               'assets/images/icons/iso-radical.png',
               height: 70,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
             ),
           ),
           const Center(

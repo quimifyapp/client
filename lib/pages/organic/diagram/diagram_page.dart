@@ -1,9 +1,10 @@
 import 'dart:math';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class DiagramPage extends StatefulWidget {
   const DiagramPage({
@@ -46,7 +47,7 @@ class _DiagramPageState extends State<DiagramPage> {
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Estructura'),
       body: Container(
-        color: Theme.of(context).colorScheme.background,
+        color: QuimifyColors.background(context),
         child: Stack(
           children: [
             Positioned.fill(
@@ -71,7 +72,8 @@ class _DiagramPageState extends State<DiagramPage> {
                   controller: controller,
                   scaleStateController: scaleStateController,
                   enableRotation: true,
-                  backgroundDecoration: const BoxDecoration(), // Needed
+                  backgroundDecoration: const BoxDecoration(),
+                  // Needed
                   // TODO bug:
                   disableGestures: true,
                   //minScale: 0.75,
@@ -122,9 +124,9 @@ class _DiagramPageState extends State<DiagramPage> {
         Expanded(
           child: SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: quimifyTeal,
-              thumbColor: quimifyTeal,
-              inactiveTrackColor: Theme.of(context).colorScheme.secondary,
+              activeTrackColor: QuimifyColors.teal(),
+              thumbColor: QuimifyColors.teal(),
+              inactiveTrackColor: QuimifyColors.tertiary(context),
             ),
             child: Slider(
               value: value.scale!.clamp(minScale, maxScale),

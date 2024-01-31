@@ -19,7 +19,6 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.
 import 'package:quimify_client/pages/organic/naming/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radical_factory_dialog.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
@@ -28,6 +27,7 @@ import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
@@ -377,7 +377,7 @@ class _NamingPageState extends State<NamingPage> {
       padding: const EdgeInsets.all(20),
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: QuimifyColors.foreground(context),
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
@@ -397,7 +397,7 @@ class _NamingPageState extends State<NamingPage> {
             maxFontSize: 20,
             style: TextStyle(
               fontSize: 20,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -406,7 +406,7 @@ class _NamingPageState extends State<NamingPage> {
             'La molecula está completa.\nYa puedes ver el resultado.',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               fontSize: 16,
             ),
             strutStyle: const StrutStyle(height: 1.5),
@@ -418,7 +418,7 @@ class _NamingPageState extends State<NamingPage> {
             child: Text(
               'Resolver',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: QuimifyColors.inverseText(context),
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
@@ -450,7 +450,7 @@ class _NamingPageState extends State<NamingPage> {
               // Input display:
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
+                  color: QuimifyColors.foreground(context),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
@@ -467,10 +467,10 @@ class _NamingPageState extends State<NamingPage> {
                       const SizedBox(width: 25),
                       Text(
                         formatStructure(_openChain().getStructure()),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'CeraProBoldCustom',
                           fontSize: 28,
-                          color: quimifyTeal,
+                          color: QuimifyColors.teal(),
                         ),
                         strutStyle: const StrutStyle(
                           fontSize: 28,
@@ -503,7 +503,7 @@ class _NamingPageState extends State<NamingPage> {
                         child: Icon(
                           Icons.delete_rounded,
                           size: 22,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: QuimifyColors.inverseText(context),
                         ),
                       ),
                     ),

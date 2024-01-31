@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report/report_sent_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
 
 class ReportDialog extends StatelessWidget {
@@ -75,7 +76,7 @@ class ReportDialog extends StatelessWidget {
           Container(
             height: 50,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
+              color: QuimifyColors.background(context),
               borderRadius: BorderRadius.circular(10),
             ),
             margin: const EdgeInsets.only(bottom: 15),
@@ -90,9 +91,9 @@ class ReportDialog extends StatelessWidget {
                 // Aspect:
                 keyboardType: TextInputType.text,
                 maxLines: 1,
-                cursorColor: Theme.of(context).colorScheme.primary,
+                cursorColor: QuimifyColors.primary(context),
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
                 ),
                 textAlignVertical: TextAlignVertical.center,
@@ -101,7 +102,7 @@ class ReportDialog extends StatelessWidget {
                   isCollapsed: true,
                   labelText: 'Detalles (opcional)',
                   labelStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: QuimifyColors.secondary(context),
                   ),
                   // So hint doesn't go up while typing:
                   floatingLabelBehavior: FloatingLabelBehavior.never,

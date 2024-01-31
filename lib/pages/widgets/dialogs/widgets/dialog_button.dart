@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class DialogButton extends StatelessWidget {
   const DialogButton({
@@ -19,7 +20,7 @@ class DialogButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: QuimifyColors.inverseText(context),
           fontSize: 17,
         ),
       ),

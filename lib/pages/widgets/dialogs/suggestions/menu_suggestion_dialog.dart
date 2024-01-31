@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_negative_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class MenuSuggestionDialog extends StatelessWidget {
   const MenuSuggestionDialog({
@@ -35,7 +36,7 @@ class MenuSuggestionDialog extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
                 fontSize: 16,
                 fontFamily: 'CeraPro',
               ),

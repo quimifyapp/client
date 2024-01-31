@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_bar.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
-import 'package:flutter/material.dart';
 
 class GraphSelector extends StatefulWidget {
   const GraphSelector({
@@ -29,8 +29,7 @@ class _GraphSelectorState extends State<GraphSelector> {
 
   _tappedGraph() => setState(() => _molesGraph = !_molesGraph);
 
-  _pressedSwitch(bool newValue) =>
-      setState(() => _molesGraph = newValue);
+  _pressedSwitch(bool newValue) => setState(() => _molesGraph = newValue);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,7 @@ class _GraphSelectorState extends State<GraphSelector> {
       onTap: _tappedGraph,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: QuimifyColors.chartBackground(context),
           borderRadius: BorderRadius.circular(15),
         ),
         padding: const EdgeInsets.all(15),
@@ -73,19 +72,19 @@ class _GraphSelectorState extends State<GraphSelector> {
                   child: AutoSizeText(
                     toSubscripts(formula),
                     minFontSize: 18,
-                    overflowReplacement: const Text(
+                    overflowReplacement: Text(
                       'Proporciones',
                       maxLines: 1,
                       style: TextStyle(
-                        color: quimifyTeal,
+                        color: QuimifyColors.teal(),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     stepGranularity: 0.1,
                     maxLines: 1,
-                    style: const TextStyle(
-                      color: quimifyTeal,
+                    style: TextStyle(
+                      color: QuimifyColors.teal(),
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
@@ -99,8 +98,8 @@ class _GraphSelectorState extends State<GraphSelector> {
                   'Pasar a mol',
                   style: TextStyle(
                     color: _molesGraph
-                        ? quimifyTeal
-                        : Theme.of(context).colorScheme.secondary,
+                        ? QuimifyColors.teal()
+                        : QuimifyColors.tertiary(context),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

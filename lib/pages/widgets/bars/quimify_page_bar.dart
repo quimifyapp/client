@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyPageBar extends StatelessWidget {
   const QuimifyPageBar({
@@ -25,12 +26,11 @@ class QuimifyPageBar extends StatelessWidget {
           children: [
             QuimifyIconButton.square(
               height: 50,
-              backgroundColor:
-                  Theme.of(context).colorScheme.onTertiaryContainer,
+              backgroundColor: QuimifyColors.mutedTeal(context),
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(
                 Icons.arrow_back,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: QuimifyColors.inverseText(context),
               ),
             ),
             const SizedBox(width: 15),
@@ -42,7 +42,7 @@ class QuimifyPageBar extends StatelessWidget {
                 maxFontSize: 20,
                 style: TextStyle(
                   fontSize: 20,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: QuimifyColors.inverseText(context),
                   fontWeight: FontWeight.bold,
                 ),
               ),

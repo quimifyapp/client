@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class HydrogenateButton extends StatelessWidget {
   const HydrogenateButton({
@@ -21,7 +22,7 @@ class HydrogenateButton extends StatelessWidget {
       onPressed: onPressed,
       child: Image.asset(
         'assets/images/icons/hydrogenate.png',
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: QuimifyColors.inverseText(context),
         width: 28,
       ),
     );

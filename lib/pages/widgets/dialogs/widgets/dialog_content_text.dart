@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class DialogContentText extends StatelessWidget {
   const DialogContentText({
@@ -16,7 +17,7 @@ class DialogContentText extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: TextStyle(
-        color: Theme.of(context).colorScheme.primary,
+        color: QuimifyColors.primary(context),
         fontSize: 16,
         fontWeight: fontWeight,
       ),

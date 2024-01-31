@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class ReportButton extends StatelessWidget {
   const ReportButton({
@@ -17,12 +18,12 @@ class ReportButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifyIconButton.square(
       height: height,
-      backgroundColor: Theme.of(context).colorScheme.error,
+      backgroundColor: QuimifyColors.redBackground(context),
       onPressed: onPressed,
       icon: Image.asset(
         'assets/images/icons/report.png',
         width: size,
-        color: Theme.of(context).colorScheme.onError,
+        color: QuimifyColors.onRedText(context),
       ),
     );
   }

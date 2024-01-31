@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyHomeBar extends StatelessWidget {
   const QuimifyHomeBar({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class QuimifyHomeBar extends StatelessWidget {
               child: IconButton(
                 icon: Image.asset(
                   'assets/images/icons/logo.png',
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: QuimifyColors.inverseText(context),
                 ),
                 // To remove native effects:
                 hoverColor: Colors.transparent,
@@ -37,7 +38,7 @@ class QuimifyHomeBar extends StatelessWidget {
             Image.asset(
               'assets/images/icons/branding-slim.png',
               height: 17,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: QuimifyColors.inverseText(context),
             ),
           ],
         ),

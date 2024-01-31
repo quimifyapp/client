@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 // TODO fix split screen not centered
@@ -13,7 +14,7 @@ showQuimifyDialog({
   showDialog<void>(
     context: context,
     barrierDismissible: closable,
-    barrierColor: Theme.of(context).colorScheme.shadow,
+    barrierColor: QuimifyColors.dialogBackdrop(context),
     builder: (BuildContext context) => dialog,
   );
 }
@@ -56,7 +57,7 @@ class QuimifyDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: QuimifyColors.foreground(context),
       titlePadding: const EdgeInsets.only(bottom: 20),
       title: Column(
         children: [
@@ -75,7 +76,7 @@ class QuimifyDialog extends StatelessWidget {
                   onPressed: () => _closeButtonPressed(context),
                   icon: Icon(
                     Icons.close_rounded,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                     size: 17,
                   ),
                 ),
@@ -85,7 +86,7 @@ class QuimifyDialog extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               fontSize: 22,
               height: 0.6,
             ),

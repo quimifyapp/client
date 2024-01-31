@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class MolecularMassHelpDialog extends StatelessWidget {
   const MolecularMassHelpDialog({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
@@ -60,7 +61,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
@@ -97,7 +98,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),

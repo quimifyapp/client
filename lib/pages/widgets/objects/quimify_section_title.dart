@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifySectionTitle extends StatelessWidget {
   const QuimifySectionTitle({
@@ -37,7 +38,7 @@ class QuimifySectionTitle extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
                 fontSize: fontSize,
                 fontWeight: fontWeight,
               ),

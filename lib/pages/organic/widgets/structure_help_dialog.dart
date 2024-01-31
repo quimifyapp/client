@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class StructureHelpDialog extends StatelessWidget {
   const StructureHelpDialog({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class StructureHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/butane-diagram.png',
                 height: 130,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
@@ -51,7 +52,7 @@ class StructureHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/butane.png',
                 height: 50,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
@@ -77,7 +78,7 @@ class StructureHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/but-2-ene.png',
                 height: 50,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
@@ -103,7 +104,7 @@ class StructureHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/but-2-yne.png',
                 height: 50,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),

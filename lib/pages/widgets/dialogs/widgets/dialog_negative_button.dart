@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class DialogNegativeButton extends StatelessWidget {
   const DialogNegativeButton({
@@ -21,14 +20,14 @@ class DialogNegativeButton extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
-        gradient: quimifyGradient(),
+        gradient: QuimifyColors.gradient(),
       ),
       child: Container(
         margin: EdgeInsets.all(borderWidth),
         clipBehavior: Clip.hardEdge, // To prevent corners overflow
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius - borderWidth),
-          color: Theme.of(context).colorScheme.surface,
+          color: QuimifyColors.foreground(context),
         ),
         child: SizedBox.expand(
           child: MaterialButton(
@@ -38,7 +37,7 @@ class DialogNegativeButton extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                color: quimifyTeal,
+                color: QuimifyColors.teal(),
                 fontSize: 17,
               ),
             ),

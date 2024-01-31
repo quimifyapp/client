@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HomePage extends StatefulWidget {
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                   child: IconButton(
                     icon: Image.asset(
                       'assets/images/icons/logo.png',
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: QuimifyColors.inverseText(context),
                     ),
                     // To remove native effects:
                     hoverColor: Colors.transparent,
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                 Image.asset(
                   'assets/images/icons/branding-slim.png',
                   height: 17,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: QuimifyColors.inverseText(context),
                 ),
               ],
             ),
@@ -179,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                   height: 60,
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: QuimifyColors.foreground(context),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(

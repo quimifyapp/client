@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/contact_buttons.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HelpSlidesDialog extends StatefulWidget {
@@ -64,8 +64,8 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
               effect: ColorTransitionEffect(
                 dotWidth: 10,
                 dotHeight: 10,
-                activeDotColor: quimifyTeal,
-                dotColor: Theme.of(context).colorScheme.secondary,
+                activeDotColor: QuimifyColors.teal(),
+                dotColor: QuimifyColors.tertiary(context),
               ),
             ),
           ),
