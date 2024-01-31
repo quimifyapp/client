@@ -43,6 +43,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: 'H (hidrógeno)   ➔   '),
@@ -61,6 +62,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: 'O (oxígeno)   ➔   '),
@@ -97,6 +99,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: '2 x '),

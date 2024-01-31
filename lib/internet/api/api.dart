@@ -266,30 +266,6 @@ class Api {
     return result;
   }
 
-  Future<InorganicResult?> smartSearchInorganic(String input) async {
-    InorganicResult? result;
-
-    String? response = await _getBodyWithRetry(
-      'inorganic/smart',
-      {
-        'input': input,
-      },
-    );
-
-    if (response != null) {
-      try {
-        result = InorganicResult.fromJson(response);
-      } catch (error) {
-        sendError(
-          context: 'Inorganic smart JSON',
-          details: error.toString(),
-        );
-      }
-    }
-
-    return result;
-  }
-
   Future<InorganicResult?> deepSearchInorganic(String input) async {
     InorganicResult? result;
 

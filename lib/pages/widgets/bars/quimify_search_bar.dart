@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/text.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({

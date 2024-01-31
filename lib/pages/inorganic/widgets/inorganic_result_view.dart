@@ -8,7 +8,7 @@ import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/text.dart';
 
 class InorganicResultView extends StatefulWidget {
   const InorganicResultView({

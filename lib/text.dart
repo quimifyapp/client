@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
     r'\u207A\u207B]'); // Superscript + and -
@@ -87,10 +89,19 @@ String toDigits(String input) {
 
   for (int rune in input.runes) {
     String char = String.fromCharCode(rune);
-    result += digitToSubscript.keys.singleWhere(
-      (keys) => digitToSubscript[keys] == char,
-      orElse: () => char,
-    );
+
+    String? digit = digitToSubscript.keys
+        .firstWhereOrNull((key) => digitToSubscript[key] == char);
+
+    if (digit != null) {
+      result += digit;
+    } else if (char == String.fromCharCode(0x207A)) {
+      result += '+';
+    } else if (char == String.fromCharCode(0x207B)) {
+      result += '-';
+    } else {
+      result += char;
+    }
   }
 
   return result;

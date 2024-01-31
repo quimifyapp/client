@@ -13,6 +13,7 @@ import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/organic/finding_formula/finding_formula_page.dart';
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
+import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
 
 main() async {
@@ -68,10 +69,10 @@ class QuimifyApp extends StatelessWidget {
         title: 'Quimify',
         home: HomePage(clientResult: clientResult),
         routes: {
-          "inorganic/nomenclature": (context) => NomenclaturePage(),
-          "organic/naming": (context) => NamingPage(),
-          "organic/finding-formula": (context) => FindingFormulaPage(),
-          "calculator/molecular-mass": (context) => MolecularMassPage(),
+          Routes.inorganicNomenclature: (context) => NomenclaturePage(),
+          Routes.organicNaming: (context) => NamingPage(),
+          Routes.organicFindingFormula: (context) => FindingFormulaPage(),
+          Routes.calculatorMolecularMass: (context) => MolecularMassPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,

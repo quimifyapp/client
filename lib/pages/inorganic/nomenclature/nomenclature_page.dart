@@ -3,17 +3,20 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/api/results/classification.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/menu_suggestion_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/history/history.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/text.dart';
 
 class NomenclaturePage extends StatefulWidget {
   const NomenclaturePage({Key? key}) : super(key: key);
@@ -42,6 +45,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     result: InorganicResult(
       true,
       null,
+      null,
       'NaCl',
       'cloruro de sodio',
       'monocloruro de sodio',
@@ -53,6 +57,19 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       '1686.15',
     ),
   );
+
+  static const Map<Classification, String> classificationToSuggestion = {
+    Classification.organicFormula: 'Parece que estás intentando resolver un',
+    Classification.organicName: 'Parece que estás intentando resolver un',
+    Classification.molecularMassProblem:
+        'Parece que estás intentando resolver una',
+  };
+
+  static const Map<Classification, String> classificationToLabel = {
+    Classification.organicFormula: 'compuesto orgánico',
+    Classification.organicName: 'compuesto orgánico',
+    Classification.molecularMassProblem: 'masa molecular',
+  };
 
   @override
   initState() {
@@ -119,43 +136,102 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     return completion;
   }
 
-  _processResult(InorganicResult? result, String formattedQuery) async {
-    if (result != null) {
-      if (result.found) {
-        setState(
-          () => _resultViews.add(
-            InorganicResultView(
-              formattedQuery: formattedQuery,
-              result: result,
-            ),
-          ),
-        );
+  _showNotFoundDialog(String formattedQuery) {
+    QuimifyMessageDialog.reportable(
+      title: 'Sin resultado',
+      details: 'No se ha encontrado:\n"$formattedQuery"',
+      reportContext: 'Inorganic naming and finding formula',
+      reportDetails: 'Searched "$formattedQuery"',
+    ).show(context);
+  }
 
-        History().saveInorganic(result, formattedQuery);
+  _processNotFound(InorganicResult? result, String formattedQuery) async {
+    if (result == null) {
+      await hasInternetConnection()
+          ? const QuimifyMessageDialog(title: 'Sin resultado').show(context)
+          : quimifyNoInternetDialog.show(context);
 
-        // UI/UX actions:
-
-        _labelText = formattedQuery; // Sets previous input as label
-        _textController.clear(); // Clears input
-        _textFocusNode.unfocus(); // Hides keyboard
-        _scrollToStart(); // Goes to the top of the page
-      } else {
-        QuimifyMessageDialog.reportable(
-          title: 'Sin resultado',
-          details: 'No se ha encontrado:\n"$formattedQuery"',
-          reportContext: 'Inorganic naming and finding formula',
-          reportDetails: 'Searched "$formattedQuery"',
-        ).show(context);
-      }
-    } else {
-      if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
-      } else {
-        quimifyNoInternetDialog.show(context);
-      }
+      return;
     }
+
+    if (result.classification == null) {
+      _showNotFoundDialog(formattedQuery);
+      return;
+    }
+
+    if (Routes.contains(result.classification!)) {
+      MenuSuggestionDialog(
+        suggestion: classificationToSuggestion[result.classification!]!,
+        label: classificationToLabel[result.classification!]!,
+        onPressedAgree: () => Navigator.pushNamed(
+          context,
+          Routes.fromClassification[result.classification!]!,
+          arguments: toDigits(formattedQuery),
+        ),
+        onPressedDisagree: () => _deepSearch(formattedQuery),
+      ).show(context);
+    } else if (result.classification == Classification.nomenclatureProblem) {
+      _showNotFoundDialog(formattedQuery); // TODO handle
+    } else if (result.classification == Classification.chemicalProblem) {
+      _showNotFoundDialog(formattedQuery); // TODO handle
+    } else if (result.classification == Classification.chemicalReaction) {
+      _showNotFoundDialog(formattedQuery); // TODO handle
+    }
+  }
+
+  _processResult(InorganicResult? result, String formattedQuery) async {
+    if (result == null || !result.found) {
+      _processNotFound(result, formattedQuery);
+      return;
+    }
+
+    // TODO handle suggestions
+
+    setState(
+      () => _resultViews.add(
+        InorganicResultView(
+          formattedQuery: formattedQuery,
+          result: result,
+        ),
+      ),
+    );
+
+    History().saveInorganic(result, formattedQuery);
+
+    // UI/UX actions:
+
+    _labelText = formattedQuery; // Sets previous input as label
+    _textController.clear(); // Clears input
+    _textFocusNode.unfocus(); // Hides keyboard
+    _scrollToStart(); // Goes to the top of the page
+  }
+
+  _deepSearch(String formattedQuery) async {
+    startQuimifyLoading(context);
+
+    var result = await Api().deepSearchInorganic(toDigits(formattedQuery));
+
+    await _processResult(result, formattedQuery);
+
+    stopQuimifyLoading();
+  }
+
+  _searchFromQuery(String formattedQuery) async {
+    if (isEmptyWithBlanks(formattedQuery)) {
+      return;
+    }
+
+    startQuimifyLoading(context);
+
+    var result = await Api().searchInorganic(toDigits(formattedQuery));
+
+    if (result != null && result.found && result.suggestion == null) {
+      Ads().showInterstitial();
+    }
+
+    await _processResult(result, formattedQuery);
+
+    stopQuimifyLoading();
   }
 
   _searchFromCompletion(String completion) async {
@@ -170,24 +246,6 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     var result = await Api().getInorganicFromCompletion(completion);
 
     await _processResult(result, formatInorganicFormulaOrName(completion));
-
-    stopQuimifyLoading();
-  }
-
-  _searchFromQuery(String input) async {
-    if (isEmptyWithBlanks(input)) {
-      return;
-    }
-
-    startQuimifyLoading(context);
-
-    var result = await Api().searchInorganic(toDigits(input));
-
-    if (result != null && result.found) {
-      Ads().showInterstitial();
-    }
-
-    await _processResult(result, input);
 
     stopQuimifyLoading();
   }

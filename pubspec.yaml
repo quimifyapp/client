@@ -4,10 +4,10 @@ description: The Quimify client
 version: 3.8.2+122 # Android build code
 
 dependencies:
-  flutter_native_splash: ^2.2.8
-  auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.2.8
+  auto_size_text: ^3.0.0
   http: ^0.13.5
   url_launcher: ^6.1.5
   photo_view: ^0.14.0

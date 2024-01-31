@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:quimify_client/internet/api/results/classification.dart';
 import 'package:quimify_client/storage/history/results/inorganic_local_result.dart';
 
 class InorganicResult {
   final bool found;
+
+  final Classification? classification;
   final String? suggestion;
 
   final String? formula;
@@ -13,6 +16,8 @@ class InorganicResult {
 
   InorganicResult(
     this.found,
+
+    this.classification,
     this.suggestion,
 
     this.formula,
@@ -31,6 +36,8 @@ class InorganicResult {
     var json = jsonDecode(body);
     return InorganicResult(
       json['found'],
+
+      stringToClassification[json['classification']],
       json['suggestion'],
 
       json['formula'],
@@ -49,6 +56,8 @@ class InorganicResult {
   factory InorganicResult.fromLocal(InorganicLocalResult localResult) =>
       InorganicResult(
         true,
+
+        null,
         null,
 
         localResult.formula,
@@ -67,6 +76,11 @@ class InorganicResult {
   @override
   String toString() {
     List<String?> identifiers = [
+      found.toString(),
+
+      classification.toString(),
+      suggestion,
+
       formula,
       stockName,
       systematicName,
@@ -78,8 +92,6 @@ class InorganicResult {
       meltingPoint,
       boilingPoint,
     ];
-
-    identifiers.removeWhere((identifier) => identifier == null);
 
     return identifiers.toString();
   }

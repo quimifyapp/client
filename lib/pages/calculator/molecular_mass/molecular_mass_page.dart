@@ -21,7 +21,7 @@ import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/text.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  // Initial values:
+  bool _argumentRead = false;
 
   String _labelText = 'H₂SO₄';
   MolecularMassResult _result = MolecularMassResult(
@@ -147,7 +147,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
-    if (isEmptyWithBlanks(_textController.text)) {
+    if (isEmptyWithBlanks(_textController.text)) { // TODO format forbid blanks?
       _textController.clear(); // Clears input
     } else {
       _eraseInitialAndFinalBlanks();
@@ -185,6 +185,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   @override
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
+
+    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (argument != null && !_argumentRead) {
+      _textFocusNode.requestFocus();
+      _argumentRead = true;
+    }
 
     return PopScope(
       onPopInvoked: (bool didPop) async {
@@ -241,7 +248,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           cursorColor: Theme.of(context).colorScheme.primary,
                           style: TextStyle(
                             fontSize: 26,
-                            color: Theme.of(context).colorScheme.primary, // TODO choose
+                            color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
                           keyboardType: TextInputType.visiblePassword,

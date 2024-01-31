@@ -30,7 +30,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/text.dart';
 
 class NamingPage extends StatefulWidget {
   const NamingPage({Key? key}) : super(key: key);
