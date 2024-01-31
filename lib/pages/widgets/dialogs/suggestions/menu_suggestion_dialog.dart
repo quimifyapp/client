@@ -44,9 +44,9 @@ class MenuSuggestionDialog extends StatelessWidget {
                 TextSpan(text: '$suggestion '),
                 TextSpan(
                   text: label,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TextSpan(text: '.'),
+                const TextSpan(text: '.'),
               ],
             ),
             textAlign: TextAlign.center,
@@ -59,7 +59,7 @@ class MenuSuggestionDialog extends StatelessWidget {
           text: 'Sí, eso es',
           onPressed: () => _agreePressed(context),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         DialogNegativeButton(
           text: 'No, seguir buscando',
           onPressed: () => _disagreePressed(context),

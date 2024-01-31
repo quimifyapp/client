@@ -69,10 +69,10 @@ class QuimifyApp extends StatelessWidget {
         title: 'Quimify',
         home: HomePage(clientResult: clientResult),
         routes: {
-          Routes.inorganicNomenclature: (context) => NomenclaturePage(),
-          Routes.organicNaming: (context) => NamingPage(),
-          Routes.organicFindingFormula: (context) => FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) => MolecularMassPage(),
+          Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
+          Routes.organicNaming: (context) => const NamingPage(),
+          Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
+          Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
@@ -81,7 +81,7 @@ class QuimifyApp extends StatelessWidget {
           child = EasyLoading.init()(context, child);
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(
-              textScaler: TextScaler.linear(1.0),
+              textScaler: const TextScaler.linear(1.0),
             ),
             // To fix a single overscroll behavior across al platforms:
             child: ScrollConfiguration(

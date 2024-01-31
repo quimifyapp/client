@@ -13,12 +13,12 @@ class InorganicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        QuimifySectionTitle(
+        const QuimifySectionTitle(
           title: 'Formular y nombrar',
           helpDialog: InorganicHelpDialog(),
         ),
-        SizedBox(height: 15),
-        QuimifyCard(
+        const SizedBox(height: 15),
+        const QuimifyCard(
           body: {
             'H₂O': 'óxido de hidrógeno',
             'AuF₃': 'trifluoruro de oro',
@@ -29,11 +29,11 @@ class InorganicPage extends StatelessWidget {
           },
           page: NomenclaturePage(),
         ),
-        QuimifySectionTitle(
+        const QuimifySectionTitle(
           title: 'Practicar',
           helpDialog: comingSoonDialog,
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         QuimifyCard.comingSoon(
           comingSoonBody: Icon(
             Icons.edit_note_rounded,

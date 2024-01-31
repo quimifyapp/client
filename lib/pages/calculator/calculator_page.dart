@@ -13,12 +13,12 @@ class CalculatorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        QuimifySectionTitle(
+        const QuimifySectionTitle(
           title: 'Masa molecular',
           helpDialog: CalculatorHelpDialog(),
         ),
-        SizedBox(height: 15),
-        QuimifyCard(
+        const SizedBox(height: 15),
+        const QuimifyCard(
           body: {
             'Fe₂O₃': '159.68 g/mol',
             'C₅H₆O₂': '110.10 g/mol',
@@ -29,11 +29,11 @@ class CalculatorPage extends StatelessWidget {
           },
           page: MolecularMassPage(),
         ),
-        QuimifySectionTitle(
+        const QuimifySectionTitle(
           title: 'Ajustar reacciones',
           helpDialog: comingSoonDialog,
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         QuimifyCard.comingSoon(
           comingSoonBody: Text(
             '⇄',

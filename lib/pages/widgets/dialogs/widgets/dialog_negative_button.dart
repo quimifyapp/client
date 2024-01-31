@@ -23,7 +23,7 @@ class DialogNegativeButton extends StatelessWidget {
         gradient: QuimifyColors.gradient(),
       ),
       child: Container(
-        margin: EdgeInsets.all(borderWidth),
+        margin: const EdgeInsets.all(borderWidth),
         clipBehavior: Clip.hardEdge, // To prevent corners overflow
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius - borderWidth),
