@@ -96,99 +96,11 @@ class QuimifyApp extends StatelessWidget {
           useMaterial3: false,
           brightness: Brightness.light,
           fontFamily: 'CeraPro',
-          colorScheme: const ColorScheme(
-            brightness: Brightness.light,
-
-            primary: Color.fromARGB(255, 34, 34, 34),
-            secondary: Colors.black12,
-            tertiary: Colors.black45,
-            tertiaryContainer: Color.fromARGB(255, 150, 150, 150),
-            // Top bar disabled text
-
-            surface: Colors.white,
-            background: Color.fromARGB(255, 247, 247, 247),
-
-            onPrimary: Colors.white,
-            // White text
-            onPrimaryContainer: Color.fromARGB(255, 220, 220, 220),
-            // Unselected text
-
-            onBackground: Color.fromARGB(255, 231, 246, 247),
-            // Chart background
-            onSecondary: Color.fromARGB(13, 0, 0, 0),
-            // Chart bar background
-            onSurface: Color.fromARGB(255, 244, 255, 249),
-            // Inorganic amounts
-
-            shadow: Color.fromARGB(150, 0, 0, 0),
-            // Dialog barrier
-            inverseSurface: Color.fromARGB(255, 60, 60, 60),
-            // Lock icon
-
-            onError: Color.fromARGB(255, 255, 96, 96),
-            // Error text
-            error: Color.fromARGB(255, 255, 241, 241),
-            // Background
-            onErrorContainer: Color.fromARGB(255, 56, 133, 224),
-            // Share text
-            errorContainer: Color.fromARGB(255, 239, 246, 253),
-            // Background
-
-            surfaceTint: Color.fromARGB(255, 255, 255, 255),
-            // Diagram background
-
-            onTertiaryContainer: Color.fromARGB(255, 106, 233, 218), // [<-]
-          ),
         ),
         darkTheme: ThemeData(
           useMaterial3: false,
           brightness: Brightness.dark,
           fontFamily: 'CeraPro',
-          colorScheme: const ColorScheme(
-            brightness: Brightness.dark,
-
-            primary: Colors.white,
-            secondary: Colors.white54,
-            tertiary: Colors.white60,
-            tertiaryContainer: Colors.white60,
-            // Top bar disabled text
-
-            surface: Color.fromARGB(255, 30, 30, 30),
-            background: Color.fromARGB(255, 18, 18, 18),
-
-            onPrimary: Color.fromARGB(255, 18, 18, 18),
-            // Black text
-            onPrimaryContainer: Color.fromARGB(255, 90, 90, 90),
-            // Unselected text
-
-            onBackground: Color.fromARGB(255, 10, 38, 34),
-            // Chart background
-            onSecondary: Colors.black45,
-            // Chart bar background
-            onSurface: Color.fromARGB(255, 7, 56, 53),
-            // Inorganic amounts
-
-            shadow: Color.fromARGB(175, 0, 0, 0),
-            // Dialog barrier
-            inverseSurface: Color.fromARGB(255, 235, 235, 235),
-            // Lock icon
-
-            onError: Color.fromARGB(255, 18, 18, 18),
-            // Black text
-            // Error color
-            error: Color.fromARGB(255, 255, 96, 96),
-            // Background
-            onErrorContainer: Color.fromARGB(255, 18, 18, 18),
-            // Black text
-            // Share color
-            errorContainer: Color.fromARGB(255, 56, 133, 224),
-            // Background
-
-            surfaceTint: Color.fromARGB(255, 10, 10, 10),
-            // Diagram background
-
-            onTertiaryContainer: Color.fromARGB(255, 118, 252, 237), // [<-]
-          ),
         ),
       ),
     );
