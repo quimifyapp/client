@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class GraphBar extends StatelessWidget {
-  const GraphBar({Key? key, required this.quantity, required this.total})
+class ChartBar extends StatelessWidget {
+  const ChartBar({Key? key, required this.quantity, required this.total})
       : super(key: key);
 
   final num quantity, total;

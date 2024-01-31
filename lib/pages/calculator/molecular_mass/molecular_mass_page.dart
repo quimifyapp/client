@@ -5,7 +5,7 @@ import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
@@ -368,7 +368,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                GraphSelector(
+                ChartSelector(
                   mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams!,
                   elementToMoles: _result.elementToMoles!,

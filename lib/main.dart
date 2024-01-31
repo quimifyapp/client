@@ -114,9 +114,9 @@ class QuimifyApp extends StatelessWidget {
             // Unselected text
 
             onBackground: Color.fromARGB(255, 231, 246, 247),
-            // Graph background
+            // Chart background
             onSecondary: Color.fromARGB(13, 0, 0, 0),
-            // Graph bar background
+            // Chart bar background
             onSurface: Color.fromARGB(255, 244, 255, 249),
             // Inorganic amounts
 
@@ -162,9 +162,9 @@ class QuimifyApp extends StatelessWidget {
             // Unselected text
 
             onBackground: Color.fromARGB(255, 10, 38, 34),
-            // Graph background
+            // Chart background
             onSecondary: Colors.black45,
-            // Graph bar background
+            // Chart bar background
             onSurface: Color.fromARGB(255, 7, 56, 53),
             // Inorganic amounts
 

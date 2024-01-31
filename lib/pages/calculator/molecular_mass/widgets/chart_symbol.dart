@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class GraphNumber extends StatelessWidget {
-  const GraphNumber({Key? key, required this.text}) : super(key: key);
+class ChartSymbol extends StatelessWidget {
+  const ChartSymbol({Key? key, required this.symbol}) : super(key: key);
 
-  final String text;
+  final String symbol;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
-      textAlign: TextAlign.right,
+      symbol,
+      textAlign: TextAlign.left,
       style: TextStyle(
         color: QuimifyColors.primary(context),
         fontSize: 16,
