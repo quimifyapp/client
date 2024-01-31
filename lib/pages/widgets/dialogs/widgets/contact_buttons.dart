@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class QuimifyContactButtons extends StatelessWidget {
-  const QuimifyContactButtons({
+class ContactButtons extends StatelessWidget {
+  const ContactButtons({
     Key? key,
     this.emailBody,
     this.afterClicked,

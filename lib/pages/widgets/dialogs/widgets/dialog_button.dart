@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 
-class QuimifyDialogButton extends StatelessWidget {
-  const QuimifyDialogButton({
+class DialogButton extends StatelessWidget {
+  const DialogButton({
     Key? key,
-    required this.onPressed,
     required this.text,
+    required this.onPressed,
   }) : super(key: key);
 
-  final VoidCallback onPressed;
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

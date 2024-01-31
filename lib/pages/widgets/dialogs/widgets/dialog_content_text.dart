@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class QuimifyDialogContentText extends StatelessWidget {
-  const QuimifyDialogContentText({
+class DialogContentText extends StatelessWidget {
+  const DialogContentText({
     Key? key,
     required this.text,
     this.fontWeight = FontWeight.normal,

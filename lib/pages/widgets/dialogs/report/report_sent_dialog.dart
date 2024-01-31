@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_contact_buttons.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/contact_buttons.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
-class ThanksDialog extends StatelessWidget {
-  const ThanksDialog({
+class ReportSentDialog extends StatelessWidget {
+  const ReportSentDialog({
     Key? key,
     this.userMessage,
   }) : super(key: key);
@@ -23,17 +23,17 @@ class ThanksDialog extends StatelessWidget {
       title: '¿Necesitas ayuda?',
       content: [
         const Center(
-          child: QuimifyDialogContentText(
+          child: DialogContentText(
             text: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
           ),
         ),
-        QuimifyContactButtons(
+        ContactButtons(
           emailBody: userMessage,
           afterClicked: () => _exit(context),
         ),
       ],
       actions: [
-        QuimifyDialogButton(
+        DialogButton(
           onPressed: () => _exit(context),
           text: 'Entendido',
         ),

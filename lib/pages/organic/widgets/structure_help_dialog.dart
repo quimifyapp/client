@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
 class StructureHelpDialog extends StatelessWidget {
   const StructureHelpDialog({Key? key}) : super(key: key);
@@ -11,11 +11,11 @@ class StructureHelpDialog extends StatelessWidget {
       titleToContent: {
         'Estructura': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Cada carbono es un vértice. Los hidrógenos se omiten.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -30,18 +30,18 @@ class StructureHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(butano)',
             ),
           ),
         ],
         'Enlace simple': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Se representa con 1 línea.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -56,18 +56,18 @@ class StructureHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(butano)',
             ),
           ),
         ],
         'Enlace doble': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Se representa con 2 líneas.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -82,18 +82,18 @@ class StructureHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(but-2-eno)',
             ),
           ),
         ],
         'Enlace triple': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Se representa con 3 líneas.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -108,7 +108,7 @@ class StructureHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(but-2-ino)',
             ),
           ),

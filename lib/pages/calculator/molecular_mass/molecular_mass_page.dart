@@ -12,10 +12,10 @@ import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
@@ -48,7 +48,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   );
 
   _calculate(String input) async {
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     // Result not found in cache, make an API call
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
@@ -69,7 +69,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _textFocusNode.unfocus();
       } else {
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog.reportable(
+        MessageDialog.reportable(
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportContext: 'Molecular mass',
@@ -80,15 +80,15 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
+        const MessageDialog(
           title: 'Sin resultado',
         ).show(context);
       } else {
-        quimifyNoInternetDialog.show(context);
+        noInternetDialog.show(context);
       }
     }
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _showHistory() {
@@ -147,7 +147,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   _tappedOutsideText() {
     _textFocusNode.unfocus(); // Hides keyboard
 
-    if (isEmptyWithBlanks(_textController.text)) { // TODO format forbid blanks?
+    if (isEmptyWithBlanks(_textController.text)) {
+      // TODO format forbid blanks?
       _textController.clear(); // Clears input
     } else {
       _eraseInitialAndFinalBlanks();
@@ -179,8 +180,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         noInitialAndFinalBlanks(_textController.text); // Clears input
   }
 
-  _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +199,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
           return;
         }
 
-        stopQuimifyLoading();
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: _tappedOutsideText,

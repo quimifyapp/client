@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
 class InorganicHelpDialog extends StatelessWidget {
   const InorganicHelpDialog({Key? key}) : super(key: key);
@@ -11,69 +11,69 @@ class InorganicHelpDialog extends StatelessWidget {
       titleToContent: {
         'Inorgánica': [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Los compuestos inorgánicos no tienen al carbono como '
                   'elemento principal.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'CO₂',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'ácido sulfúrico',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'NaCl',
             ),
           ),
         ],
         'Formular': [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'cloruro de sodio   ➔   NaCl',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'nitrato de plata   ➔   AgNO₃',
             ),
           ),
         ],
         'Nombrar': [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Consiste en averiguar el nombre dada la fórmula.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'CrO₃   ➔   óxido de cromo(VI)',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Al₂(SO₃)₃   ➔   sulfito de aluminio',
             ),
           ),

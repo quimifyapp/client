@@ -5,9 +5,9 @@ import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.da
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_fields.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_name.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:quimify_client/text.dart';
 
 class InorganicResultView extends StatefulWidget {
@@ -37,7 +37,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
     ).show(context);
   }
 
-  _pressedShareButton() => quimifyComingSoonDialog.show(context);
+  _pressedShareButton() => comingSoonDialog.show(context);
 
   _tappedBox() => setState(() => _isCollapsed = !_isCollapsed);
 

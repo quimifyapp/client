@@ -9,10 +9,10 @@ import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/menu_suggestion_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/suggestions/menu_suggestion_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/history/history.dart';
@@ -137,7 +137,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   }
 
   _showNotFoundDialog(String formattedQuery) {
-    QuimifyMessageDialog.reportable(
+    MessageDialog.reportable(
       title: 'Sin resultado',
       details: 'No se ha encontrado:\n"$formattedQuery"',
       reportContext: 'Inorganic naming and finding formula',
@@ -148,8 +148,8 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   _processNotFound(InorganicResult? result, String formattedQuery) async {
     if (result == null) {
       await hasInternetConnection()
-          ? const QuimifyMessageDialog(title: 'Sin resultado').show(context)
-          : quimifyNoInternetDialog.show(context);
+          ? const MessageDialog(title: 'Sin resultado').show(context)
+          : noInternetDialog.show(context);
 
       return;
     }
@@ -207,13 +207,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   }
 
   _deepSearch(String formattedQuery) async {
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     var result = await Api().deepSearchInorganic(toDigits(formattedQuery));
 
     await _processResult(result, formattedQuery);
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _searchFromQuery(String formattedQuery) async {
@@ -221,7 +221,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     var result = await Api().searchInorganic(toDigits(formattedQuery));
 
@@ -231,7 +231,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
     await _processResult(result, formattedQuery);
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _searchFromCompletion(String completion) async {
@@ -241,13 +241,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
     Ads().showInterstitial(); // There will be a result most of the times
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     var result = await Api().getInorganicFromCompletion(completion);
 
     await _processResult(result, formatInorganicFormulaOrName(completion));
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _scrollToStart() {
@@ -269,7 +269,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
           return;
         }
 
-        stopQuimifyLoading();
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,

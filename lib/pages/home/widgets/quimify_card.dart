@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 
 class QuimifyCard extends StatefulWidget {
   const QuimifyCard({
@@ -79,7 +79,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
         ),
       );
     } else {
-      quimifyComingSoonDialog.show(context);
+      comingSoonDialog.show(context);
     }
   }
 

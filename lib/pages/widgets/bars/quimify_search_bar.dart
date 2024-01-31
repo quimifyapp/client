@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/text.dart';
 
@@ -229,7 +229,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           QuimifyIconButton.square(
             height: 50,
             backgroundColor: Theme.of(context).colorScheme.surface,
-            onPressed: () => quimifyComingSoonDialog.show(context),
+            onPressed: () => comingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
               color: Theme.of(context).colorScheme.primary,

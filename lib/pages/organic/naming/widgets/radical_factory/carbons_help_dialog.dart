@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
 class CarbonsHelpDialog extends StatelessWidget {
   const CarbonsHelpDialog({Key? key}) : super(key: key);
@@ -11,11 +11,11 @@ class CarbonsHelpDialog extends StatelessWidget {
       titleToContent: {
         'Número de carbonos': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Es la cantidad total de carbonos en el radical.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplos con 3 carbonos:',
             fontWeight: FontWeight.bold,
           ),
@@ -30,7 +30,7 @@ class CarbonsHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(radical propil)',
             ),
           ),
@@ -43,7 +43,7 @@ class CarbonsHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(radical isopropil)',
             ),
           ),

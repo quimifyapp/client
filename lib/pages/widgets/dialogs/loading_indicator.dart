@@ -1,8 +1,8 @@
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 
-startQuimifyLoading(BuildContext context) {
+showLoadingIndicator(BuildContext context) {
   // Popup customization:
   EasyLoading.instance
     ..loadingStyle = EasyLoadingStyle.custom
@@ -20,6 +20,6 @@ startQuimifyLoading(BuildContext context) {
   EasyLoading.show();
 }
 
-stopQuimifyLoading() {
+hideLoadingIndicator() {
   EasyLoading.dismiss();
 }

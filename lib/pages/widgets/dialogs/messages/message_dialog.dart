@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class QuimifyMessageDialog extends StatelessWidget {
-  const QuimifyMessageDialog({
+class MessageDialog extends StatelessWidget {
+  const MessageDialog({
     super.key,
     required this.title,
     this.details,
@@ -19,7 +19,7 @@ class QuimifyMessageDialog extends StatelessWidget {
         _hasLink = false,
         _hasReportButton = false;
 
-  const QuimifyMessageDialog.linked({
+  const MessageDialog.linked({
     super.key,
     required this.title,
     this.details,
@@ -31,7 +31,7 @@ class QuimifyMessageDialog extends StatelessWidget {
         _hasLink = true,
         _hasReportButton = false;
 
-  const QuimifyMessageDialog.reportable({
+  const MessageDialog.reportable({
     super.key,
     required this.title,
     required this.details,
@@ -92,27 +92,26 @@ class QuimifyMessageDialog extends StatelessWidget {
         content: [
           if (details != null && details!.isNotEmpty)
             Center(
-              child: QuimifyDialogContentText(text: details!),
+              child: DialogContentText(
+                text: details!,
+              ),
             ),
         ],
         actions: [
           Row(
             children: [
-              if (_hasReportButton)
-                Row(
-                  children: [
-                    ReportButton(
-                      height: buttonHeight,
-                      size: 20,
-                      onPressed: () => _pressedReportButton(context),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
+              if (_hasReportButton) ...[
+                ReportButton(
+                  height: buttonHeight,
+                  size: 20,
+                  onPressed: () => _pressedReportButton(context),
                 ),
+                const SizedBox(width: 8),
+              ],
               Expanded(
-                child: QuimifyDialogButton(
-                  onPressed: () => _pressedButton(context),
+                child: DialogButton(
                   text: _hasLink ? linkLabel! : 'Entendido',
+                  onPressed: () => _pressedButton(context),
                 ),
               ),
             ],

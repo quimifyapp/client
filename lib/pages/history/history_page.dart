@@ -53,7 +53,8 @@ class HistoryPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Image.asset( // TODO hide in small screens?
+                        Image.asset(
+                          // TODO hide in small screens?
                           'assets/images/empty.png',
                           height: 150,
                         ),

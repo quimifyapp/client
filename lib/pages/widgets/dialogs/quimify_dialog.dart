@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
-// TODO fix split screen not centered (test empty project)
+// TODO fix split screen not centered
 
 showQuimifyDialog({
   required BuildContext context,
@@ -13,8 +13,7 @@ showQuimifyDialog({
   await showDialog<void>(
     context: context,
     barrierDismissible: closable,
-    barrierColor:
-        Theme.of(context).colorScheme.shadow,
+    barrierColor: Theme.of(context).colorScheme.shadow,
     builder: (BuildContext context) => dialog,
   );
 }

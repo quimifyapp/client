@@ -5,7 +5,7 @@ import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
 class NamingHelpDialog extends StatelessWidget {
   const NamingHelpDialog({
@@ -78,12 +78,12 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'En la lista aparecen los sustituyentes que se pueden '
                   'enlazar al carbono.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -98,18 +98,18 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(carbono con 3 hidrógenos)',
             ),
           ),
         ],
         'Radicales': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Son ramificaciones de la cadena principal de carbonos.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -121,7 +121,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(2-metilpropano)',
             ),
           ),
@@ -138,7 +138,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para añadir un carbono a la cadena.',
             ),
           ),
@@ -155,7 +155,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para enlazar varios hidrógenos al '
                   'carbono.',
             ),
@@ -173,7 +173,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para ver tus resultados anteriores.',
             ),
           ),
@@ -190,7 +190,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para deshacer el último cambio.',
             ),
           ),

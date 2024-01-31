@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class OrganicResultView extends StatelessWidget {
@@ -18,22 +18,22 @@ class OrganicResultView extends StatelessWidget {
     required this.fields,
     required this.imageProvider,
     required this.onHistoryPressed,
-    required this.quimifyReportDialog,
+    required this.reportDialog,
   }) : super(key: key);
 
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
   final Function(BuildContext) onHistoryPressed;
-  final ReportDialog quimifyReportDialog;
+  final ReportDialog reportDialog;
 
   _pressedHistoryButton(BuildContext context) => onHistoryPressed(context);
 
   _pressedReportButton(BuildContext context) =>
-      quimifyReportDialog.show(context);
+      reportDialog.show(context);
 
   _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.show(context);
+      comingSoonDialog.show(context);
 
   static const double _buttonHeight = 44;
   static const double _diagramHeight = 290;

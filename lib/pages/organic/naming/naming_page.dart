@@ -7,7 +7,7 @@ import 'package:quimify_client/internet/api/organic/components/substituent.dart'
 import 'package:quimify_client/internet/api/organic/molecules/open_chain/open_chain.dart';
 import 'package:quimify_client/internet/api/organic/molecules/open_chain/simple.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
-import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
@@ -21,15 +21,15 @@ import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/radi
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
 
 class NamingPage extends StatefulWidget {
@@ -68,14 +68,14 @@ class _NamingPageState extends State<NamingPage> {
   _search(List<int> sequence) async {
     Ads().showInterstitial(); // There will be a result most of the times
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     OrganicResult? result = await Api().getOrganicFromStructure(sequence);
 
     if (result != null) {
       if (!result.found) {
         if (!mounted) return null; // For security reasons
-        const QuimifyMessageDialog(title: 'Sin resultado').show(context);
+        const MessageDialog(title: 'Sin resultado').show(context);
 
         return null;
       }
@@ -87,15 +87,15 @@ class _NamingPageState extends State<NamingPage> {
       if (!mounted) return null; // For security reasons
 
       if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
+        const MessageDialog(
           title: 'Sin resultado',
         ).show(context);
       } else {
-        quimifyNoInternetDialog.show(context);
+        noInternetDialog.show(context);
       }
     }
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
 
     return result;
   }
@@ -119,7 +119,7 @@ class _NamingPageState extends State<NamingPage> {
                 ? NetworkImage(organicResult.url2D!)
                 : null,
             onHistoryPressed: _showHistory,
-            quimifyReportDialog: ReportDialog(
+            reportDialog: ReportDialog(
               details: 'Resultado de\n"'
                   '${formatStructure(organicResult.structure!)}"',
               reportContext: 'Organic naming',
@@ -182,7 +182,7 @@ class _NamingPageState extends State<NamingPage> {
         _checkDone();
       });
     } else {
-      const QuimifyMessageDialog(
+      const MessageDialog(
         title: 'Nada que deshacer',
         details: 'Prueba a enlazar un sustiuyente.',
       ).show(context);
@@ -202,13 +202,13 @@ class _NamingPageState extends State<NamingPage> {
         _checkDone();
       });
     } else if (_openChain().getFreeBondCount() == 4) {
-      const QuimifyMessageDialog(
+      const MessageDialog(
         title: 'Molécula vacía',
         details: 'Todavía no es posible enlazar otro carbono. Prueba a enlazar '
             'un sustiuyente.',
       ).show(context);
     } else {
-      const QuimifyMessageDialog(
+      const MessageDialog(
         title: 'No hace falta',
         details: 'Se enlazará otro carbono al oxígeno cuando completes este '
             'carbono.',
@@ -222,7 +222,7 @@ class _NamingPageState extends State<NamingPage> {
         _pressedGroupButton(Group.hydrogen);
       } while (_openChain().getFreeBondCount() > 1);
     } else {
-      const QuimifyMessageDialog(
+      const MessageDialog(
         title: 'Molécula completa',
         details: 'No quedan valencias libres para enlazar más hidrógenos.',
       ).show(context);
@@ -434,7 +434,7 @@ class _NamingPageState extends State<NamingPage> {
           return;
         }
 
-        stopQuimifyLoading();
+        hideLoadingIndicator();
       },
       child: QuimifyScaffold(
         bannerAdName: runtimeType.toString(),
@@ -547,8 +547,7 @@ class _NamingPageState extends State<NamingPage> {
                 ),
                 const SizedBox(height: 15 + 5),
               ],
-              if (_done)
-                const SizedBox(height: 5),
+              if (_done) const SizedBox(height: 5),
               Expanded(
                 child: Container(
                   decoration: const BoxDecoration(

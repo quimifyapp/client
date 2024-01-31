@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/carbons_help_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/tip_shape_help_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
   const RadicalFactoryDialog({
@@ -49,7 +49,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
     if (_canRemove()) {
       setState(() => _carbonCount--);
     } else {
-      QuimifyMessageDialog(
+      MessageDialog(
         title: 'No existe',
         details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}debe '
             'tener al menos ${_isIso ? '3 carbonos' : '1 carbono'}.',

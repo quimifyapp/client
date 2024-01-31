@@ -9,10 +9,10 @@ import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
@@ -46,7 +46,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       return;
     }
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
 
@@ -71,7 +71,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         _scrollToStart(); // Goes to the top of the page
       } else {
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog.reportable(
+        MessageDialog.reportable(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$name"',
           reportContext: 'Organic finding formula',
@@ -82,15 +82,15 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
+        const MessageDialog(
           title: 'Sin resultado',
         ).show(context);
       } else {
-        quimifyNoInternetDialog.show(context);
+        noInternetDialog.show(context);
       }
     }
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _showHistory() {
@@ -149,7 +149,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           return;
         }
 
-        stopQuimifyLoading();
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),
@@ -187,7 +187,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
             onHistoryPressed: (resultPageContext) => _showHistory(),
-            quimifyReportDialog: ReportDialog(
+            reportDialog: ReportDialog(
               details: 'Resultado de\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
               reportDetails: 'Result of "${_result.name!}": $_result',

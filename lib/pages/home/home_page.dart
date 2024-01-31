@@ -7,7 +7,7 @@ import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
@@ -50,14 +50,14 @@ class _HomePageState extends State<HomePage> {
   _showWelcomeMessagePopup() {
     if (widget.clientResult!.messagePresent) {
       if (widget.clientResult!.messageLinkPresent!) {
-        QuimifyMessageDialog.linked(
+        MessageDialog.linked(
           title: widget.clientResult!.messageTitle!,
           details: widget.clientResult!.messageDetails!,
           linkLabel: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
         ).show(context);
       } else {
-        QuimifyMessageDialog(
+        MessageDialog(
           title: widget.clientResult!.messageTitle!,
           details: widget.clientResult!.messageDetails!,
         ).show(context);
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     if (widget.clientResult!.updateAvailable) {
       bool optionalUpdate = !widget.clientResult!.updateMandatory!;
 
-      QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
+      MessageDialog updateDialog = MessageDialog.linked(
         title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
         details: widget.clientResult!.updateDetails,
         linkLabel: 'Actualizar',
