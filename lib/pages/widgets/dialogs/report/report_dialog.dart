@@ -21,8 +21,8 @@ class ReportDialog extends StatelessWidget {
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
 
-  show(BuildContext context) async =>
-      await showQuimifyDialog(context: context, dialog: this);
+  show(BuildContext context) =>
+      showQuimifyDialog(context: context, dialog: this);
 
   _sendReport(String? userMessage) async {
     Api().sendReportWithRetry(

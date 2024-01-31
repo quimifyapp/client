@@ -183,8 +183,7 @@ class Api {
     );
 
     if (!posted) {
-      // Retry:
-      await _sendError(
+      _sendError(
         authority: _mirrorAuthority,
         context: context,
         details: details,
@@ -205,8 +204,7 @@ class Api {
     );
 
     if (!posted) {
-      // Retry:
-      await _sendReport(
+      _sendReport(
         authority: _mirrorAuthority,
         context: context,
         details: details,

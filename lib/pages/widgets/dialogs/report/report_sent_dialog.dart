@@ -12,8 +12,8 @@ class ReportSentDialog extends StatelessWidget {
 
   final String? userMessage;
 
-  show(BuildContext context) async =>
-      await showQuimifyDialog(context: context, closable: true, dialog: this);
+  show(BuildContext context) =>
+      showQuimifyDialog(context: context, closable: true, dialog: this);
 
   _exit(BuildContext context) => Navigator.of(context).pop();
 

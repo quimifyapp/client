@@ -53,8 +53,8 @@ class MessageDialog extends StatelessWidget {
 
   final bool _hasLink, _hasReportButton;
 
-  show(BuildContext context) async => await showQuimifyDialog(
-      context: context, closable: closable, dialog: this);
+  show(BuildContext context) =>
+      showQuimifyDialog(context: context, closable: closable, dialog: this);
 
   _exit(BuildContext context) => Navigator.of(context).pop();
 
