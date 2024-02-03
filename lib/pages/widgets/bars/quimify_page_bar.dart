@@ -26,7 +26,7 @@ class QuimifyPageBar extends StatelessWidget {
           children: [
             QuimifyIconButton.square(
               height: 50,
-              backgroundColor: QuimifyColors.mutedTeal(context),
+              backgroundColor: QuimifyColors.secondaryTeal(context),
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(
                 Icons.arrow_back,

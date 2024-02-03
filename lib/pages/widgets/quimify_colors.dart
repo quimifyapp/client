@@ -7,6 +7,23 @@ Color _themedColor(context, {required Color light, required Color dark}) =>
     _hasLightMode(context) ? light : dark;
 
 class QuimifyColors {
+  static LinearGradient gradient({double opacity = 1}) => LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          const Color.fromARGB(255, 55, 224, 211).withOpacity(opacity),
+          const Color.fromARGB(255, 72, 232, 167).withOpacity(opacity),
+        ],
+      );
+
+  static Color teal() => const Color.fromARGB(255, 59, 226, 199);
+
+  static Color secondaryTeal(BuildContext context) => _themedColor(
+        context,
+        light: const Color.fromARGB(255, 106, 233, 218),
+        dark: const Color.fromARGB(255, 118, 252, 237),
+      );
+
   static Color primary(BuildContext context) => _themedColor(
         context,
         light: const Color.fromARGB(255, 34, 34, 34),
@@ -101,22 +118,5 @@ class QuimifyColors {
         context,
         light: const Color.fromARGB(13, 0, 0, 0),
         dark: Colors.black45,
-      );
-
-  static Color teal() => const Color.fromARGB(255, 59, 226, 199);
-
-  static Color mutedTeal(BuildContext context) => _themedColor(
-        context,
-        light: const Color.fromARGB(255, 106, 233, 218),
-        dark: const Color.fromARGB(255, 118, 252, 237),
-      );
-
-  static LinearGradient gradient({double opacity = 1}) => LinearGradient(
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-        colors: [
-          const Color.fromARGB(255, 55, 224, 211).withOpacity(opacity),
-          const Color.fromARGB(255, 72, 232, 167).withOpacity(opacity),
-        ],
       );
 }
