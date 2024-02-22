@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class QuimifyMessageDialog extends StatelessWidget {
-  const QuimifyMessageDialog({
+class MessageDialog extends StatelessWidget {
+  const MessageDialog({
     super.key,
     required this.title,
     this.details,
     this.closable = true,
+    this.onButtonPressed,
   })  : linkLabel = null,
         link = null,
         reportContext = null,
@@ -19,24 +20,26 @@ class QuimifyMessageDialog extends StatelessWidget {
         _hasLink = false,
         _hasReportButton = false;
 
-  const QuimifyMessageDialog.linked({
+  const MessageDialog.linked({
     super.key,
     required this.title,
     this.details,
     required this.linkLabel,
     required this.link,
     this.closable = true,
+    this.onButtonPressed,
   })  : reportContext = null,
         reportDetails = null,
         _hasLink = true,
         _hasReportButton = false;
 
-  const QuimifyMessageDialog.reportable({
+  const MessageDialog.reportable({
     super.key,
     required this.title,
     required this.details,
     required this.reportContext,
     required this.reportDetails,
+    this.onButtonPressed,
   })  : linkLabel = null,
         link = null,
         closable = true,
@@ -45,6 +48,7 @@ class QuimifyMessageDialog extends StatelessWidget {
 
   final String title;
   final String? details;
+  final VoidCallback? onButtonPressed;
 
   final String? linkLabel, link;
   final String? reportContext, reportDetails;
@@ -53,8 +57,8 @@ class QuimifyMessageDialog extends StatelessWidget {
 
   final bool _hasLink, _hasReportButton;
 
-  show(BuildContext context) async => await showQuimifyDialog(
-      context: context, closable: closable, dialog: this);
+  show(BuildContext context) =>
+      showQuimifyDialog(context: context, closable: closable, dialog: this);
 
   _exit(BuildContext context) => Navigator.of(context).pop();
 
@@ -65,6 +69,8 @@ class QuimifyMessageDialog extends StatelessWidget {
     if (_hasLink) {
       _openLink(context);
     }
+
+    onButtonPressed?.call();
 
     if (closable) {
       _exit(context);
@@ -85,34 +91,33 @@ class QuimifyMessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    return WillPopScope(
-      onWillPop: () => Future.value(closable),
+    return PopScope(
+      canPop: closable,
       child: QuimifyDialog(
         title: title,
         content: [
           if (details != null && details!.isNotEmpty)
             Center(
-              child: QuimifyDialogContentText(text: details!),
+              child: DialogContentText(
+                text: details!,
+              ),
             ),
         ],
         actions: [
           Row(
             children: [
-              if (_hasReportButton)
-                Row(
-                  children: [
-                    ReportButton(
-                      height: buttonHeight,
-                      size: 20,
-                      onPressed: () => _pressedReportButton(context),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
+              if (_hasReportButton) ...[
+                ReportButton(
+                  height: buttonHeight,
+                  size: 20,
+                  onPressed: () => _pressedReportButton(context),
                 ),
+                const SizedBox(width: 8),
+              ],
               Expanded(
-                child: QuimifyDialogButton(
-                  onPressed: () => _pressedButton(context),
+                child: DialogButton(
                   text: _hasLink ? linkLabel! : 'Entendido',
+                  onPressed: () => _pressedButton(context),
                 ),
               ),
             ],

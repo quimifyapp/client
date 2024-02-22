@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class HistoryEntryView extends StatelessWidget {
@@ -19,7 +19,7 @@ class HistoryEntryView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).colorScheme.surface,
+        color: QuimifyColors.foreground(context),
       ),
       // To avoid rounded corners overflow:
       clipBehavior: Clip.hardEdge,
@@ -37,7 +37,7 @@ class HistoryEntryView extends StatelessWidget {
                     .map(
                       (field) => QuimifyField(
                         title: field.title,
-                        titleColor: quimifyTeal,
+                        titleColor: QuimifyColors.teal(),
                         value: field.value,
                         valueBold: false,
                       ),
@@ -46,10 +46,10 @@ class HistoryEntryView extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 15),
-            const Icon(
+            Icon(
               Icons.arrow_forward_rounded,
               size: 30,
-              color: quimifyTeal,
+              color: QuimifyColors.teal(),
             ),
           ],
         ),

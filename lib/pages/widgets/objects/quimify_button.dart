@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyButton extends StatelessWidget {
   const QuimifyButton({
@@ -34,33 +34,27 @@ class QuimifyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double borderRadius = 10;
     double opacity = enabled ? 1 : _unselectedOpacity;
 
     return Container(
       width: width,
       height: height,
-      // To avoid rounded corners overflow:
       clipBehavior: Clip.hardEdge,
+      // To prevent rounded corners overflow
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: gradient ? quimifyGradient(opacity: opacity) : null,
+        borderRadius: BorderRadius.circular(borderRadius),
+        gradient: gradient ? QuimifyColors.gradient(opacity: opacity) : null,
         color: color?.withOpacity(opacity),
       ),
       child: SizedBox.expand(
-        child: enabled
-            ? MaterialButton(
-                padding: const EdgeInsets.all(0),
-                splashColor: Colors.transparent,
-                onPressed: onPressed,
-                child: child,
-              )
-            : MaterialButton(
-                padding: const EdgeInsets.all(0),
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: onPressed,
-                child: child,
-              ),
+        child: MaterialButton(
+          padding: const EdgeInsets.all(0),
+          splashColor: Colors.transparent,
+          highlightColor: enabled ? null : Colors.transparent,
+          onPressed: onPressed,
+          child: child,
+        ),
       ),
     );
   }

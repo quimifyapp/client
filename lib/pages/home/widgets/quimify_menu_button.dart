@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_gradient.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyMenuButton extends StatelessWidget {
   const QuimifyMenuButton({
@@ -22,7 +22,7 @@ class QuimifyMenuButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          gradient: selected ? quimifyGradient() : null,
+          gradient: selected ? QuimifyColors.gradient() : null,
         ),
         child: MaterialButton(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -40,8 +40,8 @@ class QuimifyMenuButton extends StatelessWidget {
             group: autoSizeGroup,
             style: TextStyle(
               color: selected
-                  ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).colorScheme.tertiaryContainer,
+                  ? QuimifyColors.inverseText(context)
+                  : QuimifyColors.quaternary(context),
               fontWeight: FontWeight.bold,
             ),
           ),

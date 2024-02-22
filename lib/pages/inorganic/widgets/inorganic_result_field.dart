@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class InorganicResultField extends StatelessWidget {
   const InorganicResultField({
@@ -27,7 +28,7 @@ class InorganicResultField extends StatelessWidget {
             stepGranularity: 0.1,
             group: titleAutoSizeGroup,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               fontSize: 14,
             ),
           ),
@@ -37,7 +38,7 @@ class InorganicResultField extends StatelessWidget {
             maxLines: 1,
             stepGranularity: 0.1,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

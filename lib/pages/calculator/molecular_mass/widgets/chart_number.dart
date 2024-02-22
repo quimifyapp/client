@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class GraphNumber extends StatelessWidget {
-  const GraphNumber({Key? key, required this.text}) : super(key: key);
+class ChartNumber extends StatelessWidget {
+  const ChartNumber({Key? key, required this.text}) : super(key: key);
 
   final String text;
 
@@ -11,7 +12,7 @@ class GraphNumber extends StatelessWidget {
       text,
       textAlign: TextAlign.right,
       style: TextStyle(
-        color: Theme.of(context).colorScheme.primary,
+        color: QuimifyColors.primary(context),
         fontSize: 16,
       ),
     );

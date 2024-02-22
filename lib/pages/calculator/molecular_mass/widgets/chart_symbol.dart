@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class GraphSymbol extends StatelessWidget {
-  const GraphSymbol({Key? key, required this.symbol}) : super(key: key);
+class ChartSymbol extends StatelessWidget {
+  const ChartSymbol({Key? key, required this.symbol}) : super(key: key);
 
   final String symbol;
 
@@ -11,7 +12,7 @@ class GraphSymbol extends StatelessWidget {
       symbol,
       textAlign: TextAlign.left,
       style: TextStyle(
-        color: Theme.of(context).colorScheme.primary,
+        color: QuimifyColors.primary(context),
         fontSize: 16,
       ),
     );

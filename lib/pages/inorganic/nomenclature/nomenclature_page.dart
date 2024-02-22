@@ -3,17 +3,20 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/api/results/classification.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
-import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/routes.dart';
+import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/text.dart';
 
 class NomenclaturePage extends StatefulWidget {
   const NomenclaturePage({Key? key}) : super(key: key);
@@ -41,6 +44,8 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     formattedQuery: 'NaCl',
     result: InorganicResult(
       true,
+      null,
+      null,
       'NaCl',
       'cloruro de sodio',
       'monocloruro de sodio',
@@ -52,6 +57,24 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       '1686.15',
     ),
   );
+
+  static const String suggestion = 'Parece que estás intentando resolver un';
+
+  static const Map<Classification, String> classificationToSuggestion = {
+    Classification.organicFormula: suggestion,
+    Classification.organicName: suggestion,
+    Classification.molecularMassProblem: '${suggestion}a',
+    Classification.chemicalProblem: suggestion,
+    Classification.chemicalReaction: '${suggestion}a',
+  };
+
+  static const Map<Classification, String> classificationToLabel = {
+    Classification.organicFormula: 'compuesto orgánico',
+    Classification.organicName: 'compuesto orgánico',
+    Classification.molecularMassProblem: 'masa molecular',
+    Classification.chemicalProblem: 'problema químico',
+    Classification.chemicalReaction: 'reacción química',
+  };
 
   @override
   initState() {
@@ -84,17 +107,16 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   // Looks for a previous completion that could complete this input too
   String? _getFromFoundCompletionsCache(String normalizedInput) {
     String? key = _normalizedToCompletion.keys.firstWhereOrNull(
-        (String normalizedCompletion) =>
-            normalizedCompletion.startsWith(normalizedInput));
+        (cachedNormalizedCompletion) =>
+            cachedNormalizedCompletion.startsWith(normalizedInput));
 
     return key != null ? _normalizedToCompletion[key] : null;
   }
 
   // Checks if this input is an extension of an uncompleted previous input
   bool _isInNotFoundCompletionsCache(String normalizedInput) =>
-      _completionNotFoundNormalizedInputs
-          .where((previousInput) => normalizedInput.startsWith(previousInput))
-          .isNotEmpty;
+      _completionNotFoundNormalizedInputs.any(
+          (cachedNormalizedInput) => normalizedInput == cachedNormalizedInput);
 
   String _normalize(String text) => removeDiacritics(text)
       .replaceAll(RegExp(r'[^\x00-\x7F]'), '') // Only ASCII
@@ -119,43 +141,126 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     return completion;
   }
 
-  _processResult(InorganicResult? result, String formattedQuery) async {
-    if (result != null) {
-      if (result.present) {
-        setState(
-          () => _resultViews.add(
-            InorganicResultView(
-              formattedQuery: formattedQuery,
-              result: result,
-            ),
-          ),
-        );
+  _showNotFoundDialog(String formattedQuery) {
+    MessageDialog.reportable(
+      title: 'Sin resultado',
+      details: 'No se ha encontrado:\n"$formattedQuery"',
+      reportContext: 'Inorganic naming and finding formula',
+      reportDetails: 'Searched "$formattedQuery"',
+    ).show(context);
+  }
 
-        History().saveInorganic(result, formattedQuery);
+  _processNotFound(InorganicResult? result, String formattedQuery) async {
+    if (result == null) {
+      await hasInternetConnection()
+          ? const MessageDialog(title: 'Sin resultado').show(context)
+          : noInternetDialog.show(context);
 
-        // UI/UX actions:
-
-        _labelText = formattedQuery; // Sets previous input as label
-        _textController.clear(); // Clears input
-        _textFocusNode.unfocus(); // Hides keyboard
-        _scrollToStart(); // Goes to the top of the page
-      } else {
-        QuimifyMessageDialog.reportable(
-          title: 'Sin resultado',
-          details: 'No se ha encontrado:\n"$formattedQuery"',
-          reportContext: 'Inorganic naming and finding formula',
-          reportDetails: 'Searched "$formattedQuery"',
-        ).show(context);
-      }
-    } else {
-      if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
-      } else {
-        quimifyNoInternetDialog.show(context);
-      }
+      return;
     }
+
+    if (result.classification == null) {
+      _showNotFoundDialog(formattedQuery);
+      return;
+    }
+
+    // TODO mejorar textos:
+
+    if (result.classification == Classification.nomenclatureProblem) {
+      MessageDialog(
+        title: 'Casi lo tienes',
+        details: 'Introduce sólo la fórmula o nombre que quieras resolver.',
+        onButtonPressed: () => _textFocusNode.requestFocus(),
+      ).show(context);
+      return;
+    }
+
+    bool classificationHasRoute = Routes.contains(result.classification!);
+
+    ClassificationDialog(
+      firstText: classificationToSuggestion[result.classification!]!,
+      secondBoldText: classificationToLabel[result.classification!]!,
+      closeOnAgree: !classificationHasRoute,
+      onPressedAgree: () {
+        if (classificationHasRoute) {
+          Navigator.pushNamed(
+            context,
+            Routes.fromClassification[result.classification!]!,
+            arguments: toDigits(formattedQuery),
+          );
+        } else if (result.classification == Classification.chemicalProblem) {
+          // TODO explicar qué SÍ puede hacer Quimify?
+          // TODO hacer más comprensible? "próximas actualizaciones"
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver problemas químicos en próximas '
+                'actualizaciones.',
+          ).show(context);
+        } else if (result.classification == Classification.chemicalReaction) {
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver reacciones químicas en próximas '
+                'actualizaciones.',
+          ).show(context);
+        }
+      },
+      onPressedDisagree: () => _deepSearch(formattedQuery),
+    ).show(context);
+  }
+
+  _processResult(InorganicResult? result, String formattedQuery) async {
+    if (result == null || !result.found) {
+      _processNotFound(result, formattedQuery);
+      return;
+    }
+
+    // TODO handle suggestions
+
+    setState(
+      () => _resultViews.add(
+        InorganicResultView(
+          formattedQuery: formattedQuery,
+          result: result,
+        ),
+      ),
+    );
+
+    History().saveInorganic(result, formattedQuery);
+
+    // UI/UX actions:
+
+    _labelText = formattedQuery; // Sets previous input as label
+    _textController.clear(); // Clears input
+    _textFocusNode.unfocus(); // Hides keyboard
+    _scrollToStart(); // Goes to the top of the page
+  }
+
+  _deepSearch(String formattedQuery) async {
+    showLoadingIndicator(context);
+
+    var result = await Api().deepSearchInorganic(toDigits(formattedQuery));
+
+    await _processResult(result, formattedQuery);
+
+    hideLoadingIndicator();
+  }
+
+  _searchFromQuery(String formattedQuery) async {
+    if (isEmptyWithBlanks(formattedQuery)) {
+      return;
+    }
+
+    showLoadingIndicator(context);
+
+    var result = await Api().searchInorganic(toDigits(formattedQuery));
+
+    if (result != null && result.found && result.suggestion == null) {
+      Ads().showInterstitial();
+    }
+
+    await _processResult(result, formattedQuery);
+
+    hideLoadingIndicator();
   }
 
   _searchFromCompletion(String completion) async {
@@ -165,31 +270,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
     Ads().showInterstitial(); // There will be a result most of the times
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     var result = await Api().getInorganicFromCompletion(completion);
 
     await _processResult(result, formatInorganicFormulaOrName(completion));
 
-    stopQuimifyLoading();
-  }
-
-  _searchFromQuery(String input) async {
-    if (isEmptyWithBlanks(input)) {
-      return;
-    }
-
-    startQuimifyLoading(context);
-
-    var result = await Api().getInorganic(toDigits(input));
-
-    if (result != null && result.present) {
-      Ads().showInterstitial();
-    }
-
-    await _processResult(result, input);
-
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _scrollToStart() {
@@ -205,11 +292,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // TODO in disposal method instead?
-        stopQuimifyLoading();
-        return true;
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: _textFocusNode.unfocus,

@@ -4,24 +4,24 @@ import 'package:flutter/services.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
-import 'package:quimify_client/storage/history/history.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_selector.dart';
+import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_selector.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/text.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  // Initial values:
+  bool _argumentRead = false;
 
   String _labelText = 'H₂SO₄';
   MolecularMassResult _result = MolecularMassResult(
@@ -48,7 +48,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
   );
 
   _calculate(String input) async {
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     // Result not found in cache, make an API call
     MolecularMassResult? result = await Api().getMolecularMass(toDigits(input));
@@ -69,7 +69,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         _textFocusNode.unfocus();
       } else {
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog.reportable(
+        MessageDialog.reportable(
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportContext: 'Molecular mass',
@@ -80,15 +80,15 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
+        const MessageDialog(
           title: 'Sin resultado',
         ).show(context);
       } else {
-        quimifyNoInternetDialog.show(context);
+        noInternetDialog.show(context);
       }
     }
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _showHistory() {
@@ -101,12 +101,12 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     query: toSubscripts(e.formula),
                     fields: [
                       HistoryField(
-                        'Búsqueda',
+                        'Fórmula',
                         toSubscripts(e.formula),
                       ),
                       HistoryField(
                         'Masa molecular',
-                        '${e.molecularMass.toString()} g/mol',
+                        '${formatMolecularMass(e.molecularMass)} g/mol',
                       ),
                     ],
                   ))
@@ -148,6 +148,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     _textFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_textController.text)) {
+      // TODO format forbid blanks?
       _textController.clear(); // Clears input
     } else {
       _eraseInitialAndFinalBlanks();
@@ -179,23 +180,26 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         noInitialAndFinalBlanks(_textController.text); // Clears input
   }
 
-  _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
 
   @override
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    TextStyle inputOutputStyle = const TextStyle(
-      fontSize: 26,
-      color: quimifyTeal,
-      fontWeight: FontWeight.bold,
-    );
+    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
 
-    return WillPopScope(
-      onWillPop: () async {
-        stopQuimifyLoading();
-        return true;
+    if (argument != null && !_argumentRead) {
+      _textFocusNode.requestFocus();
+      _argumentRead = true;
+    }
+
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: _tappedOutsideText,
@@ -212,7 +216,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   child: Container(
                     height: 110,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: QuimifyColors.foreground(context),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     padding: const EdgeInsets.all(20),
@@ -226,7 +230,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                               'Fórmula',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: QuimifyColors.primary(context),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -241,8 +245,12 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                           autocorrect: false,
                           enableSuggestions: false,
                           // Aspect:
-                          cursorColor: Theme.of(context).colorScheme.primary,
-                          style: inputOutputStyle,
+                          cursorColor: QuimifyColors.primary(context),
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: QuimifyColors.primary(context),
+                            fontWeight: FontWeight.bold,
+                          ),
                           keyboardType: TextInputType.visiblePassword,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
@@ -250,7 +258,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             isCollapsed: true,
                             labelText: _labelText,
                             labelStyle: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: QuimifyColors.tertiary(context),
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                             ),
@@ -292,7 +300,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: QuimifyColors.foreground(context),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Column(
@@ -304,13 +312,13 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                             'Masa molecular',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: QuimifyColors.primary(context),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           const Spacer(),
                           IconButton(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: QuimifyColors.primary(context),
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             // To remove padding:
@@ -326,7 +334,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         '${formatMolecularMass(_result.molecularMass!)} g/mol',
                         stepGranularity: 0.1,
                         maxLines: 1,
-                        style: inputOutputStyle,
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: QuimifyColors.teal(),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -346,7 +358,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         child: Text(
                           'Calcular',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: QuimifyColors.inverseText(context),
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
@@ -356,7 +368,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                GraphSelector(
+                ChartSelector(
                   mass: _result.molecularMass!,
                   elementToGrams: _result.elementToGrams!,
                   elementToMoles: _result.elementToMoles!,

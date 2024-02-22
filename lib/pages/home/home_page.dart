@@ -2,22 +2,23 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/internet/api/results/access_data_result.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
-    required this.accessDataResult,
+    required this.clientResult,
   }) : super(key: key);
 
-  final AccessDataResult? accessDataResult;
+  final ClientResult? clientResult;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,34 +49,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showWelcomeMessagePopup() {
-    if (widget.accessDataResult!.messagePresent) {
-      if (widget.accessDataResult!.messageLinkPresent!) {
-        QuimifyMessageDialog.linked(
-          title: widget.accessDataResult!.messageTitle!,
-          details: widget.accessDataResult!.messageDetails!,
-          linkLabel: widget.accessDataResult!.messageLinkName!,
-          link: widget.accessDataResult!.messageLink!,
+    if (widget.clientResult!.messagePresent) {
+      if (widget.clientResult!.messageLinkPresent!) {
+        MessageDialog.linked(
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
+          linkLabel: widget.clientResult!.messageLinkName!,
+          link: widget.clientResult!.messageLink!,
         ).show(context);
       } else {
-        QuimifyMessageDialog(
-          title: widget.accessDataResult!.messageTitle!,
-          details: widget.accessDataResult!.messageDetails!,
+        MessageDialog(
+          title: widget.clientResult!.messageTitle!,
+          details: widget.clientResult!.messageDetails!,
         ).show(context);
       }
     }
   }
 
   _showWelcomePopups() {
-    if (widget.accessDataResult == null) {
+    if (widget.clientResult == null) {
       return;
     }
 
-    if (widget.accessDataResult!.updateAvailable) {
-      bool optionalUpdate = !widget.accessDataResult!.updateMandatory!;
+    if (widget.clientResult!.updateAvailable) {
+      bool optionalUpdate = !widget.clientResult!.updateMandatory!;
 
-      QuimifyMessageDialog updateDialog = QuimifyMessageDialog.linked(
+      MessageDialog updateDialog = MessageDialog.linked(
         title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-        details: widget.accessDataResult!.updateDetails,
+        details: widget.clientResult!.updateDetails,
         linkLabel: 'Actualizar',
         link: Platform.isAndroid
             ? 'https://quimify.com/android'
@@ -120,8 +121,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => _returnButtonPressed(),
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        _returnButtonPressed();
+      },
       child: QuimifyScaffold.noAd(
         header: SafeArea(
           bottom: false, // So it's not inside status bar
@@ -139,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                   child: IconButton(
                     icon: Image.asset(
                       'assets/images/icons/logo.png',
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: QuimifyColors.inverseText(context),
                     ),
                     // To remove native effects:
                     hoverColor: Colors.transparent,
@@ -155,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                 Image.asset(
                   'assets/images/icons/branding-slim.png',
                   height: 17,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: QuimifyColors.inverseText(context),
                 ),
               ],
             ),
@@ -173,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                   height: 60,
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: QuimifyColors.foreground(context),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
@@ -204,13 +211,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 15),
                 Expanded(
-                  child: ScrollConfiguration(
-                    behavior: const ScrollBehavior().copyWith(
-                      overscroll: false, // To avoid weird behavior
-                    ),
-                    child: SingleChildScrollView(
-                      child: _pages[_currentPage],
-                    ),
+                  child: SingleChildScrollView(
+                    child: _pages[_currentPage],
                   ),
                 ),
                 const SizedBox(height: 5), // + 15 from cards = 20

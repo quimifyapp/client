@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyCard extends StatefulWidget {
   const QuimifyCard({
@@ -65,7 +66,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
   @override
   dispose() {
     if (_timer != null) {
-      _timer!.cancel();
+      _timer.cancel();
     }
 
     super.dispose();
@@ -79,7 +80,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
         ),
       );
     } else {
-      quimifyComingSoonDialog.show(context);
+      comingSoonDialog.show(context);
     }
   }
 
@@ -91,7 +92,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
         height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Theme.of(context).colorScheme.surface,
+          color: QuimifyColors.foreground(context),
         ),
         // To avoid rounded corners overflow:
         clipBehavior: Clip.hardEdge,
@@ -119,11 +120,11 @@ class _QuimifyCardState extends State<QuimifyCard> {
                         if (widget.body != null)
                           Text(
                             widget.body!.keys.elementAt(_selector),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: 'CeraProBoldCustom',
                               fontSize: 28,
                               fontWeight: FontWeight.w600,
-                              color: quimifyTeal,
+                              color: QuimifyColors.teal(),
                             ),
                           ),
                         const Spacer(), // Between title and subtitle
@@ -137,7 +138,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
                                     : 'Próximamente',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: QuimifyColors.primary(context),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -148,16 +149,16 @@ class _QuimifyCardState extends State<QuimifyCard> {
                 ),
               ),
               if (widget.comingSoonBody != null)
-                const Icon(
+                Icon(
                   Icons.lock_rounded,
                   size: 26,
-                  color: quimifyTeal,
+                  color: QuimifyColors.teal(),
                 ),
               if (widget.comingSoonBody == null)
-                const Icon(
+                Icon(
                   Icons.arrow_forward_rounded,
                   size: 30,
-                  color: quimifyTeal,
+                  color: QuimifyColors.teal(),
                 ),
             ],
           ),

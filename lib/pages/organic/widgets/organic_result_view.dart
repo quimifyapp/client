@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class OrganicResultView extends StatelessWidget {
@@ -18,22 +19,20 @@ class OrganicResultView extends StatelessWidget {
     required this.fields,
     required this.imageProvider,
     required this.onHistoryPressed,
-    required this.quimifyReportDialog,
+    required this.reportDialog,
   }) : super(key: key);
 
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
   final Function(BuildContext) onHistoryPressed;
-  final ReportDialog quimifyReportDialog;
+  final ReportDialog reportDialog;
 
   _pressedHistoryButton(BuildContext context) => onHistoryPressed(context);
 
-  _pressedReportButton(BuildContext context) =>
-      quimifyReportDialog.show(context);
+  _pressedReportButton(BuildContext context) => reportDialog.show(context);
 
-  _pressedShareButton(BuildContext context) =>
-      quimifyComingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
 
   static const double _buttonHeight = 44;
   static const double _diagramHeight = 290;
@@ -51,7 +50,7 @@ class OrganicResultView extends StatelessWidget {
               Text(
                 'Resultado',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -80,7 +79,7 @@ class OrganicResultView extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSurface,
+              color: QuimifyColors.textHighlight(context),
               borderRadius: BorderRadius.circular(10),
             ),
             child: SignedSpacingColumn(
@@ -90,7 +89,7 @@ class OrganicResultView extends StatelessWidget {
                   .map(
                     (field) => QuimifyField(
                       title: field.key,
-                      titleColor: Theme.of(context).colorScheme.primary,
+                      titleColor: QuimifyColors.primary(context),
                       value: field.value,
                       valueBold: true,
                     ),
@@ -103,7 +102,7 @@ class OrganicResultView extends StatelessWidget {
             Text(
               'Estructura',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -140,7 +139,7 @@ class OrganicResultView extends StatelessWidget {
                         ),
                         icon: Icon(
                           size: 30,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: QuimifyColors.primary(context),
                           Icons.fullscreen_rounded,
                         ),
                       ),
@@ -153,8 +152,7 @@ class OrganicResultView extends StatelessWidget {
                   width: double.infinity,
                   height: _diagramHeight,
                   decoration: BoxDecoration(
-                    // Diagram background:
-                    color: Theme.of(context).colorScheme.surfaceTint,
+                    color: QuimifyColors.diagramBackground(context),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   // To avoid rounded corners overflow:

@@ -4,9 +4,9 @@ import 'package:quimify_client/pages/organic/finding_formula/finding_formula_pag
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog.dart';
 import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class OrganicPage extends StatelessWidget {
   const OrganicPage({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class OrganicPage extends StatelessWidget {
             Image.asset(
               'assets/images/icons/2-chloroethylbenzene.png',
               height: 30,
-              color: quimifyTeal,
+              color: QuimifyColors.teal(),
             ): '2-cloroetilbenceno',
           },
           page: const FindingFormulaPage(),
@@ -48,14 +48,14 @@ class OrganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Practicar',
-          helpDialog: quimifyComingSoonDialog,
+          helpDialog: comingSoonDialog,
         ),
         const SizedBox(height: 15),
-        const QuimifyCard.comingSoon(
+        QuimifyCard.comingSoon(
           comingSoonBody: Icon(
             Icons.edit_note_rounded,
             size: 36,
-            color: quimifyTeal,
+            color: QuimifyColors.teal(),
           ),
         ),
       ],

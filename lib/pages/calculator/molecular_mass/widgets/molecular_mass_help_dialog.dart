@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class MolecularMassHelpDialog extends StatelessWidget {
   const MolecularMassHelpDialog({Key? key}) : super(key: key);
@@ -11,29 +12,29 @@ class MolecularMassHelpDialog extends StatelessWidget {
       titleToContent: {
         'Concepto de mol': const [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
                   'conoce como la constante de Avogadro.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Un mol de coches son 6.022 x 10²³ coches.',
             ),
           ),
         ],
         'Elementos': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'La masa molecular de un átomo es la masa, en gramos, de '
                   '1 mol de ese átomo.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
@@ -41,8 +42,9 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: 'H (hidrógeno)   ➔   '),
@@ -59,8 +61,9 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: 'O (oxígeno)   ➔   '),
@@ -76,17 +79,17 @@ class MolecularMassHelpDialog extends StatelessWidget {
         ],
         'Masa molecular': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'La masa molecular de un compuesto es la suma de las '
                   'masas de sus átomos.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'El H₂O (agua) tiene 2 átomos de hidrógeno y 1 de '
                   'oxígeno en su molécula. Su masa molecular es:',
             ),
@@ -95,8 +98,9 @@ class MolecularMassHelpDialog extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
+                  fontFamily: 'CeraPro',
                 ),
                 children: const [
                   TextSpan(text: '2 x '),

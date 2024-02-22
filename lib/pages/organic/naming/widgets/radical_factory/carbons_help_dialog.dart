@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class CarbonsHelpDialog extends StatelessWidget {
   const CarbonsHelpDialog({Key? key}) : super(key: key);
@@ -11,11 +12,11 @@ class CarbonsHelpDialog extends StatelessWidget {
       titleToContent: {
         'Número de carbonos': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Es la cantidad total de carbonos en el radical.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplos con 3 carbonos:',
             fontWeight: FontWeight.bold,
           ),
@@ -25,12 +26,12 @@ class CarbonsHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/propyl.png',
                 height: 19,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(radical propil)',
             ),
           ),
@@ -39,11 +40,11 @@ class CarbonsHelpDialog extends StatelessWidget {
             child: Image.asset(
               'assets/images/icons/iso-radical.png',
               height: 70,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(radical isopropil)',
             ),
           ),

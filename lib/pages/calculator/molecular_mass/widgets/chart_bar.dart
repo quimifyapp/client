@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class GraphBar extends StatelessWidget {
-  const GraphBar({Key? key, required this.quantity, required this.total})
+class ChartBar extends StatelessWidget {
+  const ChartBar({Key? key, required this.quantity, required this.total})
       : super(key: key);
 
   final num quantity, total;
@@ -16,7 +16,7 @@ class GraphBar extends StatelessWidget {
     return Container(
       height: 10,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: QuimifyColors.chartBarBackground(context),
         borderRadius: BorderRadius.circular(15),
       ),
       alignment: Alignment.centerLeft,
@@ -27,7 +27,7 @@ class GraphBar extends StatelessWidget {
         child: Container(
           height: 10,
           decoration: BoxDecoration(
-            color: quimifyTeal,
+            color: QuimifyColors.teal(),
             borderRadius: BorderRadius.circular(15),
           ),
         ),

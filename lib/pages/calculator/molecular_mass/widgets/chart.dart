@@ -1,19 +1,19 @@
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_bar.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_bar.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_number.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_symbol.dart';
 import 'package:flutter/material.dart';
 
-class Graph extends StatelessWidget {
-  const Graph({
+class Chart extends StatelessWidget {
+  const Chart({
     Key? key,
     required this.symbols,
     required this.bars,
     required this.quantities,
   }) : super(key: key);
 
-  final List<GraphSymbol> symbols;
-  final List<GraphBar> bars;
-  final List<GraphNumber> quantities;
+  final List<ChartSymbol> symbols;
+  final List<ChartBar> bars;
+  final List<ChartNumber> quantities;
 
   @override
   Widget build(BuildContext context) {

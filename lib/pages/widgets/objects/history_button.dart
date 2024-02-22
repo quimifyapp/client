@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class HistoryButton extends StatelessWidget {
   const HistoryButton({
@@ -19,11 +20,11 @@ class HistoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifyIconButton.square(
       height: height,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: QuimifyColors.foreground(context),
       onPressed: onPressed,
       icon: Icon(
         Icons.history,
-        color: Theme.of(context).colorScheme.primary,
+        color: QuimifyColors.primary(context),
         size: iconSize,
       ),
     );

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/add_carbon_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/hydrogenate_button.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/buttons/undo_button.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class NamingHelpDialog extends StatelessWidget {
   const NamingHelpDialog({
@@ -21,7 +21,7 @@ class NamingHelpDialog extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       border: Border.all(
         width: 1,
-        color: Theme.of(context).colorScheme.tertiary,
+        color: QuimifyColors.secondary(context),
         strokeAlign: BorderSide.strokeAlignOutside, // So size doesn't change
       ),
     );
@@ -40,12 +40,12 @@ class NamingHelpDialog extends StatelessWidget {
                   height: 40,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: QuimifyColors.background(context),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Image.asset(
                     'assets/images/icons/single-bond.png',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                     width: 30,
                   ),
                 ),
@@ -59,18 +59,18 @@ class NamingHelpDialog extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const Text(
+                Text(
                   'Hidrógeno',
                   style: TextStyle(
-                    color: quimifyTeal,
+                    color: QuimifyColors.teal(),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(width: 5),
-                const Icon(
+                Icon(
                   Icons.add,
-                  color: quimifyTeal,
+                  color: QuimifyColors.teal(),
                   size: 22,
                 ),
                 const SizedBox(width: 15),
@@ -78,12 +78,12 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'En la lista aparecen los sustituyentes que se pueden '
                   'enlazar al carbono.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -91,25 +91,25 @@ class NamingHelpDialog extends StatelessWidget {
             child: Text(
               'CH₃ –',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(carbono con 3 hidrógenos)',
             ),
           ),
         ],
         'Radicales': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Son ramificaciones de la cadena principal de carbonos.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Ejemplo:',
             fontWeight: FontWeight.bold,
           ),
@@ -117,11 +117,11 @@ class NamingHelpDialog extends StatelessWidget {
             child: Image.asset(
               'assets/images/icons/2-methylpropane.png',
               height: 90,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(2-metilpropano)',
             ),
           ),
@@ -138,7 +138,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para añadir un carbono a la cadena.',
             ),
           ),
@@ -155,7 +155,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para enlazar varios hidrógenos al '
                   'carbono.',
             ),
@@ -173,7 +173,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para ver tus resultados anteriores.',
             ),
           ),
@@ -190,7 +190,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Este botón sirve para deshacer el último cambio.',
             ),
           ),

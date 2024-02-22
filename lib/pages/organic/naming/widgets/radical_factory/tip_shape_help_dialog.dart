@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class TipShapeHelpDialog extends StatelessWidget {
   const TipShapeHelpDialog({Key? key}) : super(key: key);
@@ -11,11 +12,11 @@ class TipShapeHelpDialog extends StatelessWidget {
       titleToContent: {
         'Terminación': [
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Es la forma de la punta del radical.',
             ),
           ),
-          const QuimifyDialogContentText(
+          const DialogContentText(
             text: 'Terminación normal:',
             fontWeight: FontWeight.bold,
           ),
@@ -25,12 +26,12 @@ class TipShapeHelpDialog extends StatelessWidget {
               child: Image.asset(
                 'assets/images/icons/propyl.png',
                 height: 19,
-                color: Theme.of(context).colorScheme.primary,
+                color: QuimifyColors.primary(context),
               ),
             ),
           ),
           const Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: '(radical propil)',
             ),
           ),

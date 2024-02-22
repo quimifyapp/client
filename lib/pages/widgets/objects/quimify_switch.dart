@@ -1,5 +1,5 @@
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifySwitch extends StatelessWidget {
   const QuimifySwitch({Key? key, required this.value, required this.onChanged})
@@ -12,8 +12,8 @@ class QuimifySwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Switch(
       // Colors:
-      activeTrackColor: quimifyTeal,
-      inactiveTrackColor: Theme.of(context).colorScheme.secondary,
+      activeTrackColor: QuimifyColors.teal(),
+      inactiveTrackColor: QuimifyColors.tertiary(context),
       activeColor: Colors.white,
       inactiveThumbColor: Colors.white,
       // To remove top padding:

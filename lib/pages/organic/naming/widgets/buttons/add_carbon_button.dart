@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class AddCarbonButton extends StatelessWidget {
   const AddCarbonButton({
@@ -22,7 +23,7 @@ class AddCarbonButton extends StatelessWidget {
       color: const Color.fromARGB(255, 56, 133, 224),
       child: Image.asset(
         'assets/images/icons/bond-carbon.png',
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: QuimifyColors.inverseText(context),
         width: 26,
       ),
     );

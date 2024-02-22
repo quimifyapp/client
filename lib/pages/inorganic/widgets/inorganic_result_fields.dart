@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_field.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class InorganicResultFields extends StatelessWidget {
   const InorganicResultFields({
@@ -21,7 +22,7 @@ class InorganicResultFields extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Theme.of(context).colorScheme.onSurface,
+        color: QuimifyColors.textHighlight(context),
       ),
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(15),

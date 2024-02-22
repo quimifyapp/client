@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/text.dart';
 
 class GroupButton extends StatelessWidget {
   const GroupButton({
@@ -22,7 +22,7 @@ class GroupButton extends StatelessWidget {
     return QuimifyButton(
       height: 60,
       onPressed: onPressed,
-      color: Theme.of(context).colorScheme.surface,
+      color: QuimifyColors.foreground(context),
       child: Row(
         children: [
           const SizedBox(width: 10),
@@ -31,7 +31,7 @@ class GroupButton extends StatelessWidget {
             height: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
+              color: QuimifyColors.background(context),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Image.asset(
@@ -40,7 +40,7 @@ class GroupButton extends StatelessWidget {
                   : bonds == 2
                       ? 'assets/images/icons/double-bond.png'
                       : 'assets/images/icons/triple-bond.png',
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
               width: 30,
             ),
           ),
@@ -61,16 +61,16 @@ class GroupButton extends StatelessWidget {
           ),
           Text(
             name,
-            style: const TextStyle(
-              color: quimifyTeal,
+            style: TextStyle(
+              color: QuimifyColors.teal(),
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(width: 5),
-          const Icon(
+          Icon(
             Icons.add,
-            color: quimifyTeal,
+            color: QuimifyColors.teal(),
             size: 22,
           ),
           const SizedBox(width: 15),

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
-import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
 import 'package:quimify_client/pages/organic/widgets/organic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_loading.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_message_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/text.dart';
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);
@@ -29,8 +29,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
 
-  String _labelText = 'dietiléter, but-2-eno...';
+  bool _argumentRead = false;
   bool _firstSearch = true;
+
+  String _labelText = 'dietiléter, but-2-eno...';
   OrganicResult _result = OrganicResult(
     true,
     'COOH - COOH',
@@ -44,12 +46,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       return;
     }
 
-    startQuimifyLoading(context);
+    showLoadingIndicator(context);
 
     OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
 
     if (result != null) {
-      if (result.present) {
+      if (result.found) {
         Ads().showInterstitial();
 
         setState(() {
@@ -69,7 +71,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         _scrollToStart(); // Goes to the top of the page
       } else {
         if (!mounted) return; // For security reasons
-        QuimifyMessageDialog.reportable(
+        MessageDialog.reportable(
           title: 'Sin resultado',
           details: 'No se ha encontrado:\n"$name"',
           reportContext: 'Organic finding formula',
@@ -80,15 +82,15 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const QuimifyMessageDialog(
+        const MessageDialog(
           title: 'Sin resultado',
         ).show(context);
       } else {
-        quimifyNoInternetDialog.show(context);
+        noInternetDialog.show(context);
       }
     }
 
-    stopQuimifyLoading();
+    hideLoadingIndicator();
   }
 
   _showHistory() {
@@ -133,10 +135,21 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        stopQuimifyLoading();
-        return true;
+    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (argument != null && !_argumentRead) {
+      _textController.text = formatOrganicName(argument);
+      _textFocusNode.requestFocus();
+      _argumentRead = true;
+    }
+
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        hideLoadingIndicator();
       },
       child: GestureDetector(
         onTap: () => _textFocusNode.unfocus(),
@@ -174,7 +187,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
             onHistoryPressed: (resultPageContext) => _showHistory(),
-            quimifyReportDialog: ReportDialog(
+            reportDialog: ReportDialog(
               details: 'Resultado de\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
               reportDetails: 'Result of "${_result.name!}": $_result',

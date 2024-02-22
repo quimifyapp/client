@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class InorganicResultName extends StatelessWidget {
   const InorganicResultName({
@@ -20,8 +20,8 @@ class InorganicResultName extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             label,
-            style: const TextStyle(
-              color: quimifyTeal,
+            style: TextStyle(
+              color: QuimifyColors.teal(),
               fontWeight: FontWeight.w500,
               fontSize: 16,
             ),
@@ -31,7 +31,7 @@ class InorganicResultName extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Theme.of(context).colorScheme.onSurface,
+              color: QuimifyColors.textHighlight(context),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +39,7 @@ class InorganicResultName extends StatelessWidget {
                 Text(
                   name!,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                     fontSize: 18,
                   ),
                 ),

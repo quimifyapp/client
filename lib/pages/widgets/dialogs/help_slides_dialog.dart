@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_contact_buttons.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/contact_buttons.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HelpSlidesDialog extends StatefulWidget {
@@ -40,11 +40,11 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
   Widget build(BuildContext context) {
     _titleToContent['¿Necesitas ayuda?'] = [
       const Center(
-        child: QuimifyDialogContentText(
+        child: DialogContentText(
           text: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
         ),
       ),
-      QuimifyContactButtons(
+      ContactButtons(
         afterClicked: () => _exit(context),
       ),
     ];
@@ -64,13 +64,13 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
               effect: ColorTransitionEffect(
                 dotWidth: 10,
                 dotHeight: 10,
-                activeDotColor: quimifyTeal,
-                dotColor: Theme.of(context).colorScheme.secondary,
+                activeDotColor: QuimifyColors.teal(),
+                dotColor: QuimifyColors.tertiary(context),
               ),
             ),
           ),
           const SizedBox(height: 20),
-          QuimifyDialogButton(
+          DialogButton(
             onPressed: _goToNextSlide,
             text: _currentSlide < _titleToContent.length - 1
                 ? 'Siguiente'

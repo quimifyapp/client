@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/thanks_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
-import 'package:quimify_client/text/text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/report/report_sent_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/text.dart';
 
 class ReportDialog extends StatelessWidget {
   ReportDialog({
@@ -21,8 +22,8 @@ class ReportDialog extends StatelessWidget {
   final FocusNode _textFocusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
 
-  show(BuildContext context) async =>
-      await showQuimifyDialog(context: context, dialog: this);
+  show(BuildContext context) =>
+      showQuimifyDialog(context: context, dialog: this);
 
   _sendReport(String? userMessage) async {
     Api().sendReportWithRetry(
@@ -35,7 +36,7 @@ class ReportDialog extends StatelessWidget {
   _exitWithThanks(String userMessage, BuildContext context) {
     Navigator.of(context).pop();
 
-    ThanksDialog(
+    ReportSentDialog(
       userMessage: userMessage,
     ).show(context);
   }
@@ -68,14 +69,14 @@ class ReportDialog extends StatelessWidget {
         content: [
           if (details != null && details!.isNotEmpty)
             Center(
-              child: QuimifyDialogContentText(text: details!),
+              child: DialogContentText(text: details!),
             ),
         ],
         actions: [
           Container(
             height: 50,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
+              color: QuimifyColors.background(context),
               borderRadius: BorderRadius.circular(10),
             ),
             margin: const EdgeInsets.only(bottom: 15),
@@ -90,9 +91,9 @@ class ReportDialog extends StatelessWidget {
                 // Aspect:
                 keyboardType: TextInputType.text,
                 maxLines: 1,
-                cursorColor: Theme.of(context).colorScheme.primary,
+                cursorColor: QuimifyColors.primary(context),
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: QuimifyColors.primary(context),
                   fontSize: 16,
                 ),
                 textAlignVertical: TextAlignVertical.center,
@@ -101,7 +102,7 @@ class ReportDialog extends StatelessWidget {
                   isCollapsed: true,
                   labelText: 'Detalles (opcional)',
                   labelStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: QuimifyColors.secondary(context),
                   ),
                   // So hint doesn't go up while typing:
                   floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -122,7 +123,7 @@ class ReportDialog extends StatelessWidget {
               ),
             ),
           ),
-          QuimifyDialogButton(
+          DialogButton(
             onPressed: () => _pressedButton(context),
             text: 'Enviar',
           ),

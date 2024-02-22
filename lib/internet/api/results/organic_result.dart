@@ -1,17 +1,20 @@
 import 'dart:convert';
 
 class OrganicResult {
-  final bool present;
+  final bool found;
 
   final String? structure;
   final String? name;
+
   final num? molecularMass;
   final String? url2D;
 
   OrganicResult(
-    this.present,
+    this.found,
+
     this.structure,
     this.name,
+
     this.molecularMass,
     this.url2D,
   );
@@ -19,9 +22,11 @@ class OrganicResult {
   factory OrganicResult.fromJson(String body) {
     var json = jsonDecode(body);
     return OrganicResult(
-      json['present'],
+      json['found'],
+
       json['structure'],
       json['name'],
+
       json['molecularMass'],
       json['url2D'],
     );
@@ -33,6 +38,7 @@ class OrganicResult {
     List<String?> identifiers = [
       structure,
       name,
+
       url2D,
       molecularMass.toString(),
     ];

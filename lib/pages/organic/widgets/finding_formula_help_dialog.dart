@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/widgets/quimify_dialog_content_text.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
 class FindingFormulaHelpDialog extends StatelessWidget {
   const FindingFormulaHelpDialog({Key? key}) : super(key: key);
@@ -11,46 +11,46 @@ class FindingFormulaHelpDialog extends StatelessWidget {
       titleToContent: {
         'Orgánica': [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Los compuestos orgánicos contienen carbonos enlazados a '
                   'hidrógenos.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'CH₃ – CH₂ – CH₃',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(text: 'ácido etanoico'),
+            child: DialogContentText(text: 'ácido etanoico'),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'CH₂ = CH – CONH₂',
             ),
           ),
         ],
         'Formular': [
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
-          QuimifyDialogContentText(
+          DialogContentText(
             text: 'Ejemplos:',
             fontWeight: FontWeight.bold,
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'etanol   ➔   CH₃ – CH₂(OH)',
             ),
           ),
           Center(
-            child: QuimifyDialogContentText(
+            child: DialogContentText(
               text: 'propadieno   ➔   CH₂ = CH = CH₂',
             ),
           ),

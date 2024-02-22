@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class QuimifyField extends StatelessWidget {
   const QuimifyField({
@@ -33,10 +34,9 @@ class QuimifyField extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
+            color: QuimifyColors.primary(context),
             fontSize: 18,
-            fontFamily:
-                valueBold ? 'CeraProBoldCustom' : 'CeraProMediumCustom',
+            fontFamily: valueBold ? 'CeraProBoldCustom' : 'CeraProMediumCustom',
           ),
           strutStyle: const StrutStyle(
             fontSize: 18,

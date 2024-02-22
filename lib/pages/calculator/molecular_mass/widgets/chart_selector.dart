@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_bar.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_quantity.dart';
-import 'package:quimify_client/pages/calculator/molecular_mass/widgets/graph_symbol.dart';
-import 'package:quimify_client/pages/widgets/appearance/quimify_teal.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
-import 'package:quimify_client/text/text.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_bar.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_number.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_symbol.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/text.dart';
 
-class GraphSelector extends StatefulWidget {
-  const GraphSelector({
+class ChartSelector extends StatefulWidget {
+  const ChartSelector({
     Key? key,
     required this.mass,
     required this.elementToGrams,
@@ -21,47 +21,46 @@ class GraphSelector extends StatefulWidget {
   final Map<String, int> elementToMoles;
 
   @override
-  State<GraphSelector> createState() => _GraphSelectorState();
+  State<ChartSelector> createState() => _ChartSelectorState();
 }
 
-class _GraphSelectorState extends State<GraphSelector> {
-  bool _molesGraph = false;
+class _ChartSelectorState extends State<ChartSelector> {
+  bool _molesChart = false;
 
-  _tappedGraph() => setState(() => _molesGraph = !_molesGraph);
+  _tappedChart() => setState(() => _molesChart = !_molesChart);
 
-  _pressedSwitch(bool newValue) =>
-      setState(() => _molesGraph = newValue);
+  _pressedSwitch(bool newValue) => setState(() => _molesChart = newValue);
 
   @override
   Widget build(BuildContext context) {
-    List<GraphSymbol> symbols = [];
+    List<ChartSymbol> symbols = [];
 
-    List<GraphBar> gramBars = [];
-    List<GraphNumber> gramQuantities = [];
+    List<ChartBar> gramBars = [];
+    List<ChartNumber> gramQuantities = [];
 
     widget.elementToGrams.forEach((symbol, grams) {
-      symbols.add(GraphSymbol(symbol: symbol));
-      gramBars.add(GraphBar(quantity: grams, total: widget.mass));
-      gramQuantities.add(GraphNumber(text: '${formatMolecularMass(grams)} g'));
+      symbols.add(ChartSymbol(symbol: symbol));
+      gramBars.add(ChartBar(quantity: grams, total: widget.mass));
+      gramQuantities.add(ChartNumber(text: '${formatMolecularMass(grams)} g'));
     });
 
     String formula = '';
 
-    List<GraphBar> molBars = [];
-    List<GraphNumber> molQuantities = [];
+    List<ChartBar> molBars = [];
+    List<ChartNumber> molQuantities = [];
 
     int totalMoles = widget.elementToMoles.values.reduce((sum, i) => sum + i);
     widget.elementToMoles.forEach((symbol, moles) {
       formula += moles > 1 ? '$symbol$moles' : symbol;
-      molBars.add(GraphBar(quantity: moles, total: totalMoles));
-      molQuantities.add(GraphNumber(text: '$moles mol'));
+      molBars.add(ChartBar(quantity: moles, total: totalMoles));
+      molQuantities.add(ChartNumber(text: '$moles mol'));
     });
 
     return GestureDetector(
-      onTap: _tappedGraph,
+      onTap: _tappedChart,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: QuimifyColors.chartBackground(context),
           borderRadius: BorderRadius.circular(15),
         ),
         padding: const EdgeInsets.all(15),
@@ -73,34 +72,34 @@ class _GraphSelectorState extends State<GraphSelector> {
                   child: AutoSizeText(
                     toSubscripts(formula),
                     minFontSize: 18,
-                    overflowReplacement: const Text(
+                    overflowReplacement: Text(
                       'Proporciones',
                       maxLines: 1,
                       style: TextStyle(
-                        color: quimifyTeal,
+                        color: QuimifyColors.teal(),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     stepGranularity: 0.1,
                     maxLines: 1,
-                    style: const TextStyle(
-                      color: quimifyTeal,
+                    style: TextStyle(
+                      color: QuimifyColors.teal(),
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 QuimifySwitch(
-                  value: _molesGraph,
+                  value: _molesChart,
                   onChanged: _pressedSwitch,
                 ),
                 Text(
                   'Pasar a mol',
                   style: TextStyle(
-                    color: _molesGraph
-                        ? quimifyTeal
-                        : Theme.of(context).colorScheme.secondary,
+                    color: _molesChart
+                        ? QuimifyColors.teal()
+                        : QuimifyColors.tertiary(context),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -109,14 +108,14 @@ class _GraphSelectorState extends State<GraphSelector> {
             ),
             const SizedBox(height: 15),
             IndexedStack(
-              index: _molesGraph ? 1 : 0,
+              index: _molesChart ? 1 : 0,
               children: [
-                Graph(
+                Chart(
                   symbols: symbols,
                   bars: gramBars,
                   quantities: gramQuantities,
                 ),
-                Graph(
+                Chart(
                   symbols: symbols,
                   bars: molBars,
                   quantities: molQuantities,

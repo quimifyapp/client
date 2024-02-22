@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class QuimifyDialogButton extends StatelessWidget {
-  const QuimifyDialogButton({
+class DialogButton extends StatelessWidget {
+  const DialogButton({
     Key? key,
-    required this.onPressed,
     required this.text,
+    required this.onPressed,
   }) : super(key: key);
 
-  final VoidCallback onPressed;
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class QuimifyDialogButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: QuimifyColors.inverseText(context),
           fontSize: 17,
         ),
       ),

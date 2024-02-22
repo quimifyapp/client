@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io' as io;
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:quimify_client/internet/api/env/env.dart';
-import 'package:quimify_client/internet/api/results/access_data_result.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
@@ -24,8 +23,8 @@ class Api {
 
   static const _httpStatusCodeOk = 200;
 
-  static const _apiVersion = 4;
-  static const _clientVersion = 11;
+  static const _apiVersion = 5;
+  static const _clientVersion = 12;
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
@@ -148,29 +147,23 @@ class Api {
 
   // Public:
 
-  Future<AccessDataResult?> getAccessDataResult() async {
-    AccessDataResult? result;
-
-    int platform = kIsWeb
-        ? 2
-        : io.Platform.isIOS
-            ? 1
-            : 0;
+  Future<ClientResult?> getClient() async {
+    ClientResult? result;
 
     String? response = await _getBodyWithRetry(
-      'access-data',
+      'client',
       {
-        'platform': platform.toString(),
-        'client-version': _clientVersion.toString(),
+        'platform': io.Platform.isAndroid ? 'android' : 'ios',
+        'version': _clientVersion.toString(),
       },
     );
 
     if (response != null) {
       try {
-        result = AccessDataResult.fromJson(response);
+        result = ClientResult.fromJson(response);
       } catch (error) {
         sendError(
-          context: 'Access data JSON',
+          context: 'Client JSON',
           details: error.toString(),
         );
       }
@@ -190,8 +183,7 @@ class Api {
     );
 
     if (!posted) {
-      // Retry:
-      await _sendError(
+      _sendError(
         authority: _mirrorAuthority,
         context: context,
         details: details,
@@ -212,8 +204,7 @@ class Api {
     );
 
     if (!posted) {
-      // Retry:
-      await _sendReport(
+      _sendReport(
         authority: _mirrorAuthority,
         context: context,
         details: details,
@@ -249,7 +240,7 @@ class Api {
     return result;
   }
 
-  Future<InorganicResult?> getInorganic(String input) async {
+  Future<InorganicResult?> searchInorganic(String input) async {
     InorganicResult? result;
 
     String? response = await _getBodyWithRetry(
@@ -265,6 +256,30 @@ class Api {
       } catch (error) {
         sendError(
           context: 'Inorganic JSON',
+          details: error.toString(),
+        );
+      }
+    }
+
+    return result;
+  }
+
+  Future<InorganicResult?> deepSearchInorganic(String input) async {
+    InorganicResult? result;
+
+    String? response = await _getBodyWithRetry(
+      'inorganic/deep',
+      {
+        'input': input,
+      },
+    );
+
+    if (response != null) {
+      try {
+        result = InorganicResult.fromJson(response);
+      } catch (error) {
+        sendError(
+          context: 'Inorganic deep JSON',
           details: error.toString(),
         );
       }
@@ -301,7 +316,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getBodyWithRetry(
-      'organic/from-name',
+      'organic/structure',
       {
         'name': name,
       },
@@ -325,7 +340,7 @@ class Api {
     OrganicResult? result;
 
     String? response = await _getBodyWithRetry(
-      'organic/from-structure',
+      'organic/name',
       {
         'structure-sequence': sequence.join(','),
       },

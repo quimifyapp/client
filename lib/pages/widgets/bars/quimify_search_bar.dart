@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
-import 'package:quimify_client/pages/widgets/dialogs/quimify_coming_soon_dialog.dart';
-import 'package:quimify_client/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/text.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
@@ -63,6 +64,16 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
         widget.textEditingController.text)); // Clears input
   }
 
+  _tappedOutsideText() {
+    widget.focusNode.unfocus(); // Hides keyboard
+
+    if (isEmptyWithBlanks(widget.textEditingController.text)) {
+      widget.textEditingController.clear(); // Clears input
+    } else {
+      _eraseInitialAndFinalBlanks();
+    }
+  }
+
   _search() {
     if (widget.focusNode.hasPrimaryFocus) {
       widget.focusNode.unfocus();
@@ -88,17 +99,21 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).colorScheme.surface,
+                color: QuimifyColors.foreground(context),
               ),
               child: TypeAheadField(
-                // TextField:
-                textFieldConfiguration: TextFieldConfiguration(
+                focusNode: widget.focusNode,
+                controller: widget.textEditingController,
+                builder: (context, controller, focusNode) => TextField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  // Settings:
                   autocorrect: false,
                   enableSuggestions: false,
                   // Aspect:
-                  cursorColor: Theme.of(context).colorScheme.primary,
+                  cursorColor: QuimifyColors.primary(context),
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: QuimifyColors.primary(context),
                     fontSize: 18,
                     height: 1.2, // Cursor height
                   ),
@@ -107,11 +122,12 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     contentPadding: const EdgeInsets.only(right: 14),
                     // So vertical center works:
                     isCollapsed: true,
-                    alignLabelWithHint: true, // For label
+                    alignLabelWithHint: true,
+                    // For label
                     // Label:
                     labelText: widget.label,
                     labelStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: QuimifyColors.secondary(context),
                     ),
                     // So hint doesn't go up while typing:
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -134,7 +150,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                         ),
                         icon: Image.asset(
                           'assets/images/icons/search.png',
-                          color: Theme.of(context).colorScheme.primary,
+                          color: QuimifyColors.primary(context),
                         ),
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
@@ -148,8 +164,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     FilteringTextInputFormatter.allow(inputFormatter),
                   ],
                   textInputAction: TextInputAction.search,
-                  focusNode: widget.focusNode,
-                  controller: widget.textEditingController,
                   onChanged: (input) => widget.textEditingController.value =
                       widget.textEditingController.value
                           .copyWith(text: widget.inputCorrector(input)),
@@ -157,25 +171,24 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                     _eraseInitialAndFinalBlanks();
                     widget.onSubmitted(input);
                   },
+                  onTapOutside: (_) => _tappedOutsideText(),
                 ),
-                // To avoid flicker:
-                hideOnLoading: false,
                 debounceDuration: Duration.zero,
-                animationDuration: Duration.zero,
+                // To remove animation:
+                transitionBuilder: (context, animation, child) => child,
                 // To set them empty:
                 hideOnEmpty: true,
                 hideOnError: true,
-                // To make sure they're empty (the latter it's not enough):
-                noItemsFoundBuilder: (context) => const SizedBox.shrink(),
-                loadingBuilder: (context) => const SizedBox.shrink(),
+                hideOnLoading: true,
                 // Completions logic:
                 suggestionsCallback: _getCompletions,
-                onSuggestionSelected: widget.onCompletionPressed,
+                onSelected: widget.onCompletionPressed,
                 // Completions menu:
-                suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                decorationBuilder: (context, child) => Material(
                   clipBehavior: Clip.hardEdge,
                   borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.surface,
+                  color: QuimifyColors.foreground(context),
+                  child: child,
                 ),
                 itemBuilder: (context, String completion) {
                   return Container(
@@ -188,7 +201,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                           child: Icon(
                             Icons.subdirectory_arrow_right_rounded,
                             size: 26,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: QuimifyColors.primary(context),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -200,7 +213,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
                               maxLines: 1,
                               stepGranularity: 0.1,
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: QuimifyColors.primary(context),
                                 fontSize: 16,
                               ),
                             ),
@@ -216,11 +229,11 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           const SizedBox(width: 8),
           QuimifyIconButton.square(
             height: 50,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            onPressed: () => quimifyComingSoonDialog.show(context),
+            backgroundColor: QuimifyColors.foreground(context),
+            onPressed: () => comingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
-              color: Theme.of(context).colorScheme.primary,
+              color: QuimifyColors.primary(context),
             ),
           ),
         ],
