@@ -12,6 +12,7 @@ class MessageDialog extends StatelessWidget {
     required this.title,
     this.details,
     this.closable = true,
+    this.onButtonPressed,
   })  : linkLabel = null,
         link = null,
         reportContext = null,
@@ -26,6 +27,7 @@ class MessageDialog extends StatelessWidget {
     required this.linkLabel,
     required this.link,
     this.closable = true,
+    this.onButtonPressed,
   })  : reportContext = null,
         reportDetails = null,
         _hasLink = true,
@@ -37,6 +39,7 @@ class MessageDialog extends StatelessWidget {
     required this.details,
     required this.reportContext,
     required this.reportDetails,
+    this.onButtonPressed,
   })  : linkLabel = null,
         link = null,
         closable = true,
@@ -45,6 +48,7 @@ class MessageDialog extends StatelessWidget {
 
   final String title;
   final String? details;
+  final VoidCallback? onButtonPressed;
 
   final String? linkLabel, link;
   final String? reportContext, reportDetails;
@@ -65,6 +69,8 @@ class MessageDialog extends StatelessWidget {
     if (_hasLink) {
       _openLink(context);
     }
+
+    onButtonPressed?.call();
 
     if (closable) {
       _exit(context);

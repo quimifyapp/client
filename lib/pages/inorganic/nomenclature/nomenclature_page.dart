@@ -9,10 +9,10 @@ import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_result_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_search_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/suggestions/menu_suggestion_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/history/history.dart';
@@ -58,17 +58,22 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     ),
   );
 
+  static const String suggestion = 'Parece que estás intentando resolver un';
+
   static const Map<Classification, String> classificationToSuggestion = {
-    Classification.organicFormula: 'Parece que estás intentando resolver un',
-    Classification.organicName: 'Parece que estás intentando resolver un',
-    Classification.molecularMassProblem:
-        'Parece que estás intentando resolver una',
+    Classification.organicFormula: suggestion,
+    Classification.organicName: suggestion,
+    Classification.molecularMassProblem: '${suggestion}a',
+    Classification.chemicalProblem: suggestion,
+    Classification.chemicalReaction: '${suggestion}a',
   };
 
   static const Map<Classification, String> classificationToLabel = {
     Classification.organicFormula: 'compuesto orgánico',
     Classification.organicName: 'compuesto orgánico',
     Classification.molecularMassProblem: 'masa molecular',
+    Classification.chemicalProblem: 'problema químico',
+    Classification.chemicalReaction: 'reacción química',
   };
 
   @override
@@ -159,24 +164,48 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    if (Routes.contains(result.classification!)) {
-      MenuSuggestionDialog(
-        suggestion: classificationToSuggestion[result.classification!]!,
-        label: classificationToLabel[result.classification!]!,
-        onPressedAgree: () => Navigator.pushNamed(
-          context,
-          Routes.fromClassification[result.classification!]!,
-          arguments: toDigits(formattedQuery),
-        ),
-        onPressedDisagree: () => _deepSearch(formattedQuery),
+    // TODO mejorar textos:
+
+    if (result.classification == Classification.nomenclatureProblem) {
+      MessageDialog(
+        title: 'Casi lo tienes',
+        details: 'Introduce sólo la fórmula o nombre que quieras resolver.',
+        onButtonPressed: () => _textFocusNode.requestFocus(),
       ).show(context);
-    } else if (result.classification == Classification.nomenclatureProblem) {
-      _showNotFoundDialog(formattedQuery); // TODO handle
-    } else if (result.classification == Classification.chemicalProblem) {
-      _showNotFoundDialog(formattedQuery); // TODO handle
-    } else if (result.classification == Classification.chemicalReaction) {
-      _showNotFoundDialog(formattedQuery); // TODO handle
+      return;
     }
+
+    bool classificationHasRoute = Routes.contains(result.classification!);
+
+    ClassificationDialog(
+      firstText: classificationToSuggestion[result.classification!]!,
+      secondBoldText: classificationToLabel[result.classification!]!,
+      closeOnAgree: !classificationHasRoute,
+      onPressedAgree: () {
+        if (classificationHasRoute) {
+          Navigator.pushNamed(
+            context,
+            Routes.fromClassification[result.classification!]!,
+            arguments: toDigits(formattedQuery),
+          );
+        } else if (result.classification == Classification.chemicalProblem) {
+          // TODO explicar qué SÍ puede hacer Quimify?
+          // TODO hacer más comprensible? "próximas actualizaciones"
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver problemas químicos en próximas '
+                'actualizaciones.',
+          ).show(context);
+        } else if (result.classification == Classification.chemicalReaction) {
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver reacciones químicas en próximas '
+                'actualizaciones.',
+          ).show(context);
+        }
+      },
+      onPressedDisagree: () => _deepSearch(formattedQuery),
+    ).show(context);
   }
 
   _processResult(InorganicResult? result, String formattedQuery) async {

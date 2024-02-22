@@ -4,23 +4,31 @@ import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart'
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_negative_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class MenuSuggestionDialog extends StatelessWidget {
-  const MenuSuggestionDialog({
+class ClassificationDialog extends StatelessWidget {
+  const ClassificationDialog({
     Key? key,
-    required this.suggestion,
-    required this.label,
+    required this.firstText,
+    required this.secondBoldText,
+    this.closeOnAgree = false,
     required this.onPressedAgree,
     required this.onPressedDisagree,
   }) : super(key: key);
 
-  final String suggestion;
-  final String label;
+  final String firstText;
+  final String secondBoldText;
+  final bool closeOnAgree;
   final VoidCallback onPressedAgree, onPressedDisagree;
 
   show(BuildContext context) =>
       showQuimifyDialog(context: context, dialog: this);
 
-  _agreePressed(BuildContext context) => onPressedAgree();
+  _agreePressed(BuildContext context) {
+    if (closeOnAgree) {
+      Navigator.of(context).pop();
+    }
+
+    onPressedAgree();
+  }
 
   _disagreePressed(BuildContext context) {
     Navigator.of(context).pop();
@@ -41,9 +49,9 @@ class MenuSuggestionDialog extends StatelessWidget {
                 fontFamily: 'CeraPro',
               ),
               children: [
-                TextSpan(text: '$suggestion '),
+                TextSpan(text: '$firstText '),
                 TextSpan(
-                  text: label,
+                  text: secondBoldText,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const TextSpan(text: '.'),
