@@ -53,7 +53,7 @@ class Ads {
       _showGdrpForm();
     }
 
-    if (_showInterstitial) {
+    if (_showInterstitial && _interstitialOffset == 0) {
       _loadInterstitial();
     }
   }
