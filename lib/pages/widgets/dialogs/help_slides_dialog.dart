@@ -41,7 +41,7 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
     _titleToContent['¿Necesitas ayuda?'] = [
       const Center(
         child: DialogContentText(
-          text: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
+          richText: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
         ),
       ),
       ContactButtons(

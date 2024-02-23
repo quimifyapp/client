@@ -12,21 +12,20 @@ class NamingHelpDialog extends StatelessWidget {
         'Nombrar': [
           Center(
             child: DialogContentText(
-              text: 'Consiste en averiguar el nombre dada la fórmula.',
+              richText: 'Consiste en averiguar el nombre dada la fórmula.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'CH₃ – CH₂(OH)   ➔   etanol',
+              richText: 'CH₃ – CH₂(OH)   ➔   etanol',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'CH₂ = CH = CH₂   ➔   propadieno',
+              richText: 'CH₂ = CH = CH₂   ➔   propadieno',
             ),
           ),
         ],

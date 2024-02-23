@@ -13,12 +13,11 @@ class CarbonsHelpDialog extends StatelessWidget {
         'Número de carbonos': [
           const Center(
             child: DialogContentText(
-              text: 'Es la cantidad total de carbonos en el radical.',
+              richText: 'Es la cantidad total de carbonos en el radical.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplos con 3 carbonos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos con 3 carbonos:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -32,7 +31,7 @@ class CarbonsHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(radical propil)',
+              richText: '(radical propil)',
             ),
           ),
           const SizedBox(height: 25),
@@ -45,7 +44,7 @@ class CarbonsHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(radical isopropil)',
+              richText: '(radical isopropil)',
             ),
           ),
         ],

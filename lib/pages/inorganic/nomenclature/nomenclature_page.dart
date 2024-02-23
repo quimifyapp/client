@@ -58,22 +58,16 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     ),
   );
 
-  static const String suggestion = 'Parece que estás intentando resolver un';
+  // TODO mejorar textos:
 
-  static const Map<Classification, String> classificationToSuggestion = {
-    Classification.organicFormula: suggestion,
-    Classification.organicName: suggestion,
-    Classification.molecularMassProblem: '${suggestion}a',
-    Classification.chemicalProblem: suggestion,
-    Classification.chemicalReaction: '${suggestion}a',
-  };
+  static const String messageRoot = 'Parece que estás intentando resolver un';
 
-  static const Map<Classification, String> classificationToLabel = {
-    Classification.organicFormula: 'compuesto orgánico',
-    Classification.organicName: 'compuesto orgánico',
-    Classification.molecularMassProblem: 'masa molecular',
-    Classification.chemicalProblem: 'problema químico',
-    Classification.chemicalReaction: 'reacción química',
+  static const Map<Classification, String> classificationToMessage = {
+    Classification.organicFormula: '$messageRoot *compuesto orgánico*.',
+    Classification.organicName: '$messageRoot *compuesto orgánico*.',
+    Classification.molecularMassProblem: '${messageRoot}a *masa molecular*.',
+    Classification.chemicalProblem: '$messageRoot *problema químico*.',
+    Classification.chemicalReaction: '${messageRoot}a *reacción química*.',
   };
 
   @override
@@ -169,7 +163,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     if (result.classification == Classification.nomenclatureProblem) {
       MessageDialog(
         title: 'Casi lo tienes',
-        details: 'Introduce sólo la fórmula o nombre que quieras resolver.',
+        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
         onButtonPressed: () => _textFocusNode.requestFocus(),
       ).show(context);
       return;
@@ -178,8 +172,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     bool classificationHasRoute = Routes.contains(result.classification!);
 
     ClassificationDialog(
-      firstText: classificationToSuggestion[result.classification!]!,
-      secondBoldText: classificationToLabel[result.classification!]!,
+      richText: classificationToMessage[result.classification!]!,
       closeOnAgree: !classificationHasRoute,
       onPressedAgree: () {
         if (classificationHasRoute) {
@@ -191,6 +184,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
         } else if (result.classification == Classification.chemicalProblem) {
           // TODO explicar qué SÍ puede hacer Quimify?
           // TODO hacer más comprensible? "próximas actualizaciones"
+          // TODO un sólo mensaje para problemas / reacciones?
           const MessageDialog(
             title: '¡Estamos en ello!',
             details: 'Podremos resolver problemas químicos en próximas '

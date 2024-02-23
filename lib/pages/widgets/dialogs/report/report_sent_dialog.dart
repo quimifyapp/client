@@ -24,7 +24,7 @@ class ReportSentDialog extends StatelessWidget {
       content: [
         const Center(
           child: DialogContentText(
-            text: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
+            richText: 'Chatea con nosotros y solucionaremos tus dudas al momento.',
           ),
         ),
         ContactButtons(

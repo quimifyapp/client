@@ -13,30 +13,28 @@ class MolecularMassHelpDialog extends StatelessWidget {
         'Concepto de mol': const [
           Center(
             child: DialogContentText(
-              text: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
+              richText: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
                   'conoce como la constante de Avogadro.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'Un mol de coches son 6.022 x 10²³ coches.',
+              richText: 'Un mol de coches son 6.022 x 10²³ coches.',
             ),
           ),
         ],
         'Elementos': [
           const Center(
             child: DialogContentText(
-              text: 'La masa molecular de un átomo es la masa, en gramos, de '
+              richText: 'La masa molecular de un átomo es la masa, en gramos, de '
                   '1 mol de ese átomo.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: RichText(
@@ -80,17 +78,16 @@ class MolecularMassHelpDialog extends StatelessWidget {
         'Masa molecular': [
           const Center(
             child: DialogContentText(
-              text: 'La masa molecular de un compuesto es la suma de las '
+              richText: 'La masa molecular de un compuesto es la suma de las '
                   'masas de sus átomos.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           const Center(
             child: DialogContentText(
-              text: 'El H₂O (agua) tiene 2 átomos de hidrógeno y 1 de '
+              richText: 'El H₂O (agua) tiene 2 átomos de hidrógeno y 1 de '
                   'oxígeno en su molécula. Su masa molecular es:',
             ),
           ),

@@ -12,22 +12,21 @@ class CalculatorHelpDialog extends StatelessWidget {
         'Masa molecular': [
           Center(
             child: DialogContentText(
-              text: 'La masa molecular de un compuesto es la masa, en gramos, '
+              richText: 'La masa molecular de un compuesto es la masa, en gramos, '
                   'de 1 mol de ese compuesto.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'CH₃ – CH₂(OH)   ➔   46.06 g/mol',
+              richText: 'CH₃ – CH₂(OH)   ➔   46.06 g/mol',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'B₂O₃   ➔   69.60 g/mol',
+              richText: 'B₂O₃   ➔   69.60 g/mol',
             ),
           ),
         ],

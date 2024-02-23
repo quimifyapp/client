@@ -13,12 +13,11 @@ class TipShapeHelpDialog extends StatelessWidget {
         'Terminación': [
           const Center(
             child: DialogContentText(
-              text: 'Es la forma de la punta del radical.',
+              richText: 'Es la forma de la punta del radical.',
             ),
           ),
           const DialogContentText(
-            text: 'Terminación normal:',
-            fontWeight: FontWeight.bold,
+            richText: '*Terminación normal:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -32,7 +31,7 @@ class TipShapeHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(radical propil)',
+              richText: '(radical propil)',
             ),
           ),
         ],

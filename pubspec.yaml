@@ -23,6 +23,7 @@ dependencies:
   signed_spacing_flex: ^1.1.0
   device_preview: ^1.1.0
   google_mobile_ads: ^4.0.0
+  fast_rich_text: ^0.0.1
 
 dev_dependencies:
   flutter_test:

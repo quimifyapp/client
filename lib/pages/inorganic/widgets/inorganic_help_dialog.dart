@@ -12,69 +12,66 @@ class InorganicHelpDialog extends StatelessWidget {
         'Inorgánica': [
           Center(
             child: DialogContentText(
-              text: 'Los compuestos inorgánicos no tienen al carbono como '
+              richText: 'Los compuestos inorgánicos no tienen al carbono como '
                   'elemento principal.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'CO₂',
+              richText: 'CO₂',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'ácido sulfúrico',
+              richText: 'ácido sulfúrico',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'NaCl',
+              richText: 'NaCl',
             ),
           ),
         ],
         'Formular': [
           Center(
             child: DialogContentText(
-              text: 'Consiste en averiguar la fórmula dado el nombre.',
+              richText: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'cloruro de sodio   ➔   NaCl',
+              richText: 'cloruro de sodio   ➔   NaCl',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'nitrato de plata   ➔   AgNO₃',
+              richText: 'nitrato de plata   ➔   AgNO₃',
             ),
           ),
         ],
         'Nombrar': [
           Center(
             child: DialogContentText(
-              text: 'Consiste en averiguar el nombre dada la fórmula.',
+              richText: 'Consiste en averiguar el nombre dada la fórmula.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'CrO₃   ➔   óxido de cromo(VI)',
+              richText: 'CrO₃   ➔   óxido de cromo(VI)',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'Al₂(SO₃)₃   ➔   sulfito de aluminio',
+              richText: 'Al₂(SO₃)₃   ➔   sulfito de aluminio',
             ),
           ),
         ],

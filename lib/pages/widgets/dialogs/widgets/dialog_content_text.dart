@@ -1,25 +1,24 @@
+import 'package:fast_rich_text/fast_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class DialogContentText extends StatelessWidget {
   const DialogContentText({
     Key? key,
-    required this.text,
-    this.fontWeight = FontWeight.normal,
+    required this.richText,
   }) : super(key: key);
 
-  final String text;
-  final FontWeight fontWeight;
+  final String richText;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
+    return FastRichText(
+      text: richText,
       textAlign: TextAlign.center,
-      style: TextStyle(
-        color: QuimifyColors.primary(context),
+      textStyle: TextStyle(
         fontSize: 16,
-        fontWeight: fontWeight,
+        fontFamily: 'CeraPro',
+        color: QuimifyColors.primary(context),
       ),
       strutStyle: const StrutStyle(height: 1.5),
     );

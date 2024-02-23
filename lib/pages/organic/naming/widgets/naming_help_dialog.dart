@@ -79,13 +79,12 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: 'En la lista aparecen los sustituyentes que se pueden '
+              richText: 'En la lista aparecen los sustituyentes que se pueden '
                   'enlazar al carbono.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Center(
             child: Text(
@@ -99,19 +98,18 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(carbono con 3 hidrógenos)',
+              richText: '(carbono con 3 hidrógenos)',
             ),
           ),
         ],
         'Radicales': [
           const Center(
             child: DialogContentText(
-              text: 'Son ramificaciones de la cadena principal de carbonos.',
+              richText: 'Son ramificaciones de la cadena principal de carbonos.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Center(
             child: Image.asset(
@@ -122,7 +120,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(2-metilpropano)',
+              richText: '(2-metilpropano)',
             ),
           ),
         ],
@@ -139,7 +137,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: 'Este botón sirve para añadir un carbono a la cadena.',
+              richText: 'Este botón sirve para añadir un carbono a la cadena.',
             ),
           ),
         ],
@@ -156,7 +154,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: 'Este botón sirve para enlazar varios hidrógenos al '
+              richText: 'Este botón sirve para enlazar varios hidrógenos al '
                   'carbono.',
             ),
           ),
@@ -174,7 +172,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: 'Este botón sirve para ver tus resultados anteriores.',
+              richText: 'Este botón sirve para ver tus resultados anteriores.',
             ),
           ),
         ],
@@ -191,7 +189,7 @@ class NamingHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: 'Este botón sirve para deshacer el último cambio.',
+              richText: 'Este botón sirve para deshacer el último cambio.',
             ),
           ),
         ],

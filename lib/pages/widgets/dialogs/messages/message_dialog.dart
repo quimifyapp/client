@@ -99,7 +99,7 @@ class MessageDialog extends StatelessWidget {
           if (details != null && details!.isNotEmpty)
             Center(
               child: DialogContentText(
-                text: details!,
+                richText: details!,
               ),
             ),
         ],

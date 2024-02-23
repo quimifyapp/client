@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
+import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_negative_button.dart';
-import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class ClassificationDialog extends StatelessWidget {
   const ClassificationDialog({
     Key? key,
-    required this.firstText,
-    required this.secondBoldText,
+    required this.richText,
     this.closeOnAgree = false,
     required this.onPressedAgree,
     required this.onPressedDisagree,
   }) : super(key: key);
 
-  final String firstText;
-  final String secondBoldText;
+  final String richText;
   final bool closeOnAgree;
-  final VoidCallback onPressedAgree, onPressedDisagree;
+  final VoidCallback onPressedAgree;
+  final VoidCallback onPressedDisagree;
 
   show(BuildContext context) =>
       showQuimifyDialog(context: context, dialog: this);
@@ -41,26 +40,10 @@ class ClassificationDialog extends StatelessWidget {
       title: 'Un momento...',
       content: [
         Center(
-          child: RichText(
-            text: TextSpan(
-              style: TextStyle(
-                color: QuimifyColors.primary(context),
-                fontSize: 16,
-                fontFamily: 'CeraPro',
-              ),
-              children: [
-                TextSpan(text: '$firstText '),
-                TextSpan(
-                  text: secondBoldText,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const TextSpan(text: '.'),
-              ],
-            ),
-            textAlign: TextAlign.center,
-            strutStyle: const StrutStyle(height: 1.5),
+          child: DialogContentText(
+            richText: richText,
           ),
-        ),
+        )
       ],
       actions: [
         DialogButton(

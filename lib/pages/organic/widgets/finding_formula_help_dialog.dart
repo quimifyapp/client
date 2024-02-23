@@ -12,46 +12,44 @@ class FindingFormulaHelpDialog extends StatelessWidget {
         'Orgánica': [
           Center(
             child: DialogContentText(
-              text: 'Los compuestos orgánicos contienen carbonos enlazados a '
+              richText: 'Los compuestos orgánicos contienen carbonos enlazados a '
                   'hidrógenos.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'CH₃ – CH₂ – CH₃',
+              richText: 'CH₃ – CH₂ – CH₃',
             ),
           ),
           Center(
-            child: DialogContentText(text: 'ácido etanoico'),
+            child: DialogContentText(richText: 'ácido etanoico'),
           ),
           Center(
             child: DialogContentText(
-              text: 'CH₂ = CH – CONH₂',
+              richText: 'CH₂ = CH – CONH₂',
             ),
           ),
         ],
         'Formular': [
           Center(
             child: DialogContentText(
-              text: 'Consiste en averiguar la fórmula dado el nombre.',
+              richText: 'Consiste en averiguar la fórmula dado el nombre.',
             ),
           ),
           DialogContentText(
-            text: 'Ejemplos:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplos:*',
           ),
           Center(
             child: DialogContentText(
-              text: 'etanol   ➔   CH₃ – CH₂(OH)',
+              richText: 'etanol   ➔   CH₃ – CH₂(OH)',
             ),
           ),
           Center(
             child: DialogContentText(
-              text: 'propadieno   ➔   CH₂ = CH = CH₂',
+              richText: 'propadieno   ➔   CH₂ = CH = CH₂',
             ),
           ),
         ],

@@ -13,12 +13,11 @@ class StructureHelpDialog extends StatelessWidget {
         'Estructura': [
           const Center(
             child: DialogContentText(
-              text: 'Cada carbono es un vértice. Los hidrógenos se omiten.',
+              richText: 'Cada carbono es un vértice. Los hidrógenos se omiten.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -32,19 +31,18 @@ class StructureHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(butano)',
+              richText: '(butano)',
             ),
           ),
         ],
         'Enlace simple': [
           const Center(
             child: DialogContentText(
-              text: 'Se representa con 1 línea.',
+              richText: 'Se representa con 1 línea.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -58,19 +56,18 @@ class StructureHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(butano)',
+              richText: '(butano)',
             ),
           ),
         ],
         'Enlace doble': [
           const Center(
             child: DialogContentText(
-              text: 'Se representa con 2 líneas.',
+              richText: 'Se representa con 2 líneas.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -84,19 +81,18 @@ class StructureHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(but-2-eno)',
+              richText: '(but-2-eno)',
             ),
           ),
         ],
         'Enlace triple': [
           const Center(
             child: DialogContentText(
-              text: 'Se representa con 3 líneas.',
+              richText: 'Se representa con 3 líneas.',
             ),
           ),
           const DialogContentText(
-            text: 'Ejemplo:',
-            fontWeight: FontWeight.bold,
+            richText: '*Ejemplo:*',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -110,7 +106,7 @@ class StructureHelpDialog extends StatelessWidget {
           ),
           const Center(
             child: DialogContentText(
-              text: '(but-2-ino)',
+              richText: '(but-2-ino)',
             ),
           ),
         ],

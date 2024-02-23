@@ -69,7 +69,7 @@ class ReportDialog extends StatelessWidget {
         content: [
           if (details != null && details!.isNotEmpty)
             Center(
-              child: DialogContentText(text: details!),
+              child: DialogContentText(richText: details!),
             ),
         ],
         actions: [
