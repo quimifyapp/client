@@ -58,8 +58,6 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     ),
   );
 
-  // TODO mejorar textos:
-
   static const String messageRoot = 'Parece que estás intentando resolver un';
 
   static const Map<Classification, String> classificationToMessage = {
@@ -187,13 +185,13 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
           // TODO un sólo mensaje para problemas / reacciones?
           const MessageDialog(
             title: '¡Estamos en ello!',
-            details: 'Podremos resolver problemas químicos en próximas '
+            details: 'Podremos resolver *problemas químicos* en próximas '
                 'actualizaciones.',
           ).show(context);
         } else if (result.classification == Classification.chemicalReaction) {
           const MessageDialog(
             title: '¡Estamos en ello!',
-            details: 'Podremos resolver reacciones químicas en próximas '
+            details: 'Podremos resolver *reacciones químicas* en próximas '
                 'actualizaciones.',
           ).show(context);
         }
