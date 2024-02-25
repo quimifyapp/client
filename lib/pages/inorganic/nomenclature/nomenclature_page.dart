@@ -156,8 +156,6 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    // TODO mejorar textos:
-
     if (result.classification == Classification.nomenclatureProblem) {
       MessageDialog(
         title: 'Casi lo tienes',
@@ -180,9 +178,6 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
             arguments: toDigits(formattedQuery),
           );
         } else if (result.classification == Classification.chemicalProblem) {
-          // TODO explicar qué SÍ puede hacer Quimify?
-          // TODO hacer más comprensible? "próximas actualizaciones"
-          // TODO un sólo mensaje para problemas / reacciones?
           const MessageDialog(
             title: '¡Estamos en ello!',
             details: 'Podremos resolver *problemas químicos* en próximas '
