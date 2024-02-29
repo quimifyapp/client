@@ -58,14 +58,14 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     ),
   );
 
-  static const String messageRoot = 'Parece que estás intentando resolver un';
+  static const String _messageRoot = 'Parece que estás intentando resolver un';
 
-  static const Map<Classification, String> classificationToMessage = {
-    Classification.organicFormula: '$messageRoot *compuesto orgánico*.',
-    Classification.organicName: '$messageRoot *compuesto orgánico*.',
-    Classification.molecularMassProblem: '${messageRoot}a *masa molecular*.',
-    Classification.chemicalProblem: '$messageRoot *problema químico*.',
-    Classification.chemicalReaction: '${messageRoot}a *reacción química*.',
+  static const Map<Classification, String> _classificationToMessage = {
+    Classification.organicFormula: '$_messageRoot *compuesto orgánico*.',
+    Classification.organicName: '$_messageRoot *compuesto orgánico*.',
+    Classification.molecularMassProblem: '${_messageRoot}a *masa molecular*.',
+    Classification.chemicalProblem: '$_messageRoot *problema químico*.',
+    Classification.chemicalReaction: '${_messageRoot}a *reacción química*.',
   };
 
   @override
@@ -168,7 +168,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     bool classificationHasRoute = Routes.contains(result.classification!);
 
     ClassificationDialog(
-      richText: classificationToMessage[result.classification!]!,
+      richText: _classificationToMessage[result.classification!]!,
       closeOnAgree: !classificationHasRoute,
       onPressedAgree: () {
         if (classificationHasRoute) {
