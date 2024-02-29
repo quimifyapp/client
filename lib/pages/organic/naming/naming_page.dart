@@ -317,7 +317,7 @@ class _NamingPageState extends State<NamingPage> {
       ),
       Group.ether: GroupButton(
         bonds: 1,
-        structure: 'O',
+        structure: 'O –',
         name: 'Éter',
         onPressed: () => _pressedGroupButton(Group.ether),
       ),
