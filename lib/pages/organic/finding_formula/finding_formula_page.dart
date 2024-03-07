@@ -97,6 +97,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
+          onStartPressed: () => _textFocusNode.requestFocus(),
           entries: History()
               .getOrganicFormulas()
               .map((e) => HistoryEntry(

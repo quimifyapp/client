@@ -135,6 +135,7 @@ class _NamingPageState extends State<NamingPage> {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
+          onStartPressed: () {},
           entries: History()
               .getOrganicNames()
               .map((e) => HistoryEntry(

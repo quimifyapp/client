@@ -10,12 +10,19 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 class HistoryPage extends StatelessWidget {
   const HistoryPage({
     Key? key,
+    required this.onStartPressed,
     required this.entries,
     required this.onEntryPressed,
   }) : super(key: key);
 
+  final VoidCallback onStartPressed;
   final List<HistoryEntry> entries;
   final void Function(dynamic) onEntryPressed;
+
+  _startButtonPressed(BuildContext context) {
+    Navigator.of(context).pop();
+    onStartPressed();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +92,7 @@ class HistoryPage extends StatelessWidget {
                         const SizedBox(height: 20),
                         QuimifyButton.gradient(
                           height: 50,
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () => _startButtonPressed(context),
                           child: Text(
                             'Comenzar',
                             style: TextStyle(

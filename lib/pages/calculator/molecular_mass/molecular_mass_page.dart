@@ -95,6 +95,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
+          onStartPressed: () => _textFocusNode.requestFocus(),
           entries: History()
               .getMolecularMasses()
               .map((e) => HistoryEntry(
