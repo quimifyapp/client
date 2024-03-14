@@ -15,6 +15,7 @@ import 'package:quimify_client/pages/organic/finding_formula/finding_formula_pag
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
+import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 
 main() async {
   _showLoadingScreen();
@@ -69,6 +70,7 @@ class QuimifyApp extends StatelessWidget {
         title: 'Quimify',
         home: HomePage(clientResult: clientResult),
         routes: {
+          Routes.signIn: (context) => const SignInPage(),
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),

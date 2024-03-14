@@ -24,6 +24,7 @@ dependencies:
   device_preview: ^1.1.0
   google_mobile_ads: ^4.0.0
   fast_rich_text: ^0.0.1
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

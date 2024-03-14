@@ -7,6 +7,7 @@ enum Classification {
   molecularMassProblem,
   chemicalProblem,
   chemicalReaction,
+  signIn,
 }
 
 const Map<String, Classification> stringToClassification = {
@@ -18,4 +19,5 @@ const Map<String, Classification> stringToClassification = {
   'molecularMassProblem': Classification.molecularMassProblem,
   'chemicalProblem': Classification.chemicalProblem,
   'chemicalReaction': Classification.chemicalReaction,
+  'signIn': Classification.signIn,
 };
