@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (widget.clientResult!.updateAvailable) {
-      bool optionalUpdate = !widget.clientResult!.updateMandatory!;
+      bool optionalUpdate = !widget.clientResult!.updateNeeded!;
 
       MessageDialog updateDialog = MessageDialog.linked(
         title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         closable: optionalUpdate,
       );
 
-      updateDialog.show(context).then((value) => _showWelcomeMessagePopup());
+      updateDialog.show(context).then(() => _showWelcomeMessagePopup());
     } else {
       _showWelcomeMessagePopup();
     }
