@@ -18,8 +18,8 @@ class ClassificationDialog extends StatelessWidget {
   final VoidCallback onPressedAgree;
   final VoidCallback onPressedDisagree;
 
-  show(BuildContext context) =>
-      showQuimifyDialog(context: context, dialog: this);
+  show(BuildContext context) async =>
+      await showQuimifyDialog(context: context, dialog: this);
 
   _agreePressed(BuildContext context) {
     if (closeOnAgree) {

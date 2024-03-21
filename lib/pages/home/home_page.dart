@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         closable: optionalUpdate,
       );
 
-      updateDialog.show(context).then(() => _showWelcomeMessagePopup());
+      updateDialog.show(context).then((_) => _showWelcomeMessagePopup());
     } else {
       _showWelcomeMessagePopup();
     }
