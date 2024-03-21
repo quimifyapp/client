@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class ClientResult {
   final bool updateAvailable;
-  final bool? updateMandatory;
+  final bool? updateNeeded;
   final String? updateDetails;
 
   final bool messagePresent;
@@ -19,7 +19,7 @@ class ClientResult {
 
   ClientResult(
     this.updateAvailable,
-    this.updateMandatory,
+    this.updateNeeded,
     this.updateDetails,
 
     this.messagePresent,
