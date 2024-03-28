@@ -107,17 +107,18 @@ class _NamingPageState extends State<NamingPage> {
           title: _title,
           organicResultView: OrganicResultView(
             fields: {
+              if (organicResult.structure != null)
+                'Fórmula': formatStructure(organicResult.structure!),
               if (organicResult.name != null) 'Nombre': organicResult.name!,
               if (organicResult.molecularMass != null)
                 'Masa molecular':
                     '${formatMolecularMass(organicResult.molecularMass!)}'
                         ' g/mol',
-              if (organicResult.structure != null)
-                'Fórmula': formatStructure(organicResult.structure!),
             },
             imageProvider: organicResult.url2D != null
                 ? NetworkImage(organicResult.url2D!)
                 : null,
+            url3D: organicResult.url3D,
             onHistoryPressed: _showHistory,
             reportDialog: ReportDialog(
               details: 'Resultado de\n"'

@@ -23,7 +23,7 @@ class StructureHelpDialog extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Center(
               child: Image.asset(
-                'assets/images/icons/butane-diagram.png',
+                'assets/images/icons/butane-diagrams.png',
                 height: 130,
                 color: QuimifyColors.primary(context),
               ),

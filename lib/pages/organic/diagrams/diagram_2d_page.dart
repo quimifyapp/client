@@ -6,8 +6,8 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
-class DiagramPage extends StatefulWidget {
-  const DiagramPage({
+class Diagram2DPage extends StatefulWidget {
+  const Diagram2DPage({
     Key? key,
     required this.imageProvider,
   }) : super(key: key);
@@ -15,10 +15,10 @@ class DiagramPage extends StatefulWidget {
   final ImageProvider imageProvider;
 
   @override
-  State<DiagramPage> createState() => _DiagramPageState();
+  State<Diagram2DPage> createState() => _Diagram2DPageState();
 }
 
-class _DiagramPageState extends State<DiagramPage> {
+class _Diagram2DPageState extends State<Diagram2DPage> {
   late PhotoViewControllerBase controller;
   late PhotoViewScaleStateController scaleStateController;
 
@@ -44,6 +44,9 @@ class _DiagramPageState extends State<DiagramPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color from = const Color.fromARGB(255, 245, 245, 245);
+    Color to = QuimifyColors.background(context);
+
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Estructura'),
       body: Container(
@@ -55,16 +58,16 @@ class _DiagramPageState extends State<DiagramPage> {
                 colorFilter: ColorFilter.matrix(
                   MediaQuery.of(context).platformBrightness == Brightness.light
                       ? [
-                          247 / 245, 0, 0, 0, 0,
-                          0, 247 / 245, 0, 0, 0,
-                          0, 0, 247 / 245, 0, 0,
-                          0, 0, 0, 1, 0, // Identity * [245 -> light background]
+                          to.red / from.red, 0, 0, 0, 0,
+                          0, to.green / from.green, 0, 0, 0,
+                          0, 0, to.blue / from.blue, 0, 0,
+                          0, 0, 0, 1, 0, // [from -> to]
                         ]
                       : [
-                          -237 / 245, 0, 0, 0, 255,
-                          0, -237 / 245, 0, 0, 255,
-                          0, 0, -237 / 245, 0, 255,
-                          0, 0, 0, 1, 0, // Inverse * [245 -> dark background]
+                          (to.red - 255) / from.red, 0, 0, 0, 255,
+                          0, (to.green - 255) / from.green, 0, 0, 255,
+                          0, 0, (to.blue - 255) / from.blue, 0, 255,
+                          0, 0, 0, 1, 0, // [[from -> inverse] -> to]
                         ],
                 ),
                 child: PhotoView(
