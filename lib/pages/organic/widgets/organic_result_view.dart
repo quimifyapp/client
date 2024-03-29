@@ -119,7 +119,7 @@ class OrganicResultView extends StatelessWidget {
                         width: 118,
                         child: QuimifyIconButton(
                           height: _buttonHeight,
-                          backgroundColor: QuimifyColors.teal(),
+                          backgroundColor: QuimifyColors.onBlueText(context),
                           onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) => Diagram3DPage(
