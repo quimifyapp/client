@@ -25,6 +25,7 @@ dependencies:
   google_mobile_ads: ^4.0.0
   fast_rich_text: ^0.0.1
   webview_flutter: ^4.7.0
+  device_info_plus: ^9.1.2
 
 dev_dependencies:
   flutter_test:

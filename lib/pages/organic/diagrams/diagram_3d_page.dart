@@ -1,4 +1,6 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -161,18 +163,17 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       });
     }
 
-    // TODO send error
+    Api().sendError(
+      context: 'WebView error',
+      details: 'URL "${widget.url}", error "${error.toString()}"',
+    );
   }
 
   _onPageFinished() async {
-    if (!mounted) return; // For security reasons
     if (_result != null) return;
 
     if (await _checkUnsupportedBrowser()) {
-      setState(() {
-        _result = _Result.unsupportedBrowser;
-      });
-      // TODO send error
+      _handleUnsupportedBrowser();
       return;
     }
 
@@ -180,6 +181,8 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
     if (adaptedSuccessfully) {
       await Future.delayed(const Duration(seconds: 1)); // Temporary fix
+
+      if (!mounted) return; // For security reasons
 
       setState(() {
         _result = _Result.successful;
@@ -191,23 +194,6 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     }
   }
 
-  Future<bool> _adaptWebPage() async {
-    try {
-      await _defineWaitForElement();
-
-      try {
-        await _runZoomOutMolecule();
-      } catch (nonCriticalError) {
-        // TODO send error
-      }
-
-      return await _runFocusOnMolecule();
-    } catch (error) {
-      // TODO send error
-      return false;
-    }
-  }
-
   Future<bool> _checkUnsupportedBrowser() async {
     String message = 'Apologies, we no longer support your browser...';
 
@@ -216,6 +202,44 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     ''') as String;
 
     return innerText.contains(message);
+  }
+
+  _handleUnsupportedBrowser() async {
+    String device = (await DeviceInfoPlugin().deviceInfo).data['product'];
+
+    Api().sendError(
+      context: 'Unsupported browser',
+      details: 'URL "${widget.url}", device "$device"',
+    );
+
+    if (!mounted) return; // For security reasons
+
+    setState(() {
+      _result = _Result.unsupportedBrowser;
+    });
+  }
+
+  Future<bool> _adaptWebPage() async {
+    try {
+      await _defineWaitForElement();
+
+      try {
+        await _runZoomOutMolecule();
+      } catch (nonCriticalError) {
+        Api().sendError(
+          context: 'Molecule zoom out error',
+          details: nonCriticalError.toString(),
+        );
+      }
+
+      return await _runFocusOnMolecule();
+    } catch (error) {
+      Api().sendError(
+        context: 'Adapting webpage error',
+        details: error.toString(),
+      );
+      return false;
+    }
   }
 
   _defineWaitForElement() async {
@@ -264,7 +288,10 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     // Success is NOT guaranteed even if focusResult == '{}'
 
     if (zoomOutResult != '{}') {
-      // TODO send error
+      Api().sendError(
+        context: 'Zoom out result NOT {}',
+        details: 'Result "${zoomOutResult.toString()}"',
+      );
       return false;
     }
 
@@ -290,7 +317,10 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     // Success is NOT guaranteed even if focusResult == '{}'
 
     if (focusResult != '{}') {
-      // TODO send error
+      Api().sendError(
+        context: 'Focus molecule result NOT {}',
+        details: 'Result "$focusResult.toString()}"',
+      );
       return false;
     }
 
