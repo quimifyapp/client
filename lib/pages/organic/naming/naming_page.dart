@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
@@ -26,6 +25,7 @@ import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog
 import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -375,61 +375,6 @@ class _NamingPageState extends State<NamingPage> {
       );
     }
 
-    final Container doneDialog = Container(
-      padding: const EdgeInsets.all(20),
-      alignment: Alignment.topCenter,
-      decoration: BoxDecoration(
-        color: QuimifyColors.foreground(context),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
-      child: Column(
-        children: [
-          Image.asset(
-            // TODO hide in small screens?
-            'assets/images/completed.png',
-            height: 150,
-          ),
-          const SizedBox(height: 20),
-          AutoSizeText(
-            '¡Enhorabuena!',
-            maxLines: 1,
-            stepGranularity: 0.1,
-            maxFontSize: 20,
-            style: TextStyle(
-              fontSize: 20,
-              color: QuimifyColors.primary(context),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'La molecula está completa.\nYa puedes ver el resultado.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: QuimifyColors.primary(context),
-              fontSize: 16,
-            ),
-            strutStyle: const StrutStyle(height: 1.5),
-          ),
-          const SizedBox(height: 20),
-          QuimifyButton.gradient(
-            height: 50,
-            onPressed: () => _search(_sequence()),
-            child: Text(
-              'Resolver',
-              style: TextStyle(
-                color: QuimifyColors.inverseText(context),
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-
     return PopScope(
       onPopInvoked: (bool didPop) async {
         if (!didPop) {
@@ -574,7 +519,14 @@ class _NamingPageState extends State<NamingPage> {
                                   .map((function) => groupToButton[function]!)
                                   .toList(),
                             )
-                          : doneDialog,
+                          : QuimifyMascotMessage(
+                              tone: QuimifyMascotTone.positive,
+                              title: '¡Enhorabuena!',
+                              details: 'La molecula está completa.\n'
+                                  'Ya puedes ver el resultado.',
+                              buttonLabel: 'Resolver',
+                              onButtonPressed: () => _search(_sequence()),
+                            ),
                     ),
                   ),
                 ),

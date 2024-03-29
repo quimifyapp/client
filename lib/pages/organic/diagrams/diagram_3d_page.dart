@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -16,17 +17,17 @@ class Diagram3DPage extends StatefulWidget {
   State<Diagram3DPage> createState() => _Diagram3DPageState();
 }
 
-enum Result {
+enum _Result {
   successful,
   noInternet,
-  oldBrowser,
+  unsupportedBrowser,
   error,
 }
 
 class _Diagram3DPageState extends State<Diagram3DPage> {
-  late final WebViewController _controller;
+  final WebViewController _controller = WebViewController();
 
-  Result? _result;
+  _Result? _result;
 
   bool _firstBuild = true;
   late bool _lightMode;
@@ -34,30 +35,17 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
   @override
   void initState() {
-    _controller = WebViewController()
+    _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (_) => NavigationDecision.prevent,
           onPageFinished: (_) => _onPageFinished(),
-          onWebResourceError: (WebResourceError error) {
-            // TODO send error
-            // TODO display error mascot
-            // TODO with retry button
-          },
+          onWebResourceError: (WebResourceError error) => _onPageError(error),
         ),
-      )
-      ..loadRequest(Uri.parse(widget.url));
+      );
 
-    Future.delayed(const Duration(seconds: 5), () {
-      if (_result == null) {
-        // TODO controller cancel loading
-        // TODO send error
-        // TODO display error mascot
-        // TODO with retry button
-      }
-    });
-
+    _loadPage();
     super.initState();
   }
 
@@ -75,33 +63,55 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       _to = QuimifyColors.background(context);
     }
 
-    // TODO result to mascot with or without retry button
+    const String errorTitle = '¡Ups! No se ha podido cargar';
+
+    final Map<_Result, QuimifyMascotMessage> resultToQuimifyMascot = {
+      _Result.noInternet: QuimifyMascotMessage(
+        tone: QuimifyMascotTone.negative,
+        title: errorTitle,
+        details: 'Parece que no hay conexión a Internet.',
+        buttonLabel: 'Reintentar',
+        onButtonPressed: _reloadPage,
+      ),
+      _Result.unsupportedBrowser: QuimifyMascotMessage.withoutButton(
+        tone: QuimifyMascotTone.negative,
+        title: errorTitle,
+        details: 'Puede que este dispositivo sea demasiado antiguo.',
+      ),
+      _Result.error: QuimifyMascotMessage(
+        tone: QuimifyMascotTone.negative,
+        title: errorTitle,
+        details: 'Puedes probar a intentarlo otra vez.',
+        buttonLabel: 'Reintentar',
+        onButtonPressed: _reloadPage,
+      ),
+    };
 
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Estructura 3D'),
       body: Stack(
         children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.matrix(
-              _lightMode
-                  ? [
-                      _to.red / _from.red, 0, 0, 0, 0,
-                      0, _to.green / _from.green, 0, 0, 0,
-                      0, 0, _to.blue / _from.blue, 0, 0,
-                      0, 0, 0, 1, 0, // [from -> to]
-                    ]
-                  : [
-                      1, 0, 0, 0, _to.red.toDouble(),
-                      0, 1, 0, 0, _to.green.toDouble(),
-                      0, 0, 1, 0, _to.blue.toDouble(),
-                      0, 0, 0, 1, 0, // [from -> to] without dividing by 0
-                    ],
+          if (_result == null || _result == _Result.successful)
+            ColorFiltered(
+              colorFilter: ColorFilter.matrix(
+                _lightMode
+                    ? [
+                        _to.red / _from.red, 0, 0, 0, 0,
+                        0, _to.green / _from.green, 0, 0, 0,
+                        0, 0, _to.blue / _from.blue, 0, 0,
+                        0, 0, 0, 1, 0, // [from -> to]
+                      ]
+                    : [
+                        1, 0, 0, 0, _to.red.toDouble(),
+                        0, 1, 0, 0, _to.green.toDouble(),
+                        0, 0, 1, 0, _to.blue.toDouble(),
+                        0, 0, 0, 1, 0, // [from -> to] without dividing by 0
+                      ],
+              ),
+              child: WebViewWidget(
+                controller: _controller,
+              ),
             ),
-            // TODO double tap reset state
-            child: WebViewWidget(
-              controller: _controller,
-            ),
-          ),
           if (_result == null)
             Container(
               color: QuimifyColors.background(context),
@@ -111,15 +121,56 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
                 ),
               ),
             ),
+          if (_result != null && _result != _Result.successful)
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  child: resultToQuimifyMascot[_result]!,
+                ),
+              ],
+            )
         ],
       ),
     );
   }
 
+  _loadPage() async {
+    await _controller.clearCache(); // Important
+    _controller.loadRequest(Uri.parse(widget.url));
+  }
+
+  _reloadPage() {
+    setState(() {
+      _result = null;
+    });
+
+    _loadPage();
+  }
+
+  _onPageError(WebResourceError error) async {
+    if (!mounted) return; // For security reasons
+
+    if (error.description == 'net::ERR_INTERNET_DISCONNECTED') {
+      setState(() {
+        _result = _Result.noInternet;
+      });
+    } else {
+      setState(() {
+        _result = _Result.error;
+      });
+    }
+
+    // TODO send error
+  }
+
   _onPageFinished() async {
+    if (!mounted) return; // For security reasons
+    if (_result != null) return;
+
     if (await _checkUnsupportedBrowser()) {
       setState(() {
-        _result = Result.oldBrowser;
+        _result = _Result.unsupportedBrowser;
       });
       // TODO send error
       return;
@@ -128,16 +179,14 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     bool adaptedSuccessfully = await _adaptWebPage();
 
     if (adaptedSuccessfully) {
-      await Future.delayed(const Duration(seconds: 1)); // To ensure adapted
-
-      if (!mounted) return; // For security reasons
+      await Future.delayed(const Duration(seconds: 1)); // Temporary fix
 
       setState(() {
-        _result = Result.successful;
+        _result = _Result.successful;
       });
     } else {
       setState(() {
-        _result = Result.error;
+        _result = _Result.error;
       });
     }
   }
