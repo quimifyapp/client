@@ -165,7 +165,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
     Api().sendError(
       context: 'WebView error',
-      details: 'URL "${widget.url}", error "${error.toString()}"',
+      details: 'URL "${widget.url}", error "${error.description}"',
     );
   }
 
