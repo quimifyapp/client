@@ -37,8 +37,8 @@ class QuimifyMascotMessage extends StatelessWidget {
   final VoidCallback? onButtonPressed;
 
   final Map<QuimifyMascotTone, String> _toneToImagePath = {
-    QuimifyMascotTone.positive: 'assets/images/completed.png',
-    QuimifyMascotTone.negative: 'assets/images/empty.png',
+    QuimifyMascotTone.positive: 'assets/images/icons/mascot-positive.png',
+    QuimifyMascotTone.negative: 'assets/images/icons/mascot-negative.png',
   };
 
   @override
