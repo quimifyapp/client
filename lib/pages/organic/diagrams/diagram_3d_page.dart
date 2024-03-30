@@ -39,9 +39,11 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onNavigationRequest: (_) => NavigationDecision.prevent,
           onPageFinished: (_) => _onPageFinished(),
-          onWebResourceError: (WebResourceError error) => _onPageError(error),
+          onWebResourceError: (error) => _onPageError(error),
+          onNavigationRequest: (request) => request.url == widget.url
+              ? NavigationDecision.navigate
+              : NavigationDecision.prevent,
         ),
       );
 
@@ -56,8 +58,8 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
   _reloadPage() {
     setState(() {
-      _lightMode = null;
       _result = null;
+      _lightMode = null;
     });
 
     _loadPage();
@@ -68,65 +70,59 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   _onPageFinished() async {
     if (_result != null) return;
 
-    if (await _checkUnsupportedBrowser()) {
-      _onUnsupportedBrowser();
-      return;
+    _Result result;
+
+    try {
+      result = await _adaptPage();
+
+      if (result != _Result.successful) {
+        Api().sendError(
+          context: 'WebView adapt page failed',
+          details: 'URL "${widget.url}", device "${await _deviceName()}"',
+        );
+      }
+    } catch (error) {
+      result = _Result.error;
+
+      Api().sendError(
+        context: 'WebView adapt page failed',
+        details: 'URL "${widget.url}", device "${await _deviceName()}", '
+            'error "$error"',
+      );
     }
 
-    bool adaptedSuccessfully = await _adaptWebPage();
-
-    if (adaptedSuccessfully) {
-      await Future.delayed(const Duration(seconds: 1));
-
-      if (!mounted) return; // For security reasons
-
-      setState(() {
-        _result = _Result.successful;
-      });
-    } else {
-      setState(() {
-        _result = _Result.error;
-      });
-    }
+    if (!mounted) return; // For security reasons
+    setState(() {
+      _result = result;
+    });
   }
 
   _onPageError(WebResourceError error) async {
-    if (!mounted) return; // For security reasons
+    bool hasInternet = error.description != 'net::ERR_INTERNET_DISCONNECTED';
 
-    if (error.description == 'net::ERR_INTERNET_DISCONNECTED') {
-      setState(() {
-        _result = _Result.noInternet;
-      });
-    } else {
-      setState(() {
-        _result = _Result.error;
-      });
+    // TODO re-affirm using our own function
+
+    if (hasInternet) {
+      Api().sendError(
+        context: 'WebView error',
+        details: 'URL "${widget.url}", device "${await _deviceName()}", '
+            'error "${error.description}"',
+      );
     }
 
-    Api().sendError(
-      context: 'WebView error',
-      details: 'URL "${widget.url}", error "${error.description}"',
-    );
-  }
-
-  _onUnsupportedBrowser() async {
-    String device = (await DeviceInfoPlugin().deviceInfo).data['product'];
-
-    Api().sendError(
-      context: 'Unsupported browser',
-      details: 'URL "${widget.url}", device "$device"',
-    );
-
     if (!mounted) return; // For security reasons
-
     setState(() {
-      _result = _Result.unsupportedBrowser;
+      _result = hasInternet ? _Result.error : _Result.noInternet;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _setBrightnessMode(); // WebView's brightness mode can't be real-time
+    if (_lightMode == null) {
+      // WebView's brightness mode can't be real-time
+      Brightness platformBrightness = MediaQuery.of(context).platformBrightness;
+      _lightMode = platformBrightness == Brightness.light;
+    }
 
     Color fromBackground = _lightMode! ? Colors.white : Colors.black;
     Color toBackground = QuimifyColors.background(context);
@@ -202,34 +198,29 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     );
   }
 
-  Future<bool> _adaptWebPage() async {
-    try {
-      await _defineWaitForElement();
-
-      try {
-        await _runZoomOutMolecule();
-      } catch (nonCriticalError) {
-        Api().sendError(
-          context: 'Molecule zoom out error',
-          details: nonCriticalError.toString(),
-        );
-      }
-
-      return await _runFocusOnMolecule();
-    } catch (error) {
-      Api().sendError(
-        context: 'Adapting webpage error',
-        details: error.toString(),
-      );
-      return false;
+  Future<_Result> _adaptPage() async {
+    if (await _checkUnsupportedBrowser()) {
+      return _Result.unsupportedBrowser;
     }
+
+    await _defineWaitForElement();
+    await _runZoomOutMolecule();
+    await _runFocusOnMolecule();
+
+    // TODO do several checks with a delay and a timeout
+    await Future.delayed(const Duration(seconds: 1)); // Ensure JS execution
+    if (await _checkFailedAdaptWebPage()) {
+      return _Result.error;
+    }
+
+    return _Result.successful;
   }
 
-  Future<bool> _runZoomOutMolecule() async {
+  _runZoomOutMolecule() async {
     String zoomOutButtonSelector = 'button.pc-gray-button[title="Zoom out"]';
     int zoomOutTotalClicks = 6;
 
-    Object zoomOutResult = await _controller.runJavaScriptReturningResult('''
+    await _controller.runJavaScript('''
       async function zoomOutMolecule() {
         const zoomOutButton = await waitForElement('$zoomOutButtonSelector');
         
@@ -242,24 +233,12 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       
       zoomOutMolecule();
     ''');
-
-    // Success is NOT guaranteed even if focusResult == '{}'
-
-    if (zoomOutResult != '{}') {
-      Api().sendError(
-        context: 'Zoom out result NOT {}',
-        details: 'Result "${zoomOutResult.toString()}"',
-      );
-      return false;
-    }
-
-    return true;
   }
 
-  Future<bool> _runFocusOnMolecule() async {
+  _runFocusOnMolecule() async {
     String moleculeSelector = 'canvas.cursor-hand';
 
-    Object focusResult = await _controller.runJavaScriptReturningResult('''
+    await _controller.runJavaScript('''
       async function focusOnMolecule() {
         const molecule = await waitForElement('$moleculeSelector');
         
@@ -271,18 +250,6 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       
       focusOnMolecule();
     ''');
-
-    // Success is NOT guaranteed even if focusResult == '{}'
-
-    if (focusResult != '{}') {
-      Api().sendError(
-        context: 'Focus molecule result NOT {}',
-        details: 'Result "$focusResult.toString()}"',
-      );
-      return false;
-    }
-
-    return true;
   }
 
   _defineWaitForElement() async {
@@ -311,21 +278,25 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   Future<bool> _checkUnsupportedBrowser() async {
-    String message = 'Apologies, we no longer support your browser...';
+    String text = 'Apologies, we no longer support your browser...';
 
     String innerText = await _controller.runJavaScriptReturningResult('''
       document.body.innerText
     ''') as String;
 
-    return innerText.contains(message);
+    return innerText.contains(text);
   }
 
-  _setBrightnessMode() {
-    if (_lightMode != null) {
-      return;
-    }
+  Future<bool> _checkFailedAdaptWebPage() async {
+    String text = '3D Conformer';
 
-    Brightness platformBrightness = MediaQuery.of(context).platformBrightness;
-    _lightMode = platformBrightness == Brightness.light;
+    String innerText = await _controller.runJavaScriptReturningResult('''
+      document.body.innerText
+    ''') as String;
+
+    return innerText.contains(text);
   }
+
+  Future<String> _deviceName() async =>
+      await (await DeviceInfoPlugin().deviceInfo).data['product'];
 }
