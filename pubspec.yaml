@@ -45,10 +45,10 @@ flutter:
     - assets/images/dietanoic-acid.png
     - assets/images/discord.png
     - assets/images/gmail.png
-    -
+
     - assets/images/icons/logo.png
     - assets/images/icons/branding-slim.png
-    -
+
     - assets/images/icons/search.png
     - assets/images/icons/lock.png
     - assets/images/icons/molecule.png
@@ -58,7 +58,7 @@ flutter:
     - assets/images/icons/scale.png
     - assets/images/icons/bond-carbon.png
     - assets/images/icons/hydrogenate.png
-    -
+
     - assets/images/icons/single-bond.png
     - assets/images/icons/double-bond.png
     - assets/images/icons/triple-bond.png
@@ -72,7 +72,7 @@ flutter:
     - assets/images/icons/but-2-yne.png
     - assets/images/icons/4-ethyl-2-methylhexane.png
     - assets/images/icons/2-methylpropane.png
-    -
+
     - assets/images/icons/mascot-positive.png
     - assets/images/icons/mascot-negative.png
 
