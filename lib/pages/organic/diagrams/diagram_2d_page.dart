@@ -44,8 +44,22 @@ class _Diagram2DPageState extends State<Diagram2DPage> {
 
   @override
   Widget build(BuildContext context) {
-    Color from = const Color.fromARGB(255, 245, 245, 245);
-    Color to = QuimifyColors.background(context);
+    Color fromBackground = const Color.fromARGB(255, 245, 245, 245);
+    Color toBackground = QuimifyColors.background(context);
+    List<double> backgroundFilter =
+        MediaQuery.of(context).platformBrightness == Brightness.light
+            ? [
+                toBackground.red / fromBackground.red, 0, 0, 0, 0,
+                0, toBackground.green / fromBackground.green, 0, 0, 0,
+                0, 0, toBackground.blue / fromBackground.blue, 0, 0,
+                0, 0, 0, 1, 0, // fromBackground -> toBackground
+              ]
+            : [
+                (toBackground.red - 255) / fromBackground.red, 0, 0, 0, 255,
+                0, (toBackground.green - 255) / fromBackground.green, 0, 0, 255,
+                0, 0, (toBackground.blue - 255) / fromBackground.blue, 0, 255,
+                0, 0, 0, 1, 0,  // fromBackground -> inverse -> toBackground
+              ];
 
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Estructura'),
@@ -55,21 +69,7 @@ class _Diagram2DPageState extends State<Diagram2DPage> {
           children: [
             Positioned.fill(
               child: ColorFiltered(
-                colorFilter: ColorFilter.matrix(
-                  MediaQuery.of(context).platformBrightness == Brightness.light
-                      ? [
-                          to.red / from.red, 0, 0, 0, 0,
-                          0, to.green / from.green, 0, 0, 0,
-                          0, 0, to.blue / from.blue, 0, 0,
-                          0, 0, 0, 1, 0, // [from -> to]
-                        ]
-                      : [
-                          (to.red - 255) / from.red, 0, 0, 0, 255,
-                          0, (to.green - 255) / from.green, 0, 0, 255,
-                          0, 0, (to.blue - 255) / from.blue, 0, 255,
-                          0, 0, 0, 1, 0, // [[from -> inverse] -> to]
-                        ],
-                ),
+                colorFilter: ColorFilter.matrix(backgroundFilter),
                 child: PhotoView(
                   imageProvider: widget.imageProvider,
                   controller: controller,
