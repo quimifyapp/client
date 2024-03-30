@@ -31,8 +31,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
   _Result? _result;
 
-  bool _firstBuild = true;
-  late bool _lightMode;
+  bool? _lightMode;
 
   @override
   void initState() {
@@ -51,12 +50,13 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   _loadPage() async {
-    await _controller.clearCache(); // Important
+    await _controller.clearCache(); // Or else half-loaded pages will be shown
     _controller.loadRequest(Uri.parse(widget.url));
   }
 
   _reloadPage() {
     setState(() {
+      _lightMode = null;
       _result = null;
     });
 
@@ -126,11 +126,11 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
   @override
   Widget build(BuildContext context) {
-    _fixBrightnessMode(); // WebView's brightness mode is not real-time
+    _setBrightnessMode(); // WebView's brightness mode can't be real-time
 
-    Color fromBackground = _lightMode ? Colors.white : Colors.black;
+    Color fromBackground = _lightMode! ? Colors.white : Colors.black;
     Color toBackground = QuimifyColors.background(context);
-    List<double> backgroundFilter = _lightMode
+    List<double> backgroundFilter = _lightMode!
         ? [
             toBackground.red / fromBackground.red, 0, 0, 0, 0,
             0, toBackground.green / fromBackground.green, 0, 0, 0,
@@ -320,12 +320,10 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return innerText.contains(message);
   }
 
-  _fixBrightnessMode() {
-    if (!_firstBuild) {
+  _setBrightnessMode() {
+    if (_lightMode != null) {
       return;
     }
-
-    _firstBuild = false;
 
     Brightness platformBrightness = MediaQuery.of(context).platformBrightness;
     _lightMode = platformBrightness == Brightness.light;
