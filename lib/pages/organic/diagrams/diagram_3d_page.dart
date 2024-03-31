@@ -33,7 +33,9 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   _Result? _result;
   bool _pageError = false;
 
-  bool? _lightMode;
+  bool _firstBuild = true;
+  late bool _lightMode;
+  late Color _fromBackground, _toBackground;
 
   @override
   void initState() {
@@ -65,11 +67,10 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   _reloadPage() {
-    _pageError = false;
-
     setState(() {
       _result = null;
-      _lightMode = null;
+      _pageError = false;
+      _firstBuild = true;
     });
 
     _loadPage();
@@ -105,11 +106,16 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     try {
       result = await _adaptPage();
 
-      if (result != _Result.successful) {
-        Api().sendError(
-          context: 'WebView adapt page failed',
-          details: 'URL "${widget.url}", device info "${await _deviceInfo()}"',
-        );
+      if (result == _Result.error) {
+        if (await hasInternetConnection()) {
+          Api().sendError(
+            context: 'WebView adapt page failed',
+            details: 'URL "${widget.url}", '
+                'device info "${await _deviceInfo()}"',
+          );
+        } else {
+          result = _Result.noInternet;
+        }
       }
     } catch (error) {
       result = _Result.error;
@@ -129,25 +135,26 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_lightMode == null) {
+    if (_firstBuild) {
       // WebView's brightness mode can't be real-time
       Brightness platformBrightness = MediaQuery.of(context).platformBrightness;
       _lightMode = platformBrightness == Brightness.light;
+
+      _fromBackground = _lightMode ? Colors.white : Colors.black;
+      _toBackground = QuimifyColors.background(context);
     }
 
-    Color fromBackground = _lightMode! ? Colors.white : Colors.black;
-    Color toBackground = QuimifyColors.background(context);
-    List<double> backgroundFilter = _lightMode!
+    List<double> backgroundFilter = _lightMode
         ? [
-            toBackground.red / fromBackground.red, 0, 0, 0, 0,
-            0, toBackground.green / fromBackground.green, 0, 0, 0,
-            0, 0, toBackground.blue / fromBackground.blue, 0, 0,
+            _toBackground.red / _fromBackground.red, 0, 0, 0, 0,
+            0, _toBackground.green / _fromBackground.green, 0, 0, 0,
+            0, 0, _toBackground.blue / _fromBackground.blue, 0, 0,
             0, 0, 0, 1, 0, // fromBackground -> toBackground, lineally
           ]
         : [
-            1, 0, 0, 0, toBackground.red.toDouble(),
-            0, 1, 0, 0, toBackground.green.toDouble(),
-            0, 0, 1, 0, toBackground.blue.toDouble(),
+            1, 0, 0, 0, _toBackground.red.toDouble(),
+            0, 1, 0, 0, _toBackground.green.toDouble(),
+            0, 0, 1, 0, _toBackground.blue.toDouble(),
             0, 0, 0, 1, 0, // fromBackground -> toBackground, not dividing by 0
           ];
 
