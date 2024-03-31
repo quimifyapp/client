@@ -225,7 +225,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     Duration checkReadyLoopDelay = const Duration(milliseconds: 100);
 
     for (int i = 0; i < 10; i++) {
-      if (await _checkReadyWebPage()) {
+      if (await _checkPageReady()) {
         await _runZoomOutMolecule();
         await _runFocusOnMolecule();
 
@@ -249,7 +249,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return innerText.contains(text);
   }
 
-  Future<bool> _checkReadyWebPage() async {
+  Future<bool> _checkPageReady() async {
     String moleculeSelector = 'canvas.cursor-hand';
 
     Object molecule = await _controller.runJavaScriptReturningResult('''
