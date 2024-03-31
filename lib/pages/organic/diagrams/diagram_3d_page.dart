@@ -107,14 +107,14 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       result = await _adaptPage();
 
       if (result == _Result.error) {
-        if (await hasInternetConnection()) {
+        if (!await hasInternetConnection()) {
+          result = _Result.noInternet;
+        } else {
           Api().sendError(
             context: 'WebView adapt page failed',
             details: 'URL "${widget.url}", '
                 'device info "${await _deviceInfo()}"',
           );
-        } else {
-          result = _Result.noInternet;
         }
       }
     } catch (error) {
@@ -141,7 +141,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       _lightMode = platformBrightness == Brightness.light;
 
       _fromBackground = _lightMode ? Colors.white : Colors.black;
-      _toBackground = QuimifyColors.background(context);
+      _toBackground = QuimifyColors.background(context); // Current brightness
     }
 
     List<double> backgroundFilter = _lightMode
@@ -221,7 +221,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       return _Result.unsupportedBrowser;
     }
 
-    Duration webViewRefreshDelay = const Duration(seconds: 1); // TODO lower?
+    Duration webViewRefreshDelay = const Duration(milliseconds: 500);
     Duration checkReadyLoopDelay = const Duration(milliseconds: 100);
 
     for (int i = 0; i < 10; i++) {
