@@ -1,6 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -30,6 +31,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   final WebViewController _controller = WebViewController();
 
   _Result? _result;
+  bool _pageError = false;
 
   bool? _lightMode;
 
@@ -39,11 +41,17 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onPageFinished: (_) => _onPageFinished(),
-          onWebResourceError: (error) => _onPageError(error),
           onNavigationRequest: (request) => request.url == widget.url
               ? NavigationDecision.navigate
               : NavigationDecision.prevent,
+          onWebResourceError: (error) {
+            _pageError = true;
+            _onPageError(error);
+          },
+          onPageFinished: (_) {
+            if (_pageError) return;
+            _onPageFinished();
+          },
         ),
       );
 
@@ -57,6 +65,8 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   _reloadPage() {
+    _pageError = false;
+
     setState(() {
       _result = null;
       _lightMode = null;
@@ -65,7 +75,27 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     _loadPage();
   }
 
-  // Both finished and error can be called, with error preceding finished:
+  // WebView will some times call both _onPageError and _onPageFinished
+
+  _onPageError(WebResourceError error) async {
+    if (_result != null) return;
+
+    bool disconnected = error.description == 'net::ERR_INTERNET_DISCONNECTED';
+    bool hasInternet = disconnected ? false : await hasInternetConnection();
+
+    if (hasInternet) {
+      Api().sendError(
+        context: 'WebView error',
+        details: 'URL "${widget.url}", device "${await _deviceName()}", '
+            'error "${error.description}"',
+      );
+    }
+
+    if (!mounted) return; // For security reasons
+    setState(() {
+      _result = hasInternet ? _Result.error : _Result.noInternet;
+    });
+  }
 
   _onPageFinished() async {
     if (_result != null) return;
@@ -85,7 +115,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       result = _Result.error;
 
       Api().sendError(
-        context: 'WebView adapt page failed',
+        context: 'WebView adapt page crashed',
         details: 'URL "${widget.url}", device "${await _deviceName()}", '
             'error "$error"',
       );
@@ -94,25 +124,6 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     if (!mounted) return; // For security reasons
     setState(() {
       _result = result;
-    });
-  }
-
-  _onPageError(WebResourceError error) async {
-    bool hasInternet = error.description != 'net::ERR_INTERNET_DISCONNECTED';
-
-    // TODO re-affirm using our own function
-
-    if (hasInternet) {
-      Api().sendError(
-        context: 'WebView error',
-        details: 'URL "${widget.url}", device "${await _deviceName()}", '
-            'error "${error.description}"',
-      );
-    }
-
-    if (!mounted) return; // For security reasons
-    setState(() {
-      _result = hasInternet ? _Result.error : _Result.noInternet;
     });
   }
 
@@ -207,13 +218,16 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     await _runZoomOutMolecule();
     await _runFocusOnMolecule();
 
-    // TODO do several checks with a delay and a timeout
-    await Future.delayed(const Duration(seconds: 1)); // Ensure JS execution
-    if (await _checkFailedAdaptWebPage()) {
-      return _Result.error;
+    for (int i = 0; i < 10; i++) {
+      if (await _checkDoneAdaptWebPage()) {
+        await Future.delayed(const Duration(milliseconds: 500)); // To ensure
+        return _Result.successful;
+      }
+
+      await Future.delayed(const Duration(milliseconds: 500)); // Delay
     }
 
-    return _Result.successful;
+    return _Result.error;
   }
 
   _runZoomOutMolecule() async {
@@ -287,14 +301,12 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return innerText.contains(text);
   }
 
-  Future<bool> _checkFailedAdaptWebPage() async {
-    String text = '3D Conformer';
+  Future<bool> _checkDoneAdaptWebPage() async {
+    Object emptyInnerText = await _controller.runJavaScriptReturningResult('''
+      document.body.innerText === ''
+    ''');
 
-    String innerText = await _controller.runJavaScriptReturningResult('''
-      document.body.innerText
-    ''') as String;
-
-    return innerText.contains(text);
+    return emptyInnerText == true;
   }
 
   Future<String> _deviceName() async =>
