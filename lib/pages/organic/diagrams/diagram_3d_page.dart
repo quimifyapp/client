@@ -86,7 +86,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     if (hasInternet) {
       Api().sendError(
         context: 'WebView error',
-        details: 'URL "${widget.url}", device "${await _deviceName()}", '
+        details: 'URL "${widget.url}", device info "${await _deviceInfo()}", '
             'error "${error.description}"',
       );
     }
@@ -108,7 +108,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       if (result != _Result.successful) {
         Api().sendError(
           context: 'WebView adapt page failed',
-          details: 'URL "${widget.url}", device "${await _deviceName()}"',
+          details: 'URL "${widget.url}", device info "${await _deviceInfo()}"',
         );
       }
     } catch (error) {
@@ -116,7 +116,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
 
       Api().sendError(
         context: 'WebView adapt page crashed',
-        details: 'URL "${widget.url}", device "${await _deviceName()}", '
+        details: 'URL "${widget.url}", device info "${await _deviceInfo()}", '
             'error "$error"',
       );
     }
@@ -312,6 +312,6 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return emptyInnerText == true;
   }
 
-  Future<String> _deviceName() async =>
-      await (await DeviceInfoPlugin().deviceInfo).data['product'];
+  Future<String> _deviceInfo() async =>
+      (await DeviceInfoPlugin().deviceInfo).data.toString();
 }
