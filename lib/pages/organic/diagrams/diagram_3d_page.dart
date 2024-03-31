@@ -214,84 +214,22 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
       return _Result.unsupportedBrowser;
     }
 
-    await _defineWaitForElement();
-    await _runZoomOutMolecule();
-    await _runFocusOnMolecule();
-
-    Duration checkDoneLoopDelay = const Duration(milliseconds: 500);
-    Duration webViewRefreshDelay = const Duration(milliseconds: 500);
+    Duration webViewRefreshDelay = const Duration(seconds: 1); // TODO lower?
+    Duration checkReadyLoopDelay = const Duration(milliseconds: 100);
 
     for (int i = 0; i < 10; i++) {
-      if (await _checkDoneAdaptWebPage()) {
+      if (await _checkReadyWebPage()) {
+        await _runZoomOutMolecule();
+        await _runFocusOnMolecule();
+
         await Future.delayed(webViewRefreshDelay);
         return _Result.successful;
       }
 
-      await Future.delayed(checkDoneLoopDelay);
+      await Future.delayed(checkReadyLoopDelay);
     }
 
     return _Result.error;
-  }
-
-  _runZoomOutMolecule() async {
-    String zoomOutButtonSelector = 'button.pc-gray-button[title="Zoom out"]';
-    int zoomOutTotalClicks = 6;
-
-    await _controller.runJavaScript('''
-      async function zoomOutMolecule() {
-        const zoomOutButton = await waitForElement('$zoomOutButtonSelector');
-        
-        for (let i = 0; i < $zoomOutTotalClicks; i++) {
-          setTimeout(function() {
-            zoomOutButton.click();
-          }, 0);
-        }
-      }
-      
-      zoomOutMolecule();
-    ''');
-  }
-
-  _runFocusOnMolecule() async {
-    String moleculeSelector = 'canvas.cursor-hand';
-
-    await _controller.runJavaScript('''
-      async function focusOnMolecule() {
-        const molecule = await waitForElement('$moleculeSelector');
-        
-        molecule.style.height = '100vh';
-        
-        document.body.innerHTML = '';
-        document.body.appendChild(molecule); 
-      }
-      
-      focusOnMolecule();
-    ''');
-  }
-
-  _defineWaitForElement() async {
-    await _controller.runJavaScript('''
-      async function waitForElement(selector) {
-        return new Promise((resolve) => {
-          const observer = new MutationObserver((mutations) => {
-            for (const mutation of mutations) {
-              if (mutation.type === 'childList') {
-                const element = document.querySelector(selector);
-                  
-                if (element !== null) {
-                  observer.disconnect();
-                  resolve(element);
-                }
-              }
-            }
-          });
-        
-          observer.observe(document.body, {
-            childList: true
-          });
-        });
-      }
-    ''');
   }
 
   Future<bool> _checkUnsupportedBrowser() async {
@@ -304,12 +242,42 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return innerText.contains(text);
   }
 
-  Future<bool> _checkDoneAdaptWebPage() async {
-    Object emptyInnerText = await _controller.runJavaScriptReturningResult('''
-      document.body.innerText === ''
+  Future<bool> _checkReadyWebPage() async {
+    String moleculeSelector = 'canvas.cursor-hand';
+
+    Object molecule = await _controller.runJavaScriptReturningResult('''
+      document.querySelector('$moleculeSelector') !== null
     ''');
 
-    return emptyInnerText == true;
+    return molecule == true;
+  }
+
+  _runZoomOutMolecule() async {
+    String zoomOutButtonSelector = 'button.pc-gray-button[title="Zoom out"]';
+    int zoomOutTotalClicks = 6;
+
+    await _controller.runJavaScript('''
+      const zoomOutButton = document.querySelector('$zoomOutButtonSelector');
+        
+      for (let i = 0; i < $zoomOutTotalClicks; i++) {
+        setTimeout(function() {
+          zoomOutButton.click();
+        }, 0);
+      }
+    ''');
+  }
+
+  _runFocusOnMolecule() async {
+    String moleculeSelector = 'canvas.cursor-hand';
+
+    await _controller.runJavaScript('''
+      const molecule = document.querySelector('$moleculeSelector');
+        
+      molecule.style.height = '100vh';
+        
+      document.body.innerHTML = '';
+      document.body.appendChild(molecule); 
+    ''');
   }
 
   Future<String> _deviceInfo() async =>
