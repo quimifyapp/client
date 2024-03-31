@@ -218,13 +218,16 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     await _runZoomOutMolecule();
     await _runFocusOnMolecule();
 
+    Duration checkDoneLoopDelay = const Duration(milliseconds: 500);
+    Duration webViewRefreshDelay = const Duration(milliseconds: 500);
+
     for (int i = 0; i < 10; i++) {
       if (await _checkDoneAdaptWebPage()) {
-        await Future.delayed(const Duration(milliseconds: 500)); // To ensure
+        await Future.delayed(webViewRefreshDelay);
         return _Result.successful;
       }
 
-      await Future.delayed(const Duration(milliseconds: 500)); // Delay
+      await Future.delayed(checkDoneLoopDelay);
     }
 
     return _Result.error;
