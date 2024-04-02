@@ -22,8 +22,9 @@ class Diagram3DPage extends StatefulWidget {
 
 enum _Result {
   successful,
+  unsupported,
+  unavailable,
   noInternet,
-  unsupportedBrowser,
   error,
 }
 
@@ -167,10 +168,15 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
         buttonLabel: 'Reintentar',
         onButtonPressed: _reloadPage,
       ),
-      _Result.unsupportedBrowser: QuimifyMascotMessage.withoutButton(
+      _Result.unsupported: QuimifyMascotMessage.withoutButton(
         tone: QuimifyMascotTone.negative,
         title: errorTitle,
         details: 'Puede que este dispositivo sea demasiado antiguo.',
+      ),
+      _Result.unavailable: QuimifyMascotMessage.withoutButton(
+        tone: QuimifyMascotTone.negative,
+        title: '¡Ups! No disponible',
+        details: 'Puedes ver la estructura 3D de otros compuestos.',
       ),
       _Result.error: QuimifyMascotMessage(
         tone: QuimifyMascotTone.negative,
@@ -217,8 +223,12 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   Future<_Result> _adaptPage() async {
-    if (await _checkUnsupportedBrowser()) {
-      return _Result.unsupportedBrowser;
+    if (await _checkUnsupported()) {
+      return _Result.unsupported;
+    }
+
+    if (await _checkUnavailable()) {
+      return _Result.unavailable;
     }
 
     Duration webViewRefreshDelay = const Duration(milliseconds: 500);
@@ -239,8 +249,18 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
     return _Result.error;
   }
 
-  Future<bool> _checkUnsupportedBrowser() async {
+  Future<bool> _checkUnsupported() async {
     String text = 'Apologies, we no longer support your browser...';
+
+    String innerText = await _controller.runJavaScriptReturningResult('''
+      document.body.innerText
+    ''') as String;
+
+    return innerText.contains(text);
+  }
+
+  Future<bool> _checkUnavailable() async {
+    String text = 'No data found';
 
     String innerText = await _controller.runJavaScriptReturningResult('''
       document.body.innerText
