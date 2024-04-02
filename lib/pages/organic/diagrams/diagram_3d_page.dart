@@ -42,6 +42,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   void initState() {
     _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..enableZoom(false)
       ..setNavigationDelegate(
         NavigationDelegate(
           onNavigationRequest: (request) => request.url == widget.url
