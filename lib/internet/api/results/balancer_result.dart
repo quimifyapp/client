@@ -2,9 +2,9 @@ import 'dart:convert';
 
 class BalancerResult {
   final bool present;
-  final String originalEquation;
-  final String balancedEquation;
-  final String error;
+  final String? originalEquation;
+  final String? balancedEquation;
+  final String? error;
 
   BalancerResult(
     this.present,

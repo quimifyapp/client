@@ -38,7 +38,6 @@ class CalculatorPage extends StatelessWidget {
           body: {
             '2H + O ⟶ H₃O': '6H + 2O ⟶ 2(H₃O)',
             'Fe₂O₃ + C ⟶ Fe + CO₂': '2(Fe₂O₃) + 3C ⟶ 4Fe + 3(CO₂)',
-            //'NH₄NO₃ ⟶ N₂ + O₂ + H₂O': '2(NH₄NO₃) ⟶ 2N₂ + 1O₂ + 4(H₂O)',
             'Cl + 2OP ⟶ Cl₂O + P': '4Cl + 2(OP) ⟶ 2(Cl₂O) + 2P',
           },
           page: BalancerPage(),
