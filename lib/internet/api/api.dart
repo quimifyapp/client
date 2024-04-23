@@ -9,6 +9,7 @@ import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/internet/api/results/balancer_result.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -352,6 +353,30 @@ class Api {
       } catch (error) {
         sendError(
           context: 'Organic from structure JSON',
+          details: error.toString(),
+        );
+      }
+    }
+
+    return result;
+  }
+
+  Future<BalancerResult?> getBalancedEquation(String formula) async {
+    BalancerResult? result;
+
+    String? response = await _getBodyWithRetry(
+      'balancer',
+      {
+        'formula': formula,
+      },
+    );
+
+    if (response != null) {
+      try {
+        result = BalancerResult.fromJson(response, formula);
+      } catch (error) {
+        sendError(
+          context: 'Balancer JSON',
           details: error.toString(),
         );
       }
