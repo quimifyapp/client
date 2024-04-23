@@ -1,0 +1,468 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:quimify_client/internet/ads/ads.dart';
+import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/api/results/balancer_result.dart';
+import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/pages/calculator/molecular_mass/widgets/molecular_mass_help_dialog.dart';
+import 'package:quimify_client/pages/history/history_entry.dart';
+import 'package:quimify_client/pages/history/history_field.dart';
+import 'package:quimify_client/pages/history/history_page.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
+import 'package:quimify_client/pages/widgets/objects/help_button.dart';
+import 'package:quimify_client/pages/widgets/objects/history_button.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/text.dart';
+
+class BalancerPage extends StatefulWidget {
+  const BalancerPage({Key? key}) : super(key: key);
+
+  @override
+  State<BalancerPage> createState() => _BalancerPageState();
+}
+
+class _BalancerPageState extends State<BalancerPage> {
+  final FocusNode _textFocusNode = FocusNode();
+  final TextEditingController _textController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
+  bool _argumentRead = false;
+
+  String _labelText = '2H + O ⟶ H₃O';
+  BalancerResult _result = BalancerResult(
+    '2H + O ⟶ H₃O',
+    true,
+    '2H + O ⟶ H₃O',
+    '6H + 2O ⟶ 2(H₃O)',
+    null,
+  );
+
+  _calculate(String input) async {
+    showLoadingIndicator(context);
+
+    // Result not found in cache, make an API call
+    BalancerResult? result = await Api().getBalancedEquation(input);
+
+    if (result != null) {
+      if (result.present) {
+        Ads().showInterstitial();
+
+        setState(() => _result = result);
+
+        History().saveBalancedEquation(result);
+
+        // UI/UX actions:
+
+        _labelText = input; // Sets previous input as label
+        _textController.clear(); // Clears input
+
+        _textFocusNode.unfocus();
+      } else {
+        if (!mounted) return; // For security reasons
+        MessageDialog.reportable(
+          title: 'Sin resultado',
+          details: result.error != null ? toSubscripts(result.error!) : null,
+          reportContext: 'Molecular mass',
+          reportDetails: 'Searched "$input"',
+        ).show(context);
+      }
+    } else {
+      if (!mounted) return; // For security reasons
+
+      if (await hasInternetConnection()) {
+        const MessageDialog(
+          title: 'Sin resultado',
+        ).show(context);
+      } else {
+        noInternetDialog.show(context);
+      }
+    }
+
+    hideLoadingIndicator();
+  }
+
+  _showHistory() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => HistoryPage(
+          onStartPressed: () => _textFocusNode.requestFocus(),
+          entries: History()
+              .getMolecularMasses()
+              .map((e) => HistoryEntry(
+            query: toSubscripts(e.formula),
+            fields: [
+              HistoryField(
+                'Fórmula',
+                toSubscripts(e.formula),
+              ),
+              HistoryField(
+                'Masa molecular',
+                '${formatMolecularMass(e.molecularMass)} g/mol',
+              ),
+            ],
+          ))
+              .toList(),
+          onEntryPressed: (formula) => _calculate(formula),
+        ),
+      ),
+    );
+  }
+
+  // Interface:
+
+  _pressedButton() {
+    _eraseInitialAndFinalBlanks();
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      if (_textFocusNode.hasFocus) {
+        _textController.clear(); // Clears input
+      } else {
+        _startTyping();
+      }
+    } else {
+      _calculate(_textController.text);
+    }
+  }
+
+  _submittedText() {
+    // Keyboard will be hidden afterwards
+    _eraseInitialAndFinalBlanks();
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      _textController.clear(); // Clears input
+    } else {
+      _calculate(_textController.text);
+    }
+  }
+
+  _tappedOutsideText() {
+    _textFocusNode.unfocus(); // Hides keyboard
+
+    if (isEmptyWithBlanks(_textController.text)) {
+      // TODO format forbid blanks?
+      _textController.clear(); // Clears input
+    } else {
+      _eraseInitialAndFinalBlanks();
+    }
+  }
+
+  _scrollToStart() {
+    // Goes to the top of the page after a delay:
+    Future.delayed(
+      const Duration(milliseconds: 200),
+          () => WidgetsBinding.instance.addPostFrameCallback(
+            (_) => _scrollController.animateTo(
+          _scrollController.position.minScrollExtent,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 300),
+        ),
+      ),
+    );
+  }
+
+  _startTyping() {
+    // Like if the TextField was tapped:
+    _textFocusNode.requestFocus();
+    _scrollToStart();
+  }
+
+  _eraseInitialAndFinalBlanks() {
+    _textController.text =
+        noInitialAndFinalBlanks(_textController.text); // Clears input
+  }
+
+  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
+
+  @override
+  Widget build(BuildContext context) {
+    const double buttonHeight = 50;
+
+    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (argument != null && !_argumentRead) {
+      _textFocusNode.requestFocus();
+      _argumentRead = true;
+    }
+
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        hideLoadingIndicator();
+      },
+      child: GestureDetector(
+        onTap: _tappedOutsideText,
+        child: QuimifyScaffold(
+          bannerAdName: runtimeType.toString(),
+          header: const QuimifyPageBar(title: 'Ajustar reacciones'),
+          body: SingleChildScrollView(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: _startTyping, // As if the TextField was tapped
+                  child: Container( // Reactants Container
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: QuimifyColors.foreground(context),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Reactivos',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: QuimifyColors.primary(context),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Spacer(),
+                            const HelpButton(
+                              dialog: MolecularMassHelpDialog(),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        TextField(
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          // Aspect:
+                          cursorColor: QuimifyColors.primary(context),
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: QuimifyColors.primary(context),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          keyboardType: TextInputType.visiblePassword,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(bottom: 3),
+                            isCollapsed: true,
+                            labelText: _labelText,
+                            labelStyle: TextStyle(
+                              color: QuimifyColors.tertiary(context),
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            // So hint doesn't go up while typing:
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            // To remove bottom border:
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                          ),
+                          // Logic:
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              formulaInputFormatter,
+                            ),
+                          ],
+                          textCapitalization: TextCapitalization.sentences,
+                          scribbleEnabled: false,
+                          focusNode: _textFocusNode,
+                          controller: _textController,
+                          onChanged: (String input) {
+                            _textController.value = _textController.value
+                                .copyWith(text: formatStructureInput(input));
+                          },
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: (_) => _submittedText(),
+                          onTap: _scrollToStart,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                const Icon(Icons.arrow_downward_sharp, size: 35),
+                const SizedBox(height: 15),
+
+                GestureDetector(
+                  onTap: _startTyping, // As if the TextField was tapped
+                  child: Container( // Products Container
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: QuimifyColors.foreground(context),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Productos',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: QuimifyColors.primary(context),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Spacer(),
+                            const HelpButton(
+                              dialog: MolecularMassHelpDialog(),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        TextField(
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          // Aspect:
+                          cursorColor: QuimifyColors.primary(context),
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: QuimifyColors.primary(context),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          keyboardType: TextInputType.visiblePassword,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(bottom: 3),
+                            isCollapsed: true,
+                            labelText: _labelText,
+                            labelStyle: TextStyle(
+                              color: QuimifyColors.tertiary(context),
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            // So hint doesn't go up while typing:
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            // To remove bottom border:
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                          ),
+                          // Logic:
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              formulaInputFormatter,
+                            ),
+                          ],
+                          textCapitalization: TextCapitalization.sentences,
+                          scribbleEnabled: false,
+                          focusNode: _textFocusNode,
+                          controller: _textController,
+                          onChanged: (String input) {
+                            _textController.value = _textController.value
+                                .copyWith(text: formatStructureInput(input));
+                          },
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: (_) => _submittedText(),
+                          onTap: _scrollToStart,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                const Icon(Icons.done_sharp, size: 35),
+                const SizedBox(height: 15),
+
+                Container(
+                  height: 115,
+                  padding: const EdgeInsets.all(20),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: QuimifyColors.foreground(context),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Reacción ajustada',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: QuimifyColors.primary(context),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            color: QuimifyColors.primary(context),
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            // To remove padding:
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            onPressed: () => _pressedShareButton(context),
+                            icon: const Icon(Icons.share_outlined, size: 26),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      AutoSizeText(
+                        _result.balancedEquation!,
+                        stepGranularity: 0.1,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: QuimifyColors.teal(),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    HistoryButton(
+                      height: buttonHeight,
+                      onPressed: _showHistory,
+                    ),
+                    const SizedBox(width: 12.5),
+                    Expanded(
+                      child: QuimifyButton.gradient(
+                        height: buttonHeight,
+                        onPressed: _pressedButton,
+                        child: Text(
+                          'Ajustar',
+                          style: TextStyle(
+                            color: QuimifyColors.inverseText(context),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
