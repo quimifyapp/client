@@ -87,6 +87,22 @@ String toCapsAfterNotAnUppercaseLetter(String input) {
   return result;
 }
 
+String toCapsAfterSpaceOrPlusSignOrNotAnUppercaseLetter(String input) {
+  if (input.isEmpty) return input;
+
+  String result = input[0];
+
+  for (int i = 1; i < input.length; i++) {
+    if (input[i - 1] == ' ' || input[i - 1] == '+' || input[i - 1] != input[i - 1].toUpperCase()) {
+      result += input[i].toUpperCase();
+    } else {
+      result += input[i];
+    }
+  }
+
+  return result;
+}
+
 String toDigits(String input) {
   String result = '';
 
@@ -143,3 +159,10 @@ String formatStructureInput(String structure) =>
 String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));
+
+String formatBalancer (String equation) =>
+    toSubscripts(toCapsAfterDigitOrParentheses(equation));
+
+String formatBalancerInput(String structure) =>
+    toCapsAfterSpaceOrPlusSignOrNotAnUppercaseLetter(
+        formatBalancer(capFirst(structure)));
