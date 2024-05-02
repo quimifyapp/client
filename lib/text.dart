@@ -87,13 +87,13 @@ String toCapsAfterNotAnUppercaseLetter(String input) {
   return result;
 }
 
-String toCapsAfterSpaceOrPlusSignOrNotAnUppercaseLetter(String input) {
+String toCapsAfterSpaceOrPlusSign(String input) {
   if (input.isEmpty) return input;
 
   String result = input[0];
 
   for (int i = 1; i < input.length; i++) {
-    if (input[i - 1] == ' ' || input[i - 1] == '+' || input[i - 1] != input[i - 1].toUpperCase()) {
+    if (input[i - 1] == ' ' || input[i - 1] == '+') {
       result += input[i].toUpperCase();
     } else {
       result += input[i];
@@ -160,9 +160,10 @@ String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));
 
-String formatBalancer (String equation) =>
-    toSubscripts(toCapsAfterDigitOrParentheses(equation));
+  //TODO it is encoding the subcripts characters it should only encode plus signs ans parenthesis maybe equals to
 
-String formatBalancerInput(String structure) =>
-    toCapsAfterSpaceOrPlusSignOrNotAnUppercaseLetter(
-        formatBalancer(capFirst(structure)));
+String formatBalancerInput(String equation) =>
+    toCapsAfterSpaceOrPlusSign(
+        toCapsAfterNotAnUppercaseLetter(
+            toCapsAfterDigitOrParentheses(
+                toSubscripts(equation))));
