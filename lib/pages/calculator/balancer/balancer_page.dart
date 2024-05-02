@@ -35,10 +35,10 @@ class _BalancerPageState extends State<BalancerPage> {
   final TextEditingController _productsController = TextEditingController();
   final FocusNode _reactantsFocusNode = FocusNode();
   final FocusNode _productsFocusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
   //final ScrollController _reactantsScrollController = ScrollController();
   //final ScrollController _productsScrollController = ScrollController(); These are not necessary
   //final ScrollController _solutionScrollController = ScrollController();
-  final ScrollController _scrollController = ScrollController();
   //final TextEditingController _textController = TextEditingController();
   //final FocusNode _textFocusNode = FocusNode();
 
@@ -51,14 +51,17 @@ class _BalancerPageState extends State<BalancerPage> {
     true,
     'C₆H₁₂O₆ + O₂ = CO₂ + H₂O',
     '1(C₆H₁₂O₆) + 6O₂ ⟶ 6(CO₂) + 6(H₂O)',
+    '1(C₆H₁₂O₆) + 6O₂',
+    '6(CO₂) + 6(H₂O)',
     null,
   );
 
-  _calculate(String input) async {
+  _calculate(String reactants, String products) async {
     showLoadingIndicator(context);
+    String finalEquation = '$reactants = $products'; // This can be omitted
 
     // Result not found in cache, make an API call
-    BalancerResult? result = await Api().getBalancedEquation(input);
+    BalancerResult? result = await Api().getBalancedEquation(toDigits(finalEquation));
 
     if (result != null) {
       if (result.present) {
@@ -66,13 +69,12 @@ class _BalancerPageState extends State<BalancerPage> {
 
         setState(() => _result = result);
 
-        History().saveBalancedEquation(result);
+        //History().saveBalancedEquation(result); // TODO I am getting an error here`
 
         // UI/UX actions:
 
-        List<String> arr = input.split("=");
-        _reactantsLabelText = arr[0]; // Sets previous input as label
-        _productsLabelText = arr[1]; // Sets previous input as label
+        _reactantsLabelText = reactants; // Sets previous input as label
+        _productsLabelText = products; // Sets previous input as label
 
         _reactantsController.clear();
         _productsController.clear();
@@ -85,7 +87,7 @@ class _BalancerPageState extends State<BalancerPage> {
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportContext: 'Ajustar reacciones',
-          reportDetails: 'Searched "$input"',
+          reportDetails: 'Searched "$finalEquation"',
         ).show(context);
       }
     } else {
@@ -93,16 +95,15 @@ class _BalancerPageState extends State<BalancerPage> {
 
       if (await hasInternetConnection()) {
         const MessageDialog(
-          title: 'Esta reacción no puede ser ajustada',
+          title: 'Sin resultado',
         ).show(context);
       } else {
         noInternetDialog.show(context);
       }
     }
-
     hideLoadingIndicator();
   }
-
+  //TODO addapt this
   _showHistory() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -119,12 +120,12 @@ class _BalancerPageState extends State<BalancerPage> {
               ),
               HistoryField(
                 'Reacción ajustada',
-                '${(e.balancedEquation)}',
+                '${(e.balancedEquation)}', //TODO format
               ),
             ],
           ))
               .toList(),
-          onEntryPressed: (formula) => _calculate(formula),
+          onEntryPressed: (formula) => _calculate(_reactantsController.text, _productsController.text),
         ),
       ),
     );
@@ -142,9 +143,13 @@ class _BalancerPageState extends State<BalancerPage> {
     if (reactantsEmpty && productsEmpty) {
       _reactantsController.clear(); // Clears reactants input
       _productsController.clear(); // Clears products input
-      _startTyping(_reactantsFocusNode);
+      _reactantsFocusNode.requestFocus();
+    }
+    else if (productsEmpty){
+      _productsController.clear(); // Clears products input
+      _productsFocusNode.requestFocus();
     } else {
-      _calculate("${_reactantsController.text} = ${_productsController.text}");
+      _calculate(_reactantsController.text, _productsController.text);
     }
   }
 
@@ -159,7 +164,7 @@ class _BalancerPageState extends State<BalancerPage> {
       _productsController.clear(); // Clears input
     }
     else {
-      _calculate("${_reactantsController.text} = ${_productsController.text}");
+      _calculate(_reactantsController.text, _productsController.text);
     }
   }
 
@@ -168,14 +173,12 @@ class _BalancerPageState extends State<BalancerPage> {
     _productsFocusNode.unfocus(); // Hides keyboard
 
     if (isEmptyWithBlanks(_reactantsController.text)) {
-      // TODO format forbid blanks?
       _reactantsController.clear(); // Clears input
     } else {
       _eraseInitialAndFinalBlanks();
     }
 
     if (isEmptyWithBlanks(_productsController.text)) {
-      // TODO format forbid blanks?
       _productsController.clear(); // Clears input
     } else {
       _eraseInitialAndFinalBlanks();
@@ -196,9 +199,15 @@ class _BalancerPageState extends State<BalancerPage> {
     );
   }
 
-  _startTyping(FocusNode focusNode) {
+  _startTypingReactant() {
     // Like if the TextField was tapped:
-    focusNode.requestFocus();
+    _reactantsFocusNode.requestFocus();
+    _scrollToStart();
+  }
+
+  _startTypingProduct() {
+    // Like if the TextField was tapped:
+    _productsFocusNode.requestFocus();
     _scrollToStart();
   }
 
@@ -229,7 +238,7 @@ class _BalancerPageState extends State<BalancerPage> {
         hideLoadingIndicator();
       },
       child: GestureDetector(
-        onTap: _tappedOutsideText(),
+        onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           bannerAdName: runtimeType.toString(),
           header: const QuimifyPageBar(title: 'Ajustar reacciones'),
@@ -239,7 +248,7 @@ class _BalancerPageState extends State<BalancerPage> {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: _startTyping(_reactantsFocusNode), // As if the TextField was tapped
+                  onTap: _startTypingReactant, // As if the TextField was tapped
                   child: Container( // Reactants Container
                     height: 110,
                     decoration: BoxDecoration(
@@ -327,7 +336,7 @@ class _BalancerPageState extends State<BalancerPage> {
                 const SizedBox(height: 15),
 
                 GestureDetector(
-                  onTap: _startTyping(_productsFocusNode), // As if the TextField was tapped
+                  onTap: _startTypingProduct, // As if the TextField was tapped
                   child: Container( // Products Container
                     height: 110,
                     decoration: BoxDecoration(
@@ -450,7 +459,7 @@ class _BalancerPageState extends State<BalancerPage> {
                       ),
                       const Spacer(),
                       AutoSizeText(
-                        _result.balancedEquation!,
+                        formatBalancer('${_result.balancedReactants} ⟶ ${_result.balancedProducts!}'),
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: TextStyle(
