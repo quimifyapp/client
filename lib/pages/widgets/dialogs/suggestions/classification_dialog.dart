@@ -33,6 +33,8 @@ class ClassificationDialog extends StatelessWidget {
         arguments: toDigits(formattedQuery),
       );
     } else {
+      Navigator.of(context).pop();
+
       MessageDialog(
         title: '¡Estamos en ello!',
         details: classification == Classification.chemicalProblem
@@ -43,8 +45,6 @@ class ClassificationDialog extends StatelessWidget {
                     'actualizaciones.'
                 : 'Podremos resolver eso en próximas actualizaciones.',
       ).show(context);
-
-      Navigator.of(context).pop();
     }
   }
 
