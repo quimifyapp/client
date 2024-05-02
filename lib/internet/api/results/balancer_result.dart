@@ -5,6 +5,8 @@ class BalancerResult {
   final bool present;
   final String? originalEquation;
   final String? balancedEquation;
+  final String? balancedReactants;
+  final String? balancedProducts;
   final String? error;
 
   BalancerResult(
@@ -12,6 +14,8 @@ class BalancerResult {
     this.present,
     this.originalEquation,
     this.balancedEquation,
+    this.balancedReactants,
+    this.balancedProducts,
     this.error,
   );
 
@@ -22,6 +26,8 @@ class BalancerResult {
       json['present'],
       json['originalEquation'],
       json['balancedEquation'],
+      json['balancedReactants'],
+      json['balancedProducts'],
       json['error'],
     );
   }
