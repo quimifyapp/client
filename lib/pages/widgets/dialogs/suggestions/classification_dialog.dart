@@ -1,32 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/api/results/classification.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_negative_button.dart';
+import 'package:quimify_client/routes.dart';
+import 'package:quimify_client/text.dart';
 
 class ClassificationDialog extends StatelessWidget {
   const ClassificationDialog({
     Key? key,
+    required this.classification,
+    required this.formattedQuery,
     required this.richText,
-    this.closeOnAgree = false,
-    required this.onPressedAgree,
     required this.onPressedDisagree,
   }) : super(key: key);
 
+  final Classification classification;
+  final String formattedQuery;
   final String richText;
-  final bool closeOnAgree;
-  final VoidCallback onPressedAgree;
   final VoidCallback onPressedDisagree;
 
   show(BuildContext context) async =>
       await showQuimifyDialog(context: context, dialog: this);
 
   _agreePressed(BuildContext context) {
-    if (closeOnAgree) {
+    if (Routes.contains(classification)) {
+      Navigator.pushNamed(
+        context,
+        Routes.fromClassification[classification]!,
+        arguments: toDigits(formattedQuery),
+      );
+    } else {
+      MessageDialog(
+        title: '¡Estamos en ello!',
+        details: classification == Classification.chemicalProblem
+            ? 'Podremos resolver *problemas químicos* en próximas '
+                'actualizaciones.'
+            : classification == Classification.chemicalReaction
+                ? 'Podremos resolver *reacciones químicas* en próximas '
+                    'actualizaciones.'
+                : 'Podremos resolver eso en próximas actualizaciones.',
+      ).show(context);
+
       Navigator.of(context).pop();
     }
-
-    onPressedAgree();
   }
 
   _disagreePressed(BuildContext context) {
