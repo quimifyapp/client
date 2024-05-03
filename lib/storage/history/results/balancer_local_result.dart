@@ -3,22 +3,22 @@ import 'dart:convert';
 import 'package:quimify_client/internet/api/results/balancer_result.dart';
 
 class BalancerLocalResult {
-  late final String formula;
-  late final String balancedEquation;
+  late final String originalReactants;
+  late final String originalProducts;
   late final String balancedReactants;
   late final String balancedProducts;
 
   BalancerLocalResult(
-    this.formula,
-    this.balancedEquation,
+    this.originalReactants,
+    this.originalProducts,
     this.balancedReactants,
     this.balancedProducts,
   );
 
   factory BalancerLocalResult.fromResult(BalancerResult result) =>
       BalancerLocalResult(
-        result.formula!,
-        result.balancedEquation!,
+        result.originalReactants!,
+        result.originalProducts!,
         result.balancedReactants!,
         result.balancedProducts!,
       );
@@ -26,16 +26,16 @@ class BalancerLocalResult {
   factory BalancerLocalResult.fromJson(String body) {
     var json = jsonDecode(body);
     return BalancerLocalResult(
-      json['formula'],
-      json['balancedEquation'],
+      json['originalReactants'],
+      json['originalProducts'],
       json['balancedReactants'],
       json['balancedProducts'],
     );
   }
 
   String toJson() => jsonEncode({
-        'formula': formula,
-        'balancedEquation': balancedEquation,
+        'originalReactants': originalReactants,
+        'originalProducts': originalProducts,
         'balancedReactants': balancedReactants,
         'balancedProducts': balancedProducts,
       });
@@ -44,15 +44,15 @@ class BalancerLocalResult {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is BalancerLocalResult &&
-          formula == other.formula &&
-          balancedEquation == other.balancedEquation &&
+          originalReactants == other.originalReactants &&
+          originalProducts == other.originalProducts &&
           balancedReactants == other.balancedReactants &&
           balancedProducts == other.balancedProducts;
 
   @override
   int get hashCode =>
-      formula.hashCode ^
-      balancedEquation.hashCode ^
+      originalReactants.hashCode ^
+      originalProducts.hashCode ^
       balancedReactants.hashCode ^
       balancedProducts.hashCode;
 }

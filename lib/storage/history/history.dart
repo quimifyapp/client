@@ -94,8 +94,8 @@ class History {
           .cast<BalancerLocalResult>();
 
   saveBalancedEquation(BalancerResult result) => _save(
-        _balancedEquationKey,
-        BalancerLocalResult.fromResult(result),
-        getBalancedEquation(),
-      );
+    _balancedEquationKey,
+    BalancerLocalResult.fromResult(result),
+    getBalancedEquation(),
+  );
 }
