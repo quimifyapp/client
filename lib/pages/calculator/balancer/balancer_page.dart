@@ -36,11 +36,6 @@ class _BalancerPageState extends State<BalancerPage> {
   final FocusNode _reactantsFocusNode = FocusNode();
   final FocusNode _productsFocusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
-  //final ScrollController _reactantsScrollController = ScrollController();
-  //final ScrollController _productsScrollController = ScrollController(); These are not necessary
-  //final ScrollController _solutionScrollController = ScrollController();
-  //final TextEditingController _textController = TextEditingController();
-  //final FocusNode _textFocusNode = FocusNode();
 
   bool _argumentRead = false;
 
@@ -50,15 +45,31 @@ class _BalancerPageState extends State<BalancerPage> {
     '',
     true,
     'C₆H₁₂O₆ + O₂ = CO₂ + H₂O',
-    '1(C₆H₁₂O₆) + 6O₂ ⟶ 6(CO₂) + 6(H₂O)',
-    '1(C₆H₁₂O₆) + 6O₂',
+    'C₆H₁₂O₆ + O₂',
+    'CO₂ + H₂O',
+    'C₆H₁₂O₆ + 6O₂ ⟶ 6(CO₂) + 6(H₂O)',
+    'C₆H₁₂O₆ + 6O₂',
     '6(CO₂) + 6(H₂O)',
     null,
   );
 
   _calculate(String reactants, String products) async {
     showLoadingIndicator(context);
-    String finalEquation = '$reactants = $products'; // This can be omitted
+    String finalEquation;
+
+    //Handling if pressed from history
+    if (reactants.contains('⟶')){
+      List<String> arr1 = reactants.split(' =');
+      List<String> arr2 = arr1[0].split('⟶');
+
+      reactants = arr2[0];
+      products = arr2[1];
+
+      finalEquation = '$reactants = $products';
+    }
+    else {
+      finalEquation = '$reactants = $products'; // Normal request. Not from history
+    }
 
     // Result not found in cache, make an API call
     BalancerResult? result = await Api().getBalancedEquation(toDigits(finalEquation));
@@ -69,7 +80,7 @@ class _BalancerPageState extends State<BalancerPage> {
 
         setState(() => _result = result);
 
-        //History().saveBalancedEquation(result); // TODO I am getting an error here`
+        History().saveBalancedEquation(result); //
 
         // UI/UX actions:
 
@@ -103,7 +114,7 @@ class _BalancerPageState extends State<BalancerPage> {
     }
     hideLoadingIndicator();
   }
-  //TODO addapt this
+
   _showHistory() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -112,20 +123,20 @@ class _BalancerPageState extends State<BalancerPage> {
           entries: History()
               .getBalancedEquation()
               .map((e) => HistoryEntry(
-            query: toSubscripts(e.formula),
+            query: formatBalancer('${e.originalReactants} ⟶ ${e.originalProducts}'),
             fields: [
               HistoryField(
                 'Reacción',
-                toSubscripts(e.formula),
+                formatBalancer('${e.originalReactants} ⟶ ${e.originalProducts}'),
               ),
               HistoryField(
                 'Reacción ajustada',
-                '${(e.balancedEquation)}', //TODO format
+                formatBalancer('${e.balancedReactants} ⟶ ${e.balancedProducts}'),
               ),
             ],
           ))
               .toList(),
-          onEntryPressed: (formula) => _calculate(_reactantsController.text, _productsController.text),
+          onEntryPressed: (equation) => _calculate(equation, equation),
         ),
       ),
     );
