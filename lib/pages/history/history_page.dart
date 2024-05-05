@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/widgets/history_entry_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
-import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
-import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -48,64 +46,13 @@ class HistoryPage extends StatelessWidget {
                 runSpacing: 15,
                 children: entryViews.toList(),
               )
-            : Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(
-                      color: QuimifyColors.foreground(context),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          // TODO hide in small screens?
-                          'assets/images/empty.png',
-                          height: 150,
-                        ),
-                        const SizedBox(height: 20),
-                        AutoSizeText(
-                          '¡Ups! Aún no hay nada aquí',
-                          maxLines: 1,
-                          stepGranularity: 0.1,
-                          maxFontSize: 20,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: QuimifyColors.primary(context),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          'Los resultados recientes se mostrarán cuando '
-                          'hagas tu primera consulta.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: QuimifyColors.primary(context),
-                            fontSize: 16,
-                          ),
-                          strutStyle: const StrutStyle(height: 1.5),
-                        ),
-                        const SizedBox(height: 20),
-                        QuimifyButton.gradient(
-                          height: 50,
-                          onPressed: () => _startButtonPressed(context),
-                          child: Text(
-                            'Comenzar',
-                            style: TextStyle(
-                              color: QuimifyColors.inverseText(context),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+            : QuimifyMascotMessage(
+                tone: QuimifyMascotTone.negative,
+                title: '¡Ups! Aún no hay nada aquí',
+                details: 'Los resultados recientes se mostrarán cuando hagas '
+                    'tu primera consulta.',
+                buttonLabel: 'Comenzar',
+                onButtonPressed: () => _startButtonPressed(context),
               ),
       ),
     );

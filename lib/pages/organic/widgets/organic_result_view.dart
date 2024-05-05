@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:quimify_client/pages/organic/diagram/diagram_page.dart';
+import 'package:quimify_client/pages/organic/diagrams/diagram_2d_page.dart';
+import 'package:quimify_client/pages/organic/diagrams/diagram_3d_page.dart';
 import 'package:quimify_client/pages/organic/widgets/structure_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/help_button.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_field.dart';
+import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -18,6 +20,7 @@ class OrganicResultView extends StatelessWidget {
     this.scrollController,
     required this.fields,
     required this.imageProvider,
+    required this.url3D,
     required this.onHistoryPressed,
     required this.reportDialog,
   }) : super(key: key);
@@ -25,6 +28,7 @@ class OrganicResultView extends StatelessWidget {
   final ScrollController? scrollController;
   final Map<String, String> fields;
   final ImageProvider? imageProvider;
+  final String? url3D;
   final Function(BuildContext) onHistoryPressed;
   final ReportDialog reportDialog;
 
@@ -35,7 +39,7 @@ class OrganicResultView extends StatelessWidget {
   _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
 
   static const double _buttonHeight = 44;
-  static const double _diagramHeight = 290;
+  static const double _diagramHeight = 225; // TODO adaptive
 
   @override
   Widget build(BuildContext context) {
@@ -98,14 +102,48 @@ class OrganicResultView extends StatelessWidget {
             ),
           ),
           if (imageProvider != null) ...[
-            const SizedBox(height: 20),
-            Text(
-              'Estructura',
-              style: TextStyle(
-                color: QuimifyColors.primary(context),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                Text(
+                  'Estructura',
+                  style: TextStyle(
+                    color: QuimifyColors.primary(context),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const Spacer(),
+                url3D != null
+                    ? SizedBox(
+                        width: 118,
+                        child: QuimifyIconButton(
+                          height: _buttonHeight,
+                          backgroundColor: QuimifyColors.diagram3dButton(context),
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => Diagram3DPage(
+                                url: url3D!,
+                              ),
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.threesixty_outlined,
+                            size: 18,
+                            color: QuimifyColors.inverseText(context),
+                          ),
+                          text: Text(
+                            'Ver en 3D',
+                            style: TextStyle(
+                              color: QuimifyColors.inverseText(context),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(height: _buttonHeight),
+              ],
             ),
             const SizedBox(height: 15),
             Stack(
@@ -132,7 +170,7 @@ class OrganicResultView extends StatelessWidget {
                         constraints: const BoxConstraints(),
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (BuildContext context) => DiagramPage(
+                            builder: (BuildContext context) => Diagram2DPage(
                               imageProvider: imageProvider!,
                             ),
                           ),

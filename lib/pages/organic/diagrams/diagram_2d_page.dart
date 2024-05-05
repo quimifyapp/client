@@ -6,8 +6,8 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
-class DiagramPage extends StatefulWidget {
-  const DiagramPage({
+class Diagram2DPage extends StatefulWidget {
+  const Diagram2DPage({
     Key? key,
     required this.imageProvider,
   }) : super(key: key);
@@ -15,10 +15,10 @@ class DiagramPage extends StatefulWidget {
   final ImageProvider imageProvider;
 
   @override
-  State<DiagramPage> createState() => _DiagramPageState();
+  State<Diagram2DPage> createState() => _Diagram2DPageState();
 }
 
-class _DiagramPageState extends State<DiagramPage> {
+class _Diagram2DPageState extends State<Diagram2DPage> {
   late PhotoViewControllerBase controller;
   late PhotoViewScaleStateController scaleStateController;
 
@@ -44,6 +44,23 @@ class _DiagramPageState extends State<DiagramPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color fromBackground = const Color.fromARGB(255, 245, 245, 245);
+    Color toBackground = QuimifyColors.background(context);
+    List<double> backgroundFilter =
+        MediaQuery.of(context).platformBrightness == Brightness.light
+            ? [
+                toBackground.red / fromBackground.red, 0, 0, 0, 0,
+                0, toBackground.green / fromBackground.green, 0, 0, 0,
+                0, 0, toBackground.blue / fromBackground.blue, 0, 0,
+                0, 0, 0, 1, 0, // fromBackground -> toBackground
+              ]
+            : [
+                (toBackground.red - 255) / fromBackground.red, 0, 0, 0, 255,
+                0, (toBackground.green - 255) / fromBackground.green, 0, 0, 255,
+                0, 0, (toBackground.blue - 255) / fromBackground.blue, 0, 255,
+                0, 0, 0, 1, 0,  // fromBackground -> inverse -> toBackground
+              ];
+
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Estructura'),
       body: Container(
@@ -52,21 +69,7 @@ class _DiagramPageState extends State<DiagramPage> {
           children: [
             Positioned.fill(
               child: ColorFiltered(
-                colorFilter: ColorFilter.matrix(
-                  MediaQuery.of(context).platformBrightness == Brightness.light
-                      ? [
-                          247 / 245, 0, 0, 0, 0,
-                          0, 247 / 245, 0, 0, 0,
-                          0, 0, 247 / 245, 0, 0,
-                          0, 0, 0, 1, 0, // Identity * [245 -> light background]
-                        ]
-                      : [
-                          -237 / 245, 0, 0, 0, 255,
-                          0, -237 / 245, 0, 0, 255,
-                          0, 0, -237 / 245, 0, 255,
-                          0, 0, 0, 1, 0, // Inverse * [245 -> dark background]
-                        ],
-                ),
+                colorFilter: ColorFilter.matrix(backgroundFilter),
                 child: PhotoView(
                   imageProvider: widget.imageProvider,
                   controller: controller,

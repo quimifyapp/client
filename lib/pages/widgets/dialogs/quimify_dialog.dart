@@ -10,8 +10,8 @@ showQuimifyDialog({
   required BuildContext context,
   required Widget dialog,
   bool closable = true,
-}) {
-  showDialog<void>(
+}) async {
+  await showDialog<void>(
     context: context,
     barrierDismissible: closable,
     barrierColor: QuimifyColors.dialogBackdrop(context),

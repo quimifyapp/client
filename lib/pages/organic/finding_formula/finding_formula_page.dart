@@ -35,24 +35,79 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   String _labelText = 'dietiléter, but-2-eno...';
   OrganicResult _result = OrganicResult(
     true,
+    null,
+    null,
     'COOH - COOH',
     'ácido etanodioico',
     90.01,
-    null,
+    null, // There's already a pre-loaded 2D image
+    'https://pubchem.ncbi.nlm.nih.gov/compound/'
+        '971#section=3D-Conformer&fullscreen=true'
   );
 
-  _search(String name) async {
-    if (isEmptyWithBlanks(name)) {
+  _processClassification(OrganicResult result) {
+
+  }
+
+  _showNotFoundDialog(String formattedQuery) {
+    MessageDialog.reportable(
+      title: 'Sin resultado',
+      details: 'No se ha encontrado:\n"$formattedQuery"',
+      reportContext: 'Organic finding formula',
+      reportDetails: 'Searched "$formattedQuery"',
+    ).show(context);
+  }
+
+  _processNotFound(OrganicResult? result, String formattedQuery) async {
+    if (result == null) {
+      await hasInternetConnection()
+          ? const MessageDialog(title: 'Sin resultado').show(context)
+          : noInternetDialog.show(context);
+
+      return;
+    }
+
+    if (result.classification == null) {
+      _showNotFoundDialog(formattedQuery);
+      return;
+    }
+
+    _processClassification(result);
+  }
+
+  _processResult(OrganicResult? result, String formattedQuery) {
+    if (result == null || !result.found) {
+      _processNotFound(result, formattedQuery);
+      return;
+    }
+
+
+  }
+
+  _search(String formattedQuery) async {
+    if (isEmptyWithBlanks(formattedQuery)) {
       return;
     }
 
     showLoadingIndicator(context);
 
-    OrganicResult? result = await Api().getOrganicFromName(toDigits(name));
+    var result = await Api().getOrganicFromName(toDigits(formattedQuery));
+
+    if (result != null && result.found) {
+      Ads().showInterstitial();
+    }
+
+    await _processResult(result, formattedQuery);
+
+    hideLoadingIndicator();
+
+
 
     if (result != null) {
       if (result.found) {
         Ads().showInterstitial();
+
+        // TODO classification
 
         setState(() {
           _result = result;
@@ -65,22 +120,18 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
         // UI/UX actions:
 
-        _labelText = name; // Sets previous input as label
+        _labelText = formattedQuery; // Sets previous input as label
         _textController.clear(); // Clears input
         _textFocusNode.unfocus(); // Hides keyboard
         _scrollToStart(); // Goes to the top of the page
       } else {
+        // TODO classification
+
         if (!mounted) return; // For security reasons
-        MessageDialog.reportable(
-          title: 'Sin resultado',
-          details: 'No se ha encontrado:\n"$name"',
-          reportContext: 'Organic finding formula',
-          reportDetails: 'Searched "$name"',
-        ).show(context);
+
       }
     } else {
       if (!mounted) return; // For security reasons
-
       if (await hasInternetConnection()) {
         const MessageDialog(
           title: 'Sin resultado',
@@ -176,17 +227,18 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             scrollController: _scrollController,
             fields: {
               if (_result.name != null) 'Búsqueda': _result.name!,
+              if (_result.structure != null)
+                'Fórmula': formatStructure(_result.structure!),
               if (_result.molecularMass != null)
                 'Masa molecular':
                     '${formatMolecularMass(_result.molecularMass!)} g/mol',
-              if (_result.structure != null)
-                'Fórmula': formatStructure(_result.structure!),
             },
             imageProvider: _firstSearch
                 ? const AssetImage('assets/images/dietanoic-acid.png')
                 : _result.url2D != null
                     ? NetworkImage(_result.url2D!) as ImageProvider
                     : null,
+            url3D: _result.url3D,
             onHistoryPressed: (resultPageContext) => _showHistory(),
             reportDialog: ReportDialog(
               details: 'Resultado de\n"${_result.name!}"',

@@ -24,7 +24,8 @@ dependencies:
   device_preview: ^1.1.0
   google_mobile_ads: ^4.0.0
   fast_rich_text: ^0.0.1
-  google_sign_in: ^6.2.1
+  webview_flutter: ^4.7.0
+  device_info_plus: ^9.1.2
 
 dev_dependencies:
   flutter_test:
@@ -41,35 +42,39 @@ flutter:
   assets:
     - assets/ssl/isrg-x1.crt
 
+    - assets/images/dietanoic-acid.png
+    - assets/images/discord.png
+    - assets/images/gmail.png
+
     - assets/images/icons/logo.png
-    - assets/images/icons/search.png
     - assets/images/icons/branding-slim.png
+
+    - assets/images/icons/search.png
     - assets/images/icons/lock.png
-    - assets/images/icons/2-chloroethylbenzene.png
     - assets/images/icons/molecule.png
     - assets/images/icons/calculator.png
     - assets/images/icons/report.png
     - assets/images/icons/narrow-arrow.png
     - assets/images/icons/scale.png
-    - assets/images/dietanoic-acid.png
     - assets/images/icons/bond-carbon.png
     - assets/images/icons/hydrogenate.png
+
     - assets/images/icons/single-bond.png
     - assets/images/icons/double-bond.png
     - assets/images/icons/triple-bond.png
+    - assets/images/icons/2-chloroethylbenzene.png
     - assets/images/icons/straight-radical.png
     - assets/images/icons/iso-radical.png
-    - assets/images/icons/4-ethyl-2-methylhexane.png
-    - assets/images/icons/2-methylpropane.png
     - assets/images/icons/propyl.png
     - assets/images/icons/butane-diagram.png
     - assets/images/icons/butane.png
     - assets/images/icons/but-2-ene.png
     - assets/images/icons/but-2-yne.png
-    - assets/images/discord.png
-    - assets/images/gmail.png
-    - assets/images/completed.png
-    - assets/images/empty.png
+    - assets/images/icons/4-ethyl-2-methylhexane.png
+    - assets/images/icons/2-methylpropane.png
+
+    - assets/images/icons/mascot-positive.png
+    - assets/images/icons/mascot-negative.png
 
   fonts:
     - family: CeraProMediumCustom # Modified so 'Ξ' looks like a triple bond chemical symbol

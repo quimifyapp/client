@@ -10,6 +10,9 @@ class HelpButton extends StatelessWidget {
 
   final Widget dialog;
 
+  _onPressed(BuildContext context) async =>
+      await showQuimifyDialog(context: context, dialog: dialog);
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -19,7 +22,7 @@ class HelpButton extends StatelessWidget {
       // To remove padding:
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
-      onPressed: () => showQuimifyDialog(context: context, dialog: dialog),
+      onPressed: () => _onPressed(context),
       icon: const Icon(Icons.help_outline, size: 26),
     );
   }

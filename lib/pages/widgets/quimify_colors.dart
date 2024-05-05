@@ -119,4 +119,10 @@ class QuimifyColors {
         light: const Color.fromARGB(13, 0, 0, 0),
         dark: Colors.black45,
       );
+
+  static Color diagram3dButton(BuildContext context) => _themedColor(
+        context,
+        light: const Color.fromARGB(255, 56, 133, 224),
+        dark: const Color.fromARGB(255, 56, 133, 224),
+      );
 }

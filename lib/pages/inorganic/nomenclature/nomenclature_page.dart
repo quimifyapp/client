@@ -133,6 +133,47 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     return completion;
   }
 
+  _processClassification(InorganicResult result, String formattedQuery) {
+    if (result.classification == Classification.nomenclatureProblem) {
+      MessageDialog(
+        title: 'Casi lo tienes',
+        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
+        onButtonPressed: () => _textFocusNode.requestFocus(),
+      ).show(context);
+      return;
+    }
+
+    bool classificationHasRoute = Routes.contains(result.classification!);
+
+    ClassificationDialog(
+      richText: _classificationToMessage[result.classification!]!,
+      closeOnAgree: !classificationHasRoute, // TODO move to widget?
+      onPressedAgree: () {
+        // TODO move to widget?
+        if (classificationHasRoute) {
+          Navigator.pushNamed(
+            context,
+            Routes.fromClassification[result.classification!]!,
+            arguments: toDigits(formattedQuery),
+          );
+        } else if (result.classification == Classification.chemicalProblem) {
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver *problemas químicos* en próximas '
+                'actualizaciones.',
+          ).show(context);
+        } else if (result.classification == Classification.chemicalReaction) {
+          const MessageDialog(
+            title: '¡Estamos en ello!',
+            details: 'Podremos resolver *reacciones químicas* en próximas '
+                'actualizaciones.',
+          ).show(context);
+        }
+      },
+      onPressedDisagree: () => _deepSearch(formattedQuery),
+    ).show(context);
+  }
+
   _showNotFoundDialog(String formattedQuery) {
     MessageDialog.reportable(
       title: 'Sin resultado',
@@ -156,43 +197,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    if (result.classification == Classification.nomenclatureProblem) {
-      MessageDialog(
-        title: 'Casi lo tienes',
-        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
-        onButtonPressed: () => _textFocusNode.requestFocus(),
-      ).show(context);
-      return;
-    }
-
-    bool classificationHasRoute = Routes.contains(result.classification!);
-
-    ClassificationDialog(
-      richText: _classificationToMessage[result.classification!]!,
-      closeOnAgree: !classificationHasRoute,
-      onPressedAgree: () {
-        if (classificationHasRoute) {
-          Navigator.pushNamed(
-            context,
-            Routes.fromClassification[result.classification!]!,
-            arguments: toDigits(formattedQuery),
-          );
-        } else if (result.classification == Classification.chemicalProblem) {
-          const MessageDialog(
-            title: '¡Estamos en ello!',
-            details: 'Podremos resolver *problemas químicos* en próximas '
-                'actualizaciones.',
-          ).show(context);
-        } else if (result.classification == Classification.chemicalReaction) {
-          const MessageDialog(
-            title: '¡Estamos en ello!',
-            details: 'Podremos resolver *reacciones químicas* en próximas '
-                'actualizaciones.',
-          ).show(context);
-        }
-      },
-      onPressedDisagree: () => _deepSearch(formattedQuery),
-    ).show(context);
+    _processClassification(result, formattedQuery);
   }
 
   _processResult(InorganicResult? result, String formattedQuery) async {
@@ -241,7 +246,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
     var result = await Api().searchInorganic(toDigits(formattedQuery));
 
-    if (result != null && result.found && result.suggestion == null) {
+    if (result != null && result.found) {
       Ads().showInterstitial();
     }
 

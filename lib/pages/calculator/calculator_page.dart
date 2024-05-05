@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/calculator/balancer/balancer_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const QuimifySectionTitle(
+        QuimifySectionTitle(
           title: 'Masa molecular',
           helpDialog: CalculatorHelpDialog(),
         ),
-        const SizedBox(height: 15),
-        const QuimifyCard(
+        SizedBox(height: 15),
+        QuimifyCard(
           body: {
             'Fe₂O₃': '159.68 g/mol',
             'C₅H₆O₂': '110.10 g/mol',
@@ -29,21 +29,18 @@ class CalculatorPage extends StatelessWidget {
           },
           page: MolecularMassPage(),
         ),
-        const QuimifySectionTitle(
+        QuimifySectionTitle(
           title: 'Ajustar reacciones',
           helpDialog: comingSoonDialog,
         ),
-        const SizedBox(height: 15),
-        QuimifyCard.comingSoon(
-          comingSoonBody: Text(
-            '⇄',
-            style: TextStyle(
-              height: 0.9, // TODO iOS?
-              fontSize: 36,
-              fontWeight: FontWeight.w600,
-              color: QuimifyColors.teal(),
-            ),
-          ),
+        SizedBox(height: 15),
+        QuimifyCard(
+          body: {
+            '2H + O ⟶ H₃O': '6H + 2O ⟶ 2(H₃O)',
+            'Fe₂O₃ + C ⟶ Fe + CO₂': '2(Fe₂O₃) + 3C ⟶ 4Fe + 3(CO₂)',
+            'Cl + 2OP ⟶ Cl₂O + P': '4Cl + 2(OP) ⟶ 2(Cl₂O) + 2P',
+          },
+          page: BalancerPage(),
         ),
       ],
     );
