@@ -14,7 +14,6 @@ import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dar
 import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
 
@@ -29,6 +28,8 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
+
+  bool _argumentRead = false;
 
   late String _labelText;
   late List<InorganicResultView> _resultViews;
@@ -133,8 +134,8 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     return completion;
   }
 
-  _processClassification(InorganicResult result, String formattedQuery) {
-    if (result.classification == Classification.nomenclatureProblem) {
+  _processClassification(Classification classification, String formattedQuery) {
+    if (classification == Classification.nomenclatureProblem) {
       MessageDialog(
         title: 'Casi lo tienes',
         details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
@@ -143,33 +144,10 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    bool classificationHasRoute = Routes.contains(result.classification!);
-
     ClassificationDialog(
-      richText: _classificationToMessage[result.classification!]!,
-      closeOnAgree: !classificationHasRoute, // TODO move to widget?
-      onPressedAgree: () {
-        // TODO move to widget?
-        if (classificationHasRoute) {
-          Navigator.pushNamed(
-            context,
-            Routes.fromClassification[result.classification!]!,
-            arguments: toDigits(formattedQuery),
-          );
-        } else if (result.classification == Classification.chemicalProblem) {
-          const MessageDialog(
-            title: '¡Estamos en ello!',
-            details: 'Podremos resolver *problemas químicos* en próximas '
-                'actualizaciones.',
-          ).show(context);
-        } else if (result.classification == Classification.chemicalReaction) {
-          const MessageDialog(
-            title: '¡Estamos en ello!',
-            details: 'Podremos resolver *reacciones químicas* en próximas '
-                'actualizaciones.',
-          ).show(context);
-        }
-      },
+      classification: classification,
+      formattedQuery: formattedQuery,
+      richText: _classificationToMessage[classification]!,
       onPressedDisagree: () => _deepSearch(formattedQuery),
     ).show(context);
   }
@@ -192,12 +170,11 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    if (result.classification == null) {
+    if (result.classification != null) {
+      _processClassification(result.classification!, formattedQuery);
+    } else {
       _showNotFoundDialog(formattedQuery);
-      return;
     }
-
-    _processClassification(result, formattedQuery);
   }
 
   _processResult(InorganicResult? result, String formattedQuery) async {
@@ -205,8 +182,6 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       _processNotFound(result, formattedQuery);
       return;
     }
-
-    // TODO handle suggestions
 
     setState(
       () => _resultViews.add(
@@ -284,6 +259,14 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   @override
   Widget build(BuildContext context) {
+    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (argument != null && !_argumentRead) {
+      _textController.text = formatOrganicName(argument);
+      _textFocusNode.requestFocus();
+      _argumentRead = true;
+    }
+
     return PopScope(
       onPopInvoked: (bool didPop) async {
         if (!didPop) {
