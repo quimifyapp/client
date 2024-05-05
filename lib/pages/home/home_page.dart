@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
+import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -26,6 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = const [
+    SignInPage(),
     InorganicPage(),
     OrganicPage(),
     CalculatorPage(),
