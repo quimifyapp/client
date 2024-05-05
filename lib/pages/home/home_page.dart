@@ -7,11 +7,11 @@ import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
-import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import '../sign-in/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = const [
-    SignInPage(),
+    //SignInPage(),
     InorganicPage(),
     OrganicPage(),
     CalculatorPage(),
@@ -166,6 +166,26 @@ class _HomePageState extends State<HomePage> {
                   height: 17,
                   color: QuimifyColors.inverseText(context),
                 ),
+                //const SizedBox(width: 120),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    iconSize: 38,
+                    alignment: Alignment.centerRight,
+                    icon: Icon(
+                      Icons.account_circle_sharp,
+                      color: QuimifyColors.inverseText(context),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                      );
+                    },
+                  ),
+                )
               ],
             ),
           ),
