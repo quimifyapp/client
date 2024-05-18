@@ -15,10 +15,11 @@ class EquationLocalResult {
     this.balancedProducts,
   );
 
-  factory EquationLocalResult.fromResult(EquationResult result) =>
+  factory EquationLocalResult.fromResult(EquationResult result,
+          String originalReactants, String originalProducts) =>
       EquationLocalResult(
-        result.originalReactants!,
-        result.originalProducts!,
+        originalReactants,
+        originalProducts,
         result.balancedReactants!,
         result.balancedProducts!,
       );

@@ -42,12 +42,7 @@ class _EquationPageState extends State<EquationPage> {
   String _reactantsLabelText = 'C₆H₁₂O₆ + O₂';
   String _productsLabelText = 'CO₂ + H₂O';
   EquationResult _result = EquationResult(
-    '',
     true,
-    'C₆H₁₂O₆ + O₂ = CO₂ + H₂O',
-    'C₆H₁₂O₆ + O₂',
-    'CO₂ + H₂O',
-    'C₆H₁₂O₆ + 6O₂ ⟶ 6(CO₂) + 6(H₂O)',
     'C₆H₁₂O₆ + 6O₂',
     '6(CO₂) + 6(H₂O)',
     null,
@@ -55,25 +50,9 @@ class _EquationPageState extends State<EquationPage> {
 
   _calculate(String reactants, String products) async {
     showLoadingIndicator(context);
-    String finalEquation;
 
-    //Handling if pressed from history
-    if (reactants.contains('⟶')) {
-      List<String> arr1 = reactants.split(' =');
-      List<String> arr2 = arr1[0].split('⟶');
-
-      reactants = arr2[0];
-      products = arr2[1];
-
-      finalEquation = '$reactants = $products';
-    } else {
-      finalEquation =
-          '$reactants = $products'; // Normal request. Not from history
-    }
-
-    // Result not found in cache, make an API call
     EquationResult? result =
-        await Api().getBalancedEquation(toDigits(finalEquation));
+        await Api().getEquation(toDigits(reactants), toDigits(products));
 
     if (result != null) {
       if (result.present) {
@@ -81,7 +60,7 @@ class _EquationPageState extends State<EquationPage> {
 
         setState(() => _result = result);
 
-        History().saveEquation(result); //
+        History().saveEquation(result, reactants, products);
 
         // UI/UX actions:
 
@@ -98,8 +77,8 @@ class _EquationPageState extends State<EquationPage> {
         MessageDialog.reportable(
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
-          reportContext: 'Ajustar reacciones',
-          reportDetails: 'Searched "$finalEquation"',
+          reportContext: 'Equation',
+          reportDetails: 'Searched "$products" -> "$reactants"',
         ).show(context);
       }
     } else {
@@ -434,9 +413,31 @@ class _EquationPageState extends State<EquationPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
-                const Icon(Icons.done_sharp, size: 35),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    HistoryButton(
+                      height: buttonHeight,
+                      onPressed: _showHistory,
+                    ),
+                    const SizedBox(width: 12.5),
+                    Expanded(
+                      child: QuimifyButton.gradient(
+                        height: buttonHeight,
+                        onPressed: _pressedButton,
+                        child: Text(
+                          'Ajustar',
+                          style: TextStyle(
+                            color: QuimifyColors.inverseText(context),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
                 Container(
                   height: 115,
                   padding: const EdgeInsets.all(20),
@@ -473,8 +474,8 @@ class _EquationPageState extends State<EquationPage> {
                       ),
                       const Spacer(),
                       AutoSizeText(
-                        formatBalancer(
-                            '${_result.balancedReactants} ⟶ ${_result.balancedProducts!}'),
+                        formatBalancer('${_result.balancedReactants} ⟶ '
+                            '${_result.balancedProducts!}'),
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: TextStyle(
@@ -485,30 +486,6 @@ class _EquationPageState extends State<EquationPage> {
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    HistoryButton(
-                      height: buttonHeight,
-                      onPressed: _showHistory,
-                    ),
-                    const SizedBox(width: 12.5),
-                    Expanded(
-                      child: QuimifyButton.gradient(
-                        height: buttonHeight,
-                        onPressed: _pressedButton,
-                        child: Text(
-                          'Ajustar',
-                          style: TextStyle(
-                            color: QuimifyColors.inverseText(context),
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

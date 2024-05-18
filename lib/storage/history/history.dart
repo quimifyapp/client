@@ -93,9 +93,10 @@ class History {
       _fetch(_equationsKey, EquationLocalResult.fromJson)
           .cast<EquationLocalResult>();
 
-  saveEquation(EquationResult result) => _save(
+  saveEquation(EquationResult result, String originalReactants, String originalProducts) =>
+      _save(
         _equationsKey,
-        EquationLocalResult.fromResult(result),
+        EquationLocalResult.fromResult(result, originalReactants, originalProducts),
         getBalancedEquations(),
       );
 }

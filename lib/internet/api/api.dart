@@ -26,7 +26,7 @@ class Api {
 
   static const _apiVersion = 6;
   static const _clientVersion = 14;
-  static const _authority = 'api.quimify.com';
+  static const _authority = 'api2.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
   static const _timeout = Duration(seconds: 15);
@@ -361,22 +361,23 @@ class Api {
     return result;
   }
 
-  Future<EquationResult?> getBalancedEquation(String equation) async {
+  Future<EquationResult?> getEquation(String reactants, String products) async {
     EquationResult? result;
 
     String? response = await _getBodyWithRetry(
-      'balance',
+      'equation',
       {
-        'equation': equation,
+        'reactants': reactants,
+        'products': products,
       },
     );
 
     if (response != null) {
       try {
-        result = EquationResult.fromJson(response, equation);
+        result = EquationResult.fromJson(response);
       } catch (error) {
         sendError(
-          context: 'Balancer JSON',
+          context: 'Equation JSON',
           details: error.toString(),
         );
       }
