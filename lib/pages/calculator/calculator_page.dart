@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/calculator/balancer/balancer_page.dart';
+import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
@@ -40,7 +40,7 @@ class CalculatorPage extends StatelessWidget {
             'Fe₂O₃ + C ⟶ Fe + CO₂': '2(Fe₂O₃) + 3C ⟶ 4Fe + 3(CO₂)',
             'Cl + 2OP ⟶ Cl₂O + P': '4Cl + 2(OP) ⟶ 2(Cl₂O) + 2P',
           },
-          page: BalancerPage(),
+          page: EquationPage(),
         ),
       ],
     );

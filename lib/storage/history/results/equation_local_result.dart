@@ -1,31 +1,31 @@
 import 'dart:convert';
 
-import 'package:quimify_client/internet/api/results/balancer_result.dart';
+import 'package:quimify_client/internet/api/results/equation_result.dart';
 
-class BalancerLocalResult {
+class EquationLocalResult {
   late final String originalReactants;
   late final String originalProducts;
   late final String balancedReactants;
   late final String balancedProducts;
 
-  BalancerLocalResult(
+  EquationLocalResult(
     this.originalReactants,
     this.originalProducts,
     this.balancedReactants,
     this.balancedProducts,
   );
 
-  factory BalancerLocalResult.fromResult(BalancerResult result) =>
-      BalancerLocalResult(
+  factory EquationLocalResult.fromResult(EquationResult result) =>
+      EquationLocalResult(
         result.originalReactants!,
         result.originalProducts!,
         result.balancedReactants!,
         result.balancedProducts!,
       );
 
-  factory BalancerLocalResult.fromJson(String body) {
+  factory EquationLocalResult.fromJson(String body) {
     var json = jsonDecode(body);
-    return BalancerLocalResult(
+    return EquationLocalResult(
       json['originalReactants'],
       json['originalProducts'],
       json['balancedReactants'],
@@ -43,7 +43,7 @@ class BalancerLocalResult {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BalancerLocalResult &&
+      other is EquationLocalResult &&
           originalReactants == other.originalReactants &&
           originalProducts == other.originalProducts &&
           balancedReactants == other.balancedReactants &&

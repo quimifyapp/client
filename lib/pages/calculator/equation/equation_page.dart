@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
-import 'package:quimify_client/internet/api/results/balancer_result.dart';
+import 'package:quimify_client/internet/api/results/equation_result.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/pages/calculator/balancer/widget/balancer_products_help_dialog.dart';
-import 'package:quimify_client/pages/calculator/balancer/widget/balancer_reactants_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/equation/widget/equation_products_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/equation/widget/equation_reactants_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
@@ -23,14 +23,14 @@ import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
 
-class BalancerPage extends StatefulWidget {
-  const BalancerPage({Key? key}) : super(key: key);
+class EquationPage extends StatefulWidget {
+  const EquationPage({Key? key}) : super(key: key);
 
   @override
-  State<BalancerPage> createState() => _BalancerPageState();
+  State<EquationPage> createState() => _EquationPageState();
 }
 
-class _BalancerPageState extends State<BalancerPage> {
+class _EquationPageState extends State<EquationPage> {
   final TextEditingController _reactantsController = TextEditingController();
   final TextEditingController _productsController = TextEditingController();
   final FocusNode _reactantsFocusNode = FocusNode();
@@ -41,7 +41,7 @@ class _BalancerPageState extends State<BalancerPage> {
 
   String _reactantsLabelText = 'C₆H₁₂O₆ + O₂';
   String _productsLabelText = 'CO₂ + H₂O';
-  BalancerResult _result = BalancerResult(
+  EquationResult _result = EquationResult(
     '',
     true,
     'C₆H₁₂O₆ + O₂ = CO₂ + H₂O',
@@ -58,7 +58,7 @@ class _BalancerPageState extends State<BalancerPage> {
     String finalEquation;
 
     //Handling if pressed from history
-    if (reactants.contains('⟶')){
+    if (reactants.contains('⟶')) {
       List<String> arr1 = reactants.split(' =');
       List<String> arr2 = arr1[0].split('⟶');
 
@@ -66,13 +66,14 @@ class _BalancerPageState extends State<BalancerPage> {
       products = arr2[1];
 
       finalEquation = '$reactants = $products';
-    }
-    else {
-      finalEquation = '$reactants = $products'; // Normal request. Not from history
+    } else {
+      finalEquation =
+          '$reactants = $products'; // Normal request. Not from history
     }
 
     // Result not found in cache, make an API call
-    BalancerResult? result = await Api().getBalancedEquation(toDigits(finalEquation));
+    EquationResult? result =
+        await Api().getBalancedEquation(toDigits(finalEquation));
 
     if (result != null) {
       if (result.present) {
@@ -80,7 +81,7 @@ class _BalancerPageState extends State<BalancerPage> {
 
         setState(() => _result = result);
 
-        History().saveBalancedEquation(result); //
+        History().saveEquation(result); //
 
         // UI/UX actions:
 
@@ -121,20 +122,23 @@ class _BalancerPageState extends State<BalancerPage> {
         builder: (BuildContext context) => HistoryPage(
           onStartPressed: () => _reactantsFocusNode.requestFocus(),
           entries: History()
-              .getBalancedEquation()
+              .getBalancedEquations()
               .map((e) => HistoryEntry(
-            query: formatBalancer('${e.originalReactants} ⟶ ${e.originalProducts}'),
-            fields: [
-              HistoryField(
-                'Reacción',
-                formatBalancer('${e.originalReactants} ⟶ ${e.originalProducts}'),
-              ),
-              HistoryField(
-                'Reacción ajustada',
-                formatBalancer('${e.balancedReactants} ⟶ ${e.balancedProducts}'),
-              ),
-            ],
-          ))
+                    query: formatBalancer(
+                        '${e.originalReactants} ⟶ ${e.originalProducts}'),
+                    fields: [
+                      HistoryField(
+                        'Reacción',
+                        formatBalancer(
+                            '${e.originalReactants} ⟶ ${e.originalProducts}'),
+                      ),
+                      HistoryField(
+                        'Reacción ajustada',
+                        formatBalancer(
+                            '${e.balancedReactants} ⟶ ${e.balancedProducts}'),
+                      ),
+                    ],
+                  ))
               .toList(),
           onEntryPressed: (equation) => _calculate(equation, equation),
         ),
@@ -145,7 +149,7 @@ class _BalancerPageState extends State<BalancerPage> {
   // Interface:
 
   void _pressedButton() {
-    _eraseInitialAndFinalBlanks(); // This may need to be adapted to handle both fields.
+    _eraseInitialAndFinalBlanks(); // TODO This may need to be adapted to handle both fields
 
     // Check if both fields are empty, even with blanks
     bool reactantsEmpty = isEmptyWithBlanks(_reactantsController.text);
@@ -155,8 +159,7 @@ class _BalancerPageState extends State<BalancerPage> {
       _reactantsController.clear(); // Clears reactants input
       _productsController.clear(); // Clears products input
       _reactantsFocusNode.requestFocus();
-    }
-    else if (productsEmpty){
+    } else if (productsEmpty) {
       _productsController.clear(); // Clears products input
       _productsFocusNode.requestFocus();
     } else {
@@ -170,11 +173,9 @@ class _BalancerPageState extends State<BalancerPage> {
 
     if (isEmptyWithBlanks(_reactantsController.text)) {
       _reactantsController.clear(); // Clears input
-    }
-    else if(isEmptyWithBlanks(_productsController.text)){
+    } else if (isEmptyWithBlanks(_productsController.text)) {
       _productsController.clear(); // Clears input
-    }
-    else {
+    } else {
       _calculate(_reactantsController.text, _productsController.text);
     }
   }
@@ -200,8 +201,8 @@ class _BalancerPageState extends State<BalancerPage> {
     // Goes to the top of the page after a delay:
     Future.delayed(
       const Duration(milliseconds: 200),
-          () => WidgetsBinding.instance.addPostFrameCallback(
-            (_) => _scrollController.animateTo(
+      () => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _scrollController.animateTo(
           _scrollController.position.minScrollExtent,
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 300),
@@ -223,8 +224,10 @@ class _BalancerPageState extends State<BalancerPage> {
   }
 
   void _eraseInitialAndFinalBlanks() {
-    _reactantsController.text = noInitialAndFinalBlanks(_reactantsController.text);
-    _productsController.text = noInitialAndFinalBlanks(_productsController.text);
+    _reactantsController.text =
+        noInitialAndFinalBlanks(_reactantsController.text);
+    _productsController.text =
+        noInitialAndFinalBlanks(_productsController.text);
   }
 
   _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
@@ -260,7 +263,8 @@ class _BalancerPageState extends State<BalancerPage> {
               children: [
                 GestureDetector(
                   onTap: _startTypingReactant, // As if the TextField was tapped
-                  child: Container( // Reactants Container
+                  child: Container(
+                    // Reactants Container
                     height: 110,
                     decoration: BoxDecoration(
                       color: QuimifyColors.foreground(context),
@@ -283,7 +287,7 @@ class _BalancerPageState extends State<BalancerPage> {
                             ),
                             const Spacer(),
                             const HelpButton(
-                              dialog: BalancerReactantHelpDialog(),
+                              dialog: EquationReactantsHelpDialog(),
                             ),
                           ],
                         ),
@@ -330,7 +334,8 @@ class _BalancerPageState extends State<BalancerPage> {
                           focusNode: _reactantsFocusNode,
                           controller: _reactantsController,
                           onChanged: (String input) {
-                            _reactantsController.value = _reactantsController.value
+                            _reactantsController.value = _reactantsController
+                                .value
                                 .copyWith(text: formatBalancerInput(input));
                           },
                           textInputAction: TextInputAction.search,
@@ -341,14 +346,13 @@ class _BalancerPageState extends State<BalancerPage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 15),
                 const Icon(Icons.arrow_downward_sharp, size: 35),
                 const SizedBox(height: 15),
-
                 GestureDetector(
                   onTap: _startTypingProduct, // As if the TextField was tapped
-                  child: Container( // Products Container
+                  child: Container(
+                    // Products Container
                     height: 110,
                     decoration: BoxDecoration(
                       color: QuimifyColors.foreground(context),
@@ -371,7 +375,7 @@ class _BalancerPageState extends State<BalancerPage> {
                             ),
                             const Spacer(),
                             const HelpButton(
-                              dialog: BalancerProductHelpDialog(),
+                              dialog: EquationProductsHelpDialog(),
                             ),
                           ],
                         ),
@@ -418,7 +422,8 @@ class _BalancerPageState extends State<BalancerPage> {
                           focusNode: _productsFocusNode,
                           controller: _productsController,
                           onChanged: (String input) {
-                            _productsController.value = _productsController.value
+                            _productsController.value = _productsController
+                                .value
                                 .copyWith(text: formatBalancerInput(input));
                           },
                           textInputAction: TextInputAction.search,
@@ -429,11 +434,9 @@ class _BalancerPageState extends State<BalancerPage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 15),
                 const Icon(Icons.done_sharp, size: 35),
                 const SizedBox(height: 15),
-
                 Container(
                   height: 115,
                   padding: const EdgeInsets.all(20),
@@ -470,7 +473,8 @@ class _BalancerPageState extends State<BalancerPage> {
                       ),
                       const Spacer(),
                       AutoSizeText(
-                        formatBalancer('${_result.balancedReactants} ⟶ ${_result.balancedProducts!}'),
+                        formatBalancer(
+                            '${_result.balancedReactants} ⟶ ${_result.balancedProducts!}'),
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: TextStyle(

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:quimify_client/internet/api/results/balancer_result.dart';
+import 'package:quimify_client/internet/api/results/equation_result.dart';
 import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
-import 'package:quimify_client/storage/history/results/balancer_local_result.dart';
+import 'package:quimify_client/storage/history/results/equation_local_result.dart';
 import 'package:quimify_client/storage/history/results/inorganic_local_result.dart';
 import 'package:quimify_client/storage/history/results/molecular_mass_local_result.dart';
 import 'package:quimify_client/storage/history/results/organic_formula_local_result.dart';
@@ -24,7 +24,7 @@ class History {
   static const String _organicFormulasKey = 'organic-formulas';
   static const String _organicNamesKey = 'organic-names';
   static const String _molecularMassesKey = 'molecular-masses';
-  static const String _balancedEquationKey = 'balanced-equations';
+  static const String _equationsKey = 'equations';
 
   // Private:
 
@@ -89,13 +89,13 @@ class History {
         getMolecularMasses(),
       );
 
-  List<BalancerLocalResult> getBalancedEquation() =>
-      _fetch(_balancedEquationKey, BalancerLocalResult.fromJson)
-          .cast<BalancerLocalResult>();
+  List<EquationLocalResult> getBalancedEquations() =>
+      _fetch(_equationsKey, EquationLocalResult.fromJson)
+          .cast<EquationLocalResult>();
 
-  saveBalancedEquation(BalancerResult result) => _save(
-    _balancedEquationKey,
-    BalancerLocalResult.fromResult(result),
-    getBalancedEquation(),
-  );
+  saveEquation(EquationResult result) => _save(
+        _equationsKey,
+        EquationLocalResult.fromResult(result),
+        getBalancedEquations(),
+      );
 }

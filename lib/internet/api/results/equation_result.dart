@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class BalancerResult {
+class EquationResult {
   final String? formula;
   final bool present;
   final String? originalEquation;
@@ -11,7 +11,7 @@ class BalancerResult {
   final String? balancedProducts;
   final String? error;
 
-  BalancerResult(
+  EquationResult(
     this.formula,
     this.present,
     this.originalEquation,
@@ -23,9 +23,9 @@ class BalancerResult {
     this.error,
   );
 
-  factory BalancerResult.fromJson(String body, String formula) {
+  factory EquationResult.fromJson(String body, String formula) {
     var json = jsonDecode(body);
-    return BalancerResult(
+    return EquationResult(
       formula,
       json['present'],
       json['originalEquation'],

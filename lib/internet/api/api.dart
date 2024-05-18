@@ -9,7 +9,7 @@ import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/internet/api/results/balancer_result.dart';
+import 'package:quimify_client/internet/api/results/equation_result.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -25,8 +25,8 @@ class Api {
   static const _httpStatusCodeOk = 200;
 
   static const _apiVersion = 6;
-  static const _clientVersion = 13;
-  static const _authority = 'api2.quimify.com';
+  static const _clientVersion = 14;
+  static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
   static const _timeout = Duration(seconds: 15);
@@ -361,8 +361,8 @@ class Api {
     return result;
   }
 
-  Future<BalancerResult?> getBalancedEquation(String equation) async {
-    BalancerResult? result;
+  Future<EquationResult?> getBalancedEquation(String equation) async {
+    EquationResult? result;
 
     String? response = await _getBodyWithRetry(
       'balance',
@@ -373,7 +373,7 @@ class Api {
 
     if (response != null) {
       try {
-        result = BalancerResult.fromJson(response, equation);
+        result = EquationResult.fromJson(response, equation);
       } catch (error) {
         sendError(
           context: 'Balancer JSON',

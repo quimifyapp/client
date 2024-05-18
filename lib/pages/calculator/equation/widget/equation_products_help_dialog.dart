@@ -3,21 +3,20 @@ import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class BalancerReactantHelpDialog extends StatelessWidget {
-  const BalancerReactantHelpDialog({Key? key}) : super(key: key);
+class EquationProductsHelpDialog extends StatelessWidget {
+  const EquationProductsHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Reactivos': [
+        'Productos': [
           //Primera Página
           const Center(
             child: DialogContentText(
-              richText:
-                  'Los reactivos es como se le llaman a las sustancia o compuesto añadidos a un '
-                  'sistema para provocar una reacción química. Se situan en el lado '
-                  'izquierdo de la reacción',
+              richText: 'Los productos es como se le llaman a las sustancias o '
+                  'compuestos obtenidas luego de ocurrir una reacción química.'
+                  ' Se situan en el lado derecho de la reacción',
             ),
           ),
           const DialogContentText(
@@ -34,9 +33,11 @@ class BalancerReactantHelpDialog extends StatelessWidget {
                 children: const [
                   TextSpan(
                     text: '2H + O',
+                  ),
+                  TextSpan(
+                    text: '   ➔   H₃O',
                     style: TextStyle(color: Colors.blue),
                   ),
-                  TextSpan(text: '   ➔   H₃O'),
                 ],
               ),
             ),
