@@ -3,8 +3,8 @@ import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class MolecularMassHelpDialog extends StatelessWidget {
-  const MolecularMassHelpDialog({Key? key}) : super(key: key);
+class MolecularMassInputHelpDialog extends StatelessWidget {
+  const MolecularMassInputHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

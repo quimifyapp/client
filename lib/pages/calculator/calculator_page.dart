@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
-import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/widgets/equation_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/text.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        QuimifySectionTitle(
+        const QuimifySectionTitle(
           title: 'Masa molecular',
-          helpDialog: CalculatorHelpDialog(),
+          helpDialog: MolecularMassHelpDialog(),
         ),
-        SizedBox(height: 15),
-        QuimifyCard(
+        const SizedBox(height: 15),
+        const QuimifyCard(
           body: {
             'Fe₂O₃': '159.68 g/mol',
             'C₅H₆O₂': '110.10 g/mol',
@@ -29,18 +30,19 @@ class CalculatorPage extends StatelessWidget {
           },
           page: MolecularMassPage(),
         ),
-        QuimifySectionTitle(
-          title: 'Ajustar reacciones',
-          helpDialog: comingSoonDialog,
+        const QuimifySectionTitle(
+          title: 'Balancear reacción',
+          helpDialog: EquationHelpDialog(),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         QuimifyCard(
+          // TODO check for overflow
           body: {
-            '2H + O ⟶ H₃O': '6H + 2O ⟶ 2(H₃O)',
-            'Fe₂O₃ + C ⟶ Fe + CO₂': '2(Fe₂O₃) + 3C ⟶ 4Fe + 3(CO₂)',
-            'Cl + 2OP ⟶ Cl₂O + P': '4Cl + 2(OP) ⟶ 2(Cl₂O) + 2P',
+            toEquation('H₂ + O₂', 'H₂O'): toEquation('2H₂ + O₂', '2H₂O'),
+            toEquation('NH₃', 'N₂ + H₂'): toEquation('2NH₃', 'N₂ + 3H₂'),
+            toEquation('Fe + O₂', 'Fe₂O₃'): toEquation('4Fe + 3O₂', '2Fe₂O₃'),
           },
-          page: EquationPage(),
+          page: const EquationPage(),
         ),
       ],
     );

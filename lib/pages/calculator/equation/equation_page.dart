@@ -5,8 +5,7 @@ import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/equation_result.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/pages/calculator/equation/widget/equation_products_help_dialog.dart';
-import 'package:quimify_client/pages/calculator/equation/widget/equation_reactants_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/equation/widgets/equation_input_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
 import 'package:quimify_client/pages/history/history_page.dart';
@@ -78,7 +77,7 @@ class _EquationPageState extends State<EquationPage> {
           title: 'Sin resultado',
           details: result.error != null ? toSubscripts(result.error!) : null,
           reportContext: 'Equation',
-          reportDetails: 'Searched "$products" -> "$reactants"',
+          reportDetails: 'Searched ${toEquation(reactants, products)}',
         ).show(context);
       }
     } else {
@@ -102,22 +101,28 @@ class _EquationPageState extends State<EquationPage> {
           onStartPressed: () => _reactantsFocusNode.requestFocus(),
           entries: History()
               .getBalancedEquations()
-              .map((e) => HistoryEntry(
-                    query: formatBalancer(
-                        '${e.originalReactants} ⟶ ${e.originalProducts}'),
-                    fields: [
-                      HistoryField(
-                        'Reacción',
-                        formatBalancer(
-                            '${e.originalReactants} ⟶ ${e.originalProducts}'),
+              .map(
+                (e) => HistoryEntry(
+                  query: formatEquation(
+                    toEquation(e.originalReactants,
+                        e.originalProducts), // TODO fix this + NOT formatted
+                  ),
+                  fields: [
+                    HistoryField(
+                      'Reacción',
+                      formatEquation(
+                        toEquation(e.originalReactants, e.originalProducts),
                       ),
-                      HistoryField(
-                        'Reacción ajustada',
-                        formatBalancer(
-                            '${e.balancedReactants} ⟶ ${e.balancedProducts}'),
+                    ),
+                    HistoryField(
+                      'Reacción ajustada',
+                      formatEquation(
+                        toEquation(e.balancedReactants, e.balancedProducts),
                       ),
-                    ],
-                  ))
+                    ),
+                  ],
+                ),
+              )
               .toList(),
           onEntryPressed: (equation) => _calculate(equation, equation),
         ),
@@ -128,21 +133,16 @@ class _EquationPageState extends State<EquationPage> {
   // Interface:
 
   void _pressedButton() {
-    _eraseInitialAndFinalBlanks(); // TODO This may need to be adapted to handle both fields
+    _eraseInitialAndFinalBlanks();
 
     // Check if both fields are empty, even with blanks
     bool reactantsEmpty = isEmptyWithBlanks(_reactantsController.text);
     bool productsEmpty = isEmptyWithBlanks(_productsController.text);
 
-    if (reactantsEmpty && productsEmpty) {
-      _reactantsController.clear(); // Clears reactants input
-      _productsController.clear(); // Clears products input
-      _reactantsFocusNode.requestFocus();
-    } else if (productsEmpty) {
-      _productsController.clear(); // Clears products input
-      _productsFocusNode.requestFocus();
-    } else {
+    if (!reactantsEmpty && !productsEmpty) {
       _calculate(_reactantsController.text, _productsController.text);
+    } else {
+      _startTyping();
     }
   }
 
@@ -151,9 +151,9 @@ class _EquationPageState extends State<EquationPage> {
     _eraseInitialAndFinalBlanks();
 
     if (isEmptyWithBlanks(_reactantsController.text)) {
-      _reactantsController.clear(); // Clears input
+      _reactantsController.clear();
     } else if (isEmptyWithBlanks(_productsController.text)) {
-      _productsController.clear(); // Clears input
+      _productsController.clear();
     } else {
       _calculate(_reactantsController.text, _productsController.text);
     }
@@ -190,21 +190,20 @@ class _EquationPageState extends State<EquationPage> {
     );
   }
 
-  _startTypingReactant() {
-    // Like if the TextField was tapped:
-    _reactantsFocusNode.requestFocus();
+  _startTyping() {
     _scrollToStart();
-  }
 
-  _startTypingProduct() {
-    // Like if the TextField was tapped:
-    _productsFocusNode.requestFocus();
-    _scrollToStart();
+    if (isEmptyWithBlanks(_reactantsController.text)) {
+      _reactantsFocusNode.requestFocus();
+    } else {
+      _productsFocusNode.requestFocus();
+    }
   }
 
   void _eraseInitialAndFinalBlanks() {
     _reactantsController.text =
         noInitialAndFinalBlanks(_reactantsController.text);
+
     _productsController.text =
         noInitialAndFinalBlanks(_productsController.text);
   }
@@ -234,17 +233,15 @@ class _EquationPageState extends State<EquationPage> {
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           bannerAdName: runtimeType.toString(),
-          header: const QuimifyPageBar(title: 'Ajustar reacciones'),
+          header: const QuimifyPageBar(title: 'Balancear reacción'),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: _startTypingReactant, // As if the TextField was tapped
+                  onTap: _startTyping,
                   child: Container(
-                    // Reactants Container
-                    height: 110,
                     decoration: BoxDecoration(
                       color: QuimifyColors.foreground(context),
                       borderRadius: BorderRadius.circular(15),
@@ -257,7 +254,7 @@ class _EquationPageState extends State<EquationPage> {
                         Row(
                           children: [
                             Text(
-                              'Reactivos',
+                              'Reacción',
                               style: TextStyle(
                                 fontSize: 18,
                                 color: QuimifyColors.primary(context),
@@ -266,11 +263,11 @@ class _EquationPageState extends State<EquationPage> {
                             ),
                             const Spacer(),
                             const HelpButton(
-                              dialog: EquationReactantsHelpDialog(),
+                              dialog: EquationInputHelpDialog(),
                             ),
                           ],
                         ),
-                        const Spacer(),
+                        const SizedBox(height: 15),
                         TextField(
                           autocorrect: false,
                           enableSuggestions: false,
@@ -315,50 +312,22 @@ class _EquationPageState extends State<EquationPage> {
                           onChanged: (String input) {
                             _reactantsController.value = _reactantsController
                                 .value
-                                .copyWith(text: formatBalancerInput(input));
+                                .copyWith(text: formatEquationInput(input));
                           },
                           textInputAction: TextInputAction.search,
                           onSubmitted: (_) => _submittedText(),
                           onTap: _scrollToStart,
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                const Icon(Icons.arrow_downward_sharp, size: 35),
-                const SizedBox(height: 15),
-                GestureDetector(
-                  onTap: _startTypingProduct, // As if the TextField was tapped
-                  child: Container(
-                    // Products Container
-                    height: 110,
-                    decoration: BoxDecoration(
-                      color: QuimifyColors.foreground(context),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    padding: const EdgeInsets.all(20),
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Productos',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: QuimifyColors.primary(context),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const Spacer(),
-                            const HelpButton(
-                              dialog: EquationProductsHelpDialog(),
-                            ),
-                          ],
+                        const SizedBox(height: 10),
+                        Text(
+                          '⟶',
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: QuimifyColors.primary(context),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        const Spacer(),
+                        const SizedBox(height: 10),
                         TextField(
                           autocorrect: false,
                           enableSuggestions: false,
@@ -403,7 +372,7 @@ class _EquationPageState extends State<EquationPage> {
                           onChanged: (String input) {
                             _productsController.value = _productsController
                                 .value
-                                .copyWith(text: formatBalancerInput(input));
+                                .copyWith(text: formatEquationInput(input));
                           },
                           textInputAction: TextInputAction.search,
                           onSubmitted: (_) => _submittedText(),
@@ -439,7 +408,6 @@ class _EquationPageState extends State<EquationPage> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  height: 115,
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
@@ -472,10 +440,29 @@ class _EquationPageState extends State<EquationPage> {
                           ),
                         ],
                       ),
-                      const Spacer(),
+                      const SizedBox(height: 15),
                       AutoSizeText(
-                        formatBalancer('${_result.balancedReactants} ⟶ '
-                            '${_result.balancedProducts!}'),
+                        formatEquation(_result.balancedReactants!),
+                        stepGranularity: 0.1,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: QuimifyColors.teal(),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        '⟶',
+                        style: TextStyle(
+                          fontSize: 26,
+                          color: QuimifyColors.primary(context),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      AutoSizeText(
+                        formatEquation(_result.balancedProducts!),
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: TextStyle(

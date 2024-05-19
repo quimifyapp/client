@@ -36,29 +36,31 @@ String toSubscripts(String input) {
 
 String toSubscriptsIfNotCoefficient(String input) {
   String result = '';
-  bool isCoefficient = true;  // Assume first number sequence is a coefficient
-  bool inNumber = false;      // Flag to track when we are within a number
+  bool isCoefficient = true; // Assume first number sequence is a coefficient
+  bool inNumber = false; // Flag to track when we are within a number
 
   for (int i = 0; i < input.length; i++) {
     String char = input[i];
     if (char == ' ' || char == '+') {
-      isCoefficient = true;  // Reset for possible next coefficient
+      isCoefficient = true; // Reset for possible next coefficient
       result += char;
     } else if (RegExp(r'[0-9]').hasMatch(char)) {
       if (isCoefficient) {
         // If starting a number sequence after a space or at the start
         if (!inNumber) {
           inNumber = true;
-          result += char;  // Append the digit normally
+          result += char; // Append the digit normally
         } else {
-          result += char;  // Continue appending digits of a coefficient
+          result += char; // Continue appending digits of a coefficient
         }
       } else {
-        result += digitToSubscript[char]!;  // Convert to subscript if not coefficient
+        result +=
+            digitToSubscript[char]!; // Convert to subscript if not coefficient
       }
     } else {
-      inNumber = false;     // No longer in a number, reset flag
-      isCoefficient = false;  // Any non-space non-digit marks end of a coefficient
+      inNumber = false; // No longer in a number, reset flag
+      isCoefficient =
+          false; // Any non-space non-digit marks end of a coefficient
       result += char;
     }
   }
@@ -192,12 +194,13 @@ String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));
 
-String formatBalancer(String equation) =>
+String formatEquationInput(String equation) =>
+    capFirst(toCapsAfterSpaceOrPlusSign(toCapsAfterNotAnUppercaseLetter(
+        toCapsAfterDigitOrParentheses(
+            toSubscriptsIfNotCoefficient(equation)))));
+
+String formatEquation(String equation) =>
     toSubscriptsIfNotCoefficient(equation);
 
-String formatBalancerInput(String equation) =>
-    capFirst(
-        toCapsAfterSpaceOrPlusSign(
-            toCapsAfterNotAnUppercaseLetter(
-                toCapsAfterDigitOrParentheses(
-                    toSubscriptsIfNotCoefficient(equation)))));
+String toEquation(String reactants, String products) =>
+    '$products ⟶ $reactants';
