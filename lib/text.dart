@@ -7,7 +7,7 @@ RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
-RegExp balancerInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
+RegExp equationInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
 
 const Map<String, String> digitToSubscript = {

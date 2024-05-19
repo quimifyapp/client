@@ -89,7 +89,7 @@ class History {
         getMolecularMasses(),
       );
 
-  List<EquationLocalResult> getBalancedEquations() =>
+  List<EquationLocalResult> getEquations() =>
       _fetch(_equationsKey, EquationLocalResult.fromJson)
           .cast<EquationLocalResult>();
 
@@ -97,6 +97,6 @@ class History {
       _save(
         _equationsKey,
         EquationLocalResult.fromResult(result, originalReactants, originalProducts),
-        getBalancedEquations(),
+        getEquations(),
       );
 }

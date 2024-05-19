@@ -36,8 +36,6 @@ class _EquationPageState extends State<EquationPage> {
   final FocusNode _productsFocusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
 
-  bool _argumentRead = false;
-
   String _reactantsLabelText = 'C₆H₁₂O₆ + O₂';
   String _productsLabelText = 'CO₂ + H₂O';
   EquationResult _result = EquationResult(
@@ -69,8 +67,8 @@ class _EquationPageState extends State<EquationPage> {
         _reactantsController.clear();
         _productsController.clear();
 
-        _productsFocusNode.unfocus();
         _reactantsFocusNode.unfocus();
+        _productsFocusNode.unfocus();
       } else {
         if (!mounted) return; // For security reasons
         MessageDialog.reportable(
@@ -98,15 +96,15 @@ class _EquationPageState extends State<EquationPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => HistoryPage(
-          onStartPressed: () => _reactantsFocusNode.requestFocus(),
+          onStartPressed: _startTyping,
           entries: History()
-              .getBalancedEquations()
+              .getEquations()
               .map(
                 (e) => HistoryEntry(
-                  query: formatEquation(
-                    toEquation(e.originalReactants,
-                        e.originalProducts), // TODO fix this + NOT formatted
-                  ),
+                  query: [
+                    formatEquation(e.originalReactants),
+                    formatEquation(e.originalProducts),
+                  ],
                   fields: [
                     HistoryField(
                       'Reacción',
@@ -124,7 +122,7 @@ class _EquationPageState extends State<EquationPage> {
                 ),
               )
               .toList(),
-          onEntryPressed: (equation) => _calculate(equation, equation),
+          onEntryPressed: (query) => _calculate(query[0], query[1]),
         ),
       ),
     );
@@ -214,13 +212,6 @@ class _EquationPageState extends State<EquationPage> {
   Widget build(BuildContext context) {
     const double buttonHeight = 50;
 
-    String? argument = ModalRoute.of(context)?.settings.arguments as String?;
-
-    if (argument != null && !_argumentRead) {
-      _reactantsFocusNode.requestFocus();
-      _argumentRead = true;
-    }
-
     return PopScope(
       onPopInvoked: (bool didPop) async {
         if (!didPop) {
@@ -302,7 +293,7 @@ class _EquationPageState extends State<EquationPage> {
                           // Logic:
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
-                              balancerInputFormatter,
+                              equationInputFormatter,
                             ),
                           ],
                           textCapitalization: TextCapitalization.sentences,
@@ -362,7 +353,7 @@ class _EquationPageState extends State<EquationPage> {
                           // Logic:
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
-                              balancerInputFormatter,
+                              equationInputFormatter,
                             ),
                           ],
                           textCapitalization: TextCapitalization.sentences,
