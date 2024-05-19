@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
-class CalculatorHelpDialog extends StatelessWidget {
-  const CalculatorHelpDialog({Key? key}) : super(key: key);
+class MolecularMassHelpDialog extends StatelessWidget {
+  const MolecularMassHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

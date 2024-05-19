@@ -9,6 +9,7 @@ import 'package:quimify_client/internet/api/results/inorganic_result.dart';
 import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/internet/api/results/equation_result.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -22,12 +23,13 @@ class Api {
   // Constants:
 
   static const _httpStatusCodeOk = 200;
-
+  
   static const _apiVersion = 6;
-  static const _clientVersion = 13;
+  static const _clientVersion = 14;
+
   static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
-
+  
   static const _timeout = Duration(seconds: 15);
 
   // Initialize:
@@ -352,6 +354,31 @@ class Api {
       } catch (error) {
         sendError(
           context: 'Organic from structure JSON',
+          details: error.toString(),
+        );
+      }
+    }
+
+    return result;
+  }
+
+  Future<EquationResult?> getEquation(String reactants, String products) async {
+    EquationResult? result;
+
+    String? response = await _getBodyWithRetry(
+      'equation',
+      {
+        'reactants': reactants,
+        'products': products,
+      },
+    );
+
+    if (response != null) {
+      try {
+        result = EquationResult.fromJson(response);
+      } catch (error) {
+        sendError(
+          context: 'Equation JSON',
           details: error.toString(),
         );
       }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
-import 'package:quimify_client/pages/calculator/widgets/calculator_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/widgets/equation_help_dialog.dart';
+import 'package:quimify_client/pages/calculator/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
-import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/text.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class CalculatorPage extends StatelessWidget {
       children: [
         const QuimifySectionTitle(
           title: 'Masa molecular',
-          helpDialog: CalculatorHelpDialog(),
+          helpDialog: MolecularMassHelpDialog(),
         ),
         const SizedBox(height: 15),
         const QuimifyCard(
@@ -30,20 +31,18 @@ class CalculatorPage extends StatelessWidget {
           page: MolecularMassPage(),
         ),
         const QuimifySectionTitle(
-          title: 'Ajustar reacciones',
-          helpDialog: comingSoonDialog,
+          title: 'Balancear reacción',
+          helpDialog: EquationHelpDialog(),
         ),
         const SizedBox(height: 15),
-        QuimifyCard.comingSoon(
-          comingSoonBody: Text(
-            '⇄',
-            style: TextStyle(
-              height: 0.9, // TODO iOS?
-              fontSize: 36,
-              fontWeight: FontWeight.w600,
-              color: QuimifyColors.teal(),
-            ),
-          ),
+        QuimifyCard(
+          // TODO check for overflow
+          body: {
+            toEquation('H₂ + O₂', 'H₂O'): toEquation('2H₂ + O₂', '2H₂O'),
+            toEquation('NH₃', 'N₂ + H₂'): toEquation('2NH₃', 'N₂ + 3H₂'),
+            toEquation('Fe + O₂', 'Fe₂O₃'): toEquation('4Fe + 3O₂', '2Fe₂O₃'),
+          },
+          page: const EquationPage(),
         ),
       ],
     );

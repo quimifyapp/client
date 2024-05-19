@@ -7,6 +7,9 @@ RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
     r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
+RegExp equationInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
+
 const Map<String, String> digitToSubscript = {
   '0': '\u2080',
   '1': '\u2081',
@@ -26,6 +29,40 @@ String toSubscripts(String input) {
   for (int rune in input.runes) {
     String char = String.fromCharCode(rune);
     result += digitToSubscript[char] ?? char;
+  }
+
+  return result;
+}
+
+String toSubscriptsIfNotCoefficient(String input) {
+  String result = '';
+  bool isCoefficient = true; // Assume first number sequence is a coefficient
+  bool inNumber = false; // Flag to track when we are within a number
+
+  for (int i = 0; i < input.length; i++) {
+    String char = input[i];
+    if (char == ' ' || char == '+') {
+      isCoefficient = true; // Reset for possible next coefficient
+      result += char;
+    } else if (RegExp(r'[0-9]').hasMatch(char)) {
+      if (isCoefficient) {
+        // If starting a number sequence after a space or at the start
+        if (!inNumber) {
+          inNumber = true;
+          result += char; // Append the digit normally
+        } else {
+          result += char; // Continue appending digits of a coefficient
+        }
+      } else {
+        result +=
+            digitToSubscript[char]!; // Convert to subscript if not coefficient
+      }
+    } else {
+      inNumber = false; // No longer in a number, reset flag
+      isCoefficient =
+          false; // Any non-space non-digit marks end of a coefficient
+      result += char;
+    }
   }
 
   return result;
@@ -79,6 +116,22 @@ String toCapsAfterNotAnUppercaseLetter(String input) {
     result += input[i - 1] == input[i - 1].toUpperCase()
         ? input[i]
         : input[i].toUpperCase();
+  }
+
+  return result;
+}
+
+String toCapsAfterSpaceOrPlusSign(String input) {
+  if (input.isEmpty) return input;
+
+  String result = input[0];
+
+  for (int i = 1; i < input.length; i++) {
+    if (input[i - 1] == ' ' || input[i - 1] == '+') {
+      result += input[i].toUpperCase();
+    } else {
+      result += input[i];
+    }
   }
 
   return result;
@@ -140,3 +193,14 @@ String formatStructureInput(String structure) =>
 String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));
+
+String formatEquationInput(String equation) =>
+    capFirst(toCapsAfterSpaceOrPlusSign(toCapsAfterNotAnUppercaseLetter(
+        toCapsAfterDigitOrParentheses(
+            toSubscriptsIfNotCoefficient(equation)))));
+
+String formatEquation(String equation) =>
+    toSubscriptsIfNotCoefficient(equation);
+
+String toEquation(String reactants, String products) =>
+    '$products ⟶ $reactants';
