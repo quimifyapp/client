@@ -32,20 +32,20 @@ class ClassificationDialog extends StatelessWidget {
         Routes.fromClassification[classification]!,
         arguments: toDigits(formattedQuery),
       );
-    } else {
-      Navigator.of(context).pop();
 
-      MessageDialog(
-        title: '¡Estamos en ello!',
-        details: classification == Classification.chemicalProblem
-            ? 'Podremos resolver *problemas químicos* en próximas '
-                'actualizaciones.'
-            : classification == Classification.chemicalReaction
-                ? 'Podremos resolver *reacciones químicas* en próximas '
-                    'actualizaciones.'
-                : 'Podremos resolver eso en próximas actualizaciones.',
-      ).show(context);
+      return;
     }
+
+    Navigator.of(context).pop();
+
+    String problemType = classification == Classification.chemicalProblem
+        ? '*problemas químicos*'
+        : 'eso';
+
+    MessageDialog(
+      title: '¡Estamos en ello!',
+      details: 'Podremos resolver $problemType en próximas actualizaciones.',
+    ).show(context);
   }
 
   _disagreePressed(BuildContext context) {

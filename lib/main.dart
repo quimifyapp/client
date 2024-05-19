@@ -8,6 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
@@ -73,6 +74,7 @@ class QuimifyApp extends StatelessWidget {
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
           Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
+          Routes.calculatorEquation: (context) => const EquationPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,

@@ -5,6 +5,7 @@ class Routes {
   static const String organicNaming = 'organic/naming';
   static const String organicFindingFormula = 'organic/finding-formula';
   static const String calculatorMolecularMass = 'calculator/molecular-mass';
+  static const String calculatorEquation = 'calculator/equation';
 
   static final Map<Classification, String> fromClassification = {
     Classification.inorganicFormula: inorganicNomenclature,
@@ -12,6 +13,7 @@ class Routes {
     Classification.inorganicName: inorganicNomenclature,
     Classification.organicName: organicFindingFormula,
     Classification.molecularMassProblem: calculatorMolecularMass,
+    Classification.chemicalReaction: calculatorEquation
   };
 
   static bool contains(Classification classification) =>
