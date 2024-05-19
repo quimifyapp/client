@@ -36,7 +36,7 @@ class OrganicResult {
     return OrganicResult(
       json['found'],
 
-      json['classification'],
+      stringToClassification[json['classification']],
       json['suggestion'],
 
       json['structure'],

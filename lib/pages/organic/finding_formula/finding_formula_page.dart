@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
+import 'package:quimify_client/internet/api/results/classification.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
@@ -13,6 +14,7 @@ import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
+import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
@@ -34,19 +36,45 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   String _labelText = 'dietiléter, but-2-eno...';
   OrganicResult _result = OrganicResult(
-    true,
-    null,
-    null,
-    'COOH - COOH',
-    'ácido etanodioico',
-    90.01,
-    null, // There's already a pre-loaded 2D image
-    'https://pubchem.ncbi.nlm.nih.gov/compound/'
-        '971#section=3D-Conformer&fullscreen=true'
-  );
+      true,
+      null,
+      null,
+      'COOH - COOH',
+      'ácido etanodioico',
+      90.01,
+      null,
+      // There's already a pre-loaded 2D image
+      'https://pubchem.ncbi.nlm.nih.gov/compound/'
+          '971#section=3D-Conformer&fullscreen=true');
 
-  _processClassification(OrganicResult result) {
+  static const String _messageRoot = 'Parece que estás intentando resolver un';
 
+  static const Map<Classification, String> _classificationToMessage = {
+    Classification.inorganicFormula: '$_messageRoot *compuesto inorgánico*.',
+    Classification.inorganicName: '$_messageRoot *compuesto inorgánico*.',
+    Classification.organicFormula: '$_messageRoot *a fórmula*.',
+    Classification.molecularMassProblem: '${_messageRoot}a *masa molecular*.',
+    Classification.chemicalProblem: '$_messageRoot *problema químico*.',
+    Classification.chemicalReaction: '${_messageRoot}a *reacción química*.',
+  };
+
+  _processClassification(Classification classification, String formattedQuery,
+      VoidCallback onPressedDisagree) {
+    if (classification == Classification.nomenclatureProblem) {
+      MessageDialog(
+        title: 'Casi lo tienes',
+        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
+        onButtonPressed: () => _textFocusNode.requestFocus(),
+      ).show(context);
+      return;
+    }
+
+    ClassificationDialog(
+      classification: classification,
+      formattedQuery: formattedQuery,
+      richText: _classificationToMessage[classification]!,
+      onPressedDisagree: onPressedDisagree,
+    ).show(context);
   }
 
   _showNotFoundDialog(String formattedQuery) {
@@ -72,7 +100,29 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       return;
     }
 
-    _processClassification(result);
+    _processClassification(
+      result.classification!,
+      formattedQuery,
+      () => _showNotFoundDialog(formattedQuery),
+    );
+  }
+
+  _displayResult(OrganicResult result, String formattedQuery) {
+    setState(() {
+      _result = result;
+      if (_firstSearch) {
+        _firstSearch = false;
+      }
+    });
+
+    History().saveOrganicFormula(result);
+
+    // UI/UX actions:
+
+    _labelText = formattedQuery; // Sets previous input as label
+    _textController.clear(); // Clears input
+    _textFocusNode.unfocus(); // Hides keyboard
+    _scrollToStart(); // Goes to the top of the page
   }
 
   _processResult(OrganicResult? result, String formattedQuery) {
@@ -81,7 +131,16 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       return;
     }
 
-
+    if (result.classification == null) {
+      Ads().showInterstitial();
+      _displayResult(result, formattedQuery);
+    } else {
+      _processClassification(
+        result.classification!,
+        formattedQuery,
+        () => _displayResult(result, formattedQuery),
+      );
+    }
   }
 
   _search(String formattedQuery) async {
@@ -98,48 +157,6 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     }
 
     await _processResult(result, formattedQuery);
-
-    hideLoadingIndicator();
-
-
-
-    if (result != null) {
-      if (result.found) {
-        Ads().showInterstitial();
-
-        // TODO classification
-
-        setState(() {
-          _result = result;
-          if (_firstSearch) {
-            _firstSearch = false;
-          }
-        });
-
-        History().saveOrganicFormula(result);
-
-        // UI/UX actions:
-
-        _labelText = formattedQuery; // Sets previous input as label
-        _textController.clear(); // Clears input
-        _textFocusNode.unfocus(); // Hides keyboard
-        _scrollToStart(); // Goes to the top of the page
-      } else {
-        // TODO classification
-
-        if (!mounted) return; // For security reasons
-
-      }
-    } else {
-      if (!mounted) return; // For security reasons
-      if (await hasInternetConnection()) {
-        const MessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
-      } else {
-        noInternetDialog.show(context);
-      }
-    }
 
     hideLoadingIndicator();
   }

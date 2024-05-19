@@ -1,7 +1,0 @@
-//Remover el .example de extensión y dejar solo local.properties, configurar con tusvariables en caso de que sea necesario
-sdk.dir=C:\\Users\\rub\\AppData\\Local\\Android\\sdk
-flutter.sdk=C:\\flutter\\flutter
-flutter.buildMode=debug
-flutter.versionName=3.6.2
-flutter.minSdkVersion=19
-flutter.versionCode=95
