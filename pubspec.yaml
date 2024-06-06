@@ -26,6 +26,7 @@ dependencies:
   fast_rich_text: ^0.0.1
   webview_flutter: ^4.7.0
   device_info_plus: ^9.1.2
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -45,9 +46,12 @@ flutter:
     - assets/images/dietanoic-acid.png
     - assets/images/discord.png
     - assets/images/gmail.png
+    - assets/images/logo.png
+    - assets/images/branding.png
 
     - assets/images/icons/logo.png
     - assets/images/icons/branding-slim.png
+    - assets/images/icons/google-logo.png
 
     - assets/images/icons/search.png
     - assets/images/icons/lock.png
