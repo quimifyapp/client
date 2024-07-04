@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
@@ -11,15 +12,18 @@ import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dar
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-import '../sign-in/profile/profile_page.dart';
+
+import '../profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
     required this.clientResult,
+    required this.user,
   }) : super(key: key);
 
   final ClientResult? clientResult;
+  final GoogleSignInAccount? user;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -27,7 +31,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = const [
-    //SignInPage(),
     InorganicPage(),
     OrganicPage(),
     CalculatorPage(),
@@ -133,63 +136,63 @@ class _HomePageState extends State<HomePage> {
       },
       child: QuimifyScaffold.noAd(
         header: SafeArea(
-          bottom: false, // So it's not inside status bar
-          child: Container(
-            padding: const EdgeInsets.only(
-              top: 15, // TODO 17.5?
-              bottom: 20,
-              left: 20,
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: IconButton(
-                    icon: Image.asset(
-                      'assets/images/icons/logo.png',
-                      color: QuimifyColors.inverseText(context),
-                    ),
-                    // To remove native effects:
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    // So it fills container (48 x 48):
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                    onPressed: () {},
+        bottom: false, // So it's not inside status bar
+        child: Container(
+          padding: const EdgeInsets.only(
+            top: 15, // TODO 17.5?
+            bottom: 20,
+            left: 20,
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/images/icons/logo.png',
+                    color: QuimifyColors.inverseText(context),
                   ),
+                  // To remove native effects:
+                  hoverColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  // So it fills container (48 x 48):
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: () {},
                 ),
-                const SizedBox(width: 15),
-                Image.asset(
-                  'assets/images/icons/branding-slim.png',
-                  height: 17,
-                  color: QuimifyColors.inverseText(context),
-                ),
-                //const SizedBox(width: 120),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 38,
-                    alignment: Alignment.centerRight,
-                    icon: Icon(
-                      Icons.account_circle_sharp,
-                      color: QuimifyColors.inverseText(context),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
-                      );
-                    },
+              ),
+              const SizedBox(width: 15),
+              Image.asset(
+                'assets/images/icons/branding-slim.png',
+                height: 17,
+                color: QuimifyColors.inverseText(context),
+              ),
+              //const SizedBox(width: 120),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  iconSize: 38,
+                  alignment: Alignment.centerRight,
+                  icon: Icon(
+                    Icons.account_circle_sharp,
+                    color: QuimifyColors.inverseText(context),
                   ),
-                )
-              ],
-            ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage(user: widget.user!,)),
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         ),
+      ),
         body: QuimifySwipeDetector(
           leftSwipe: () => _goToPage((_currentPage - 1) % 3),
           rightSwipe: () => _goToPage((_currentPage + 1) % 3),
