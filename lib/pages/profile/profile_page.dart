@@ -1,63 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:quimify_client/pages/home/home_page.dart';
-
+import 'package:quimify_client/internet/api/sign-in/google_sign_in_api.dart';
 import '../../internet/api/results/client_result.dart';
-import '../../internet/api/sign-in/google_sign_in_api.dart';
+import '../sign-in/sign_in_page.dart';
+import '../widgets/bars/quimify_page_bar.dart';
+import '../widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+
+import '../widgets/quimify_colors.dart';
+
 
 class ProfilePage extends StatelessWidget {
-  final GoogleSignInAccount user;
   final ClientResult? clientResult;
+  final GoogleSignInAccount user;
 
   ProfilePage({
     Key? key,
-    required this.user,
     this.clientResult,
+    required this.user,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('Detalles de la cuenta'),
-          centerTitle: true,
-          actions: [
-            ElevatedButton(
-              child: Icon(Icons.logout),
-              onPressed: () async {
-                await GoogleSignInApi.logout();
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) =>
-                        HomePage(clientResult: clientResult)));
-              },
-            )
-          ],
-        ),
+  Widget build(BuildContext context) {
+    return PopScope(
+      onPopInvoked: (bool didPop) async {
+        if (!didPop) {
+          return;
+        }
+
+        hideLoadingIndicator();
+      },
+      child: QuimifyScaffold.noAd(
+        header: const QuimifyPageBar(title: 'Perfil'),
         body: Container(
-          alignment: Alignment.center,
-          color: Colors.blue,
+          width: 900,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: QuimifyColors.foreground(context),
+            borderRadius: BorderRadius.circular(15),
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Profile', style: TextStyle(fontSize: 24)),
-              SizedBox(
-                height: 32,
-              ),
+
+              const SizedBox(height: 20),
+
               CircleAvatar(
-                radius: 40,
+                radius: 50,
                 backgroundImage: NetworkImage(user.photoUrl!),
               ),
-              SizedBox(height: 8),
+
+              const SizedBox(height: 20),
+
               Text(
-                'Nombre: ' + user.displayName!,
-                style: TextStyle(color: Colors.white),
+                'Nombre: ${user.displayName!}',
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
+
+              const SizedBox(height: 20),
+
               Text(
-                'Email: ' + user.email,
-                style: TextStyle(color: Colors.white),
-              )
+                'Email: ${user.email}', // Can never be null
+                style: const TextStyle(fontSize: 16),
+              ),
+
+              const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: () {
+                  // Implement the "Gana dinero con Quimify" functionality here
+                },
+                child: Text('Gana dinero con Quimify'),
+              ),
+
+              const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: () async {
+                  await GoogleSignInApi.logout();
+                  // Navigate back to the sign-in screen after signing out
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInPage()),
+                  );
+                },
+                child: Text('Cerrar Sesión'),
+              ),
+              //const SizedBox(height: 15),
+              //const SizedBox(height: 5), // + 15 from cards = 20
             ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }
