@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 import '../../internet/api/results/client_result.dart';
 import '../../internet/api/sign-in/google_sign_in_api.dart';
@@ -29,17 +28,16 @@ class SignInPage extends StatelessWidget {
                   height: 175,
                 ),
 
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
 
                 // Google Sign-In button
                 ElevatedButton.icon(
                   onPressed: () async {
                     final user = await GoogleSignInApi.login();
                     if (user != null) {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => HomePage(clientResult: clientResult),
-                          ));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              HomePage(clientResult: clientResult, user: user,)));
                     }
                   },
                   icon: Image.asset('assets/images/icons/google-logo.png',
@@ -55,26 +53,32 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Apple Sign-In button (assuming you have Apple sign-in set up)
                 ElevatedButton.icon(
-                  onPressed: () {
+                  onPressed: () async {
                     // TODO Handle Apple sign-in
+                    final user = await GoogleSignInApi.login();
+                    if (user != null) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              HomePage(clientResult: clientResult, user: user,)));
+                    }
                   },
-                  icon: Icon(Icons.apple, color: Colors.white, size: 24),
-                  label: Text('Iniciar Sesión con Apple'),
+                  icon: const Icon(Icons.apple, color: Colors.white, size: 24),
+                  label: const Text('Iniciar Sesión con Apple'),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.black,
-                    minimumSize: Size(double.infinity, 50),
+                    minimumSize: const Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
 
                 Image.asset(
                   'assets/images/branding.png',
