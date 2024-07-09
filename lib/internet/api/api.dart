@@ -26,7 +26,7 @@ class Api {
 
   static const _apiVersion = 6;
   static const _clientVersion = 13;
-  static const _authority = 'api2.quimify.com';
+  static const _authority = 'api1.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
   static const _timeout = Duration(seconds: 15);
