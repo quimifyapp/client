@@ -44,12 +44,22 @@ class SignInPage extends StatelessWidget {
                     // Google Sign-In button
                     ElevatedButton.icon(
                       onPressed: () async {
+<<<<<<< HEAD
                         final user = await UserAuthService.signInGoogleUser();
                         print(user?.displayName);
                         if (user == null) return;
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => HomePage(
                                 clientResult: clientResult, user: user)));
+=======
+                        final user = await GoogleSignInApi.login();
+                        if (user != null) {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                      clientResult: clientResult, user: user)));
+                        }
+>>>>>>> 445f779f3a2148e61ed9ab6c1725dd63f230c556
                       },
                       icon: Image.asset('assets/images/icons/google-logo.png',
                           height: 24),
@@ -70,7 +80,11 @@ class SignInPage extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () async {
                         // TODO Handle Apple sign-in
+<<<<<<< HEAD
                         final user = await UserAuthService.signInGoogleUser();
+=======
+                        final user = await GoogleSignInApi.login();
+>>>>>>> 445f779f3a2148e61ed9ab6c1725dd63f230c556
                         if (user != null) {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
