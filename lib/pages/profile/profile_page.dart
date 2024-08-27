@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/api/sign-in/google_sign_in_api.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+
 import '../../internet/api/results/client_result.dart';
 import '../sign-in/sign_in_page.dart';
 import '../widgets/bars/quimify_page_bar.dart';
 import '../widgets/dialogs/loading_indicator.dart';
-import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
-
 import '../widgets/quimify_colors.dart';
-
 
 class ProfilePage extends StatelessWidget {
   final ClientResult? clientResult;
-  final GoogleSignInAccount user;
+  final QuimifyIdentity user;
 
-  ProfilePage({
+  const ProfilePage({
     Key? key,
     this.clientResult,
     required this.user,
@@ -42,20 +40,21 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               const SizedBox(height: 20),
 
               CircleAvatar(
                 radius: 50,
                 // TODO: Make it locally
-                backgroundImage: NetworkImage(user.photoUrl ?? 'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg'),
+                backgroundImage: NetworkImage(user.photoUrl ??
+                    'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg'),
               ),
 
               const SizedBox(height: 20),
 
               Text(
-                'Nombre: ${user.displayName!}',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                'Nombre: ${user.displayName}',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 20),
@@ -71,21 +70,21 @@ class ProfilePage extends StatelessWidget {
                 onPressed: () {
                   // Implement the "Gana dinero con Quimify" functionality here
                 },
-                child: Text('Gana dinero con Quimify'),
+                child: const Text('Gana dinero con Quimify'),
               ),
 
               const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () async {
-                  await GoogleSignInApi.logout();
+                  await UserAuthService.signOut();
                   // Navigate back to the sign-in screen after signing out
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
+                    MaterialPageRoute(builder: (context) => const SignInPage()),
                   );
                 },
-                child: Text('Cerrar Sesión'),
+                child: const Text('Cerrar Sesión'),
               ),
               //const SizedBox(height: 15),
               //const SizedBox(height: 5), // + 15 from cards = 20

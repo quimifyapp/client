@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
@@ -14,9 +13,9 @@ import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/organic/finding_formula/finding_formula_page.dart';
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
+import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
-import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 
 import 'internet/api/sign-in/google_sign_in_api.dart';
 
@@ -33,7 +32,10 @@ main() async {
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
   } catch (_) {} // It's already present in modern devices anyways
 
-  GoogleSignInAccount? user = await GoogleSignInApi.loginSilently();
+  QuimifyIdentity? user =
+      await UserAuthService.handleSilentAuthentication(AuthProviders.google);
+
+  print(user);
   ClientResult? clientResult = await Api().getClient();
 
   Ads().initialize(clientResult);
@@ -66,7 +68,7 @@ class QuimifyApp extends StatelessWidget {
   }) : super(key: key);
 
   final ClientResult? clientResult;
-  final GoogleSignInAccount? user;
+  final QuimifyIdentity? user;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,11 @@ class QuimifyApp extends StatelessWidget {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
-        home: user != null ? HomePage(clientResult: clientResult, user: user) : SignInPage(clientResult: clientResult,),
+        home: user != null
+            ? HomePage(clientResult: clientResult, user: user)
+            : SignInPage(
+                clientResult: clientResult,
+              ),
         routes: {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
