@@ -17,7 +17,7 @@ import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
 
-import 'internet/api/sign-in/google_sign_in_api.dart';
+import 'internet/api/sign-in/sign_in_api.dart';
 
 main() async {
   _showLoadingScreen();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 
 import '../../internet/api/results/client_result.dart';
-import '../../internet/api/sign-in/google_sign_in_api.dart';
+import '../../internet/api/sign-in/sign_in_api.dart';
 import '../widgets/quimify_colors.dart';
 
 class SignInPage extends StatelessWidget {
@@ -44,22 +44,11 @@ class SignInPage extends StatelessWidget {
                     // Google Sign-In button
                     ElevatedButton.icon(
                       onPressed: () async {
-<<<<<<< HEAD
                         final user = await UserAuthService.signInGoogleUser();
-                        print(user?.displayName);
                         if (user == null) return;
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => HomePage(
                                 clientResult: clientResult, user: user)));
-=======
-                        final user = await GoogleSignInApi.login();
-                        if (user != null) {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                      clientResult: clientResult, user: user)));
-                        }
->>>>>>> 445f779f3a2148e61ed9ab6c1725dd63f230c556
                       },
                       icon: Image.asset('assets/images/icons/google-logo.png',
                           height: 24),
@@ -80,11 +69,7 @@ class SignInPage extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () async {
                         // TODO Handle Apple sign-in
-<<<<<<< HEAD
                         final user = await UserAuthService.signInGoogleUser();
-=======
-                        final user = await GoogleSignInApi.login();
->>>>>>> 445f779f3a2148e61ed9ab6c1725dd63f230c556
                         if (user != null) {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
@@ -95,6 +80,33 @@ class SignInPage extends StatelessWidget {
                       icon: const Icon(Icons.apple,
                           color: Colors.white, size: 24),
                       label: const Text('Iniciar Sesión con Apple'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Anonymous Sign-In button
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        final user =
+                            await UserAuthService.signInAnonymousUser();
+                        if (user != null) {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                      clientResult: clientResult, user: user)));
+                        }
+                      },
+                      icon: const Icon(Icons.person_off_outlined,
+                          color: Colors.grey, size: 24),
+                      label: const Text('Saltar'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

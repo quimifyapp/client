@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/internet/api/sign-in/google_sign_in_api.dart';
+import 'package:quimify_client/internet/api/sign-in/sign_in_api.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 import '../../internet/api/results/client_result.dart';
