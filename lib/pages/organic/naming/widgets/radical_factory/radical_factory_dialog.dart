@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/carbons_help_dialog.dart';
 import 'package:quimify_client/pages/organic/naming/widgets/radical_factory/tip_shape_help_dialog.dart';

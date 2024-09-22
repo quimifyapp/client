@@ -97,12 +97,9 @@ class SignInPage extends StatelessWidget {
                       onPressed: () async {
                         final user =
                             await UserAuthService.signInAnonymousUser();
-                        if (user != null) {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                      clientResult: clientResult, user: user)));
-                        }
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                clientResult: clientResult, user: user)));
                       },
                       icon: const Icon(Icons.person_off_outlined,
                           color: Colors.grey, size: 24),

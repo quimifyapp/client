@@ -1,22 +1,11 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/api/sign-in/info_google.dart';
+import 'package:quimify_client/storage/storage.dart';
 
 class UserAuthService {
   static final _googleSignIn = GoogleSignIn(scopes: scopes);
 
-  static QuimifyIdentity _identity = QuimifyIdentity(
-      isPremium: false,
-      // TODO Add Default Photo to assets
-      photoUrl:
-          'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg',
-      displayName: 'Quimify',
-      email: 'Quimify@quimify.com',
-      birthday: 'EIGHTEEN_TO_TWENTY',
-      gender: 'Male');
-
-  static QuimifyIdentity get identity => _identity;
-
-  static List<String> scopes = <String>[
+  static List<String> scopes = [
     'email',
     'https://www.googleapis.com/auth/user.birthday.read',
     'https://www.googleapis.com/auth/user.gender.read'
@@ -24,67 +13,70 @@ class UserAuthService {
 
   static Future<void> signOut() async {
     if (_googleSignIn.currentUser != null) await _googleSignIn.signOut();
+    final prefs = Storage();
+    await prefs.saveBool('isAnonymouslySignedIn', false);
   }
 
-  // Donde va la logica de cada tipo de autenticación
   static Future<QuimifyIdentity?> signInGoogleUser() async {
     final user = await _googleSignIn.signIn();
     if (user == null) return null;
-    return await postLogin(AuthProviders.google, user, null);
+    return await postLogin(AuthProviders.google, user);
   }
 
   static Future<QuimifyIdentity?> signInAnonymousUser() async {
-    return await postLogin(AuthProviders.none, null, null);
+    QuimifyIdentity? identity = await postLogin(AuthProviders.none, null);
+    final prefs = Storage();
+    await prefs.saveBool('isAnonymouslySignedIn', true);
+
+    return identity;
   }
 
-  // TODO: Hacer la petición POST /login(id)
-  static Future<QuimifyIdentity> postLogin(AuthProviders service,
-      GoogleSignInAccount? googleUser, AppleIdentity? appleUser) async {
+  Future<bool> getisAnonymouslySignedIn() async {
+    final prefs = Storage();
+    return prefs.getBool('isAnonymouslySignedIn') ?? false;
+  }
+
+  // TODO: Implement error handling for login requests
+  static Future<QuimifyIdentity?> postLogin(
+      AuthProviders service, GoogleSignInAccount? googleUser) async {
     switch (service) {
       case AuthProviders.google:
         if (googleUser != null) {
           var data = await getInfoGoogle(googleUser);
-          // At the moment, returning default QuimifyIdentity
-          _identity = QuimifyIdentity(
+          QuimifyIdentity identity = QuimifyIdentity(
               isPremium: false,
               googleUser: googleUser,
-              photoUrl: googleUser.photoUrl ??
-                  'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg',
+              photoUrl: googleUser.photoUrl,
               displayName: googleUser.displayName ?? 'Quimify',
               email: googleUser.email,
               gender: data['gender'],
               birthday: data['birthday']);
+          return identity;
         }
         print('Enviado /login');
-        return _identity;
-      case AuthProviders.apple:
-        // TODO: Implement Apple Sign-In
-        return _identity;
+        break;
       case AuthProviders.none:
-        return _identity;
+        return null;
     }
+    return null;
   }
 
   static Future<QuimifyIdentity?> handleSilentAuthentication(
       AuthProviders service) async {
-    //TODO: At the moment, only works with GooglwSignIn
     if (service != AuthProviders.google) return null;
 
     final googleUser = await _googleSignIn.signInSilently();
     if (googleUser != null) {
-      return await postLogin(AuthProviders.google, googleUser, null);
+      return await postLogin(AuthProviders.google, googleUser);
     }
     return null;
   }
 }
 
-// Later implementation, just for logic now
-class AppleIdentity {}
-
 class QuimifyIdentity {
   final GoogleIdentity? googleUser;
   final bool isPremium;
-  final String photoUrl;
+  final String? photoUrl;
   final String displayName;
   final String? gender;
   final String email;
@@ -101,4 +93,4 @@ class QuimifyIdentity {
   });
 }
 
-enum AuthProviders { google, apple, none }
+enum AuthProviders { google, none }

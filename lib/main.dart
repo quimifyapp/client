@@ -32,10 +32,16 @@ main() async {
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
   } catch (_) {} // It's already present in modern devices anyways
 
+  bool isAnonymouslySignedIn =
+      await UserAuthService().getisAnonymouslySignedIn();
+
   QuimifyIdentity? user =
       await UserAuthService.handleSilentAuthentication(AuthProviders.google);
 
+  print(isAnonymouslySignedIn);
   print(user);
+  bool hasToLogin = isAnonymouslySignedIn == false && user == null;
+  print(hasToLogin);
   ClientResult? clientResult = await Api().getClient();
 
   Ads().initialize(clientResult);
@@ -46,6 +52,7 @@ main() async {
       builder: (context) => QuimifyApp(
         clientResult: clientResult,
         user: user,
+        hasToLogin: hasToLogin,
       ), // Wrap your app
     ),
   );
@@ -65,10 +72,12 @@ class QuimifyApp extends StatelessWidget {
     Key? key,
     this.clientResult,
     required this.user,
+    required this.hasToLogin,
   }) : super(key: key);
 
   final ClientResult? clientResult;
   final QuimifyIdentity? user;
+  final bool hasToLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +86,7 @@ class QuimifyApp extends StatelessWidget {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
-        home: user != null
+        home: hasToLogin != true
             ? HomePage(clientResult: clientResult, user: user)
             : SignInPage(
                 clientResult: clientResult,
@@ -86,7 +95,8 @@ class QuimifyApp extends StatelessWidget {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
+          Routes.calculatorMolecularMass: (context) =>
+              const MolecularMassPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,
