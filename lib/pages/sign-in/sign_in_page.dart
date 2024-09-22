@@ -65,44 +65,14 @@ class SignInPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Apple Sign-In button (assuming you have Apple sign-in set up)
-                    ElevatedButton.icon(
-                      onPressed: () async {
-                        // TODO Handle Apple sign-in
-                        final user = await UserAuthService.signInGoogleUser();
-                        if (user != null) {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                      clientResult: clientResult, user: user)));
-                        }
-                      },
-                      icon: const Icon(Icons.apple,
-                          color: Colors.white, size: 24),
-                      label: const Text('Iniciar Sesión con Apple'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.black,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
-
                     // Anonymous Sign-In button
                     ElevatedButton.icon(
                       onPressed: () async {
                         final user =
                             await UserAuthService.signInAnonymousUser();
-                        if (user != null) {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                      clientResult: clientResult, user: user)));
-                        }
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                clientResult: clientResult, user: user)));
                       },
                       icon: const Icon(Icons.person_off_outlined,
                           color: Colors.grey, size: 24),

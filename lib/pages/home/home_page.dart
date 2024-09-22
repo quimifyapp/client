@@ -177,18 +177,27 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.zero,
                     iconSize: 38,
                     alignment: Alignment.centerRight,
-                    icon: Icon(
-                      Icons.account_circle_sharp,
-                      color: QuimifyColors.inverseText(context),
-                    ),
+                    icon: widget.user?.photoUrl != null
+                        ? CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(widget.user?.photoUrl ?? ''),
+                            radius: 19, // Adjust radius as needed
+                          )
+                        : Icon(
+                            Icons.account_circle,
+                            color: QuimifyColors.inverseText(context),
+                          ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
+                      if (widget.user != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                             builder: (context) => ProfilePage(
-                                  user: widget.user!,
-                                )),
-                      );
+                              user: widget.user, // Use non-null assertion here
+                            ),
+                          ),
+                        );
+                      }
                     },
                   ),
                 )

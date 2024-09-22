@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
@@ -32,10 +33,12 @@ main() async {
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
   } catch (_) {} // It's already present in modern devices anyways
 
-  QuimifyIdentity? user =
-      await UserAuthService.handleSilentAuthentication(AuthProviders.google);
+  bool skippedLogin = await UserAuthService().hasSkippedLogin();
 
-  print(user);
+  QuimifyIdentity? user = await UserAuthService.handleSilentAuthentication();
+
+  bool hasToLogin = skippedLogin == false && user == null;
+
   ClientResult? clientResult = await Api().getClient();
 
   Ads().initialize(clientResult);
@@ -46,6 +49,7 @@ main() async {
       builder: (context) => QuimifyApp(
         clientResult: clientResult,
         user: user,
+        hasToLogin: hasToLogin,
       ), // Wrap your app
     ),
   );
@@ -65,10 +69,12 @@ class QuimifyApp extends StatelessWidget {
     Key? key,
     this.clientResult,
     required this.user,
+    required this.hasToLogin,
   }) : super(key: key);
 
   final ClientResult? clientResult;
   final QuimifyIdentity? user;
+  final bool hasToLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +83,7 @@ class QuimifyApp extends StatelessWidget {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
-        home: user != null
+        home: hasToLogin != true
             ? HomePage(clientResult: clientResult, user: user)
             : SignInPage(
                 clientResult: clientResult,
@@ -86,7 +92,8 @@ class QuimifyApp extends StatelessWidget {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
+          Routes.calculatorMolecularMass: (context) =>
+              const MolecularMassPage(),
         },
         // To get rid of debug banner:
         debugShowCheckedModeBanner: false,

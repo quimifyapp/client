@@ -1,22 +1,11 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/api/sign-in/info_google.dart';
+import 'package:quimify_client/storage/storage.dart';
 
 class UserAuthService {
   static final _googleSignIn = GoogleSignIn(scopes: scopes);
 
-  static QuimifyIdentity _identity = QuimifyIdentity(
-      isPremium: false,
-      // TODO Add Default Photo to assets
-      photoUrl:
-          'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg',
-      displayName: 'Quimify',
-      email: 'Quimify@quimify.com',
-      birthday: 'EIGHTEEN_TO_TWENTY',
-      gender: 'Male');
-
-  static QuimifyIdentity get identity => _identity;
-
-  static List<String> scopes = <String>[
+  static List<String> scopes = [
     'email',
     'https://www.googleapis.com/auth/user.birthday.read',
     'https://www.googleapis.com/auth/user.gender.read'
@@ -24,81 +13,93 @@ class UserAuthService {
 
   static Future<void> signOut() async {
     if (_googleSignIn.currentUser != null) await _googleSignIn.signOut();
+    final prefs = Storage();
+    await prefs.saveBool('isAnonymouslySignedIn', false);
   }
 
-  // Donde va la logica de cada tipo de autenticación
   static Future<QuimifyIdentity?> signInGoogleUser() async {
     final user = await _googleSignIn.signIn();
     if (user == null) return null;
-    return await postLogin(AuthProviders.google, user, null);
+    return signInPOST(user);
   }
 
   static Future<QuimifyIdentity?> signInAnonymousUser() async {
-    return await postLogin(AuthProviders.none, null, null);
+    bool state = await logInPOST(null);
+    final prefs = Storage();
+    await prefs.saveBool('isAnonymouslySignedIn', state);
+    QuimifyIdentity identity = QuimifyIdentity();
+    return identity;
   }
 
-  // TODO: Hacer la petición POST /login(id)
-  static Future<QuimifyIdentity> postLogin(AuthProviders service,
-      GoogleSignInAccount? googleUser, AppleIdentity? appleUser) async {
-    switch (service) {
-      case AuthProviders.google:
-        if (googleUser != null) {
-          var data = await getInfoGoogle(googleUser);
-          // At the moment, returning default QuimifyIdentity
-          _identity = QuimifyIdentity(
-              isPremium: false,
-              googleUser: googleUser,
-              photoUrl: googleUser.photoUrl ??
-                  'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg',
-              displayName: googleUser.displayName ?? 'Quimify',
-              email: googleUser.email,
-              gender: data['gender'],
-              birthday: data['birthday']);
-        }
-        print('Enviado /login');
-        return _identity;
-      case AuthProviders.apple:
-        // TODO: Implement Apple Sign-In
-        return _identity;
-      case AuthProviders.none:
-        return _identity;
-    }
+  Future<bool> hasSkippedLogin() async {
+    final prefs = Storage();
+    return prefs.getBool('userSkippedLogIn') ?? false;
   }
 
-  static Future<QuimifyIdentity?> handleSilentAuthentication(
-      AuthProviders service) async {
-    //TODO: At the moment, only works with GooglwSignIn
-    if (service != AuthProviders.google) return null;
+  // TODO: Implement error handling for login requests
+  static Future<QuimifyIdentity?> signInPOST(
+      GoogleSignInAccount googleUser) async {
+    var data = await getInfoGoogle(googleUser);
+    QuimifyIdentity identity = QuimifyIdentity(
+        googleUser: googleUser,
+        photoUrl: googleUser.photoUrl,
+        displayName: googleUser.displayName ?? 'Quimify',
+        email: googleUser.email,
+        gender: data['gender'],
+        birthday: data['birthday']);
+    //formato api.quimify.com/login?id=...&email=...&gender=...&birthday=...
+    print('Enviado /login');
+    //formato api.quimify.com/login?id=...&email=...&gender=...&birthday=...
+    return identity;
+  }
 
+  // TODO: Logic of hhtp request (make sure to handle errors)
+  //* Return true if login was successful, false otherwise
+  static Future<bool> logInPOST(GoogleSignInAccount? googleUser) async {
+    // If user is null, it means that the user is not logged in
+    if (googleUser == null) return false;
+
+    // _Important_: Do not use this returned Google ID to communicate the
+    /// currently signed in user to your backend server. Instead, send an ID token
+    /// which can be securely validated on the server.
+    var id = googleUser.authentication.then((value) => value.idToken);
+    //formato api.quimify.com/login?id=...&email=...&gender=...&birthday=...
+    print('Enviado /login' + id.toString());
+    return true;
+  }
+
+  static Future<QuimifyIdentity?> handleSilentAuthentication() async {
     final googleUser = await _googleSignIn.signInSilently();
     if (googleUser != null) {
-      return await postLogin(AuthProviders.google, googleUser, null);
+      bool state = await logInPOST(googleUser);
+      QuimifyIdentity identity = QuimifyIdentity(
+        googleUser: googleUser,
+        photoUrl: googleUser.photoUrl,
+        displayName: googleUser.displayName ?? 'Quimify',
+        email: googleUser.email,
+      );
+      return state ? identity : null;
     }
     return null;
   }
 }
 
-// Later implementation, just for logic now
-class AppleIdentity {}
-
 class QuimifyIdentity {
   final GoogleIdentity? googleUser;
-  final bool isPremium;
-  final String photoUrl;
-  final String displayName;
+  final String? photoUrl;
+  final String? displayName;
   final String? gender;
-  final String email;
+  final String? email;
   final String? birthday;
 
   QuimifyIdentity({
     this.googleUser,
-    required this.isPremium,
-    required this.photoUrl,
-    required this.displayName,
-    required this.email,
+    this.photoUrl,
+    this.displayName,
+    this.email,
     this.gender,
     this.birthday,
   });
 }
 
-enum AuthProviders { google, apple, none }
+enum AuthProviders { google, none }

@@ -17,4 +17,8 @@ class Storage {
   String? get(String key) => sharedPreferences.getString(key);
 
   save(String key, String value) => sharedPreferences.setString(key, value);
+
+  saveBool(String key, bool value) => sharedPreferences.setBool(key, value);
+
+  getBool(String key) => sharedPreferences.getBool(key);
 }
