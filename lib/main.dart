@@ -33,13 +33,12 @@ main() async {
     SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
   } catch (_) {} // It's already present in modern devices anyways
 
-  bool isAnonymouslySignedIn =
-      await UserAuthService().getisAnonymouslySignedIn();
+  bool skippedLogin = await UserAuthService().hasSkippedLogin();
 
-  QuimifyIdentity? user =
-      await UserAuthService.handleSilentAuthentication(AuthProviders.google);
+  QuimifyIdentity? user = await UserAuthService.handleSilentAuthentication();
 
-  bool hasToLogin = isAnonymouslySignedIn == false && user == null;
+  bool hasToLogin = skippedLogin == false && user == null;
+
   ClientResult? clientResult = await Api().getClient();
 
   Ads().initialize(clientResult);
