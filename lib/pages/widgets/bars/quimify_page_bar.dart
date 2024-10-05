@@ -7,8 +7,10 @@ class QuimifyPageBar extends StatelessWidget {
   const QuimifyPageBar({
     Key? key,
     required this.title,
+    this.onPressed,
   }) : super(key: key);
 
+  final VoidCallback? onPressed; // Add this optional parameter
   final String title;
 
   @override
@@ -27,7 +29,10 @@ class QuimifyPageBar extends StatelessWidget {
             QuimifyIconButton.square(
               height: 50,
               backgroundColor: QuimifyColors.secondaryTeal(context),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => {
+                onPressed?.call(),
+                Navigator.of(context).pop(),
+              },
               icon: Icon(
                 Icons.arrow_back,
                 color: QuimifyColors.inverseText(context),

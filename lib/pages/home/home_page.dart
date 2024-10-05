@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
-import 'package:quimify_client/internet/api/sign-in/sign_in_api.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
+import 'package:quimify_client/pages/home/widgets/quimify_avatar.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
@@ -13,23 +13,19 @@ import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dar
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
-import '../profile/profile_page.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
     required this.clientResult,
-    required this.user,
   }) : super(key: key);
 
   final ClientResult? clientResult;
-  final QuimifyIdentity? user;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with RouteAware {
   final List<Widget> _pages = const [
     InorganicPage(),
     OrganicPage(),
@@ -127,8 +123,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (bool didPop) async {
-        if (!didPop) {
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
           return;
         }
 
@@ -136,7 +132,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: QuimifyScaffold.noAd(
         header: SafeArea(
-          bottom: false, // So it's not inside status bar
+          bottom: false,
           child: Container(
             padding: const EdgeInsets.only(
               top: 15, // TODO 17.5?
@@ -171,35 +167,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 //const SizedBox(width: 120),
                 const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 38,
-                    alignment: Alignment.centerRight,
-                    icon: widget.user?.photoUrl != null
-                        ? CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(widget.user?.photoUrl ?? ''),
-                            radius: 19, // Adjust radius as needed
-                          )
-                        : Icon(
-                            Icons.account_circle,
-                            color: QuimifyColors.inverseText(context),
-                          ),
-                    onPressed: () {
-                      if (widget.user != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage(
-                                    user: widget.user,
-                                  )),
-                        );
-                      }
-                    },
-                  ),
-                )
+                UserAvatar()
               ],
             ),
           ),

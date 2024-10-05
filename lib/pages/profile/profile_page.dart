@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:quimify_client/internet/api/sign-in/sign_in_api.dart';
+import 'package:quimify_client/internet/api/sign-in/userAuthService.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
-import '../../internet/api/results/client_result.dart';
-import 'package:quimify_client/pages/home/home_page.dart';
-import '../sign-in/sign_in_page.dart';
-import '../widgets/bars/quimify_page_bar.dart';
-import '../widgets/dialogs/loading_indicator.dart';
-import '../widgets/quimify_colors.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final ClientResult? clientResult;
-  final QuimifyIdentity? user;
+  final Function(QuimifyIdentity?) onUserUpdated;
+  QuimifyIdentity? user;
 
-  const ProfilePage({
-    Key? key,
-    this.clientResult,
-    this.user,
-  }) : super(key: key);
+  ProfilePage(
+      {Key? key, this.clientResult, required this.onUserUpdated, this.user})
+      : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  void _updateUserProfile() {
+    updateUserProfile(UserAuthService.getUser());
+  }
+
+  updateUserProfile(QuimifyIdentity? newUser) {
+    print("UPDATING USER PROFILE");
+
+    // UPDATE THE PROFILE PAGE
+    updateUser(newUser);
+    // REBUILD THE PROFILE PAGE
+    widget.onUserUpdated(newUser);
+  }
 
   @override
   Widget build(BuildContext context) {
     var defaultLogo = const AssetImage('assets/images/logo.png');
-    if (user?.googleUser is GoogleIdentity && user != null) {
+    if (widget.user?.googleUser is GoogleIdentity && widget.user != null) {
       return PopScope(
         onPopInvokedWithResult: (didPop, dynamic) async {
           if (!didPop) {
@@ -33,7 +48,8 @@ class ProfilePage extends StatelessWidget {
           hideLoadingIndicator();
         },
         child: QuimifyScaffold.noAd(
-          header: const QuimifyPageBar(title: 'Perfil'),
+          header:
+              QuimifyPageBar(title: 'Perfil', onPressed: _updateUserProfile),
           body: Container(
             width: 900,
             padding: const EdgeInsets.all(20),
@@ -45,53 +61,39 @@ class ProfilePage extends StatelessWidget {
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: user?.photoUrl != null
-                      ? NetworkImage(user?.photoUrl ?? '')
+                  backgroundImage: widget.user?.photoUrl != null
+                      ? NetworkImage(widget.user?.photoUrl ?? '')
                       : defaultLogo,
                 ),
                 const SizedBox(height: 20),
-
                 Text(
-                  'Nombre: ${user?.displayName ?? 'No hay nombre disponible'}', // Use null-ish coalescing operator (??)
+                  'Nombre: ${widget.user?.displayName ?? 'No hay nombre disponible'}',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-
                 const SizedBox(height: 20),
-
                 Text(
-                  'Email: ${user?.email}', // Can never be null
+                  'Email: ${widget.user?.email}',
                   style: const TextStyle(fontSize: 16),
                 ),
-
                 const SizedBox(height: 20),
-
                 ElevatedButton(
                   onPressed: () {
-                    // Implement the "Gana dinero con Quimify" functionality here
+                    // TODO: Implement the "Gana dinero con Quimify" functionality here
                   },
                   child: const Text('Gana dinero con Quimify'),
                 ),
-
                 const SizedBox(height: 20),
-
                 ElevatedButton(
                   onPressed: () async {
                     await UserAuthService.signOut();
-                    // Navigate back to the sign-in screen after signing out
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfilePage()),
-                    );
+
+                    updateUserProfile(UserAuthService.getUser());
                   },
                   child: const Text('Cerrar Sesión'),
                 ),
-                //const SizedBox(height: 15),
-                //const SizedBox(height: 5), // + 15 from cards = 20
               ],
             ),
           ),
@@ -118,19 +120,12 @@ class ProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 50),
-
-                      // Google Sign-In button
                       ElevatedButton.icon(
                         onPressed: () async {
-                          final user = await UserAuthService.signInGoogleUser();
+                          final user =
+                              await UserAuthService().signInGoogleUser();
                           if (user == null) return;
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage(
-                              clientResult: clientResult,
-                              user: user,
-                            ),
-                          ));
+                          _updateUserProfile();
                         },
                         icon: Image.asset(
                           'assets/images/icons/google-logo.png',
@@ -146,7 +141,6 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       const SizedBox(height: 50),
                     ],
                   ),
@@ -157,5 +151,11 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void updateUser(QuimifyIdentity? newUser) {
+    setState(() {
+      widget.user = newUser;
+    });
   }
 }

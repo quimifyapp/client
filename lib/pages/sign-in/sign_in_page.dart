@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
 
-import '../../internet/api/results/client_result.dart';
-import '../../internet/api/sign-in/sign_in_api.dart';
-import '../widgets/quimify_colors.dart';
+import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/internet/api/sign-in/userAuthService.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class SignInPage extends StatelessWidget {
   final ClientResult? clientResult;
@@ -25,7 +25,6 @@ class SignInPage extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return Center(
-                // Added Center widget for vertical centering
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -44,11 +43,11 @@ class SignInPage extends StatelessWidget {
                     // Google Sign-In button
                     ElevatedButton.icon(
                       onPressed: () async {
-                        final user = await UserAuthService.signInGoogleUser();
+                        final user = await UserAuthService().signInGoogleUser();
                         if (user == null) return;
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                clientResult: clientResult, user: user)));
+                            builder: (context) =>
+                                HomePage(clientResult: clientResult)));
                       },
                       icon: Image.asset('assets/images/icons/google-logo.png',
                           height: 24),
@@ -69,10 +68,10 @@ class SignInPage extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () async {
                         final user =
-                            await UserAuthService.signInAnonymousUser();
+                            await UserAuthService().signInAnonymousUser();
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                clientResult: clientResult, user: user)));
+                            builder: (context) =>
+                                HomePage(clientResult: clientResult)));
                       },
                       icon: const Icon(Icons.person_off_outlined,
                           color: Colors.grey, size: 24),

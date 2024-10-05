@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
@@ -18,38 +17,22 @@ import 'package:quimify_client/pages/sign-in/sign_in_page.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
 
-import 'internet/api/sign-in/sign_in_api.dart';
+import 'internet/api/sign-in/userAuthService.dart';
 
 main() async {
   _showLoadingScreen();
 
+  await UserAuthService().initialize();
+  Ads().initialize(await Api().getClient());
   await Storage().initialize();
-  Api().initialize();
-
-  try {
-    // Sets ISRG Root X1 certificate, not present in Android < 25
-    var certificate = await rootBundle.load('assets/ssl/isrg-x1.crt');
-    var bytes = certificate.buffer.asUint8List();
-    SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
-  } catch (_) {} // It's already present in modern devices anyways
-
-  bool skippedLogin = await UserAuthService().hasSkippedLogin();
-
-  QuimifyIdentity? user = await UserAuthService.handleSilentAuthentication();
-
-  bool hasToLogin = skippedLogin == false && user == null;
 
   ClientResult? clientResult = await Api().getClient();
-
-  Ads().initialize(clientResult);
 
   runApp(
     DevicePreview(
       enabled: false, // !kReleaseMode,
       builder: (context) => QuimifyApp(
         clientResult: clientResult,
-        user: user,
-        hasToLogin: hasToLogin,
       ), // Wrap your app
     ),
   );
@@ -65,16 +48,13 @@ _showLoadingScreen() {
 _hideLoadingScreen() => FlutterNativeSplash.remove();
 
 class QuimifyApp extends StatelessWidget {
-  const QuimifyApp({
+  QuimifyApp({
     Key? key,
     this.clientResult,
-    required this.user,
-    required this.hasToLogin,
   }) : super(key: key);
 
   final ClientResult? clientResult;
-  final QuimifyIdentity? user;
-  final bool hasToLogin;
+  RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +63,10 @@ class QuimifyApp extends StatelessWidget {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: MaterialApp(
         title: 'Quimify',
-        home: hasToLogin != true
-            ? HomePage(clientResult: clientResult, user: user)
+        home: UserAuthService.loginRequiered() != true
+            ? HomePage(
+                clientResult: clientResult,
+              )
             : SignInPage(
                 clientResult: clientResult,
               ),
