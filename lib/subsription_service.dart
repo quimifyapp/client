@@ -38,9 +38,6 @@ class SubscriptionService {
     final entitlementInfo = customerInfo.entitlements.all['Premium'];
     final isSubscribed = entitlementInfo?.isActive ?? false;
 
-    // Add a small delay to ensure proper state update
-    await Future.delayed(const Duration(seconds: 1));
-
     _isSubscribed = isSubscribed;
     _entitlementInfo = entitlementInfo;
 
