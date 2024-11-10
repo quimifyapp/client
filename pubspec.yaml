@@ -1,7 +1,7 @@
 name: quimify_client
 description: The Quimify client
 
-version: 4.2.1+132 # Android build code
+version: 4.2.1+133 # Android build code
 
 dependencies:
   flutter:
@@ -26,6 +26,10 @@ dependencies:
   fast_rich_text: ^0.0.1
   webview_flutter: ^4.7.0
   device_info_plus: ^9.1.2
+  purchases_flutter: ^8.2.1
+  purchases_ui_flutter: ^8.2.1
+  get_it: ^8.0.2
+  
 
 dev_dependencies:
   flutter_test:

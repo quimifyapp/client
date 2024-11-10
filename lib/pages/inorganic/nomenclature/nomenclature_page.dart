@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/classification.dart';
@@ -15,6 +18,7 @@ import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog
 import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/subsription_service.dart';
 import 'package:quimify_client/text.dart';
 
 class NomenclaturePage extends StatefulWidget {
@@ -25,6 +29,16 @@ class NomenclaturePage extends StatefulWidget {
 }
 
 class _NomenclaturePageState extends State<NomenclaturePage> {
+  final _subscriptionService = getIt<SubscriptionService>();
+  bool _isSubscribed = false;
+  StreamSubscription? _subscription;
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -72,6 +86,16 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   @override
   initState() {
     super.initState();
+
+    _isSubscribed = _subscriptionService.isSubscribed;
+    _subscription =
+        _subscriptionService.subscriptionStream.listen((isSubscribed) {
+      if (mounted) {
+        setState(() {
+          _isSubscribed = isSubscribed;
+        });
+      }
+    });
 
     _labelText = _defaultLabelText;
 
@@ -222,7 +246,11 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     var result = await Api().searchInorganic(toDigits(formattedQuery));
 
     if (result != null && result.found) {
-      Ads().showInterstitial();
+      if (!_isSubscribed) {
+        Ads().showInterstitial(onDismissed: () {
+          RevenueCatUI.presentPaywallIfNeeded('Premium');
+        });
+      }
     }
 
     await _processResult(result, formattedQuery);
@@ -235,7 +263,11 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    Ads().showInterstitial(); // There will be a result most of the times
+    if (!_isSubscribed) {
+      Ads().showInterstitial(onDismissed: () {
+        RevenueCatUI.presentPaywallIfNeeded('Premium');
+      });
+    }
 
     showLoadingIndicator(context);
 

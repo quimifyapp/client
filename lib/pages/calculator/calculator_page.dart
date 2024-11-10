@@ -1,14 +1,47 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/calculator/widgets/equation_help_dialog.dart';
 import 'package:quimify_client/pages/calculator/widgets/molecular_mass_help_dialog.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
+import 'package:quimify_client/subsription_service.dart';
 import 'package:quimify_client/text.dart';
 
-class CalculatorPage extends StatelessWidget {
+class CalculatorPage extends StatefulWidget {
   const CalculatorPage({Key? key}) : super(key: key);
+
+  @override
+  State<CalculatorPage> createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
+  final _subscriptionService = getIt<SubscriptionService>();
+  bool _isSubscribed = false;
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _isSubscribed = _subscriptionService.isSubscribed;
+    _subscription =
+        _subscriptionService.subscriptionStream.listen((isSubscribed) {
+      if (mounted) {
+        setState(() {
+          _isSubscribed = isSubscribed;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +76,13 @@ class CalculatorPage extends StatelessWidget {
             toEquation('Fe + O₂', 'Fe₂O₃'): toEquation('4Fe + 3O₂', '2Fe₂O₃'),
           },
           page: const EquationPage(),
+          // If user is subscribed then it will allow navigating
+          allowNavigating: _isSubscribed,
+          onPressed: _isSubscribed
+              ? null
+              : () {
+                  RevenueCatUI.presentPaywallIfNeeded('Premium');
+                },
         ),
       ],
     );

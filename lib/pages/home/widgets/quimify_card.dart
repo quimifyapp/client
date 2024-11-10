@@ -9,6 +9,8 @@ class QuimifyCard extends StatefulWidget {
     super.key,
     required this.body,
     required this.page,
+    this.onPressed,
+    this.allowNavigating = true,
   })  : customBody = null,
         comingSoonBody = null;
 
@@ -16,12 +18,16 @@ class QuimifyCard extends StatefulWidget {
     super.key,
     required this.customBody,
     required this.page,
+    this.onPressed,
+    this.allowNavigating = true,
   })  : body = null,
         comingSoonBody = null;
 
   const QuimifyCard.comingSoon({
     super.key,
     required this.comingSoonBody,
+    this.onPressed,
+    this.allowNavigating = true,
   })  : body = null,
         customBody = null,
         page = null;
@@ -30,6 +36,8 @@ class QuimifyCard extends StatefulWidget {
   final Map<Widget, String>? customBody;
   final Widget? comingSoonBody;
   final Widget? page;
+  final VoidCallback? onPressed;
+  final bool allowNavigating;
 
   @override
   State<QuimifyCard> createState() => _QuimifyCardState();
@@ -73,6 +81,13 @@ class _QuimifyCardState extends State<QuimifyCard> {
   }
 
   _onPressed(BuildContext context) {
+    if (widget.onPressed != null) {
+      widget.onPressed!();
+      if (!widget.allowNavigating) {
+        return;
+      }
+    }
+
     if (widget.page != null) {
       Navigator.of(context).push(
         MaterialPageRoute(

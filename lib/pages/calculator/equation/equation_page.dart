@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/equation_result.dart';
@@ -20,6 +23,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
+import 'package:quimify_client/subsription_service.dart';
 import 'package:quimify_client/text.dart';
 
 class EquationPage extends StatefulWidget {
@@ -30,6 +34,30 @@ class EquationPage extends StatefulWidget {
 }
 
 class _EquationPageState extends State<EquationPage> {
+  final _subscriptionService = getIt<SubscriptionService>();
+  bool _isSubscribed = false;
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _isSubscribed = _subscriptionService.isSubscribed;
+    _subscription =
+        _subscriptionService.subscriptionStream.listen((isSubscribed) {
+      if (mounted) {
+        setState(() {
+          _isSubscribed = isSubscribed;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
   final TextEditingController _reactantsController = TextEditingController();
   final TextEditingController _productsController = TextEditingController();
   final FocusNode _reactantsFocusNode = FocusNode();
@@ -53,7 +81,13 @@ class _EquationPageState extends State<EquationPage> {
 
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitial();
+        if (!_isSubscribed) {
+          Ads().showInterstitial(
+            onDismissed: () {
+              RevenueCatUI.presentPaywallIfNeeded('Premium');
+            },
+          );
+        }
 
         setState(() => _result = result);
 
