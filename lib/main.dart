@@ -71,28 +71,6 @@ class QuimifyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // useEffect(() {
-    //   // This will listen to any changes for this user
-    //   Purchases.addCustomerInfoUpdateListener((customerInfo) async {
-    //     EntitlementInfo? entitlementInfo =
-    //         customerInfo.entitlements.all['Premium'];
-
-    //     final isSubscribed = entitlementInfo?.isActive ?? false;
-    //     log("User is subscribed: $isSubscribed");
-
-    //     await Future.delayed(const Duration(seconds: 1));
-
-    //     // If user is subscribed then we save it into the state provider
-    //     // This gives us the ability to use it in other widgets
-    //     ref.read(userIsSubscribedProvider.notifier).state = isSubscribed;
-
-    //     if (isSubscribed) {
-    //       ref.read(userEntitlementProvider.notifier).state = entitlementInfo;
-    //     }
-    //   });
-    //   return null;
-    // }, []);
-
     // To get rid of status bar's tint:
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
