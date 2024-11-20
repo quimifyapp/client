@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
-import 'package:quimify_client/subsription_service.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class QuimifyScaffold extends StatefulWidget {
@@ -33,24 +30,6 @@ class QuimifyScaffold extends StatefulWidget {
 }
 
 class _QuimifyScaffoldState extends State<QuimifyScaffold> {
-  final _subscriptionService = getIt<SubscriptionService>();
-  bool _isSubscribed = false;
-  StreamSubscription? _subscription;
-
-  @override
-  void initState() {
-    super.initState();
-    _isSubscribed = _subscriptionService.isSubscribed;
-    _subscription =
-        _subscriptionService.subscriptionStream.listen((isSubscribed) {
-      if (mounted) {
-        setState(() {
-          _isSubscribed = isSubscribed;
-        });
-      }
-    });
-  }
-
   static const double _bodyRoundedCornersRadius = 25;
   static const double _bannerAdMaxHeight = 60; // TODO responsive, 50 smaller
 
@@ -61,7 +40,6 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
   dispose() {
     super.dispose();
     _bannerAd?.dispose();
-    _subscription?.cancel();
   }
 
   @override
@@ -104,7 +82,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
               child: widget.body,
             ),
           ),
-          if (_bannerAd != null && !_isSubscribed)
+          if (_bannerAd != null)
             Padding(
               padding: const EdgeInsets.only(
                 top: _bodyRoundedCornersRadius, // To counter overlap

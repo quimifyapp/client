@@ -124,24 +124,13 @@ class Ads {
     bannerAd.load();
   }
 
-  showInterstitial({Function? onDismissed}) {
+  showInterstitial() {
     if (!_showInterstitial) {
       return;
     }
 
     if (_nextInterstitial != null) {
       if (_interstitialFreeAttempts >= _interstitialPeriod) {
-        // Update the callback before showing the ad
-        _nextInterstitial!.fullScreenContentCallback =
-            FullScreenContentCallback(
-          onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
-          onAdDismissedFullScreenContent: (ad) {
-            // Execute the provided callback if it exists
-            onDismissed?.call();
-            ad.dispose();
-          },
-        );
-
         _nextInterstitial!.show();
         _nextInterstitial = null;
 

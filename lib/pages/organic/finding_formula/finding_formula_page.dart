@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/classification.dart';
@@ -20,7 +17,6 @@ import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
-import 'package:quimify_client/subsription_service.dart';
 import 'package:quimify_client/text.dart';
 
 class FindingFormulaPage extends StatefulWidget {
@@ -31,28 +27,6 @@ class FindingFormulaPage extends StatefulWidget {
 }
 
 class _FindingFormulaPageState extends State<FindingFormulaPage> {
-  final _subscriptionService = getIt<SubscriptionService>();
-  bool _isSubscribed = false;
-  StreamSubscription? _subscription;
-
-  @override
-  void initState() {
-    super.initState();
-    _isSubscribed = _subscriptionService.isSubscribed;
-    _subscription =
-        _subscriptionService.subscriptionStream.listen((isSubscribed) {
-      setState(() {
-        _isSubscribed = isSubscribed;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _subscription?.cancel();
-    super.dispose();
-  }
-
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
@@ -158,11 +132,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     }
 
     if (result.classification == null) {
-      if (!_isSubscribed) {
-        Ads().showInterstitial(onDismissed: () {
-          RevenueCatUI.presentPaywallIfNeeded('Premium');
-        });
-      }
+      Ads().showInterstitial();
       _displayResult(result, formattedQuery);
     } else {
       _processClassification(
@@ -183,11 +153,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     var result = await Api().getOrganicFromName(toDigits(formattedQuery));
 
     if (result != null && result.found) {
-      if (!_isSubscribed) {
-        Ads().showInterstitial(onDismissed: () {
-          RevenueCatUI.presentPaywallIfNeeded('Premium');
-        });
-      }
+      Ads().showInterstitial();
     }
 
     await _processResult(result, formattedQuery);
