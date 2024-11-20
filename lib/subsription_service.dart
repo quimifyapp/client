@@ -44,8 +44,4 @@ class SubscriptionService {
     // Notify listeners
     _subscriptionController.add(isSubscribed);
   }
-
-  void dispose() {
-    _subscriptionController.close();
-  }
 }
