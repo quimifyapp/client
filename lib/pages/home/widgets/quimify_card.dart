@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
@@ -9,6 +10,7 @@ class QuimifyCard extends StatefulWidget {
     super.key,
     required this.body,
     required this.page,
+    this.paidFeature = false,
   })  : customBody = null,
         comingSoonBody = null;
 
@@ -16,6 +18,7 @@ class QuimifyCard extends StatefulWidget {
     super.key,
     required this.customBody,
     required this.page,
+    this.paidFeature = false,
   })  : body = null,
         comingSoonBody = null;
 
@@ -24,12 +27,14 @@ class QuimifyCard extends StatefulWidget {
     required this.comingSoonBody,
   })  : body = null,
         customBody = null,
-        page = null;
+        page = null,
+        paidFeature = false;
 
   final Map<String, String>? body;
   final Map<Widget, String>? customBody;
   final Widget? comingSoonBody;
   final Widget? page;
+  final bool paidFeature;
 
   @override
   State<QuimifyCard> createState() => _QuimifyCardState();
@@ -73,15 +78,21 @@ class _QuimifyCardState extends State<QuimifyCard> {
   }
 
   _onPressed(BuildContext context) {
-    if (widget.page != null) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => widget.page!,
-        ),
-      );
-    } else {
+    if (widget.page == null) {
       comingSoonDialog.show(context);
+      return;
     }
+
+    if (widget.paidFeature && !Payments().isSubscribed) {
+      Payments().showPaywall();
+      return;
+    }
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => widget.page!,
+      ),
+    );
   }
 
   @override
