@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/env/env.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 
 class Ads {
   static final Ads _singleton = Ads._internal();
@@ -55,7 +56,7 @@ class Ads {
       _showGdrpForm();
     }
 
-    if (_showInterstitial && _interstitialOffset == 0) {
+    if (_showInterstitial) {
       _loadInterstitial();
     }
   }
@@ -90,8 +91,14 @@ class Ads {
             _nextInterstitial = ad;
 
             ad.fullScreenContentCallback = FullScreenContentCallback(
-              onAdFailedToShowFullScreenContent: (ad, err) => ad.dispose(),
-              onAdDismissedFullScreenContent: (ad) => ad.dispose(),
+              onAdFailedToShowFullScreenContent: (ad, err) {
+                Payments().showPaywall();
+                ad.dispose();
+              },
+              onAdDismissedFullScreenContent: (ad) {
+                Payments().showPaywall();
+                ad.dispose();
+              },
             );
           },
           onAdFailedToLoad: (error) => developer.log(error.message),
@@ -102,6 +109,10 @@ class Ads {
 
   loadBanner(Size size, void Function(Ad) onLoaded) {
     if (!_showBanner) {
+      return;
+    }
+
+    if (Payments().isSubscribed) {
       return;
     }
 
@@ -129,9 +140,14 @@ class Ads {
       return;
     }
 
+    if (Payments().isSubscribed) {
+      return;
+    }
+
     if (_nextInterstitial != null) {
       if (_interstitialFreeAttempts >= _interstitialPeriod) {
         _nextInterstitial!.show();
+
         _nextInterstitial = null;
 
         _loadInterstitial();

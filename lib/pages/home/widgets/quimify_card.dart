@@ -84,7 +84,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
     }
 
     if (widget.paidFeature && !Payments().isSubscribed) {
-      Payments().showPayWall();
+      Payments().showPaywall();
       return;
     }
 
