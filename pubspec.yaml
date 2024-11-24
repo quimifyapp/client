@@ -28,8 +28,7 @@ dependencies:
   device_info_plus: ^9.1.2
   purchases_flutter: ^8.2.1
   purchases_ui_flutter: ^8.2.1
-  get_it: ^8.0.2
-  
+
 
 dev_dependencies:
   flutter_test:

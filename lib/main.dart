@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/calculator/equation/equation_page.dart';
 import 'package:quimify_client/pages/calculator/molecular_mass/molecular_mass_page.dart';
 import 'package:quimify_client/pages/home/home_page.dart';
@@ -17,12 +17,9 @@ import 'package:quimify_client/pages/organic/finding_formula/finding_formula_pag
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/storage/storage.dart';
-import 'package:quimify_client/subsription_service.dart';
 
 main() async {
   _showLoadingScreen();
-
-  await _initializeDependencies();
 
   await Storage().initialize();
   Api().initialize();
@@ -38,16 +35,14 @@ main() async {
 
   Ads().initialize(clientResult);
 
-  await configurePurchaseSDK();
-
-  await getIt<SubscriptionService>().initialize();
+  await Payments().initialize();
 
   runApp(
     DevicePreview(
       enabled: false, // !kReleaseMode,
       builder: (context) => QuimifyApp(
         clientResult: clientResult,
-      ), // Wrap your app
+      ),
     ),
   );
 
@@ -116,23 +111,4 @@ class QuimifyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-Future<void> configurePurchaseSDK() async {
-  await Purchases.setLogLevel(LogLevel.debug);
-
-  PurchasesConfiguration? configuration;
-
-  if (Platform.isAndroid) {
-    configuration = PurchasesConfiguration('goog_SgCLLuxoLOuSMTDVBqzacRsJFaD');
-  } else {
-    configuration = PurchasesConfiguration('appl_TVkhSRZrgVENdilvDxxbEzzGxXI');
-  }
-
-  await Purchases.configure(configuration);
-}
-
-Future<void> _initializeDependencies() async {
-  // Register SubscriptionService as a singleton
-  getIt.registerLazySingleton<SubscriptionService>(() => SubscriptionService());
 }
