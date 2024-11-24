@@ -37,7 +37,10 @@ class Payments {
 
   // Public:
 
-  showPaywall() => RevenueCatUI.presentPaywallIfNeeded('Premium');
+  showPaywall() => RevenueCatUI.presentPaywallIfNeeded(
+        'Premium',
+        displayCloseButton: true,
+      );
 
   bool get isSubscribed => _subscribed;
 }
