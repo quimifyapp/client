@@ -32,8 +32,6 @@ class Ads {
   initialize(ClientResult? clientResult) {
     MobileAds.instance.initialize();
 
-    MobileAds.instance.setAppMuted(true);
-
     if (clientResult != null) {
       _showBanner = clientResult.bannerAdPresent;
 
