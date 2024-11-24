@@ -20,22 +20,13 @@ import 'package:quimify_client/storage/storage.dart';
 
 main() async {
   _showLoadingScreen();
+  await _loadApp();
+  _hideLoadingScreen();
+}
 
-  await Storage().initialize();
-  Api().initialize();
-
-  try {
-    // Sets ISRG Root X1 certificate, not present in Android < 25
-    var certificate = await rootBundle.load('assets/ssl/isrg-x1.crt');
-    var bytes = certificate.buffer.asUint8List();
-    SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
-  } catch (_) {} // It's already present in modern devices anyways
-
-  ClientResult? clientResult = await Api().getClient();
-
-  Ads().initialize(clientResult);
-
-  await Payments().initialize();
+_loadApp() async {
+  await _loadRootCertificateNotPresentInOlderDevices();
+  ClientResult? clientResult = await _initializeDependencies();
 
   runApp(
     DevicePreview(
@@ -45,8 +36,6 @@ main() async {
       ),
     ),
   );
-
-  _hideLoadingScreen();
 }
 
 _showLoadingScreen() {
@@ -55,6 +44,32 @@ _showLoadingScreen() {
 }
 
 _hideLoadingScreen() => FlutterNativeSplash.remove();
+
+_loadRootCertificateNotPresentInOlderDevices() async {
+  try {
+    var certificate = await rootBundle.load('assets/ssl/isrg-x1.crt');
+    var bytes = certificate.buffer.asUint8List();
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(bytes);
+  } catch (_) {}
+}
+
+Future<ClientResult?> _initializeDependencies() async {
+  Api().initialize();
+
+  List<Future> futures = [
+    Api().getClient(),
+    Storage().initialize(),
+    Payments().initialize(),
+  ];
+
+  await futures.wait;
+
+  ClientResult? clientResult = await futures[0];
+
+  Ads().initialize(clientResult);
+
+  return clientResult;
+}
 
 class QuimifyApp extends StatelessWidget {
   const QuimifyApp({
@@ -76,8 +91,7 @@ class QuimifyApp extends StatelessWidget {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) =>
-              const MolecularMassPage(),
+          Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
           Routes.calculatorEquation: (context) => const EquationPage(),
         },
         // To get rid of debug banner:
