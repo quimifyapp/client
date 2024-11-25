@@ -16,7 +16,7 @@ class OrganicPage extends StatelessWidget {
     return Column(
       children: [
         const QuimifySectionTitle(
-          title: 'Formular',
+          title: 'De nombre a fórmula',
           helpDialog: FindingFormulaHelpDialog(),
         ),
         const SizedBox(height: 15),
@@ -31,7 +31,7 @@ class OrganicPage extends StatelessWidget {
           page: const FindingFormulaPage(),
         ),
         const QuimifySectionTitle(
-          title: 'Nombrar',
+          title: 'De fórmula a nombre',
           helpDialog: NamingHelpDialog(),
         ),
         const SizedBox(height: 15),

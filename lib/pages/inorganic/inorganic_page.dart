@@ -14,7 +14,7 @@ class InorganicPage extends StatelessWidget {
     return Column(
       children: [
         const QuimifySectionTitle(
-          title: 'Formular y nombrar',
+          title: 'Fórmulas y nombres',
           helpDialog: InorganicHelpDialog(),
         ),
         const SizedBox(height: 15),

@@ -15,7 +15,7 @@ class CalculatorPage extends StatelessWidget {
     return Column(
       children: [
         const QuimifySectionTitle(
-          title: 'Masa molecular',
+          title: 'Masas moleculares',
           helpDialog: MolecularMassHelpDialog(),
         ),
         const SizedBox(height: 15),
@@ -31,7 +31,7 @@ class CalculatorPage extends StatelessWidget {
           page: MolecularMassPage(),
         ),
         const QuimifySectionTitle(
-          title: 'Balancear reacción',
+          title: 'Balancear reacciones',
           helpDialog: EquationHelpDialog(),
         ),
         const SizedBox(height: 15),

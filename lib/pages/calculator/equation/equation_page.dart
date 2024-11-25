@@ -224,7 +224,7 @@ class _EquationPageState extends State<EquationPage> {
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           bannerAdName: runtimeType.toString(),
-          header: const QuimifyPageBar(title: 'Balancear reacción'),
+          header: const QuimifyPageBar(title: 'Balancear reacciones'),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),

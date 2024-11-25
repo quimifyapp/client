@@ -10,7 +10,7 @@ class EquationInputHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Balancear reacción': [
+        'Balancear reacciones': [
           Center(
             child: RichText(
               textAlign: TextAlign.center,
