@@ -20,14 +20,13 @@ class Payments {
   // Initialize:
 
   initialize() async {
-    await Purchases.configure(PurchasesConfiguration(_publicApiKey()));
+    await Purchases.configure(PurchasesConfiguration(_getPublicApiKey()));
     Purchases.addCustomerInfoUpdateListener(_update);
-    Purchases.getCustomerInfo().then(_update);
   }
 
   // Private:
 
-  String _publicApiKey() =>
+  String _getPublicApiKey() =>
       Platform.isAndroid ? _publicApiKeyAndroid : _publicApiKeyIos;
 
   _update(CustomerInfo customerInfo) {
