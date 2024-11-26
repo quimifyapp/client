@@ -41,7 +41,7 @@ class _EquationPageState extends State<EquationPage> {
   EquationResult _result = EquationResult(
     true,
     'C₆H₁₂O₆ + 6O₂',
-    '6(CO₂) + 6(H₂O)',
+    '6CO₂ + 6H₂O',
     null,
   );
 
@@ -130,8 +130,8 @@ class _EquationPageState extends State<EquationPage> {
 
   // Interface:
 
-  void _pressedButton() {
-    _eraseInitialAndFinalBlanks();
+  _pressedButton() {
+    _correctInput();
 
     // Check if both fields are empty, even with blanks
     bool reactantsEmpty = isEmptyWithBlanks(_reactantsController.text);
@@ -144,33 +144,18 @@ class _EquationPageState extends State<EquationPage> {
     }
   }
 
-  _submittedText() {
-    // Keyboard will be hidden afterwards
-    _eraseInitialAndFinalBlanks();
+  _tappedOutsideText() {
+    _reactantsFocusNode.unfocus();
+    _productsFocusNode.unfocus();
+
+    _correctInput();
 
     if (isEmptyWithBlanks(_reactantsController.text)) {
       _reactantsController.clear();
-    } else if (isEmptyWithBlanks(_productsController.text)) {
-      _productsController.clear();
-    } else {
-      _calculate(_reactantsController.text, _productsController.text);
-    }
-  }
-
-  _tappedOutsideText() {
-    _reactantsFocusNode.unfocus(); // Hides keyboard
-    _productsFocusNode.unfocus(); // Hides keyboard
-
-    if (isEmptyWithBlanks(_reactantsController.text)) {
-      _reactantsController.clear(); // Clears input
-    } else {
-      _eraseInitialAndFinalBlanks();
     }
 
     if (isEmptyWithBlanks(_productsController.text)) {
-      _productsController.clear(); // Clears input
-    } else {
-      _eraseInitialAndFinalBlanks();
+      _productsController.clear();
     }
   }
 
@@ -198,12 +183,9 @@ class _EquationPageState extends State<EquationPage> {
     }
   }
 
-  void _eraseInitialAndFinalBlanks() {
-    _reactantsController.text =
-        noInitialAndFinalBlanks(_reactantsController.text);
-
-    _productsController.text =
-        noInitialAndFinalBlanks(_productsController.text);
+  _correctInput() {
+    _reactantsController.text = formatEquationInput(_reactantsController.text);
+    _productsController.text = formatEquationInput(_productsController.text);
   }
 
   _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
@@ -301,12 +283,12 @@ class _EquationPageState extends State<EquationPage> {
                           focusNode: _reactantsFocusNode,
                           controller: _reactantsController,
                           onChanged: (String input) {
-                            _reactantsController.value = _reactantsController
-                                .value
-                                .copyWith(text: formatEquationInput(input));
+                            _reactantsController.value =
+                                _reactantsController.value.copyWith(
+                                    text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) => _submittedText(),
+                          onSubmitted: (_) => _pressedButton(),
                           onTap: _scrollToStart,
                         ),
                         const SizedBox(height: 10),
@@ -361,12 +343,12 @@ class _EquationPageState extends State<EquationPage> {
                           focusNode: _productsFocusNode,
                           controller: _productsController,
                           onChanged: (String input) {
-                            _productsController.value = _productsController
-                                .value
-                                .copyWith(text: formatEquationInput(input));
+                            _productsController.value =
+                                _productsController.value.copyWith(
+                                    text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) => _submittedText(),
+                          onSubmitted: (_) => _pressedButton(),
                           onTap: _scrollToStart,
                         ),
                       ],

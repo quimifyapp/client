@@ -71,6 +71,15 @@ String toSubscriptsIfNotCoefficient(String input) {
 bool isDigit(String char) =>
     digitToSubscript.containsKey(char) || digitToSubscript.containsValue(char);
 
+String toSpacedPlusSign(String input) =>
+    input.replaceAll(RegExp(r'(\s*\+\s*)+'), ' + ');
+
+String noInitialAndFinalPlusSign(String input) =>
+    input.replaceAll(RegExp(r'^\s*\+\s*|\s*\+\s*$'), '');
+
+String noBlanksBetweenDigits(String input) =>
+    input.replaceAll(RegExp(r'(?<=\d)\s+(?=\d)'), '');
+
 String toCapsAfterDigitOrParentheses(String input) {
   if (input.isEmpty) return input;
 
@@ -194,10 +203,14 @@ String formatStructure(String structure) =>
     toSpacedBonds(toCapsAfterNotAnUppercaseLetter(
         toSubscripts(toCapsAfterDigitOrParentheses((capFirst(structure))))));
 
-String formatEquationInput(String equation) =>
+String formatEquationOngoingInput(String equation) =>
     capFirst(toCapsAfterSpaceOrPlusSign(toCapsAfterNotAnUppercaseLetter(
         toCapsAfterDigitOrParentheses(
             toSubscriptsIfNotCoefficient(equation)))));
+
+String formatEquationInput(String input) =>
+    noInitialAndFinalBlanks(toSubscriptsIfNotCoefficient(noBlanksBetweenDigits(
+        toDigits(noInitialAndFinalPlusSign(toSpacedPlusSign(input))))));
 
 String formatEquation(String equation) =>
     toSubscriptsIfNotCoefficient(equation);

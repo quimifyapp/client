@@ -37,7 +37,6 @@ class CalculatorPage extends StatelessWidget {
         const SizedBox(height: 15),
         QuimifyCard(
           paidFeature: true,
-          // TODO check for overflow
           body: {
             toEquation('H₂ + O₂', 'H₂O'): toEquation('2H₂ + O₂', '2H₂O'),
             toEquation('NH₃', 'N₂ + H₂'): toEquation('2NH₃', 'N₂ + 3H₂'),
