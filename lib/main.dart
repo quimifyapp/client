@@ -62,9 +62,9 @@ Future<ClientResult?> _initializeDependencies() async {
     Payments().initialize(),
   ];
 
-  await futures.wait;
+  final results = await Future.wait(futures);
 
-  ClientResult? clientResult = await futures[0];
+  final ClientResult? clientResult = results[0] as ClientResult?;
 
   Ads().initialize(clientResult);
 
@@ -91,7 +91,8 @@ class QuimifyApp extends StatelessWidget {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
           Routes.organicNaming: (context) => const NamingPage(),
           Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) => const MolecularMassPage(),
+          Routes.calculatorMolecularMass: (context) =>
+              const MolecularMassPage(),
           Routes.calculatorEquation: (context) => const EquationPage(),
         },
         // To get rid of debug banner:
