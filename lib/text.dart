@@ -216,4 +216,4 @@ String formatEquation(String equation) =>
     toSubscriptsIfNotCoefficient(equation);
 
 String toEquation(String reactants, String products) =>
-    '$products ⟶ $reactants';
+    '$reactants ⟶ $products';
