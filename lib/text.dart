@@ -1,14 +1,14 @@
 import 'package:collection/collection.dart';
 
 RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
-    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
-    r'\u207A\u207B]'); // Superscript + and -
+r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
+r'\u207A\u207B]'); // Superscript + and -
 
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
-    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
+r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
 RegExp equationInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
-    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
+r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
 
 const Map<String, String> digitToSubscript = {
   '0': '\u2080',
@@ -55,12 +55,12 @@ String toSubscriptsIfNotCoefficient(String input) {
         }
       } else {
         result +=
-            digitToSubscript[char]!; // Convert to subscript if not coefficient
+        digitToSubscript[char]!; // Convert to subscript if not coefficient
       }
     } else {
       inNumber = false; // No longer in a number, reset flag
       isCoefficient =
-          false; // Any non-space non-digit marks end of a coefficient
+      false; // Any non-space non-digit marks end of a coefficient
       result += char;
     }
   }
@@ -72,7 +72,7 @@ bool isDigit(String char) =>
     digitToSubscript.containsKey(char) || digitToSubscript.containsValue(char);
 
 String toSpacedPlusSign(String input) =>
-    input.replaceAll(RegExp(r'(\s*\+\s*)+'), ' + ');
+    input.replaceAll(RegExp(r'(\+)+'), ' + ');
 
 String noInitialAndFinalPlusSign(String input) =>
     input.replaceAll(RegExp(r'^\s*\+\s*|\s*\+\s*$'), '');
@@ -208,9 +208,9 @@ String formatEquationOngoingInput(String equation) =>
         toCapsAfterDigitOrParentheses(
             toSubscriptsIfNotCoefficient(equation)))));
 
-String formatEquationInput(String input) =>
-    noInitialAndFinalBlanks(toSubscriptsIfNotCoefficient(noBlanksBetweenDigits(
-        toDigits(noInitialAndFinalPlusSign(toSpacedPlusSign(input))))));
+String formatEquationInput(String input) => noInitialAndFinalBlanks(
+    toSubscriptsIfNotCoefficient(toDigits(
+        noInitialAndFinalPlusSign(toSpacedPlusSign(noBlanks(input))))));
 
 String formatEquation(String equation) =>
     toSubscriptsIfNotCoefficient(equation);
