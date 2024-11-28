@@ -159,6 +159,11 @@ class _EquationPageState extends State<EquationPage> {
     }
   }
 
+  _tappedInsideText() {
+    _correctInput();
+    _startTyping();
+  }
+
   _scrollToStart() {
     // Goes to the top of the page after a delay:
     Future.delayed(
@@ -213,7 +218,7 @@ class _EquationPageState extends State<EquationPage> {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: _startTyping,
+                  onTap: _tappedInsideText,
                   child: Container(
                     decoration: BoxDecoration(
                       color: QuimifyColors.foreground(context),

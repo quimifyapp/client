@@ -1,14 +1,14 @@
 import 'package:collection/collection.dart';
 
 RegExp inputFormatter = RegExp(r'[A-Za-zÁ-ú\d \(\),\-+'
-r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
-r'\u207A\u207B]'); // Superscript + and -
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'
+    r'\u207A\u207B]'); // Superscript + and -
 
 RegExp formulaInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
-r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089]');
 
 RegExp equationInputFormatter = RegExp(r'[A-IK-PR-Za-ik-pr-z\d\(\)'
-r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
+    r'\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089\s\+]');
 
 const Map<String, String> digitToSubscript = {
   '0': '\u2080',
@@ -54,13 +54,11 @@ String toSubscriptsIfNotCoefficient(String input) {
           result += char; // Continue appending digits of a coefficient
         }
       } else {
-        result +=
-        digitToSubscript[char]!; // Convert to subscript if not coefficient
+        result += digitToSubscript[char]!; // Convert to subscript if not coefficient
       }
     } else {
       inNumber = false; // No longer in a number, reset flag
-      isCoefficient =
-      false; // Any non-space non-digit marks end of a coefficient
+      isCoefficient = false; // Any non-space non-digit marks end of a coefficient
       result += char;
     }
   }
@@ -205,11 +203,10 @@ String formatStructure(String structure) =>
 
 String formatEquationOngoingInput(String equation) =>
     capFirst(toCapsAfterSpaceOrPlusSign(toCapsAfterNotAnUppercaseLetter(
-        toCapsAfterDigitOrParentheses(
-            toSubscriptsIfNotCoefficient(equation)))));
+        toCapsAfterDigitOrParentheses(toSubscripts(equation)))));
 
-String formatEquationInput(String input) => noInitialAndFinalBlanks(
-    toSubscriptsIfNotCoefficient(toDigits(
+String formatEquationInput(String input) =>
+    noInitialAndFinalBlanks(toSubscripts(toDigits(
         noInitialAndFinalPlusSign(toSpacedPlusSign(noBlanks(input))))));
 
 String formatEquation(String equation) =>
