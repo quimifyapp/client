@@ -36,12 +36,12 @@ class _EquationPageState extends State<EquationPage> {
   final FocusNode _productsFocusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
 
-  String _reactantsLabelText = 'C₆H₁₂O₆ + O₂';
+  String _reactantsLabelText = 'CH₄ + O₂';
   String _productsLabelText = 'CO₂ + H₂O';
   EquationResult _result = EquationResult(
     true,
-    'C₆H₁₂O₆ + 6O₂',
-    '6CO₂ + 6H₂O',
+    'CH₄ + 2O₂',
+    'CO₂ + 2H₂O',
     null,
   );
 
