@@ -28,6 +28,12 @@ dependencies:
   device_info_plus: ^9.1.2
   purchases_flutter: 8.2.1
   purchases_ui_flutter: 8.2.1
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.8
+  google_sign_in: ^6.2.1
+  cloud_firestore: ^4.15.8
+  sign_in_with_apple: ^5.0.0
+  crypto: ^3.0.3
 
 
 dev_dependencies:
@@ -45,6 +51,8 @@ flutter:
   assets:
     - assets/ssl/isrg-x1.crt
 
+    - assets/images/
+    - assets/images/icons/
     - assets/images/dietanoic-acid.png
     - assets/images/discord.png
     - assets/images/gmail.png

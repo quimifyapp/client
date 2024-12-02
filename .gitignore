@@ -52,3 +52,6 @@ app.*.map.json
 .fvm/
 keystore/
 .vscode/
+
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
