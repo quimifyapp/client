@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
+import 'package:quimify_client/pages/widgets/objects/user_profile_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
@@ -164,6 +165,9 @@ class _HomePageState extends State<HomePage> {
                   height: 17,
                   color: QuimifyColors.inverseText(context),
                 ),
+                const Spacer(),
+                UserProfileButton(widget: widget),
+                const SizedBox(width: 16)
               ],
             ),
           ),
