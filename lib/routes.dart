@@ -6,6 +6,7 @@ class Routes {
   static const String organicFindingFormula = 'organic/finding-formula';
   static const String calculatorMolecularMass = 'calculator/molecular-mass';
   static const String calculatorEquation = 'calculator/equation';
+  static const String signIn = 'sign-in';
 
   static final Map<Classification, String> fromClassification = {
     Classification.inorganicFormula: inorganicNomenclature,
