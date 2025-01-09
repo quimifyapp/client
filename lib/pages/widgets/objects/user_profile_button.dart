@@ -15,7 +15,6 @@ class UserProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? photoUrl = AuthService().photoUrl;
 
     return InkWell(
       onTap: () {
@@ -38,21 +37,11 @@ class UserProfileButton extends StatelessWidget {
           ),
         );
       },
-      child: photoUrl != null
-          ? CircleAvatar(
-              backgroundImage: NetworkImage(photoUrl),
-              radius: 24,
-            )
-          : CircleAvatar(
-              radius: 24,
-              backgroundColor: QuimifyColors.secondaryTeal(context),
-              child: AuthService().isSignedIn
-                  ? Text(AuthService().firstName![0])
-                  : Icon(
-                      Icons.person,
-                      color: QuimifyColors.inverseText(context),
-                    ),
-            ),
+      child: Icon(
+        Icons.account_circle_sharp,
+        color: QuimifyColors.inverseText(context),
+        size: 40.0,
+      ),
     );
   }
 }

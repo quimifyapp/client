@@ -16,7 +16,7 @@ class AccountsPage extends StatelessWidget {
     final payments = Payments();
 
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Cuentas'),
+      header: const QuimifyPageBar(title: 'Cuenta'),
       body: Column(
         children: [
           Container(
@@ -104,16 +104,19 @@ class AccountsPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: () => payments.showPaywall(),
-                    icon: const Icon(Icons.star, color: Colors.white),
+                    icon: Icon(
+                      Icons.star,
+                      color: Colors.white,
+                    ),
                     label: payments.isSubscribed
                         ? const Text('Suscrito')
                         : const Text('Suscripción Premium'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: QuimifyColors.primary(context),
+                      backgroundColor: QuimifyColors.teal(),
                       foregroundColor: QuimifyColors.foreground(context),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
                   ),
@@ -139,11 +142,11 @@ class AccountsPage extends StatelessWidget {
                     icon: const Icon(Icons.logout, color: Colors.white),
                     label: const Text('Cerrar Sesión'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.orangeAccent,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
                   ),
@@ -161,11 +164,11 @@ class AccountsPage extends StatelessWidget {
                     icon: const Icon(Icons.delete_forever, color: Colors.white),
                     label: const Text('Eliminar Cuenta'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.redAccent,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
                   ),
