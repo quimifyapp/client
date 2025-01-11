@@ -39,7 +39,7 @@ class AccountsPage extends StatelessWidget {
                             : null,
                         child: authService.photoUrl == null
                             ? Text(
-                                authService.firstName![0],
+                                authService.firstName?[0] ?? 'N/A',
                                 style: TextStyle(
                                   fontSize: 50,
                                   color: QuimifyColors.inverseText(context),

@@ -6,6 +6,7 @@ import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
+import 'package:quimify_client/pages/inorganic/periodic_table/periodic_table_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
@@ -131,6 +132,26 @@ class _HomePageState extends State<HomePage> {
         _returnButtonPressed();
       },
       child: QuimifyScaffold.noAd(
+        fab: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  // Navigate to Periodic Table
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const PeriodicTablePage(),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.table_chart_sharp),
+              ),
+            ],
+          ),
+        ),
         header: SafeArea(
           bottom: false, // So it's not inside status bar
           child: Container(
