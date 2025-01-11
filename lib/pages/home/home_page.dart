@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: const Icon(Icons.table_chart_sharp),
+                child: const Icon(Icons.science_rounded),
               ),
             ],
           ),
