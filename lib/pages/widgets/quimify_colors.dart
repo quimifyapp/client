@@ -125,4 +125,44 @@ class QuimifyColors {
         light: const Color.fromARGB(255, 56, 133, 224),
         dark: const Color.fromARGB(255, 56, 133, 224),
       );
+
+  static Color reactiveNonMetal() => const Color(0xff6C2CC2);
+
+  static Color reactiveNonMetalLight() => const Color(0xffDFCDF6);
+
+  static Color transitionMetal() => const Color(0xff454ADE);
+
+  static Color transitionMetalLight() => const Color(0xffDADBF8);
+
+  static Color halogene() => const Color(0xff24928C);
+
+  static Color halogeneLight() => const Color(0xffD3E9E8);
+
+  static Color postTransitionMetal() => const Color(0xff1D8448);
+
+  static Color postTransitionMetalLight() => const Color(0xffC4F5D7);
+
+  static Color lanthanide() => const Color(0xff6B5257);
+
+  static Color lanthanideLight() => const Color(0xffE1E1E1);
+
+  static Color nobleGas() => const Color(0xff6F673E);
+
+  static Color nobleGasLight() => const Color(0xffFFEBC1);
+
+  static Color metalloid() => const Color(0xffCC6D16);
+
+  static Color metalloidLight() => const Color(0xffFFDEBE);
+
+  static Color actinide() => const Color(0xffC03F47);
+
+  static Color actinideLight() => const Color(0xffFFCED1);
+
+  static Color alkalineEarthMetal() => const Color(0xffB84789);
+
+  static Color alkalineEarthMetalLight() => const Color(0xffF6BEE0);
+
+  static Color alkaliMetal() => const Color(0xff83499F);
+
+  static Color alkaliMetalLight() => const Color(0xffECC5FB);
 }

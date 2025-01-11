@@ -11,17 +11,20 @@ class QuimifyScaffold extends StatefulWidget {
     required this.bannerAdName,
     required this.header,
     required this.body,
+    this.fab,
   }) : super(key: key);
 
   const QuimifyScaffold.noAd({
     super.key,
     required this.header,
     required this.body,
+    this.fab,
   })  : showBannerAd = false,
         bannerAdName = '';
 
   final String bannerAdName;
   final Widget header, body;
+  final Widget? fab;
 
   final bool showBannerAd;
 
@@ -56,6 +59,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // To avoid keyboard resizing
       backgroundColor: QuimifyColors.background(context),
+      floatingActionButton: widget.fab,
       body: SignedSpacingColumn(
         spacing: -_bodyRoundedCornersRadius,
         stackingOrder: StackingOrder.lastOnTop,
