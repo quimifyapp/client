@@ -109,7 +109,7 @@ class _ElementCard extends StatelessWidget {
                       ],
                     ),
                     GradientText(
-                      element.atomicWeight.toStringAsFixed(4),
+                      element.atomicWeight.toStringAsFixed(3),
                       style: const TextStyle(
                         fontSize: 14,
                       ),
@@ -183,12 +183,17 @@ class _GeneralInfo extends StatelessWidget {
                 leftLabel: 'Número atómico',
                 leftValue: element.atomicNumber.toString(),
                 rightLabel: 'Peso atómico',
-                rightValue: element.atomicWeight.toStringAsFixed(4),
+                rightValue: element.atomicWeight.toStringAsFixed(3),
               ),
               const SizedBox(height: 24),
               _SingleInfo(
                 label: 'Estado a temperatura ambiente (20°C)',
                 value: element.phase,
+              ),
+              const SizedBox(height: 24),
+              _SingleInfo(
+                label: 'Configuración electrónica',
+                value: '${element.electronConfiguration}\n\n${element.simplifiedElectronConfiguration}',
               ),
             ],
           ),
@@ -256,6 +261,7 @@ class _SingleInfo extends StatelessWidget {
             style: TextStyle(
               color: QuimifyColors.teal(),
               fontSize: 16,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 8),
@@ -263,8 +269,8 @@ class _SingleInfo extends StatelessWidget {
             value,
             style: TextStyle(
               color: QuimifyColors.primary(context),
-              fontSize: 28,
-              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],

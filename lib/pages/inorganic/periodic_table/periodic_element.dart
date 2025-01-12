@@ -46,9 +46,9 @@ class PeriodicElement {
       atomicWeight:
           double.tryParse(map['atomic_weight']?.toString() ?? '') ?? 0.0,
       meltingPoint:
-          double.tryParse(map['melting_point']?.toString() ?? '') ?? 0.0,
+          double.tryParse(map['melting_point']?.toString() ?? '') ?? double.nan,
       boilingPoint:
-          double.tryParse(map['boiling_point']?.toString() ?? '') ?? 0.0,
+          double.tryParse(map['boiling_point']?.toString() ?? '') ?? double.nan,
       phase: map['phase'] ?? '',
       electronConfiguration: map['electron_configuration'] ?? '',
       simplifiedElectronConfiguration:
