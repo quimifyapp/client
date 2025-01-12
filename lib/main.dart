@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_preview/device_preview.dart';
@@ -64,10 +65,17 @@ _loadRootCertificateNotPresentInOlderDevices() async {
 Future<ClientResult?> _initializeDependencies() async {
   Api().initialize();
 
+  // Initialize Payments first
+  try {
+    await Payments().initialize();
+  } catch (e) {
+    log('Failed to initialize payments: $e');
+    rethrow;
+  }
+
   List<Future> futures = [
     Api().getClient(),
     Storage().initialize(),
-    Payments().initialize(),
     AuthService().initialize(),
   ];
 
