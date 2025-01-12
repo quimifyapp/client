@@ -126,6 +126,12 @@ class QuimifyColors {
         dark: const Color.fromARGB(255, 56, 133, 224),
       );
 
+  static Color periodicTableHeader(BuildContext context) => _themedColor(
+        context,
+        light: Colors.grey.shade200,
+        dark: const Color(0xFF323232),
+      );
+
   static Color reactiveNonMetal() => const Color(0xff6C2CC2);
 
   static Color reactiveNonMetalLight() => const Color(0xffDFCDF6);

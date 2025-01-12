@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/inorganic/periodic_table/periodic_element.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -61,25 +62,27 @@ class _ElementCard extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.45,
-          height: MediaQuery.of(context).size.width * 0.45,
-          padding: const EdgeInsets.all(16),
+          width: MediaQuery.of(context).size.width * 0.48,
+          height: MediaQuery.of(context).size.width * 0.48,
           decoration: BoxDecoration(
-            color: const Color(0xFF0A2421),
+            color: QuimifyColors.foreground(context),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GradientText(
-                element.atomicNumber.toString(),
-                style: const TextStyle(
-                  fontSize: 16,
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 16),
+                child: GradientText(
+                  element.atomicNumber.toString(),
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                  colors: const [
+                    Color.fromARGB(255, 55, 224, 211),
+                    Color.fromARGB(255, 72, 232, 167),
+                  ],
                 ),
-                colors: const [
-                  Color.fromARGB(255, 55, 224, 211),
-                  Color.fromARGB(255, 72, 232, 167),
-                ],
               ),
               Center(
                 child: Column(
@@ -152,10 +155,10 @@ class _GeneralInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Información general',
           style: TextStyle(
-            color: Colors.white,
+            color: QuimifyColors.teal(),
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -164,7 +167,7 @@ class _GeneralInfo extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A1A),
+            color: QuimifyColors.foreground(context),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -250,16 +253,16 @@ class _SingleInfo extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: QuimifyColors.teal(),
               fontSize: 16,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             value,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: QuimifyColors.primary(context),
               fontSize: 28,
               fontWeight: FontWeight.w500,
             ),
@@ -285,8 +288,8 @@ class _AboutElement extends StatelessWidget {
       children: [
         Text(
           'Acerca del ${element.name.toLowerCase()}',
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: QuimifyColors.teal(),
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -296,13 +299,13 @@ class _AboutElement extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1A1A),
+            color: QuimifyColors.foreground(context),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
             element.description,
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: QuimifyColors.primary(context),
               fontSize: 16,
               height: 1.5,
             ),
