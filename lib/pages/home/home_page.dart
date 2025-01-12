@@ -138,6 +138,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FloatingActionButton(
+                backgroundColor: QuimifyColors.teal(),
                 onPressed: () {
                   // Navigate to Periodic Table
                   Navigator.of(context).push(

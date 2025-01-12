@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:collection/collection.dart';
 import 'package:csv/csv.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:quimify_client/pages/inorganic/periodic_table/element_detail_page.dart';
 import 'package:quimify_client/pages/inorganic/periodic_table/periodic_element.dart';
+import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 class PeriodicTablePage extends StatefulWidget {
   const PeriodicTablePage({Key? key}) : super(key: key);
@@ -14,22 +19,8 @@ class PeriodicTablePage extends StatefulWidget {
   State<PeriodicTablePage> createState() => _PeriodicTablePageState();
 }
 
-class _PeriodicTablePageState extends State<PeriodicTablePage> {
-  List<PeriodicElement> elements = [];
-
-  late LinkedScrollControllerGroup _horizontalControllers;
-  late LinkedScrollControllerGroup _verticalControllers;
-  late ScrollController _horizontalMainController;
-  late ScrollController _horizontalHeaderController;
-  late ScrollController _verticalMainController;
-  late ScrollController _verticalHeaderController;
-
-  double _zoomLevel = 1.0;
-  double _previousScale = 1.0;
-  static const double _minZoom = 0.75;
-  static const double _maxZoom = 2.0;
-  static const double _baseCellSize = 85.0;
-
+class _PeriodicTablePageState extends State<PeriodicTablePage>
+    with SingleTickerProviderStateMixin {
   Future<void> _loadElements() async {
     try {
       final rawData =
@@ -54,50 +45,27 @@ class _PeriodicTablePageState extends State<PeriodicTablePage> {
         elements = data.map((map) => PeriodicElement.fromCsv(map)).toList();
       });
     } catch (e) {
-      print('Error loading elements: $e');
+      log('Error loading elements: $e');
     }
   }
 
-  void _onScaleStart(ScaleStartDetails details) {
-    _previousScale = 1.0;
-  }
+  List<PeriodicElement> elements = [];
+  late LinkedScrollControllerGroup _horizontalControllers;
+  late LinkedScrollControllerGroup _verticalControllers;
+  late ScrollController _horizontalMainController;
+  late ScrollController _horizontalHeaderController;
+  late ScrollController _verticalMainController;
+  late ScrollController _verticalHeaderController;
 
-  void _onScaleUpdate(ScaleUpdateDetails details) {
-    if (details.scale == 1.0) return; // Ignore non-zoom gestures
+  double _zoomLevel = 1.0;
+  final double _targetZoomLevel = 1.0;
+  static const double _minZoom = 0.75;
+  static const double _maxZoom = 2.0;
+  static const double _baseCellSize = 85.0;
+  static const headerHeight = 40.0;
 
-    setState(() {
-      // Calculate the incremental change in scale
-      final double delta = details.scale / _previousScale;
-      _previousScale = details.scale;
-
-      // Apply smooth damping to the zoom
-      final double dampedDelta = 1.0 + (delta - 1.0) * 0.5;
-
-      // Update zoom level with smooth interpolation
-      _zoomLevel = (_zoomLevel * dampedDelta).clamp(_minZoom, _maxZoom);
-    });
-  }
-
-  void _onZoomIn() {
-    setState(() {
-      _zoomLevel = (_zoomLevel + 0.25).clamp(_minZoom, _maxZoom);
-    });
-  }
-
-  void _onZoomOut() {
-    setState(() {
-      _zoomLevel = (_zoomLevel - 0.25).clamp(_minZoom, _maxZoom);
-    });
-  }
-
-  final TransformationController _transformationController =
-      TransformationController();
-
-  void _onInteractionUpdate(ScaleUpdateDetails details) {
-    setState(() {
-      _zoomLevel = (_zoomLevel * details.scale).clamp(_minZoom, _maxZoom);
-    });
-  }
+  late AnimationController _animationController;
+  late Animation<double> _zoomAnimation;
 
   @override
   void initState() {
@@ -109,6 +77,25 @@ class _PeriodicTablePageState extends State<PeriodicTablePage> {
     _horizontalHeaderController = _horizontalControllers.addAndGet();
     _verticalMainController = _verticalControllers.addAndGet();
     _verticalHeaderController = _verticalControllers.addAndGet();
+
+    // Initialize animation controller
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+
+    _zoomAnimation = Tween<double>(
+      begin: _zoomLevel,
+      end: _targetZoomLevel,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    ))
+      ..addListener(() {
+        setState(() {
+          _zoomLevel = _zoomAnimation.value;
+        });
+      });
   }
 
   @override
@@ -117,196 +104,196 @@ class _PeriodicTablePageState extends State<PeriodicTablePage> {
     _horizontalHeaderController.dispose();
     _verticalMainController.dispose();
     _verticalHeaderController.dispose();
-    _transformationController.dispose();
-
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final cellSize = _baseCellSize * _zoomLevel;
-    final headerHeight = 40.0;
     final headerWidth = 40.0 * _zoomLevel;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tabla periódica'),
-        elevation: 0,
-      ),
-      body: Container(
-        color: const Color(0xFF272727),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: headerWidth,
-                  height: headerHeight,
-                  color: const Color(0xFF323232),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    controller: _horizontalHeaderController,
-                    physics: const BouncingScrollPhysics(),
-                    child: Row(
-                      children: _buildColumnHeaders(cellSize),
+    return QuimifyScaffold.noAd(
+      header: const QuimifyPageBar(title: 'Tabla periódica'),
+      body: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: Container(
+          color: QuimifyColors.foreground(context),
+          child: Column(
+            children: [
+              // Headers row
+              SizedBox(
+                height: headerHeight,
+                child: Row(
+                  children: [
+                    Container(
+                      width: headerWidth,
+                      color: QuimifyColors.periodicTableHeader(context),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    controller: _verticalHeaderController,
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: _buildRowHeaders(cellSize, headerWidth),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onScaleStart: _onScaleStart,
-                      onScaleUpdate: _onScaleUpdate,
+                    Expanded(
                       child: SingleChildScrollView(
-                        controller: _horizontalMainController,
                         scrollDirection: Axis.horizontal,
+                        controller: _horizontalHeaderController,
                         physics: const BouncingScrollPhysics(),
-                        child: SingleChildScrollView(
-                          controller: _verticalMainController,
-                          physics: const BouncingScrollPhysics(),
-                          child: Stack(
-                            children: [
-// Inside the Stack in the build method:
-                              SizedBox(
-                                width: cellSize * 18 +
-                                    (17 *
-                                        2.0), // Keep the spacing for proper alignment
-                                child: GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 18,
-                                    childAspectRatio: 1.0,
-                                    crossAxisSpacing:
-                                        2.0, // Match the spacing in width calculation
-                                    mainAxisSpacing:
-                                        2.0, // Keep vertical spacing consistent
-                                  ),
-                                  itemCount:
-                                      18 * 9, // Change to 9 rows instead of 10
-                                  itemBuilder: (context, index) {
-                                    final row = index ~/ 18;
-                                    final col = index % 18;
-                                    final element = elements.firstWhereOrNull(
-                                        (e) =>
-                                            e.tableRow == row + 1 &&
-                                            e.columnIndex == col);
-                                    if (element == null) return Container();
-                                    return _buildElementCell(element);
-                                  },
-                                ),
-                              ),
-                              Positioned(
-                                left: cellSize * 3.5,
-                                top: cellSize * .3,
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  child: _Legend(zoomLevel: _zoomLevel),
-                                ),
-                              ),
-                              Positioned(
-                                left: cellSize * 1,
-                                top: cellSize * 7.6,
-                                child: SizedBox(
-                                  width: cellSize * 1.2,
-                                  height: cellSize * 1.2,
-                                  child: Image.asset(
-                                    'assets/images/logo-branding.png',
-                                    fit: BoxFit.contain,
+                        child: Row(
+                          children: List.generate(
+                            18,
+                            (index) => Container(
+                              width: cellSize,
+                              height: headerHeight,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 1.0),
+                              color: QuimifyColors.periodicTableHeader(context),
+                              child: Center(
+                                child: Text(
+                                  [
+                                    'A',
+                                    'B',
+                                    'C',
+                                    'D',
+                                    'E',
+                                    'F',
+                                    'G',
+                                    'H',
+                                    'I',
+                                    'J',
+                                    'K',
+                                    'L',
+                                    'N',
+                                    'M',
+                                    'O',
+                                    'P',
+                                    'Q',
+                                    'R'
+                                  ][index],
+                                  style: TextStyle(
+                                    color: QuimifyColors.primary(context),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Row headers column
+                    SingleChildScrollView(
+                      controller: _verticalHeaderController,
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: List.generate(
+                          9,
+                          (index) => Container(
+                            width: headerWidth,
+                            height: cellSize + 2.0,
+                            margin: const EdgeInsets.symmetric(vertical: 1.0),
+                            color: QuimifyColors.periodicTableHeader(context),
+                            child: Center(
+                              child: Text(
+                                (index + 1).toString(),
+                                style: TextStyle(
+                                  color: QuimifyColors.primary(context),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Main periodic table grid
+                    Expanded(
+                      child: ScalableWrapper(
+                        onScaleUpdate: (scale) {
+                          setState(() {
+                            _zoomLevel = scale.clamp(_minZoom, _maxZoom);
+                          });
+                        },
+                        child: SingleChildScrollView(
+                          controller: _horizontalMainController,
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          child: SingleChildScrollView(
+                            controller: _verticalMainController,
+                            physics: const BouncingScrollPhysics(),
+                            child: SizedBox(
+                              width: cellSize * 18 + (17 * 2.0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 2.0),
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 18,
+                                        childAspectRatio: 1.0,
+                                        crossAxisSpacing: 2.0,
+                                        mainAxisSpacing: 2.0,
+                                      ),
+                                      itemCount: 18 * 9,
+                                      itemBuilder: (context, index) {
+                                        final row = index ~/ 18;
+                                        final col = index % 18;
+                                        final element =
+                                            elements.firstWhereOrNull((e) =>
+                                                e.tableRow == row + 1 &&
+                                                e.columnIndex == col);
+                                        if (element == null) return Container();
+                                        return _buildElementCell(element);
+                                      },
+                                    ),
+                                  ),
+                                  // Legend
+                                  Positioned(
+                                    left: cellSize * 3.5,
+                                    top: cellSize * .3,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(16),
+                                      child: _Legend(zoomLevel: _zoomLevel),
+                                    ),
+                                  ),
+                                  // Logo
+                                  Positioned(
+                                    left: cellSize * 1,
+                                    top: cellSize * 7.6,
+                                    child: SizedBox(
+                                      width: cellSize * 1.2,
+                                      height: cellSize * 1.2,
+                                      child: Image.asset(
+                                        'assets/images/logo-branding.png',
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-
-  List<Widget> _buildColumnHeaders(double cellSize) {
-    final headers = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'N',
-      'M',
-      'O',
-      'P',
-      'Q',
-      'R'
-    ];
-
-    return headers
-        .map((header) => Container(
-              width: cellSize,
-              height: 40,
-              margin: const EdgeInsets.symmetric(horizontal: 1.0),
-              color: const Color(0xFF323232),
-              child: Center(
-                child: Text(
-                  header,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ))
-        .toList();
-  }
-
-  List<Widget> _buildRowHeaders(double height, double width) {
-    return List.generate(
-        9,
-        (index) => Container(
-              width: width,
-              height: height, // Using cellSize instead of headerHeight
-              margin: const EdgeInsets.symmetric(vertical: 1.0),
-              color: const Color(0xFF323232),
-              child: Center(
-                child: Text(
-                  (index + 1).toString(),
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ));
   }
 
   Widget _buildElementCell(PeriodicElement element) {
@@ -380,83 +367,6 @@ class _PeriodicTablePageState extends State<PeriodicTablePage> {
         ),
       ),
     );
-  }
-
-  Color _getElementColor(String element) {
-    final categoryColors = {
-      'no_metal': Colors.purple.shade200,
-      'metal_transition': Colors.blue.shade200,
-      'halogen': QuimifyColors.teal(),
-      'other_metal': Colors.green.shade200,
-      'gas_noble': const Color(0xFFFFE4B5),
-      'alkaline': Colors.pink.shade200,
-      'metal_alkaline': Colors.pink.shade300,
-      'lanthanide': Colors.grey.shade400,
-      'actinide': Colors.red.shade200,
-      'metalloid': const Color(0xFFFFDEAD),
-    };
-
-    final elementCategories = {
-      'H': 'no_metal',
-      'He': 'gas_noble',
-      'Li': 'alkaline',
-      'Be': 'metal_alkaline',
-      // Add all element categories here
-    };
-
-    final category = elementCategories[element];
-    return category != null ? categoryColors[category]! : QuimifyColors.teal();
-  }
-
-  int _getAtomicNumber(int row, int col) {
-    final atomicNumbers = {
-      '0,0': 1, // H
-      '0,17': 2, // He
-      '1,0': 3, // Li
-      '1,1': 4, // Be
-      // Add all atomic numbers here
-    };
-
-    return atomicNumbers['$row,$col'] ?? 0;
-  }
-
-  String _getAtomicMass(int row, int col) {
-    final atomicMasses = {
-      '0,0': '1.0078', // H
-      '0,17': '4.0026', // He
-      '1,0': '6.9410', // Li
-      '1,1': '9.0122', // Be
-      // Add all atomic masses here
-    };
-
-    return atomicMasses['$row,$col'] ?? '';
-  }
-
-  MapEntry<String, String>? _getElementAtPosition(int row, int col) {
-    final elements = {
-      'H': 'Hidrógeno',
-      'He': 'Helio',
-      'Li': 'Litio',
-      'Be': 'Berilio',
-      'B': 'Boro',
-      'C': 'Carbono',
-      'N': 'Nitrógeno',
-      'O': 'Oxígeno',
-      'F': 'Flúor',
-      'Ne': 'Neón',
-      'Na': 'Sodio',
-      'Mg': 'Magnesio',
-      // Add all elements here
-    };
-
-    // Define element positions
-    if (row == 0 && col == 0) return MapEntry('H', elements['H']!);
-    if (row == 0 && col == 17) return MapEntry('He', elements['He']!);
-    if (row == 1 && col == 0) return MapEntry('Li', elements['Li']!);
-    if (row == 1 && col == 1) return MapEntry('Be', elements['Be']!);
-    // Add all element positions here
-
-    return null;
   }
 }
 
@@ -600,11 +510,84 @@ class _LegendItem extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            color: Colors.white70,
+            color: QuimifyColors.primary(context),
             fontSize: 18 * zoomLevel,
           ),
         ),
       ],
+    );
+  }
+}
+
+class CustomScaleGestureRecognizer extends ScaleGestureRecognizer {
+  @override
+  void rejectGesture(int pointer) {
+    acceptGesture(pointer);
+  }
+}
+
+class ScalableWrapper extends StatefulWidget {
+  final Widget child;
+  final void Function(double) onScaleUpdate;
+
+  const ScalableWrapper({
+    Key? key,
+    required this.child,
+    required this.onScaleUpdate,
+  }) : super(key: key);
+
+  @override
+  State<ScalableWrapper> createState() => _ScalableWrapperState();
+}
+
+class _ScalableWrapperState extends State<ScalableWrapper> {
+  final CustomScaleGestureRecognizer _scaleGestureRecognizer =
+      CustomScaleGestureRecognizer();
+  double _startScale = 1.0;
+  double _lastScale = 1.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scaleGestureRecognizer
+      ..onStart = _handleScaleStart
+      ..onUpdate = _handleScaleUpdate
+      ..onEnd = _handleScaleEnd;
+  }
+
+  void _handleScaleStart(ScaleStartDetails details) {
+    _startScale = _lastScale;
+  }
+
+  void _handleScaleUpdate(ScaleUpdateDetails details) {
+    _currentScale = (_startScale * details.scale);
+    widget.onScaleUpdate(_currentScale);
+  }
+
+  double _currentScale = 1.0; // Add this as a class field
+
+  void _handleScaleEnd(ScaleEndDetails details) {
+    _lastScale = _currentScale;
+    _startScale = 1.0;
+  }
+
+  @override
+  void dispose() {
+    _scaleGestureRecognizer.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RawGestureDetector(
+      gestures: <Type, GestureRecognizerFactory>{
+        CustomScaleGestureRecognizer:
+            GestureRecognizerFactoryWithHandlers<CustomScaleGestureRecognizer>(
+          () => _scaleGestureRecognizer,
+          (CustomScaleGestureRecognizer instance) {},
+        ),
+      },
+      child: widget.child,
     );
   }
 }
