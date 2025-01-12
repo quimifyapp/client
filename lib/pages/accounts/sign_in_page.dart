@@ -85,7 +85,10 @@ class _SignInPageState extends State<SignInPage> {
               SignInButton(
                 onPressed: () async {
                   try {
-                    _isGoogleLoading = true;
+                    setState(() {
+                      _isGoogleLoading = true;
+                    });
+
                     final user = await AuthService().signInWithGoogle();
                     if (user != null && context.mounted) {
                       Navigator.of(context).push(
@@ -97,9 +100,14 @@ class _SignInPageState extends State<SignInPage> {
                       );
                     }
 
-                    _isGoogleLoading = false;
+                    setState(() {
+                      _isGoogleLoading = false;
+                    });
                   } catch (e) {
-                    _isGoogleLoading = false;
+                    setState(() {
+                      _isGoogleLoading = false;
+                    });
+
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Error al iniciar sesión con Google'),
@@ -120,7 +128,10 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 SignInButton(
                   onPressed: () async {
-                    _isAppleLoading = true;
+                    setState(() {
+                      _isAppleLoading = true;
+                    });
+
                     try {
                       final authService = AuthService();
                       final user = await authService.signInWithApple();
@@ -134,9 +145,14 @@ class _SignInPageState extends State<SignInPage> {
                         );
                       }
 
-                      _isAppleLoading = false;
+                      setState(() {
+                        _isAppleLoading = false;
+                      });
                     } catch (e) {
-                      _isAppleLoading = false;
+                      setState(() {
+                        _isAppleLoading = false;
+                      });
+
                       if (context.mounted) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
