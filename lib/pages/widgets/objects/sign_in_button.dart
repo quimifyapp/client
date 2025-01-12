@@ -39,7 +39,7 @@ class SignInButton extends StatelessWidget {
             ? SizedBox.square(
                 dimension: 22,
                 child: CircularProgressIndicator(
-                  color: QuimifyColors.primary(context),
+                  color: QuimifyColors.foreground(context),
                 ),
               )
             : Text(
