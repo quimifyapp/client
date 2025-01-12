@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -11,6 +12,7 @@ class Payments {
   Payments._internal();
 
   bool _subscribed = false;
+  bool _isInitialized = false;
 
   // Constants:
 
@@ -19,9 +21,27 @@ class Payments {
 
   // Initialize:
 
-  initialize() async {
-    await Purchases.configure(PurchasesConfiguration(_getPublicApiKey()));
-    Purchases.addCustomerInfoUpdateListener(_update);
+  Future<void> initialize() async {
+    if (_isInitialized) return;
+
+    try {
+      // Configure RevenueCat
+      await Purchases.configure(PurchasesConfiguration(_getPublicApiKey()));
+
+      // Add listener for customer info updates
+      Purchases.addCustomerInfoUpdateListener(_update);
+
+      // Get initial customer info
+      final customerInfo = await Purchases.getCustomerInfo();
+      _update(customerInfo);
+
+      _isInitialized = true;
+    } catch (e) {
+      log('RevenueCat initialization failed: $e');
+      // Handle initialization failure
+      _isInitialized = false;
+      rethrow;
+    }
   }
 
   // Private:
@@ -36,10 +56,23 @@ class Payments {
 
   // Public:
 
-  showPaywall() => RevenueCatUI.presentPaywallIfNeeded(
+  Future<void> showPaywall() async {
+    if (!_isInitialized) {
+      log('Payments not initialized. Attempting to initialize...');
+      await initialize();
+    }
+
+    try {
+      await RevenueCatUI.presentPaywallIfNeeded(
         'Premium',
         displayCloseButton: true,
       );
+    } catch (e) {
+      log('Failed to show paywall: $e');
+      // Handle paywall presentation failure
+    }
+  }
 
   bool get isSubscribed => _subscribed;
+  bool get isInitialized => _isInitialized;
 }
