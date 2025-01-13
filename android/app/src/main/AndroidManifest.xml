@@ -2,7 +2,8 @@
     package="com.quimify">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    
     <!-- Needed to launch URLs -->
 
     <queries>

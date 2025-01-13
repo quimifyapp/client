@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/bars/camera_button_handler.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
@@ -32,6 +32,15 @@ class QuimifySearchBar extends StatefulWidget {
 }
 
 class _QuimifySearchBarState extends State<QuimifySearchBar> {
+  final CameraButtonHandler _cameraHandler = CameraButtonHandler();
+
+  void _handleExtractedText(String text) {
+    setState(() {
+      widget.textEditingController.text = text;
+      widget.onSubmitted(text);
+    });
+  }
+
   // Completions stream:
   late String? _lastCompletion;
   late bool _isLoadingCompletion = false;
@@ -230,7 +239,12 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           QuimifyIconButton.square(
             height: 50,
             backgroundColor: QuimifyColors.foreground(context),
-            onPressed: () => comingSoonDialog.show(context),
+            onPressed: () => _cameraHandler.handleCameraButton(
+              context,
+              _handleExtractedText,
+            ),
+
+            // onPressed: () => comingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
               color: QuimifyColors.primary(context),
