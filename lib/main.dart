@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:quimify_client/firebase_options.dart';
 import 'package:quimify_client/internet/accounts/accounts.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
@@ -34,6 +35,21 @@ _loadApp() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final configuration = PurchasesConfiguration(Platform.isAndroid
+      ? 'goog_SgCLLuxoLOuSMTDVBqzacRsJFaD'
+      : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI');
+
+  // Configure RevenueCat
+  await Purchases.configure(configuration);
+
+  // Initialize Payments
+  try {
+    await Payments().initialize();
+  } catch (e) {
+    log('Failed to initialize payments: $e');
+    rethrow;
+  }
 
   ClientResult? clientResult = await _initializeDependencies();
 
@@ -77,14 +93,6 @@ _loadRootCertificateNotPresentInOlderDevices() async {
 
 Future<ClientResult?> _initializeDependencies() async {
   Api().initialize();
-
-  // Initialize Payments first
-  try {
-    await Payments().initialize();
-  } catch (e) {
-    log('Failed to initialize payments: $e');
-    rethrow;
-  }
 
   List<Future> futures = [
     Api().getClient(),
