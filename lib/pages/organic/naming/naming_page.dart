@@ -186,7 +186,7 @@ class _NamingPageState extends State<NamingPage> {
     } else {
       const MessageDialog(
         title: 'Nada que deshacer',
-        details: 'Prueba a enlazar un sustiuyente.',
+        details: 'Prueba a enlazar un sustituyente.',
       ).show(context);
     }
   }
@@ -207,7 +207,7 @@ class _NamingPageState extends State<NamingPage> {
       const MessageDialog(
         title: 'Molécula vacía',
         details: 'Todavía no es posible enlazar otro carbono. Prueba a enlazar '
-            'un sustiuyente.',
+            'un sustituyente.',
       ).show(context);
     } else {
       const MessageDialog(
