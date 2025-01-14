@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ocr/ocr_service.dart';
 import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
+import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
 class CameraButtonHandler {
   final OCRService _ocrService = OCRService();
@@ -33,14 +34,23 @@ class CameraButtonHandler {
           ],
           uiSettings: [
             AndroidUiSettings(
-              toolbarTitle: 'Crop Image',
-              toolbarColor: Colors.blue,
+              toolbarTitle: 'Recortar imagen',
+              toolbarColor: QuimifyColors.teal(),
               toolbarWidgetColor: Colors.white,
+              cropGridColor: QuimifyColors.teal(),
+              cropFrameColor: QuimifyColors.teal(),
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false,
+              statusBarColor: QuimifyColors.teal(),
+              hideBottomControls: false,
+              showCropGrid: true,
+              dimmedLayerColor: Colors.black.withOpacity(0.8),
+              activeControlsWidgetColor: QuimifyColors.teal(),
             ),
             IOSUiSettings(
-              title: 'Crop Image',
+              title: 'Recortar imagen',
+              doneButtonTitle: 'Hecho',
+              cancelButtonTitle: 'Cancelar',
             ),
           ],
         );
