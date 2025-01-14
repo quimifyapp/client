@@ -36,10 +36,12 @@ _loadApp() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Configure RevenueCat
-  await Purchases.configure(PurchasesConfiguration(Platform.isAndroid
+  final configuration = PurchasesConfiguration(Platform.isAndroid
       ? 'goog_SgCLLuxoLOuSMTDVBqzacRsJFaD'
-      : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI'));
+      : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI');
+
+  // Configure RevenueCat
+  await Purchases.configure(configuration);
 
   // Initialize Payments
   try {

@@ -54,6 +54,17 @@ class Payments {
   // Public:
 
   Future<void> showPaywall() async {
+    final isConfigured = await Purchases.isConfigured;
+
+    if (!isConfigured) {
+      final configuration = PurchasesConfiguration(Platform.isAndroid
+          ? 'goog_SgCLLuxoLOuSMTDVBqzacRsJFaD'
+          : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI');
+
+      // Configure RevenueCat
+      await Purchases.configure(configuration);
+    }
+
     if (!_isInitialized) {
       log('Payments not initialized. Attempting to initialize...');
       await initialize();
@@ -67,6 +78,7 @@ class Payments {
     } catch (e) {
       log('Failed to show paywall: $e');
       // Handle paywall presentation failure
+      rethrow;
     }
   }
 
