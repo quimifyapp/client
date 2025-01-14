@@ -25,9 +25,6 @@ class Payments {
     if (_isInitialized) return;
 
     try {
-      // Configure RevenueCat
-      await Purchases.configure(PurchasesConfiguration(_getPublicApiKey()));
-
       // Add listener for customer info updates
       Purchases.addCustomerInfoUpdateListener(_update);
 
@@ -46,7 +43,7 @@ class Payments {
 
   // Private:
 
-  String _getPublicApiKey() =>
+  String getPublicApiKey() =>
       Platform.isAndroid ? _publicApiKeyAndroid : _publicApiKeyIos;
 
   _update(CustomerInfo customerInfo) {
