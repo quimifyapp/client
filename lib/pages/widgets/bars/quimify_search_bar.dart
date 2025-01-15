@@ -52,6 +52,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           .split('\n')
           .map((line) => line.trim())
           .where((line) => line.isNotEmpty)
+          .toList()
+          .reversed
           .toList();
 
       List<String> totalCompounds = [];
@@ -97,6 +99,8 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           .split('\n')
           .map((line) => line.trim())
           .where((line) => line.isNotEmpty)
+          .toList()
+          .reversed
           .toList();
 
       if (compounds.isNotEmpty) {
