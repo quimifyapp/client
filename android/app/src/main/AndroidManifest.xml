@@ -2,7 +2,8 @@
     package="com.quimify">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    
     <!-- Needed to launch URLs -->
 
     <queries>
@@ -20,6 +21,11 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="Quimify">
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -51,6 +57,8 @@
                 android:minWidth="320dp" />
 
         </activity>
+  
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -284,6 +284,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
             children: [
               const QuimifyPageBar(title: 'Nomenclatura inorgánica'),
               QuimifySearchBar(
+                isOrganic: false,
                 label: _labelText,
                 textEditingController: _textController,
                 focusNode: _textFocusNode,

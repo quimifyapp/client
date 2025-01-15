@@ -2,7 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/widgets/bars/camera_button_handler.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
@@ -18,8 +19,10 @@ class QuimifySearchBar extends StatefulWidget {
     required this.completionCallBack,
     required this.completionCorrector,
     required this.onCompletionPressed,
+    required this.isOrganic,
   }) : super(key: key);
 
+  final bool isOrganic;
   final String label;
   final FocusNode focusNode;
   final TextEditingController textEditingController;
@@ -32,6 +35,96 @@ class QuimifySearchBar extends StatefulWidget {
 }
 
 class _QuimifySearchBarState extends State<QuimifySearchBar> {
+  final CameraButtonHandler _cameraHandler = CameraButtonHandler();
+
+  bool _isProcessingCompounds = false;
+
+  // Max compounds
+  static const _maxInorganicCompounds = 5;
+
+  Future<void> _processInorganicCompounds(String text) async {
+    if (_isProcessingCompounds) return;
+    _isProcessingCompounds = true;
+
+    try {
+      // Split the text by newlines and filter out empty lines
+      final compounds = text
+          .split('\n')
+          .map((line) => line.trim())
+          .where((line) => line.isNotEmpty)
+          .toList();
+
+      List<String> totalCompounds = [];
+      for (int i = 0; i < compounds.length; i++) {
+        final compound = compounds[i];
+        if (totalCompounds.length < _maxInorganicCompounds) {
+          totalCompounds.add(compound);
+        } else {
+          break;
+        }
+      }
+
+      // Reverse totalCompounds
+      final reversedCompoundsList = totalCompounds.reversed.toList();
+
+      await Future.forEach(reversedCompoundsList, (compound) async {
+        // Update the text field with current compound
+        setState(() {
+          widget.textEditingController.text = compound;
+        });
+
+        // Submit the compound and WAIT for the result to complete
+        // This will wait for the API call and UI updates to finish
+        await widget.onSubmitted(compound);
+      });
+
+      // If there are more compounds than the max, show a message
+      if (compounds.length > _maxInorganicCompounds) {
+        if (context.mounted) {
+          const MessageDialog(
+            title: 'Aviso',
+            details:
+                'Sólo se pueden procesar $_maxInorganicCompounds compuestos a la vez',
+          ).show(context);
+        }
+      }
+    } finally {
+      _isProcessingCompounds = false;
+    }
+  }
+
+  void _handleExtractedText(String text) async {
+    if (widget.isOrganic) {
+      // For organic compounds, only process the first one
+      final compounds = text
+          .split('\n')
+          .map((line) => line.trim())
+          .where((line) => line.isNotEmpty)
+          .toList();
+
+      if (compounds.isNotEmpty) {
+        // Process only the first compound
+        setState(() {
+          widget.textEditingController.text = compounds[0];
+        });
+
+        await widget.onSubmitted(compounds[0]);
+
+        // Show warning if there were more compounds
+        if (compounds.length > 1 && context.mounted) {
+          const MessageDialog(
+            title: 'Aviso',
+            details:
+                'Para compuestos orgánicos, solo se puede procesar uno a la vez.',
+          ).show(context);
+        }
+      }
+    } else {
+      // Process inorganic compounds line by line
+      await _processInorganicCompounds(text);
+    }
+  }
+
   // Completions stream:
   late String? _lastCompletion;
   late bool _isLoadingCompletion = false;
@@ -230,7 +323,12 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           QuimifyIconButton.square(
             height: 50,
             backgroundColor: QuimifyColors.foreground(context),
-            onPressed: () => comingSoonDialog.show(context),
+            onPressed: () => _cameraHandler.handleCameraButton(
+              context,
+              _handleExtractedText,
+            ),
+
+            // onPressed: () => comingSoonDialog.show(context),
             icon: Icon(
               Icons.camera_alt_outlined,
               color: QuimifyColors.primary(context),

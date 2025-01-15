@@ -17,6 +17,8 @@
       </array>
     </dict>
   </array>
+  <key>NSCameraUsageDescription</key>
+  <string>We need camera access to capture images for text extraction</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

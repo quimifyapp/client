@@ -228,6 +228,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             children: [
               const QuimifyPageBar(title: 'Formular orgánicos'),
               QuimifySearchBar(
+                isOrganic: true,
+
                 label: _labelText,
                 textEditingController: _textController,
                 focusNode: _textFocusNode,
