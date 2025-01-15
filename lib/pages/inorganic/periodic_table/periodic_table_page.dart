@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:collection/collection.dart';
@@ -23,29 +24,58 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
     with SingleTickerProviderStateMixin {
   Future<void> _loadElements() async {
     try {
-      final rawData =
-          await rootBundle.loadString('assets/csv/periodic_table.csv');
+      // Get the ByteData and decode with UTF8
+      final ByteData fileData =
+          await rootBundle.load('assets/csv/periodic_table.csv');
+      final String rawData = utf8.decode(
+          fileData.buffer
+              .asUint8List(fileData.offsetInBytes, fileData.lengthInBytes),
+          allowMalformed: true // Add this to handle potentially malformed UTF8
+          );
+
+      // Parse CSV with specific settings
       final List<List<dynamic>> csvTable =
           const CsvToListConverter().convert(rawData);
 
       // Get headers
-      final headers = csvTable[0].map((e) => e.toString()).toList();
+      final headers = csvTable[0].map((e) => e.toString().trim()).toList();
 
       // Convert to list of maps
-      final List<Map<String, dynamic>> data = [];
+      final List<Map<String, dynamic>> elementsList = [];
       for (var i = 1; i < csvTable.length; i++) {
-        final map = <String, dynamic>{};
-        for (var j = 0; j < headers.length; j++) {
-          map[headers[j]] = csvTable[i][j];
+        if (csvTable[i].length == headers.length) {
+          // Validate row length
+          final map = <String, dynamic>{};
+          for (var j = 0; j < headers.length; j++) {
+            var value = csvTable[i][j].toString().trim();
+
+            // Handle numeric conversions
+            if (headers[j] == 'atomic_weight' ||
+                headers[j] == 'melting_point' ||
+                headers[j] == 'boiling_point') {
+              map[headers[j]] = double.tryParse(value) ?? 0.0;
+            } else {
+              map[headers[j]] = value;
+            }
+          }
+          elementsList.add(map);
         }
-        data.add(map);
       }
 
       setState(() {
-        elements = data.map((map) => PeriodicElement.fromCsv(map)).toList();
+        elements =
+            elementsList.map((map) => PeriodicElement.fromCsv(map)).toList();
       });
-    } catch (e) {
+    } catch (e, stackTrace) {
       log('Error loading elements: $e');
+      log('Stack trace: $stackTrace');
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error loading elements: $e'),
+          ),
+        );
+      }
     }
   }
 
