@@ -5,6 +5,7 @@ import 'package:crop_image/crop_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ocr/ocr_service.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -46,6 +47,21 @@ class CameraButtonHandler {
         // Show loading indicator
         if (context.mounted) {
           showLoadingIndicator(context);
+        }
+
+        // Check if user has subscribed to premium
+        if (!Payments().isSubscribed) {
+          // Show paywall
+          await Payments().showPaywall();
+
+          // Exit early if user has not subscribed
+          if (!Payments().isSubscribed) {
+            // Hide loading indicator
+            if (context.mounted) {
+              hideLoadingIndicator();
+            }
+            return;
+          }
         }
 
         // Process the cropped image
