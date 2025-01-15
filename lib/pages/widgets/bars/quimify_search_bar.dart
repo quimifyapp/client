@@ -84,7 +84,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           const MessageDialog(
             title: 'Aviso',
             details:
-                'Sólo se pueden procesar $_maxInorganicCompounds compuestos a la vez',
+                'Sólo se pueden procesar $_maxInorganicCompounds compuestos a la vez.',
           ).show(context);
         }
       }
@@ -115,7 +115,7 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           const MessageDialog(
             title: 'Aviso',
             details:
-                'Para compuestos orgánicos, solo se puede procesar uno a la vez.',
+                'Para compuestos orgánicos, solo se puede procesar 1 a la vez.',
           ).show(context);
         }
       }

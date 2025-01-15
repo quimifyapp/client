@@ -85,7 +85,7 @@ class CameraButtonHandler {
 
       // Show error dialog
       if (context.mounted) {
-        const MessageDialog(title: 'Error', details: 'No se puede procesar')
+        const MessageDialog(title: 'Error', details: 'No se puede procesar.')
             .show(context);
       }
     }
@@ -139,7 +139,7 @@ class _ImageCropperScreenState extends State<ImageCropperScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: QuimifyColors.teal(),
-        title: const Text('Recortar imagen'),
+        title: const Text('Recortar imágen'),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -218,7 +218,7 @@ class ImageSourceDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'Seleccionar imagen',
+              'Seleccionar imágen',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
