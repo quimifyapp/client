@@ -929,18 +929,18 @@ packages:
     dependency: "direct main"
     description:
       name: purchases_flutter
-      sha256: "3771638a8cca85f8cfba8c65c1478314883af4448343a29d4b799bc2aba54e4b"
+      sha256: b01c5858dcdecafca40e93d7f573f4199d72a5238a51969f5cbd45df78f65c0d
       url: "https://pub.dev"
     source: hosted
-    version: "8.2.2"
+    version: "8.4.1"
   purchases_ui_flutter:
     dependency: "direct main"
     description:
       name: purchases_ui_flutter
-      sha256: c4c5c44b8618f89a680377488534ca0a8f72c379669954a487e62b57f117f2f6
+      sha256: "7626796abc99552da467d67227e36b4b75ad8806c7ed5217fb820d970369372d"
       url: "https://pub.dev"
     source: hosted
-    version: "8.2.2"
+    version: "8.4.1"
   shared_preferences:
     dependency: "direct main"
     description:
