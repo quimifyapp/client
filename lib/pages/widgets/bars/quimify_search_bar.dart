@@ -52,8 +52,6 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
           .split('\n')
           .map((line) => line.trim())
           .where((line) => line.isNotEmpty)
-          .toList()
-          .reversed
           .toList();
 
       List<String> totalCompounds = [];
@@ -66,7 +64,10 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
         }
       }
 
-      await Future.forEach(totalCompounds, (compound) async {
+      // Reverse totalCompounds
+      final reversedCompoundsList = totalCompounds.reversed.toList();
+
+      await Future.forEach(reversedCompoundsList, (compound) async {
         // Update the text field with current compound
         setState(() {
           widget.textEditingController.text = compound;
