@@ -6,7 +6,7 @@ import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
-import 'package:quimify_client/pages/inorganic/periodic_table/periodic_table_page.dart';
+import 'package:quimify_client/pages/periodic_table/periodic_table_page.dart';
 import 'package:quimify_client/pages/organic/organic_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
