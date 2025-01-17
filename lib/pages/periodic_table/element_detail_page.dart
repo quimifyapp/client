@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quimify_client/pages/inorganic/periodic_table/periodic_element.dart';
+import 'package:quimify_client/pages/periodic_table/periodic_element.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -193,7 +193,8 @@ class _GeneralInfo extends StatelessWidget {
               const SizedBox(height: 24),
               _SingleInfo(
                 label: 'Configuración electrónica',
-                value: '${element.electronConfiguration}\n\n${element.simplifiedElectronConfiguration}',
+                value:
+                    '${element.electronConfiguration}\n\n${element.simplifiedElectronConfiguration}',
               ),
             ],
           ),
