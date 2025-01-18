@@ -7,9 +7,11 @@ class QuimifyPageBar extends StatelessWidget {
   const QuimifyPageBar({
     Key? key,
     required this.title,
+    this.trailing,
   }) : super(key: key);
 
   final String title;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,10 @@ class QuimifyPageBar extends StatelessWidget {
                 ),
               ),
             ),
+            if (trailing != null) ...[
+              const Spacer(),
+              trailing!,
+            ],
           ],
         ),
       ),

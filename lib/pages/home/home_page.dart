@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/accounts/accounts.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
+import 'package:quimify_client/pages/accounts/sign_in_page.dart';
 import 'package:quimify_client/pages/calculator/calculator_page.dart';
+import 'package:quimify_client/pages/chatbot/chatbot_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_menu_button.dart';
 import 'package:quimify_client/pages/inorganic/inorganic_page.dart';
 import 'package:quimify_client/pages/periodic_table/periodic_table_page.dart';
@@ -133,11 +136,12 @@ class _HomePageState extends State<HomePage> {
       },
       child: QuimifyScaffold.noAd(
         fab: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FloatingActionButton(
+                heroTag: null,
                 backgroundColor: QuimifyColors.teal(),
                 onPressed: () {
                   // Navigate to Periodic Table
@@ -149,6 +153,39 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: const Icon(Icons.science_rounded),
+              ),
+              FloatingActionButton(
+                heroTag: null,
+                backgroundColor: QuimifyColors.teal(),
+                onPressed: () {
+                  // If user is not signed in, navigate to sign in page
+                  if (!AuthService().isSignedIn) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => SignInPage(
+                          clientResult: widget.clientResult,
+                        ),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Por favor inicia sesión para chatear'),
+                      ),
+                    );
+                    return;
+                  }
+
+                  // Navigate to chatbot
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const ChatbotPage(),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/images/atomic.png',
+                  width: 32,
+                ),
               ),
             ],
           ),

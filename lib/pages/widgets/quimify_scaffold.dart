@@ -60,6 +60,7 @@ class _QuimifyScaffoldState extends State<QuimifyScaffold> {
       resizeToAvoidBottomInset: false, // To avoid keyboard resizing
       backgroundColor: QuimifyColors.background(context),
       floatingActionButton: widget.fab,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SignedSpacingColumn(
         spacing: -_bodyRoundedCornersRadius,
         stackingOrder: StackingOrder.lastOnTop,
