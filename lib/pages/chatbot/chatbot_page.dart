@@ -18,14 +18,14 @@ class ChatbotPage extends StatelessWidget {
       header: QuimifyPageBar(
         title: 'Chatea con Atomic',
         trailing: QuimifyIconButton.square(
-          height: 32,
-          backgroundColor: QuimifyColors.secondaryTeal(context),
+          height: 40,
+          backgroundColor: Colors.white,
           onPressed: () async {
             await ChatService().clearHistory();
           },
-          icon: Icon(
-            Icons.restore,
-            color: QuimifyColors.inverseText(context),
+          icon: const Icon(
+            Icons.delete_outline ,
+            color: Colors.black,
           ),
         ),
       ),
@@ -127,7 +127,7 @@ class ChatMessage extends StatelessWidget {
       // Add math part if exists
       if (i < matches.length && matches[i] != null) {
         final mathText =
-            matches[i]!.replaceAll(r'\[', '').replaceAll(r'\]', '').trim();
+        matches[i]!.replaceAll(r'\[', '').replaceAll(r'\]', '').trim();
 
         children.add(Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -178,7 +178,7 @@ class ChatMessage extends StatelessWidget {
               ),
               child: (message.isEmpty && !isUser)
                   ? const Text(
-                      'Thinking...',
+                      'Pensando ...',
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.black38,
@@ -208,12 +208,11 @@ class _BodyState extends State<_Body> {
   bool _isLoading = false; // Add this line
 
   static const List<String> quickQuestions = [
-    'Explain this concept simply',
-    'Give me an example',
-    'How is this used in real life?',
-    'Can you draw the structure?',
-    'What is the balanced equation?',
-    'Why is this important?',
+    'Qué es la nomenclatura química?',
+    'Dame un ejemplo',
+    'Explicame este concepto de manera simple',
+    'Cómo se usa esto en la vida real?',
+    'Por qué es importante esto?',
   ];
 
   @override
@@ -313,8 +312,8 @@ class _BodyState extends State<_Body> {
                               children: [
                                 Image.asset(
                                   'assets/images/atomic.png',
-                                  height: 80,
-                                  width: 80,
+                                  height: 95,
+                                  width: 95,
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
@@ -327,7 +326,7 @@ class _BodyState extends State<_Body> {
                                     child: Text(
                                       message.content,
                                       style:
-                                          const TextStyle(color: Colors.black),
+                                          TextStyle(color: QuimifyColors.primary(context)),
                                     ),
                                   ),
                                 ),
@@ -356,9 +355,9 @@ class _BodyState extends State<_Body> {
           ),
           decoration: BoxDecoration(
             color: QuimifyColors.background(context),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Colors.black12,
+                color: QuimifyColors.teal(),
                 blurRadius: 4,
                 offset: Offset(0, -2),
               ),
@@ -402,7 +401,7 @@ class _BodyState extends State<_Body> {
 
                         controller: _textController,
                         decoration: InputDecoration(
-                          hintText: 'Ask me anything...',
+                          hintText: 'Hazme una pregunta ...',
                           hintStyle: TextStyle(
                               color: QuimifyColors.quaternary(context)),
                           filled: true,
@@ -475,15 +474,13 @@ class _QuickQuestionButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: enabled
-              ? QuimifyColors.teal()
-              : QuimifyColors.teal().withOpacity(0.7),
+          color: QuimifyColors.teal().withOpacity(0.8),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           text,
-          style: const TextStyle(
-            color: Colors.black,
+          style: TextStyle(
+            color: QuimifyColors.primary(context),
             fontSize: 14,
           ),
         ),

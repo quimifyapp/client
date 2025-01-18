@@ -47,10 +47,12 @@ class ChatService {
   final welcomeMessage = ChatMessageModel(
     id: 'welcome',
     content:
-        'Hi! mi name is Atomic! I am your AI private teacher, ask me any questions yo have about chemistry',
+        'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
+            'artifical, preguntame lo que quieras sobre Química',
     isUser: false,
     timestamp: DateTime.now(),
     status: 'delivered',
+
   );
 
   String get _userId {
