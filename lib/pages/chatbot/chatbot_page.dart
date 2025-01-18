@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:quimify_client/internet/chatbot/chat_service.dart';
-import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -15,17 +14,50 @@ class ChatbotPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: QuimifyPageBar(
-        title: 'Chatea con Atomic',
-        trailing: QuimifyIconButton.square(
-          height: 40,
-          backgroundColor: Colors.white,
-          onPressed: () async {
-            await ChatService().clearHistory();
-          },
-          icon: const Icon(
-            Icons.delete_outline ,
-            color: Colors.black,
+      header: SafeArea(
+        bottom: false,
+        child: Container(
+          padding: const EdgeInsets.only(
+            top: 15,
+            bottom: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Row(
+            children: [
+              QuimifyIconButton.square(
+                height: 50,
+                backgroundColor: QuimifyColors.secondaryTeal(context),
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: QuimifyColors.inverseText(context),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Expanded(
+                child: Text(
+                  'Chatea con Atomic',
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: QuimifyColors.inverseText(context),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              QuimifyIconButton.square(
+                height: 40,
+                backgroundColor: Colors.white,
+                onPressed: () async {
+                  await ChatService().clearHistory();
+                },
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: QuimifyColors.teal(),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -47,8 +79,9 @@ class ChatMessage extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildMathContent(String text, BuildContext context) {
-    // Split text by math expressions
-    final RegExp mathExp = RegExp(r'\\\[.*?\\\]');
+    // Handle both display math \[ ... \] and inline math \( ... \)
+    final RegExp mathExp =
+        RegExp(r'(\\\[.*?\\\]|\\\(.*?\\\))', multiLine: true, dotAll: true);
     final List<String> parts = text.split(mathExp);
     final List<String?> matches =
         mathExp.allMatches(text).map((m) => m.group(0)).toList();
@@ -67,13 +100,13 @@ class ChatMessage extends StatelessWidget {
             code: TextStyle(
               backgroundColor: isUser
                   ? Colors.blue[700]
-                  : QuimifyColors.secondaryTeal(context),
-              color: isUser ? Colors.white : Colors.black,
+                  : const Color.fromARGB(255, 18, 18, 18),
+              color: isUser ? Colors.white : Colors.white,
             ),
             codeblockDecoration: BoxDecoration(
               color: isUser
                   ? Colors.blue[700]
-                  : QuimifyColors.secondaryTeal(context),
+                  : const Color.fromARGB(255, 18, 18, 18),
               borderRadius: BorderRadius.circular(8),
             ),
             blockquote: TextStyle(
@@ -116,9 +149,9 @@ class ChatMessage extends StatelessWidget {
             ),
             listIndent: 20.0,
             blockSpacing: 8.0,
-            h1Padding: EdgeInsets.only(top: 8, bottom: 4),
-            h2Padding: EdgeInsets.only(top: 8, bottom: 4),
-            h3Padding: EdgeInsets.only(top: 8, bottom: 4),
+            h1Padding: const EdgeInsets.only(top: 8, bottom: 4),
+            h2Padding: const EdgeInsets.only(top: 8, bottom: 4),
+            h3Padding: const EdgeInsets.only(top: 8, bottom: 4),
           ),
           selectable: true,
         ));
@@ -126,21 +159,29 @@ class ChatMessage extends StatelessWidget {
 
       // Add math part if exists
       if (i < matches.length && matches[i] != null) {
-        final mathText =
-        matches[i]!.replaceAll(r'\[', '').replaceAll(r'\]', '').trim();
+        final mathText = matches[i]!;
+        final isDisplayMode = mathText.startsWith(r'\[');
+
+        // Remove the delimiters
+        final cleanMathText = mathText
+            .replaceAll(r'\[', '')
+            .replaceAll(r'\]', '')
+            .replaceAll(r'\(', '')
+            .replaceAll(r'\)', '')
+            .trim();
 
         children.add(Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Math.tex(
-              mathText,
-              textStyle: TextStyle(
-                color: isUser ? Colors.white : Colors.black,
-                fontSize: 16,
-              ),
-              mathStyle: MathStyle.display,
+          padding: EdgeInsets.symmetric(
+            vertical: isDisplayMode ? 8.0 : 0.0,
+            horizontal: 2.0,
+          ),
+          child: Math.tex(
+            cleanMathText,
+            textStyle: TextStyle(
+              color: isUser ? Colors.white : Colors.black,
+              fontSize: 16,
             ),
+            mathStyle: isDisplayMode ? MathStyle.display : MathStyle.text,
           ),
         ));
       }
@@ -215,6 +256,16 @@ class _BodyState extends State<_Body> {
     'Por qué es importante esto?',
   ];
 
+  final welcomeMessage = ChatMessageModel(
+    id: 'welcome',
+    content:
+        'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
+        'artifical, preguntame lo que quieras sobre Química',
+    isUser: false,
+    timestamp: DateTime.now(),
+    status: 'delivered',
+  );
+
   @override
   void initState() {
     super.initState();
@@ -282,7 +333,8 @@ class _BodyState extends State<_Body> {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  final messages = snapshot.data!;
+                  // Add welcome message to the beginning of the list
+                  final messages = [welcomeMessage, ...snapshot.data!];
 
                   // In StreamBuilder
                   if (_isFirstLoad && messages.length > 1) {
@@ -325,8 +377,9 @@ class _BodyState extends State<_Body> {
                                     ),
                                     child: Text(
                                       message.content,
-                                      style:
-                                          TextStyle(color: QuimifyColors.primary(context)),
+                                      style: TextStyle(
+                                          color:
+                                              QuimifyColors.primary(context)),
                                     ),
                                   ),
                                 ),
@@ -359,7 +412,7 @@ class _BodyState extends State<_Body> {
               BoxShadow(
                 color: QuimifyColors.teal(),
                 blurRadius: 4,
-                offset: Offset(0, -2),
+                offset: const Offset(0, -2),
               ),
             ],
           ),
