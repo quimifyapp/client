@@ -140,51 +140,65 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FloatingActionButton(
-                heroTag: null,
-                backgroundColor: QuimifyColors.teal(),
-                onPressed: () {
-                  // Navigate to Periodic Table
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
+              SizedBox(
+                width: 65,
+                height: 65,
+                child: FittedBox(
+                  child:
+                  FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: QuimifyColors.teal(),
+                    onPressed: () {
+                      // Navigate to Periodic Table
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
                           const PeriodicTablePage(),
-                    ),
-                  );
-                },
-                child: const Icon(Icons.science_rounded),
-              ),
-              FloatingActionButton(
-                heroTag: null,
-                backgroundColor: QuimifyColors.teal(),
-                onPressed: () {
-                  // If user is not signed in, navigate to sign in page
-                  if (!AuthService().isSignedIn) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => SignInPage(
-                          clientResult: widget.clientResult,
                         ),
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Por favor inicia sesión para chatear'),
-                      ),
-                    );
-                    return;
-                  }
+                      );
+                    },
+                    child: const Icon(Icons.science_rounded, size: 35,),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 65,
+                height: 65,
+                child: FittedBox(
+                  child:
+                  FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: QuimifyColors.teal(),
+                    onPressed: () {
+                      // If user is not signed in, navigate to sign in page
+                      if (!AuthService().isSignedIn) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => SignInPage(
+                              clientResult: widget.clientResult,
+                            ),
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Por favor inicia sesión para chatear con Atomic'),
+                          ),
+                        );
+                        return;
+                      }
 
-                  // Navigate to chatbot
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const ChatbotPage(),
+                      // Navigate to chatbot
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const ChatbotPage(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/atomic.png',
+                      width:45,
                     ),
-                  );
-                },
-                child: Image.asset(
-                  'assets/images/atomic.png',
-                  width: 32,
+                  ),
                 ),
               ),
             ],
