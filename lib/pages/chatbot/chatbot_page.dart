@@ -40,7 +40,7 @@ class ChatbotPage extends StatelessWidget {
                   'Chatea con Atomic',
                   maxLines: 1,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 19,
                     color: QuimifyColors.inverseText(context),
                     fontWeight: FontWeight.bold,
                   ),
@@ -81,10 +81,10 @@ class ChatMessage extends StatelessWidget {
   Widget _buildMathContent(String text, BuildContext context) {
     // Handle both display math \[ ... \] and inline math \( ... \)
     final RegExp mathExp =
-        RegExp(r'(\\\[.*?\\\]|\\\(.*?\\\))', multiLine: true, dotAll: true);
+    RegExp(r'(\\\[.*?\\\]|\\\(.*?\\\))', multiLine: true, dotAll: true);
     final List<String> parts = text.split(mathExp);
     final List<String?> matches =
-        mathExp.allMatches(text).map((m) => m.group(0)).toList();
+    mathExp.allMatches(text).map((m) => m.group(0)).toList();
 
     List<Widget> children = [];
 
@@ -98,15 +98,12 @@ class ChatMessage extends StatelessWidget {
               color: isUser ? Colors.white : Colors.black,
             ),
             code: TextStyle(
-              backgroundColor: isUser
-                  ? Colors.blue[700]
-                  : const Color.fromARGB(255, 18, 18, 18),
-              color: isUser ? Colors.white : Colors.white,
+              backgroundColor:
+              isUser ? Colors.blue[700] : Colors.black.withOpacity(0.10),
+              color: Colors.black,
             ),
             codeblockDecoration: BoxDecoration(
-              color: isUser
-                  ? Colors.blue[700]
-                  : const Color.fromARGB(255, 18, 18, 18),
+              color: isUser ? Colors.blue[700] : Colors.grey.withOpacity(0.75),
               borderRadius: BorderRadius.circular(8),
             ),
             blockquote: TextStyle(
@@ -199,7 +196,7 @@ class ChatMessage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment:
-            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser && showAvatar) ...[
@@ -219,12 +216,12 @@ class ChatMessage extends StatelessWidget {
               ),
               child: (message.isEmpty && !isUser)
                   ? const Text(
-                      'Pensando ...',
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black38,
-                      ),
-                    )
+                'Pensando ...',
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  color: Colors.black38,
+                ),
+              )
                   : _buildMathContent(message, context),
             ),
           ),
@@ -251,15 +248,15 @@ class _BodyState extends State<_Body> {
   static const List<String> quickQuestions = [
     'Qué es la nomenclatura química?',
     'Dame un ejemplo',
-    'Explicame este concepto de manera simple',
-    'Cómo se usa esto en la vida real?',
-    'Por qué es importante esto?',
+    'Cómo ajusto una reacción?',
+    'Que eres capaz de hacer?',
+    'Quienes son tus creadores?',
   ];
 
   final welcomeMessage = ChatMessageModel(
     id: 'welcome',
     content:
-        'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
+    'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
         'artifical, preguntame lo que quieras sobre Química',
     isUser: false,
     timestamp: DateTime.now(),
@@ -377,9 +374,8 @@ class _BodyState extends State<_Body> {
                                     ),
                                     child: Text(
                                       message.content,
-                                      style: TextStyle(
-                                          color:
-                                              QuimifyColors.primary(context)),
+                                      style:
+                                      const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
@@ -429,15 +425,15 @@ class _BodyState extends State<_Body> {
                     children: [
                       const SizedBox(width: 16),
                       ...quickQuestions.map((question) => Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: _QuickQuestionButton(
-                              text: question,
-                              onTap: _isLoading
-                                  ? null
-                                  : () => _handleSendMessage(question),
-                              enabled: !_isLoading,
-                            ),
-                          )),
+                        padding: const EdgeInsets.only(right: 8),
+                        child: _QuickQuestionButton(
+                          text: question,
+                          onTap: _isLoading
+                              ? null
+                              : () => _handleSendMessage(question),
+                          enabled: !_isLoading,
+                        ),
+                      )),
                       const SizedBox(width: 16),
                     ],
                   ),
@@ -450,7 +446,8 @@ class _BodyState extends State<_Body> {
                   children: [
                     Expanded(
                       child: TextField(
-                        enabled: !_isLoading, // Disable when loading
+                        enabled: !_isLoading,
+                        // Disable when loading
 
                         controller: _textController,
                         decoration: InputDecoration(
@@ -460,27 +457,27 @@ class _BodyState extends State<_Body> {
                           filled: true,
                           fillColor: _isLoading
                               ? QuimifyColors.foreground(context)
-                                  .withOpacity(0.7)
+                              .withOpacity(0.7)
                               : QuimifyColors.foreground(context),
                           border: OutlineInputBorder(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(24)),
+                            const BorderRadius.all(Radius.circular(24)),
                             borderSide: BorderSide(
                                 color: QuimifyColors.tertiary(context)),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(24)),
+                            const BorderRadius.all(Radius.circular(24)),
                             borderSide: BorderSide(
                                 color: QuimifyColors.tertiary(context)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(24)),
+                            const BorderRadius.all(Radius.circular(24)),
                             borderSide: BorderSide(color: QuimifyColors.teal()),
                           ),
                           contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                          const EdgeInsets.symmetric(horizontal: 16),
                         ),
                         style: TextStyle(color: QuimifyColors.primary(context)),
                         onSubmitted: _isLoading ? null : _handleSendMessage,
@@ -490,10 +487,10 @@ class _BodyState extends State<_Body> {
                     IconButton(
                       icon: _isLoading
                           ? CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  QuimifyColors.teal()),
-                              strokeWidth: 2,
-                            )
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            QuimifyColors.teal()),
+                        strokeWidth: 2,
+                      )
                           : Icon(Icons.send, color: QuimifyColors.teal()),
                       onPressed: () => _handleSendMessage(_textController.text),
                     ),
