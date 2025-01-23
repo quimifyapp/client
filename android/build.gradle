@@ -1,5 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.8.10' 
+    ext.kotlin_version = '1.8.10'
+    ext.java_version = JavaVersion.VERSION_17
     repositories {
         google()
         mavenCentral()
@@ -9,7 +10,7 @@ buildscript {
         // START: FlutterFire Configuration
         classpath 'com.google.gms:google-services:4.3.15'
         // END: FlutterFire Configuration
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:8.6.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -22,11 +23,18 @@ allprojects {
 }
 
 rootProject.buildDir = '../build'
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(':app')
+
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'org.jetbrains.kotlin') {
+                details.useVersion kotlin_version
+            }
+        }
+    }
 }
 
 tasks.register("clean", Delete) {
