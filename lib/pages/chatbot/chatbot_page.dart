@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quimify_client/internet/chatbot/chat_service.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/widgets/bars/camera_button_handler.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -346,6 +347,12 @@ class _BodyState extends State<_Body> {
   }
 
   Future<void> _handleSendMessage(String text) async {
+    // Make sure user is subscribed else show paywall
+    final payments = Payments();
+    if (!payments.isSubscribed) {
+      await payments.showPaywall();
+      return;
+    }
     if ((!_hasSelectedImage && text.trim().isEmpty) || _isLoading) return;
 
     final messageText = text.trim();
