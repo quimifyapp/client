@@ -227,10 +227,11 @@ class ChatMessage extends StatelessWidget {
                 children: [
                   if (type == 'image') ...[
                     Text(
-                      'Photo',
+                      'Foto adjuntada 📸',
                       style: TextStyle(
                         color: isUser ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15
                       ),
                     ),
                   ],
@@ -563,7 +564,7 @@ class _BodyState extends State<_Body> {
                             controller: _textController,
                             decoration: InputDecoration(
                               hintText: _hasSelectedImage
-                                  ? 'Add a message (optional)...'
+                                  ? 'Añade mensaje'
                                   : 'Hazme una pregunta ...',
                               hintStyle: TextStyle(
                                   color: QuimifyColors.quaternary(context)),
