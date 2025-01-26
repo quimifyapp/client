@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ChatMessageModel {
   final String id;
   final String content;
+  final String? imageBase64;
+  final String messageType;
   final bool isUser;
   final DateTime timestamp;
   final String status;
@@ -12,6 +14,8 @@ class ChatMessageModel {
   ChatMessageModel({
     required this.id,
     required this.content,
+    this.imageBase64,
+    this.messageType = 'text',
     required this.isUser,
     required this.timestamp,
     required this.status,
@@ -22,6 +26,8 @@ class ChatMessageModel {
     return ChatMessageModel(
       id: doc.id,
       content: data['content'] ?? '',
+      imageBase64: data['imageBase64'],
+      messageType: data['messageType'] ?? 'text',
       isUser: data['isUser'] ?? false,
       timestamp: (data['timestamp'] as Timestamp).toDate(),
       status: data['status'] ?? 'delivered',
@@ -31,6 +37,8 @@ class ChatMessageModel {
   Map<String, dynamic> toMap() {
     return {
       'content': content,
+      'imageBase64': imageBase64,
+      'messageType': messageType,
       'isUser': isUser,
       'timestamp': Timestamp.fromDate(timestamp),
       'status': status,
@@ -74,11 +82,13 @@ class ChatService {
   }
 
   // Send message
-  Future<String> sendMessage(String message) async {
+  Future<String> sendMessage(String message, {String? imageBase64}) async {
     try {
       final callable = _functions.httpsCallable('processChat');
       final result = await callable.call({
         'message': message,
+        'imageBase64': imageBase64,
+        'messageType': imageBase64 != null ? 'image' : 'text',
       });
 
       if (result.data['success']) {

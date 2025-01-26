@@ -36,10 +36,10 @@ class SignInButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         icon: isLoading ? const SizedBox() : icon,
         label: isLoading
-            ? SizedBox.square(
+            ? const SizedBox.square(
                 dimension: 22,
                 child: CircularProgressIndicator(
-                  color: QuimifyColors.foreground(context),
+                  color: Color.fromARGB(255, 30, 30, 30),
                 ),
               )
             : Text(

@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:quimify_client/internet/chatbot/chat_service.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
+import 'package:quimify_client/pages/widgets/bars/camera_button_handler.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -70,21 +76,23 @@ class ChatMessage extends StatelessWidget {
   final String message;
   final bool isUser;
   final bool showAvatar;
+  final String? type;
 
   const ChatMessage({
     Key? key,
     required this.message,
     required this.isUser,
+    this.type = 'text',
     this.showAvatar = false,
   }) : super(key: key);
 
   Widget _buildMathContent(String text, BuildContext context) {
     // Handle both display math \[ ... \] and inline math \( ... \)
     final RegExp mathExp =
-    RegExp(r'(\\\[.*?\\\]|\\\(.*?\\\))', multiLine: true, dotAll: true);
+        RegExp(r'(\\\[.*?\\\]|\\\(.*?\\\))', multiLine: true, dotAll: true);
     final List<String> parts = text.split(mathExp);
     final List<String?> matches =
-    mathExp.allMatches(text).map((m) => m.group(0)).toList();
+        mathExp.allMatches(text).map((m) => m.group(0)).toList();
 
     List<Widget> children = [];
 
@@ -99,7 +107,7 @@ class ChatMessage extends StatelessWidget {
             ),
             code: TextStyle(
               backgroundColor:
-              isUser ? Colors.blue[700] : Colors.black.withOpacity(0.10),
+                  isUser ? Colors.blue[700] : Colors.black.withOpacity(0.10),
               color: Colors.black,
             ),
             codeblockDecoration: BoxDecoration(
@@ -196,7 +204,7 @@ class ChatMessage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment:
-        isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser && showAvatar) ...[
@@ -214,15 +222,32 @@ class ChatMessage extends StatelessWidget {
                 color: isUser ? Colors.blue : QuimifyColors.teal(),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: (message.isEmpty && !isUser)
-                  ? const Text(
-                'Pensando ...',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  color: Colors.black38,
-                ),
-              )
-                  : _buildMathContent(message, context),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (type == 'image') ...[
+                    Text(
+                      'Photo',
+                      style: TextStyle(
+                        color: isUser ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                  if (message.isEmpty && !isUser)
+                    const Text(
+                      'Pensando ...',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black38,
+                      ),
+                    )
+                  else if (message.isNotEmpty) ...[
+                    if (type != null) const SizedBox(height: 4),
+                    _buildMathContent(message, context),
+                  ],
+                ],
+              ),
             ),
           ),
         ],
@@ -244,6 +269,44 @@ class _BodyState extends State<_Body> {
   final ChatService _chatService = ChatService();
   bool _isFirstLoad = true;
   bool _isLoading = false; // Add this line
+  String? _selectedImageBase64;
+  bool _hasSelectedImage = false;
+  Future<void> _pickImage() async {
+    final ImageSource? source = await showDialog<ImageSource>(
+      context: context,
+      builder: (context) => const ImageSourceDialog(),
+    );
+
+    if (source == null) return;
+
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(
+      source: source,
+      preferredCameraDevice: CameraDevice.rear,
+    );
+
+    if (photo != null && context.mounted) {
+      // Show the cropping screen
+      if (!context.mounted) {
+        return;
+      }
+
+      // ignore: use_build_context_synchronously
+      final croppedFile = await Navigator.of(context).push<File>(
+        MaterialPageRoute(
+          builder: (context) => ImageCropperScreen(imageFile: File(photo.path)),
+        ),
+      );
+
+      if (croppedFile == null) return;
+
+      final bytes = await croppedFile.readAsBytes();
+      setState(() {
+        _selectedImageBase64 = base64Encode(bytes);
+        _hasSelectedImage = true;
+      });
+    }
+  }
 
   static const List<String> quickQuestions = [
     'Qué es la nomenclatura química?',
@@ -256,7 +319,7 @@ class _BodyState extends State<_Body> {
   final welcomeMessage = ChatMessageModel(
     id: 'welcome',
     content:
-    'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
+        'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
         'artifical, preguntame lo que quieras sobre Química',
     isUser: false,
     timestamp: DateTime.now(),
@@ -284,20 +347,34 @@ class _BodyState extends State<_Body> {
   }
 
   Future<void> _handleSendMessage(String text) async {
-    if (text.trim().isEmpty || _isLoading) return; // Add _isLoading check
+    // Make sure user is subscribed else show paywall
+    final payments = Payments();
+    if (!payments.isSubscribed) {
+      await payments.showPaywall();
+      return;
+    }
+    if ((!_hasSelectedImage && text.trim().isEmpty) || _isLoading) return;
 
+    final messageText = text.trim();
     _textController.clear();
 
     setState(() {
-      _isLoading = true; // Set loading state
+      _isLoading = true;
     });
 
     if (context.mounted) FocusScope.of(context).unfocus();
 
     try {
-      await _chatService.sendMessage(text);
+      await _chatService.sendMessage(
+        messageText,
+        imageBase64: _selectedImageBase64,
+      );
 
-      // Scroll to bottom after message is sent
+      setState(() {
+        _selectedImageBase64 = null;
+        _hasSelectedImage = false;
+      });
+
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e) {
       if (context.mounted) {
@@ -307,7 +384,7 @@ class _BodyState extends State<_Body> {
       }
     } finally {
       setState(() {
-        _isLoading = false; // Reset loading state
+        _isLoading = false;
       });
     }
   }
@@ -374,8 +451,9 @@ class _BodyState extends State<_Body> {
                                     ),
                                     child: Text(
                                       message.content,
-                                      style:
-                                      const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
@@ -388,6 +466,7 @@ class _BodyState extends State<_Body> {
 
                       return ChatMessage(
                         message: message.content,
+                        type: message.messageType,
                         isUser: message.isUser,
                         showAvatar: showAvatar,
                       );
@@ -425,15 +504,15 @@ class _BodyState extends State<_Body> {
                     children: [
                       const SizedBox(width: 16),
                       ...quickQuestions.map((question) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: _QuickQuestionButton(
-                          text: question,
-                          onTap: _isLoading
-                              ? null
-                              : () => _handleSendMessage(question),
-                          enabled: !_isLoading,
-                        ),
-                      )),
+                            padding: const EdgeInsets.only(right: 8),
+                            child: _QuickQuestionButton(
+                              text: question,
+                              onTap: _isLoading
+                                  ? null
+                                  : () => _handleSendMessage(question),
+                              enabled: !_isLoading,
+                            ),
+                          )),
                       const SizedBox(width: 16),
                     ],
                   ),
@@ -442,57 +521,94 @@ class _BodyState extends State<_Body> {
               const SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: TextField(
-                        enabled: !_isLoading,
-                        // Disable when loading
-
-                        controller: _textController,
-                        decoration: InputDecoration(
-                          hintText: 'Hazme una pregunta ...',
-                          hintStyle: TextStyle(
-                              color: QuimifyColors.quaternary(context)),
-                          filled: true,
-                          fillColor: _isLoading
-                              ? QuimifyColors.foreground(context)
-                              .withOpacity(0.7)
-                              : QuimifyColors.foreground(context),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(24)),
-                            borderSide: BorderSide(
-                                color: QuimifyColors.tertiary(context)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(24)),
-                            borderSide: BorderSide(
-                                color: QuimifyColors.tertiary(context)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(24)),
-                            borderSide: BorderSide(color: QuimifyColors.teal()),
-                          ),
-                          contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16),
+                    if (_hasSelectedImage) ...[
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: QuimifyColors.foreground(context),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        style: TextStyle(color: QuimifyColors.primary(context)),
-                        onSubmitted: _isLoading ? null : _handleSendMessage,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.photo, color: Colors.grey),
+                            const SizedBox(width: 8),
+                            const Text('Foto seleccionada'),
+                            const Spacer(),
+                            IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () => setState(() {
+                                _selectedImageBase64 = null;
+                                _hasSelectedImage = false;
+                              }),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    IconButton(
-                      icon: _isLoading
-                          ? CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            QuimifyColors.teal()),
-                        strokeWidth: 2,
-                      )
-                          : Icon(Icons.send, color: QuimifyColors.teal()),
-                      onPressed: () => _handleSendMessage(_textController.text),
+                      const SizedBox(height: 8),
+                    ],
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.photo_camera,
+                            color: QuimifyColors.teal(),
+                          ),
+                          onPressed: _isLoading ? null : _pickImage,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            enabled: !_isLoading,
+                            controller: _textController,
+                            decoration: InputDecoration(
+                              hintText: _hasSelectedImage
+                                  ? 'Add a message (optional)...'
+                                  : 'Hazme una pregunta ...',
+                              hintStyle: TextStyle(
+                                  color: QuimifyColors.quaternary(context)),
+                              filled: true,
+                              fillColor: _isLoading
+                                  ? QuimifyColors.foreground(context)
+                                      .withOpacity(0.7)
+                                  : QuimifyColors.foreground(context),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide: BorderSide(
+                                    color: QuimifyColors.tertiary(context)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide: BorderSide(
+                                    color: QuimifyColors.tertiary(context)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide:
+                                    BorderSide(color: QuimifyColors.teal()),
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                            ),
+                            style: TextStyle(
+                                color: QuimifyColors.primary(context)),
+                            onSubmitted: _isLoading ? null : _handleSendMessage,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          icon: _isLoading
+                              ? CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      QuimifyColors.teal()),
+                                  strokeWidth: 2,
+                                )
+                              : Icon(Icons.send, color: QuimifyColors.teal()),
+                          onPressed: _isLoading
+                              ? null
+                              : () => _handleSendMessage(_textController.text),
+                        ),
+                      ],
                     ),
                   ],
                 ),
