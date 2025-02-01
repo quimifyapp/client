@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/chatbot/chat_service.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/widgets/bars/camera_button_handler.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -347,22 +349,52 @@ class _BodyState extends State<_Body> {
   }
 
   Future<void> _handleSendMessage(String text) async {
-    // Make sure user is subscribed else show paywall
-    final payments = Payments();
-    if (!payments.isSubscribed) {
-      await payments.showPaywall();
-      return;
-    }
     if ((!_hasSelectedImage && text.trim().isEmpty) || _isLoading) return;
 
     final messageText = text.trim();
+    final payments = Payments();
+    final ads = Ads();
+
+    // If not subscribed, show paywall first
+    if (!payments.isSubscribed) {
+      await payments.showPaywall();
+
+      // If still not subscribed after paywall, offer rewarded ad
+      if (!payments.isSubscribed &&
+          ads.canWatchRewardedAd &&
+          !_hasSelectedImage) {
+        if (!context.mounted) return;
+
+        await MessageDialog(
+          title: 'Enviar mensaje',
+          details: 'Puedes enviar este mensaje viendo un anuncio de video.',
+          onButtonPressed: () async {
+            final bool wasRewarded = await ads.showRewarded();
+            if (wasRewarded && context.mounted) {
+              // Send the message if rewarded
+              await _sendMessageToService(messageText);
+            }
+          },
+        ).show(context);
+        return;
+      }
+      return;
+    }
+
+    await _sendMessageToService(messageText);
+  }
+
+  // Helper method to handle the actual message sending
+  Future<void> _sendMessageToService(String messageText) async {
     _textController.clear();
 
     setState(() {
       _isLoading = true;
     });
 
-    if (context.mounted) FocusScope.of(context).unfocus();
+    if (context.mounted) {
+      FocusScope.of(context).unfocus();
+    }
 
     try {
       await _chatService.sendMessage(
