@@ -5,6 +5,7 @@ import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/equation_result.dart';
 import 'package:quimify_client/internet/internet.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/calculator/equation/widgets/equation_input_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
@@ -53,7 +54,7 @@ class _EquationPageState extends State<EquationPage> {
 
     if (result != null) {
       if (result.present) {
-        Ads().showInterstitial();
+        // Ads().showInterstitial();
 
         setState(() => _result = result);
 
@@ -293,7 +294,32 @@ class _EquationPageState extends State<EquationPage> {
                                     text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) => _pressedButton(),
+                          onSubmitted: (_) async {
+                            if (!Payments().isSubscribed) {
+                              await Payments().showPaywall();
+                              // Check if user is subscribed after paywall
+                              if (!Payments().isSubscribed &&
+                                  Ads().canWatchRewardedAd) {
+                                // Show dialog to watch ad
+                                await MessageDialog(
+                                  title: 'Desbloquear con anuncio',
+                                  details:
+                                      'Puedes desbloquear esta función una vez viendo un anuncio de video.',
+                                  onButtonPressed: () async {
+                                    final bool wasRewarded =
+                                        await Ads().showRewarded();
+                                    if (wasRewarded) {
+                                      _pressedButton();
+                                    }
+                                  },
+                                  // ignore: use_build_context_synchronously
+                                ).show(context);
+                                return;
+                              }
+                              return;
+                            }
+                          },
+
                           onTap: _scrollToStart,
                         ),
                         const SizedBox(height: 10),
@@ -353,7 +379,31 @@ class _EquationPageState extends State<EquationPage> {
                                     text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) => _pressedButton(),
+                          onSubmitted: (_) async {
+                            if (!Payments().isSubscribed) {
+                              await Payments().showPaywall();
+                              // Check if user is subscribed after paywall
+                              if (!Payments().isSubscribed &&
+                                  Ads().canWatchRewardedAd) {
+                                // Show dialog to watch ad
+                                await MessageDialog(
+                                  title: 'Desbloquear con anuncio',
+                                  details:
+                                      'Puedes desbloquear esta función una vez viendo un anuncio de video.',
+                                  onButtonPressed: () async {
+                                    final bool wasRewarded =
+                                        await Ads().showRewarded();
+                                    if (wasRewarded) {
+                                      _pressedButton();
+                                    }
+                                  },
+                                  // ignore: use_build_context_synchronously
+                                ).show(context);
+                                return;
+                              }
+                              return;
+                            }
+                          },
                           onTap: _scrollToStart,
                         ),
                       ],
@@ -371,7 +421,31 @@ class _EquationPageState extends State<EquationPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        onPressed: _pressedButton,
+                        onPressed: () async {
+                          if (!Payments().isSubscribed) {
+                            await Payments().showPaywall();
+                            // Check if user is subscribed after paywall
+                            if (!Payments().isSubscribed &&
+                                Ads().canWatchRewardedAd) {
+                              // Show dialog to watch ad
+                              await MessageDialog(
+                                title: 'Desbloquear con anuncio',
+                                details:
+                                    'Puedes desbloquear esta función una vez viendo un anuncio de video.',
+                                onButtonPressed: () async {
+                                  final bool wasRewarded =
+                                      await Ads().showRewarded();
+                                  if (wasRewarded) {
+                                    _pressedButton();
+                                  }
+                                },
+                                // ignore: use_build_context_synchronously
+                              ).show(context);
+                              return;
+                            }
+                            return;
+                          }
+                        },
                         child: Text(
                           'Ajustar',
                           style: TextStyle(

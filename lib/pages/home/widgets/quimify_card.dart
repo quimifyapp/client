@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:quimify_client/internet/payments/payments.dart';
+
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
@@ -77,14 +77,9 @@ class _QuimifyCardState extends State<QuimifyCard> {
     super.dispose();
   }
 
-  _onPressed(BuildContext context) {
+  _onPressed(BuildContext context) async {
     if (widget.page == null) {
       comingSoonDialog.show(context);
-      return;
-    }
-
-    if (widget.paidFeature && !Payments().isSubscribed) {
-      Payments().showPaywall();
       return;
     }
 

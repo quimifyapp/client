@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:ui';
 
@@ -5,9 +6,13 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quimify_client/internet/ads/env/env.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Ads {
   static final Ads _singleton = Ads._internal();
+  static const int kMaxDailyRewards = 5;
+  static const String kLastRewardDateKey = 'last_reward_date';
+  static const String kDailyRewardsCountKey = 'daily_rewards_count';
 
   factory Ads() => _singleton;
 
@@ -23,14 +28,39 @@ class Ads {
   late int _interstitialOffset = 1; // Minimum attempts before 1st one
   late String _interstitialUnitId = Env.defaultInterstitialUnitId;
 
+  late bool _showRewarded = true;
+  late String _rewardedUnitId = Env.defaultRewardedUnitId;
+  late int _dailyRewardsCount = 0;
+  late DateTime _lastRewardDate;
+
   late int _interstitialFreeAttempts;
 
   InterstitialAd? _nextInterstitial;
+  RewardedAd? _nextRewarded;
 
   // Initialize:
 
-  initialize(ClientResult? clientResult) {
+  initialize(ClientResult? clientResult) async {
     MobileAds.instance.initialize();
+
+    // Load saved reward data
+    final prefs = await SharedPreferences.getInstance();
+    final lastRewardDateStr = prefs.getString(kLastRewardDateKey);
+    if (lastRewardDateStr != null) {
+      _lastRewardDate = DateTime.parse(lastRewardDateStr);
+
+      // Reset counter if it's a new day
+      if (!_isSameDay(_lastRewardDate, DateTime.now())) {
+        _dailyRewardsCount = 0;
+        await _saveRewardData();
+      } else {
+        _dailyRewardsCount = prefs.getInt(kDailyRewardsCountKey) ?? 0;
+      }
+    } else {
+      _lastRewardDate = DateTime.now();
+      _dailyRewardsCount = 0;
+      await _saveRewardData();
+    }
 
     if (clientResult != null) {
       _showBanner = clientResult.bannerAdPresent;
@@ -46,20 +76,74 @@ class Ads {
         _interstitialOffset = clientResult.interstitialAdOffset!;
         _interstitialUnitId = clientResult.interstitialAdUnitId!;
       }
+
+      _showRewarded = clientResult.rewardedAdPresent;
+      if (_showRewarded && clientResult.rewardedAdUnitId != null) {
+        _rewardedUnitId = clientResult.rewardedAdUnitId!;
+      }
     }
 
     _interstitialFreeAttempts = _interstitialPeriod - _interstitialOffset;
 
-    if (_showBanner || _showInterstitial) {
+    if (_showBanner || _showInterstitial || _showRewarded) {
       _showGdrpForm();
     }
 
     if (_showInterstitial) {
       _loadInterstitial();
     }
+
+    if (_showRewarded) {
+      _loadRewarded();
+    }
   }
 
   // Private:
+
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
+  Future<void> _saveRewardData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        kLastRewardDateKey, _lastRewardDate.toIso8601String());
+    await prefs.setInt(kDailyRewardsCountKey, _dailyRewardsCount);
+  }
+
+  Future<void> _incrementRewardCount() async {
+    final now = DateTime.now();
+    if (!_isSameDay(_lastRewardDate, now)) {
+      _dailyRewardsCount = 0;
+      _lastRewardDate = now;
+    }
+    _dailyRewardsCount++;
+    await _saveRewardData();
+  }
+
+  _loadRewarded() => RewardedAd.load(
+        adUnitId: _rewardedUnitId,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (ad) {
+            _nextRewarded = ad;
+
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              onAdDismissedFullScreenContent: (ad) {
+                ad.dispose();
+                _loadRewarded(); // Preload next rewarded ad
+              },
+              onAdFailedToShowFullScreenContent: (ad, error) {
+                ad.dispose();
+                _loadRewarded();
+              },
+            );
+          },
+          onAdFailedToLoad: (error) => developer.log(error.message),
+        ),
+      );
 
   _showGdrpForm() => ConsentInformation.instance.requestConsentInfoUpdate(
         ConsentRequestParameters(),
@@ -158,4 +242,47 @@ class Ads {
       _interstitialFreeAttempts += 1;
     }
   }
+
+  Future<bool> showRewarded() async {
+    if (!_showRewarded) {
+      return false;
+    }
+
+    if (Payments().isSubscribed) {
+      return false;
+    }
+
+    if (_dailyRewardsCount >= kMaxDailyRewards) {
+      return false;
+    }
+
+    if (_nextRewarded == null) {
+      _loadRewarded();
+      return false;
+    }
+
+    Completer<bool> rewardCompleter = Completer<bool>();
+
+    _nextRewarded!.show(
+      onUserEarnedReward: (_, reward) async {
+        await _incrementRewardCount();
+        rewardCompleter.complete(true);
+      },
+    );
+
+    _nextRewarded = null;
+    _loadRewarded(); // Preload next rewarded ad
+
+    return rewardCompleter.future;
+  }
+
+  bool get isRewardedAdReady => _nextRewarded != null;
+
+  int get remainingDailyRewards => kMaxDailyRewards - _dailyRewardsCount;
+
+  bool get canWatchRewardedAd =>
+      _showRewarded &&
+      !Payments().isSubscribed &&
+      _nextRewarded != null &&
+      _dailyRewardsCount < kMaxDailyRewards;
 }

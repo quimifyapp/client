@@ -12,7 +12,7 @@ part 'env.g.dart';
   // flutter packages pub run build_runner build --delete-conflicting-outputs
 
 // Usage:
-  // Env.defaultBannerUnitI
+  // Env.defaultBannerUnitId
   // Env.defaultInterstitialUnitId
 
 @Envied(path: 'lib/internet/ads/env/ads.env')
@@ -22,4 +22,8 @@ abstract class Env {
 
   @EnviedField(varName: 'DEFAULT_INTERSTITIAL_UNIT_ID', obfuscate: true)
   static final String defaultInterstitialUnitId = _Env.defaultInterstitialUnitId;
+
+  @EnviedField(varName: 'DEFAULT_REWARDED_UNIT_ID', obfuscate: true)
+  static final String defaultRewardedUnitId = _Env.defaultRewardedUnitId;
+
 }
