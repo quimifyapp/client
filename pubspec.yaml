@@ -1,7 +1,7 @@
 name: quimify_client
 description: The Quimify client
 
-version: 4.3.2+149 # Android build code
+version: 4.3.2+151 # Android build code
 
 dependencies:
   flutter:
