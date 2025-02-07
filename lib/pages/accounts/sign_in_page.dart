@@ -175,10 +175,11 @@ class _SignInPageState extends State<SignInPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: RichText(
+                  textAlign: TextAlign.center,
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Al iniciar sesión, aceptas nuestra ',
+                        text: 'Al iniciar sesión, aceptas nuestra\n',
                         style: TextStyle(
                           color: QuimifyColors.secondary(context),
                           fontSize: 12,
