@@ -377,6 +377,44 @@ class _BodyState extends State<_Body> {
             }
           },
         ).show(context);
+
+        return;
+      }
+      else if (!payments.isSubscribed &&
+          !ads.canWatchRewardedAd &&
+          !_hasSelectedImage){
+        if (!context.mounted) return;
+
+        await MessageDialog(
+          title: 'Máximo diario alcanzado',
+          details: 'Si quieres seguir enviando mensajes a Atomic suscribete a Premium.',
+          onButtonPressed: () async {
+            final bool wasRewarded = await ads.showRewarded();
+            if (wasRewarded && context.mounted) {
+              // Send the message if rewarded
+              await _sendMessageToService(messageText);
+            }
+          },
+        ).show(context);
+
+        return;
+      }
+      else if (!payments.isSubscribed &&
+          _hasSelectedImage){
+        if (!context.mounted) return;
+
+        await MessageDialog(
+          title: 'Solo con Premium',
+          details: 'Si quieres enviar un mensaje con imágen a Atomic suscribete a Premium.',
+          onButtonPressed: () async {
+            final bool wasRewarded = await ads.showRewarded();
+            if (wasRewarded && context.mounted) {
+              // Send the message if rewarded
+              await _sendMessageToService(messageText);
+            }
+          },
+        ).show(context);
+
         return;
       }
       return;

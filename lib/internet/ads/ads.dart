@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Ads {
   static final Ads _singleton = Ads._internal();
-  static const int kMaxDailyRewards = 20;
+  static const int kMaxDailyRewards = 1;
   static const String kLastRewardDateKey = 'last_reward_date';
   static const String kDailyRewardsCountKey = 'daily_rewards_count';
 
