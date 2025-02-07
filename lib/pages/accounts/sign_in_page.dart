@@ -172,53 +172,57 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ],
               const SizedBox(height: 12),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'By logging in, you agree to our ',
-                      style: TextStyle(
-                        color: QuimifyColors.secondary(context),
-                        fontSize: 12,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Al iniciar sesión, aceptas nuestra ',
+                        style: TextStyle(
+                          color: QuimifyColors.secondary(context),
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'Terms of Service',
-                      style: TextStyle(
-                        color: QuimifyColors.teal(),
-                        fontSize: 12,
-                        decoration: TextDecoration.underline,
+                      TextSpan(
+                        text: 'Política de Privacidad',
+                        style: TextStyle(
+                          color: QuimifyColors.teal(),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(
+                                Uri.parse(
+                                    'https://quimify.com/privacy-policy/'),
+                                mode: LaunchMode.externalApplication);
+                          },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          launchUrl(
-                              Uri.parse(
-                                  'https://quimify.com/terms-conditions/'),
-                              mode: LaunchMode.externalApplication);
-                        },
-                    ),
-                    TextSpan(
-                      text: ' and ',
-                      style: TextStyle(
-                        color: QuimifyColors.secondary(context),
-                        fontSize: 12,
+                      TextSpan(
+                        text: ' y ',
+                        style: TextStyle(
+                          color: QuimifyColors.secondary(context),
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'Privacy Policy',
-                      style: TextStyle(
-                        color: QuimifyColors.teal(),
-                        fontSize: 12,
-                        decoration: TextDecoration.underline,
+                      TextSpan(
+                        text: 'Términos & Condiciones',
+                        style: TextStyle(
+                          color: QuimifyColors.teal(),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(
+                                Uri.parse(
+                                    'https://quimify.com/terms-conditions/'),
+                                mode: LaunchMode.externalApplication);
+                          },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          launchUrl(
-                              Uri.parse('https://quimify.com/privacy-policy/'),
-                              mode: LaunchMode.externalApplication);
-                        },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const Spacer(),
