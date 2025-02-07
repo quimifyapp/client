@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/accounts/accounts.dart';
 import 'package:quimify_client/internet/api/results/client_result.dart';
@@ -7,6 +8,7 @@ import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/pages/widgets/objects/sign_in_button.dart';
 import 'package:quimify_client/pages/widgets/particle_effect.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key, required this.clientResult});
@@ -169,6 +171,61 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ],
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Al iniciar sesión, aceptas nuestra\n',
+                        style: TextStyle(
+                          color: QuimifyColors.secondary(context),
+                          fontSize: 12,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Política de Privacidad',
+                        style: TextStyle(
+                          color: QuimifyColors.teal(),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(
+                                Uri.parse(
+                                    'https://quimify.com/privacy-policy/'),
+                                mode: LaunchMode.externalApplication);
+                          },
+                      ),
+                      TextSpan(
+                        text: ' y ',
+                        style: TextStyle(
+                          color: QuimifyColors.secondary(context),
+                          fontSize: 12,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Términos & Condiciones',
+                        style: TextStyle(
+                          color: QuimifyColors.teal(),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(
+                                Uri.parse(
+                                    'https://quimify.com/terms-conditions/'),
+                                mode: LaunchMode.externalApplication);
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
