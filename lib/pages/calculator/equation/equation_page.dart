@@ -443,7 +443,23 @@ class _EquationPageState extends State<EquationPage> {
                               ).show(context);
                               return;
                             }
+                            else if (Payments().isSubscribed) {
+                              _pressedButton();
+                            }
+                            else if (!Payments().isSubscribed &&
+                                !Ads().canWatchRewardedAd) {
+                              // Max daily rewards reached
+                              await const MessageDialog(
+                                title: 'Máximo diario alcanzado',
+                                details:
+                                    'Si quieres seguir balanceando ecuaciones suscribete a Premium.',
+                              ).show(context);
+                              return;
+                            }
                             return;
+                          }
+                          else {
+                            _pressedButton();
                           }
                         },
                         child: Text(
