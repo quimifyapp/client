@@ -17,6 +17,8 @@
       </array>
     </dict>
   </array>
+  <key>NSUserTrackingUsageDescription</key>
+  <string>Permite que Quimify te proporcione contenido y anuncios personalizados según tus intereses.</string>
   <key>NSCameraUsageDescription</key>
   <string>We need camera access to capture images for text extraction</string>
 	<key>CFBundleDevelopmentRegion</key>
