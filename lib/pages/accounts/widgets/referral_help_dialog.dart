@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/pages/accounts/widgets/video_examples_buttons.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 
@@ -18,6 +19,7 @@ class ReferralHelpDialog extends StatelessWidget {
           DialogContentText(
             richText: '*Ejemplos:*',
           ),
+          VideoExamplesButtons()
         ],
         '📈 Acumula visitas': [
           Center(
