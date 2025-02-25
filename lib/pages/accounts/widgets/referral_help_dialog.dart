@@ -9,69 +9,55 @@ class ReferralHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return const HelpSlidesDialog(
       titleToContent: {
-        'Inorgánica': [
+        '📲 Sube un vídeo': [
           Center(
             child: DialogContentText(
-              richText: 'Los compuestos inorgánicos no tienen al carbono como '
-                  'elemento principal.',
+              richText: 'Sube un vídeo a *TikTok, Instagram o YouTube* que este relacionado o mencione a *Quimify*',
             ),
           ),
           DialogContentText(
             richText: '*Ejemplos:*',
           ),
+        ],
+        '📈 Acumula visitas': [
           Center(
             child: DialogContentText(
-              richText: 'CO₂',
+              richText: 'Acumula visitas a través de varios vídeos y plataformas',
+            ),
+          ),
+          DialogContentText(
+            richText: '*Ejemplo:*',
+          ),
+          Center(
+            child: DialogContentText(
+              richText: 'TikTok vídeo 1 ➔ 50 mil visitas',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'ácido sulfúrico',
+              richText: 'TikTok vídeo 2 ➔ 200 mil visitas',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'NaCl',
+              richText: 'Instagram vídeo 1 ➔ 120 mil visitas',
+            ),
+          ),
+          Center(
+            child: DialogContentText(
+              richText: 'YouTube vídeo 1 ➔ 30 mil visitas',
+            ),
+          ),
+          Center(
+            child: DialogContentText(
+              richText: '*Total ➔ 400 mil visitas = 40€/\$*',
             ),
           ),
         ],
-        'Formular': [
+        '💸 Reclama tu dinero': [
           Center(
             child: DialogContentText(
-              richText: 'Consiste en averiguar la fórmula dado el nombre.',
-            ),
-          ),
-          DialogContentText(
-            richText: '*Ejemplos:*',
-          ),
-          Center(
-            child: DialogContentText(
-              richText: 'cloruro de sodio   ➔   NaCl',
-            ),
-          ),
-          Center(
-            child: DialogContentText(
-              richText: 'nitrato de plata   ➔   AgNO₃',
-            ),
-          ),
-        ],
-        'Nombrar': [
-          Center(
-            child: DialogContentText(
-              richText: 'Consiste en averiguar el nombre dada la fórmula.',
-            ),
-          ),
-          DialogContentText(
-            richText: '*Ejemplos:*',
-          ),
-          Center(
-            child: DialogContentText(
-              richText: 'CrO₃   ➔   óxido de cromo(VI)',
-            ),
-          ),
-          Center(
-            child: DialogContentText(
-              richText: 'Al₂(SO₃)₃   ➔   sulfito de aluminio',
+              richText: 'Cuándo llegues a 100 mil visitas o más, escríbenos un email.\n\n Envía el link de todos los vídeos que quieres que tengamos en cuenta. Solo puedes enviar cada vídeo 1 vez así que piensa bien cuando hacerlo. \n\n Revisaremos todos los vídeos para comprobar sus visualizaciones en el momento de envío y ver que están relacionados o mencionan a Quimify. \n\n Si los vídeos pasan la revisión recibirás 10€/\$ por 100 mil visitas generadas. El pago se hará en tarjetas regalo de Amazon, Apple, Playstation, Starbucks, Netflix... etc, sujeto a disponibilidad.',
             ),
           ),
         ],
