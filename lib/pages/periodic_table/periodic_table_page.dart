@@ -33,9 +33,12 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
           allowMalformed: true // Add this to handle potentially malformed UTF8
           );
 
+
+      String cleanData = rawData.replaceAll('Â', ''); //Fix typos
+
       // Parse CSV with specific settings
       final List<List<dynamic>> csvTable =
-          const CsvToListConverter().convert(rawData);
+          const CsvToListConverter().convert(cleanData);
 
       // Get headers
       final headers = csvTable[0].map((e) => e.toString().trim()).toList();
