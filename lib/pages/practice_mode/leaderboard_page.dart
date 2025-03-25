@@ -105,7 +105,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                                   'assets/images/practice_mode/2_place.png',
                               name: _users![1].userName,
                               score: _users![1].points,
-                              size: 100,
+                              size: 90,
                             ),
                           )
                         else
@@ -126,7 +126,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                                   'assets/images/practice_mode/3_place.png',
                               name: _users![2].userName,
                               score: _users![2].points,
-                              size: 100,
+                              size: 90,
                             ),
                           )
                         else
@@ -235,7 +235,7 @@ class TopStudentBadge extends StatelessWidget {
     required this.badgeUrl,
     required this.name,
     required this.score,
-    this.size = 120,
+    this.size = 110,
   });
 
   final String badgeUrl;
@@ -245,30 +245,39 @@ class TopStudentBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          badgeUrl,
-          width: size,
-          height: size,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    return SizedBox(
+      width: size,
+      child: Column(
+        children: [
+          Image.asset(
+            badgeUrl,
+            width: size,
+            height: size,
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          score.toString(),
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+          const SizedBox(height: 8),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: size),
+            child: Text(
+              name,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            score.toString(),
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
