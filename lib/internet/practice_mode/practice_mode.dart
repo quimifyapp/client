@@ -1,11 +1,17 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as dev;
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
+import 'package:quimify_client/internet/accounts/accounts.dart';
 import 'models/question.dart';
+import 'models/answer.dart';
+import 'models/leaderboard_user.dart';
 
 class PracticeModeService {
   List<Question>? _questions;
+  // Adjust max questions the user can answer during a quiz
   final int _maxQuestions = 10;
 
   Future<void> loadQuestions() async {
@@ -55,16 +61,16 @@ class PracticeModeService {
             final row = csvTable[i].map((e) => e.toString().trim()).toList();
             _questions!.add(Question.fromCsv(row));
           } catch (e) {
-            log('Error parsing row $i: $e');
+            dev.log('Error parsing row $i: $e');
             // Skip invalid rows instead of failing completely
             continue;
           }
         }
       }
-      log('Questions loaded successfully: ${_questions!.length} questions');
+      dev.log('Questions loaded successfully: ${_questions!.length} questions');
     } catch (e, stackTrace) {
-      log('Error loading questions: $e');
-      log('Stack trace: $stackTrace');
+      dev.log('Error loading questions: $e');
+      dev.log('Stack trace: $stackTrace');
       rethrow;
     }
   }
@@ -82,12 +88,115 @@ class PracticeModeService {
       await loadQuestions();
     }
 
-    return _questions!
+    final filtered = _questions!
         .where((q) =>
             q.difficulty == difficulty.toLowerCase() &&
             q.category == category.toLowerCase())
-        .toList()
-        .take(_maxQuestions)
         .toList();
+
+    // Randomize questions
+    filtered.shuffle();
+    return filtered.take(_maxQuestions).toList();
+  }
+
+  Future<Map<String, dynamic>> submitQuizResults({
+    required List<Answer> answers,
+  }) async {
+    try {
+      final authService = AuthService();
+
+      // Convert answers to the format expected by the cloud function
+      final formattedAnswers = answers
+          .map((answer) => {
+                'id': answer.question.id,
+                'answer': answer.option,
+              })
+          .toList();
+
+      // Call the cloud function
+      final result = await FirebaseFunctions.instance
+          .httpsCallable('processPracticeModeAnswers')
+          .call({
+        'answers': formattedAnswers,
+        'userName': authService.firstName ?? 'N/A',
+      });
+
+      return result.data as Map<String, dynamic>;
+    } catch (e) {
+      dev.log('Error submitting quiz results: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<LeaderboardUser>> getLeaderboard() async {
+    try {
+      final authService = AuthService();
+      final userId = authService.currentUser!.uid;
+
+      // Get top 10 users
+      final QuerySnapshot topSnapshot = await FirebaseFirestore.instance
+          .collection('leaderboard')
+          .orderBy('points', descending: true)
+          .limit(10)
+          .get();
+
+      final topUsers = topSnapshot.docs
+          .map((doc) => LeaderboardUser.fromFirestore(doc))
+          .toList();
+
+      // Check if current user is in top 10
+      final isUserInTop10 = topUsers.any((user) => user.userId == userId);
+
+      if (!isUserInTop10) {
+        // Get current user's position by counting users with higher points
+        final userDoc = await FirebaseFirestore.instance
+            .collection('leaderboard')
+            .doc(userId)
+            .get();
+
+        if (userDoc.exists) {
+          final userData = userDoc.data() as Map<String, dynamic>;
+          final userPoints = userData['points'] as int;
+
+          // Count users with higher points to get position
+          final AggregateQuerySnapshot higherPointsQuery =
+              await FirebaseFirestore.instance
+                  .collection('leaderboard')
+                  .where('points', isGreaterThan: userPoints)
+                  .count()
+                  .get();
+
+          final position = (higherPointsQuery.count ?? 0) + 1;
+
+          // Add current user to the list with their position
+          final currentUser = LeaderboardUser.fromFirestore(userDoc);
+          topUsers.add(LeaderboardUser(
+            userId: currentUser.userId,
+            userName: currentUser.userName,
+            points: currentUser.points,
+            lastUpdated: currentUser.lastUpdated,
+            position: position,
+          ));
+        }
+      }
+
+      // Set positions for top 10
+      for (var i = 0; i < topUsers.length; i++) {
+        if (i < 10) {
+          topUsers[i] = LeaderboardUser(
+            userId: topUsers[i].userId,
+            userName: topUsers[i].userName,
+            points: topUsers[i].points,
+            lastUpdated: topUsers[i].lastUpdated,
+            position: i + 1,
+          );
+        }
+      }
+
+      return topUsers;
+    } catch (e) {
+      dev.log('Error fetching leaderboard: $e');
+      rethrow;
+    }
   }
 }

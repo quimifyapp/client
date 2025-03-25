@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/practice_mode/category_page.dart';
+import 'package:quimify_client/pages/practice_mode/leaderboard_page.dart';
 import 'package:quimify_client/pages/practice_mode/selection_button.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -50,6 +52,14 @@ class DifficultyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
       header: const QuimifyPageBar(title: 'Practicar'),
+      fab: FloatingActionButton(
+        backgroundColor: QuimifyColors.teal(),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LeaderboardPage()));
+        },
+        child: const Icon(Icons.leaderboard),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -133,15 +143,21 @@ class DifficultyPage extends StatelessWidget {
                                 title: 'Difícil',
                                 imageUr:
                                     'assets/images/practice_mode/difficulty_difficult.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const CategoryPage(
-                                        difficulty: 'hard',
+                                onTap: () async {
+                                  final payments = Payments();
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CategoryPage(
+                                          difficulty: 'hard',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    await payments.showPaywall();
+                                  }
                                 },
                               ),
                             ],

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/practice_mode/models/answer.dart';
 import 'package:quimify_client/internet/practice_mode/models/question.dart';
 import 'package:quimify_client/internet/practice_mode/practice_mode.dart';
+import 'package:quimify_client/pages/practice_mode/leaderboard_page.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
@@ -61,7 +62,8 @@ class _QuizPageState extends State<QuizPage> {
   void _moveToNextQuestion() {
     _timer?.cancel();
     if (_pageController?.page?.toInt() == _questions.length - 1) {
-      // Handle quiz completion
+      // Submit quiz and navigate to leaderboard
+      _submitQuizAndShowLeaderboard();
       return;
     }
 
@@ -94,6 +96,31 @@ class _QuizPageState extends State<QuizPage> {
       isLoading = false;
     });
     _startTimer();
+  }
+
+  Future<void> _submitQuizAndShowLeaderboard() async {
+    try {
+      final service = PracticeModeService();
+      await service.submitQuizResults(answers: _answers);
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LeaderboardPage(),
+          ),
+        );
+      }
+    } catch (e) {
+      log('Error submitting quiz: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error submitting quiz results'),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -161,13 +188,6 @@ class _QuizPageState extends State<QuizPage> {
                                     border: Border.all(
                                       color: Colors.grey[300]!,
                                     ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey[300]!,
-                                        blurRadius: 10,
-                                        offset: const Offset(0, 5),
-                                      ),
-                                    ],
                                   ),
                                   padding: const EdgeInsets.all(16),
                                   child: Center(
@@ -203,24 +223,32 @@ class _QuizPageState extends State<QuizPage> {
                                   setState(() => _answerSelected = true);
                                   _timer
                                       ?.cancel(); // Stop timer when answer selected
-                                  // Wait for animation before moving to next page
+
+                                  // Wait for animation before proceeding
                                   await Future.delayed(
                                       const Duration(seconds: 2));
+
                                   if (mounted) {
                                     setState(() {
                                       _answers.add(Answer(
-                                        option: option.value,
+                                        option: option.id,
                                         question: question,
                                       ));
                                     });
-                                    _pageController
-                                        ?.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 300),
-                                          curve: Curves.easeInOut,
-                                        )
-                                        .then((_) =>
-                                            _startTimer()); // Start timer for next question
+
+                                    // Check if this is the last question
+                                    if (_pageController?.page?.toInt() ==
+                                        _questions.length - 1) {
+                                      _submitQuizAndShowLeaderboard();
+                                    } else {
+                                      _pageController
+                                          ?.nextPage(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            curve: Curves.easeInOut,
+                                          )
+                                          .then((_) => _startTimer());
+                                    }
                                   }
                                 },
                               );

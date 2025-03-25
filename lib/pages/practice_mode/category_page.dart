@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/practice_mode/quiz_page.dart';
 import 'package:quimify_client/pages/practice_mode/selection_button.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
@@ -260,21 +261,27 @@ class CategoryPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 40),
+                          const SizedBox(height: 40),
                           SelectionButton(
                             title: 'Universidad',
                             imageUr:
                                 'assets/images/practice_mode/category_university.png',
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => QuizPage(
-                                    difficulty: difficulty,
-                                    category: 'university',
+                            onTap: () async {
+                              final payments = Payments();
+
+                              if (payments.isSubscribed) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => QuizPage(
+                                      difficulty: difficulty,
+                                      category: 'university',
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              } else {
+                                await payments.showPaywall();
+                              }
                             },
                           ),
                         ],

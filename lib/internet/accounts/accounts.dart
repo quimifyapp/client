@@ -19,7 +19,10 @@ class AuthService {
   // Fields:
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: ['email'],
+    scopes: [
+      'email',
+      'profile',
+    ],
   );
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late SharedPreferences _prefs;
@@ -148,26 +151,42 @@ class AuthService {
   // Public methods:
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      developer.log('Starting Google sign-in process...');
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
+        developer.log('User cancelled the sign-in process');
         return null;
       }
 
+      developer.log('Getting Google auth tokens...');
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
+      if (googleAuth.accessToken == null) {
+        developer.log('Error: Access token is null');
+        return null;
+      }
+
+      if (googleAuth.idToken == null) {
+        developer.log('Error: ID token is null');
+        return null;
+      }
+
+      developer.log('Creating Firebase credential...');
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken!,
+        idToken: googleAuth.idToken!,
       );
 
+      developer.log('Signing in to Firebase...');
       final UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
       _currentUser = userCredential.user;
 
       if (_currentUser != null) {
+        developer.log('User signed in successfully, fetching user data...');
         await _fetchOrCreateUserData(_currentUser!);
       }
 
@@ -175,6 +194,11 @@ class AuthService {
 
       return userCredential;
     } catch (e) {
+      developer.log('Detailed error during Google sign-in: $e');
+      if (e is FirebaseAuthException) {
+        developer.log('Firebase Auth Error Code: ${e.code}');
+        developer.log('Firebase Auth Error Message: ${e.message}');
+      }
       await _handleError('Google sign-in', e);
       return null;
     }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/accounts/accounts.dart';
+import 'package:quimify_client/pages/accounts/sign_in_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
@@ -43,7 +45,23 @@ class InorganicPage extends StatelessWidget {
               color: QuimifyColors.teal(),
             ): 'Practicar',
           },
-          page: DifficultyPage(),
+          page: const DifficultyPage(),
+          onPressed: () {
+            final authService = AuthService();
+            if (!authService.isSignedIn) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SignInPage(),
+                ),
+              );
+              return;
+            }
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const DifficultyPage(),
+              ),
+            );
+          },
         ),
       ],
     );

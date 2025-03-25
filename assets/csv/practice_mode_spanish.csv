@@ -1,364 +1,364 @@
 id,question,A,B,C,D,solution,category,difficulty
-1,¿Cuál es la fórmula química del agua?,H2O,CO2,O2,H2,A,university,easy
-2,¿Qué partícula subatómica tiene carga negativa?,Protón,Neutrón,Electrón,Mesón,C,university,easy
-3,¿Cuál de estos es un estado de la materia?,Plasma,Reactivo,Éter,Luz,A,university,easy
-4,¿Qué unidad se usa para medir la cantidad de sustancia?,Litro,Mol,Gramo,Joule,B,university,easy
-5,¿Cuál es la carga del protón?,Negativa,Positiva,Neutra,Variable,B,university,easy
-6,¿Cuál es la partícula más pequeña que conserva las propiedades de un elemento?,Molécula,Átomo,Electrón,Núcleo,B,university,easy
-7,¿Qué significa 'aq' en una ecuación química?,Sólido,Líquido,Disuelto en agua,Gas,C,university,easy
-8,¿Cuál es el principal gas de la atmósfera terrestre?,Oxígeno,Nitrógeno,Argón,Dióxido de carbono,B,university,easy
-9,¿Qué define el número atómico de un elemento?,Número de protones,Número de neutrones,Número de electrones,Masa molecular,A,university,easy
-10,¿Qué nombre recibe la columna vertical en la tabla periódica?,Período,Grupo,Bloque,Fila,B,university,easy
-11,¿En qué grupo de la tabla periódica se encuentran los gases nobles?,Grupo 1,Grupo 2,Grupo 17,Grupo 18,D,university,easy
-12,¿Cómo se llama el cambio de estado de sólido a líquido?,Sublimación,Fusión,Evaporación,Condensación,B,university,easy
-13,¿Qué número representa el Avogadro?,6'022 x 10^23,9'81 x 10^2,3'14 x 10^0,1'602 x 10^-19,A,university,easy
-14,¿Qué mide el pH?,La concentración de soluto,La temperatura de una solución,La acidez o alcalinidad,La presión parcial de un gas,C,university,easy
-15,¿Cómo se llama la fuerza de atracción entre masas?,Fuerza nuclear,Electrostática,Gravitación,Magnética,C,university,easy
-16,¿Cuál de las siguientes opciones es una base fuerte?,NaOH,HCl,CH3COOH,NH3,A,university,easy
-17,¿Qué tipo de enlace se forma al compartir electrones?,Iónico,Covalente,Metálico,Puente de hidrógeno,B,university,easy
-18,¿Cuál de estas magnitudes se mide en litros?,Masa,Energía,Volumen,Presión,C,university,easy
-19,¿Cuántos átomos de oxígeno tiene una molécula de ozono?,1,2,3,4,C,university,easy
-20,¿Cuál es el símbolo del sodio?,So,Na,S,Sn,B,university,easy
-21,¿Qué estado de la materia no tiene forma ni volumen definidos?,Sólido,Líquido,Gas,Plasma,C,university,easy
-22,¿Qué partícula subatómica determina la reactividad química?,Electrón,Protón,Neutrón,Quark,A,university,easy
-23,¿Qué ocurre cuando un átomo gana electrones?,Forma un catión,Forma un anión,Permanece neutro,Se vuelve un isótopo,B,university,easy
-24,¿Cuál es la fórmula del ion hidronio?,H-,OH-,H3O+,H2O2,C,university,easy
-25,¿Qué sucede si combinas un ácido y una base en cantidades equivalentes?,Se forma un gas noble,Ocurre neutralización,Aumenta el pH a 14,No pasa nada,B,university,easy
-26,¿Qué significa 's' en una ecuación química?,Solución acuosa,Fase sólida,Fase gaseosa,Fase líquida,B,university,easy
-27,¿Cuál es la partícula con carga positiva en el núcleo?,Mesón,Protón,Positrón,Electrón,B,university,easy
-28,¿Cuál de las siguientes es una unidad de presión?,Pascal,Julio,Kelvin,Coulomb,A,university,easy
-29,¿Qué ocurre al aumentar la temperatura de un gas en un recipiente cerrado?,Disminuye la presión,La presión aumenta,No hay cambio,Se licua,B,university,easy
-30,¿Qué significa el símbolo '?' en una reacción química?,Temperatura baja,Reacción incompleta,Calentamiento,Volumen constante,C,university,easy
-31,¿Cuál de estas especies es un radical libre?,O2,H2O,Cl·,NH4+,C,university,medium
-32,¿Cuál de las siguientes magnitudes se conserva en una reacción química?,Volumen total,Masa total,Presión,Entalpía,B,university,medium
-33,¿Qué nombre recibe una solución que puede resistir cambios de pH al agregar ácido o base?,Isotónica,Sobresaturada,Tampón,Coloide,C,university,medium
-34,¿Cuál es la fórmula empírica del peróxido de hidrógeno (H2O2)?,HO,H2O2,H2O,HO2,A,university,medium
-35,¿Qué es la entalpía (H)?,Calor absorbido a presión constante,Calor absorbido a volumen constante,Energía libre del sistema,Energía potencial,A,university,medium
-36,¿Cuál de estas fuerzas es la más débil?,Enlace covalente,Enlace iónico,Puente de hidrógeno,Fuerzas de Van der Waals,D,university,medium
-37,¿Qué establece la ley de Charles?,P1V1 = P2V2,V1/T1 = V2/T2,PV = nRT,V1n1 = V2n2,B,university,medium
-38,¿Qué tipo de reacción es: A + BC -> AC + B?,Neutralización,Doble desplazamiento,Sustitución simple,Síntesis,C,university,medium
-39,¿Cuál es el reactivo limitante en una reacción química?,El que se gasta primero,El que está en mayor cantidad,El que no reacciona,El que determina la entalpía,A,university,medium
-40,¿Cómo se llama la sustancia que acelera una reacción sin consumirse?,Soluto,Catalizador,Intermediario,Inhibidor,B,university,medium
-41,¿Cuál es el producto iónico del agua (Kw) a 25 °C?,1 x 10^-14,1 x 10^-7,1 x 10^14,0,A,university,medium
-42,¿Qué tipo de compuesto resulta de la reacción entre un ácido y un alcohol?,Aldehído,Éter,Éster,Amina,C,university,medium
-43,¿Cuál es la principal característica de un gas ideal?,No tiene volumen,No hay fuerzas intermoleculares,Se licua fácilmente,Es diatómico,B,university,medium
-44,¿Cuál es la unidad SI de la constante de gases (R)?,J/(mol·K),L/(atm·K),N/(m·K),g/(mol·K),A,university,medium
-45,¿Qué sucede en un proceso endotérmico?,Se libera energía,No hay transferencia de calor,Se absorbe calor,Cambia la entropía pero no la entalpía,C,university,medium
-46,¿Qué expresa la ley de Hess?,El calor de reacción depende de la ruta,El calor de reacción es independiente de la ruta,El calor de reacción es siempre cero,El calor de reacción no puede medirse,B,university,medium
-47,¿Qué es un enlace polar?,Un enlace con distribución equitativa de electrones,Un enlace que comparte protones,Un enlace con distribución desigual de electrones,Un enlace que rompe la regla del octeto,C,university,medium
-48,¿Qué significa que una reacción esté en equilibrio?,La reacción se detiene,Las concentraciones de reactivos y productos son iguales,Las velocidades directa e inversa son iguales,El catalizador se desactiva,C,university,medium
-49,¿Cuál es el número de oxidación del oxígeno en la mayoría de compuestos?,-2,-1,0,2,A,university,medium
-50,¿Cuál es el pH de una solución con [H+] = 1x10^-5 M?,5,9,14,2,A,university,medium
-51,¿Qué tipo de interacción estabiliza a las micelas en solución?,Interacciones metálicas,Atracciones electrostáticas fuertes,Interacciones hidrofóbicas,Enlaces iónicos,C,university,medium
-52,¿Cuál es la expresión de la constante de equilibrio para la reacción: aA + bB <-> cC + dD?,K = [A]^a [B]^b / [C]^c [D]^d,K = ([A]^a [B]^b) / ([C]^c [D]^d) x RT,K = [C]^c [D]^d / [A]^a [B]^b,K = (a+b)/(c+d),C,university,medium
-53,¿Cuál es el pOH de una solución con pH = 3 a 25 °C?,7,14,11,1,C,university,medium
-54,¿Cuál es la geometría electrónica de una molécula con 3 pares de electrones en el átomo central?,Lineal,Tetraédrica,Trigonal planar,Piramidal,C,university,medium
-55,¿Qué representa la letra 'n' en la ecuación de gases ideales?,Número de moléculas,Número de moles,Número de átomos,Número cuántico,B,university,medium
-56,¿Qué tipo de enlace se forma en un compuesto iónico?,Compartir electrones,Transferencia de electrones,Pérdida de protones,Atracción dipolo-dipolo,B,university,medium
-57,¿Cuál es la configuración electrónica del Neón (Z=10)?,1s2 2s2 2p6,1s2 2s2 2p4,1s2 2s2 2p5,1s2 2s2 2p6 3s1,A,university,medium
-58,¿Qué indica la constante de equilibrio K>>1?,Predominan los reactivos,La reacción casi no avanza,Predominan los productos,El equilibrio es imposible,C,university,medium
-59,¿Qué es la entropía (S)?,El contenido de calor de un sistema,La medida del desorden o aleatoriedad,La capacidad de hacer trabajo,La variación de energía de Gibbs,B,university,medium
-60,¿Cuál es la forma de la molécula de agua?,Lineal,Tetraédrica,Angular,Trigonal plana,C,university,medium
-61,¿Qué establece el principio de Le Châtelier?,El pH depende solo de la base,Si se cambia una condición de equilibrio el sistema se opone a ese cambio,La entalpía de un sistema siempre aumenta,La entropía del universo disminuye,B,university,hard
-62,"¿Cuál es el valor de la constante universal de los gases, R, en L·atm/(mol·K)?",0.08206,8.314,62.36,2.303,A,university,hard
-63,¿En qué consiste la hibridación sp^2?,Mezcla de un orbital s y dos p,Mezcla de un orbital s y un orbital p,Mezcla de un orbital s y tres p,Mezcla de dos orbitales s y un d,A,university,hard
-64,¿Cuál es la ecuación de la energía libre de Gibbs?,?G = ?H + T?S,?G = ?H - T?S,?G = -RT ln K,?G = q - w,B,university,hard
-65,¿Qué tipo de isómeros difieren en la disposición espacial alrededor de un doble enlace?,Isómeros estructurales,Isómeros ópticos,Isómeros geométricos (cis-trans),Tautoméricos,C,university,hard
-66,¿Qué mide la espectroscopía de infrarrojo en una molécula?,Transiciones electrónicas,Vibraciones moleculares,Cambios en el núcleo atómico,Movimientos de electrones no apareados,B,university,hard
-67,¿Qué tipo de reacción es la nitración de benceno?,Sustitución electrofílica aromática,Sustitución nucleofílica alifática,Oxidación enérgica,Reducción catalítica,A,university,hard
-68,¿Cuál de estas moléculas tiene un momento dipolar neto igual a cero?,HCl,H2O,CO2,NH3,C,university,hard
-69,¿Qué propiedad coligativa eleva la temperatura de ebullición de una solución?,Disminución de la presión de vapor,Aumento de la presión de vapor,Disminución del punto de congelación,Cambio de color,A,university,hard
-70,¿Cuál es la velocidad de reacción según la ley: v = k[A]^2[B]?,Es de primer orden total,Es de segundo orden total,Es de tercer orden total,Es de orden mixto,C,university,hard
-71,¿Cuál es la ecuación de Arrhenius?,k = Ae^(Ea/RT),ln(k2/k1) = Ea/R (1/T2 - 1/T1),k = A e^(-Ea/RT),k = e^(?G/RT),C,university,hard
-72,¿Cómo se denomina la sustancia formada temporalmente en el curso de una reacción que luego se convierte en producto?,Reactivo,Intermedio,Catalizador,Producto secundario,B,university,hard
-73,¿Qué describe el principio de exclusión de Pauli?,No más de dos electrones pueden ocupar el mismo orbital,El orbital d debe estar vacío,Los electrones tienen carga positiva,Cada subnivel solo puede tener un electrón,A,university,hard
-74,¿Cuál es la geometría electrónica de un átomo central con hibridación sp3d?,Tetraédrica,Trigonal plana,Bipiramidal trigonal,Octaédrica,C,university,hard
-75,¿Cómo se llama la energía necesaria para quitar un electrón de un átomo en estado gaseoso?,Afinidad electrónica,Energía de ionización,Energía reticular,Potencial de reducción,B,university,hard
-76,¿Cuál es el orden de reacción global si la velocidad es v = k[A]^1[B]^2?,1,2,3,0,C,university,hard
-77,¿Qué estudia la cinética química?,La posición del equilibrio,La rapidez de las reacciones,La naturaleza de los iones,La termodinámica,B,university,hard
-78,¿Qué define la constante de equilibrio Kp?,Equilibrio para concentraciones,Equilibrio en fase sólida,Equilibrio en fase acuosa,Equilibrio en presiones parciales,D,university,hard
-79,¿Cuál es la base conjugada del ácido sulfúrico (H2SO4)?,HSO4-,SO4^2-,SO3^2-,H2SO3,A,university,hard
-80,¿Qué método se utiliza para balancear reacciones redox en medio ácido?,Método algebraico,Método de ajuste directo,Ion-electrón,Método de Pauli,C,university,hard
-81,¿Cuál es el potencial estándar de hidrógeno (SHE)?,1'00 V,0'00 V,0'76 V,Depende del ph,B,university,hard
-82,¿Qué describe la ecuación de Nernst?,Relación entre emf y las concentraciones iónicas,Relación entre energía libre y entalpía,Velocidad de reacción y temperatura,Equilibrio de fases,A,university,hard
-83,¿Cuál es la fórmula para la presión osmótica (?)?,? = M R T,? = k [A]^n,? = ?H - T?S,? = d · g · h,A,university,hard
-84,¿Qué es un diagrama de fases?,Muestra la energía de activación,Representa los estados de agregación a distintas T y P,Indica la geometría molecular,Es un diagrama de orbitales,B,university,hard
-85,¿Cuál es la principal interacción en la disolución de iones en agua?,Ion-ion,Dipolo-dipolo,Ion-dipolo,London,C,university,hard
-86,¿Cuál de los siguientes iones es comúnmente un contraión en complejos de coordinación?,K+,NO3-,Al3+,F2-,B,university,hard
-87,¿Cómo se denomina el fenómeno en que una sustancia pierde agua de hidratación al exponerse al aire?,Sublimación,Disociación,Eflorescencia,Descomposición,C,university,hard
-88,¿Qué establece la regla del octeto?,Los átomos tienden a completar 8 electrones en su capa de valencia,La suma de protones y neutrones es 8,Los orbitales d no participan en enlaces,Solo los metales de transición pueden formar 8 enlaces,A,university,hard
-89,¿Cómo se llama el proceso de convertir un líquido en gas a temperatura inferior a su punto de ebullición?,Sublimación,Evaporación,Fusión,Licuefacción,B,university,hard
-90,¿Cuál es la principal interacción que estabiliza la estructura secundaria de las proteínas?,Enlaces iónicos,Puentes de hidrógeno,Puentes disulfuro,Interacciones hidrofóbicas,B,university,hard
-91,¿Qué gas hace que las burbujas en las bebidas carbonatadas?,Oxígeno,Nitrógeno,Dióxido de carbono,Helio,C,general,easy
-92,¿Qué metal es líquido a temperatura ambiente?,Sodio,Mercurio,Hierro,Aluminio,B,general,easy
-93,¿Cómo se llama la sustancia que en contacto con la piel produce un color característico en el bronceado?,Oxígeno,Melanina,Hemoglobina,Keratina,B,general,easy
-94,¿Cuál de estos elementos no es un metal?,Oro,Sodio,Carbono,Calcio,C,general,easy
-95,¿Cuál es la base de la vida en la Tierra?,Hidrógeno,Oxígeno,Carbono,Hierro,C,general,easy
-96,¿Qué gas es necesario para la combustión en el aire?,Nitrógeno,Argón,Oxígeno,Dióxido de carbono,C,general,easy
-97,"¿Cuál es la fórmula del ácido acético, principal componente del vinagre?",H2SO4,HCl,CH3COOH,HNO3,C,general,easy
-98,¿Cuál es el compuesto principal del vidrio?,SiO2,CO2,NaCl,CaO,A,general,easy
-99,¿Qué elemento químico tiene el símbolo 'Fe'?,Fósforo,Hierro,Flúor,Francio,B,general,easy
-100,¿Cuál es el gas noble más ligero?,Helio,Neón,Argón,Radón,A,general,easy
-101,¿Cuál es el componente principal del aire que respiramos?,Oxígeno,Nitrógeno,Dióxido de carbono,Vapor de agua,B,general,easy
-102,¿Cuál de estos se considera un ácido fuerte?,HCl,HF,CH3COOH,H2CO3,A,general,easy
-103,¿Cuál de las siguientes sustancias es una mezcla?,Agua destilada,Dióxido de carbono,Aire,Cloruro de sodio,C,general,easy
-104,¿Qué metal es conocido por su alta conductividad eléctrica?,Plomo,Cobre,Hierro,Oro,B,general,easy
-105,¿Qué macromolécula forman los aminoácidos?,Proteínas,Carbohidratos,Lípidos,Ácidos nucleicos,A,general,easy
-106,¿Qué es la oxidación?,Pérdida de electrones,Ganancia de electrones,Disminución del número de oxidación,Formación de enlaces covalentes,A,general,easy
-107,¿Qué define una disolución sobresaturada?,No puede disolver más soluto,Tiene menos soluto del que puede disolver,Contiene más soluto disuelto del que debería a esa temperatura,Es siempre ácida,C,general,easy
-108,¿Qué es el amoníaco en términos de fórmula química?,NH3,NH4+,NO3-,N2,A,general,easy
-109,¿Qué son los enlaces de hidrógeno?,Fuerzas débiles entre H y un metal,Interacciones entre H y un átomo muy electronegativo,Enlaces covalentes fuertes,Enlaces iónicos,B,general,easy
-110,¿Qué indica la estequiometría de una ecuación química?,La velocidad de la reacción,Las proporciones en que reaccionan las sustancias,El color de los reactivos,La presión requerida,B,general,easy
-111,¿Cuál de los siguientes no es un hidrocarburo?,Metano,Etanol,Propano,Buteno,B,general,easy
-112,¿Qué significa 'Pb' en la tabla periódica?,Polonio,Plomo,Paladio,Bromo,B,general,easy
-113,¿Cuál es el nombre común del cloruro de sodio?,Azúcar,Sal de mesa,Bicarbonato,Yeso,B,general,easy
-114,¿Qué es una solución acuosa?,Una mezcla de aceite en agua,Una mezcla de agua con un solvente orgánico,Una mezcla donde el agua es el disolvente,Un coloide semisólido,C,general,easy
-115,¿Qué son los iones?,Átomos con distinto número de protones y neutrones,Átomos o moléculas con carga eléctrica,Átomos con el mismo número atómico,Moléculas neutras,B,general,easy
-116,¿Qué es el cloro en su forma elemental?,Gas diatómico,Líquido verde,Sólido cristalino,Gas noble,A,general,easy
-117,¿Cuál de estos compuestos es orgánico?,CO2,CH4,NaOH,MgCl2,B,general,easy
-118,¿Qué ocurre si mezclas vinagre con bicarbonato de sodio?,No pasa nada,Se produce calor sin burbujas,Reacciona formando CO2 y espuma,Se convierte en un sólido,C,general,easy
-119,¿Cuál es la propiedad que mide la resistencia de un metal a deformarse?,Ductilidad,Maleabilidad,Conductividad,Dureza,B,general,easy
-120,¿Cuál es el principal gas de efecto invernadero producido por actividades humanas?,Metano,Ozono,Dióxido de carbono,Monóxido de carbono,C,general,easy
-121,¿Qué sucede con el punto de ebullición si aumenta la presión externa?,Disminuye,Aumenta,No cambia,Se vuelve 0 °C,B,general,medium
-122,¿Qué elemento se encuentra en todos los compuestos orgánicos?,Hidrógeno,Oxígeno,Nitrógeno,Carbono,D,general,medium
-123,¿Cuál es el principal componente del gas natural?,Propano,Butano,Metano,Etano,C,general,medium
-124,¿Qué tipo de enlace mantiene unidos a los átomos de sal (NaCl)?,Covalente polar,Iónico,Metálico,Van der Waals,B,general,medium
-125,¿Qué ácido se encuentra comúnmente en las baterías de coche?,Ácido clorhídrico,Ácido sulfúrico,Ácido acético,Ácido nítrico,B,general,medium
-126,¿Cuál es la principal razón de la conductividad eléctrica en metales?,Electrones deslocalizados,Protones libres,Ausencia de electrones,Altas energías de ionización,A,general,medium
-127,¿Qué define a un grupo funcional en química orgánica?,La solubilidad en agua,El número de carbonos,El tipo de reacción que sufre,El peso molecular,C,general,medium
-128,¿Qué método se utiliza para separar líquidos miscibles basados en sus puntos de ebullición?,Filtración,Destilación,Cristalización,Decantación,B,general,medium
-129,¿Qué caracteriza a un coloide?,Mezcla homogénea de 2 fases,Partículas muy grandes,Mezcla heterogénea con sedimentación,Partículas de tamaño intermedio,D,general,medium
-130,¿Cómo se llama el proceso de eliminar sales disueltas del agua para hacerla potable?,Ablandamiento,Desalinización,Ozono-tratamiento,Destilación fraccionada,B,general,medium
-131,¿Cuál es el anión en la fórmula de Na2SO4?,Na+,S2-,SO4^2-,SO3^2-,C,general,medium
-132,¿Qué es un polímero?,Un átomo con alto número atómico,Una mezcla heterogénea,Un material con largas cadenas repetidas,Un catalizador orgánico,C,general,medium
-133,¿Cuál es la característica principal de un isótopo?,Igual número de protones distinto de neutrones,Diferente número de protones mismo neutrones,Distinto número atómico,Diferente reactividad,A,general,medium
-134,¿Qué mide la escala Mohs?,La dureza de los minerales,El calor de combustión,La solubilidad en agua,La densidad de los gases,A,general,medium
-135,¿Qué subproducto se produce típicamente en la combustión completa de un hidrocarburo?,CO,CO2,C,H2,B,general,medium
-136,¿Qué sucede si el pH de una solución es menor que 7?,Es básica,Es neutra,Es ácida,Es estable,C,general,medium
-137,¿Cuál de los siguientes no es un estado de agregación de la materia?,Sólido,Plasma,Líquido,Cristalino,D,general,medium
-138,¿Qué tipo de enlace une a los aminoácidos en una proteína?,Enlace glucosídico,Enlace peptídico,Enlace fosfodiéster,Enlace iónico,B,general,medium
-139,¿Cuál es la principal sustancia responsable de la capa de ozono estratosférica?,O3,O2,CFC,NOx,A,general,medium
-140,¿Qué describe la ley de Avogadro?,"A T y P ctes, V ? número de moles",La relación entre presión y volumen es constante,La energía interna de un gas ideal es constante,El volumen es inverso a la temperatura,A,general,medium
-141,¿Qué cambio físico ocurre durante la sublimación?,Líquido a gas,Gas a sólido,Sólido a gas,Líquido a sólido,C,general,medium
-142,¿Qué tipo de compuesto son los triglicéridos?,Proteínas,Lípidos,Ácidos nucleicos,Carbohidratos,B,general,medium
-143,¿Cuál es un indicador de pH muy común en laboratorios?,Azul de bromotimol,Mercurio,Etanol,Silicio,A,general,medium
-144,¿Qué es la galvanización?,Aplicar un recubrimiento de cinc,una reacción redox en ácido,un tipo de electrólisis,Oxidación de hierro,A,general,medium
-145,¿Qué subpartícula cambia entre isótopos del mismo elemento?,Electrones,Neutrones,Protones,Quarks,B,general,medium
-146,¿Cuál es el principal gas implicado en el efecto invernadero?,Argón,CO2,Helio,Hidrógeno,B,general,medium
-147,¿Qué se entiende por entalpía de formación estándar?,Energía cinética de moléculas,Calor liberado en combustión,Calor absorbido al formar 1 mol desde elementos,Energía para romper enlaces,C,general,medium
-148,¿Cuál es el nombre del proceso por el cual las plantas convierten CO2 y agua en glucosa?,Respiración,Evapotranspiración,Fotosíntesis,Fermentación,C,general,medium
-149,¿Qué indica el término 'anfótero'?,Funciona como ácido o base,Es insoluble en agua,Conduce electricidad,Reacciona solo con metales,A,general,medium
-150,¿Cuál es el principal ácido graso en el aceite de oliva?,Ácido láctico,Ácido palmítico,Ácido oleico,Ácido butírico,C,general,medium
-151,¿Cuál es la principal característica de un líquido supercrítico?,No ejerce presión,No presenta tensión superficial ni fase líquida/gaseosa definida,Es estable solo a baja T,Se solidifica fácilmente,B,general,hard
-152,¿Cuál de estas sustancias es un desecante común?,H2O,H2SO4 conc,CO2 sólido,NH3 acuoso,B,general,hard
-153,¿Qué describe la ecuación de Henderson-Hasselbalch?,"Relación pH, pKa y conc de ácido/base",Relación entre P y V,Energía vs temperatura,Velocidad vs concentración,A,general,hard
-154,¿Qué significa ppm?,Partículas por mililitro,Partes por millón,Parámetros por magnitud,Protones por masa,B,general,hard
-155,¿Qué tipo de reacción es la saponificación?,Síntesis de éster,Hidrólisis de éster en base,Deshidratación de alcohol,Reducción de aldehído,B,general,hard
-156,¿Cuál es la principal ventaja de la destilación al vacío?,Permite destilar a T más baja,Aumenta el punto de ebullición,Evita azeótropos,Elimina impurezas iónicas,A,general,hard
-157,¿Qué postula el modelo de enlace de valencia (VB)?,Moléculas son nubes electrónicas,Orbitales atómicos ? orbitales molec.,Enlaces = solapamiento de orbitales atómicos,El n cuántico principal = forma molecular,C,general,hard
-158,¿Cuál de estas unidades mide radiación ionizante?,Newton,Gray,Pascal,Joule,B,general,hard
-159,¿Qué se libera al disociarse el ácido carbónico (H2CO3)?,H2 y CO,2H+ y CO3^2-,CO2 y H2O,H2 y HCO3-,C,general,hard
-160,¿Qué ley relaciona la conc. de gas disuelto con su presión parcial?,Ley de Henry,Ley de Raoult,Ley de Dalton,Ley de Graham,A,general,hard
-161,¿Qué ocurre en la electrólisis de NaCl fundido?,Na en cátodo y Cl2 en ánodo,H2 en cátodo y O2 en ánodo,No hay reacción,Forman OH- y H+,A,general,hard
-162,¿Qué es una celda galvánica?,Consume energía para forzar reacción,Celda de alta presión sin reacción,Produce electricidad con reacción espontánea,Catalizador biológico,C,general,hard
-163,¿Cuál es la función de un agente quelante?,Romper enlaces iónicos,Formar complejos con iones metálicos,Precipitar sales,Oxidar metales,B,general,hard
-164,¿Qué mide la espectroscopia de RMN?,Absorción uV,Cambios de rotación molecular,Absorción nuclear en campo magnético,Energía vibracional,C,general,hard
-165,¿Qué es un homopolímero?,Polímero de más de un monómero,Polímero con enlaces cruzados,Polímero de un solo monómero,Polímero ramificado,C,general,hard
-166,¿Qué sustancias aceleran la polimerización radicalaria?,Antioxidantes,Radicales libres/iniciadores,Bases fuertes,Inhibidores,B,general,hard
-167,¿Cuál es Cv para un gas ideal monoatómico?,(5/2)R,(3/2)R,(7/2)R,(9/2)R,B,general,hard
-168,¿Qué ocurre en el ánodo de una celda electrolítica?,Se reduce,Se oxida,No hay electrones,Se depositan metales,B,general,hard
-169,¿Qué es la catálisis heterogénea?,Catalizador y reactivos misma fase,Catalizador en fase distinta,Catalizador se disuelve en producto,Sin energía requerida,B,general,hard
-170,¿Qué se produce al hidrolizar un triglicérido?,Glicerol y ácidos grasos,Aminoácidos,Monosacáridos,Ésteres y fenoles,A,general,hard
-171,¿En qué consiste la fermentación alcohólica?,Oxidación de ácidos grasos,Reducción de etanol,Azúcares? etanol+CO2 (levaduras),Adición de agua a alqueno,C,general,hard
-172,¿Qué nombre recibe la reacción de un ácido/anhídrido con agua?,Neutralización,Hidrólisis,Condensación,Saponificación,B,general,hard
-173,¿Cuál es la relación aire-combustible ideal para gasolina?,14'7:1,2:1,32:1,1:1,A,general,hard
-174,¿Cuál de los siguientes es un explosivo común?,NaClO,NH4NO3,CH3COOH,K2SO4,B,general,hard
-175,¿Qué determina la constante dieléctrica de un solvente?,Conducir electricidad,Disolver sustancias polares,Densidad,Punto de ebullición,B,general,hard
-176,¿Qué es una reacción SN2?,Sustitución nucleofílica bimolecular,Sustitución nucleofílica unimolecular,Eliminación unimolecular,Reducción electrolítica,A,general,hard
-177,¿Cuál es el principal componente del ácido estomacal?,H2SO4,HCl,HNO3,H3PO4,B,general,hard
-178,¿Cuál es la función del EDTA en química analítica?,Ácido fuerte,Estándar primario,Agente quelante,Indicador de pH,C,general,hard
-179,¿Qué técnica separa mezclas de líquidos volátiles?,Cromatografía de gases,Espectroscopía IR,Recristalización,Liofilización,A,general,hard
-180,¿Cuál es la fase móvil en la cromatografía de papel?,El papel,El disolvente,El soluto,El adsorbente,B,general,hard
-181,¿Qué elemento define la química orgánica?,Hidrógeno,Carbono,Oxígeno,Nitrógeno,B,organic,easy
-182,¿Cómo se llaman los compuestos que solo contienen C e H?,Alcoholes,Haluros,Hidrocarburos,Aminas,C,organic,easy
-183,¿Qué grupo funcional caracteriza a los alcoholes?,-OH,-COOH,-NH2,-SH,A,organic,easy
-184,¿Cuál es la fórmula del metano?,C2H6,CH4,C3H8,CO2,B,organic,easy
-185,¿Qué tipo de hidrocarburo tiene solo enlaces simples?,Alqueno,Alcano,Alquino,Areno,B,organic,easy
-186,¿Cómo se llama el compuesto CH3CH2OH?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
-187,¿Cuál es la principal fuente natural de hidrocarburos?,Carbón,Agua,Petróleo,Arena,C,organic,easy
-188,¿Cómo se denomina el grupo funcional -COOH?,Hidroxilo,Carboxilo,Carbonilo,Amino,B,organic,easy
-189,¿Qué tipo de isomería existe entre cis-but-2-eno y trans-but-2-eno?,Constitucional,Geométrica,Óptica,Tautomérica,B,organic,easy
-190,¿Qué átomo (distinto de C) aparece más comúnmente en compuestos orgánicos?,Nitrógeno,Flúor,Oxígeno,Azufre,C,organic,easy
-191,¿Cuál es el nombre común del CH3OH?,Metano,Metanol,Ácido fórmico,Formaldehído,B,organic,easy
-192,¿Qué tipo de reacción es la halogenación de un alcano (en presencia de luz)?,Adición,Sustitución radicalaria,Eliminación,Reordenamiento,B,organic,easy
-193,¿Cuál es el producto principal de la hidratación de un alqueno?,un alcano,un alquino,un alcohol,un ácido carboxílico,C,organic,easy
-194,¿Cómo se llama un anillo de benceno con un grupo OH?,Fenol,Benceno,Benzoato,Tolueno,A,organic,easy
-195,¿Qué compuesto se obtiene al oxidar un alcohol primario?,Aldehído,Cetona,Éter,Amina,A,organic,easy
-196,¿Cuál es el nombre del hidrocarburo con 2 carbonos y enlace triple?,Etano,Eteno,Etino (acetileno),Etileno,C,organic,easy
-197,¿Qué describe la fórmula CnH2n+2?,Alquenos,Alcanos,Alquinos,Aromaticidad,B,organic,easy
-198,¿Cuál es el nombre del grupo funcional -CHO?,Carboxilo,Hidroxilo,Carbonilo (aldehído),Amida,C,organic,easy
-199,¿Cuál es el principal alcohol presente en las bebidas alcohólicas?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
-200,¿Cómo se denomina el grupo -NH2?,Hidroxilo,Amino,Nitro,Aldehído,B,organic,easy
-201,¿Qué familia de compuestos contiene un anillo bencénico?,Hidrocarburos alifáticos,Arenos,Halocarburos,Aldehídos,B,organic,easy
-202,¿Cuál de estos es un aldehído simple?,Acetona,Formaldehído,Fenol,Butanol,B,organic,easy
-203,¿Cómo se llama la reacción de un alcano con oxígeno para formar CO2 y H2O?,Sustitución,Combustión,Adición,Polimerización,B,organic,easy
-204,¿Qué tipo de hibridación tiene el carbono en el metano?,sp,sp2,sp3,sp3d,C,organic,easy
-205,¿Qué tipo de compuesto es el benceno?,Alcano,Aminoácido,Aromático,Cetona,C,organic,easy
-206,¿Cómo se denomina un compuesto con el grupo –O– entre dos cadenas carbonadas?,Aldehído,Éter,Cetona,Ácido carboxílico,B,organic,easy
-207,¿Qué producto se forma al reducir un aldehído?,Alcohol primario,Alcohol secundario,Cetona,Ácido carboxílico,A,organic,easy
-208,¿Cuál es el nombre común del etino?,Acetileno,Etileno,Etanol,Metilacetileno,A,organic,easy
-209,¿Cómo se llama el grupo funcional -NO2?,Amino,Nitro,Nitrilo,Nitrato,B,organic,easy
-210,¿Cuál es la fórmula general de los alquenos?,CnH2n+2,CnH2n,CnH2n-2,CnHn,B,organic,easy
-211,¿Qué catalizador se usa frecuentemente en la hidrogenación de alquenos?,Fe,Pt/Pd/Ni,Hg,Cu,B,organic,medium
-212,¿Cuál es el reactivo de Tollens?,[Ag(NH3)2]+,KMnO4,CrO3/H2SO4,NaBH4,A,organic,medium
-213,¿Cómo se llama la reacción entre un aldehído y un alcohol para formar un hemiacetal?,Esterificación,Hidrólisis,Adición nucleofílica,Eliminación,C,organic,medium
-214,¿Cuál es la hibridación del carbono en un alquino lineal?,sp3,sp2,sp,sp3d,C,organic,medium
-215,¿Qué producto se obtiene de la saponificación de un éster graso?,Un aldehído,Un jabón (sal de ácido graso),Un anhídrido,Un fenol,B,organic,medium
-216,¿Cuál es la función principal de un radical libre en reacciones orgánicas?,Estabilizar intermedios,Iniciar cadenas de sustitución,Inhibir la reacción,Formar puentes de hidrógeno,B,organic,medium
-217,¿Cómo se llama la reacción de adición de H2O a un alqueno en medio ácido?,Hidrogenación,Hidratación,Halogenación,Oxidación,B,organic,medium
-218,¿Qué ocurre al oxidar un alcohol secundario?,Se forma un aldehído,Se forma un ácido carboxílico,Se forma una cetona,No reacciona,C,organic,medium
-219,¿Cuál es la parte reactiva (centro electrofílico) en un carbonilo C=O?,El carbono,El oxígeno,Ambos,Ninguno,A,organic,medium
-220,¿Qué caracteriza a la reacción SN1?,Un solo paso,Intermediario carbocatión,Requiere radicales libres,Ocurre en alcanos,B,organic,medium
-221,¿Qué es la polimerización por adición?,Un monómero se condensa con pérdida de H2O,Monómeros con dobles enlaces se unen sin pérdida de átomos,Una reacción ácido-base,Ninguna de las anteriores,B,organic,medium
-222,¿Cuál es el nombre de la familia con un doble enlace carbono-nitrógeno (C=N)?,Amidas,Iminas,Ésteres,Nitrilos,B,organic,medium
-223,¿Qué define a un compuestos aromático según la regla de Hückel?,4n electrones ?,(4n+2) electrones ?,una anillo de 5 átomos,Solo enlaces simples,B,organic,medium
-224,¿Qué tipo de reactividad presentan los halogenuros de alquilo en reacciones nucleofílicas?,Son muy estables y no reaccionan,Actúan como sustratos electrofílicos,Son ácidos fuertes,Liberan halógenos libres,B,organic,medium
-225,¿Cuál es el principal producto de la oxidación de un aldehído?,Alcohol,Aldehído diferente,Cetona,Ácido carboxílico,D,organic,medium
-226,¿Qué reactivo se utiliza para la oxidación de alcoholes primarios a ácidos carboxílicos en medio ácido?,NaBH4,KMnO4,H2/Pd,LiAlH4,B,organic,medium
-227,¿Qué sucede cuando un benceno reacciona con HNO3 en presencia de H2SO4?,Sulfona el anillo,Nitra el anillo,Reduce el anillo,Polimeriza el anillo,B,organic,medium
-228,¿Cómo se llama el proceso de separar compuestos orgánicos basados en su solubilidad en distintas fases?,Cromatografía líquida,Filtración al vacío,Extracción líquido-líquido,Destilación fraccionada,C,organic,medium
-229,¿Qué es un enol?,Un aldehído,Un tautómero de un carbonilo con OH en C=C,Un éster cíclico,Una sal orgánica,B,organic,medium
-230,¿Qué caracteriza a las diaminas?,Tienen dos grupos -OH,Tienen dos grupos -NH2,Tienen dos dobles enlaces,Tienen dos anillos aromáticos,B,organic,medium
-231,¿Cómo se llama la reacción de condensación entre dos moléculas de aminoácidos?,Esterificación,Reacción de Diels-Alder,Reacción de Cannizzaro,Formación de enlace peptídico,D,organic,medium
-232,¿Qué es la isomería óptica?,Existencia de isómeros que difieren en un enlace doble,Isómeros con giro de luz polarizada,Isómeros que difieren en posición de sustituyentes en anillo,Ninguna,B,organic,medium
-233,¿Cuál de estas es una amina aromática?,Anilina,Metilamina,Dimetilamina,Amoníaco,A,organic,medium
-234,¿Qué define la reacción de polimerización por condensación?,Se unen monómeros con liberación de moléculas pequeñas (ej. H2O),Es una reacción en cadena radicalaria,No requiere catalizador,Ocurre solo en fase gaseosa,A,organic,medium
-235,¿Qué es un alfa-hidroxiácido (AHA)?,Un ácido carboxílico con hidroxilo en el carbono vecino,Un alcohol con doble enlace,Una cetona cíclica,Un aminoácido esencial,A,organic,medium
-236,¿Cuál es un método común para convertir un alcohol en un haluro de alquilo?,Oxidación fuerte,Sustitución con HX,Reducción catalítica,Ninguno,B,organic,medium
-237,¿Qué caracteriza al ácido benzoico?,Grupo -OH en anillo,Grupo -CHO en anillo,Grupo -COOH unido al anillo bencénico,Grupo -NH2 en anillo,C,organic,medium
-238,¿Cuál es el nombre del compuesto CH3-CH2-CH2-NH2?,Etanolamina,Propanamina,Metilamina,Butilamina,B,organic,medium
-239,¿Qué produce la reducción de un nitrilo (R-C?N)?,Una amida,Una amina primaria,Un aldehído,Un ácido carboxílico,B,organic,medium
-240,¿Cómo se llama la reacción de dimerización de dos radicales libres?,Acoplamiento radicalario,Reducción radicalaria,Transposición,Eliminación,A,organic,medium
-241,¿Qué describe la reacción de Diels-Alder?,Ciclación entre un dieno conjugado y un dienófilo,Eliminación de H2O en alcoholes,Reducción de una cetona,Sustitución electrofílica en benceno,A,organic,hard
-242,¿Qué es un ácido carboxílico insaturado?,un ácido con un doble o triple enlace en la cadena,un ácido con más grupos -COOH,un ácido aromático,un ácido con halógenos,A,organic,hard
-243,¿Cuál es la conformación más estable del ciclohexano?,Silla,Bote,Twist-boat,Medio-bote,A,organic,hard
-244,¿Qué representa la notación (R) y (S) en química orgánica?,Configuración absoluta de centros quirales,Tipo de enlace,Grado de sustitución,Polaridad del enlace,A,organic,hard
-245,¿Qué producto se obtiene de la ozonólisis de un alqueno?,Alcoholes,Cetonas/aldehídos,Aminas,Nitrocompuestos,B,organic,hard
-246,¿Qué es un carbanión?,Un catión de carbono,Un radical neutro,Un anión con carga negativa en carbono,Un grupo nitro,C,organic,hard
-247,¿Qué requiere la reacción de Friedel-Crafts acilación?,AlCl3,SOCl2,NaBH4,Ag(NH3)2+,A,organic,hard
-248,¿Qué sucede en la reacción de Cannizzaro?,Dos moléculas de aldehído sin hidrógeno alfa: una se oxida y la otra se reduce,Se forma un hemiacetal,Ocurre una hidrogenación,Se produce un carbanión estable,A,organic,hard
-249,¿Qué tipo de radical es más estable en una reacción radicalaria?,Primario,Secundario,Terciario,Todos iguales,C,organic,hard
-250,¿Qué describe la tautomería ceto-enol?,La interconversión entre un aldehído y su isómero cis,La interconversión entre formas ceto y enol,La separación de fases en una solución,Ninguna de las anteriores,B,organic,hard
-251,¿Qué define un compuesto meso?,Posee centro quiral y actividad óptica alta,No tiene centros quirales,Tiene centros quirales pero es ópticamente inactivo,Es un compuesto con anillo aromático,C,organic,hard
-252,¿Cuál es la reacción principal para sintetizar aminas primarias a partir de haluros de alquilo?,Reacción de Grignard,Amonólisis del haluro,Hidratación ácida,Acilación de Friedel-Crafts,B,organic,hard
-253,¿Qué es la catálisis ácida en reacciones orgánicas?,Uso de un ácido fuerte para inhibir la reacción,El ácido se consume en la reacción,El ácido protona intermedios aumentando su reactividad,El ácido reduce la energía de activación cediendo electrones,C,organic,hard
-254,¿Qué producto se obtiene de la reacción de un éster con un amoniaco en exceso?,Amida,Alcohol,Haluro de alquilo,Éter,A,organic,hard
-255,¿Qué hace el reactivo de Grignard (RMgX) con un carbonilo?,Oxida la cetona,Agrega R- al carbonilo formando un alcohol tras hidrólisis,Elimina el carbonilo,Ninguna,B,organic,hard
-256,¿Qué caracteriza al mecanismo E2 (eliminación bimolecular)?,Forma carbocatión intermedio,Es de primer orden global,Requiere base fuerte y ocurre en un solo paso,Solo ocurre a bajas temperaturas,C,organic,hard
-257,¿Qué define un azúcar reductor?,Tiene un anillo aromático,Posee un grupo amino libre,Puede oxidarse en presencia de reactivos como Tollens/Benedict,No contiene carbonilo,C,organic,hard
-258,¿Cómo se llama la reacción de formación de un diacilo a partir de un anhídrido?,Cloruración,Transesterificación,Acilación,Halogenación,C,organic,hard
-259,¿Qué ocurre en la reacción de Wolff-Kishner?,Reducción de cetonas/aldehídos a alcanos con hidrazina,Oxidación de alcoholes a ácidos,Sustitución nucleofílica en haluros,Ninguna,A,organic,hard
-260,¿Cuál es la base conjugada de un fenol?,Fenolato,Fenil,Fenilamina,Benceno,A,organic,hard
-261,¿Qué se forma al hidrolizar una amida?,Amine + OH-,Ácido carboxílico y amina/amoniaco,Ácido graso y glicerol,Aldehído y nitrógeno,B,organic,hard
-262,¿Qué define la reducción de Birch (benceno con Na y NH3)?,Oxida anillo aromático a fenol,Produce un diol,Reduce parcialmente el anillo a dieno,Sustituye hidrógeno por sodio,C,organic,hard
-263,¿Qué es el test de iodoformo (haloformo)?,Confirma la presencia de CH3CH(OH)- o CH3C=O-,Detecta anillos aromáticos,Detecta enlaces dobles,Confirma haluros de alquilo secundarios,A,organic,hard
-264,¿Cuál es la diferencia entre un enantiomero y un diastereoisómero?,Son lo mismo,Enantiomeros son imagen especular no superponible; diastereoisómeros no lo son,Diastereoisómeros son imágenes especulares,Ninguna,B,organic,hard
-265,¿Qué son los compuestos organometálicos?,Sustancias con enlaces metal-oxígeno,Sustancias que contienen enlaces metal-carbono,Sustancias con metales alcalinos sin carbono,Polímeros con metal en la cadena,B,organic,hard
-266,¿Qué hace el reactivo de Lucas (ZnCl2/HCl)?,Oxida cetonas a ácidos,Diferencia alcoholes terciarios (reacción turbiedad rápida),Nitra anillos aromáticos,Descarboxila ácidos,B,organic,hard
-267,¿Qué define la condensación aldólica?,Unión de dos aldehídos/cetonas con hidrógeno alfa para formar ?-hidroxialdehído/cetona,Oxidación de alcoholes a aldehídos,Unión de un aldehído y un ácido,Reacción redox intracelular,A,organic,hard
-268,¿Cuál es el reactivo principal para la formación de diazocompuestos (diazotación) en anilina?,H2/Ni,NaNO2 + HCl (frío),Br2/FeBr3,KMnO4,B,organic,hard
-269,¿Qué describe la reacción de Wittig?,Transformar un carbonilo en un alqueno usando ylide de fosforo,Hidratación de un alquino,Hidrogenación catalítica,Oxidación de alcoholes,A,organic,hard
-270,¿Qué es la fotoisomerización del retinal en el ojo humano?,Un cambio redox,Un cambio de configuración cis-trans al absorber fotones,Una hidrólisis enzimática,Ninguna,B,organic,hard
-271,¿Qué estudia la química inorgánica principalmente?,Compuestos de carbono,Compuestos orgánicos,Compuestos sin C como base principal,Solo metales preciosos,C,inorganic,easy
-272,¿Cuál es el catión metálico en la sal de mesa NaCl?,Na+,Cl-,K+,Ca2+,A,inorganic,easy
-273,¿Qué color presenta típicamente el ion cúprico (Cu2+) en solución acuosa?,Incoloro,Azul,Verde,Rojo,B,inorganic,easy
-274,¿Cuál es la fórmula del amonio?,NH2-,NH3,NH4+,NH4-,C,inorganic,easy
-275,¿Qué tipo de compuestos forman los metales alcalinos con el cloro?,Óxidos,Sales iónicas,Peróxidos,Haluros covalentes,B,inorganic,easy
-276,¿Cuál de estos no es un halógeno?,F,Cl,Br,O,D,inorganic,easy
-277,¿Qué estado de oxidación tiene el sodio en Na2O?,1,2,-1,0,A,inorganic,easy
-278,¿Qué metal se encuentra en la hematita (Fe2O3)?,Hierro,Cobre,Aluminio,Zinc,A,inorganic,easy
-279,¿Qué nombre reciben los elementos del grupo 2 de la tabla periódica?,Alcalinos,Alcalinotérreos,Halógenos,Lantánidos,B,inorganic,easy
-280,¿Cuál es el principal uso del cloro elemental?,Combustible,Desinfectante/Blanqueante,Metalurgia,Refrigerante,B,inorganic,easy
-281,¿Cómo se llama el compuesto CaO?,Cal viva,Cal apagada,Yeso,Caliza,A,inorganic,easy
-282,¿Qué indica el término 'anfótero' en un hidróxido metálico?,Actúa solo como base,Actúa solo como ácido,Puede actuar como ácido o base,No reacciona con ácidos ni bases,C,inorganic,easy
-283,¿Cuál es el anión en el nitrato de potasio (KNO3)?,K+,NO3-,NO2-,N3-,B,inorganic,easy
-284,¿Cómo se denomina FeSO4?,Sulfato férrico,Sulfato ferroso,Sulfito ferroso,Sulfito férrico,B,inorganic,easy
-285,¿Qué iones forman un enlace iónico en MgCl2?,Mg2+ y Cl-,Mg+ y Cl2-,Mg y Cl,Ninguno,A,inorganic,easy
-286,¿Qué metal se emplea comúnmente para proteger hierro de la corrosión mediante galvanizado?,Cu,Ag,Zn,Pb,C,inorganic,easy
-287,¿Cómo se denomina el compuesto HCl en agua?,Ácido hipocloroso,Ácido clorhídrico,Cloruro de hidrógeno,Ácido clórico,B,inorganic,easy
-288,¿Cuál es el nombre del ion poliatómico SO4^2-?,Sulfito,Sulfato,Tiosulfato,Sulfuro,B,inorganic,easy
-289,¿Cuál de estos compuestos es un óxido ácido?,Na2O,MgO,SO3,CaO,C,inorganic,easy
-290,¿Qué elemento forma el diamante y el grafito?,Hierro,Carbono,Silicio,Zinc,B,inorganic,easy
-291,¿Qué tipo de compuesto es K2O?,Óxido metálico,Óxido no metálico,Peróxido,Anhídrido,A,inorganic,easy
-292,¿Cuál es la valencia habitual del aluminio en Al2O3?,1,2,3,4,C,inorganic,easy
-293,¿Qué iones produce la disociación de NaOH en agua?,Na- y OH+,Na2+ y O2-,Na+ y OH-,NaO- y H+,C,inorganic,easy
-294,¿Cuál es el número de oxidación del cloro en HClO?,1,3,5,7,A,inorganic,easy
-295,"¿Qué elemento se encuentra en la bauxita, mineral para obtener aluminio?",Fe,Al,Cu,Zn,B,inorganic,easy
-296,¿Cuál es el gas inerte más abundante en la atmósfera terrestre?,He,Ne,Ar,Kr,C,inorganic,easy
-297,"¿Qué nombre reciben los elementos del grupo 17 (F, Cl, Br, I)?",Gases nobles,Alcalinos,Halógenos,Calcógenos,C,inorganic,easy
-298,¿Qué color tiene el azufre elemental sólido?,Negro,Transparente,Amarillo,Rojo,C,inorganic,easy
-299,¿Qué metal es extraído principalmente de la casiterita (SnO2)?,Plomo,Estaño,Cobre,Mercurio,B,inorganic,easy
-300,¿Qué significa 'aq' en una fórmula como H2SO4(aq)?,Compuesto puro,Solución acuosa,Estado sólido,No está definido,B,inorganic,easy
-301,¿Qué caracteriza a los compuestos de coordinación?,Tienen enlaces covalentes puros,El metal central se une a ligandos a través de enlaces coordinados,Son iones con carga -2,Son siempre diamagnéticos,B,inorganic,medium
-302,¿Cómo se llama el anión complejo [Fe(CN)6]4-?,Ferroso,Ferricianuro,Ferrocianuro,Férrico,C,inorganic,medium
-303,¿Cuál es la hibridación del carbono en el CO2?,sp3,sp2,sp,No está hibridado,C,inorganic,medium
-304,¿Qué establece la teoría del campo cristalino?,Explica la energía de electrones d en complejos metálicos,Explica la solubilidad de sales,Predice las temperaturas de fusión,No describe iones metálicos,A,inorganic,medium
-305,¿Cuál es el estado de oxidación del Mn en KMnO4?,2,4,6,7,D,inorganic,medium
-306,¿Qué tipo de sólido es el cloruro de sodio?,Molecular,Iónico,Metálico,Covalente en red,B,inorganic,medium
-307,¿Cuál es el nombre del oxácido H3PO4?,Ácido fosforoso,Ácido hipofosforoso,Ácido fosfórico,Ácido perfosfórico,C,inorganic,medium
-308,¿Qué elemento es el más electronegativo?,Oxígeno,Flúor,Cloro,Nitrógeno,B,inorganic,medium
-309,¿Qué es la pasivación de un metal?,Su fusión inmediata,Formación de una capa protectora de óxido,Disolución completa en ácidos,Conversión en sal,B,inorganic,medium
-310,¿Cómo se nombra Fe2(SO4)3?,Sulfato de hierro (II),Sulfito de hierro (III),Sulfato de hierro (III),Hidróxido ferroso,C,inorganic,medium
-311,¿Cuál es el estado de oxidación del cromo en K2Cr2O7?,2,3,6,7,C,inorganic,medium
-312,¿Qué iones forman el permanganato de potasio?,K+ y MnO4-,K2+ y MnO4^2-,K+ y MnO4^2-,K- y MnO4+,A,inorganic,medium
-313,¿Cuál es el compuesto principal del mármol?,CaCO3,CaO,Ca(OH)2,CaSO4,A,inorganic,medium
-314,¿Qué producto se obtiene al descomponer térmicamente CaCO3?,Ca(OH)2,CaO y CO2,Ca y CO3,No se descompone,B,inorganic,medium
-315,¿Qué tipo de enlace se presenta en los óxidos metálicos?,Covalente polar,Metálico,Iónico,Covalente no polar,C,inorganic,medium
-316,¿Qué es la aleación latón?,Fe y C,Cu y Zn,Cu y Sn,Ag y Cu,B,inorganic,medium
-317,¿Qué caracteriza a las sales dobles como el alumbre (KAl(SO4)2·12H2O)?,Un solo catión y un anión complejo,Dos cationes diferentes y un anión simple,Tienen dos cationes y dos aniones que cristalizan juntos,No contienen agua de cristalización,C,inorganic,medium
-318,¿Cuál es el gas liberado usualmente en la reacción de un metal con un ácido fuerte?,O2,H2,Cl2,SO2,B,inorganic,medium
-319,¿Qué es el ZnS (blenda de zinc)?,Un hidróxido,Un sulfuro iónico,Un óxido metálico,Un haluro metálico,B,inorganic,medium
-320,¿Qué define la estequiometría en un compuesto inorgánico?,La velocidad de reacción,La proporción fija de átomos en su fórmula,La solubilidad del compuesto,La estructura cristalina,B,inorganic,medium
-321,¿Cómo se llama la reacción de un metal alcalinotérreo con agua para formar hidróxido y H2?,Electrólisis,Neutralización,Reacción de desplazamiento,Reacción de combinación,C,inorganic,medium
-322,¿Cuál es la principal diferencia entre óxidos básicos y óxidos ácidos?,Su color,Su solubilidad,Reaccionan con ácidos vs reaccionan con bases,No hay diferencia,C,inorganic,medium
-323,¿Qué se forma cuando NH3 se disuelve en agua?,NH4+ y OH-,NH3+ y H-,NH2- y H2O+,No reacciona,A,inorganic,medium
-324,¿Qué metal se obtiene principalmente a partir de la esfalerita (ZnS)?,Zinc,Plomo,Cobre,Hierro,A,inorganic,medium
-325,¿Cuál es la fórmula del fosfato de sodio?,Na3PO4,NaPO3,Na2HPO4,NaH2PO4,A,inorganic,medium
-326,¿Cómo se llama el método de extracción de aluminio a partir de Al2O3 fundido con criolita?,Proceso Haber,Proceso Hall-Héroult,Proceso Ostwald,Proceso Bayer,B,inorganic,medium
-327,¿Qué es un ácido poliprótico?,Un ácido con múltiples grupos funcionales,Un ácido capaz de donar más de un protón,Un ácido con enlaces metálicos,No existe tal concepto,B,inorganic,medium
-328,"¿Qué nombre reciben los óxidos de nitrógeno como NO,  NO2,  N2O4?",Óxidos básicos,Anhídridos halógenos,Óxidos neutros,Óxidos ácidos,D,inorganic,medium
-329,¿Cuál es la valencia del cobre en CuSO4?,1,2,3,-1,B,inorganic,medium
-330,¿Qué metal líquido se utiliza en algunos tipos de termómetros?,Plata,Mercurio,Litio,Oro,B,inorganic,medium
-331,¿Qué explica la teoría de Bandas en sólidos?,La conductividad eléctrica en metales y semiconductores,La solubilidad de sales iónicas,La estructura atómica del núcleo,El color de las llamas,A,inorganic,hard
-332,¿Qué es un compuesto de Werner?,Un tipo de complejo de coordinación,Un óxido anfótero,Un peróxido en el que el metal es +1,Ninguno,A,inorganic,hard
-333,¿Cómo se llama la especie [Pt(NH3)2Cl2]?,Sulfato de platino,Ácido platínico,Diaminodicloroplatino(II),No es estable,C,inorganic,hard
-334,¿Cuál es la carga global del complejo [Co(NH3)6]Cl3 en disolución?,3,0,-3,2,B,inorganic,hard
-335,¿Qué es la pirita (FeS2) químicamente?,Un óxido de hierro,Un silicato de hierro,Un sulfuro de hierro,Un hidróxido,C,inorganic,hard
-336,¿Qué ocurre cuando se calienta fuertemente KClO3 con un catalizador?,No reacciona,Sublima,Se descompone liberando O2,Pasa a estado líquido,C,inorganic,hard
-337,¿Cuál es la diferencia entre un ferromagnetismo y un paramagnetismo?,El ferromagnetismo desaparece tras quitar el campo magnético,En el paramagnetismo las dipolos se alinean fuertemente,El ferromagnetismo requiere electrones emparejados,El ferromagnetismo es un alineamiento colectivo y persistente y el paramagnetismo es débil y no persiste,D,inorganic,hard
-338,¿Qué describe la regla de 18 electrones en química organometálica?,La preferencia de los complejos metálicos por una configuración de gas noble extendida,La estabilidad del núcleo,El número de protones permitido,No existe tal regla,A,inorganic,hard
-339,¿Qué iones forman el complejo de tetraaminacobre(II)?,Cu2+ y 4Cl-,Cu2+ y 4NH3,Cu+ y 4NH4+,No existe tal complejo,B,inorganic,hard
-340,¿Qué es un ácido de Lewis?,Un dador de H+,Un aceptor de pares de electrones,Un aceptor de H+,Un dador de electrones,B,inorganic,hard
-341,¿Cuál es la geometría común de un complejo con número de coordinación 6?,Tetraédrica,Cuadrado plano,Lineal,Octaédrica,D,inorganic,hard
-342,¿Qué caracteriza la pila de combustible de hidrógeno?,Emite CO2,Oxida H2 y reduce O2 generando H2O,Funciona solo en alta presión,No genera electricidad,B,inorganic,hard
-343,¿Qué metal se emplea como cátodo en la fabricación del litio por electrólisis de LiCl fundido?,Hierro,Níquel,Grafito,Cobre,C,inorganic,hard
-344,¿Qué es el efecto Jahn-Teller?,Una distorsión geométrica en complejos de metales de transición con degeneración electrónica,La hidrólisis de iones metálicos,La aparición de magnetismo diamagnético,La mezcla de orbitales s y p,A,inorganic,hard
-345,¿Qué ocurre en el proceso Solvay?,Síntesis de amoníaco,Obtención de Na2CO3 a partir de NaCl y NH3,Producción de ácido sulfúrico,Refinación de petróleo,B,inorganic,hard
-346,¿Qué subproducto se forma en la electrólisis de NaCl en celdas de diafragma aparte del Cl2?,NaOH,HCl,H2O2,FeCl3,A,inorganic,hard
-347,¿Qué describe la serie electroquímica de metales?,Su capacidad de formar enlaces covalentes,Su potencial de reducción estándar relativo,Su densidad,Su punto de ebullición,B,inorganic,hard
-348,¿Qué tipo de cristal es el diamante?,Molecular,Iónico,Metálico,Covalente de red,D,inorganic,hard
-349,¿Cómo se denomina el ion complejo [Ag(NH3)2]+?,Amoníaco complejo de plata,Diaminoplata(I),Plata amónica,Ion argentocianuro,B,inorganic,hard
-350,¿Cuál es el principal producto al hacer pasar amoníaco sobre cobre(II) óxido caliente?,N2 y H2O,NO y H2O,NH4NO3,Cu(NH3)4^2+,A,inorganic,hard
-351,¿Qué técnica se usa para purificar el germanio e incrementarle la pureza para semiconductores?,Destilación fraccionada,Proceso de Czochralski (cristal único),Electrorefinación en medio acuoso,Proceso Bayer,B,inorganic,hard
-352,¿Cuál es la fuente principal de fósforo para la industria química?,Fluorita,Apatita (fosfatos),Yeso,Silvina,B,inorganic,hard
-353,¿Qué ocurre en la precipitación fraccionada?,Un ácido se neutraliza por partes,Se forman complejos a distintas etapas,Se separan iones de una solución basados en diferentes solubilidades,Ocurre una electrólisis selectiva,C,inorganic,hard
-354,¿Qué es la pasivación del aluminio?,La formación de una capa de óxido que lo protege,La disolución del metal a alta T,La reducción de su óxido a metal,La formación de aleaciones con Fe,A,inorganic,hard
-355,¿Cuál es el disolvente usado comúnmente en el proceso Bayer para disolver la bauxita?,HCl,NaOH,NH3,H2SO4,B,inorganic,hard
-356,¿Qué define la Ley de Fajans?,La polarización de un anión por un catión pequeño con alta carga,La conductividad eléctrica en disolución,El volumen molar de un gas,La formación de sales dobles,A,inorganic,hard
-357,¿Qué se forma cuando se combina B2H6 (diborano) con O2?,BH3,B2O3 y agua,H2O2 y B,No reacciona,B,inorganic,hard
-358,¿Qué nombre recibe la clase de compuestos que contienen el anión [MnO4]-?,Permanganatos,Silicatos,Sulfatos,CrO4 compuestos,A,inorganic,hard
-359,¿Qué caracteriza a los lantánidos?,Son gases nobles,Elementos 3d de transición,Metales blandos y reactivos con orbitales 4f en llenado,No existen en la Tierra,C,inorganic,hard
-360,¿Qué es la aleación 'cuproníquel'?,Cobre + Níquel,Cobre + Estaño,Cobre + Zinc,Níquel + Hierro,A,inorganic,hard
+1,CuÃ¡l es la fÃ³rmula quÃ­ica del agua?,H2O,CO2,O2,H2,A,university,easy
+2,QuÃ© partÃ­ula subatÃ³mica tiene carga negativa?,ProtÃ³n,NeutrÃ³n,ElectrÃ³n,MesÃ³n,C,university,easy
+3,CuÃ¡l de estos es un estado de la materia?,Plasma,Reactivo,Ã©ter,Luz,A,university,easy
+4,QuÃ© unidad se usa para medir la cantidad de sustancia?,Litro,Mol,Gramo,Joule,B,university,easy
+5,CuÃ¡l es la carga del protÃ³n?,Negativa,Positiva,Neutra,Variable,B,university,easy
+6,CuÃ¡l es la partÃ­ula mÃ¡s pequeÃ±a que conserva las propiedades de un elemento?,MolÃ©cula,Ã¡tomo,ElectrÃ³n,NÃºcleo,B,university,easy
+7,QuÃ© significa 'aq' en una ecuaciÃ³n quÃ­ica?,SÃ³lido,LÃ­uido,Disuelto en agua,Gas,C,university,easy
+8,CuÃ¡l es el principal gas de la atmÃ³sfera terrestre?,OxÃ­eno,NitrÃ³geno,ArgÃ³n,DiÃ³xido de carbono,B,university,easy
+9,QuÃ© define el nÃºmero atÃ³mico de un elemento?,NÃºmero de protones,NÃºmero de neutrones,NÃºmero de electrones,Masa molecular,A,university,easy
+10,QuÃ© nombre recibe la columna vertical en la tabla periÃ³dica?,PerÃ­do,Grupo,Bloque,Fila,B,university,easy
+11,En quÃ© grupo de la tabla periÃ³dica se encuentran los gases nobles?,Grupo 1,Grupo 2,Grupo 17,Grupo 18,D,university,easy
+12,CÃ³mo se llama el cambio de estado de sÃ³lido a lÃ­uido?,SublimaciÃ³n,FusiÃ³n,EvaporaciÃ³n,CondensaciÃ³n,B,university,easy
+13,QuÃ© nÃºmero representa el Avogadro?,6'022 x 10^23,9'81 x 10^2,3'14 x 10^0,1'602 x 10^-19,A,university,easy
+14,QuÃ© mide el pH?,La concentraciÃ³n de soluto,La temperatura de una soluciÃ³n,La acidez o alcalinidad,La presiÃ³n parcial de un gas,C,university,easy
+15,CÃ³mo se llama la fuerza de atracciÃ³n entre masas?,Fuerza nuclear,ElectrostÃ¡tica,GravitaciÃ³n,MagnÃ©tica,C,university,easy
+16,CuÃ¡l de las siguientes opciones es una base fuerte?,NaOH,HCl,CH3COOH,NH3,A,university,easy
+17,QuÃ© tipo de enlace se forma al compartir electrones?,IÃ³nico,Covalente,MetÃ¡lico,Puente de hidrÃ³geno,B,university,easy
+18,CuÃ¡l de estas magnitudes se mide en litros?,Masa,EnergÃ­,Volumen,PresiÃ³n,C,university,easy
+19,CuÃ¡ntos Ã¡tomos de oxÃ­eno tiene una molÃ©cula de ozono?,1,2,3,4,C,university,easy
+20,CuÃ¡l es el sÃ­bolo del sodio?,So,Na,S,Sn,B,university,easy
+21,QuÃ© estado de la materia no tiene forma ni volumen definidos?,SÃ³lido,LÃ­uido,Gas,Plasma,C,university,easy
+22,QuÃ© partÃ­ula subatÃ³mica determina la reactividad quÃ­ica?,ElectrÃ³n,ProtÃ³n,NeutrÃ³n,Quark,A,university,easy
+23,QuÃ© ocurre cuando un Ã¡tomo gana electrones?,Forma un catiÃ³n,Forma un aniÃ³n,Permanece neutro,Se vuelve un isÃ³topo,B,university,easy
+24,CuÃ¡l es la fÃ³rmula del ion hidronio?,H-,OH-,H3O+,H2O2,C,university,easy
+25,QuÃ© sucede si combinas un Ã¡cido y una base en cantidades equivalentes?,Se forma un gas noble,Ocurre neutralizaciÃ³n,Aumenta el pH a 14,No pasa nada,B,university,easy
+26,QuÃ© significa 's' en una ecuaciÃ³n quÃ­ica?,SoluciÃ³n acuosa,Fase sÃ³lida,Fase gaseosa,Fase lÃ­uida,B,university,easy
+27,CuÃ¡l es la partÃ­ula con carga positiva en el nÃºcleo?,MesÃ³n,ProtÃ³n,PositrÃ³n,ElectrÃ³n,B,university,easy
+28,CuÃ¡l de las siguientes es una unidad de presiÃ³n?,Pascal,Julio,Kelvin,Coulomb,A,university,easy
+29,QuÃ© ocurre al aumentar la temperatura de un gas en un recipiente cerrado?,Disminuye la presiÃ³n,La presiÃ³n aumenta,No hay cambio,Se licua,B,university,easy
+30,QuÃ© significa el sÃ­bolo '?' en una reacciÃ³n quÃ­ica?,Temperatura baja,ReacciÃ³n incompleta,Calentamiento,Volumen constante,C,university,easy
+31,CuÃ¡l de estas especies es un radical libre?,O2,H2O,ClÂ·,NH4+,C,university,medium
+32,CuÃ¡l de las siguientes magnitudes se conserva en una reacciÃ³n quÃ­ica?,Volumen total,Masa total,PresiÃ³n,EntalpÃ­,B,university,medium
+33,QuÃ© nombre recibe una soluciÃ³n que puede resistir cambios de pH al agregar Ã¡cido o base?,IsotÃ³nica,Sobresaturada,TampÃ³n,Coloide,C,university,medium
+34,CuÃ¡l es la fÃ³rmula empÃ­ica del perÃ³xido de hidrÃ³geno (H2O2)?,HO,H2O2,H2O,HO2,A,university,medium
+35,QuÃ© es la entalpÃ­ (H)?,Calor absorbido a presiÃ³n constante,Calor absorbido a volumen constante,EnergÃ­ libre del sistema,EnergÃ­ potencial,A,university,medium
+36,CuÃ¡l de estas fuerzas es la mÃ¡s dÃ©bil?,Enlace covalente,Enlace iÃ³nico,Puente de hidrÃ³geno,Fuerzas de Van der Waals,D,university,medium
+37,QuÃ© establece la ley de Charles?,P1V1 = P2V2,V1/T1 = V2/T2,PV = nRT,V1n1 = V2n2,B,university,medium
+38,QuÃ© tipo de reacciÃ³n es: A + BC -> AC + B?,NeutralizaciÃ³n,Doble desplazamiento,SustituciÃ³n simple,SÃ­tesis,C,university,medium
+39,CuÃ¡l es el reactivo limitante en una reacciÃ³n quÃ­ica?,El que se gasta primero,El que estÃ¡ en mayor cantidad,El que no reacciona,El que determina la entalpÃ­,A,university,medium
+40,CÃ³mo se llama la sustancia que acelera una reacciÃ³n sin consumirse?,Soluto,Catalizador,Intermediario,Inhibidor,B,university,medium
+41,CuÃ¡l es el producto iÃ³nico del agua (Kw) a 25 Ã‚Â°?,1 x 10^-14,1 x 10^-7,1 x 10^14,0,A,university,medium
+42,QuÃ© tipo de compuesto resulta de la reacciÃ³n entre un Ã¡cido y un alcohol?,AldehÃ­o,Ã©ter,Ã©ster,Amina,C,university,medium
+43,CuÃ¡l es la principal caracterÃ­tica de un gas ideal?,No tiene volumen,No hay fuerzas intermoleculares,Se licua fÃ¡cilmente,Es diatÃ³mico,B,university,medium
+44,CuÃ¡l es la unidad SI de la constante de gases (R)?,J/(molÂ·K),L/(atmÂ·K),N/(mÂ·K),g/(molÂ·K),A,university,medium
+45,QuÃ© sucede en un proceso endotÃ©rmico?,Se libera energÃ­,No hay transferencia de calor,Se absorbe calor,Cambia la entropÃ­ pero no la entalpÃ­,C,university,medium
+46,QuÃ© expresa la ley de Hess?,El calor de reacciÃ³n depende de la ruta,El calor de reacciÃ³n es independiente de la ruta,El calor de reacciÃ³n es siempre cero,El calor de reacciÃ³n no puede medirse,B,university,medium
+47,QuÃ© es un enlace polar?,Un enlace con distribuciÃ³n equitativa de electrones,Un enlace que comparte protones,Un enlace con distribuciÃ³n desigual de electrones,Un enlace que rompe la regla del octeto,C,university,medium
+48,QuÃ© significa que una reacciÃ³n estÃ© en equilibrio?,La reacciÃ³n se detiene,Las concentraciones de reactivos y productos son iguales,Las velocidades directa e inversa son iguales,El catalizador se desactiva,C,university,medium
+49,CuÃ¡l es el nÃºmero de oxidaciÃ³n del oxÃ­eno en la mayorÃ­ de compuestos?,-2,-1,0,2,A,university,medium
+50,CuÃ¡l es el pH de una soluciÃ³n con [H+] = 1x10^-5 M?,5,9,14,2,A,university,medium
+51,QuÃ© tipo de interacciÃ³n estabiliza a las micelas en soluciÃ³n?,Interacciones metÃ¡licas,Atracciones electrostÃ¡ticas fuertes,Interacciones hidrofÃ³bicas,Enlaces iÃ³nicos,C,university,medium
+52,CuÃ¡l es la expresiÃ³n de la constante de equilibrio para la reacciÃ³n: aA + bB <-> cC + dD?,K = [A]^a [B]^b / [C]^c [D]^d,K = ([A]^a [B]^b) / ([C]^c [D]^d) x RT,K = [C]^c [D]^d / [A]^a [B]^b,K = (a+b)/(c+d),C,university,medium
+53,CuÃ¡l es el pOH de una soluciÃ³n con pH = 3 a 25 Ã‚Â°?,7,14,11,1,C,university,medium
+54,CuÃ¡l es la geometrÃ­ electrÃ³nica de una molÃ©cula con 3 pares de electrones en el Ã¡tomo central?,Lineal,TetraÃ©drica,Trigonal planar,Piramidal,C,university,medium
+55,QuÃ© representa la letra 'n' en la ecuaciÃ³n de gases ideales?,NÃºmero de molÃ©culas,NÃºmero de moles,NÃºmero de Ã¡tomos,NÃºmero cuÃ¡ntico,B,university,medium
+56,QuÃ© tipo de enlace se forma en un compuesto iÃ³nico?,Compartir electrones,Transferencia de electrones,PÃ©rdida de protones,AtracciÃ³n dipolo-dipolo,B,university,medium
+57,CuÃ¡l es la configuraciÃ³n electrÃ³nica del NeÃ³n (Z=10)?,1s2 2s2 2p6,1s2 2s2 2p4,1s2 2s2 2p5,1s2 2s2 2p6 3s1,A,university,medium
+58,QuÃ© indica la constante de equilibrio K>>1?,Predominan los reactivos,La reacciÃ³n casi no avanza,Predominan los productos,El equilibrio es imposible,C,university,medium
+59,QuÃ© es la entropÃ­ (S)?,El contenido de calor de un sistema,La medida del desorden o aleatoriedad,La capacidad de hacer trabajo,La variaciÃ³n de energÃ­ de Gibbs,B,university,medium
+60,CuÃ¡l es la forma de la molÃ©cula de agua?,Lineal,TetraÃ©drica,Angular,Trigonal plana,C,university,medium
+61,QuÃ© establece el principio de Le Chatelier?,El pH depende solo de la base,Si se cambia una condiciÃ³n de equilibrio el sistema se opone a ese cambio,La entalpÃ­ de un sistema siempre aumenta,La entropÃ­ del universo disminuye,B,university,hard
+62,"CuÃ¡l es el valor de la constante universal de los gases, R, en LÂ·atm/(molÂ·K)?",0.08206,8.314,62.36,2.303,A,university,hard
+63,En quÃ© consiste la hibridaciÃ³n sp^2?,Mezcla de un orbital s y dos p,Mezcla de un orbital s y un orbital p,Mezcla de un orbital s y tres p,Mezcla de dos orbitales s y un d,A,university,hard
+64,CuÃ¡l es la ecuaciÃ³n de la energÃ­ libre de Gibbs?,?G = ?H + T?S,?G = ?H - T?S,?G = -RT ln K,?G = q - w,B,university,hard
+65,QuÃ© tipo de isÃ³meros difieren en la disposiciÃ³n espacial alrededor de un doble enlace?,IsÃ³meros estructurales,IsÃ³meros Ã³pticos,IsÃ³meros geomÃ©tricos (cis-trans),TautomÃ©ricos,C,university,hard
+66,QuÃ© mide la espectroscopÃ­ de infrarrojo en una molÃ©cula?,Transiciones electrÃ³nicas,Vibraciones moleculares,Cambios en el nÃºcleo atÃ³mico,Movimientos de electrones no apareados,B,university,hard
+67,QuÃ© tipo de reacciÃ³n es la nitraciÃ³n de benceno?,SustituciÃ³n electrofÃ­ica aromÃ¡tica,SustituciÃ³n nucleofÃ­ica alifÃ¡tica,OxidaciÃ³n enÃ©rgica,ReducciÃ³n catalÃ­ica,A,university,hard
+68,CuÃ¡l de estas molÃ©culas tiene un momento dipolar neto igual a cero?,HCl,H2O,CO2,NH3,C,university,hard
+69,QuÃ© propiedad coligativa eleva la temperatura de ebulliciÃ³n de una soluciÃ³n?,DisminuciÃ³n de la presiÃ³n de vapor,Aumento de la presiÃ³n de vapor,DisminuciÃ³n del punto de congelaciÃ³n,Cambio de color,A,university,hard
+70,CuÃ¡l es la velocidad de reacciÃ³n segÃºn la ley: v = k[A]^2[B]?,Es de primer orden total,Es de segundo orden total,Es de tercer orden total,Es de orden mixto,C,university,hard
+71,CuÃ¡l es la ecuaciÃ³n de Arrhenius?,k = Ae^(Ea/RT),ln(k2/k1) = Ea/R (1/T2 - 1/T1),k = A e^(-Ea/RT),k = e^(?G/RT),C,university,hard
+72,CÃ³mo se denomina la sustancia formada temporalmente en el curso de una reacciÃ³n que luego se convierte en producto?,Reactivo,Intermedio,Catalizador,Producto secundario,B,university,hard
+73,QuÃ© describe el principio de exclusiÃ³n de Pauli?,No mÃ¡s de dos electrones pueden ocupar el mismo orbital,El orbital d debe estar vacÃ­,Los electrones tienen carga positiva,Cada subnivel solo puede tener un electrÃ³n,A,university,hard
+74,CuÃ¡l es la geometrÃ­ electrÃ³nica de un Ã¡tomo central con hibridaciÃ³n sp3d?,TetraÃ©drica,Trigonal plana,Bipiramidal trigonal,OctaÃ©drica,C,university,hard
+75,CÃ³mo se llama la energÃ­ necesaria para quitar un electrÃ³n de un Ã¡tomo en estado gaseoso?,Afinidad electrÃ³nica,EnergÃ­ de ionizaciÃ³n,EnergÃ­ reticular,Potencial de reducciÃ³n,B,university,hard
+76,CuÃ¡l es el orden de reacciÃ³n global si la velocidad es v = k[A]^1[B]^2?,1,2,3,0,C,university,hard
+77,QuÃ© estudia la cinÃ©tica quÃ­ica?,La posiciÃ³n del equilibrio,La rapidez de las reacciones,La naturaleza de los iones,La termodinÃ¡mica,B,university,hard
+78,QuÃ© define la constante de equilibrio Kp?,Equilibrio para concentraciones,Equilibrio en fase sÃ³lida,Equilibrio en fase acuosa,Equilibrio en presiones parciales,D,university,hard
+79,CuÃ¡l es la base conjugada del Ã¡cido sulfÃºrico (H2SO4)?,HSO4-,SO4^2-,SO3^2-,H2SO3,A,university,hard
+80,QuÃ© mÃ©todo se utiliza para balancear reacciones redox en medio Ã¡cido?,MÃ©todo algebraico,MÃ©todo de ajuste directo,Ion-electrÃ³n,MÃ©todo de Pauli,C,university,hard
+81,CuÃ¡l es el potencial estÃ¡ndar de hidrÃ³geno (SHE)?,1'00 V,0'00 V,0'76 V,Depende del ph,B,university,hard
+82,QuÃ© describe la ecuaciÃ³n de Nernst?,RelaciÃ³n entre emf y las concentraciones iÃ³nicas,RelaciÃ³n entre energÃ­ libre y entalpÃ­,Velocidad de reacciÃ³n y temperatura,Equilibrio de fases,A,university,hard
+83,CuÃ¡l es la fÃ³rmula para la presiÃ³n osmÃ³tica (?)?,? = M R T,? = k [A]^n,? = ?H - T?S,? = d Â· g Â· h,A,university,hard
+84,QuÃ© es un diagrama de fases?,Muestra la energÃ­ de activaciÃ³n,Representa los estados de agregaciÃ³n a distintas T y P,Indica la geometrÃ­ molecular,Es un diagrama de orbitales,B,university,hard
+85,CuÃ¡l es la principal interacciÃ³n en la disoluciÃ³n de iones en agua?,Ion-ion,Dipolo-dipolo,Ion-dipolo,London,C,university,hard
+86,CuÃ¡l de los siguientes iones es comÃºnmente un contraiÃ³n en complejos de coordinaciÃ³n?,K+,NO3-,Al3+,F2-,B,university,hard
+87,CÃ³mo se denomina el fenÃ³meno en que una sustancia pierde agua de hidrataciÃ³n al exponerse al aire?,SublimaciÃ³n,DisociaciÃ³n,Eflorescencia,DescomposiciÃ³n,C,university,hard
+88,QuÃ© establece la regla del octeto?,Los Ã¡tomos tienden a completar 8 electrones en su capa de valencia,La suma de protones y neutrones es 8,Los orbitales d no participan en enlaces,Solo los metales de transiciÃ³n pueden formar 8 enlaces,A,university,hard
+89,CÃ³mo se llama el proceso de convertir un lÃ­uido en gas a temperatura inferior a su punto de ebulliciÃ³n?,SublimaciÃ³n,EvaporaciÃ³n,FusiÃ³n,LicuefacciÃ³n,B,university,hard
+90,CuÃ¡l es la principal interacciÃ³n que estabiliza la estructura secundaria de las proteÃ­as?,Enlaces iÃ³nicos,Puentes de hidrÃ³geno,Puentes disulfuro,Interacciones hidrofÃ³bicas,B,university,hard
+91,QuÃ© gas hace que las burbujas en las bebidas carbonatadas?,OxÃ­eno,NitrÃ³geno,DiÃ³xido de carbono,Helio,C,general,easy
+92,QuÃ© metal es lÃ­uido a temperatura ambiente?,Sodio,Mercurio,Hierro,Aluminio,B,general,easy
+93,CÃ³mo se llama la sustancia que en contacto con la piel produce un color caracterÃ­tico en el bronceado?,OxÃ­eno,Melanina,Hemoglobina,Keratina,B,general,easy
+94,CuÃ¡l de estos elementos no es un metal?,Oro,Sodio,Carbono,Calcio,C,general,easy
+95,CuÃ¡l es la base de la vida en la Tierra?,HidrÃ³geno,OxÃ­eno,Carbono,Hierro,C,general,easy
+96,QuÃ© gas es necesario para la combustiÃ³n en el aire?,NitrÃ³geno,ArgÃ³n,OxÃ­eno,DiÃ³xido de carbono,C,general,easy
+97,"CuÃ¡l es la fÃ³rmula del Ã¡cido acÃ©tico, principal componente del vinagre?",H2SO4,HCl,CH3COOH,HNO3,C,general,easy
+98,CuÃ¡l es el compuesto principal del vidrio?,SiO2,CO2,NaCl,CaO,A,general,easy
+99,QuÃ© elemento quÃ­ico tiene el sÃ­bolo 'Fe'?,FÃ³sforo,Hierro,FlÃºor,Francio,B,general,easy
+100,CuÃ¡l es el gas noble mÃ¡s ligero?,Helio,NeÃ³n,ArgÃ³n,RadÃ³n,A,general,easy
+101,CuÃ¡l es el componente principal del aire que respiramos?,OxÃ­eno,NitrÃ³geno,DiÃ³xido de carbono,Vapor de agua,B,general,easy
+102,CuÃ¡l de estos se considera un Ã¡cido fuerte?,HCl,HF,CH3COOH,H2CO3,A,general,easy
+103,CuÃ¡l de las siguientes sustancias es una mezcla?,Agua destilada,DiÃ³xido de carbono,Aire,Cloruro de sodio,C,general,easy
+104,QuÃ© metal es conocido por su alta conductividad elÃ©ctrica?,Plomo,Cobre,Hierro,Oro,B,general,easy
+105,QuÃ© macromolÃ©cula forman los aminoÃ¡cidos?,ProteÃ­as,Carbohidratos,LÃ­idos,Ã¡cidos nucleicos,A,general,easy
+106,QuÃ© es la oxidaciÃ³n?,PÃ©rdida de electrones,Ganancia de electrones,DisminuciÃ³n del nÃºmero de oxidaciÃ³n,FormaciÃ³n de enlaces covalentes,A,general,easy
+107,QuÃ© define una disoluciÃ³n sobresaturada?,No puede disolver mÃ¡s soluto,Tiene menos soluto del que puede disolver,Contiene mÃ¡s soluto disuelto del que deberÃ­ a esa temperatura,Es siempre Ã¡cida,C,general,easy
+108,QuÃ© es el amonÃ­co en tÃ©rminos de fÃ³rmula quÃ­ica?,NH3,NH4+,NO3-,N2,A,general,easy
+109,QuÃ© son los enlaces de hidrÃ³geno?,Fuerzas dÃ©biles entre H y un metal,Interacciones entre H y un Ã¡tomo muy electronegativo,Enlaces covalentes fuertes,Enlaces iÃ³nicos,B,general,easy
+110,QuÃ© indica la estequiometrÃ­ de una ecuaciÃ³n quÃ­ica?,La velocidad de la reacciÃ³n,Las proporciones en que reaccionan las sustancias,El color de los reactivos,La presiÃ³n requerida,B,general,easy
+111,CuÃ¡l de los siguientes no es un hidrocarburo?,Metano,Etanol,Propano,Buteno,B,general,easy
+112,QuÃ© significa 'Pb' en la tabla periÃ³dica?,Polonio,Plomo,Paladio,Bromo,B,general,easy
+113,CuÃ¡l es el nombre comÃºn del cloruro de sodio?,AzÃºcar,Sal de mesa,Bicarbonato,Yeso,B,general,easy
+114,QuÃ© es una soluciÃ³n acuosa?,Una mezcla de aceite en agua,Una mezcla de agua con un solvente orgÃ¡nico,Una mezcla donde el agua es el disolvente,Un coloide semisÃ³lido,C,general,easy
+115,QuÃ© son los iones?,Ã¡tomos con distinto nÃºmero de protones y neutrones,Ã¡tomos o molÃ©culas con carga elÃ©ctrica,Ã¡tomos con el mismo nÃºmero atÃ³mico,MolÃ©culas neutras,B,general,easy
+116,QuÃ© es el cloro en su forma elemental?,Gas diatÃ³mico,LÃ­uido verde,SÃ³lido cristalino,Gas noble,A,general,easy
+117,CuÃ¡l de estos compuestos es orgÃ¡nico?,CO2,CH4,NaOH,MgCl2,B,general,easy
+118,QuÃ© ocurre si mezclas vinagre con bicarbonato de sodio?,No pasa nada,Se produce calor sin burbujas,Reacciona formando CO2 y espuma,Se convierte en un sÃ³lido,C,general,easy
+119,CuÃ¡l es la propiedad que mide la resistencia de un metal a deformarse?,Ductilidad,Maleabilidad,Conductividad,Dureza,B,general,easy
+120,CuÃ¡l es el principal gas de efecto invernadero producido por actividades humanas?,Metano,Ozono,DiÃ³xido de carbono,MonÃ³xido de carbono,C,general,easy
+121,QuÃ© sucede con el punto de ebulliciÃ³n si aumenta la presiÃ³n externa?,Disminuye,Aumenta,No cambia,Se vuelve 0 Ã‚Â°,B,general,medium
+122,QuÃ© elemento se encuentra en todos los compuestos orgÃ¡nicos?,HidrÃ³geno,OxÃ­eno,NitrÃ³geno,Carbono,D,general,medium
+123,CuÃ¡l es el principal componente del gas natural?,Propano,Butano,Metano,Etano,C,general,medium
+124,QuÃ© tipo de enlace mantiene unidos a los Ã¡tomos de sal (NaCl)?,Covalente polar,IÃ³nico,MetÃ¡lico,Van der Waals,B,general,medium
+125,QuÃ© Ã¡cido se encuentra comÃºnmente en las baterÃ­s de coche?,Ã¡cido clorhÃ­rico,Ã¡cido sulfÃºrico,Ã¡cido acÃ©tico,Ã¡cido nÃ­rico,B,general,medium
+126,CuÃ¡l es la principal razÃ³n de la conductividad elÃ©ctrica en metales?,Electrones deslocalizados,Protones libres,Ausencia de electrones,Altas energÃ­s de ionizaciÃ³n,A,general,medium
+127,QuÃ© define a un grupo funcional en quÃ­ica orgÃ¡nica?,La solubilidad en agua,El nÃºmero de carbonos,El tipo de reacciÃ³n que sufre,El peso molecular,C,general,medium
+128,QuÃ© mÃ©todo se utiliza para separar lÃ­uidos miscibles basados en sus puntos de ebulliciÃ³n?,FiltraciÃ³n,DestilaciÃ³n,CristalizaciÃ³n,DecantaciÃ³n,B,general,medium
+129,QuÃ© caracteriza a un coloide?,Mezcla homogÃ©nea de 2 fases,PartÃ­ulas muy grandes,Mezcla heterogÃ©nea con sedimentaciÃ³n,PartÃ­ulas de tamaÃ±o intermedio,D,general,medium
+130,CÃ³mo se llama el proceso de eliminar sales disueltas del agua para hacerla potable?,Ablandamiento,DesalinizaciÃ³n,Ozono-tratamiento,DestilaciÃ³n fraccionada,B,general,medium
+131,CuÃ¡l es el aniÃ³n en la fÃ³rmula de Na2SO4?,Na+,S2-,SO4^2-,SO3^2-,C,general,medium
+132,QuÃ© es un polÃ­ero?,Un Ã¡tomo con alto nÃºmero atÃ³mico,Una mezcla heterogÃ©nea,Un material con largas cadenas repetidas,Un catalizador orgÃ¡nico,C,general,medium
+133,CuÃ¡l es la caracterÃ­tica principal de un isÃ³topo?,Igual nÃºmero de protones distinto de neutrones,Diferente nÃºmero de protones mismo neutrones,Distinto nÃºmero atÃ³mico,Diferente reactividad,A,general,medium
+134,QuÃ© mide la escala Mohs?,La dureza de los minerales,El calor de combustiÃ³n,La solubilidad en agua,La densidad de los gases,A,general,medium
+135,QuÃ© subproducto se produce tÃ­icamente en la combustiÃ³n completa de un hidrocarburo?,CO,CO2,C,H2,B,general,medium
+136,QuÃ© sucede si el pH de una soluciÃ³n es menor que 7?,Es bÃ¡sica,Es neutra,Es Ã¡cida,Es estable,C,general,medium
+137,CuÃ¡l de los siguientes no es un estado de agregaciÃ³n de la materia?,SÃ³lido,Plasma,LÃ­uido,Cristalino,D,general,medium
+138,QuÃ© tipo de enlace une a los aminoÃ¡cidos en una proteÃ­a?,Enlace glucosÃ­ico,Enlace peptÃ­ico,Enlace fosfodiÃ©ster,Enlace iÃ³nico,B,general,medium
+139,CuÃ¡l es la principal sustancia responsable de la capa de ozono estratosfÃ©rica?,O3,O2,CFC,NOx,A,general,medium
+140,QuÃ© describe la ley de Avogadro?,"A T y P ctes, V ? nÃºmero de moles",La relaciÃ³n entre presiÃ³n y volumen es constante,La energÃ­ interna de un gas ideal es constante,El volumen es inverso a la temperatura,A,general,medium
+141,QuÃ© cambio fÃ­ico ocurre durante la sublimaciÃ³n?,LÃ­uido a gas,Gas a sÃ³lido,SÃ³lido a gas,LÃ­uido a sÃ³lido,C,general,medium
+142,QuÃ© tipo de compuesto son los triglicÃ©ridos?,ProteÃ­as,LÃ­idos,Ã¡cidos nucleicos,Carbohidratos,B,general,medium
+143,CuÃ¡l es un indicador de pH muy comÃºn en laboratorios?,Azul de bromotimol,Mercurio,Etanol,Silicio,A,general,medium
+144,QuÃ© es la galvanizaciÃ³n?,Aplicar un recubrimiento de cinc,una reacciÃ³n redox en Ã¡cido,un tipo de electrÃ³lisis,OxidaciÃ³n de hierro,A,general,medium
+145,QuÃ© subpartÃ­ula cambia entre isÃ³topos del mismo elemento?,Electrones,Neutrones,Protones,Quarks,B,general,medium
+146,CuÃ¡l es el principal gas implicado en el efecto invernadero?,ArgÃ³n,CO2,Helio,HidrÃ³geno,B,general,medium
+147,QuÃ© se entiende por entalpÃ­ de formaciÃ³n estÃ¡ndar?,EnergÃ­ cinÃ©tica de molÃ©culas,Calor liberado en combustiÃ³n,Calor absorbido al formar 1 mol desde elementos,EnergÃ­ para romper enlaces,C,general,medium
+148,CuÃ¡l es el nombre del proceso por el cual las plantas convierten CO2 y agua en glucosa?,RespiraciÃ³n,EvapotranspiraciÃ³n,FotosÃ­tesis,FermentaciÃ³n,C,general,medium
+149,QuÃ© indica el tÃ©rmino 'anfÃ³tero'?,Funciona como Ã¡cido o base,Es insoluble en agua,Conduce electricidad,Reacciona solo con metales,A,general,medium
+150,CuÃ¡l es el principal Ã¡cido graso en el aceite de oliva?,Ã¡cido lÃ¡ctico,Ã¡cido palmÃ­ico,Ã¡cido oleico,Ã¡cido butÃ­ico,C,general,medium
+151,CuÃ¡l es la principal caracterÃ­tica de un lÃ­uido supercrÃ­ico?,No ejerce presiÃ³n,No presenta tensiÃ³n superficial ni fase lÃ­uida/gaseosa definida,Es estable solo a baja T,Se solidifica fÃ¡cilmente,B,general,hard
+152,CuÃ¡l de estas sustancias es un desecante comÃºn?,H2O,H2SO4 conc,CO2 sÃ³lido,NH3 acuoso,B,general,hard
+153,QuÃ© describe la ecuaciÃ³n de Henderson-Hasselbalch?,"RelaciÃ³n pH, pKa y conc de Ã¡cido/base",RelaciÃ³n entre P y V,EnergÃ­ vs temperatura,Velocidad vs concentraciÃ³n,A,general,hard
+154,QuÃ© significa ppm?,PartÃ­ulas por mililitro,Partes por millÃ³n,ParÃ¡metros por magnitud,Protones por masa,B,general,hard
+155,QuÃ© tipo de reacciÃ³n es la saponificaciÃ³n?,SÃ­tesis de Ã©ster,HidrÃ³lisis de Ã©ster en base,DeshidrataciÃ³n de alcohol,ReducciÃ³n de aldehÃ­o,B,general,hard
+156,CuÃ¡l es la principal ventaja de la destilaciÃ³n al vacÃ­?,Permite destilar a T mÃ¡s baja,Aumenta el punto de ebulliciÃ³n,Evita azeÃ³tropos,Elimina impurezas iÃ³nicas,A,general,hard
+157,QuÃ© postula el modelo de enlace de valencia (VB)?,MolÃ©culas son nubes electrÃ³nicas,Orbitales atÃ³micos ? orbitales molec.,Enlaces = solapamiento de orbitales atÃ³micos,El n cuÃ¡ntico principal = forma molecular,C,general,hard
+158,CuÃ¡l de estas unidades mide radiaciÃ³n ionizante?,Newton,Gray,Pascal,Joule,B,general,hard
+159,QuÃ© se libera al disociarse el Ã¡cido carbÃ³nico (H2CO3)?,H2 y CO,2H+ y CO3^2-,CO2 y H2O,H2 y HCO3-,C,general,hard
+160,QuÃ© ley relaciona la conc. de gas disuelto con su presiÃ³n parcial?,Ley de Henry,Ley de Raoult,Ley de Dalton,Ley de Graham,A,general,hard
+161,QuÃ© ocurre en la electrÃ³lisis de NaCl fundido?,Na en cÃ¡todo y Cl2 en Ã¡nodo,H2 en cÃ¡todo y O2 en Ã¡nodo,No hay reacciÃ³n,Forman OH- y H+,A,general,hard
+162,QuÃ© es una celda galvÃ¡nica?,Consume energÃ­ para forzar reacciÃ³n,Celda de alta presiÃ³n sin reacciÃ³n,Produce electricidad con reacciÃ³n espontÃ¡nea,Catalizador biolÃ³gico,C,general,hard
+163,CuÃ¡l es la funciÃ³n de un agente quelante?,Romper enlaces iÃ³nicos,Formar complejos con iones metÃ¡licos,Precipitar sales,Oxidar metales,B,general,hard
+164,QuÃ© mide la espectroscopia de RMN?,AbsorciÃ³n uV,Cambios de rotaciÃ³n molecular,AbsorciÃ³n nuclear en campo magnÃ©tico,EnergÃ­ vibracional,C,general,hard
+165,QuÃ© es un homopolÃ­ero?,PolÃ­ero de mÃ¡s de un monÃ³mero,PolÃ­ero con enlaces cruzados,PolÃ­ero de un solo monÃ³mero,PolÃ­ero ramificado,C,general,hard
+166,QuÃ© sustancias aceleran la polimerizaciÃ³n radicalaria?,Antioxidantes,Radicales libres/iniciadores,Bases fuertes,Inhibidores,B,general,hard
+167,CuÃ¡l es Cv para un gas ideal monoatÃ³mico?,(5/2)R,(3/2)R,(7/2)R,(9/2)R,B,general,hard
+168,QuÃ© ocurre en el Ã¡nodo de una celda electrolÃ­ica?,Se reduce,Se oxida,No hay electrones,Se depositan metales,B,general,hard
+169,QuÃ© es la catÃ¡lisis heterogÃ©nea?,Catalizador y reactivos misma fase,Catalizador en fase distinta,Catalizador se disuelve en producto,Sin energÃ­ requerida,B,general,hard
+170,QuÃ© se produce al hidrolizar un triglicÃ©rido?,Glicerol y Ã¡cidos grasos,AminoÃ¡cidos,MonosacÃ¡ridos,Ã©steres y fenoles,A,general,hard
+171,En quÃ© consiste la fermentaciÃ³n alcohÃ³lica?,OxidaciÃ³n de Ã¡cidos grasos,ReducciÃ³n de etanol,AzÃºcares? etanol+CO2 (levaduras),AdiciÃ³n de agua a alqueno,C,general,hard
+172,QuÃ© nombre recibe la reacciÃ³n de un Ã¡cido/anhÃ­rido con agua?,NeutralizaciÃ³n,HidrÃ³lisis,CondensaciÃ³n,SaponificaciÃ³n,B,general,hard
+173,CuÃ¡l es la relaciÃ³n aire-combustible ideal para gasolina?,14'7:1,2:01,32:01:00,1:01,A,general,hard
+174,CuÃ¡l de los siguientes es un explosivo comÃºn?,NaClO,NH4NO3,CH3COOH,K2SO4,B,general,hard
+175,QuÃ© determina la constante dielÃ©ctrica de un solvente?,Conducir electricidad,Disolver sustancias polares,Densidad,Punto de ebulliciÃ³n,B,general,hard
+176,QuÃ© es una reacciÃ³n SN2?,SustituciÃ³n nucleofÃ­ica bimolecular,SustituciÃ³n nucleofÃ­ica unimolecular,EliminaciÃ³n unimolecular,ReducciÃ³n electrolÃ­ica,A,general,hard
+177,CuÃ¡l es el principal componente del Ã¡cido estomacal?,H2SO4,HCl,HNO3,H3PO4,B,general,hard
+178,CuÃ¡l es la funciÃ³n del EDTA en quÃ­ica analÃ­ica?,Ã¡cido fuerte,EstÃ¡ndar primario,Agente quelante,Indicador de pH,C,general,hard
+179,QuÃ© tÃ©cnica separa mezclas de lÃ­uidos volÃ¡tiles?,CromatografÃ­ de gases,EspectroscopÃ­ IR,RecristalizaciÃ³n,LiofilizaciÃ³n,A,general,hard
+180,CuÃ¡l es la fase mÃ³vil en la cromatografÃ­ de papel?,El papel,El disolvente,El soluto,El adsorbente,B,general,hard
+181,QuÃ© elemento define la quÃ­ica orgÃ¡nica?,HidrÃ³geno,Carbono,OxÃ­eno,NitrÃ³geno,B,organic,easy
+182,CÃ³mo se llaman los compuestos que solo contienen C e H?,Alcoholes,Haluros,Hidrocarburos,Aminas,C,organic,easy
+183,QuÃ© grupo funcional caracteriza a los alcoholes?,#NAME?,#NAME?,0,#NAME?,A,organic,easy
+184,CuÃ¡l es la fÃ³rmula del metano?,C2H6,CH4,C3H8,CO2,B,organic,easy
+185,QuÃ© tipo de hidrocarburo tiene solo enlaces simples?,Alqueno,Alcano,Alquino,Areno,B,organic,easy
+186,CÃ³mo se llama el compuesto CH3CH2OH?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
+187,CuÃ¡l es la principal fuente natural de hidrocarburos?,CarbÃ³n,Agua,PetrÃ³leo,Arena,C,organic,easy
+188,CÃ³mo se denomina el grupo funcional -COOH?,Hidroxilo,Carboxilo,Carbonilo,Amino,B,organic,easy
+189,QuÃ© tipo de isomerÃ­ existe entre cis-but-2-eno y trans-but-2-eno?,Constitucional,GeomÃ©trica,Ã³ptica,TautomÃ©rica,B,organic,easy
+190,QuÃ© Ã¡tomo (distinto de C) aparece mÃ¡s comÃºnmente en compuestos orgÃ¡nicos?,NitrÃ³geno,FlÃºor,OxÃ­eno,Azufre,C,organic,easy
+191,CuÃ¡l es el nombre comÃºn del CH3OH?,Metano,Metanol,Ã¡cido fÃ³rmico,FormaldehÃ­o,B,organic,easy
+192,QuÃ© tipo de reacciÃ³n es la halogenaciÃ³n de un alcano (en presencia de luz)?,AdiciÃ³n,SustituciÃ³n radicalaria,EliminaciÃ³n,Reordenamiento,B,organic,easy
+193,CuÃ¡l es el producto principal de la hidrataciÃ³n de un alqueno?,un alcano,un alquino,un alcohol,un Ã¡cido carboxÃ­ico,C,organic,easy
+194,CÃ³mo se llama un anillo de benceno con un grupo OH?,Fenol,Benceno,Benzoato,Tolueno,A,organic,easy
+195,QuÃ© compuesto se obtiene al oxidar un alcohol primario?,AldehÃ­o,Cetona,Ã©ter,Amina,A,organic,easy
+196,CuÃ¡l es el nombre del hidrocarburo con 2 carbonos y enlace triple?,Etano,Eteno,Etino (acetileno),Etileno,C,organic,easy
+197,QuÃ© describe la fÃ³rmula CnH2n+2?,Alquenos,Alcanos,Alquinos,Aromaticidad,B,organic,easy
+198,CuÃ¡l es el nombre del grupo funcional -CHO?,Carboxilo,Hidroxilo,Carbonilo (aldehÃ­o),Amida,C,organic,easy
+199,CuÃ¡l es el principal alcohol presente en las bebidas alcohÃ³licas?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
+200,CÃ³mo se denomina el grupo -NH2?,Hidroxilo,Amino,Nitro,AldehÃ­o,B,organic,easy
+201,QuÃ© familia de compuestos contiene un anillo bencÃ©nico?,Hidrocarburos alifÃ¡ticos,Arenos,Halocarburos,AldehÃ­os,B,organic,easy
+202,CuÃ¡l de estos es un aldehÃ­o simple?,Acetona,FormaldehÃ­o,Fenol,Butanol,B,organic,easy
+203,CÃ³mo se llama la reacciÃ³n de un alcano con oxÃ­eno para formar CO2 y H2O?,SustituciÃ³n,CombustiÃ³n,AdiciÃ³n,PolimerizaciÃ³n,B,organic,easy
+204,QuÃ© tipo de hibridaciÃ³n tiene el carbono en el metano?,sp,sp2,sp3,sp3d,C,organic,easy
+205,QuÃ© tipo de compuesto es el benceno?,Alcano,AminoÃ¡cido,AromÃ¡tico,Cetona,C,organic,easy
+206,CÃ³mo se denomina un compuesto con el grupo - O - entre dos cadenas carbonadas?,AldehÃ­o,Ã©ter,Cetona,Ã¡cido carboxÃ­ico,B,organic,easy
+207,QuÃ© producto se forma al reducir un aldehÃ­o?,Alcohol primario,Alcohol secundario,Cetona,Ã¡cido carboxÃ­ico,A,organic,easy
+208,CuÃ¡l es el nombre comÃºn del etino?,Acetileno,Etileno,Etanol,Metilacetileno,A,organic,easy
+209,CÃ³mo se llama el grupo funcional -NO2?,Amino,Nitro,Nitrilo,Nitrato,B,organic,easy
+210,CuÃ¡l es la fÃ³rmula general de los alquenos?,CnH2n+2,CnH2n,CnH2n-2,CnHn,B,organic,easy
+211,QuÃ© catalizador se usa frecuentemente en la hidrogenaciÃ³n de alquenos?,Fe,Pt/Pd/Ni,Hg,Cu,B,organic,medium
+212,CuÃ¡l es el reactivo de Tollens?,[Ag(NH3)2]+,KMnO4,CrO3/H2SO4,NaBH4,A,organic,medium
+213,CÃ³mo se llama la reacciÃ³n entre un aldehÃ­o y un alcohol para formar un hemiacetal?,EsterificaciÃ³n,HidrÃ³lisis,AdiciÃ³n nucleofÃ­ica,EliminaciÃ³n,C,organic,medium
+214,CuÃ¡l es la hibridaciÃ³n del carbono en un alquino lineal?,sp3,sp2,sp,sp3d,C,organic,medium
+215,QuÃ© producto se obtiene de la saponificaciÃ³n de un Ã©ster graso?,Un aldehÃ­o,Un jabÃ³n (sal de Ã¡cido graso),Un anhÃ­rido,Un fenol,B,organic,medium
+216,CuÃ¡l es la funciÃ³n principal de un radical libre en reacciones orgÃ¡nicas?,Estabilizar intermedios,Iniciar cadenas de sustituciÃ³n,Inhibir la reacciÃ³n,Formar puentes de hidrÃ³geno,B,organic,medium
+217,CÃ³mo se llama la reacciÃ³n de adiciÃ³n de H2O a un alqueno en medio Ã¡cido?,HidrogenaciÃ³n,HidrataciÃ³n,HalogenaciÃ³n,OxidaciÃ³n,B,organic,medium
+218,QuÃ© ocurre al oxidar un alcohol secundario?,Se forma un aldehÃ­o,Se forma un Ã¡cido carboxÃ­ico,Se forma una cetona,No reacciona,C,organic,medium
+219,CuÃ¡l es la parte reactiva (centro electrofÃ­ico) en un carbonilo C=O?,El carbono,El oxÃ­eno,Ambos,Ninguno,A,organic,medium
+220,QuÃ© caracteriza a la reacciÃ³n SN1?,Un solo paso,Intermediario carbocatiÃ³n,Requiere radicales libres,Ocurre en alcanos,B,organic,medium
+221,QuÃ© es la polimerizaciÃ³n por adiciÃ³n?,Un monÃ³mero se condensa con pÃ©rdida de H2O,MonÃ³meros con dobles enlaces se unen sin pÃ©rdida de Ã¡tomos,Una reacciÃ³n Ã¡cido-base,Ninguna de las anteriores,B,organic,medium
+222,CuÃ¡l es el nombre de la familia con un doble enlace carbono-nitrÃ³geno (C=N)?,Amidas,Iminas,Ã©steres,Nitrilos,B,organic,medium
+223,QuÃ© define a un compuestos aromÃ¡tico segÃºn la regla de Huckel?,4n electrones ?,(4n+2) electrones ?,una anillo de 5 Ã¡tomos,Solo enlaces simples,B,organic,medium
+224,QuÃ© tipo de reactividad presentan los halogenuros de alquilo en reacciones nucleofÃ­icas?,Son muy estables y no reaccionan,ActÃºan como sustratos electrofÃ­icos,Son Ã¡cidos fuertes,Liberan halÃ³genos libres,B,organic,medium
+225,CuÃ¡l es el principal producto de la oxidaciÃ³n de un aldehÃ­o?,Alcohol,AldehÃ­o diferente,Cetona,Ã¡cido carboxÃ­ico,D,organic,medium
+226,QuÃ© reactivo se utiliza para la oxidaciÃ³n de alcoholes primarios a Ã¡cidos carboxÃ­icos en medio Ã¡cido?,NaBH4,KMnO4,H2/Pd,LiAlH4,B,organic,medium
+227,QuÃ© sucede cuando un benceno reacciona con HNO3 en presencia de H2SO4?,Sulfona el anillo,Nitra el anillo,Reduce el anillo,Polimeriza el anillo,B,organic,medium
+228,CÃ³mo se llama el proceso de separar compuestos orgÃ¡nicos basados en su solubilidad en distintas fases?,CromatografÃ­ lÃ­uida,FiltraciÃ³n al vacÃ­,ExtracciÃ³n lÃ­uido-lÃ­uido,DestilaciÃ³n fraccionada,C,organic,medium
+229,QuÃ© es un enol?,Un aldehÃ­o,Un tautÃ³mero de un carbonilo con OH en C=C,Un Ã©ster cÃ­lico,Una sal orgÃ¡nica,B,organic,medium
+230,QuÃ© caracteriza a las diaminas?,Tienen dos grupos -OH,Tienen dos grupos -NH2,Tienen dos dobles enlaces,Tienen dos anillos aromÃ¡ticos,B,organic,medium
+231,CÃ³mo se llama la reacciÃ³n de condensaciÃ³n entre dos molÃ©culas de aminoÃ¡cidos?,EsterificaciÃ³n,ReacciÃ³n de Diels-Alder,ReacciÃ³n de Cannizzaro,FormaciÃ³n de enlace peptÃ­ico,D,organic,medium
+232,QuÃ© es la isomerÃ­ Ã³ptica?,Existencia de isÃ³meros que difieren en un enlace doble,IsÃ³meros con giro de luz polarizada,IsÃ³meros que difieren en posiciÃ³n de sustituyentes en anillo,Ninguna,B,organic,medium
+233,CuÃ¡l de estas es una amina aromÃ¡tica?,Anilina,Metilamina,Dimetilamina,AmonÃ­co,A,organic,medium
+234,QuÃ© define la reacciÃ³n de polimerizaciÃ³n por condensaciÃ³n?,Se unen monÃ³meros con liberaciÃ³n de molÃ©culas pequeÃ±as (ej. H2O),Es una reacciÃ³n en cadena radicalaria,No requiere catalizador,Ocurre solo en fase gaseosa,A,organic,medium
+235,QuÃ© es un alfa-hidroxiÃ¡cido (AHA)?,Un Ã¡cido carboxÃ­ico con hidroxilo en el carbono vecino,Un alcohol con doble enlace,Una cetona cÃ­lica,Un aminoÃ¡cido esencial,A,organic,medium
+236,CuÃ¡l es un mÃ©todo comÃºn para convertir un alcohol en un haluro de alquilo?,OxidaciÃ³n fuerte,SustituciÃ³n con HX,ReducciÃ³n catalÃ­ica,Ninguno,B,organic,medium
+237,QuÃ© caracteriza al Ã¡cido benzoico?,Grupo -OH en anillo,Grupo -CHO en anillo,Grupo -COOH unido al anillo bencÃ©nico,Grupo -NH2 en anillo,C,organic,medium
+238,CuÃ¡l es el nombre del compuesto CH3-CH2-CH2-NH2?,Etanolamina,Propanamina,Metilamina,Butilamina,B,organic,medium
+239,QuÃ© produce la reducciÃ³n de un nitrilo (R-C?N)?,Una amida,Una amina primaria,Un aldehÃ­o,Un Ã¡cido carboxÃ­ico,B,organic,medium
+240,CÃ³mo se llama la reacciÃ³n de dimerizaciÃ³n de dos radicales libres?,Acoplamiento radicalario,ReducciÃ³n radicalaria,TransposiciÃ³n,EliminaciÃ³n,A,organic,medium
+241,QuÃ© describe la reacciÃ³n de Diels-Alder?,CiclaciÃ³n entre un dieno conjugado y un dienÃ³filo,EliminaciÃ³n de H2O en alcoholes,ReducciÃ³n de una cetona,SustituciÃ³n electrofÃ­ica en benceno,A,organic,hard
+242,QuÃ© es un Ã¡cido carboxÃ­ico insaturado?,un Ã¡cido con un doble o triple enlace en la cadena,un Ã¡cido con mÃ¡s grupos -COOH,un Ã¡cido aromÃ¡tico,un Ã¡cido con halÃ³genos,A,organic,hard
+243,CuÃ¡l es la conformaciÃ³n mÃ¡s estable del ciclohexano?,Silla,Bote,Twist-boat,Medio-bote,A,organic,hard
+244,QuÃ© representa la notaciÃ³n (R) y (S) en quÃ­ica orgÃ¡nica?,ConfiguraciÃ³n absoluta de centros quirales,Tipo de enlace,Grado de sustituciÃ³n,Polaridad del enlace,A,organic,hard
+245,QuÃ© producto se obtiene de la ozonÃ³lisis de un alqueno?,Alcoholes,Cetonas/aldehÃ­os,Aminas,Nitrocompuestos,B,organic,hard
+246,QuÃ© es un carbaniÃ³n?,Un catiÃ³n de carbono,Un radical neutro,Un aniÃ³n con carga negativa en carbono,Un grupo nitro,C,organic,hard
+247,QuÃ© requiere la reacciÃ³n de Friedel-Crafts acilaciÃ³n?,AlCl3,SOCl2,NaBH4,Ag(NH3)2+,A,organic,hard
+248,QuÃ© sucede en la reacciÃ³n de Cannizzaro?,Dos molÃ©culas de aldehÃ­o sin hidrÃ³geno alfa: una se oxida y la otra se reduce,Se forma un hemiacetal,Ocurre una hidrogenaciÃ³n,Se produce un carbaniÃ³n estable,A,organic,hard
+249,QuÃ© tipo de radical es mÃ¡s estable en una reacciÃ³n radicalaria?,Primario,Secundario,Terciario,Todos iguales,C,organic,hard
+250,QuÃ© describe la tautomerÃ­ ceto-enol?,La interconversiÃ³n entre un aldehÃ­o y su isÃ³mero cis,La interconversiÃ³n entre formas ceto y enol,La separaciÃ³n de fases en una soluciÃ³n,Ninguna de las anteriores,B,organic,hard
+251,QuÃ© define un compuesto meso?,Posee centro quiral y actividad Ã³ptica alta,No tiene centros quirales,Tiene centros quirales pero es Ã³pticamente inactivo,Es un compuesto con anillo aromÃ¡tico,C,organic,hard
+252,CuÃ¡l es la reacciÃ³n principal para sintetizar aminas primarias a partir de haluros de alquilo?,ReacciÃ³n de Grignard,AmonÃ³lisis del haluro,HidrataciÃ³n Ã¡cida,AcilaciÃ³n de Friedel-Crafts,B,organic,hard
+253,QuÃ© es la catÃ¡lisis Ã¡cida en reacciones orgÃ¡nicas?,Uso de un Ã¡cido fuerte para inhibir la reacciÃ³n,El Ã¡cido se consume en la reacciÃ³n,El Ã¡cido protona intermedios aumentando su reactividad,El Ã¡cido reduce la energÃ­ de activaciÃ³n cediendo electrones,C,organic,hard
+254,QuÃ© producto se obtiene de la reacciÃ³n de un Ã©ster con un amoniaco en exceso?,Amida,Alcohol,Haluro de alquilo,Ã©ter,A,organic,hard
+255,QuÃ© hace el reactivo de Grignard (RMgX) con un carbonilo?,Oxida la cetona,Agrega R- al carbonilo formando un alcohol tras hidrÃ³lisis,Elimina el carbonilo,Ninguna,B,organic,hard
+256,QuÃ© caracteriza al mecanismo E2 (eliminaciÃ³n bimolecular)?,Forma carbocatiÃ³n intermedio,Es de primer orden global,Requiere base fuerte y ocurre en un solo paso,Solo ocurre a bajas temperaturas,C,organic,hard
+257,QuÃ© define un azÃºcar reductor?,Tiene un anillo aromÃ¡tico,Posee un grupo amino libre,Puede oxidarse en presencia de reactivos como Tollens/Benedict,No contiene carbonilo,C,organic,hard
+258,CÃ³mo se llama la reacciÃ³n de formaciÃ³n de un diacilo a partir de un anhÃ­rido?,CloruraciÃ³n,TransesterificaciÃ³n,AcilaciÃ³n,HalogenaciÃ³n,C,organic,hard
+259,QuÃ© ocurre en la reacciÃ³n de Wolff-Kishner?,ReducciÃ³n de cetonas/aldehÃ­os a alcanos con hidrazina,OxidaciÃ³n de alcoholes a Ã¡cidos,SustituciÃ³n nucleofÃ­ica en haluros,Ninguna,A,organic,hard
+260,CuÃ¡l es la base conjugada de un fenol?,Fenolato,Fenil,Fenilamina,Benceno,A,organic,hard
+261,QuÃ© se forma al hidrolizar una amida?,Amine + OH-,Ã¡cido carboxÃ­ico y amina/amoniaco,Ã¡cido graso y glicerol,AldehÃ­o y nitrÃ³geno,B,organic,hard
+262,QuÃ© define la reducciÃ³n de Birch (benceno con Na y NH3)?,Oxida anillo aromÃ¡tico a fenol,Produce un diol,Reduce parcialmente el anillo a dieno,Sustituye hidrÃ³geno por sodio,C,organic,hard
+263,QuÃ© es el test de iodoformo (haloformo)?,Confirma la presencia de CH3CH(OH)- o CH3C=O-,Detecta anillos aromÃ¡ticos,Detecta enlaces dobles,Confirma haluros de alquilo secundarios,A,organic,hard
+264,CuÃ¡l es la diferencia entre un enantiomero y un diastereoisÃ³mero?,Son lo mismo,Enantiomeros son imagen especular no superponible; diastereoisÃ³meros no lo son,DiastereoisÃ³meros son imÃ¡genes especulares,Ninguna,B,organic,hard
+265,QuÃ© son los compuestos organometÃ¡licos?,Sustancias con enlaces metal-oxÃ­eno,Sustancias que contienen enlaces metal-carbono,Sustancias con metales alcalinos sin carbono,PolÃ­eros con metal en la cadena,B,organic,hard
+266,QuÃ© hace el reactivo de Lucas (ZnCl2/HCl)?,Oxida cetonas a Ã¡cidos,Diferencia alcoholes terciarios (reacciÃ³n turbiedad rÃ¡pida),Nitra anillos aromÃ¡ticos,Descarboxila Ã¡cidos,B,organic,hard
+267,QuÃ© define la condensaciÃ³n aldÃ³lica?,UniÃ³n de dos aldehÃ­os/cetonas con hidrÃ³geno alfa para formar ?-hidroxialdehÃ­o/cetona,OxidaciÃ³n de alcoholes a aldehÃ­os,UniÃ³n de un aldehÃ­o y un Ã¡cido,ReacciÃ³n redox intracelular,A,organic,hard
+268,CuÃ¡l es el reactivo principal para la formaciÃ³n de diazocompuestos (diazotaciÃ³n) en anilina?,H2/Ni,NaNO2 + HCl (frÃ­),Br2/FeBr3,KMnO4,B,organic,hard
+269,QuÃ© describe la reacciÃ³n de Wittig?,Transformar un carbonilo en un alqueno usando ylide de fosforo,HidrataciÃ³n de un alquino,HidrogenaciÃ³n catalÃ­ica,OxidaciÃ³n de alcoholes,A,organic,hard
+270,QuÃ© es la fotoisomerizaciÃ³n del retinal en el ojo humano?,Un cambio redox,Un cambio de configuraciÃ³n cis-trans al absorber fotones,Una hidrÃ³lisis enzimÃ¡tica,Ninguna,B,organic,hard
+271,QuÃ© estudia la quÃ­ica inorgÃ¡nica principalmente?,Compuestos de carbono,Compuestos orgÃ¡nicos,Compuestos sin C como base principal,Solo metales preciosos,C,inorganic,easy
+272,CuÃ¡l es el catiÃ³n metÃ¡lico en la sal de mesa NaCl?,Na+,Cl-,K+,Ca2+,A,inorganic,easy
+273,QuÃ© color presenta tÃ­icamente el ion cÃºprico (Cu2+) en soluciÃ³n acuosa?,Incoloro,Azul,Verde,Rojo,B,inorganic,easy
+274,CuÃ¡l es la fÃ³rmula del amonio?,NH2-,NH3,NH4+,NH4-,C,inorganic,easy
+275,QuÃ© tipo de compuestos forman los metales alcalinos con el cloro?,Ã³xidos,Sales iÃ³nicas,PerÃ³xidos,Haluros covalentes,B,inorganic,easy
+276,CuÃ¡l de estos no es un halÃ³geno?,F,Cl,Br,O,D,inorganic,easy
+277,QuÃ© estado de oxidaciÃ³n tiene el sodio en Na2O?,1,2,-1,0,A,inorganic,easy
+278,QuÃ© metal se encuentra en la hematita (Fe2O3)?,Hierro,Cobre,Aluminio,Zinc,A,inorganic,easy
+279,QuÃ© nombre reciben los elementos del grupo 2 de la tabla periÃ³dica?,Alcalinos,AlcalinotÃ©rreos,HalÃ³genos,LantÃ¡nidos,B,inorganic,easy
+280,CuÃ¡l es el principal uso del cloro elemental?,Combustible,Desinfectante/Blanqueante,Metalurgia,Refrigerante,B,inorganic,easy
+281,CÃ³mo se llama el compuesto CaO?,Cal viva,Cal apagada,Yeso,Caliza,A,inorganic,easy
+282,QuÃ© indica el tÃ©rmino 'anfÃ³tero' en un hidrÃ³xido metÃ¡lico?,ActÃºa solo como base,ActÃºa solo como Ã¡cido,Puede actuar como Ã¡cido o base,No reacciona con Ã¡cidos ni bases,C,inorganic,easy
+283,CuÃ¡l es el aniÃ³n en el nitrato de potasio (KNO3)?,K+,NO3-,NO2-,N3-,B,inorganic,easy
+284,CÃ³mo se denomina FeSO4?,Sulfato fÃ©rrico,Sulfato ferroso,Sulfito ferroso,Sulfito fÃ©rrico,B,inorganic,easy
+285,QuÃ© iones forman un enlace iÃ³nico en MgCl2?,Mg2+ y Cl-,Mg+ y Cl2-,Mg y Cl,Ninguno,A,inorganic,easy
+286,QuÃ© metal se emplea comÃºnmente para proteger hierro de la corrosiÃ³n mediante galvanizado?,Cu,Ag,Zn,Pb,C,inorganic,easy
+287,CÃ³mo se denomina el compuesto HCl en agua?,Ã¡cido hipocloroso,Ã¡cido clorhÃ­rico,Cloruro de hidrÃ³geno,Ã¡cido clÃ³rico,B,inorganic,easy
+288,CuÃ¡l es el nombre del ion poliatÃ³mico SO4^2-?,Sulfito,Sulfato,Tiosulfato,Sulfuro,B,inorganic,easy
+289,CuÃ¡l de estos compuestos es un Ã³xido Ã¡cido?,Na2O,MgO,SO3,CaO,C,inorganic,easy
+290,QuÃ© elemento forma el diamante y el grafito?,Hierro,Carbono,Silicio,Zinc,B,inorganic,easy
+291,QuÃ© tipo de compuesto es K2O?,Ã³xido metÃ¡lico,Ã³xido no metÃ¡lico,PerÃ³xido,AnhÃ­rido,A,inorganic,easy
+292,CuÃ¡l es la valencia habitual del aluminio en Al2O3?,1,2,3,4,C,inorganic,easy
+293,QuÃ© iones produce la disociaciÃ³n de NaOH en agua?,Na- y OH+,Na2+ y O2-,Na+ y OH-,NaO- y H+,C,inorganic,easy
+294,CuÃ¡l es el nÃºmero de oxidaciÃ³n del cloro en HClO?,1,3,5,7,A,inorganic,easy
+295,"QuÃ© elemento se encuentra en la bauxita, mineral para obtener aluminio?",Fe,Al,Cu,Zn,B,inorganic,easy
+296,CuÃ¡l es el gas inerte mÃ¡s abundante en la atmÃ³sfera terrestre?,He,Ne,Ar,Kr,C,inorganic,easy
+297,"QuÃ© nombre reciben los elementos del grupo 17 (F, Cl, Br, I)?",Gases nobles,Alcalinos,HalÃ³genos,CalcÃ³genos,C,inorganic,easy
+298,QuÃ© color tiene el azufre elemental sÃ³lido?,Negro,Transparente,Amarillo,Rojo,C,inorganic,easy
+299,QuÃ© metal es extraÃ­o principalmente de la casiterita (SnO2)?,Plomo,EstaÃ±o,Cobre,Mercurio,B,inorganic,easy
+300,QuÃ© significa 'aq' en una fÃ³rmula como H2SO4(aq)?,Compuesto puro,SoluciÃ³n acuosa,Estado sÃ³lido,No estÃ¡ definido,B,inorganic,easy
+301,QuÃ© caracteriza a los compuestos de coordinaciÃ³n?,Tienen enlaces covalentes puros,El metal central se une a ligandos a travÃ©s de enlaces coordinados,Son iones con carga -2,Son siempre diamagnÃ©ticos,B,inorganic,medium
+302,CÃ³mo se llama el aniÃ³n complejo [Fe(CN)6]4-?,Ferroso,Ferricianuro,Ferrocianuro,FÃ©rrico,C,inorganic,medium
+303,CuÃ¡l es la hibridaciÃ³n del carbono en el CO2?,sp3,sp2,sp,No estÃ¡ hibridado,C,inorganic,medium
+304,QuÃ© establece la teorÃ­ del campo cristalino?,Explica la energÃ­ de electrones d en complejos metÃ¡licos,Explica la solubilidad de sales,Predice las temperaturas de fusiÃ³n,No describe iones metÃ¡licos,A,inorganic,medium
+305,CuÃ¡l es el estado de oxidaciÃ³n del Mn en KMnO4?,2,4,6,7,D,inorganic,medium
+306,QuÃ© tipo de sÃ³lido es el cloruro de sodio?,Molecular,IÃ³nico,MetÃ¡lico,Covalente en red,B,inorganic,medium
+307,CuÃ¡l es el nombre del oxÃ¡cido H3PO4?,Ã¡cido fosforoso,Ã¡cido hipofosforoso,Ã¡cido fosfÃ³rico,Ã¡cido perfosfÃ³rico,C,inorganic,medium
+308,QuÃ© elemento es el mÃ¡s electronegativo?,OxÃ­eno,FlÃºor,Cloro,NitrÃ³geno,B,inorganic,medium
+309,QuÃ© es la pasivaciÃ³n de un metal?,Su fusiÃ³n inmediata,FormaciÃ³n de una capa protectora de Ã³xido,DisoluciÃ³n completa en Ã¡cidos,ConversiÃ³n en sal,B,inorganic,medium
+310,CÃ³mo se nombra Fe2(SO4)3?,Sulfato de hierro (II),Sulfito de hierro (III),Sulfato de hierro (III),HidrÃ³xido ferroso,C,inorganic,medium
+311,CuÃ¡l es el estado de oxidaciÃ³n del cromo en K2Cr2O7?,2,3,6,7,C,inorganic,medium
+312,QuÃ© iones forman el permanganato de potasio?,K+ y MnO4-,K2+ y MnO4^2-,K+ y MnO4^2-,K- y MnO4+,A,inorganic,medium
+313,CuÃ¡l es el compuesto principal del mÃ¡rmol?,CaCO3,CaO,Ca(OH)2,CaSO4,A,inorganic,medium
+314,QuÃ© producto se obtiene al descomponer tÃ©rmicamente CaCO3?,Ca(OH)2,CaO y CO2,Ca y CO3,No se descompone,B,inorganic,medium
+315,QuÃ© tipo de enlace se presenta en los Ã³xidos metÃ¡licos?,Covalente polar,MetÃ¡lico,IÃ³nico,Covalente no polar,C,inorganic,medium
+316,QuÃ© es la aleaciÃ³n latÃ³n?,Fe y C,Cu y Zn,Cu y Sn,Ag y Cu,B,inorganic,medium
+317,QuÃ© caracteriza a las sales dobles como el alumbre (KAl(SO4)2Â·12H2O)?,Un solo catiÃ³n y un aniÃ³n complejo,Dos cationes diferentes y un aniÃ³n simple,Tienen dos cationes y dos aniones que cristalizan juntos,No contienen agua de cristalizaciÃ³n,C,inorganic,medium
+318,CuÃ¡l es el gas liberado usualmente en la reacciÃ³n de un metal con un Ã¡cido fuerte?,O2,H2,Cl2,SO2,B,inorganic,medium
+319,QuÃ© es el ZnS (blenda de zinc)?,Un hidrÃ³xido,Un sulfuro iÃ³nico,Un Ã³xido metÃ¡lico,Un haluro metÃ¡lico,B,inorganic,medium
+320,QuÃ© define la estequiometrÃ­ en un compuesto inorgÃ¡nico?,La velocidad de reacciÃ³n,La proporciÃ³n fija de Ã¡tomos en su fÃ³rmula,La solubilidad del compuesto,La estructura cristalina,B,inorganic,medium
+321,CÃ³mo se llama la reacciÃ³n de un metal alcalinotÃ©rreo con agua para formar hidrÃ³xido y H2?,ElectrÃ³lisis,NeutralizaciÃ³n,ReacciÃ³n de desplazamiento,ReacciÃ³n de combinaciÃ³n,C,inorganic,medium
+322,CuÃ¡l es la principal diferencia entre Ã³xidos bÃ¡sicos y Ã³xidos Ã¡cidos?,Su color,Su solubilidad,Reaccionan con Ã¡cidos vs reaccionan con bases,No hay diferencia,C,inorganic,medium
+323,QuÃ© se forma cuando NH3 se disuelve en agua?,NH4+ y OH-,NH3+ y H-,NH2- y H2O+,No reacciona,A,inorganic,medium
+324,QuÃ© metal se obtiene principalmente a partir de la esfalerita (ZnS)?,Zinc,Plomo,Cobre,Hierro,A,inorganic,medium
+325,CuÃ¡l es la fÃ³rmula del fosfato de sodio?,Na3PO4,NaPO3,Na2HPO4,NaH2PO4,A,inorganic,medium
+326,CÃ³mo se llama el mÃ©todo de extracciÃ³n de aluminio a partir de Al2O3 fundido con criolita?,Proceso Haber,Proceso Hall-HÃ©roult,Proceso Ostwald,Proceso Bayer,B,inorganic,medium
+327,QuÃ© es un Ã¡cido poliprÃ³tico?,Un Ã¡cido con mÃºltiples grupos funcionales,Un Ã¡cido capaz de donar mÃ¡s de un protÃ³n,Un Ã¡cido con enlaces metÃ¡licos,No existe tal concepto,B,inorganic,medium
+328,"QuÃ© nombre reciben los Ã³xidos de nitrÃ³geno como NO,  NO2,  N2O4?",Ã³xidos bÃ¡sicos,AnhÃ­ridos halÃ³genos,Ã³xidos neutros,Ã³xidos Ã¡cidos,D,inorganic,medium
+329,CuÃ¡l es la valencia del cobre en CuSO4?,1,2,3,-1,B,inorganic,medium
+330,QuÃ© metal lÃ­uido se utiliza en algunos tipos de termÃ³metros?,Plata,Mercurio,Litio,Oro,B,inorganic,medium
+331,QuÃ© explica la teorÃ­ de Bandas en sÃ³lidos?,La conductividad elÃ©ctrica en metales y semiconductores,La solubilidad de sales iÃ³nicas,La estructura atÃ³mica del nÃºcleo,El color de las llamas,A,inorganic,hard
+332,QuÃ© es un compuesto de Werner?,Un tipo de complejo de coordinaciÃ³n,Un Ã³xido anfÃ³tero,Un perÃ³xido en el que el metal es +1,Ninguno,A,inorganic,hard
+333,CÃ³mo se llama la especie [Pt(NH3)2Cl2]?,Sulfato de platino,Ã¡cido platÃ­ico,Diaminodicloroplatino(II),No es estable,C,inorganic,hard
+334,CuÃ¡l es la carga global del complejo [Co(NH3)6]Cl3 en disoluciÃ³n?,3,0,-3,2,B,inorganic,hard
+335,QuÃ© es la pirita (FeS2) quÃ­icamente?,Un Ã³xido de hierro,Un silicato de hierro,Un sulfuro de hierro,Un hidrÃ³xido,C,inorganic,hard
+336,QuÃ© ocurre cuando se calienta fuertemente KClO3 con un catalizador?,No reacciona,Sublima,Se descompone liberando O2,Pasa a estado lÃ­uido,C,inorganic,hard
+337,CuÃ¡l es la diferencia entre un ferromagnetismo y un paramagnetismo?,El ferromagnetismo desaparece tras quitar el campo magnÃ©tico,En el paramagnetismo las dipolos se alinean fuertemente,El ferromagnetismo requiere electrones emparejados,El ferromagnetismo es un alineamiento colectivo y persistente y el paramagnetismo es dÃ©bil y no persiste,D,inorganic,hard
+338,QuÃ© describe la regla de 18 electrones en quÃ­ica organometÃ¡lica?,La preferencia de los complejos metÃ¡licos por una configuraciÃ³n de gas noble extendida,La estabilidad del nÃºcleo,El nÃºmero de protones permitido,No existe tal regla,A,inorganic,hard
+339,QuÃ© iones forman el complejo de tetraaminacobre(II)?,Cu2+ y 4Cl-,Cu2+ y 4NH3,Cu+ y 4NH4+,No existe tal complejo,B,inorganic,hard
+340,QuÃ© es un Ã¡cido de Lewis?,Un dador de H+,Un aceptor de pares de electrones,Un aceptor de H+,Un dador de electrones,B,inorganic,hard
+341,CuÃ¡l es la geometrÃ­ comÃºn de un complejo con nÃºmero de coordinaciÃ³n 6?,TetraÃ©drica,Cuadrado plano,Lineal,OctaÃ©drica,D,inorganic,hard
+342,QuÃ© caracteriza la pila de combustible de hidrÃ³geno?,Emite CO2,Oxida H2 y reduce O2 generando H2O,Funciona solo en alta presiÃ³n,No genera electricidad,B,inorganic,hard
+343,QuÃ© metal se emplea como cÃ¡todo en la fabricaciÃ³n del litio por electrÃ³lisis de LiCl fundido?,Hierro,NÃ­uel,Grafito,Cobre,C,inorganic,hard
+344,QuÃ© es el efecto Jahn-Teller?,Una distorsiÃ³n geomÃ©trica en complejos de metales de transiciÃ³n con degeneraciÃ³n electrÃ³nica,La hidrÃ³lisis de iones metÃ¡licos,La apariciÃ³n de magnetismo diamagnÃ©tico,La mezcla de orbitales s y p,A,inorganic,hard
+345,QuÃ© ocurre en el proceso Solvay?,SÃ­tesis de amonÃ­co,ObtenciÃ³n de Na2CO3 a partir de NaCl y NH3,ProducciÃ³n de Ã¡cido sulfÃºrico,RefinaciÃ³n de petrÃ³leo,B,inorganic,hard
+346,QuÃ© subproducto se forma en la electrÃ³lisis de NaCl en celdas de diafragma aparte del Cl2?,NaOH,HCl,H2O2,FeCl3,A,inorganic,hard
+347,QuÃ© describe la serie electroquÃ­ica de metales?,Su capacidad de formar enlaces covalentes,Su potencial de reducciÃ³n estÃ¡ndar relativo,Su densidad,Su punto de ebulliciÃ³n,B,inorganic,hard
+348,QuÃ© tipo de cristal es el diamante?,Molecular,IÃ³nico,MetÃ¡lico,Covalente de red,D,inorganic,hard
+349,CÃ³mo se denomina el ion complejo [Ag(NH3)2]+?,AmonÃ­co complejo de plata,Diaminoplata(I),Plata amÃ³nica,Ion argentocianuro,B,inorganic,hard
+350,CuÃ¡l es el principal producto al hacer pasar amonÃ­co sobre cobre(II) Ã³xido caliente?,N2 y H2O,NO y H2O,NH4NO3,Cu(NH3)4^2+,A,inorganic,hard
+351,QuÃ© tÃ©cnica se usa para purificar el germanio e incrementarle la pureza para semiconductores?,DestilaciÃ³n fraccionada,Proceso de Czochralski (cristal Ãºnico),ElectrorefinaciÃ³n en medio acuoso,Proceso Bayer,B,inorganic,hard
+352,CuÃ¡l es la fuente principal de fÃ³sforo para la industria quÃ­ica?,Fluorita,Apatita (fosfatos),Yeso,Silvina,B,inorganic,hard
+353,QuÃ© ocurre en la precipitaciÃ³n fraccionada?,Un Ã¡cido se neutraliza por partes,Se forman complejos a distintas etapas,Se separan iones de una soluciÃ³n basados en diferentes solubilidades,Ocurre una electrÃ³lisis selectiva,C,inorganic,hard
+354,QuÃ© es la pasivaciÃ³n del aluminio?,La formaciÃ³n de una capa de Ã³xido que lo protege,La disoluciÃ³n del metal a alta T,La reducciÃ³n de su Ã³xido a metal,La formaciÃ³n de aleaciones con Fe,A,inorganic,hard
+355,CuÃ¡l es el disolvente usado comÃºnmente en el proceso Bayer para disolver la bauxita?,HCl,NaOH,NH3,H2SO4,B,inorganic,hard
+356,QuÃ© define la Ley de Fajans?,La polarizaciÃ³n de un aniÃ³n por un catiÃ³n pequeÃ±o con alta carga,La conductividad elÃ©ctrica en disoluciÃ³n,El volumen molar de un gas,La formaciÃ³n de sales dobles,A,inorganic,hard
+357,QuÃ© se forma cuando se combina B2H6 (diborano) con O2?,BH3,B2O3 y agua,H2O2 y B,No reacciona,B,inorganic,hard
+358,QuÃ© nombre recibe la clase de compuestos que contienen el aniÃ³n [MnO4]-?,Permanganatos,Silicatos,Sulfatos,CrO4 compuestos,A,inorganic,hard
+359,QuÃ© caracteriza a los lantÃ¡nidos?,Son gases nobles,Elementos 3d de transiciÃ³n,Metales blandos y reactivos con orbitales 4f en llenado,No existen en la Tierra,C,inorganic,hard
+360,QuÃ© es la aleaciÃ³n 'cupronÃ­uel'?,Cobre + NÃ­uel,Cobre + EstaÃ±o,Cobre + Zinc,NÃ­uel + Hierro,A,inorganic,hard
 361,Balancea 2H2 + O2 -> _H2O,1,2,3,4,B,balancing,easy
 362,Balancea 2Na + Cl2 -> _NaCl,1,2,3,4,B,balancing,easy
 363,Balancea N2 + 3H2 -> _NH3,1,2,3,4,C,balancing,easy
