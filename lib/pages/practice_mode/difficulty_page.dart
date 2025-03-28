@@ -127,15 +127,21 @@ class DifficultyPage extends StatelessWidget {
                                 title: 'Intermedio',
                                 imageUr:
                                     'assets/images/practice_mode/difficulty_medium.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const CategoryPage(
-                                        difficulty: 'medium',
+                                onTap: () async {
+                                  final payments = Payments();
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CategoryPage(
+                                          difficulty: 'medium',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    await payments.showPaywall();
+                                  }
                                 },
                               ),
                               const SizedBox(width: 40),

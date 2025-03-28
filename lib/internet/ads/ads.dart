@@ -14,6 +14,13 @@ class Ads {
   static const String kLastRewardDateKey = 'last_reward_date';
   static const String kDailyRewardsCountKey = 'daily_rewards_count';
 
+  // Practice Mode Rewards
+  static const String kLastPracticeModeRewardDateKey =
+      'last_practice_mode_reward_date';
+  static const String kDailyPracticeModeRewardsCountKey =
+      'daily_practice_mode_rewards_count';
+  static const int kRewardPracticeModeFreeAttemptsDaily = 2;
+
   factory Ads() => _singleton;
 
   Ads._internal();
@@ -32,6 +39,8 @@ class Ads {
   late String _rewardedUnitId = Env.defaultRewardedUnitId;
   late int _dailyRewardsCount = 0;
   late DateTime _lastRewardDate;
+  late int _dailyPracticeModeRewardsCount = 0;
+  late DateTime _lastPracticeModeRewardDate;
 
   late int _interstitialFreeAttempts;
 
@@ -60,6 +69,27 @@ class Ads {
       _lastRewardDate = DateTime.now();
       _dailyRewardsCount = 0;
       await _saveRewardData();
+    }
+
+    // Load practice mode reward data
+    final lastPracticeModeRewardDateStr =
+        prefs.getString(kLastPracticeModeRewardDateKey);
+    if (lastPracticeModeRewardDateStr != null) {
+      _lastPracticeModeRewardDate =
+          DateTime.parse(lastPracticeModeRewardDateStr);
+
+      // Reset counter if it's a new day
+      if (!_isSameDay(_lastPracticeModeRewardDate, DateTime.now())) {
+        _dailyPracticeModeRewardsCount = 0;
+        await _savePracticeModeRewardData();
+      } else {
+        _dailyPracticeModeRewardsCount =
+            prefs.getInt(kDailyPracticeModeRewardsCountKey) ?? 0;
+      }
+    } else {
+      _lastPracticeModeRewardDate = DateTime.now();
+      _dailyPracticeModeRewardsCount = 0;
+      await _savePracticeModeRewardData();
     }
 
     if (clientResult != null) {
@@ -121,6 +151,24 @@ class Ads {
     }
     _dailyRewardsCount++;
     await _saveRewardData();
+  }
+
+  Future<void> _incrementPracticeModeRewardCount() async {
+    final now = DateTime.now();
+    if (!_isSameDay(_lastPracticeModeRewardDate, now)) {
+      _dailyPracticeModeRewardsCount = 0;
+      _lastPracticeModeRewardDate = now;
+    }
+    _dailyPracticeModeRewardsCount++;
+    await _savePracticeModeRewardData();
+  }
+
+  Future<void> _savePracticeModeRewardData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(kLastPracticeModeRewardDateKey,
+        _lastPracticeModeRewardDate.toIso8601String());
+    await prefs.setInt(
+        kDailyPracticeModeRewardsCountKey, _dailyPracticeModeRewardsCount);
   }
 
   _loadRewarded() => RewardedAd.load(
@@ -276,13 +324,51 @@ class Ads {
     return rewardCompleter.future;
   }
 
+  Future<bool> showRewardedPracticeMode() async {
+    if (Payments().isSubscribed) {
+      return false;
+    }
+
+    if (_dailyPracticeModeRewardsCount > kRewardPracticeModeFreeAttemptsDaily) {
+      return false;
+    }
+
+    if (_nextRewarded == null) {
+      _loadRewarded();
+      return false;
+    }
+
+    Completer<bool> rewardCompleter = Completer<bool>();
+
+    _nextRewarded!.show(
+      onUserEarnedReward: (_, reward) async {
+        await _incrementPracticeModeRewardCount();
+        rewardCompleter.complete(true);
+      },
+    );
+
+    _nextRewarded = null;
+    _loadRewarded(); // Preload next rewarded ad
+
+    return rewardCompleter.future;
+  }
+
   bool get isRewardedAdReady => _nextRewarded != null;
 
   int get remainingDailyRewards => kMaxDailyRewards - _dailyRewardsCount;
+
+  int get remainingDailyPracticeModeRewards =>
+      kRewardPracticeModeFreeAttemptsDaily - _dailyPracticeModeRewardsCount;
 
   bool get canWatchRewardedAd =>
       _showRewarded &&
       !Payments().isSubscribed &&
       _nextRewarded != null &&
       _dailyRewardsCount < kMaxDailyRewards;
+
+  bool get canWatchPracticeModeRewardedAd =>
+      _showRewarded &&
+      !Payments().isSubscribed &&
+      _nextRewarded != null &&
+      _dailyPracticeModeRewardsCount < kRewardPracticeModeFreeAttemptsDaily;
 }

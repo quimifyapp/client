@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/practice_mode/quiz_page.dart';
 import 'package:quimify_client/pages/practice_mode/selection_button.dart';
@@ -191,38 +192,70 @@ class CategoryPage extends StatelessWidget {
                                 title: 'General',
                                 imageUr:
                                     'assets/images/practice_mode/category_general.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QuizPage(
-                                        difficulty: difficulty,
-                                        category: 'general',
+                                onTap: () async {
+                                  final ads = Ads();
+                                  final payments = Payments();
+                                  // If user is subscribed, navigate to quiz
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizPage(
+                                          difficulty: difficulty,
+                                          category: 'general',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                    return;
+                                  }
+
+                                  // If user can watch rewarded ad, show it
+                                  if (ads.canWatchPracticeModeRewardedAd) {
+                                    final watched =
+                                        await ads.showRewardedPracticeMode();
+                                    if (watched && context.mounted) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => QuizPage(
+                                            difficulty: difficulty,
+                                            category: 'general',
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    return;
+                                  }
+
+                                  // If user cannot watch rewarded ad, show paywall
+                                  payments.showPaywall();
                                 },
                               ),
-                              SizedBox(width: 72),
+                              const SizedBox(width: 72),
                               SelectionButton(
                                 title: 'Equilibrio',
                                 imageUr:
                                     'assets/images/practice_mode/category_balancing.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QuizPage(
-                                        difficulty: difficulty,
-                                        category: 'balancing',
+                                onTap: () async {
+                                  final payments = Payments();
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizPage(
+                                          difficulty: difficulty,
+                                          category: 'balancing',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    await payments.showPaywall();
+                                  }
                                 },
                               ),
                             ],
                           ),
-                          SizedBox(height: 40),
+                          const SizedBox(height: 40),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -230,33 +263,43 @@ class CategoryPage extends StatelessWidget {
                                 title: 'Inorgánico',
                                 imageUr:
                                     'assets/images/practice_mode/category_inorganic.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QuizPage(
-                                        difficulty: difficulty,
-                                        category: 'inorganic',
+                                onTap: () async {
+                                  final payments = Payments();
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizPage(
+                                          difficulty: difficulty,
+                                          category: 'inorganic',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    await payments.showPaywall();
+                                  }
                                 },
                               ),
-                              SizedBox(width: 72),
+                              const SizedBox(width: 72),
                               SelectionButton(
                                 title: 'Organico',
                                 imageUr:
                                     'assets/images/practice_mode/category_organic.png',
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QuizPage(
-                                        difficulty: difficulty,
-                                        category: 'organic',
+                                onTap: () async {
+                                  final payments = Payments();
+                                  if (payments.isSubscribed) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizPage(
+                                          difficulty: difficulty,
+                                          category: 'organic',
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    await payments.showPaywall();
+                                  }
                                 },
                               ),
                             ],
