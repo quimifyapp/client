@@ -47,7 +47,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Leaderboard'),
+      header: const QuimifyPageBar(title: 'Ranking'),
       body: SingleChildScrollView(
         child: Column(
           children: [

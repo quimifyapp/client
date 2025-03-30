@@ -7,6 +7,8 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
+import '../widgets/dialogs/messages/message_dialog.dart';
+
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key, required this.difficulty});
 
@@ -211,24 +213,35 @@ class CategoryPage extends StatelessWidget {
 
                                   // If user can watch rewarded ad, show it
                                   if (ads.canWatchPracticeModeRewardedAd) {
-                                    final watched =
+                                    if (!context.mounted) return;
+                                    await MessageDialog(
+                                      title: 'Jugar a practicar',
+                                      details: 'Puedes jugar a practicar viendo un anuncio de vídeo.',
+                                      onButtonPressed: () async {
+                                        final watched =
                                         await ads.showRewardedPracticeMode();
-                                    if (watched && context.mounted) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => QuizPage(
-                                            difficulty: difficulty,
-                                            category: 'general',
-                                          ),
-                                        ),
-                                      );
-                                    }
+                                        if (watched && context.mounted) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => QuizPage(
+                                                difficulty: difficulty,
+                                                category: 'general',
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ).show(context);
                                     return;
                                   }
 
-                                  // If user cannot watch rewarded ad, show paywall
-                                  payments.showPaywall();
+                                  // If user cannot watch rewarded ad, show limit reached message
+                                  if (!context.mounted) return;
+                                  await const MessageDialog(
+                                    title: 'Máximo diario alcanzado',
+                                    details: 'Solo puedes jugar 2 veces al día de manera gratuita. Vuelve mañana!',
+                                  ).show(context);
                                 },
                               ),
                               const SizedBox(width: 72),
