@@ -202,7 +202,7 @@ class _QuizPageState extends State<QuizPage> {
                                     top: 16,
                                     left: 16,
                                     child: Text(
-                                      'Question ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
+                                      'Pregunta ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,

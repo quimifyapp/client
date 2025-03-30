@@ -5,7 +5,7 @@ import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
 import 'package:quimify_client/pages/practice_mode/difficulty_page.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
+import 'package:quimify_client/pages/practice_mode/practice_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 
@@ -34,7 +34,7 @@ class InorganicPage extends StatelessWidget {
         ),
         const QuimifySectionTitle(
           title: 'Practicar',
-          helpDialog: comingSoonDialog,
+          helpDialog: PracticeHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
