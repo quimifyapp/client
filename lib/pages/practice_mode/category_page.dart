@@ -233,7 +233,7 @@ class CategoryPage extends StatelessWidget {
                               ),
                               const SizedBox(width: 72),
                               SelectionButton(
-                                title: 'Equilibrio',
+                                title: 'Balanceo',
                                 imageUr:
                                     'assets/images/practice_mode/category_balancing.png',
                                 onTap: () async {
@@ -260,7 +260,7 @@ class CategoryPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SelectionButton(
-                                title: 'Inorgánico',
+                                title: 'Inorgánica',
                                 imageUr:
                                     'assets/images/practice_mode/category_inorganic.png',
                                 onTap: () async {
@@ -282,7 +282,7 @@ class CategoryPage extends StatelessWidget {
                               ),
                               const SizedBox(width: 72),
                               SelectionButton(
-                                title: 'Organico',
+                                title: 'Orgánica',
                                 imageUr:
                                     'assets/images/practice_mode/category_organic.png',
                                 onTap: () async {
