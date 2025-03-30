@@ -11,6 +11,7 @@ class QuimifyCard extends StatefulWidget {
     required this.body,
     required this.page,
     this.paidFeature = false,
+    this.onPressed,
   })  : customBody = null,
         comingSoonBody = null;
 
@@ -19,6 +20,7 @@ class QuimifyCard extends StatefulWidget {
     required this.customBody,
     required this.page,
     this.paidFeature = false,
+    this.onPressed,
   })  : body = null,
         comingSoonBody = null;
 
@@ -28,13 +30,15 @@ class QuimifyCard extends StatefulWidget {
   })  : body = null,
         customBody = null,
         page = null,
-        paidFeature = false;
+        paidFeature = false,
+        onPressed = null;
 
   final Map<String, String>? body;
   final Map<Widget, String>? customBody;
   final Widget? comingSoonBody;
   final Widget? page;
   final bool paidFeature;
+  final VoidCallback? onPressed;
 
   @override
   State<QuimifyCard> createState() => _QuimifyCardState();
@@ -80,6 +84,11 @@ class _QuimifyCardState extends State<QuimifyCard> {
   _onPressed(BuildContext context) async {
     if (widget.page == null) {
       comingSoonDialog.show(context);
+      return;
+    }
+
+    if (widget.onPressed != null) {
+      widget.onPressed!();
       return;
     }
 

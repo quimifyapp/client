@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quimify_client/internet/accounts/accounts.dart';
+import 'package:quimify_client/pages/accounts/sign_in_page.dart';
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/inorganic/nomenclature/nomenclature_page.dart';
 import 'package:quimify_client/pages/inorganic/widgets/inorganic_help_dialog.dart';
+import 'package:quimify_client/pages/practice_mode/difficulty_page.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
@@ -34,12 +37,31 @@ class InorganicPage extends StatelessWidget {
           helpDialog: comingSoonDialog,
         ),
         const SizedBox(height: 15),
-        QuimifyCard.comingSoon(
-          comingSoonBody: Icon(
-            Icons.edit_note_rounded,
-            size: 36,
-            color: QuimifyColors.teal(),
-          ),
+        QuimifyCard.custom(
+          customBody: {
+            Icon(
+              Icons.edit_note_rounded,
+              size: 36,
+              color: QuimifyColors.teal(),
+            ): 'Practicar',
+          },
+          page: const DifficultyPage(),
+          onPressed: () {
+            final authService = AuthService();
+            if (!authService.isSignedIn) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SignInPage(),
+                ),
+              );
+              return;
+            }
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const DifficultyPage(),
+              ),
+            );
+          },
         ),
       ],
     );

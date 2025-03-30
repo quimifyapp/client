@@ -46,18 +46,6 @@ class OrganicPage extends StatelessWidget {
           },
           page: NamingPage(),
         ),
-        const QuimifySectionTitle(
-          title: 'Practicar',
-          helpDialog: comingSoonDialog,
-        ),
-        const SizedBox(height: 15),
-        QuimifyCard.comingSoon(
-          comingSoonBody: Icon(
-            Icons.edit_note_rounded,
-            size: 36,
-            color: QuimifyColors.teal(),
-          ),
-        ),
       ],
     );
   }

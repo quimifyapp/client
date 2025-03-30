@@ -6,12 +6,14 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 class QuimifyPageBar extends StatelessWidget {
   const QuimifyPageBar({
     Key? key,
-    required this.title,
+    this.title,
     this.trailing,
+    this.leading,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final Widget? trailing;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +28,34 @@ class QuimifyPageBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            QuimifyIconButton.square(
-              height: 50,
-              backgroundColor: QuimifyColors.secondaryTeal(context),
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(
-                Icons.arrow_back,
-                color: QuimifyColors.inverseText(context),
-              ),
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: AutoSizeText(
-                title,
-                maxLines: 1,
-                stepGranularity: 0.1,
-                maxFontSize: 20,
-                style: TextStyle(
-                  fontSize: 20,
+            if (leading != null) ...[
+              leading!,
+              const SizedBox(width: 15),
+            ] else
+              QuimifyIconButton.square(
+                height: 50,
+                backgroundColor: QuimifyColors.secondaryTeal(context),
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Icons.arrow_back,
                   color: QuimifyColors.inverseText(context),
-                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
+            const SizedBox(width: 15),
+            if (title != null)
+              Expanded(
+                child: AutoSizeText(
+                  title!,
+                  maxLines: 1,
+                  stepGranularity: 0.1,
+                  maxFontSize: 20,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: QuimifyColors.inverseText(context),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             if (trailing != null) ...[
               const Spacer(),
               trailing!,

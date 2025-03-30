@@ -11,7 +11,7 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key, required this.clientResult});
+  const SignInPage({super.key, this.clientResult});
   final ClientResult? clientResult;
 
   @override
