@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/api/api.dart';
 import 'package:quimify_client/internet/api/results/equation_result.dart';
 import 'package:quimify_client/internet/internet.dart';
-import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/calculator/equation/widgets/equation_input_help_dialog.dart';
 import 'package:quimify_client/pages/history/history_entry.dart';
 import 'package:quimify_client/pages/history/history_field.dart';
@@ -294,31 +292,6 @@ class _EquationPageState extends State<EquationPage> {
                                     text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) async {
-                            if (!Payments().isSubscribed) {
-                              await Payments().showPaywall();
-                              // Check if user is subscribed after paywall
-                              if (!Payments().isSubscribed &&
-                                  Ads().canWatchRewardedAd) {
-                                // Show dialog to watch ad
-                                await MessageDialog(
-                                  title: 'Desbloquear con anuncio',
-                                  details:
-                                      'Puedes desbloquear esta función una vez viendo un anuncio de video.',
-                                  onButtonPressed: () async {
-                                    final bool wasRewarded =
-                                        await Ads().showRewarded();
-                                    if (wasRewarded) {
-                                      _pressedButton();
-                                    }
-                                  },
-                                  // ignore: use_build_context_synchronously
-                                ).show(context);
-                                return;
-                              }
-                              return;
-                            }
-                          },
 
                           onTap: _scrollToStart,
                         ),
@@ -379,31 +352,6 @@ class _EquationPageState extends State<EquationPage> {
                                     text: formatEquationOngoingInput(input));
                           },
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (_) async {
-                            if (!Payments().isSubscribed) {
-                              await Payments().showPaywall();
-                              // Check if user is subscribed after paywall
-                              if (!Payments().isSubscribed &&
-                                  Ads().canWatchRewardedAd) {
-                                // Show dialog to watch ad
-                                await MessageDialog(
-                                  title: 'Desbloquear con anuncio',
-                                  details:
-                                      'Puedes desbloquear esta función una vez viendo un anuncio de video.',
-                                  onButtonPressed: () async {
-                                    final bool wasRewarded =
-                                        await Ads().showRewarded();
-                                    if (wasRewarded) {
-                                      _pressedButton();
-                                    }
-                                  },
-                                  // ignore: use_build_context_synchronously
-                                ).show(context);
-                                return;
-                              }
-                              return;
-                            }
-                          },
                           onTap: _scrollToStart,
                         ),
                       ],
@@ -421,47 +369,7 @@ class _EquationPageState extends State<EquationPage> {
                     Expanded(
                       child: QuimifyButton.gradient(
                         height: buttonHeight,
-                        onPressed: () async {
-                          if (!Payments().isSubscribed) {
-                            await Payments().showPaywall();
-                            // Check if user is subscribed after paywall
-                            if (!Payments().isSubscribed &&
-                                Ads().canWatchRewardedAd) {
-                              // Show dialog to watch ad
-                              await MessageDialog(
-                                title: 'Desbloquear con anuncio',
-                                details:
-                                    'Puedes desbloquear esta función una vez viendo un anuncio de video.',
-                                onButtonPressed: () async {
-                                  final bool wasRewarded =
-                                      await Ads().showRewarded();
-                                  if (wasRewarded) {
-                                    _pressedButton();
-                                  }
-                                },
-                                // ignore: use_build_context_synchronously
-                              ).show(context);
-                              return;
-                            }
-                            else if (Payments().isSubscribed) {
-                              _pressedButton();
-                            }
-                            else if (!Payments().isSubscribed &&
-                                !Ads().canWatchRewardedAd) {
-                              // Max daily rewards reached
-                              await const MessageDialog(
-                                title: 'Máximo diario alcanzado',
-                                details:
-                                    'Si quieres seguir balanceando ecuaciones suscribete a Premium.',
-                              ).show(context);
-                              return;
-                            }
-                            return;
-                          }
-                          else {
-                            _pressedButton();
-                          }
-                        },
+                        onPressed: _pressedButton,
                         child: Text(
                           'Ajustar',
                           style: TextStyle(
