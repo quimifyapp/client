@@ -4,7 +4,6 @@ import 'package:quimify_client/pages/organic/finding_formula/finding_formula_pag
 import 'package:quimify_client/pages/organic/naming/naming_page.dart';
 import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog.dart';
 import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
-import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 

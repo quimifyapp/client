@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +14,8 @@ import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+
+import '../widgets/dialogs/messages/no_internet_dialog.dart';
 
 class ChatbotPage extends StatelessWidget {
   const ChatbotPage({
@@ -350,19 +353,24 @@ class _BodyState extends State<_Body> {
   }
 
   Future<void> _handleSendMessage(String text) async {
+    // Check internet connectivity before proceeding
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => noInternetDialog,
+      );
+      return;
+    }
     if ((!_hasSelectedImage && text.trim().isEmpty) || _isLoading) return;
 
     final messageText = text.trim();
     final payments = Payments();
     final ads = Ads();
 
-    // If not subscribed, show paywall first
     if (!payments.isSubscribed) {
-      await payments.showPaywall();
 
-      // If still not subscribed after paywall, offer rewarded ad
-      if (!payments.isSubscribed &&
-          ads.canWatchRewardedAd &&
+      if (ads.canWatchRewardedAd &&
           !_hasSelectedImage) {
         if (!context.mounted) return;
 
@@ -380,8 +388,7 @@ class _BodyState extends State<_Body> {
 
         return;
       }
-      else if (!payments.isSubscribed &&
-          !ads.canWatchRewardedAd &&
+      else if (!ads.canWatchRewardedAd &&
           !_hasSelectedImage){
         if (!context.mounted) return;
 

@@ -52,7 +52,7 @@ class CameraButtonHandler {
         // Check if user has subscribed to premium
         if (!Payments().isSubscribed) {
           // Show paywall
-          await Payments().showPaywall();
+          await Payments().showPaywall(context);
 
           // Exit early if user has not subscribed
           if (!Payments().isSubscribed) {

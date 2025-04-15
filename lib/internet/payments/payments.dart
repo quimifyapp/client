@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:quimify_client/pages/widgets/dialogs/messages/no_internet_dialog.dart';
 
 class Payments {
   static final Payments _singleton = Payments._internal();
@@ -52,14 +55,25 @@ class Payments {
   }
 
   // Public:
+  Future<void> showPaywall(BuildContext context) async {
+    // Check internet connectivity before proceeding
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => noInternetDialog,
+      );
+      return;
+    }
 
-  Future<void> showPaywall() async {
+    // Check if Purchases is configured
     final isConfigured = await Purchases.isConfigured;
-
     if (!isConfigured) {
-      final configuration = PurchasesConfiguration(Platform.isAndroid
-          ? 'goog_SgCLLuxoLOuSMTDVBqzacRsJFaD'
-          : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI');
+      final configuration = PurchasesConfiguration(
+        Platform.isAndroid
+            ? 'goog_SgCLLuxoLOuSMTDVBqzacRsJFaD'
+            : 'appl_TVkhSRZrgVENdilvDxxbEzzGxXI',
+      );
 
       // Configure RevenueCat
       await Purchases.configure(configuration);

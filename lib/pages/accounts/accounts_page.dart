@@ -108,7 +108,7 @@ class AccountsPage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
-                      onPressed: () => payments.showPaywall(),
+                      onPressed: () => payments.showPaywall(context),
                       icon: const Icon(
                         Icons.star,
                         color: Colors.white,

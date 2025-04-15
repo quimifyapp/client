@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/ads/ads.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
@@ -8,6 +9,7 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 
 import '../widgets/dialogs/messages/message_dialog.dart';
+import '../widgets/dialogs/messages/no_internet_dialog.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key, required this.difficulty});
@@ -195,6 +197,15 @@ class CategoryPage extends StatelessWidget {
                                 imageUr:
                                     'assets/images/practice_mode/category_general.png',
                                 onTap: () async {
+                                  // Check internet connectivity before proceeding
+                                  final connectivityResult = await Connectivity().checkConnectivity();
+                                  if (connectivityResult == ConnectivityResult.none) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) => noInternetDialog,
+                                    );
+                                    return;
+                                  }
                                   final ads = Ads();
                                   final payments = Payments();
                                   // If user is subscribed, navigate to quiz
@@ -262,7 +273,7 @@ class CategoryPage extends StatelessWidget {
                                       ),
                                     );
                                   } else {
-                                    await payments.showPaywall();
+                                    await payments.showPaywall(context);
                                   }
                                 },
                               ),
@@ -289,7 +300,7 @@ class CategoryPage extends StatelessWidget {
                                       ),
                                     );
                                   } else {
-                                    await payments.showPaywall();
+                                    await payments.showPaywall(context);
                                   }
                                 },
                               ),
@@ -311,7 +322,7 @@ class CategoryPage extends StatelessWidget {
                                       ),
                                     );
                                   } else {
-                                    await payments.showPaywall();
+                                    await payments.showPaywall(context);
                                   }
                                 },
                               ),
@@ -336,7 +347,7 @@ class CategoryPage extends StatelessWidget {
                                   ),
                                 );
                               } else {
-                                await payments.showPaywall();
+                                await payments.showPaywall(context);
                               }
                             },
                           ),

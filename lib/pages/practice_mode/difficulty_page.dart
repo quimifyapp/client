@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/practice_mode/category_page.dart';
@@ -6,6 +7,8 @@ import 'package:quimify_client/pages/practice_mode/selection_button.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+
+import '../widgets/dialogs/messages/no_internet_dialog.dart';
 
 class DifficultyPage extends StatelessWidget {
   const DifficultyPage({super.key});
@@ -54,7 +57,16 @@ class DifficultyPage extends StatelessWidget {
       header: const QuimifyPageBar(title: 'Practicar'),
       fab: FloatingActionButton(
         backgroundColor: QuimifyColors.teal(),
-        onPressed: () {
+        onPressed: () async {
+          // Check internet connectivity before proceeding
+          final connectivityResult = await Connectivity().checkConnectivity();
+          if (connectivityResult == ConnectivityResult.none) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => noInternetDialog,
+            );
+            return;
+          }
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const LeaderboardPage()));
         },
@@ -140,7 +152,7 @@ class DifficultyPage extends StatelessWidget {
                                       ),
                                     );
                                   } else {
-                                    await payments.showPaywall();
+                                    await payments.showPaywall(context);
                                   }
                                 },
                               ),
@@ -162,7 +174,7 @@ class DifficultyPage extends StatelessWidget {
                                       ),
                                     );
                                   } else {
-                                    await payments.showPaywall();
+                                    await payments.showPaywall(context);
                                   }
                                 },
                               ),
