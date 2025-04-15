@@ -222,11 +222,9 @@ class Ads {
 
             ad.fullScreenContentCallback = FullScreenContentCallback(
               onAdFailedToShowFullScreenContent: (ad, err) {
-                Payments().showPaywall();
                 ad.dispose();
               },
               onAdDismissedFullScreenContent: (ad) {
-                Payments().showPaywall();
                 ad.dispose();
               },
             );
