@@ -9,6 +9,7 @@ import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/widgets/dialogs/loading_indicator.dart';
 import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class CameraButtonHandler {
   final OCRService _ocrService = OCRService();
@@ -85,7 +86,7 @@ class CameraButtonHandler {
 
       // Show error dialog
       if (context.mounted) {
-        const MessageDialog(title: 'Error', details: 'No se puede procesar.')
+        MessageDialog(title: 'Error', details: context.l10n.cannotBeProcessed)
             .show(context);
       }
     }
@@ -139,7 +140,7 @@ class _ImageCropperScreenState extends State<ImageCropperScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: QuimifyColors.teal(),
-        title: const Text('Recortar imágen'),
+        title: Text(context.l10n.cropImage),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -217,9 +218,9 @@ class ImageSourceDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Seleccionar imágen',
-              style: TextStyle(
+            Text(
+              context.l10n.selectImage,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -230,12 +231,12 @@ class ImageSourceDialog extends StatelessWidget {
               children: [
                 _SourceOption(
                   icon: Icons.camera_alt,
-                  label: 'Cámara',
+                  label: context.l10n.camera,
                   onTap: () => Navigator.pop(context, ImageSource.camera),
                 ),
                 _SourceOption(
                   icon: Icons.photo_library,
-                  label: 'Galería',
+                  label: context.l10n.gallery,
                   onTap: () => Navigator.pop(context, ImageSource.gallery),
                 ),
               ],

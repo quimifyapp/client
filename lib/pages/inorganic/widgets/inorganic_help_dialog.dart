@@ -1,77 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class InorganicHelpDialog extends StatelessWidget {
   const InorganicHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const HelpSlidesDialog(
+    return HelpSlidesDialog(
       titleToContent: {
-        'Inorgánica': [
+        context.l10n.inorganic: [
           Center(
             child: DialogContentText(
-              richText: 'Los compuestos inorgánicos no tienen al carbono como '
-                  'elemento principal.',
+              richText: context
+                  .l10n.inorganicCompoundsDoNotHaveCarbonAsTheirMainElement,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
-          Center(
+          const Center(
             child: DialogContentText(
               richText: 'CO₂',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'ácido sulfúrico',
+              richText: context.l10n.sulfuricAcid,
             ),
           ),
-          Center(
+          const Center(
             child: DialogContentText(
               richText: 'NaCl',
             ),
           ),
         ],
-        'Formular': [
+        context.l10n.formula: [
           Center(
             child: DialogContentText(
-              richText: 'Consiste en averiguar la fórmula dado el nombre.',
+              richText:
+                  context.l10n.itConsistsOfFindingOutTheFormulaGivenTheName,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: DialogContentText(
-              richText: 'cloruro de sodio   ➔   NaCl',
+              richText: '${context.l10n.sodiumChloride}   ➔   NaCl',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'nitrato de plata   ➔   AgNO₃',
+              richText: '${context.l10n.silverNitrate}   ➔   AgNO₃',
             ),
           ),
         ],
-        'Nombrar': [
+        context.l10n.name: [
           Center(
             child: DialogContentText(
-              richText: 'Consiste en averiguar el nombre dada la fórmula.',
+              richText:
+                  context.l10n.itConsistsOfFindingOutTheNameGivenTheFormula,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: DialogContentText(
-              richText: 'CrO₃   ➔   óxido de cromo(VI)',
+              richText: 'CrO₃   ➔   ${context.l10n.chromiumVIoxide}',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Al₂(SO₃)₃   ➔   sulfito de aluminio',
+              richText: 'Al₂(SO₃)₃   ➔   ${context.l10n.aluminumSulfite}',
             ),
           ),
         ],

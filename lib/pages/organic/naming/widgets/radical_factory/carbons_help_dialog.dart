@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class CarbonsHelpDialog extends StatelessWidget {
   const CarbonsHelpDialog({Key? key}) : super(key: key);
@@ -10,14 +11,14 @@ class CarbonsHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Número de carbonos': [
-          const Center(
+        context.l10n.carbonNumber: [
+          Center(
             child: DialogContentText(
-              richText: 'Es la cantidad total de carbonos en el radical.',
+              richText: context.l10n.itIsTheTotalNumberOfCarbonsInTheRadical,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplos con 3 carbonos:*',
+          DialogContentText(
+            richText: context.l10n.exampleWith3Carbons,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -29,9 +30,9 @@ class CarbonsHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(radical propil)',
+              richText: context.l10n.radicalPropyl,
             ),
           ),
           const SizedBox(height: 25),
@@ -42,9 +43,9 @@ class CarbonsHelpDialog extends StatelessWidget {
               color: QuimifyColors.primary(context),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(radical isopropil)',
+              richText: context.l10n.radicalIsopropyl,
             ),
           ),
         ],

@@ -8,6 +8,7 @@ import 'package:quimify_client/pages/home/home_page.dart';
 import 'package:quimify_client/pages/widgets/objects/sign_in_button.dart';
 import 'package:quimify_client/pages/widgets/particle_effect.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _SignInPageState extends State<SignInPage> {
                     width: 16,
                   ),
                   Text(
-                    'Accede a Quimify',
+                    context.l10n.accessQuimify,
                     style: TextStyle(
                       fontSize: 20,
                       color: QuimifyColors.primary(context),
@@ -111,14 +112,14 @@ class _SignInPageState extends State<SignInPage> {
                     });
 
                     if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Error al iniciar sesión con Google'),
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(context.l10n.errorSigningInWithGoogle),
                       ));
                     }
                   }
                 },
                 isLoading: _isGoogleLoading,
-                label: 'Continúa con Google',
+                label: context.l10n.continueWithGoogle,
                 icon: Image.asset(
                   'assets/images/icons/google-icon.png',
                   width: 24,
@@ -156,15 +157,14 @@ class _SignInPageState extends State<SignInPage> {
                       });
 
                       if (context.mounted) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text('Error al iniciar sesión con Apple'),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(context.l10n.errorSigningInWithApple),
                         ));
                       }
                     }
                   },
                   isLoading: _isAppleLoading,
-                  label: 'Iniciar sesión con Apple',
+                  label: context.l10n.signInWithApple,
                   icon: Image.asset(
                     'assets/images/icons/apple-icon.png',
                     width: 24,
@@ -179,14 +179,14 @@ class _SignInPageState extends State<SignInPage> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Al iniciar sesión, aceptas nuestra\n',
+                        text: context.l10n.bySigningInYouAcceptOur,
                         style: TextStyle(
                           color: QuimifyColors.secondary(context),
                           fontSize: 12,
                         ),
                       ),
                       TextSpan(
-                        text: 'Política de Privacidad',
+                        text: context.l10n.privacyPolicy,
                         style: TextStyle(
                           color: QuimifyColors.teal(),
                           fontSize: 12,
@@ -201,14 +201,14 @@ class _SignInPageState extends State<SignInPage> {
                           },
                       ),
                       TextSpan(
-                        text: ' y ',
+                        text: context.l10n.and,
                         style: TextStyle(
                           color: QuimifyColors.secondary(context),
                           fontSize: 12,
                         ),
                       ),
                       TextSpan(
-                        text: 'Términos & Condiciones',
+                        text: context.l10n.termsAndConditions,
                         style: TextStyle(
                           color: QuimifyColors.teal(),
                           fontSize: 12,
@@ -251,7 +251,7 @@ class _SignInPageState extends State<SignInPage> {
                       );
                     },
                     icon: Text(
-                      'Omitir',
+                      context.l10n.skip,
                       style: TextStyle(
                         color: QuimifyColors.secondaryTeal(context),
                         fontSize: 16,

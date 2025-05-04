@@ -31,6 +31,7 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class NamingPage extends StatefulWidget {
   const NamingPage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class NamingPage extends StatefulWidget {
 }
 
 class _NamingPageState extends State<NamingPage> {
-  static const String _title = 'Nombrar orgánicos';
+  // static const String _title = 'Nombrar orgánicos';
 
   late bool _done;
   late List<OpenChain> _openChainStack;
@@ -91,7 +92,7 @@ class _NamingPageState extends State<NamingPage> {
           title: 'Sin resultado',
         ).show(context);
       } else {
-        noInternetDialog.show(context);
+        noInternetDialog(context).show(context);
       }
     }
 
@@ -104,14 +105,15 @@ class _NamingPageState extends State<NamingPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => OrganicResultPage(
-          title: _title,
+          title: context.l10n.nameOrganic,
           organicResultView: OrganicResultView(
             fields: {
               if (organicResult.structure != null)
-                'Fórmula': formatStructure(organicResult.structure!),
-              if (organicResult.name != null) 'Nombre': organicResult.name!,
+                context.l10n.formula: formatStructure(organicResult.structure!),
+              if (organicResult.name != null)
+                context.l10n.name: organicResult.name!,
               if (organicResult.molecularMass != null)
-                'Masa molecular':
+                context.l10n.molecularMass:
                     '${formatMolecularMass(organicResult.molecularMass!)}'
                         ' g/mol',
             },
@@ -121,10 +123,11 @@ class _NamingPageState extends State<NamingPage> {
             url3D: organicResult.url3D,
             onHistoryPressed: _showHistory,
             reportDialog: ReportDialog(
-              details: 'Resultado de\n"'
+              details: '${context.l10n.resultOf}\n"'
                   '${formatStructure(organicResult.structure!)}"',
-              reportContext: 'Organic naming',
-              reportDetails: 'Result of ${_sequence()}: $organicResult',
+              reportContext: context.l10n.nameOrganic,
+              reportDetails:
+                  '${context.l10n.resultOf} ${_sequence()}: $organicResult',
             ),
           ),
         ),
@@ -143,11 +146,11 @@ class _NamingPageState extends State<NamingPage> {
                     query: e.sequence,
                     fields: [
                       HistoryField(
-                        'Fórmula',
+                        context.l10n.formula,
                         formatStructure(e.structure!),
                       ),
                       HistoryField(
-                        'Nombre',
+                        context.l10n.name,
                         e.name,
                       ),
                     ],
@@ -184,9 +187,9 @@ class _NamingPageState extends State<NamingPage> {
         _checkDone();
       });
     } else {
-      const MessageDialog(
-        title: 'Nada que deshacer',
-        details: 'Prueba a enlazar un sustituyente.',
+      MessageDialog(
+        title: context.l10n.nothingToUndo,
+        details: context.l10n.tryToBondASubstituent,
       ).show(context);
     }
   }
@@ -204,16 +207,16 @@ class _NamingPageState extends State<NamingPage> {
         _checkDone();
       });
     } else if (_openChain().getFreeBondCount() == 4) {
-      const MessageDialog(
-        title: 'Molécula vacía',
-        details: 'Todavía no es posible enlazar otro carbono. Prueba a enlazar '
-            'un sustituyente.',
+      MessageDialog(
+        title: context.l10n.emptyMolecule,
+        details: context
+            .l10n.itIsNotYetPossibleToBondAnotherCarbonTryBondingASubstituent,
       ).show(context);
     } else {
-      const MessageDialog(
-        title: 'No hace falta',
-        details: 'Se enlazará otro carbono al oxígeno cuando completes este '
-            'carbono.',
+      MessageDialog(
+        title: context.l10n.noNeed,
+        details: context
+            .l10n.anotherCarbonWillBondToTheOxygenWhenYouCompleteThisCarbon,
       ).show(context);
     }
   }
@@ -224,9 +227,9 @@ class _NamingPageState extends State<NamingPage> {
         _pressedGroupButton(Group.hydrogen);
       } while (_openChain().getFreeBondCount() > 1);
     } else {
-      const MessageDialog(
-        title: 'Molécula completa',
-        details: 'No quedan valencias libres para enlazar más hidrógenos.',
+      MessageDialog(
+        title: context.l10n.completeMolecule,
+        details: context.l10n.thereAreNoFreeValencesLeftToBondMoreHydrogens,
       ).show(context);
     }
   }
@@ -278,91 +281,91 @@ class _NamingPageState extends State<NamingPage> {
       Group.hydrogen: GroupButton(
         bonds: 1,
         structure: 'H',
-        name: 'Hidrógeno',
+        name: context.l10n.hydrogen,
         onPressed: () => _pressedGroupButton(Group.hydrogen),
       ),
       Group.radical: GroupButton(
         bonds: 1,
         structure: 'CH2 – CH3',
-        name: 'Radical',
+        name: context.l10n.radical,
         onPressed: _pressedRadicalButton,
       ),
       Group.iodine: GroupButton(
         bonds: 1,
         structure: 'I',
-        name: 'Yodo',
+        name: context.l10n.iodine,
         onPressed: () => _pressedGroupButton(Group.iodine),
       ),
       Group.fluorine: GroupButton(
         bonds: 1,
         structure: 'F',
-        name: 'Flúor',
+        name: context.l10n.fluorine,
         onPressed: () => _pressedGroupButton(Group.fluorine),
       ),
       Group.chlorine: GroupButton(
         bonds: 1,
         structure: 'Cl',
-        name: 'Cloro',
+        name: context.l10n.chlorine,
         onPressed: () => _pressedGroupButton(Group.chlorine),
       ),
       Group.bromine: GroupButton(
         bonds: 1,
         structure: 'Br',
-        name: 'Bromo',
+        name: context.l10n.bromine,
         onPressed: () => _pressedGroupButton(Group.bromine),
       ),
       Group.nitro: GroupButton(
         bonds: 1,
         structure: 'NO2',
-        name: 'Nitro',
+        name: context.l10n.nitro,
         onPressed: () => _pressedGroupButton(Group.nitro),
       ),
       Group.ether: GroupButton(
         bonds: 1,
         structure: 'O –',
-        name: 'Éter',
+        name: context.l10n.ether,
         onPressed: () => _pressedGroupButton(Group.ether),
       ),
       Group.amine: GroupButton(
         bonds: 1,
         structure: 'NH2',
-        name: 'Amina',
+        name: context.l10n.amine,
         onPressed: () => _pressedGroupButton(Group.amine),
       ),
       Group.alcohol: GroupButton(
         bonds: 1,
         structure: 'OH',
-        name: 'Alcohol',
+        name: context.l10n.alcohol,
         onPressed: () => _pressedGroupButton(Group.alcohol),
       ),
       Group.ketone: GroupButton(
         bonds: 2,
         structure: 'O',
-        name: 'Cetona',
+        name: context.l10n.ketone,
         onPressed: () => _pressedGroupButton(Group.ketone),
       ),
       Group.aldehyde: GroupButton(
         bonds: 3,
         structure: 'HO',
-        name: 'Aldehído',
+        name: context.l10n.aldehyde,
         onPressed: () => _pressedGroupButton(Group.aldehyde),
       ),
       Group.nitrile: GroupButton(
         bonds: 3,
         structure: 'N',
-        name: 'Nitrilo',
+        name: context.l10n.nitrile,
         onPressed: () => _pressedGroupButton(Group.nitrile),
       ),
       Group.amide: GroupButton(
         bonds: 3,
         structure: 'ONH2',
-        name: 'Amida',
+        name: context.l10n.amide,
         onPressed: () => _pressedGroupButton(Group.amide),
       ),
       Group.acid: GroupButton(
         bonds: 3,
         structure: 'OOH',
-        name: 'Ácido',
+        name: context.l10n.acid,
         onPressed: () => _pressedGroupButton(Group.acid),
       ),
     };
@@ -385,7 +388,7 @@ class _NamingPageState extends State<NamingPage> {
       },
       child: QuimifyScaffold(
         bannerAdName: runtimeType.toString(),
-        header: const QuimifyPageBar(title: _title),
+        header: QuimifyPageBar(title: context.l10n.nameOrganic),
         body: Padding(
           padding: const EdgeInsets.only(
             top: 20,
@@ -486,8 +489,8 @@ class _NamingPageState extends State<NamingPage> {
               // Substituents:
               const SizedBox(height: 15),
               if (!_done) ...[
-                const QuimifySectionTitle(
-                  title: 'Sustituyentes',
+                QuimifySectionTitle(
+                  title: context.l10n.substituents,
                   helpDialog: NamingHelpDialog(
                     buttonHeight: buttonHeight,
                   ),
@@ -521,10 +524,10 @@ class _NamingPageState extends State<NamingPage> {
                             )
                           : QuimifyMascotMessage(
                               tone: QuimifyMascotTone.positive,
-                              title: '¡Enhorabuena!',
-                              details: 'La molecula está completa.\n'
-                                  'Ya puedes ver el resultado.',
-                              buttonLabel: 'Resolver',
+                              title: context.l10n.congratulations,
+                              details: context.l10n
+                                  .theMoleculeIsCompleteYouCanNowSeeTheResult,
+                              buttonLabel: context.l10n.solve,
                               onButtonPressed: () => _search(_sequence()),
                             ),
                     ),

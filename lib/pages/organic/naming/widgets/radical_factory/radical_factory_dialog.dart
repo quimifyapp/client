@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_button.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class RadicalFactoryDialog extends StatefulWidget {
   const RadicalFactoryDialog({
@@ -51,9 +52,10 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
       setState(() => _carbonCount--);
     } else {
       MessageDialog(
-        title: 'No existe',
-        details: 'Un radical ${_isIso ? 'con esa terminación ' : ''}debe '
-            'tener al menos ${_isIso ? '3 carbonos' : '1 carbono'}.',
+        title: context.l10n.doesNotExist,
+        details: _isIso
+            ? context.l10n.aRadicalWithThatEndingMustHaveAtLeast3Carbons
+            : context.l10n.aRadicalMustHaveAtLeast1Carbon,
       ).show(context);
     }
   }
@@ -70,10 +72,10 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
   @override
   Widget build(BuildContext context) {
     return QuimifyDialog(
-      title: 'Radical',
+      title: context.l10n.radical,
       content: [
-        const QuimifySectionTitle.custom(
-          title: 'Carbonos',
+        QuimifySectionTitle.custom(
+          title: context.l10n.carbons,
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -158,8 +160,8 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
             ),
           ),
         ),
-        const QuimifySectionTitle.custom(
-          title: 'Terminación',
+        QuimifySectionTitle.custom(
+          title: context.l10n.termination,
           horizontalPadding: 0,
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -201,7 +203,7 @@ class _RadicalFactoryDialogState extends State<RadicalFactoryDialog> {
           height: 50,
           onPressed: _pressedDoneButton,
           child: Text(
-            'Enlazar',
+            context.l10n.link,
             style: TextStyle(
               color: QuimifyColors.inverseText(context),
               fontSize: 17,

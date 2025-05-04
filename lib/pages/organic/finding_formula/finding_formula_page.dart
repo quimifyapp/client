@@ -18,6 +18,7 @@ import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class FindingFormulaPage extends StatefulWidget {
   const FindingFormulaPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   bool _argumentRead = false;
   bool _firstSearch = true;
 
-  String _labelText = 'dietiléter, but-2-eno...';
+  String _labelText = '';
   OrganicResult _result = OrganicResult(
       true,
       null,
@@ -47,23 +48,35 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
       'https://pubchem.ncbi.nlm.nih.gov/compound/'
           '971#section=3D-Conformer&fullscreen=true');
 
-  static const String _messageRoot = 'Parece que estás intentando resolver un';
+  Map<Classification, String> _classificationToMessage = {};
 
-  static const Map<Classification, String> _classificationToMessage = {
-    Classification.inorganicFormula: '$_messageRoot *compuesto inorgánico*.',
-    Classification.inorganicName: '$_messageRoot *compuesto inorgánico*.',
-    Classification.organicFormula: '$_messageRoot *a fórmula*.',
-    Classification.molecularMassProblem: '${_messageRoot}a *masa molecular*.',
-    Classification.chemicalProblem: '$_messageRoot *problema químico*.',
-    Classification.chemicalReaction: '${_messageRoot}a *reacción química*.',
-  };
+  @override
+  void initState() {
+    super.initState();
+    _labelText = context.l10n.diethylEtherBut2Ene;
+
+    _classificationToMessage = {
+      Classification.inorganicFormula:
+          context.l10n.itLooksLikeYouAreTryingToSolveAnInOrganicCompoundFormula,
+      Classification.organicFormula:
+          context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundFormula,
+      Classification.organicName:
+          context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundName,
+      Classification.molecularMassProblem:
+          context.l10n.itLooksLikeYouAreTryingToSolveAMolecularMassProblem,
+      Classification.chemicalProblem:
+          context.l10n.itLooksLikeYouAreTryingToSolveAChemicalProblem,
+      Classification.chemicalReaction:
+          context.l10n.itLooksLikeYouAreTryingToSolveAChemicalReaction,
+    };
+  }
 
   _processClassification(Classification classification, String formattedQuery,
       VoidCallback onPressedDisagree) {
     if (classification == Classification.nomenclatureProblem) {
       MessageDialog(
-        title: 'Casi lo tienes',
-        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
+        title: context.l10n.youAreAlmostThere,
+        details: context.l10n.onlyEnterTheFormulaOrNameYouWantToSolve,
         onButtonPressed: () => _textFocusNode.requestFocus(),
       ).show(context);
       return;
@@ -79,8 +92,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
 
   _showNotFoundDialog(String formattedQuery) {
     MessageDialog.reportable(
-      title: 'Sin resultado',
-      details: 'No se ha encontrado:\n"$formattedQuery"',
+      title: context.l10n.noResult,
+      details: '${context.l10n.notFound}:\n"$formattedQuery"',
       reportContext: 'Organic finding formula',
       reportDetails: 'Searched "$formattedQuery"',
     ).show(context);
@@ -89,8 +102,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   _processNotFound(OrganicResult? result, String formattedQuery) async {
     if (result == null) {
       await hasInternetConnection()
-          ? const MessageDialog(title: 'Sin resultado').show(context)
-          : noInternetDialog.show(context);
+          ? MessageDialog(title: context.l10n.noResult).show(context)
+          : noInternetDialog(context).show(context);
 
       return;
     }
@@ -172,12 +185,12 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                     query: e.name,
                     fields: [
                       HistoryField(
-                        'Búsqueda',
+                        context.l10n.search,
                         e.name,
                       ),
                       if (e.structure != null)
                         HistoryField(
-                          'Fórmula',
+                          context.l10n.formula,
                           formatStructure(e.structure!),
                         )
                     ],
@@ -226,7 +239,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           bannerAdName: runtimeType.toString(),
           header: Column(
             children: [
-              const QuimifyPageBar(title: 'Formular orgánicos'),
+              QuimifyPageBar(title: context.l10n.formulateOrganic),
               QuimifySearchBar(
                 isOrganic: true,
 
@@ -245,11 +258,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
           body: OrganicResultView(
             scrollController: _scrollController,
             fields: {
-              if (_result.name != null) 'Búsqueda': _result.name!,
+              if (_result.name != null) context.l10n.search: _result.name!,
               if (_result.structure != null)
-                'Fórmula': formatStructure(_result.structure!),
+                context.l10n.formula: formatStructure(_result.structure!),
               if (_result.molecularMass != null)
-                'Masa molecular':
+                context.l10n.molecularMass:
                     '${formatMolecularMass(_result.molecularMass!)} g/mol',
             },
             imageProvider: _firstSearch
@@ -260,7 +273,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
             url3D: _result.url3D,
             onHistoryPressed: (resultPageContext) => _showHistory(),
             reportDialog: ReportDialog(
-              details: 'Resultado de\n"${_result.name!}"',
+              details: '${context.l10n.resultOf}\n"${_result.name!}"',
               reportContext: 'Organic finding formula',
               reportDetails: 'Result of "${_result.name!}": $_result',
             ),

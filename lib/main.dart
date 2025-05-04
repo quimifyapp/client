@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:quimify_client/firebase_options.dart';
@@ -166,6 +167,15 @@ class _QuimifyAppState extends State<QuimifyApp> {
       ),
       child: MaterialApp(
         title: 'Quimify',
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('es'), // Spanish
+        ],
         home: _initialScreen,
         routes: {
           Routes.inorganicNomenclature: (context) => const NomenclaturePage(),

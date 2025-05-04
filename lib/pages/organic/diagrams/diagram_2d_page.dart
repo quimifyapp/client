@@ -5,6 +5,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class Diagram2DPage extends StatefulWidget {
   const Diagram2DPage({
@@ -58,11 +59,11 @@ class _Diagram2DPageState extends State<Diagram2DPage> {
                 (toBackground.red - 255) / fromBackground.red, 0, 0, 0, 255,
                 0, (toBackground.green - 255) / fromBackground.green, 0, 0, 255,
                 0, 0, (toBackground.blue - 255) / fromBackground.blue, 0, 255,
-                0, 0, 0, 1, 0,  // fromBackground -> inverse -> toBackground
+                0, 0, 0, 1, 0, // fromBackground -> inverse -> toBackground
               ];
 
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Estructura'),
+      header: QuimifyPageBar(title: context.l10n.structure),
       body: Container(
         color: QuimifyColors.background(context),
         child: Stack(

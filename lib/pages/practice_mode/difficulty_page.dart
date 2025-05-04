@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/practice_mode/selection_button.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 import '../widgets/dialogs/messages/no_internet_dialog.dart';
 
@@ -54,7 +55,7 @@ class DifficultyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Practicar'),
+      header: QuimifyPageBar(title: context.l10n.practice),
       fab: FloatingActionButton(
         backgroundColor: QuimifyColors.teal(),
         onPressed: () async {
@@ -63,7 +64,7 @@ class DifficultyPage extends StatelessWidget {
           if (connectivityResult == ConnectivityResult.none) {
             showDialog(
               context: context,
-              builder: (BuildContext context) => noInternetDialog,
+              builder: (BuildContext context) => noInternetDialog(context),
             );
             return;
           }
@@ -96,7 +97,7 @@ class DifficultyPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Dificultad',
+                        context.l10n.difficulty,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -117,7 +118,7 @@ class DifficultyPage extends StatelessWidget {
                       Column(
                         children: [
                           SelectionButton(
-                            title: 'Fácil',
+                            title: context.l10n.easy,
                             imageUr:
                                 'assets/images/practice_mode/difficulty_easy.png',
                             onTap: () {
@@ -136,7 +137,7 @@ class DifficultyPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SelectionButton(
-                                title: 'Intermedio',
+                                title: context.l10n.medium,
                                 imageUr:
                                     'assets/images/practice_mode/difficulty_medium.png',
                                 onTap: () async {
@@ -158,7 +159,7 @@ class DifficultyPage extends StatelessWidget {
                               ),
                               const SizedBox(width: 40),
                               SelectionButton(
-                                title: 'Difícil',
+                                title: context.l10n.difficult,
                                 imageUr:
                                     'assets/images/practice_mode/difficulty_difficult.png',
                                 onTap: () async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class TipShapeHelpDialog extends StatelessWidget {
   const TipShapeHelpDialog({Key? key}) : super(key: key);
@@ -10,14 +11,16 @@ class TipShapeHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Terminación': [
-          const Center(
+        context.l10n.termination: [
+          Center(
             child: DialogContentText(
-              richText: 'Es la forma de la punta del radical.',
+              richText: context.l10n.itIsTheShapeOfTheTipOfTheRadical,
             ),
           ),
-          const DialogContentText(
-            richText: '*Terminación normal:*',
+          Center(
+            child: DialogContentText(
+              richText: context.l10n.normalTermination,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -29,9 +32,9 @@ class TipShapeHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(radical propil)',
+              richText: context.l10n.radicalPropyl,
             ),
           ),
         ],

@@ -1,68 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class PracticeHelpDialog extends StatelessWidget {
   const PracticeHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const HelpSlidesDialog(
+    return HelpSlidesDialog(
       titleToContent: {
-        '🤓 Selecciona dificultad': [
+        context.l10n.selectDifficulty: [
           DialogContentText(
-            richText: '*Dificultad:*',
+            richText: '*${context.l10n.difficulty}:*',
           ),
           Center(
             child: DialogContentText(
-              richText: 'Fácil',
+              richText: context.l10n.easy,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Intermedio',
+              richText: context.l10n.medium,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Difícil',
+              richText: context.l10n.difficult,
             ),
           ),
         ],
-        '🤔 Selecciona categoría': [
+        context.l10n.selectCategory: [
           DialogContentText(
-            richText: '*Categorías:*',
+            richText: '*${context.l10n.categories}:*',
           ),
           Center(
             child: DialogContentText(
-              richText: 'General',
+              richText: context.l10n.general,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Balanceo de ecuaciones',
+              richText: context.l10n.balancingEquations,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Inorgánica',
+              richText: context.l10n.inorganic,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Orgánica',
+              richText: context.l10n.organic,
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'Química universitaria',
+              richText: context.l10n.universityChemistry,
             ),
           ),
         ],
-        '📊 Sube en el ranking': [
+        context.l10n.rankUp: [
           Center(
             child: DialogContentText(
-              richText: 'Juega y acumula puntos por cada respuesta correcta. \nSube puestos en el ranking para convertirte en el mejor!',
+              richText: '${context.l10n.rankUpDescription}',
             ),
           ),
         ],

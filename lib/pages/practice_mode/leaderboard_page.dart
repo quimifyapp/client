@@ -5,6 +5,7 @@ import 'package:quimify_client/internet/practice_mode/practice_mode.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class LeaderboardPage extends StatefulWidget {
   const LeaderboardPage({super.key});
@@ -37,7 +38,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _error = 'Failed to load leaderboard';
+          _error = context.l10n.errorLoadingLeaderboard;
           _isLoading = false;
         });
       }
@@ -47,7 +48,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Ranking'),
+      header: QuimifyPageBar(title: context.l10n.ranking),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -73,7 +74,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Top Estudiantes',
+                        context.l10n.topStudents,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -215,7 +216,9 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(user.userName +
-                      (currentUserId == user.userId ? ' (You)' : '')),
+                      (currentUserId == user.userId
+                          ? ' (${context.l10n.you})'
+                          : '')),
                 ),
                 Text(user.points.toString()),
               ],

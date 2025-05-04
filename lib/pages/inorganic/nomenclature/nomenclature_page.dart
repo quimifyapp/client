@@ -16,6 +16,7 @@ import 'package:quimify_client/pages/widgets/dialogs/suggestions/classification_
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class NomenclaturePage extends StatefulWidget {
   const NomenclaturePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   // Constants:
 
-  static const String _defaultLabelText = 'NaCl, óxido de hierro...';
+  // static const String _defaultLabelText = 'NaCl, óxido de hierro...';
 
   static final _defaultResultView = InorganicResultView(
     formattedQuery: 'NaCl',
@@ -59,21 +60,28 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
     ),
   );
 
-  static const String _messageRoot = 'Parece que estás intentando resolver un';
+  // static const String _messageRoot = 'Parece que estás intentando resolver un';
 
-  static const Map<Classification, String> _classificationToMessage = {
-    Classification.organicFormula: '$_messageRoot *compuesto orgánico*.',
-    Classification.organicName: '$_messageRoot *compuesto orgánico*.',
-    Classification.molecularMassProblem: '${_messageRoot}a *masa molecular*.',
-    Classification.chemicalProblem: '$_messageRoot *problema químico*.',
-    Classification.chemicalReaction: '${_messageRoot}a *reacción química*.',
-  };
+  Map<Classification, String> _classificationToMessage = {};
 
   @override
   initState() {
     super.initState();
 
-    _labelText = _defaultLabelText;
+    _labelText = context.l10n.naclIronOxide;
+
+    _classificationToMessage = {
+      Classification.organicFormula:
+          context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundFormula,
+      Classification.organicName:
+          context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundName,
+      Classification.molecularMassProblem:
+          context.l10n.itLooksLikeYouAreTryingToSolveAMolecularMassProblem,
+      Classification.chemicalProblem:
+          context.l10n.itLooksLikeYouAreTryingToSolveAChemicalProblem,
+      Classification.chemicalReaction:
+          context.l10n.itLooksLikeYouAreTryingToSolveAChemicalReaction,
+    };
 
     _resultViews = History()
         .getInorganics()
@@ -137,8 +145,8 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   _processClassification(Classification classification, String formattedQuery) {
     if (classification == Classification.nomenclatureProblem) {
       MessageDialog(
-        title: 'Casi lo tienes',
-        details: 'Introduce sólo la *fórmula* o *nombre* que quieras resolver.',
+        title: context.l10n.almostThere,
+        details: context.l10n.enterOnlyTheFormulaOrNameYouWantToSolve,
         onButtonPressed: () => _textFocusNode.requestFocus(),
       ).show(context);
       return;
@@ -154,18 +162,18 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   _showNotFoundDialog(String formattedQuery) {
     MessageDialog.reportable(
-      title: 'Sin resultado',
-      details: 'No se ha encontrado:\n"$formattedQuery"',
-      reportContext: 'Inorganic naming and finding formula',
-      reportDetails: 'Searched "$formattedQuery"',
+      title: context.l10n.noResult,
+      details: '${context.l10n.notFound}:\n"$formattedQuery"',
+      reportContext: context.l10n.inorganicNamingAndFindingFormula,
+      reportDetails: '${context.l10n.searched} "$formattedQuery"',
     ).show(context);
   }
 
   _processNotFound(InorganicResult? result, String formattedQuery) async {
     if (result == null) {
       await hasInternetConnection()
-          ? const MessageDialog(title: 'Sin resultado').show(context)
-          : noInternetDialog.show(context);
+          ? MessageDialog(title: context.l10n.noResult).show(context)
+          : noInternetDialog(context).show(context);
 
       return;
     }
@@ -282,7 +290,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
           showBannerAd: true,
           header: Column(
             children: [
-              const QuimifyPageBar(title: 'Nomenclatura inorgánica'),
+              QuimifyPageBar(title: context.l10n.inorganicNomenclature),
               QuimifySearchBar(
                 isOrganic: false,
                 label: _labelText,

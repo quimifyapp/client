@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mailto/mailto.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactButtons extends StatelessWidget {
@@ -33,7 +34,7 @@ class ContactButtons extends StatelessWidget {
   _pressedEmailButton(BuildContext context) {
     final mailtoLink = Mailto(
       to: [_emailAddress],
-      subject: 'Necesito ayuda',
+      subject: context.l10n.iNeedHelp,
       body: emailBody,
     );
 

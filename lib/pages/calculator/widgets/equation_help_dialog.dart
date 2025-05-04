@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class EquationHelpDialog extends StatelessWidget {
   const EquationHelpDialog({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class EquationHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Reacción química': [
+        context.l10n.chemicalReaction: [
           Center(
             child: RichText(
               textAlign: TextAlign.center,
@@ -20,30 +21,30 @@ class EquationHelpDialog extends StatelessWidget {
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
-                children: const [
+                children: [
                   TextSpan(
-                    text: 'Una reacción química tiene ',
+                    text: context.l10n.aChemicalReactionHas,
                   ),
                   TextSpan(
-                    text: 'reactivos',
-                    style: TextStyle(color: Colors.blue),
+                    text: context.l10n.reactants,
+                    style: const TextStyle(color: Colors.blue),
                   ),
                   TextSpan(
-                    text: ' y ',
+                    text: context.l10n.and,
                   ),
                   TextSpan(
-                    text: 'productos',
-                    style: TextStyle(color: Colors.red),
+                    text: context.l10n.products,
+                    style: const TextStyle(color: Colors.red),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: '.',
                   ),
                 ],
               ),
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Center(
             child: RichText(

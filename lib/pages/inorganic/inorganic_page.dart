@@ -8,6 +8,7 @@ import 'package:quimify_client/pages/practice_mode/difficulty_page.dart';
 import 'package:quimify_client/pages/practice_mode/practice_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class InorganicPage extends StatelessWidget {
   const InorganicPage({Key? key}) : super(key: key);
@@ -16,25 +17,25 @@ class InorganicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuimifySectionTitle(
-          title: 'Fórmulas y nombres',
-          helpDialog: InorganicHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.formulasAndNames,
+          helpDialog: const InorganicHelpDialog(),
         ),
         const SizedBox(height: 15),
-        const QuimifyCard(
+        QuimifyCard(
           body: {
-            'H₂O': 'óxido de hidrógeno',
-            'AuF₃': 'trifluoruro de oro',
-            'HCl': 'ácido clorhídrico',
-            'Fe₂S₃': 'sulfuro de hierro(III)',
-            'PbBr₂': 'dibromuro de plomo',
-            'H₂SO₃': 'ácido sulfuroso',
+            'H₂O': context.l10n.hydrogenOxide,
+            'AuF₃': context.l10n.goldTrifluoride,
+            'HCl': context.l10n.hydrochloricAcid,
+            'Fe₂S₃': context.l10n.ironSulfide,
+            'PbBr₂': context.l10n.leadBromide,
+            'H₂SO₃': context.l10n.sulfurousAcid,
           },
-          page: NomenclaturePage(),
+          page: const NomenclaturePage(),
         ),
-        const QuimifySectionTitle(
-          title: 'Practicar',
-          helpDialog: PracticeHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.practice,
+          helpDialog: const PracticeHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
@@ -43,7 +44,7 @@ class InorganicPage extends StatelessWidget {
               Icons.edit_note_rounded,
               size: 36,
               color: QuimifyColors.teal(),
-            ): 'Practicar',
+            ): context.l10n.practice,
           },
           page: const DifficultyPage(),
           onPressed: () {

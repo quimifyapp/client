@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class InorganicResultView extends StatefulWidget {
   const InorganicResultView({
@@ -30,14 +31,14 @@ class _InorganicResultViewState extends State<InorganicResultView> {
 
   _pressedReportButton() {
     ReportDialog(
-      details: 'Resultado de\n"${widget.formattedQuery}"',
-      reportContext: 'Inorganic naming and finding formula',
-      reportDetails: 'Result of "${widget.formattedQuery}": '
+      details: '${context.l10n.resultOf}\n"${widget.formattedQuery}"',
+      reportContext: context.l10n.inorganicNamingAndFindingFormula,
+      reportDetails: '${context.l10n.resultOf} "${widget.formattedQuery}": '
           '${widget.result}',
     ).show(context);
   }
 
-  _pressedShareButton() => comingSoonDialog.show(context);
+  _pressedShareButton() => comingSoonDialog(context).show(context);
 
   _tappedBox() => setState(() => _isCollapsed = !_isCollapsed);
 
@@ -64,7 +65,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
             child: Row(
               children: [
                 Text(
-                  'Búsqueda: ',
+                  '${context.l10n.search}: ',
                   style: TextStyle(
                     color: QuimifyColors.secondary(context),
                     fontSize: 16,
@@ -112,19 +113,19 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                   ),
                 ),
                 InorganicResultName(
-                  label: 'Stock',
+                  label: context.l10n.stock,
                   name: widget.result.stockName,
                 ),
                 InorganicResultName(
-                  label: 'Sistemática',
+                  label: context.l10n.systematic,
                   name: widget.result.systematicName,
                 ),
                 InorganicResultName(
-                  label: 'Tradicional',
+                  label: context.l10n.traditional,
                   name: widget.result.traditionalName,
                 ),
                 InorganicResultName(
-                  label: 'Nombre común',
+                  label: context.l10n.common,
                   name: widget.result.commonName,
                 ),
                 const SizedBox(height: 15),
@@ -140,28 +141,28 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                           fields: [
                             if (widget.result.molecularMass != null)
                               InorganicResultField(
-                                title: 'Masa molecular',
+                                title: context.l10n.molecularMass,
                                 quantity: widget.result.molecularMass,
                                 unit: 'g/mol',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
                             if (widget.result.density != null)
                               InorganicResultField(
-                                title: 'Densidad',
+                                title: context.l10n.density,
                                 quantity: widget.result.density,
                                 unit: 'g/cm³',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
                             if (widget.result.meltingPoint != null)
                               InorganicResultField(
-                                title: 'P. de fusión',
+                                title: context.l10n.meltingPoint,
                                 quantity: widget.result.meltingPoint,
                                 unit: 'K',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
                             if (widget.result.boilingPoint != null)
                               InorganicResultField(
-                                title: 'P. de ebullición',
+                                title: context.l10n.boilingPoint,
                                 quantity: widget.result.boilingPoint,
                                 unit: 'K',
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
@@ -182,7 +183,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                   size: 18,
                                 ),
                                 text: Text(
-                                  'Compartir',
+                                  context.l10n.share,
                                   style: TextStyle(
                                     color: QuimifyColors.onBlueText(context),
                                     fontSize: 15,
@@ -204,7 +205,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                                   width: 18,
                                 ),
                                 text: Text(
-                                  'Reportar',
+                                  context.l10n.report,
                                   style: TextStyle(
                                     color: QuimifyColors.onRedText(context),
                                     fontSize: 15,

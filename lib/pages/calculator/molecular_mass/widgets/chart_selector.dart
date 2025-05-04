@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/calculator/molecular_mass/widgets/chart_sym
 import 'package:quimify_client/pages/widgets/objects/quimify_switch.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class ChartSelector extends StatefulWidget {
   const ChartSelector({
@@ -73,7 +74,7 @@ class _ChartSelectorState extends State<ChartSelector> {
                     toSubscripts(formula),
                     minFontSize: 18,
                     overflowReplacement: Text(
-                      'Proporciones',
+                      context.l10n.proportions,
                       maxLines: 1,
                       style: TextStyle(
                         color: QuimifyColors.teal(),
@@ -95,7 +96,7 @@ class _ChartSelectorState extends State<ChartSelector> {
                   onChanged: _pressedSwitch,
                 ),
                 Text(
-                  'Pasar a mol',
+                  context.l10n.goToMole,
                   style: TextStyle(
                     color: _molesChart
                         ? QuimifyColors.teal()

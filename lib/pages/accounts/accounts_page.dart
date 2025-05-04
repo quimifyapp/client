@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/accounts/widgets/referral_help_dialog.dart'
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class AccountsPage extends StatelessWidget {
   const AccountsPage({super.key});
@@ -17,7 +18,7 @@ class AccountsPage extends StatelessWidget {
     final payments = Payments();
 
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Cuenta'),
+      header: QuimifyPageBar(title: context.l10n.account),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -54,7 +55,7 @@ class AccountsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Información del Usuario',
+                    context.l10n.userInfo,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -66,7 +67,7 @@ class AccountsPage extends StatelessWidget {
                       SizedBox(
                         width: 80,
                         child: Text(
-                          'Nombre:',
+                          context.l10n.name,
                           style:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
@@ -88,7 +89,7 @@ class AccountsPage extends StatelessWidget {
                       SizedBox(
                         width: 80,
                         child: Text(
-                          'Email:',
+                          context.l10n.email,
                           style:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
@@ -114,8 +115,8 @@ class AccountsPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       label: payments.isSubscribed
-                          ? const Text('Suscrito')
-                          : const Text('Suscripción Premium'),
+                          ? Text(context.l10n.subscribed)
+                          : Text(context.l10n.premiumSubscription),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: QuimifyColors.teal(),
                         foregroundColor: Colors.white,
@@ -154,7 +155,7 @@ class AccountsPage extends StatelessWidget {
                         }
                       },
                       icon: const Icon(Icons.logout, color: Colors.white),
-                      label: const Text('Cerrar Sesión'),
+                      label: Text(context.l10n.signOut),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orangeAccent,
                         foregroundColor: Colors.white,
@@ -178,7 +179,7 @@ class AccountsPage extends StatelessWidget {
                       },
                       icon:
                           const Icon(Icons.delete_forever, color: Colors.white),
-                      label: const Text('Eliminar Cuenta'),
+                      label: Text(context.l10n.deleteAccount),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                         foregroundColor: Colors.white,
@@ -250,18 +251,22 @@ class InviteCard extends StatelessWidget {
 
           const SizedBox(height: 16.0),
 
-          // Bullet points 
+          // Bullet points
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check, size: 20, color: Colors.green,),
+              Icon(
+                Icons.check,
+                size: 20,
+                color: Colors.green,
+              ),
               SizedBox(width: 8.0),
               Text(
                 '📲 Graba un vídeo',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -275,9 +280,9 @@ class InviteCard extends StatelessWidget {
               Text(
                 '👀 Consigue visitas',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -291,9 +296,9 @@ class InviteCard extends StatelessWidget {
               Text(
                 '💰 Gana Dinero',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -306,7 +311,8 @@ class InviteCard extends StatelessWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => ReferralHelpDialog(), // Show the dialog properly
+                builder: (context) =>
+                    ReferralHelpDialog(), // Show the dialog properly
               );
             },
             style: ElevatedButton.styleFrom(
@@ -317,7 +323,6 @@ class InviteCard extends StatelessWidget {
             ),
             child: const Text('Saber más'),
           )
-
         ],
       ),
     );

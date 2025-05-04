@@ -16,6 +16,7 @@ import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dar
 import 'package:quimify_client/pages/widgets/objects/user_profile_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -80,9 +81,11 @@ class _HomePageState extends State<HomePage> {
       bool optionalUpdate = !widget.clientResult!.updateNeeded!;
 
       MessageDialog updateDialog = MessageDialog.linked(
-        title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
+        title: optionalUpdate
+            ? context.l10n.updateAvailable
+            : context.l10n.updateNecessary,
         details: widget.clientResult!.updateDetails,
-        linkLabel: 'Actualizar',
+        linkLabel: context.l10n.update,
         link: Platform.isAndroid
             ? 'https://quimify.com/android'
             : 'https://quimify.com/ios',
@@ -144,8 +147,7 @@ class _HomePageState extends State<HomePage> {
                 width: 65,
                 height: 65,
                 child: FittedBox(
-                  child:
-                  FloatingActionButton(
+                  child: FloatingActionButton(
                     heroTag: null,
                     backgroundColor: QuimifyColors.teal(),
                     onPressed: () {
@@ -153,11 +155,14 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
-                          const PeriodicTablePage(),
+                              const PeriodicTablePage(),
                         ),
                       );
                     },
-                    child: const Icon(Icons.science_rounded, size: 35,),
+                    child: const Icon(
+                      Icons.science_rounded,
+                      size: 35,
+                    ),
                   ),
                 ),
               ),
@@ -165,8 +170,7 @@ class _HomePageState extends State<HomePage> {
                 width: 65,
                 height: 65,
                 child: FittedBox(
-                  child:
-                  FloatingActionButton(
+                  child: FloatingActionButton(
                     heroTag: null,
                     backgroundColor: QuimifyColors.teal(),
                     onPressed: () {
@@ -180,8 +184,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Por favor inicia sesión para chatear con Atomic'),
+                          SnackBar(
+                            content:
+                                Text(context.l10n.pleaseLoginToChatWithAtomic),
                           ),
                         );
                         return;
@@ -190,13 +195,14 @@ class _HomePageState extends State<HomePage> {
                       // Navigate to chatbot
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (BuildContext context) => const ChatbotPage(),
+                          builder: (BuildContext context) =>
+                              const ChatbotPage(),
                         ),
                       );
                     },
                     child: Image.asset(
                       'assets/images/atomic.png',
-                      width:45,
+                      width: 45,
                     ),
                   ),
                 ),
@@ -264,21 +270,21 @@ class _HomePageState extends State<HomePage> {
                     key: ValueKey(_currentPage),
                     children: [
                       QuimifyMenuButton(
-                        title: 'Inorgánica',
+                        title: context.l10n.inorganic,
                         selected: _currentPage == 0,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(0),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
-                        title: 'Orgánica',
+                        title: context.l10n.organic,
                         selected: _currentPage == 1,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(1),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
-                        title: 'Calculadora',
+                        title: context.l10n.calculator,
                         selected: _currentPage == 2,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(2),

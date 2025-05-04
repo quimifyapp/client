@@ -3,6 +3,7 @@ import 'package:quimify_client/pages/periodic_table/periodic_element.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class ElementDetailPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class ElementDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Volver'),
+      header: QuimifyPageBar(title: context.l10n.back),
       body: _Body(element: element),
     );
   }
@@ -156,7 +157,7 @@ class _GeneralInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Información general',
+          context.l10n.generalInfo,
           style: TextStyle(
             color: QuimifyColors.teal(),
             fontSize: 24,
@@ -173,26 +174,26 @@ class _GeneralInfo extends StatelessWidget {
           child: Column(
             children: [
               _InfoRow(
-                leftLabel: 'Punto de fusión',
+                leftLabel: context.l10n.meltingPoint,
                 leftValue: '${element.meltingPoint}°C',
-                rightLabel: 'P. de ebullición',
+                rightLabel: context.l10n.boilingPoint,
                 rightValue: '${element.boilingPoint}°C',
               ),
               const SizedBox(height: 24),
               _InfoRow(
-                leftLabel: 'Número atómico',
+                leftLabel: context.l10n.atomicNumber,
                 leftValue: element.atomicNumber.toString(),
-                rightLabel: 'Peso atómico',
+                rightLabel: context.l10n.atomicWeight,
                 rightValue: element.atomicWeight.toStringAsFixed(3),
               ),
               const SizedBox(height: 24),
               _SingleInfo(
-                label: 'Estado a temperatura ambiente (20°C)',
+                label: context.l10n.stateAtRoomTemperature,
                 value: element.phase,
               ),
               const SizedBox(height: 24),
               _SingleInfo(
-                label: 'Configuración electrónica',
+                label: context.l10n.electronConfiguration,
                 value:
                     '${element.electronConfiguration}\n\n${element.simplifiedElectronConfiguration}',
               ),
@@ -294,7 +295,7 @@ class _AboutElement extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Acerca del ${element.name.toLowerCase()}',
+          '${context.l10n.about} ${element.name.toLowerCase()}',
           style: TextStyle(
             color: QuimifyColors.teal(),
             fontSize: 24,

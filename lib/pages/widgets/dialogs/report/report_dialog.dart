@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart'
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class ReportDialog extends StatelessWidget {
   ReportDialog({
@@ -100,7 +101,7 @@ class ReportDialog extends StatelessWidget {
                 decoration: InputDecoration(
                   // So vertical center works:
                   isCollapsed: true,
-                  labelText: 'Detalles (opcional)',
+                  labelText: context.l10n.detailsOptional,
                   labelStyle: TextStyle(
                     color: QuimifyColors.secondary(context),
                   ),
@@ -125,7 +126,7 @@ class ReportDialog extends StatelessWidget {
           ),
           DialogButton(
             onPressed: () => _pressedButton(context),
-            text: 'Enviar',
+            text: context.l10n.send,
           ),
         ],
       ),

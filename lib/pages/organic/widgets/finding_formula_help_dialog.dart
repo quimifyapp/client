@@ -1,55 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class FindingFormulaHelpDialog extends StatelessWidget {
   const FindingFormulaHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const HelpSlidesDialog(
+    return HelpSlidesDialog(
       titleToContent: {
-        'Orgánica': [
+        context.l10n.organic: [
           Center(
             child: DialogContentText(
-              richText: 'Los compuestos orgánicos contienen carbonos enlazados a '
-                  'hidrógenos.',
+              richText:
+                  context.l10n.organicCompoundsContainCarbonsBondedToHydrogens,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
-          Center(
+          const Center(
             child: DialogContentText(
               richText: 'CH₃ – CH₂ – CH₃',
             ),
           ),
           Center(
-            child: DialogContentText(richText: 'ácido etanoico'),
+            child: DialogContentText(richText: context.l10n.ethanoicAcid),
           ),
-          Center(
+          const Center(
             child: DialogContentText(
               richText: 'CH₂ = CH – CONH₂',
             ),
           ),
         ],
-        'Formular': [
+        context.l10n.formula: [
           Center(
             child: DialogContentText(
-              richText: 'Consiste en averiguar la fórmula dado el nombre.',
+              richText:
+                  context.l10n.itConsistsOfFindingOutTheFormulaGivenTheName,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: DialogContentText(
-              richText: 'etanol   ➔   CH₃ – CH₂(OH)',
+              richText: '${context.l10n.ethanol}   ➔   CH₃ – CH₂(OH)',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'propadieno   ➔   CH₂ = CH = CH₂',
+              richText: '${context.l10n.propadiene}   ➔   CH₂ = CH = CH₂',
             ),
           ),
         ],

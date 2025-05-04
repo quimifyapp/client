@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class NamingHelpDialog extends StatelessWidget {
   const NamingHelpDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const HelpSlidesDialog(
+    return HelpSlidesDialog(
       titleToContent: {
-        'Nombrar': [
+        context.l10n.name: [
           Center(
             child: DialogContentText(
-              richText: 'Consiste en averiguar el nombre dada la fórmula.',
+              richText:
+                  context.l10n.itConsistsOfFindingOutTheNameGivenTheFormula,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplos:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: DialogContentText(
-              richText: 'CH₃ – CH₂(OH)   ➔   etanol',
+              richText: 'CH₃ – CH₂(OH)   ➔   ${context.l10n.ethanol}',
             ),
           ),
           Center(
             child: DialogContentText(
-              richText: 'CH₂ = CH = CH₂   ➔   propadieno',
+              richText: 'CH₂ = CH = CH₂   ➔   ${context.l10n.propadiene}',
             ),
           ),
         ],

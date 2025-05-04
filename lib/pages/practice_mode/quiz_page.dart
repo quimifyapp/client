@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/practice_mode/leaderboard_page.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key, required this.difficulty, required this.category});
@@ -115,8 +116,8 @@ class _QuizPageState extends State<QuizPage> {
       log('Error submitting quiz: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error submitting quiz results'),
+          SnackBar(
+            content: Text(context.l10n.errorSubmittingQuizResults),
           ),
         );
       }
@@ -202,7 +203,7 @@ class _QuizPageState extends State<QuizPage> {
                                     top: 16,
                                     left: 16,
                                     child: Text(
-                                      'Pregunta ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
+                                      '${context.l10n.question} ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,

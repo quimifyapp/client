@@ -36,7 +36,8 @@ class OrganicResultView extends StatelessWidget {
 
   _pressedReportButton(BuildContext context) => reportDialog.show(context);
 
-  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) =>
+      comingSoonDialog(context).show(context);
 
   static const double _buttonHeight = 44;
   static const double _diagramHeight = 225; // TODO adaptive
@@ -119,7 +120,8 @@ class OrganicResultView extends StatelessWidget {
                         width: 118,
                         child: QuimifyIconButton(
                           height: _buttonHeight,
-                          backgroundColor: QuimifyColors.diagram3dButton(context),
+                          backgroundColor:
+                              QuimifyColors.diagram3dButton(context),
                           onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) => Diagram3DPage(

@@ -22,6 +22,7 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class MolecularMassPage extends StatefulWidget {
   const MolecularMassPage({Key? key}) : super(key: key);
@@ -70,21 +71,21 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
       } else {
         if (!mounted) return; // For security reasons
         MessageDialog.reportable(
-          title: 'Sin resultado',
+          title: context.l10n.noResult,
           details: result.error != null ? toSubscripts(result.error!) : null,
-          reportContext: 'Molecular mass',
-          reportDetails: 'Searched "$input"',
+          reportContext: context.l10n.molecularMass,
+          reportDetails: '${context.l10n.searched} "$input"',
         ).show(context);
       }
     } else {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const MessageDialog(
-          title: 'Sin resultado',
+        MessageDialog(
+          title: context.l10n.noResult,
         ).show(context);
       } else {
-        noInternetDialog.show(context);
+        noInternetDialog(context).show(context);
       }
     }
 
@@ -102,11 +103,11 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                     query: toSubscripts(e.formula),
                     fields: [
                       HistoryField(
-                        'Fórmula',
+                        context.l10n.formula,
                         toSubscripts(e.formula),
                       ),
                       HistoryField(
-                        'Masa molecular',
+                        context.l10n.molecularMass,
                         '${formatMolecularMass(e.molecularMass)} g/mol',
                       ),
                     ],
@@ -181,7 +182,8 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         noInitialAndFinalBlanks(_textController.text); // Clears input
   }
 
-  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) =>
+      comingSoonDialog(context).show(context);
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +208,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           bannerAdName: runtimeType.toString(),
-          header: const QuimifyPageBar(title: 'Masas moleculares'),
+          header: QuimifyPageBar(title: context.l10n.molecularMasses),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),
@@ -228,7 +230,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         Row(
                           children: [
                             Text(
-                              'Fórmula',
+                              context.l10n.formula,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: QuimifyColors.primary(context),
@@ -310,7 +312,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                       Row(
                         children: [
                           Text(
-                            'Masa molecular',
+                            context.l10n.molecularMass,
                             style: TextStyle(
                               fontSize: 18,
                               color: QuimifyColors.primary(context),
@@ -357,7 +359,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                         height: buttonHeight,
                         onPressed: _pressedButton,
                         child: Text(
-                          'Calcular',
+                          context.l10n.calculate,
                           style: TextStyle(
                             color: QuimifyColors.inverseText(context),
                             fontSize: 17,

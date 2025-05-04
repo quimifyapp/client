@@ -14,6 +14,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 import '../widgets/dialogs/messages/no_internet_dialog.dart';
 
@@ -48,7 +49,7 @@ class ChatbotPage extends StatelessWidget {
               const SizedBox(width: 15),
               Expanded(
                 child: Text(
-                  'Chatea con Atomic',
+                  context.l10n.chatWithAtomic,
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 19,
@@ -232,17 +233,16 @@ class ChatMessage extends StatelessWidget {
                 children: [
                   if (type == 'image') ...[
                     Text(
-                      'Foto adjuntada 📸',
+                      context.l10n.photoAttached,
                       style: TextStyle(
-                        color: isUser ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 15
-                      ),
+                          color: isUser ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15),
                     ),
                   ],
                   if (message.isEmpty && !isUser)
-                    const Text(
-                      'Pensando ...',
+                    Text(
+                      context.l10n.thinking,
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.black38,
@@ -314,13 +314,7 @@ class _BodyState extends State<_Body> {
     }
   }
 
-  static const List<String> quickQuestions = [
-    'Qué es la nomenclatura química?',
-    'Dame un ejemplo',
-    'Cómo ajusto una reacción?',
-    'Que eres capaz de hacer?',
-    'Quienes son tus creadores?',
-  ];
+  List<String> quickQuestions = [];
 
   final welcomeMessage = ChatMessageModel(
     id: 'welcome',
@@ -335,6 +329,13 @@ class _BodyState extends State<_Body> {
   @override
   void initState() {
     super.initState();
+    quickQuestions = [
+      context.l10n.whatIsChemicalNomenclature,
+      context.l10n.giveMeAnExample,
+      context.l10n.howDoIAdjustAResponse,
+      context.l10n.whatAreYouCapableOf,
+      context.l10n.whoAreYourCreators,
+    ];
   }
 
   @override
@@ -358,7 +359,7 @@ class _BodyState extends State<_Body> {
     if (connectivityResult == ConnectivityResult.none) {
       showDialog(
         context: context,
-        builder: (BuildContext context) => noInternetDialog,
+        builder: (BuildContext context) => noInternetDialog(context),
       );
       return;
     }
@@ -369,14 +370,12 @@ class _BodyState extends State<_Body> {
     final ads = Ads();
 
     if (!payments.isSubscribed) {
-
-      if (ads.canWatchRewardedAd &&
-          !_hasSelectedImage) {
+      if (ads.canWatchRewardedAd && !_hasSelectedImage) {
         if (!context.mounted) return;
 
         await MessageDialog(
-          title: 'Enviar mensaje',
-          details: 'Puedes enviar este mensaje viendo un anuncio de video.',
+          title: context.l10n.sendMessage,
+          details: context.l10n.youCanSendThisMessageByWatchingAVideoAd,
           onButtonPressed: () async {
             final bool wasRewarded = await ads.showRewarded();
             if (wasRewarded && context.mounted) {
@@ -387,25 +386,23 @@ class _BodyState extends State<_Body> {
         ).show(context);
 
         return;
-      }
-      else if (!ads.canWatchRewardedAd &&
-          !_hasSelectedImage){
+      } else if (!ads.canWatchRewardedAd && !_hasSelectedImage) {
         if (!context.mounted) return;
 
-        await const MessageDialog(
-          title: 'Máximo diario alcanzado',
-          details: 'Si quieres seguir enviando mensajes a Atomic suscribete a Premium.',
+        await MessageDialog(
+          title: context.l10n.dailyMaximumReached,
+          details: context.l10n
+              .ifYouWantToContinueSendingMessagesToAtomicSubscribeToPremium,
         ).show(context);
 
         return;
-      }
-      else if (!payments.isSubscribed &&
-          _hasSelectedImage){
+      } else if (!payments.isSubscribed && _hasSelectedImage) {
         if (!context.mounted) return;
 
-        await const MessageDialog(
-          title: 'Solo con Premium',
-          details: 'Si quieres enviar un mensaje con imágen a Atomic suscribete a Premium.',
+        await MessageDialog(
+          title: context.l10n.onlyWithPremium,
+          details:
+              context.l10n.ifYouWantToSendAPictureToAtomicSubscribeToPremium,
         ).show(context);
 
         return;
@@ -443,7 +440,7 @@ class _BodyState extends State<_Body> {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error sending message: $e')),
+          SnackBar(content: Text(context.l10n.errorSendingMessage)),
         );
       }
     } finally {
@@ -464,7 +461,7 @@ class _BodyState extends State<_Body> {
                 stream: _chatService.streamMessages(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(child: Text(context.l10n.error));
                   }
 
                   if (!snapshot.hasData) {
@@ -598,7 +595,7 @@ class _BodyState extends State<_Body> {
                           children: [
                             const Icon(Icons.photo, color: Colors.grey),
                             const SizedBox(width: 8),
-                            const Text('Foto seleccionada'),
+                            Text(context.l10n.selectedPhoto),
                             const Spacer(),
                             IconButton(
                               icon: const Icon(Icons.close),
@@ -627,8 +624,8 @@ class _BodyState extends State<_Body> {
                             controller: _textController,
                             decoration: InputDecoration(
                               hintText: _hasSelectedImage
-                                  ? 'Añade mensaje'
-                                  : 'Hazme una pregunta ...',
+                                  ? context.l10n.addMessage
+                                  : context.l10n.askMeAQuestion,
                               hintStyle: TextStyle(
                                   color: QuimifyColors.quaternary(context)),
                               filled: true,

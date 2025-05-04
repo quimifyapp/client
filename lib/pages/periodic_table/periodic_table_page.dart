@@ -12,6 +12,7 @@ import 'package:quimify_client/pages/periodic_table/periodic_element.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class PeriodicTablePage extends StatefulWidget {
   const PeriodicTablePage({Key? key}) : super(key: key);
@@ -32,7 +33,6 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
               .asUint8List(fileData.offsetInBytes, fileData.lengthInBytes),
           allowMalformed: true // Add this to handle potentially malformed UTF8
           );
-
 
       String cleanData = rawData.replaceAll('Â', ''); //Fix typos
 
@@ -75,7 +75,7 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error loading elements: $e'),
+            content: Text(context.l10n.errorLoadingElements),
           ),
         );
       }
@@ -147,7 +147,7 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
     final headerWidth = 40.0 * _zoomLevel;
 
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Tabla periódica'),
+      header: QuimifyPageBar(title: context.l10n.periodicTable),
       body: MediaQuery.removePadding(
         context: context,
         removeTop: true,
@@ -429,35 +429,35 @@ class _Legend extends StatelessWidget {
                   _LegendItem(
                     color: QuimifyColors.reactiveNonMetal(),
                     borderColor: QuimifyColors.reactiveNonMetalLight(),
-                    label: 'No metal',
+                    label: context.l10n.legendNonMetal,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.transitionMetal(),
                     borderColor: QuimifyColors.transitionMetalLight(),
-                    label: 'Metal de transición',
+                    label: context.l10n.legendTransitionMetal,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.halogene(),
                     borderColor: QuimifyColors.halogeneLight(),
-                    label: 'Halógeno',
+                    label: context.l10n.legendHalogene,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.postTransitionMetal(),
                     borderColor: QuimifyColors.postTransitionMetalLight(),
-                    label: 'Otros metales',
+                    label: context.l10n.legendOtherMetal,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.lanthanide(),
                     borderColor: QuimifyColors.lanthanideLight(),
-                    label: 'Lantánido',
+                    label: context.l10n.legendLanthanide,
                     zoomLevel: zoomLevel,
                   ),
                 ],
@@ -470,35 +470,35 @@ class _Legend extends StatelessWidget {
                   _LegendItem(
                     color: QuimifyColors.nobleGas(),
                     borderColor: QuimifyColors.nobleGasLight(),
-                    label: 'Gas noble',
+                    label: context.l10n.legendNobleGas,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.metalloid(),
                     borderColor: QuimifyColors.metalloidLight(),
-                    label: 'Metaloide',
+                    label: context.l10n.legendMetalloid,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.actinide(),
                     borderColor: QuimifyColors.actinideLight(),
-                    label: 'Actínido',
+                    label: context.l10n.legendActinide,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.alkalineEarthMetal(),
                     borderColor: QuimifyColors.alkalineEarthMetalLight(),
-                    label: 'Alcalinotérreo',
+                    label: context.l10n.legendAlkalineEarthMetal,
                     zoomLevel: zoomLevel,
                   ),
                   SizedBox(height: 12 * zoomLevel),
                   _LegendItem(
                     color: QuimifyColors.alkaliMetal(),
                     borderColor: QuimifyColors.alkaliMetalLight(),
-                    label: 'Metal alcalino',
+                    label: context.l10n.legendAlkalineEarthMetal,
                     zoomLevel: zoomLevel,
                   ),
                 ],

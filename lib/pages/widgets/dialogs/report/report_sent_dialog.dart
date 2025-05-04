@@ -3,6 +3,7 @@ import 'package:quimify_client/pages/widgets/dialogs/quimify_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/contact_buttons.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class ReportSentDialog extends StatelessWidget {
   const ReportSentDialog({
@@ -20,12 +21,11 @@ class ReportSentDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyDialog(
-      title: '¿Necesitas ayuda?',
+      title: context.l10n.needHelp,
       content: [
-        const Center(
+        Center(
           child: DialogContentText(
-            richText: 'Chatea con nosotros y nuestro equipo solucionará tus '
-                'dudas al momento.',
+            richText: context.l10n.needHelpDescription,
           ),
         ),
         ContactButtons(
@@ -36,7 +36,7 @@ class ReportSentDialog extends StatelessWidget {
       actions: [
         DialogButton(
           onPressed: () => _exit(context),
-          text: 'Entendido',
+          text: context.l10n.understood,
         ),
       ],
     );

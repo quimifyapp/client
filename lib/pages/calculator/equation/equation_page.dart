@@ -20,6 +20,7 @@ import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
 import 'package:quimify_client/storage/history/history.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class EquationPage extends StatefulWidget {
   const EquationPage({Key? key}) : super(key: key);
@@ -71,21 +72,22 @@ class _EquationPageState extends State<EquationPage> {
       } else {
         if (!mounted) return; // For security reasons
         MessageDialog.reportable(
-          title: 'Sin resultado',
+          title: context.l10n.noResult,
           details: result.error != null ? toSubscripts(result.error!) : null,
-          reportContext: 'Equation',
-          reportDetails: 'Searched ${toEquation(reactants, products)}',
+          reportContext: context.l10n.equation,
+          reportDetails:
+              '${context.l10n.searched} ${toEquation(reactants, products)}',
         ).show(context);
       }
     } else {
       if (!mounted) return; // For security reasons
 
       if (await hasInternetConnection()) {
-        const MessageDialog(
-          title: 'Sin resultado',
+        MessageDialog(
+          title: context.l10n.noResult,
         ).show(context);
       } else {
-        noInternetDialog.show(context);
+        noInternetDialog(context).show(context);
       }
     }
     hideLoadingIndicator();
@@ -106,13 +108,13 @@ class _EquationPageState extends State<EquationPage> {
                   ],
                   fields: [
                     HistoryField(
-                      'Reacción',
+                      context.l10n.reaction,
                       formatEquation(
                         toEquation(e.originalReactants, e.originalProducts),
                       ),
                     ),
                     HistoryField(
-                      'Reacción ajustada',
+                      context.l10n.adjustedReaction,
                       formatEquation(
                         toEquation(e.balancedReactants, e.balancedProducts),
                       ),
@@ -192,7 +194,8 @@ class _EquationPageState extends State<EquationPage> {
     _productsController.text = formatEquationInput(_productsController.text);
   }
 
-  _pressedShareButton(BuildContext context) => comingSoonDialog.show(context);
+  _pressedShareButton(BuildContext context) =>
+      comingSoonDialog(context).show(context);
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +213,7 @@ class _EquationPageState extends State<EquationPage> {
         onTap: _tappedOutsideText,
         child: QuimifyScaffold(
           bannerAdName: runtimeType.toString(),
-          header: const QuimifyPageBar(title: 'Balancear reacciones'),
+          header: QuimifyPageBar(title: context.l10n.balanceReactions),
           body: SingleChildScrollView(
             controller: _scrollController,
             padding: const EdgeInsets.all(20),
@@ -231,7 +234,7 @@ class _EquationPageState extends State<EquationPage> {
                         Row(
                           children: [
                             Text(
-                              'Reacción',
+                              context.l10n.reaction,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: QuimifyColors.primary(context),
@@ -371,7 +374,7 @@ class _EquationPageState extends State<EquationPage> {
                         height: buttonHeight,
                         onPressed: _pressedButton,
                         child: Text(
-                          'Ajustar',
+                          context.l10n.adjust,
                           style: TextStyle(
                             color: QuimifyColors.inverseText(context),
                             fontSize: 17,
@@ -396,7 +399,7 @@ class _EquationPageState extends State<EquationPage> {
                       Row(
                         children: [
                           Text(
-                            'Reacción ajustada',
+                            context.l10n.adjustedReaction,
                             style: TextStyle(
                               fontSize: 18,
                               color: QuimifyColors.primary(context),
