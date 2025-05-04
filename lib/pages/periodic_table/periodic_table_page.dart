@@ -331,6 +331,7 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
 
   Widget _buildElementCell(PeriodicElement element) {
     final textScaleFactor = (_zoomLevel * 0.8).clamp(0.5, 1.2);
+    final currentLanguage = Localizations.localeOf(context).languageCode;
 
     return GestureDetector(
       onTap: () {
@@ -376,7 +377,7 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      element.name,
+                      currentLanguage == 'es' ? element.name : element.nameEn,
                       style: TextStyle(
                         fontSize: 14 * textScaleFactor,
                         color: element.getForegroundColor(),
@@ -498,7 +499,7 @@ class _Legend extends StatelessWidget {
                   _LegendItem(
                     color: QuimifyColors.alkaliMetal(),
                     borderColor: QuimifyColors.alkaliMetalLight(),
-                    label: context.l10n.legendAlkalineEarthMetal,
+                    label: context.l10n.legendAlkaliMetal,
                     zoomLevel: zoomLevel,
                   ),
                 ],

@@ -60,6 +60,7 @@ class _ElementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return Row(
       children: [
         Container(
@@ -100,7 +101,7 @@ class _ElementCard extends StatelessWidget {
                       ],
                     ),
                     GradientText(
-                      element.name,
+                      currentLanguage == 'es' ? element.name : element.nameEn,
                       style: const TextStyle(
                         fontSize: 20,
                       ),
@@ -291,11 +292,12 @@ class _AboutElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${context.l10n.about} ${element.name.toLowerCase()}',
+          '${context.l10n.about} ${currentLanguage == 'es' ? element.name : element.nameEn.toLowerCase()}',
           style: TextStyle(
             color: QuimifyColors.teal(),
             fontSize: 24,
@@ -311,7 +313,9 @@ class _AboutElement extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
-            element.description,
+            currentLanguage == 'es'
+                ? element.description
+                : element.descriptionEn,
             style: TextStyle(
               color: QuimifyColors.primary(context),
               fontSize: 16,
