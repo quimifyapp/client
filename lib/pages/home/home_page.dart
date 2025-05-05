@@ -129,6 +129,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return PopScope(
       onPopInvoked: (bool didPop) async {
         if (!didPop) {
@@ -240,7 +241,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(width: 15),
                 Image.asset(
-                  'assets/images/icons/branding-slim.png',
+                  currentLanguage == 'es'
+                      ? 'assets/images/icons/branding-slim.png'
+                      : 'assets/images/icons/branding-slim-english.png',
                   height: 17,
                   color: QuimifyColors.inverseText(context),
                 ),

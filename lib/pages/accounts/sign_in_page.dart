@@ -24,6 +24,7 @@ class _SignInPageState extends State<SignInPage> {
   bool _isAppleLoading = false;
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return Scaffold(
       backgroundColor: QuimifyColors.background(context),
       body: Stack(
@@ -35,7 +36,9 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 64),
               Center(
                 child: Image.asset(
-                  'assets/images/logo-branding.png',
+                  currentLanguage == 'es'
+                      ? 'assets/images/logo-branding.png'
+                      : 'assets/images/logo-branding-english.png',
                   width: 120,
                 ),
               ),

@@ -68,6 +68,7 @@ flutter:
 
     - assets/ssl/isrg-x1.crt
 
+    - assets/images/icons/
     - assets/images/
     - assets/images/practice_mode/
     - assets/images/icons/

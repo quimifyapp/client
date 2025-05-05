@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/accounts/accounts.dart';
+import 'package:quimify_client/internet/language/language.dart';
 import 'package:quimify_client/internet/payments/payments.dart';
 import 'package:quimify_client/pages/accounts/delete_account_dialog.dart';
 import 'package:quimify_client/pages/accounts/sign_in_page.dart';
@@ -16,6 +17,7 @@ class AccountsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = AuthService();
     final payments = Payments();
+    final languageService = LanguageService();
 
     return QuimifyScaffold.noAd(
       header: QuimifyPageBar(title: context.l10n.account),
@@ -54,11 +56,41 @@ class AccountsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Text(
-                    context.l10n.userInfo,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.l10n.userInfo,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      ValueListenableBuilder<String>(
+                        valueListenable: languageService.languageNotifier,
+                        builder: (context, language, _) {
+                          return TextButton(
+                            onPressed: () => languageService.toggleLanguage(),
+                            style: TextButton.styleFrom(
+                              backgroundColor: QuimifyColors.teal(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                            ),
+                            child: Text(
+                              language.toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -127,13 +159,13 @@ class AccountsPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16),
 
-                  // ---------------------------------------------
-                  // REFERAL PROGRAM MESSAGE
-                  // ---------------------------------------------
-                  const SizedBox(height: 16),
-                  const InviteCard(), // <--- Our new custom widget
-                  const SizedBox(height: 16),
+                  // // ---------------------------------------------
+                  // // REFERAL PROGRAM MESSAGE
+                  // // ---------------------------------------------
+                  // const InviteCard(), // <--- Our new custom widget
+                  // const SizedBox(height: 16),
 
                   // --- CERRAR SESIÓN BUTTON ---
                   SizedBox(

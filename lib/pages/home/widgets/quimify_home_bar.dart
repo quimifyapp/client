@@ -6,6 +6,7 @@ class QuimifyHomeBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return SafeArea(
       bottom: false, // So it's not inside status bar
       child: Container(
@@ -36,7 +37,9 @@ class QuimifyHomeBar extends StatelessWidget {
             ),
             const SizedBox(width: 15),
             Image.asset(
-              'assets/images/icons/branding-slim.png',
+              currentLanguage == 'es'
+                  ? 'assets/images/icons/branding-slim.png'
+                  : 'assets/images/icons/branding-slim-english.png',
               height: 17,
               color: QuimifyColors.inverseText(context),
             ),

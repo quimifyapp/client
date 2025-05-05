@@ -82,7 +82,7 @@ class PracticeModeService {
   Future<List<Question>> createQuiz({
     required String difficulty,
     required String category,
-    String language = 'es',
+    required String language,
   }) async {
     if (_questions == null) {
       await loadQuestions();

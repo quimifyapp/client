@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:quimify_client/internet/language/language.dart';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -100,6 +101,7 @@ Future<ClientResult?> _initializeDependencies() async {
     Api().getClient(),
     Storage().initialize(),
     AuthService().initialize(),
+    LanguageService().initialize(),
   ];
 
   final results = await Future.wait(futures);
@@ -126,6 +128,7 @@ class QuimifyApp extends StatefulWidget {
 class _QuimifyAppState extends State<QuimifyApp> {
   late bool _isInitialized = false;
   late Widget _initialScreen;
+  final _languageService = LanguageService();
 
   @override
   void initState() {
@@ -166,8 +169,12 @@ class _QuimifyAppState extends State<QuimifyApp> {
         systemNavigationBarColor: Colors.transparent,
         systemNavigationBarDividerColor: Colors.transparent,
       ),
-      child: MaterialApp(
+      child: ValueListenableBuilder<String>(
+        valueListenable: _languageService.languageNotifier,
+        builder: (context, language, _) {
+          return MaterialApp(
         title: 'Quimify',
+        locale: Locale(language),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: _initialScreen,
@@ -207,6 +214,8 @@ class _QuimifyAppState extends State<QuimifyApp> {
           brightness: Brightness.dark,
           fontFamily: 'CeraPro',
         ),
+          );
+        },
       ),
     );
   }

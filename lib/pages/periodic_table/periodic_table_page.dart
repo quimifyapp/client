@@ -145,6 +145,7 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
   Widget build(BuildContext context) {
     final cellSize = _baseCellSize * _zoomLevel;
     final headerWidth = 40.0 * _zoomLevel;
+    final currentLanguage = Localizations.localeOf(context).languageCode;
 
     return QuimifyScaffold.noAd(
       header: QuimifyPageBar(title: context.l10n.periodicTable),
@@ -307,7 +308,9 @@ class _PeriodicTablePageState extends State<PeriodicTablePage>
                                       width: cellSize * 1.2,
                                       height: cellSize * 1.2,
                                       child: Image.asset(
-                                        'assets/images/logo-branding.png',
+                                        currentLanguage == 'es'
+                                            ? 'assets/images/logo-branding.png'
+                                            : 'assets/images/logo-branding-english.png',
                                         fit: BoxFit.contain,
                                       ),
                                     ),

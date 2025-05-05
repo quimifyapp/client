@@ -86,10 +86,13 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> _loadQuestions() async {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
+
     final service = PracticeModeService();
     final questions = await service.createQuiz(
       difficulty: widget.difficulty,
       category: widget.category,
+      language: currentLanguage,
     );
     log(questions.length.toString());
     setState(() {
