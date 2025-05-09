@@ -76,7 +76,7 @@ class _NamingPageState extends State<NamingPage> {
     if (result != null) {
       if (!result.found) {
         if (!mounted) return null; // For security reasons
-        const MessageDialog(title: 'Sin resultado').show(context);
+        MessageDialog(title: context.l10n.noResult).show(context);
 
         return null;
       }
@@ -88,9 +88,7 @@ class _NamingPageState extends State<NamingPage> {
       if (!mounted) return null; // For security reasons
 
       if (await hasInternetConnection()) {
-        const MessageDialog(
-          title: 'Sin resultado',
-        ).show(context);
+        MessageDialog(title: context.l10n.noResult).show(context);
       } else {
         noInternetDialog(context).show(context);
       }

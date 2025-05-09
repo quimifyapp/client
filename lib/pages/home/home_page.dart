@@ -55,18 +55,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showWelcomeMessagePopup() {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     if (widget.clientResult!.messagePresent) {
       if (widget.clientResult!.messageLinkPresent!) {
         MessageDialog.linked(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
+          title: currentLanguage == 'es'
+              ? widget.clientResult!.messageTitleSpanish!
+              : widget.clientResult!.messageTitleEnglish!,
+          details: currentLanguage == 'es'
+              ? widget.clientResult!.messageDetailsSpanish!
+              : widget.clientResult!.messageDetailsEnglish!,
           linkLabel: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
         ).show(context);
       } else {
         MessageDialog(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
+          title: currentLanguage == 'es'
+              ? widget.clientResult!.messageTitleSpanish!
+              : widget.clientResult!.messageTitleEnglish!,
+          details: currentLanguage == 'es'
+              ? widget.clientResult!.messageDetailsSpanish!
+              : widget.clientResult!.messageDetailsEnglish!,
         ).show(context);
       }
     }
@@ -78,13 +87,16 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (widget.clientResult!.updateAvailable) {
+      final currentLanguage = Localizations.localeOf(context).languageCode;
       bool optionalUpdate = !widget.clientResult!.updateNeeded!;
 
       MessageDialog updateDialog = MessageDialog.linked(
         title: optionalUpdate
             ? context.l10n.updateAvailable
             : context.l10n.updateNecessary,
-        details: widget.clientResult!.updateDetails,
+        details: currentLanguage == 'es'
+            ? widget.clientResult!.updateDetailsSpanish!
+            : widget.clientResult!.updateDetailsEnglish!,
         linkLabel: context.l10n.update,
         link: Platform.isAndroid
             ? 'https://quimify.com/android'

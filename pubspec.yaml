@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/csv/periodic_table.csv
     - assets/csv/practice_mode_spanish.csv
+    - assets/csv/practice_mode_english.csv
 
     - assets/ssl/isrg-x1.crt
 

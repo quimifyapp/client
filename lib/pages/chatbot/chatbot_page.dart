@@ -327,8 +327,8 @@ class _BodyState extends State<_Body> {
   );
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     quickQuestions = [
       context.l10n.whatIsChemicalNomenclature,
       context.l10n.giveMeAnExample,

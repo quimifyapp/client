@@ -22,19 +22,30 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  static const int maxTime = 60;
   PageController? _pageController;
   List<Question> _questions = [];
   List<Answer> _answers = [];
   bool isLoading = true;
   Timer? _timer;
-  int _timeLeft = 30;
+  int _timeLeft = maxTime;
   bool _answerSelected = false;
+
+  bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    _loadQuestions();
     _pageController = PageController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _loadQuestions();
+      _initialized = true;
+    }
   }
 
   @override
@@ -47,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
   void _startTimer() {
     _timer?.cancel();
     setState(() {
-      _timeLeft = 30;
+      _timeLeft = maxTime;
       _answerSelected = false;
     });
 

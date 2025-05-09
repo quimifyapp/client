@@ -51,8 +51,8 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   Map<Classification, String> _classificationToMessage = {};
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _labelText = context.l10n.diethylEtherBut2Ene;
 
     _classificationToMessage = {

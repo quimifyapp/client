@@ -64,12 +64,12 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   Map<Classification, String> _classificationToMessage = {};
 
+  // didChangeDependencies:
+
   @override
-  initState() {
-    super.initState();
-
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _labelText = context.l10n.naclIronOxide;
-
     _classificationToMessage = {
       Classification.organicFormula:
           context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundFormula,
@@ -82,6 +82,11 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       Classification.chemicalReaction:
           context.l10n.itLooksLikeYouAreTryingToSolveAChemicalReaction,
     };
+  }
+
+  @override
+  initState() {
+    super.initState();
 
     _resultViews = History()
         .getInorganics()

@@ -1,4 +1,4 @@
-id,question,A,B,C,D,solution,category,difficulty
+﻿id,question,A,B,C,D,solution,category,difficulty
 1,Cuál es la fórmula química del agua?,H₂O,CO₂,O₂,H₂,A,university,easy
 2,Qué partícula subatómica tiene carga negativa?,Protón,Neutrón,Electrón,Mesón,C,university,easy
 3,Cuál de estos es un estado de la materia?,Plasma,Reactivo,éter,Luz,A,university,easy
@@ -11,7 +11,7 @@ id,question,A,B,C,D,solution,category,difficulty
 10,Qué nombre recibe la columna vertical en la tabla periódica?,Período,Grupo,Bloque,Fila,B,university,easy
 11,En qué grupo de la tabla periódica se encuentran los gases nobles?,Grupo 1,Grupo 2,Grupo 17,Grupo 18,D,university,easy
 12,Cómo se llama el cambio de estado de sólido a líquido?,Sublimación,Fusión,Evaporación,Condensación,B,university,easy
-13,Qué número representa el Avogadro?,6'022 x 10^²³,9'81 x 10^2,3'14 x 10^0,1'602 x 10^-19,A,university,easy
+13,Qué número representa el Avogadro?,6'022 x 10²³,9'81 x 10²,3'14 x 10⁰,1'602 x 10⁻19,A,university,easy
 14,Qué mide el pH?,La concentración de soluto,La temperatura de una solución,La acidez o alcalinidad,La presión parcial de un gas,C,university,easy
 15,Cómo se llama la fuerza de atracción entre masas?,Fuerza nuclear,Electrostática,Gravitación,Magnética,C,university,easy
 16,Cuál de las siguientes opciones es una base fuerte?,NaOH,HCl,CH₃COOH,NH₃,A,university,easy
@@ -39,7 +39,7 @@ id,question,A,B,C,D,solution,category,difficulty
 38,Qué tipo de reacción es: A + BC -> AC + B?,Neutralización,Doble desplazamiento,Sustitución simple,Síntesis,C,university,medium
 39,Cuál es el reactivo limitante en una reacción química?,El que se gasta primero,El que está en mayor cantidad,El que no reacciona,El que determina la entalpía,A,university,medium
 40,Cómo se llama la sustancia que acelera una reacción sin consumirse?,Soluto,Catalizador,Intermediario,Inhibidor,B,university,medium
-41,Cuál es el producto iónico del agua (Kw) a 25 Â°?,1 x 10⁻¹⁴,1 x 10⁻⁷,1 x 10^14,0,A,university,medium
+41,Cuál es el producto iónico del agua (Kw) a 25 Â°?,1 x 10⁻¹⁴,1 x 10⁻⁷,1 x 10¹⁴,0,A,university,medium
 42,Qué tipo de compuesto resulta de la reacción entre un ácido y un alcohol?,Aldehíno,éter,éster,Amina,C,university,medium
 43,Cuál es la principal característica de un gas ideal?,No tiene volumen,No hay fuerzas intermoleculares,Se licua fácilmente,Es diatómico,B,university,medium
 44,Cuál es la unidad SI de la constante de gases (R)?,J/(mol·K),L/(atm·K),N/(m·K),g/(mol·K),A,university,medium
@@ -48,7 +48,7 @@ id,question,A,B,C,D,solution,category,difficulty
 47,Qué es un enlace polar?,Un enlace con distribución equitativa de electrones,Un enlace que comparte protones,Un enlace con distribución desigual de electrones,Un enlace que rompe la regla del octeto,C,university,medium
 48,Qué significa que una reacción esté en equilibrio?,La reacción se detiene,Las concentraciones de reactivos y productos son iguales,Las velocidades directa e inversa son iguales,El catalizador se desactiva,C,university,medium
 49,Cuál es el número de oxidación del oxígeno en la mayoría de compuestos?,-2,-1,0,2,A,university,medium
-50,Cuál es el pH de una solución con [H⁺] = 1x10⁻⁵ M?,5,9,14,2,A,university,medium
+50,Cuál es el pH de una solución con [H⁺] = 1x₁₀⁻⁵ M?,5,9,14,2,A,university,medium
 51,Qué tipo de interacción estabiliza a las micelas en solución?,Interacciones metálicas,Atracciones electrostáticas fuertes,Interacciones hidrofóbicas,Enlaces iónicos,C,university,medium
 52,Cuál es la expresión de la constante de equilibrio para la reacción: aA + bB <-> cC + dD?,K = [A]ª [B]ᵇ / [C]ᶜ [D]ᵈ,K = ([A]ª [B]ᵇ) / ([C]ᶜ [D]ᵈ) x RT,K = [C]ᶜ [D]ᵈ / [A]ª [B]ᵇ,K = (a+b)/(c+d),C,university,medium
 53,Cuál es el pOH de una solución con pH = 3 a 25 Â°?,7,14,11,1,C,university,medium
@@ -69,7 +69,7 @@ id,question,A,B,C,D,solution,category,difficulty
 68,Cuál de estas moléculas tiene un momento dipolar neto igual a cero?,HCl,H₂O,CO₂,NH₃,C,university,hard
 69,Qué propiedad coligativa eleva la temperatura de ebullición de una solución?,Disminución de la presión de vapor,Aumento de la presión de vapor,Disminución del punto de congelación,Cambio de color,A,university,hard
 70,Cuál es la velocidad de reacción según la ley: v = k[A]²[B]?,Es de primer orden total,Es de segundo orden total,Es de tercer orden total,Es de orden mixto,C,university,hard
-71,Cuál es la ecuación de Arrhenius?,k = Ae^(Ea/RT),ln(k₂/k₁) = Ea/R (1/T₂ - 1/T₁),k = A e^(-Ea/RT),k = e^(?G/RT),C,university,hard
+71,Cuál es la ecuación de Arrhenius?,k = Ae(Ea/RT),ln(k₂/k₁) = Ea/R (1/T₂ - 1/T₁),k = A e(-Ea/RT),k = e(?G/RT),C,university,hard
 72,Cómo se denomina la sustancia formada temporalmente en el curso de una reacción que luego se convierte en producto?,Reactivo,Intermedio,Catalizador,Producto secundario,B,university,hard
 73,Qué describe el principio de exclusión de Pauli?,No más de dos electrones pueden ocupar el mismo orbital,El orbital d debe estar vacío,Los electrones tienen carga positiva,Cada subnivel solo puede tener un electrón,A,university,hard
 74,Cuál es la geometría electrónica de un átomo central con hibridación sp³d?,Tetraédrica,Trigonal plana,Bipiramidal trigonal,Octaédrica,C,university,hard
@@ -81,7 +81,7 @@ id,question,A,B,C,D,solution,category,difficulty
 80,Qué método se utiliza para balancear reacciones redox en medio ácido?,Método algebraico,Método de ajuste directo,Ion-electrón,Método de Pauli,C,university,hard
 81,Cuál es el potencial estándar de hidrógeno (SHE)?,1'00 V,0'00 V,0'76 V,Depende del ph,B,university,hard
 82,Qué describe la ecuación de Nernst?,Relación entre emf y las concentraciones iónicas,Relación entre energía libre y entalpía,Velocidad de reacción y temperatura,Equilibrio de fases,A,university,hard
-83,Cuál es la fórmula para la presión osmótica (?)?,? = M R T,? = k [A]^n,? = ?H - T?S,? = d · g · h,A,university,hard
+83,Cuál es la fórmula para la presión osmótica (?)?,? = M R T,? = k [A]n,? = ?H - T?S,? = d · g · h,A,university,hard
 84,Qué es un diagrama de fases?,Muestra la energía de activación,Representa los estados de agregación a distintas T y P,Indica la geometría molecular,Es un diagrama de orbitales,B,university,hard
 85,Cuál es la principal interacción en la disolución de iones en agua?,Ion-ion,Dipolo-dipolo,Ion-dipolo,London,C,university,hard
 86,Cuál de los siguientes iones es comúnmente un contraión en complejos de coordinación?,K⁺,NO₃⁻,Al³⁺,F₂⁻,B,university,hard
@@ -174,7 +174,7 @@ id,question,A,B,C,D,solution,category,difficulty
 173,Cuál es la relación aire-combustible ideal para gasolina?,14'7:1,2:01,32:01:00,1:01,A,general,hard
 174,Cuál de los siguientes es un explosivo común?,NaClO,NH₄NO₃,CH₃COOH,K₂SO₄,B,general,hard
 175,Qué determina la constante dieléctrica de un solvente?,Conducir electricidad,Disolver sustancias polares,Densidad,Punto de ebullición,B,general,hard
-176,Qué es una reacción SN2?,Sustitución nucleofílica bimolecular,Sustitución nucleofílica unimolecular,Eliminación unimolecular,Reducción electrolílica,A,general,hard
+176,Qué es una reacción SN₂?,Sustitución nucleofílica bimolecular,Sustitución nucleofílica unimolecular,Eliminación unimolecular,Reducción electrolílica,A,general,hard
 177,Cuál es el principal componente del ácido estomacal?,H₂SO₄,HCl,HNO₃,H₃PO₄,B,general,hard
 178,Cuál es la función del EDTA en química analítica?,ácido fuerte,Estándar primario,Agente quelante,Indicador de pH,C,general,hard
 179,Qué técnica separa mezclas de líquidos volátiles?,Cromatografía de gases,Espectroscopía IR,Recristalización,Liofilización,A,general,hard
@@ -186,7 +186,7 @@ id,question,A,B,C,D,solution,category,difficulty
 185,Qué tipo de hidrocarburo tiene solo enlaces simples?,Alqueno,Alcano,Alquino,Areno,B,organic,easy
 186,Cómo se llama el compuesto CH₃CH₂OH?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
 187,Cuál es la principal fuente natural de hidrocarburos?,Carbón,Agua,Petróleo,Arena,C,organic,easy
-188,Cómo se denomina el grupo funcional -COOH?,Hidroxilo,Carboxilo,Carbonilo,Amino,B,organic,easy
+188,Cómo se denomina el grupo funcional⁻COOH?,Hidroxilo,Carboxilo,Carbonilo,Amino,B,organic,easy
 189,Qué tipo de isomería existe entre cis-but-2-eno y trans-but-2-eno?,Constitucional,Geométrica,óptica,Tautomérica,B,organic,easy
 190,Qué átomo (distinto de C) aparece más comúnmente en compuestos orgánicos?,Nitrógeno,Flúor,Oxígeno,Azufre,C,organic,easy
 191,Cuál es el nombre común del CH₃OH?,Metano,Metanol,ácido fórmico,Formaldehído,B,organic,easy
@@ -196,9 +196,9 @@ id,question,A,B,C,D,solution,category,difficulty
 195,Qué compuesto se obtiene al oxidar un alcohol primario?,Aldehído,Cetona,éter,Amina,A,organic,easy
 196,Cuál es el nombre del hidrocarburo con 2 carbonos y enlace triple?,Etano,Eteno,Etino (acetileno),Etileno,C,organic,easy
 197,Qué describe la fórmula CnH₂n+2?,Alquenos,Alcanos,Alquinos,Aromaticidad,B,organic,easy
-198,Cuál es el nombre del grupo funcional -CHO?,Carboxilo,Hidroxilo,Carbonilo (aldehído),Amida,C,organic,easy
+198,Cuál es el nombre del grupo funcional⁻CHO?,Carboxilo,Hidroxilo,Carbonilo (aldehído),Amida,C,organic,easy
 199,Cuál es el principal alcohol presente en las bebidas alcohólicas?,Metanol,Etanol,Propanol,Butanol,B,organic,easy
-200,Cómo se denomina el grupo -NH₂?,Hidroxilo,Amino,Nitro,Aldehído,B,organic,easy
+200,Cómo se denomina el grupo⁻NH₂?,Hidroxilo,Amino,Nitro,Aldehído,B,organic,easy
 201,Qué familia de compuestos contiene un anillo bencénico?,Hidrocarburos alifáticos,Arenos,Halocarburos,Aldehídos,B,organic,easy
 202,Cuál de estos es un aldehído simple?,Acetona,Formaldehído,Fenol,Butanol,B,organic,easy
 203,Cómo se llama la reacción de un alcano con oxígeno para formar CO₂ y H₂O?,Sustitución,Combustión,Adición,Polimerización,B,organic,easy
@@ -207,7 +207,7 @@ id,question,A,B,C,D,solution,category,difficulty
 206,Cómo se denomina un compuesto con el grupo - O - entre dos cadenas carbonadas?,Aldehído,éter,Cetona,ácido carboxílico,B,organic,easy
 207,Qué producto se forma al reducir un aldehído?,Alcohol primario,Alcohol secundario,Cetona,ácido carboxílico,A,organic,easy
 208,Cuál es el nombre común del etino?,Acetileno,Etileno,Etanol,Metilacetileno,A,organic,easy
-209,Cómo se llama el grupo funcional -NO₂?,Amino,Nitro,Nitrilo,Nitrato,B,organic,easy
+209,Cómo se llama el grupo funcional⁻NO₂?,Amino,Nitro,Nitrilo,Nitrato,B,organic,easy
 210,Cuál es la fórmula general de los alquenos?,CₙH₂ₙ+2,CₙH₂ₙ,CₙH₂ₙ-2,CₙHₙ,B,organic,easy
 211,Qué catalizador se usa frecuentemente en la hidrogenación de alquenos?,Fe,Pt/Pd/Ni,Hg,Cu,B,organic,medium
 212,Cuál es el reactivo de Tollens?,[Ag(NH₃)₂]⁺,KMnO₄,CrO₃/H₂SO₄,NaBH₄,A,organic,medium
@@ -218,7 +218,7 @@ id,question,A,B,C,D,solution,category,difficulty
 217,Cómo se llama la reacción de adición de H₂O a un alqueno en medio ácido?,Hidrogenación,Hidratación,Halogenación,Oxidación,B,organic,medium
 218,Qué ocurre al oxidar un alcohol secundario?,Se forma un aldehído,Se forma un ácido carboxílico,Se forma una cetona,No reacciona,C,organic,medium
 219,Cuál es la parte reactiva (centro electrofílico) en un carbonilo C=O?,El carbono,El oxígeno,Ambos,Ninguno,A,organic,medium
-220,Qué caracteriza a la reacción SN1?,Un solo paso,Intermediario carbocatión,Requiere radicales libres,Ocurre en alcanos,B,organic,medium
+220,Qué caracteriza a la reacción SN₁?,Un solo paso,Intermediario carbocatión,Requiere radicales libres,Ocurre en alcanos,B,organic,medium
 221,Qué es la polimerización por adición?,Un monómero se condensa con pérdida de H₂O,Monómeros con dobles enlaces se unen sin pérdida de átomos,Una reacción ácido-base,Ninguna de las anteriores,B,organic,medium
 222,Cuál es el nombre de la familia con un doble enlace carbono-nitrógeno (C=N)?,Amidas,Iminas,ésteres,Nitrilos,B,organic,medium
 223,Qué define a un compuestos aromático según la regla de Huckel?,4n electrones ?,(4n+2) electrones ?,una anillo de 5 átomos,Solo enlaces simples,B,organic,medium
@@ -228,19 +228,19 @@ id,question,A,B,C,D,solution,category,difficulty
 227,Qué sucede cuando un benceno reacciona con HNO₃ en presencia de H₂SO₄?,Sulfona el anillo,Nitra el anillo,Reduce el anillo,Polimeriza el anillo,B,organic,medium
 228,Cómo se llama el proceso de separar compuestos orgánicos basados en su solubilidad en distintas fases?,Cromatografía líquida,Filtración al vacío,Extracción líquido-líquido,Destilación fraccionada,C,organic,medium
 229,Qué es un enol?,Un aldehído,Un tautómero de un carbonilo con OH en C=C,Un éster cíclico,Una sal orgánica,B,organic,medium
-230,Qué caracteriza a las diaminas?,Tienen dos grupos -OH,Tienen dos grupos -NH₂,Tienen dos dobles enlaces,Tienen dos anillos aromáticos,B,organic,medium
+230,Qué caracteriza a las diaminas?,Tienen dos grupos⁻OH,Tienen dos grupos⁻NH₂,Tienen dos dobles enlaces,Tienen dos anillos aromáticos,B,organic,medium
 231,Cómo se llama la reacción de condensación entre dos moléculas de aminoácidos?,Esterificación,Reacción de Diels-Alder,Reacción de Cannizzaro,Formación de enlace peptídico,D,organic,medium
 232,Qué es la isomería óptica?,Existencia de isómeros que difieren en un enlace doble,Isómeros con giro de luz polarizada,Isómeros que difieren en posición de sustituyentes en anillo,Ninguna,B,organic,medium
 233,Cuál de estas es una amina aromática?,Anilina,Metilamina,Dimetilamina,Amoníaco,A,organic,medium
 234,Qué define la reacción de polimerización por condensación?,Se unen monómeros con liberación de moléculas pequeñas (ej. H₂O),Es una reacción en cadena radicalaria,No requiere catalizador,Ocurre solo en fase gaseosa,A,organic,medium
 235,Qué es un alfa-hidroxiácido (AHA)?,Un ácido carboxílico con hidroxilo en el carbono vecino,Un alcohol con doble enlace,Una cetona cíclica,Un aminoácido esencial,A,organic,medium
 236,Cuál es un método común para convertir un alcohol en un haluro de alquilo?,Oxidación fuerte,Sustitución con HX,Reducción catalítica,Ninguno,B,organic,medium
-237,Qué caracteriza al ácido benzoico?,Grupo -OH en anillo,Grupo -CHO en anillo,Grupo -COOH unido al anillo bencénico,Grupo -NH₂ en anillo,C,organic,medium
+237,Qué caracteriza al ácido benzoico?,Grupo⁻OH en anillo,Grupo⁻CHO en anillo,Grupo⁻COOH unido al anillo bencénico,Grupo⁻NH₂ en anillo,C,organic,medium
 238,Cuál es el nombre del compuesto CH₃-CH₂-CH₂-NH₂?,Etanolamina,Propanamina,Metilamina,Butilamina,B,organic,medium
 239,Qué produce la reducción de un nitrilo (R-C≡N)?,Una amida,Una amina primaria,Un aldehído,Un ácido carboxílico,B,organic,medium
 240,Cómo se llama la reacción de dimerización de dos radicales libres?,Acoplamiento radicalario,Reducción radicalaria,Transposición,Eliminación,A,organic,medium
 241,Qué describe la reacción de Diels-Alder?,Ciclación entre un dieno conjugado y un dienófilo,Eliminación de H₂O en alcoholes,Reducción de una cetona,Sustitución electrofílica en benceno,A,organic,hard
-242,Qué es un ácido carboxílico insaturado?,un ácido con un doble o triple enlace en la cadena,un ácido con más grupos -COOH,un ácido aromático,un ácido con halógenos,A,organic,hard
+242,Qué es un ácido carboxílico insaturado?,un ácido con un doble o triple enlace en la cadena,un ácido con más grupos⁻COOH,un ácido aromático,un ácido con halógenos,A,organic,hard
 243,Cuál es la conformación más estable del ciclohexano?,Silla,Bote,Twist-boat,Medio-bote,A,organic,hard
 244,Qué representa la notación (R) y (S) en química orgánica?,Configuración absoluta de centros quirales,Tipo de enlace,Grado de sustitución,Polaridad del enlace,A,organic,hard
 245,Qué producto se obtiene de la ozonólisis de un alqueno?,Alcoholes,Cetonas/aldehídos,Aminas,Nitrocompuestos,B,organic,hard
@@ -254,7 +254,7 @@ id,question,A,B,C,D,solution,category,difficulty
 253,Qué es la catálisis ácida en reacciones orgánicas?,Uso de un ácido fuerte para inhibir la reacción,El ácido se consume en la reacción,El ácido protona intermedios aumentando su reactividad,El ácido reduce la energía de activación cediendo electrones,C,organic,hard
 254,Qué producto se obtiene de la reacción de un éster con un amoniaco en exceso?,Amida,Alcohol,Haluro de alquilo,éter,A,organic,hard
 255,Qué hace el reactivo de Grignard (RMgX) con un carbonilo?,Oxida la cetona,Agrega R- al carbonilo formando un alcohol tras hidrólisis,Elimina el carbonilo,Ninguna,B,organic,hard
-256,Qué caracteriza al mecanismo E2 (eliminación bimolecular)?,Forma carbocatión intermedio,Es de primer orden global,Requiere base fuerte y ocurre en un solo paso,Solo ocurre a bajas temperaturas,C,organic,hard
+256,Qué caracteriza al mecanismo E₂ (eliminación bimolecular)?,Forma carbocatión intermedio,Es de primer orden global,Requiere base fuerte y ocurre en un solo paso,Solo ocurre a bajas temperaturas,C,organic,hard
 257,Qué define un azúcar reductor?,Tiene un anillo aromático,Posee un grupo amino libre,Puede oxidarse en presencia de reactivos como Tollens/Benedict,No contiene carbonilo,C,organic,hard
 258,Cómo se llama la reacción de formación de un diacilo a partir de un anhídrido?,Cloruración,Transesterificación,Acilación,Halogenación,C,organic,hard
 259,Qué ocurre en la reacción de Wolff-Kishner?,Reducción de cetonas/aldehídos a alcanos con hidrazina,Oxidación de alcoholes a ácidos,Sustitución nucleofílica en haluros,Ninguna,A,organic,hard
@@ -299,7 +299,7 @@ id,question,A,B,C,D,solution,category,difficulty
 298,Qué color tiene el azufre elemental sólido?,Negro,Transparente,Amarillo,Rojo,C,inorganic,easy
 299,Qué metal es extraído principalmente de la casiterita (SnO₂)?,Plomo,Estaño,Cobre,Mercurio,B,inorganic,easy
 300,Qué significa 'aq' en una fórmula como H₂SO₄(aq)?,Compuesto puro,Solución acuosa,Estado sólido,No está definido,B,inorganic,easy
-301,Qué caracteriza a los compuestos de coordinación?,Tienen enlaces covalentes puros,El metal central se une a ligandos a través de enlaces coordinados,Son iones con carga -2,Son siempre diamagnéticos,B,inorganic,medium
+301,Qué caracteriza a los compuestos de coordinación?,Tienen enlaces covalentes puros,El metal central se une a ligandos a través de enlaces coordinados,Son iones con carga⁻2,Son siempre diamagnéticos,B,inorganic,medium
 302,Cómo se llama el anión complejo [Fe(CN)₆]⁴⁻?,Ferroso,Ferricianuro,Ferrocianuro,Férrico,C,inorganic,medium
 303,Cuál es la hibridación del carbono en el CO₂?,sp³,sp²,sp,No está hibridado,C,inorganic,medium
 304,Qué establece la teoría del campo cristalino?,Explica la energía de electrones d en complejos metálicos,Explica la solubilidad de sales,Predice las temperaturas de fusión,No describe iones metálicos,A,inorganic,medium
@@ -330,7 +330,7 @@ id,question,A,B,C,D,solution,category,difficulty
 329,Cuál es la valencia del cobre en CuSO₄?,1,2,3,-1,B,inorganic,medium
 330,Qué metal líquido se utiliza en algunos tipos de termómetros?,Plata,Mercurio,Litio,Oro,B,inorganic,medium
 331,Qué explica la teoría de Bandas en sólidos?,La conductividad eléctrica en metales y semiconductores,La solubilidad de sales iónicas,La estructura atómica del núcleo,El color de las llamas,A,inorganic,hard
-332,Qué es un compuesto de Werner?,Un tipo de complejo de coordinación,Un óxido anfótero,Un peróxido en el que el metal es +1,Ninguno,A,inorganic,hard
+332,Qué es un compuesto de Werner?,Un tipo de complejo de coordinación,Un óxido anfótero,Un peróxido en el que el metal es⁺1,Ninguno,A,inorganic,hard
 333,Cómo se llama la especie [Pt(NH₃)₂Cl₂]?,Sulfato de platino,ácido platínico,Diaminodicloroplatino(II),No es estable,C,inorganic,hard
 334,Cuál es la carga global del complejo [Co(NH₃)₆]Cl₃ en disolución?,3,0,-3,2,B,inorganic,hard
 335,Qué es la pirita (FeS₂) químicamente?,Un óxido de hierro,Un silicato de hierro,Un sulfuro de hierro,Un hidróxido,C,inorganic,hard
@@ -448,7 +448,7 @@ id,question,A,B,C,D,solution,category,difficulty
 447,Balancea 6Mg + _N₂ -> 2Mg₃N₂,1,2,3,4,B,balancing,hard
 448,Balancea 8P + _O₂ -> 4P₂O₅,8,10,12,14,B,balancing,hard
 449,Balancea P₄ + 20HNO₃ -> 4H₃PO₄ + 20NO₂ + _H₂O,2,3,4,5,C,balancing,hard
-450,Balancea 4Sb + 10HNO3 -> 2Sb2O5 + 5NO2 + _H2O,1,No ajustable,3,5,B,balancing,hard
+450,Balancea 4Sb + 10HNO₃ -> 2Sb₂O₅ + 5NO₂ + _H₂O,1,No ajustable,3,5,B,balancing,hard
 451,Cuál es la partícula subatómica con carga negativa en el átomo?,Protón,Neutrón,Electrón,Positrón,C,general,easy
 452,Cuál es la fórmula química del agua?,H₂O,H₂O₂,HO₂,OH₂,A,general,easy
 453,Cuál de los siguientes es un ejemplo de mezcla homogénea?,Agua y aceite,Aire,Agua con arena,Ensalada,B,general,easy
@@ -476,7 +476,7 @@ id,question,A,B,C,D,solution,category,difficulty
 475,Qué significa que una sustancia sea soluble en agua?,Que reacciona con el agua,Que se mezcla con aceite,Que puede disolverse en agua,Que no cambia sus propiedades,C,general,easy
 476,Cuál de las siguientes magnitudes se mide en Pascales (Pa)?,Temperatura,Presión,Velocidad,Masa,B,general,easy
 477,Qué elemento tiene el símbolo químico 'Ag'?,Oro,Aluminio,Plata,Argón,C,general,easy
-478,En una reacción química, qué son los reactivos?,Los productos finales,Las sustancias que intervienen al comienzo,Las sustancias inertes,Los iones presentes en el medio,B,general,easy
+478,"En una reacción química, qué son los reactivos?",Los productos finales,Las sustancias que intervienen al comienzo,Las sustancias inertes,Los iones presentes en el medio,B,general,easy
 479,Cuál es el factor que se modifica en un experimento para observar su efecto?,Variable independiente,Variable dependiente,Control,Constante,A,general,easy
 480,Qué describe la ley de conservación de la masa?,La masa puede convertirse en energía,La masa permanece constante durante una reacción química,La masa varía con la temperatura,La masa aumenta al combinar sustancias,B,general,easy
 481,Cuál de los siguientes instrumentos se utiliza para medir la masa de una sustancia?,Probeta,Balanza,Termómetro,Pipeta,B,general,easy
@@ -492,10 +492,10 @@ id,question,A,B,C,D,solution,category,difficulty
 491,Qué tipo de cambio ocurre cuando una sustancia se transforma químicamente en otra diferente?,Cambio físico,Cambio químico,Cambio de estado,Cambio nuclear,B,general,easy
 492,Cuál es el estado físico del bromo a temperatura ambiente?,Sólido,Líquido,Gas,Plasma,B,general,easy
 493,Cuál de estas sustancias es considerada una base según la teoría de Arrhenius?,HCl,NaOH,H₂SO₄,CH₄,B,general,easy
-494,Qué mide la ley de los gases ideales PV=nRT?,La relación entre presión, volumen, temperatura y cantidad de gas,La velocidad de reacción,La concentración iónica,La densidad,A,general,easy
+494,Qué mide la ley de los gases ideales PV=nRT?,"La relación entre presión, volumen, temperatura y cantidad de gas",La velocidad de reacción,La concentración iónica,La densidad,A,general,easy
 495,Cuál es el elemento más abundante en la corteza terrestre?,Hierro,Silicio,Oxígeno,Aluminio,C,general,easy
 496,Qué tipo de partícula subatómica se encuentra en el núcleo con carga positiva?,Electrón,Protón,Neutrón,Ión,B,general,easy
-497,Cuál es el valor aproximado de la constante de Avogadro?,6.022x10^20,6.022x10^23,9.81x10^23,1.602x10^-19,B,general,easy
+497,Cuál es el valor aproximado de la constante de Avogadro?,6.022x₁₀²⁰,6.022x₁₀²³,9.81x₁₀²³,1.602x₁₀⁻19,B,general,easy
 498,Qué propiedad de los metales les permite ser martillados o deformados en láminas?,Ductilidad,Maleabilidad,Fragilidad,Conductividad térmica,B,general,easy
 499,Cuál de estos elementos es un halógeno?,Cloro,Sodio,Oro,Magnesio,A,general,easy
 500,Cuál es la unidad de carga eléctrica en el SI?,Newton,Coulomb,Joule,Volt,B,general,easy
@@ -521,7 +521,7 @@ id,question,A,B,C,D,solution,category,difficulty
 520,Cuál es la partícula con carga negativa que se forma cuando un átomo gana electrones?,Protón,Neutrón,Anión,Catión,C,general,easy
 521,Qué significa la sigla pH?,Potencial de hidrógeno,Peso hidrológico,Presión hidrostática,Poder de hidratación,A,general,easy
 522,Qué es el plasma en términos de estado de la materia?,Un gas ionizado,Un sólido cristalino,Un líquido muy viscoso,Un estado de baja energía,A,general,easy
-523,En una reacción química, qué son los productos?,Las sustancias iniciales,Las sustancias formadas,Los catalizadores,Los disolventes,B,general,easy
+523,"En una reacción química, qué son los productos?",Las sustancias iniciales,Las sustancias formadas,Los catalizadores,Los disolventes,B,general,easy
 524,Cuál es el gas más ligero conocido?,Hidrógeno,Helio,Neón,Metano,A,general,easy
 525,Qué es un isótopo?,Un átomo con diferente número de protones,Un átomo con diferente número de electrones,Un átomo con diferente número de neutrones,Un tipo de ión,C,general,easy
 526,Qué tipo de enlace químico comparte electrones entre átomos?,Iónico,Covalente,Metálico,Vander Waals,B,general,easy
@@ -568,7 +568,7 @@ id,question,A,B,C,D,solution,category,difficulty
 567,Cuál de estas mezclas es una suspensión?,Leche,Agua salada,Jugo de naranja con pulpa,Aleación de bronce,C,general,easy
 568,Cuál de las siguientes bases nitrogenadas no está presente en el ADN?,Adenina,Timina,Citosina,Uracilo,D,general,easy
 569,Cuál de las siguientes es una propiedad coligativa?,Solubilidad,Descenso crioscópico,Viscosidad,Polimorfismo,B,general,easy
-570,En la neutralización de un ácido fuerte con una base fuerte, el pH final es aproximadamente...?,3,7,11,14,B,general,easy
+570,En la neutralización de un ácido fuerte con una base fuerte, el pH final es aproximadamente...?,3,7,11,14,B,general
 571,Cuál de los siguientes es un ejemplo de una amina?,NH₃,CH₃NH₂,C₂H₅OH,NaNH₂,B,general,easy
 572,Qué partícula subatómica se transfiere o comparte durante las reacciones químicas?,Protones,Neutrones,Electrones,Quarks,C,general,easy
 573,Cuál de los siguientes metales reacciona violentamente con agua?,Cobre,Hierro,Sodio,Oro,C,general,easy
@@ -583,7 +583,7 @@ id,question,A,B,C,D,solution,category,difficulty
 582,Cuál es la fórmula química del carbonato de calcio?,CaCO₃,Ca(OH)₂,CaCl₂,CaO,A,general,easy
 583,Cómo se llama el proceso en el que un sólido pasa directamente a estado gaseoso?,Fusión,Condensación,Sublimación,Deposición,C,general,easy
 584,Cuál es la función principal de un buffer en una disolución?,Cambiar el color,Mantener el pH estable,Aumentar la temperatura,Eliminar iones,B,general,easy
-585,En la notación isotópica 14 arriba y 6 abajo C, qué indica el 14?,Número atómico,Número másico,Número de protones,Número de neutrones,B,general,easy
+585,"En la notación isotópica 14 arriba y 6 abajo C, qué indica el 14?",Número atómico,Número másico,Número de protones,Número de neutrones,B,general,easy
 586,Qué tipo de enlace se forma entre dos aminoácidos en una proteína?,Enlace iónico,Enlace peptídico,Enlace metálico,Enlace de hidrógeno,B,general,easy
 587,Cuál es la fórmula del ion amonio?,NH₃,NH₄⁺,NO₂⁻,NH₂⁻,B,general,easy
 588,Cuál de las siguientes partículas subatómicas tiene mayor masa?,Protón,Electrón,Neutrón,Todos tienen la misma masa,C,general,easy
@@ -613,7 +613,7 @@ id,question,A,B,C,D,solution,category,difficulty
 612,Cuál de las siguientes sustancias es un ácido orgánico presente en los cítricos?,Ácido cítrico,Ácido fosfórico,Ácido clorhídrico,Ácido úrico,A,general,easy
 613,Qué es la hidrólisis?,La unión de azúcares,La ruptura de un compuesto por agua,La sublimación de un sólido,La deshidratación de la molécula,B,general,easy
 614,Cuál describe mejor la entalpía (H) de un sistema?,Medida de la entropía,Contenido de calor a presión constante,Energía cinética de moléculas,Diferencia de potencial eléctrico,B,general,easy
-615,En una reacción redox, qué le sucede a la sustancia que se reduce?,Pierde electrones,Aumenta su número de oxidación,Gana electrones,Se hace insoluble,C,general,easy
+615,"En una reacción redox, qué le sucede a la sustancia que se reduce?",Pierde electrones,Aumenta su número de oxidación,Gana electrones,Se hace insoluble,C,general,easy
 616,Qué es un puente salino en una celda electroquímica?,Conductor metálico,Tubo que permite el flujo de iones,Separador sólido,Fuente de energía externa,B,general,easy
 617,Cuál es el pH aproximado de la saliva humana?,Entre 1 y 2,Entre 6 y 7,Entre 8 y 9,Mayor que 10,B,general,easy
 618,Qué es la nitruración en el acero?,Eliminar impurezas,Aumentar el nitrógeno en la superficie,Aleación con cobre,Proceso de galvanizado,B,general,easy
@@ -621,7 +621,7 @@ id,question,A,B,C,D,solution,category,difficulty
 620,Qué establece la ley de acción de masas?,La velocidad es inversa a la concentración,La velocidad es directa a la temperatura,La velocidad es directa a la concentración,La velocidad no depende de la concentración,C,general,easy
 621,Cuál de los siguientes compuestos tiene enlace iónico?,H₂O,NaCl,CH₄,Cl₂,B,general,easy
 622,Cuál es el gas noble más pesado?,Radón,Xenón,Argón,Kriptón,A,general,easy
-623,En la reacción 2H₂ + O₂ -> 2H₂O, qué reactivo es limitante si hay 4 moles de H₂ y 1 mol de O₂?,H₂,O₂,H₂O,Ninguno,B,general,easy
+623,"En la reacción 2H₂ + O₂ -> 2H₂O, qué reactivo es limitante si hay 4 moles de H₂ y 1 mol de O₂?",H₂,O₂,H₂O,Ninguno,B,general,easy
 624,Qué ocurre con el equilibrio de una reacción exotérmica si aumenta la temperatura?,Se desplaza a productos,No cambia,Se desplaza a reactivos,Se forman iones,C,general,easy
 625,Cuál es el principal producto de la fermentación alcohólica?,Metano,Etanol,Ácido acético,Benceno,B,general,easy
 626,Cuál de estas sustancias abunda en la combustión incompleta?,Dióxido de carbono,Monóxido de carbono,Agua,Ozono,B,general,easy
@@ -649,4 +649,1118 @@ id,question,A,B,C,D,solution,category,difficulty
 648,Cuál de los siguientes es un ácido diprótico?,HCl,H₂SO₄,H₃PO₄,CH₃COOH,B,general,easy
 649,Cuál es el principal uso del gas cloro en el tratamiento del agua?,Oxidar metales,Desinfectar agua potable,Controlar dureza,Reducir pH,B,general,easy
 650,Cuál describe mejor a una base según la teoría de Arrhenius?,Sustancia que dona H⁺,Produce OH⁻,Genera H₃O⁺,Gana electrones,B,general,easy
-
+651,¿Cuál es la masa molar del carbonato de calcio (CaCO₃)?,100.09 g/mol,84.01 g/mol,60.01 g/mol,50.05 g/mol,A,general,medium
+652,¿Cuál es la fórmula empírica de un compuesto con 40% de azufre y 60% de oxígeno en masa?,SO,SO₂,SO₃,S₂O₃,C,general,medium
+653,¿Qué ley establece que la presión y el volumen de un gas son inversamente proporcionales a temperatura constante?,Ley de Boyle,Ley de Charles,Ley de Avogadro,Ley de Dalton,A,general,medium
+654,¿Cuál es el pH de una solución de 0.01 M de HCl?,1,2,3,4,A,general,medium
+655,"Para la reacción N₂(g) + 3H₂(g) ↔ 2NH₃(g), ¿cuál es la expresión de la constante de equilibrio (Kc)?",[NH₃]²/([N₂][H₂]³),[N₂][H₂]³/[NH₃]²,[NH₃]/([N₂][H₂]),[N₂]²/[NH₃]³,A,general,medium
+656,¿Cuál es el pH de una solución 0.1 M de ácido acético (Ka = 1.8×10⁻⁵)?,2.88,3.1,4.76,5.42,A,general,medium
+657,¿Cuál es el estado de oxidación del manganeso en KMnO₄?,6,7,4,2,B,general,medium
+658,¿Qué especie es la base conjugada de HSO₄⁻?,SO₄²⁻,H₂SO₄,OH⁻,SO₃²⁻,A,general,medium
+659,¿Cuál es la geometría molecular de CH₄?,Tetraédrica,Trigonal plana,Lineal,Angular,A,general,medium
+660,¿Qué tipo de enlace está presente en NaCl?,Iónico,Covalente,Metálico,Por puente de hidrógeno,A,general,medium
+661,¿Qué elemento tiene la mayor electronegatividad?,Flúor,Oxígeno,Cloro,Nitrógeno,A,general,medium
+662,¿Qué elemento tiene un radio atómico mayor: Na o K?,Na,K,Li,Mg,B,general,medium
+663,¿Cuáles son los productos de la combustión completa de los hidrocarburos?,CO₂ y H₂O,CO y H₂,CH₄ y O₂,Solo CO₂,A,general,medium
+664,¿Cuál es el pOH de una solución con [OH⁻] = 1×10⁻³ M?,3,4,2,1,A,general,medium
+665,"En una celda galvánica, ¿en qué electrodo ocurre la reducción?",Cátodo,Ánodo,Puente salino,Electrolito,A,general,medium
+666,"Para la reacción A ↔ B,  si Kc = 10, la reacción favorece:",Productos,Reactivos,Ninguno,No se puede determinar,A,general,medium
+667,¿Qué ley permite calcular ΔH° usando entalpías estándar de formación?,Ley de Hess,Ley de Raoult,Ley de Henry,Principio de Le Chatelier,A,general,medium
+668,¿Qué grupo funcional está presente en el etanol?,Alcohol,Éter,Aldehído,Cetona,A,general,medium
+669,¿Qué tipo de orbital tiene forma de mancuerna?,s,p,d,f,B,general,medium
+670,"Según la regla de Hund, los electrones llenan:",Orbitales degenerados individualmente antes de aparearse,Orbitales de menor energía primero,Orbitales de mayor energía primero,Orbitales en orden de spin creciente,A,general,medium
+671,¿Qué elemento tiene la configuración electrónica [Ne]3s¹?,Na,Mg,Al,Si,A,general,medium
+672,¿Qué volumen ocupa 1 mol de un gas ideal en CNPT?,22.4 L,24.5 L,1 L,44.8 L,A,general,medium
+673,¿Cuál es la expresión de Ksp para AgCl?,[Ag⁺][Cl⁻],[AgCl],[Ag⁺]²[Cl⁻],[Ag²⁺][Cl₂],A,general,medium
+674,¿Qué sal produce una solución básica en agua?,CH₃COONa,NH₄Cl,NaCl,KCl,A,general,medium
+675,¿Cuál de los siguientes es un agente reductor?,H₂,O₂,Cl₂,NO₂,A,general,medium
+676,"En la titulación de un ácido fuerte con una base fuerte, el pH en el punto de equivalencia es:",7,>7,<7,Depende de la concentración,A,general,medium
+677,¿Qué explica los colores de muchos compuestos de metales de transición?,Transiciones electrónicas d-d,Transiciones de transferencia de carga,Transiciones vibracionales,Transiciones nucleares,A,general,medium
+678,¿Cuál de estos es un ácido de Lewis?,BF₃,NH₃,OH⁻,Cl⁻,A,general,medium
+679,El cloruro de metilo reacciona con el ion hidróxido por qué mecanismo?,SN₁,SN₂,E₁,E₂,B,general,medium
+680,¿Cuál es la molaridad de una solución que contiene 5 g de NaOH en 500 mL?,0.25 M,0.125 M,0.5 M,1 M,A,general,medium
+681,¿Qué fuerza intermolecular está presente en NH₃?,Puente de hidrógeno,Dipolo-dipolo,Dispersiones de London,Iónica,A,general,medium
+682,"Si kb (constante de elevación del punto de ebullición) es 0.5 °C/m y m = 2,  ¿cuál es ΔTb?",1°C,0.5°C,2°C,4°C,A,general,medium
+683,¿Cuál es la presión osmótica de una solución 0.1 M a 298 K? (R=0.082 L·atm/mol·K),2.44 atm,0.82 atm,1.23 atm,3.00 atm,A,general,medium
+684,"En cinética de primer orden, la vida media es independiente de:",Concentración inicial,Constante de velocidad,Temperatura,Orden de reacción,A,general,medium
+685,¿Qué gas se desvía más del comportamiento ideal?,CO₂,H₂,He,CH₄,A,general,medium
+686,¿Qué ácido es el más fuerte?,HClO₄,H₂SO₄,HCl,HNO₃,A,general,medium
+687,¿Qué base es la más fuerte?,CH₃NH₂,NH₃,N₂,H₂O,A,general,medium
+688,"¿Qué tipo de isomería muestra el 1,2-dicloroeteno?",Cis-trans,Estructural,Óptica,Conformacional,A,general,medium
+689,"En espectroscopía NMR, un mayor desplazamiento químico (δ) indica:",Desprotección,Protección,Relajación más rápida,Más protones,A,general,medium
+690,"En espectrometría de masas, el pico M⁺ corresponde al:",Ion molecular,Ion fragmento,Pico base,Pico de isótopo,A,general,medium
+691,¿Qué compuesto es aromático?,Benceno,Ciclohexano,Ciclopentadieno,Ciclooctatetraeno,A,general,medium
+692,"Si la velocidad = k[A][B], el orden de reacción es:",Segundo orden,Primer orden,Orden cero,Tercer orden,A,general,medium
+693,"Según la ecuación de Arrhenius, aumentar la temperatura afecta la:",Constante de velocidad,Energía de activación,Factor de frecuencia,Constante de equilibrio,A,general,medium
+694,"Para una reacción exotérmica, aumentar la temperatura desplaza el equilibrio hacia:",Reactivos,Productos,Sin cambio,Imposible de predecir,A,general,medium
+695,La desintegración beta emite qué partícula?,Electrón,Positrón,Partícula alfa,Rayo gamma,A,general,medium
+696,La desintegración gamma emite:,Fotones de alta energía,Neutrones,Electrones,Protones,A,general,medium
+697,"Si t₁/₂ = 3 h, la fracción restante después de 9 h es:",1/8,1/2,1/4,1/16,A,general,medium
+698,"En cromatografía, Rf es:",Distancia del soluto/distancia del frente del solvente,Distancia del frente del solvente/soluto,Tiempo de retención,Coeficiente de partición,A,general,medium
+699,Una absorción amplia alrededor de 3300 cm⁻¹ en un espectro IR indica:,Alcohol O-H,Carbonilo C=O,Estiramiento C-H,Flexión N-H,A,general,medium
+700,¿Qué reactivo oxida alcoholes primarios a ácidos carboxílicos?,KMnO₄,PCC,NaBH₄,LiAlH₄,A,general,medium
+701,¿Qué volumen de H₂SO₄ 0.1 M se necesita para neutralizar 50 mL de NaOH 0.2 M?,50 mL,25 mL,100 mL,200 mL,A,general,medium
+702,¿Qué compuesto es una cetona?,Acetona,Etanol,Formaldehído,Ácido acético,A,general,medium
+703,¿Cuál es el tipo de reacción: alqueno + HBr → bromuro de alquilo?,Adición,Sustitución,Eliminación,Condensación,A,general,medium
+704,¿Cuál es la densidad de un gas con masa molar 44 g/mol en CNPT?,1.96 g/L,2.24 g/L,0.96 g/L,44 g/L,A,general,medium
+705,¿Qué volumen ocupa 2 moles de gas ideal a 300 K y 2 atm?,24.6 L,12.3 L,49.2 L,6.15 L,A,general,medium
+706,¿Qué sal es soluble en agua?,KNO₃,AgCl,PbCl₂,BaSO₄,A,general,medium
+707,¿Qué metal tiene la conductividad eléctrica más alta?,Plata,Cobre,Hierro,Aluminio,A,general,medium
+708,¿Qué grupo funcional tiene la fórmula C=O?,Carbonilo,Hidroxilo,Amina,Alqueno,A,general,medium
+709,¿Qué componente de una célula galvánica completa el circuito?,Puente salino,Ánodo,Cátodo,Voltímetro,A,general,medium
+710,¿Qué radio iónico es el más pequeño?,Al³⁺,Mg²⁺,Na⁺,K⁺,A,general,medium
+711,¿Cuál es la ecuación iónica neta para HCl + NaOH → ?,H⁺ + OH⁻ → H₂O,Na⁺ + Cl⁻ → NaCl,HCl → H⁺ + Cl⁻,NaOH → Na⁺ + OH⁻,A,general,medium
+712,¿Cuál de los siguientes es paramagnético?,O₂,N₂,H₂,CO₂,A,general,medium
+713,¿Cuál es la función del puente salino en una celda electroquímica?,Mantener el equilibrio de cargas,Generar electrones,Medir voltaje,Proporcionar iones como reactivos,A,general,medium
+714,¿Qué disolvente disuelve mejor NaCl?,Agua,Benceno,Hexano,Tolueno,A,general,medium
+715,¿Qué compuesto tiene el punto de ebullición más alto?,CH₃OH,CH₃OCH₃,CH₄,C₂H₆,A,general,medium
+716,¿Cuál es el rendimiento porcentual si teórico es 10 g y real es 8 g?,80%,90%,70%,60%,A,general,medium
+717,¿Qué sustancia es anfótera?,H₂O,NH₃,HCl,NaOH,A,general,medium
+718,¿Cuál de estos es una base de Lewis?,NH₃,BF₃,AlCl₃,Cl⁻,A,general,medium
+719,"En la electrólisis de NaCl fundido, el producto en el cátodo es:",Na,Cl₂,H₂,O₂,A,general,medium
+720,¿Qué proceso separa sustancias según su punto de ebullición?,Destilación,Filtración,Cromatografía,Cristalización,A,general,medium
+721,¿Cuál es el pH de un tampón con [HA] = [A⁻] y pKa = 4.76?,4.76,3.76,5.76,6.76,A,general,medium
+722,¿Qué fuerza intermolecular es más fuerte en HCl?,Dipolo-dipolo,Dispersiones de London,Puente de hidrógeno,Iónica,A,general,medium
+723,¿Cuál es la concentración de Cl⁻ en CaCl₂ 0.5 M?,1.0 M,0.5 M,0.25 M,2.0 M,A,general,medium
+724,¿Qué reacción ocurre: CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O?,Esterificación,Hidratación,Reducción,Saponificación,A,general,medium
+725,¿Cuál es el rango de longitud de onda de la luz visible?,400–700 nm,200–400 nm,700–1000 nm,100–200 nm,A,general,medium
+726,¿Cuál de los siguientes es un metal de transición?,Escandio,Magnesio,Aluminio,Silicio,A,general,medium
+727,"Según el principio de Aufbau, los electrones llenan orbitales:",4s antes de 3d,3d antes de 4s,Al azar,Todos a la vez,A,general,medium
+728,¿Qué hibridación corresponde al carbono del eteno?,sp²,sp³,sp,spd,A,general,medium
+729,¿Cuál es la composición porcentual de hidrógeno en el agua (H₂O)?,11.11%,88.89%,66.67%,33.33%,A,general,medium
+730,¿Qué amina es la más básica?,Metilamina,Anilina,Amoníaco,Nitroanilina,A,general,medium
+731,¿Qué ácido se disocia completamente en agua?,HCl,CH₃COOH,HF,HCN,A,general,medium
+732,¿Qué sal hidroliza para formar una solución ácida?,NH₄Cl,NaCl,KNO₃,CaCl₂,A,general,medium
+733,¿Cuál es la carga formal del nitrógeno en NH₄⁺?,1,0,–1,2,A,general,medium
+734,¿Qué ley establece V/T = constante?,Ley de Charles,Ley de Boyle,Ley de Avogadro,Ley de Gay-Lussac,A,general,medium
+735,"En espectrometría de masas, el pico base es:",Fragmento más abundante,Ion molecular,Pico de isótopo,Pico M+1,A,general,medium
+736,¿Qué describe a un catalizador?,Acelera sin consumirse,Se consume en la reacción,Cambia el equilibrio,Aumenta la energía de activación,A,general,medium
+737,Una reacción endotérmica tiene ΔH:,Positivo,Negativo,Cero,Indefinido,A,general,medium
+738,¿Qué propiedad del agua se debe al enlace de hidrógeno?,Alta tensión superficial,Baja capacidad calorífica,Alta presión de vapor,Baja densidad,A,general,medium
+739,¿Qué masa de NaCl se necesita para 2 L de solución 0.5 M?,58.44 g,29.22 g,116.88 g,14.61 g,A,general,medium
+740,¿Cuál es el potencial estándar del electrodo de hidrógeno?,0 V,0.34 V,1.23 V,–0.76 V,A,general,medium
+741,¿Qué soluto reduce más el punto de congelación del agua?,NaCl,CH₃OH,C₆H₁₂O₆,CO₂,A,general,medium
+742,¿Cuál es el nombre IUPAC de CH₃CH₂OH?,Etanol,Metanol,Etano,Etanal,A,general,medium
+743,¿Qué elemento tiene la configuración [Ar]4s²3d¹⁰4p⁵?,Bromo,Selenio,Kriptón,Calcio,A,general,medium
+744,"En una reacción endotérmica, la energía se:",Absorbe,Libera,Conserva,Crea,A,general,medium
+745,¿Cuál es un agente oxidante?,KMnO₄,H₂,NaBH₄,LiAlH₄,A,general,medium
+746,¿Qué ley describe las presiones parciales en mezclas de gases?,Ley de Dalton,Ley de Boyle,Ley de Charles,Ley de Graham,A,general,medium
+747,¿Qué principio explica llenar primero los orbitales de menor energía?,Principio de Aufbau,Regla de Hund,Principio de exclusión de Pauli,Principio de incertidumbre de Heisenberg,A,general,medium
+748,¿Cuántos estereoisómeros tiene el²⁻buteno?,2,1,3,4,A,general,medium
+749,La extracción líquido-líquido separa compuestos según:,Diferencias de solubilidad,Puntos de ebullición,Diferencias de densidad,Propiedades magnéticas,A,general,medium
+750,¿Qué molécula contiene un enlace covalente dativo?,NH₄⁺,O₂,CO₂,H₂O,A,general,medium
+751,Para una reacción redox con potencial de celda estándar de 1.10 V y transferencia de 2 electrones ¿cuál es el cambio de energía libre estándar ΔG° en kJ/mol?,-212 kJ,-106 kJ,+106 kJ,+212 kJ,A,general,hard
+752,La vida media de una reacción de segundo orden con constante de velocidad 0.02 M-1 s-1 y concentración inicial 0.1 M es?,500 s,50 s,250 s,1000 s,A,general,hard
+753,¿Qué ecuación relaciona la energía de un fotón con su frecuencia? ,E=hν,E=hc/λ,E=mv₂,E=RT,A,general,hard
+754,¿Qué propiedad estima la ley límite de Debye–Hückel en disoluciones electrolíticas? ,coeficientes de actividad,producto de solubilidad, fuerza iónica,coeficiente de difusión,A,general,hard
+755,¿Cuál es el grado de insaturación de un compuesto con fórmula C₁₀H₁₄O?,4,5,3,2,A,general,hard
+756,¿Qué ligando de coordinación común se une a través de dos átomos donantes? ,EDTA₄-,etilendiamina, cianuro, amoníaco,B,general,hard
+757,¿Una absorción nítida cerca de 2250 cm-1 en IR es característica de qué grupo funcional? ,nitrilo,alquino,carboxilo,alcohol,A,general,hard
+758,¿El protón aldehídico en bencilaldehído en 1H NMR aparece aproximadamente a qué desplazamiento? ,9.8 ppm,7.2 ppm,3.5 ppm,12 ppm,A,general,hard
+759,¿Qué polímero se forma por polimerización de condensación de ácido adípico con hexametilendiamina? ,"nylon 6,6",Kevlar, poliéster,polietileno,A,general,hard
+760,"Estime el máximo de absorción UV λmax de 1,3-butadieno usando reglas de Woodward–Fieser.",217 nm,250 nm,200 nm,300 nm,A,general,hard
+761,¿Qué compuesto iónico tiene la energía reticular más alta? ,MgO,CaO,NaF,KCl,A,general,hard
+762,¿El alto constante dieléctrico del agua explica su capacidad para qué? ,disolver compuestos iónicos,estabilizar radicales libres,bajar punto de ebullición,aumentar presión de vapor,A,general,hard
+763,¿Qué número cuántico define el momento angular orbital y por tanto la forma del orbital atómico? ,l,n,m,s,A,general,hard
+764,¿La ley de Raoult es más precisa en qué condición? ,disoluciones diluidas, soluc. concentradas, altas presiones,bajas temperaturas,A,general,hard
+765,¿En solución ácida pH 2 qué oxianión de cromo predomina? ,CrO₄ 2-,Cr₂O₇ 2-,Cr₃+,CrO₆ 4-,B,general,hard
+766,¿Cuál es el orden global de la reacción con ley de velocidad rate = k [A]2 [B]0? ,2,1,3,0,A,general,hard
+767,La combustión completa de 1 mol de glucosa produce cuántos litros de CO₂ en CNPT? ,134.4 L,112 L,44.8 L,268.8 L,A,general,hard
+768,¿Qué proceso aumenta la entropía del universo? ,mezcla de gases ideales,congelación del agua,condensación de vapor, cristalización de sal,A,general,hard
+769,¿Cuál es el factor de Van ’t Hoff teórico i para MgCl₂ en disolución muy diluida? ,3,2,1,4,A,general,hard
+770,¿Qué indicador ácido-base cambia a alrededor de pH 8.2? ,fenolftaleína,naranja de metilo,azul de bromotimol, tornasol,A,general,hard
+771,¿Qué orbital molecular en H₂ es antienlazante? ,sigma 1s,sigma* 1s,pi 2p,sigma 2p,B,general,hard
+772,En complejos octaédricos ¿para qué ion metálico es mayor Δo? ,Co₃+,Ni₂+,Fe₂+,Mn₂+,A,general,hard
+773,¿Qué estructura metálica tiene huecos tetraédricos y octaédricos? ,cúbica centrada en caras,cúbica centrada en el cuerpo,cúbica simple,hexagonal empaquetada,A,general,hard
+774,Bajo control termodinámico la formación de enolato favorece qué isómero de alqueno? ,menos sustituido,más sustituido,cis,trans,B,general,hard
+775,¿Qué reactivo se usa como auxiliar quiral para determinar exceso enantiomérico en RMN? ,ácido de Mosher, reactivo de Grignard,PCC,H₂/Pd,A,general,hard
+776,En espectroscopía Mössbauer el desplazamiento isomérico es más sensible a qué propiedad? ,estado de oxidación,masa molecular,longitud de enlace,tamaño de partícula,A,general,hard
+777,¿Qué proceso de polimerización se inicia por radicales libres? ,polimeriz. por adición, polimeriz. por condensación, polimeriz. por apertura de anillo, polimeriz. en etapas,A,general,hard
+778,¿Dopar silicio con fósforo pentavalente produce qué tipo de semiconductor? ,n-type,p-type,intrinsic,metallic,A,general,hard
+779,En espectrometría de masas la intensidad relativa del pico M+1 informa sobre el recuento de qué elemento? ,carbono,hidrógeno,nitrógeno,oxígeno,A,general,hard
+780,En moléculas centrosimétricas la regla de Laporte permite transiciones de qué paridad a qué paridad? ,g a u, g a g, u a g, u a u,A,general,hard
+781,Un compuesto con coeficiente partición octanol-agua de 100 se describe mejor como: ,hidrofóbico,hidrofílico,neutral,anfipático,A,general,hard
+782,¿Qué reactivo se usa para proteger alcoholes como éteres trimetilsililo? ,TmSCl,TsCl,Ac₂O,HCl,A,general,hard
+783,En un ciclo Born–Haber el término para la energía de remover un electrón de un átomo gaseoso es: ,afinidad electrónica,energía de ionización,energía reticular,energía de sublimación,B,general,hard
+784,¿Cuál es la pendiente de la gráfica de Arrhenius ln k vs 1/T? ,-Ea/R,Ea/R,-R/Ea,R/Ea,A,general,hard
+785,¿Cuál es el estado de oxidación promedio del azufre en S₂O₃ 2-? ,+2,5,3,4,A,general,hard
+786,¿Qué proceso involucra la oxidación espontánea de metales sin circuito externo? ,corrosión,electrólisis,galvanización,catalisis,A,general,hard
+787,¿Qué tipo de catálisis implica cambios en el estado de oxidación del catalizador? ,catálisis redox, catálisis ácido-base, catálisis radical, catálisis enzimática,A,general,hard
+788,Estime el carácter iónico fraccional de HCl usando electronegatividades Pauling χH=2.20 χCl=3.16.,0.2,0.1,0.5,0.8,A,general,hard
+789,¿Qué defecto cristalográfico consiste en insertar un semiplano extra de átomos? ,dislocación de borde,vacancia,intersticial,subsustitucional,A,general,hard
+790,¿Cuál es el momento magnético spin-solo de Fe₃+ d₅ de alto espín en magnetones de Bohr? ,5.92,4.9,3.87,2.83,A,general,hard
+791,La descomposición térmica de CaCO₃ produce gas ¿cuál es el signo de ΔS°? ,positivo,negativo,cero,no determinable,A,general,hard
+792,¿Qué principio de Química Verde asegura que los productos se descompongan en sustancias no dañinas? ,diseño para degradación,maximizar rendimiento,uso de solventes tóxicos,aumentar consumo energético,A,general,hard
+793,¿Qué ion metálico en citocromo c oxidasa es crítico para la transferencia electrónica? ,Cu,Fe,Zn,Mg,A,general,hard
+794,¿Qué término describe la estabilización de iones por moléculas de disolvente? ,solvatación,sublimación,ionización,cristalización,A,general,hard
+795,¿Qué reactivo se usa para remover grupos trimetilsililo de alcoholes? ,TBAF,HCl,H₂SO₄,NaOH,A,general,hard
+796,¿Qué estadística cuántica describe a los fotones y otros bosones? ,Bose–Einstein,Fermi–Dirac,Maxwell–Boltzmann,Pauling,A,general,hard
+797,¿Cuál es el número de coordinación típico de moléculas de agua alrededor de K+ en disolución acuosa? ,6,4,8,2,A,general,hard
+798,¿Qué proceso extrae principalmente CO₂ de la sangre hacia los alvéolos? ,difusión,exhalación,convección,inhalación,A,general,hard
+799,¿Qué sistema tampón fisiológico regula principalmente el pH sanguíneo? ,bicarbonato,fosfato,acetato,Tris,A,general,hard
+800,¿Cómo se define el factor de capacidad cromatográfica k'? ,(tR - t₀)/t₀,t₀/(tR - t₀),tR/t₀,t₀/tR,A,general,hard
+801,¿Qué constante física aparece en la ecuación de Born para energía reticular? ,constante de Coulomb,constante de Planck,constante de Boltzmann,número de Avogadro,A,general,hard
+802,¿Qué elemento del bloque p es un metal en condiciones estándar? ,Polonio,Silicio,Boro,Carbono,A,general,hard
+803,El efecto isotópico cinético se refiere al cambio en la velocidad de reacción causado por qué factor? ,sustitución isotópica,cambio de equilibrio,cambio de solubilidad,cambio de punto de fusión,A,general,hard
+804,¿Qué ácido carboxílico tiene el pKa más alto? ,ácido acético,ácido fórmico,ácido trifluoroacético,ácido benzoico,A,general,hard
+805,En una expansión libre de Joule de un gas ideal en el vacío ¿el cambio de temperatura es? ,cero,positivo,negativo,no determinable,A,general,hard
+806,Para cualquier proceso cíclico ¿qué cantidad termodinámica es cero? ,ΔU,ΔS,ΔH,ΔG,A,general,hard
+807,¿Qué diseño de reactor asume mezcla completa y estado estable? ,CSTR,PFR,Lote,SBR,A,general,hard
+808,¿Cuáles son las unidades de absortividad molar en la ley de Beer–Lambert? ,L mol-1 cm-1,cm₂,mol/L,adimensional,A,general,hard
+809,La normalidad se define como equivalentes por qué volumen de disolución? ,litros,moles,moles de disolvente,gramos,A,general,hard
+810,En cinética Michaelis–Menten Vmax se alcanza a qué concentración de sustrato? ,infinito,Km,Km/2,0,A,general,hard
+811,En una celda galvánica en funcionamiento ¿hacia qué electrodo migran los iones positivos? ,cátodo,ánodo,puente salino,electrolito,A,general,hard
+812,¿Qué óxido anfótero reacciona con ácidos y bases? ,Al₂O₃,CO₂,SiO₂,Na₂O,A,general,hard
+813,En la ecuación Born–Landé ¿de qué depende la constante de Madelung? ,estructura cristalina,temperatura,presión,composición,A,general,hard
+814,¿Qué técnica cromatográfica puede resolver enantiómeros? ,cromatografía quiral,destilación, cristalización,extracción,A,general,hard
+815,¿Qué molécula en fase gas puede formar enlaces de hidrógeno intermoleculares? ,agua,metano,CO₂,O₂,A,general,hard
+816,¿Qué iniciador radicalario en polimerización tiene vida media cerca de 60 °C? ,AIBN,peróxido de benzoílo,peróxido de di-tert-butilo,K₂S₂O₈,A,general,hard
+817,¿Qué definición de ácido-base describe ácidos como aceptores de pares electrónicos? ,Lewis,Arrhenius,Brønsted–Lowry,Brønsted,A,general,hard
+818,¿Cuál es la fórmula general de las estructuras perovskitas? ,ABX₃,AX,AB₂X₄,A₂BX₄,A,general,hard
+819,¿Qué transición electrónica está prohibida por el cambio de espín? ,triplete a singlete,singlete a singlete,doublete a doublete,cuartete a cuartete,A,general,hard
+820,En cromatografía ¿qué mide la resolución entre dos analitos? ,eficiencia de separación,factor de retención,selectividad,factor de capacidad,A,general,hard
+821,¿Qué reacción pericíclica procede por un estado de transición cíclico concertado? ,SN₂,Diels–Alder,E₁,radical,B,general,hard
+822,¿Qué efecto electrónico indica una constante de Hammett σ positiva? ,retiro electrónico,donación electrónica,neutral,estabilización radical,A,general,hard
+823,¿En qué titulación aparece una región tampón pronunciada? ,ácido débil con base fuerte,ácido fuerte con base fuerte,ácido débil con base débil,ácido fuerte con base débil,B,general,hard
+824,¿Qué fórmula empírica describe la dependencia de temperatura de la viscosidad gaseosa? ,fórmula de Sutherland,ley de Boyle,ley de Charles,ley de Dalton,A,general,hard
+825,¿Qué símbolo denota la temperatura de transición vítrea de un polímero? ,Tg,Tm,Tc,Cp,A,general,hard
+826,En voltametría cíclica controlada por difusión la corriente pico es proporcional a qué factor?, raíz cuadrada de la velocidad de barrido,velocidad de barrido,inversa de la velocidad de barrido,raíz cuadrada de la concentración,A,general,hard
+827,¿Qué indicador de pH es adecuado para titular una base débil con un ácido fuerte? ,naranja de metilo,fenolftaleína,azul de bromotimol,tornasol,A,general,hard
+828,¿Qué cadenas laterales de aminoácidos contribuyen a la absorbancia de proteínas a 280 nm? ,aromáticas,enlace peptídico,puente disulfuro,grupo azucar,A,general,hard
+829,¿Qué tipo de zeolita se usa como catalizador en craqueo catalítico en fase fluida? ,ZSM-5,LTA,Y,X,C,general,hard
+830,La teoría de campo de ligandos combina la teoría de campo cristalino con qué otro modelo? ,orbital molecular,VSEPR,orbital de valencia,HSAB,A,general,hard
+831,¿Qué estructura metálica cercana empaquetada tiene eficiencia de empaquetamiento del 74%? ,cúbica centrada en caras,cúbica centrada en el cuerpo,cúbica simple,hexagonal empaquetada,A,general,hard
+832,¿Qué reacción en benceno es sustitución aromática electrófila? ,nitración, hidrogenación,halogenación alifática,SN₁,A,general,hard
+833,¿Qué grupo puntual molecular tiene el metano CH₄? ,Td,Oh,C₃v,D₂h,A,general,hard
+834,¿Qué hibridación describe coordinación cuadrado planar en complejos metálicos? ,dsp₂,sp₃,sp₃d,d₂sp₃,A,general,hard
+835,Los compuestos cisplatino y transplatino son ejemplos de qué tipo de isómero? ,geométrico,óptico,estructural,conformacional,A,general,hard
+836,¿Qué especie paramagnética da un valor g de EPR cerca de 2.002? ,radicales libres orgánicos,O₂-,NO,Fe₃+,A,general,hard
+837,En teoría HSAB un ácido duro se une preferentemente a qué base? ,base dura,base blanda,metales de transición,aniones,A,general,hard
+838,¿Qué mecanismo reaccional involucra la reacción de Fenton que produce radicales hidroxilo? ,cadena radicalaria,SN₁,E₁,pericíclica,A,general,hard
+839,¿Qué técnica analítica usa adsorción de gas para medir área superficial de un sólido? ,método BET,TGA,DSC,NMR,A,general,hard
+840,¿Qué término describe la absorción de humedad atmosférica por una sal sólida hasta formar solución? ,deliquescencia,eflorescencia, hidratación, cristalización,A,general,hard
+841,¿Qué ligando se une a metales por átomo donante azufre? ,tiolato, nitrilo,fosfina,imidazol,A,general,hard
+842,El grado de polimerización de una cadena polimérica se refiere a qué? ,número medio de unidades monoméricas,peso molecular,longitud,densidad,A,general,hard
+843,¿Qué método electroforético separa biomoléculas según su punto isoeléctrico? ,enfoque isoeléctrico,SDS-PAGE, cromatografía de exclusión por tamaño,cromatografía de intercambio iónico,A,general,hard
+844,¿Qué ácido de Lewis se emplea en reacciones de acilación de Friedel–Crafts? ,AlCl₃,FeCl₃,H₂SO₄,HCl,A,general,hard
+845,Calcule la molaridad de una solución con 10 g de piridina MW 79 g/mol en 250 mL.,0.506 M,0.253 M,0.101 M,0.789 M,A,general,hard
+846,¿Qué gas contaminante ácido se elimina comúnmente de los gases de combustión al absorberse en NaOH acuoso? ,SO₂,CO₂,NO₂,HCl,A,general,hard
+847,En cromatografía en capa fina ¿cuál es el valor de Rf si el compuesto migra 3 cm y el frente de solvente 6 cm? ,0.5,0.33,2,1.5,A,general,hard
+848,¿Qué cofactor derivado de vitamina es esencial para descarboxilación de α-cetoácidos? ,pirofosfato de tiamina,NAD,FAD,biotina,A,general,hard
+849,En un diagrama de celda con ánodo a la izquierda los electrones fluyen en qué dirección? ,izquierda a derecha,derecha a izquierda,arriba a abajo,abajo a arriba,A,general,hard
+850,¿Cuál es el símbolo químico del sodio?,Na,S,N,So,A,inorganic ,easy
+851,¿Cuál es el número atómico del oxígeno?,8,16,6,10,A,inorganic ,easy
+852,¿Qué elemento es un gas noble?,Argón,Cloro,Oxígeno,Flúor,A,inorganic ,easy
+853,¿Cuál es la fórmula del agua?,H₂O,HO₂,O₂H,HHO,A,inorganic ,easy
+854,¿Qué elemento tiene número atómico 1?,Hidrógeno,Helio,Litio,Berilio,A,inorganic ,easy
+855,¿Cuál es el símbolo del cloro?,Cl,Ch,C,Cl₂,A,inorganic ,easy
+856,¿Qué elemento es un halógeno?,Flúor,Sodio,Neón,Calcio,A,inorganic ,easy
+857,¿Cuál es la carga de un protón?,1,0,-1,2,A,inorganic ,easy
+858,¿Cuál es el símbolo químico del hierro?,Fe,Ir,In,Fr,A,inorganic ,easy
+859,¿Qué elemento es un metal?,Hierro,Oxígeno,Nitrógeno,Cloro,A,inorganic ,easy
+860,¿Cuál es la fórmula del óxido de magnesio?,MgO,MgO₂,Mg₂O,MOg,A,inorganic ,easy
+861,¿Qué elemento está en la cima del grupo 1?,Hidrógeno,Litio,Sodio,Potasio,A,inorganic ,easy
+862,¿Cuál es el símbolo del potasio?,K,Po,Pt,P,A,inorganic ,easy
+863,¿Cuál es la masa atómica aproximada del carbono?,12,6,14,16,A,inorganic ,easy
+864,¿Qué elemento se usa comúnmente en filamentos de bombillas?,Wolframio,Plomo,Oro,Plata,A,inorganic ,easy
+865,¿Cuál es la fórmula de la sal de mesa?,NaCl,KCl,CaCl₂,Na₂Cl,A,inorganic ,easy
+866,¿Qué elemento es líquido a temperatura ambiente?,Mercurio,Oro,Cinc,Plomo,A,inorganic ,easy
+867,¿Cuál es el símbolo químico de la plata?,Ag,Si,Au,Al,A,inorganic ,easy
+868,¿Qué elemento está en el grupo 2?,Magnesio,Potasio,Sodio,Aluminio,A,inorganic ,easy
+869,¿Cuál es la valencia de los gases nobles?,0,1,2,3,A,inorganic ,easy
+870,¿Cuál es la configuración electrónica del helio?,1s₂,1s₁,2s₂,2p₂,A,inorganic ,easy
+871,¿Qué elemento lleva el nombre de un planeta?,Mercurio,Venus,Tierra,Marte,A,inorganic ,easy
+872,¿Cuál es la fórmula química del amoníaco?,NH₃,NH₄,N₂H₃,NH₂,A,inorganic ,easy
+873,¿Qué elemento es ferromagnético a temperatura ambiente?,Hierro,Cobre,Plata,Oro,A,inorganic ,easy
+874,¿Cuál es el componente principal del gas natural?,Metano,Eteno,Propano,Butano,A,inorganic ,easy
+875,¿Cuál es la fórmula del dióxido de carbono?,CO₂,CO,O₂C,CO₃,A,inorganic ,easy
+876,¿Qué gas existe como moléculas diatómicas en condiciones estándar?,Oxígeno,Nitrógeno,Cloro,Todas las anteriores,D,inorganic ,easy
+877,¿Cuál es el estado de oxidación del sodio en NaCl?,1,-1,2,0,A,inorganic ,easy
+878,¿Cuál es la sustancia natural más dura?,Diamante,Cuarzo,Grafito,Calcita,A,inorganic ,easy
+879,¿Qué elemento es necesario para la función nerviosa?,Sodio,Argón,Neón,Helio,A,inorganic ,easy
+880,¿Cuál es el símbolo químico del calcio?,Ca,C,Cal,Cl,A,inorganic ,easy
+881,¿Cuál es la fórmula del ácido sulfúrico?,H₂SO₄,H₂SO₃,H₂S,O₂SO₂,A,inorganic ,easy
+882,¿Qué elemento se usa en termómetros?,Mercurio,Plomo,Litio,Hierro,A,inorganic ,easy
+883,¿Qué gas se produce en la respiración?,Dióxido de carbono,Oxígeno,Nitrógeno,Hidrógeno,A,inorganic ,easy
+884,¿Qué elemento es un metal alcalinotérreo?,Calcio,Potasio,Sodio,Aluminio,A,inorganic ,easy
+885,¿Cuál es el símbolo del cobre?,Cu,Cupr,Co,Cp,A,inorganic ,easy
+886,¿Qué elemento tiene el símbolo Pb?,Plomo,Potasio,Polonio,Platino,A,inorganic ,easy
+887,¿Cuál es la fórmula del carbonato de calcio?,CaCO₃,CaCO₂,CO₃Ca,CaC₃O,A,inorganic ,easy
+888,¿Qué elemento es más abundante en la corteza terrestre?,Oxígeno,Silicio,Aluminio,Hierro,A,inorganic ,easy
+889,¿Cuál es la unidad de la masa molar?,g/mol,kg/mol,mg/mol,tonelada/mol,A,inorganic ,easy
+890,¿Qué gas es más ligero que el aire?,Hidrógeno,Dióxido de carbono,Oxígeno,Nitrógeno,A,inorganic ,easy
+891,¿Qué elemento se usa en la construcción de aeronaves?,Aluminio,Hierro,Plomo,Oro,A,inorganic ,easy
+892,¿Cuál es el pH del agua pura?,7,1,14,0,A,inorganic ,easy
+893,¿Qué elemento se usa en los letreros de neón?,Neón,Argón,Xenón,Kriptón,A,inorganic ,easy
+894,¿Qué elemento se usa como combustible nuclear?,Uranio,Plutonio,Torio,Radio,A,inorganic ,easy
+895,¿Cómo varía el radio atómico a lo largo de un periodo?,Disminuye,Aumenta,Permanece constante,Varía impredeciblemente,A,inorganic ,easy
+896,¿Cuál es el elemento más electronegativo?,Flúor,Oxígeno,Cloro,Nitrógeno,A,inorganic ,easy
+897,¿Qué tipo de enlace hay en HCl?,Covalente polar,Iónico,Metálico,Covalente apolar,A,inorganic ,easy
+898,¿Qué elemento forma un catión⁺2?,Calcio,Potasio,Cloro,Oxígeno,A,inorganic ,easy
+899,¿Cuál es el número de grupo de los halógenos?,17,16,18,1,A,inorganic ,easy
+900,¿Cuál es el número de periodo del carbono?,2,1,3,4,A,inorganic ,easy
+901,¿Qué elemento es químicamente inerte en condiciones estándar?,Argón,Cloro,Oxígeno,Flúor,A,inorganic ,easy
+902,¿Cuál es la fórmula química del óxido de hierro (herrumbre)?,Fe₂O₃,FeO,Fe₃O₄,FeO₂,A,inorganic ,easy
+903,¿Qué elemento tiene el punto de fusión más alto?,Wolframio,Carbono,Hierro,Níquel,A,inorganic ,easy
+904,¿Cuál es la configuración electrónica del neón?,1s₂ 2s₂ 2p₆,1s₂ 2s₂ 2p₅,1s₂ 2s₁ 2p₆,1s₁ 2s₂ 2p₆,A,inorganic ,easy
+905,¿Cuál es un metal de transición?,Cobre,Calcio,Potasio,Cloro,A,inorganic ,easy
+906,¿Cuál es el símbolo químico del oro?,Au,Ag,Al,Ar,A,inorganic ,easy
+907,¿Qué elemento está en el grupo 17?,Cloro,Escandio,Calcio,Carbono,A,inorganic ,easy
+908,¿Cuál es el gas noble más ligero?,Helio,Neón,Argón,Kriptón,A,inorganic ,easy
+909,¿Qué gas inerte se usa comúnmente para inflar globos de fiesta?,Helio,Neón,Argón,Kriptón,A,inorganic ,easy
+910,¿Qué elemento da llama roja en la prueba de llama?,Litio,Sodio,Potasio,Cobre,A,inorganic ,easy
+911,¿De qué color es la llama del sodio?,Amarilla,Naranja,Roja,Azul,A,inorganic ,easy
+912,¿Qué metal es líquido a temperatura ambiente?,Mercurio,Plomo,Bismuto,Francio,A,inorganic ,easy
+913,¿Cuál es la fórmula del amoníaco?,NH₃,NH₄,N₂H₄,NO₃,A,inorganic ,easy
+914,¿Qué elemento tiene número atómico 29?,Cobre,Cinc,Níquel,Hierro,A,inorganic ,easy
+915,¿Cuál es la fórmula del ozono?,O₃,O₂,O,O₄,A,inorganic ,easy
+916,¿Qué elemento es radiactivo?,Uranio,Oro,Plata,Cobre,A,inorganic ,easy
+917,¿Cuál es el estado de oxidación del cloro en HCl?,-1,1,0,2,A,inorganic ,easy
+918,¿Cuál es un metal alcalino?,Sodio,Magnesio,Aluminio,Calcio,A,inorganic ,easy
+919,¿Cuál es un metal alcalinotérreo?,Magnesio,Sodio,Aluminio,Potasio,A,inorganic ,easy
+920,¿Qué elemento produce color verde en los fuegos artificiales?,Bario,Estroncio,Calcio,Magnesio,A,inorganic ,easy
+921,¿Qué elemento es esencial para la hemoglobina?,Hierro,Magnesio,Calcio,Potasio,A,inorganic ,easy
+922,¿Cuál es la fórmula del hidróxido de calcio?,Ca(OH)₂,CaOH,CaO₂,(OH)₂Ca,A,inorganic ,easy
+923,¿Qué elemento tiene el símbolo Ag?,Plata,Oro,Estaño,Aluminio,A,inorganic ,easy
+924,¿Cuál es la fórmula del ácido nítrico?,HNO₃,HNO₂,HOH,NOH,A,inorganic ,easy
+925,¿Qué elemento aumenta la resistencia a la corrosión del acero?,Cromo,Níquel,Carbono,Molibdeno,A,inorganic ,easy
+926,¿Cuál es el número de grupo del carbono?,14,15,16,17,A,inorganic ,easy
+927,¿Qué elemento es un metaloide?,Silicio,Aluminio,Hierro,Calcio,A,inorganic ,easy
+928,¿Qué gas producen las pilas alcalinas?,Hidrógeno,Oxígeno,Nitrógeno,Cloro,A,inorganic ,easy
+929,¿Cuál es el símbolo químico del plomo?,Pb,Le,Ld,Pl,A,inorganic ,easy
+930,¿Qué elemento se usa en semiconductores?,Silicio,Germanio,Plomo,Arsénico,A,inorganic ,easy
+931,¿Qué elemento tiene número atómico 47?,Plata,Oro,Platino,Cobre,A,inorganic ,easy
+932,¿Qué elemento se usa en detectores infrarrojos?,Germanio,Silicio,Selenio,Arsénico,A,inorganic ,easy
+933,¿Cuál es la fórmula del peróxido de hidrógeno?,H₂O₂,H₂O,O₂H₂,HO₂,A,inorganic ,easy
+934,¿Qué metal es no magnético?,Cobre,Hierro,Níquel,Cobalto,A,inorganic ,easy
+935,¿Qué elemento es esencial para las hormonas tiroideas?,Yodo,Flúor,Bromo,Cloro,A,inorganic ,easy
+936,¿Qué elemento es gas en CNPT?,Nitrógeno,Oxígeno,Argón,Todas las anteriores,D,inorganic ,easy
+937,¿Cuál es la fórmula del ácido clorhídrico?,HCl,HCl₂,ClH,HC₁,A,inorganic ,easy
+938,¿Qué elemento se usa como catalizador en convertidores catalíticos?,Platino,Paladio,Oro,Plata,A,inorganic ,easy
+939,¿Qué elemento lleva el nombre de Marie Curie?,Curio,Einsteinio,Polonio,Americio,A,inorganic ,easy
+940,¿Qué elemento está en el grupo 18?,Neón,Oxígeno,Nitrógeno,Flúor,A,inorganic ,easy
+941,¿Qué tipo de estructura cristalina tiene el cloruro de sodio?,Cúbica centrada en caras,Cúbica centrada en el cuerpo,Hexagonal compacta,Tetragonal,A,inorganic ,easy
+942,¿Qué no metal es líquido a temperatura ambiente?,Bromo,Cloro,Yodo,Flúor,A,inorganic ,easy
+943,¿Qué metal se usa en la amalgama dental?,Mercurio,Oro,Plata,Hierro,A,inorganic ,easy
+944,¿De qué color es la solución de sulfato de cobre(II)?,Azul,Verde,Amarillo,Rojo,A,inorganic ,easy
+945,¿Qué elemento se usa en diodos emisores de luz (LED)?,Galio,Indio,Fósforo,Silicio,A,inorganic ,easy
+946,¿Qué forma cristalina del carbono es blanda y se usa como lubricante?,Grafito,Diamante,Fullereno,Grafeno,A,inorganic ,easy
+947,¿Qué elemento se usa en células fotoeléctricas?,Selenio,Cadmio,Cinc,Cobre,A,inorganic ,easy
+948,¿Qué gas se añade a mezclas de respiración para buceo profundo para reducir la narcósis?,Helio,Nitrógeno,Oxígeno,Dióxido de carbono,A,inorganic ,easy
+949,¿Qué elemento se usa en la soldadura?,Estaño,Plomo,Plata,Cobre,A,inorganic ,easy
+950,¿Qué elemento exhibe estados de oxidación⁺2 y⁺4 en sus compuestos estables?,Ca,Sn,Fe,Zn,B,inroganic,medium
+951,¿Cuál es el número de coordinación del metal central en [Cr(NH₃)₆]3+?,6,4,8,2,A,inroganic,medium
+952,¿Qué ligando produce la mayor separación de campo cristalino en complejos octaédricos?,CN-,H₂O,Cl-,NH₃,A,inroganic,medium
+953,El color de [Cu(H₂O)₆]2+ se debe a qué tipo de transición electrónica?,d-d,transferencia de carga,ligando a metal,metal a ligando,A,inroganic,medium
+954,¿Qué óxido es anfótero?,ZnO,CaO,SiO₂,P₂O₅,A,inroganic,medium
+955,¿Qué halógeno se desproporciona en solución alcalina para formar hipoclorito y clorato?,Cl₂,F₂,Br₂,I₂,A,inroganic,medium
+956,¿Cuál es la geometría molecular de XeF₄?,plano cuadrado,tetraédrica,octaédrica,bipiramidal trigonal,A,inroganic,medium
+957,¿Qué metal está presente en la sal de Mohr?,Fe,Cu,Zn,Mn,A,inroganic,medium
+958,¿Cuál es el grupo puntual de la molécula BF₃?,D₃h,C₃v,D∞h,Td,A,inroganic,medium
+959,¿Qué ácido es más fuerte en solución acuosa?,HClO₄,HClO₃,HClO₂,HClO,A,inroganic,medium
+960,¿Cuál es el estado de oxidación del Cr en K₂Cr₂O₇?,6,3,2,4,A,inroganic,medium
+961,¿Qué ión es isolectrónico con argón?,Cl-,K+,Ca₂+,S₂-,A,inroganic,medium
+962,¿Qué metal forma una celda galvánica con el potencial de reducción estándar más negativo?,Li,Mg,Zn,Cu,A,inroganic,medium
+963,¿Cuál es la expresión del producto de solubilidad de CaF₂?,[Ca₂+][F-]²,[CaF₂],[Ca₂+]²[F-],[Ca₂+][F-],A,inroganic,medium
+964,¿Qué complejo de metal de transición es paramagnético con tres electrones desapareados?,[Fe(H₂O)₆]2+,[Co(NH₃)₆]3+,[Ni(CN)₄]2-,[MnO₄]-,A,inroganic,medium
+965,¿Qué elemento tiene la mayor energía de ionización primera entre los metales alcalinos?,Li,Na,K,Rb,A,inroganic,medium
+966,¿Cuál es la estructura de red cristalina de NaCl?,cúbica centrada en caras,cúbica centrada en el cuerpo,cúbica simple,hexagonal compacta,A,inroganic,medium
+967,¿Qué óxido es básico?,Na₂O,CO₂,SO₃,P₂O₅,A,inroganic,medium
+968,¿Cuál es la fórmula de agua regia?,HCl:HNO₃ (3:1),HCl:H₂SO₄,HNO₃:H₂SO₄,HCl:HNO₂,A,inroganic,medium
+969,¿Cuál de los siguientes es un ácido de Lewis?,BF₃,NH₃,Cl-,OH-,A,inroganic,medium
+970,¿Cuál es la geometría del ión sulfato SO₄₂-?,tetraédrica,planar trigonal,angular,octaédrica,A,inroganic,medium
+971,¿Qué ligando es bidentado?,etilendiamina,NH₃,H₂O,Cl-,A,inroganic,medium
+972,¿Qué elemento sufre contracción del bloque f a lo largo de la serie de los lantánidos?,lantano,gadolinio,iterbio,cerio,C,inroganic,medium
+973,¿Cuál es el estado de oxidación del Mn en MnO₄-?,7,6,4,2,A,inroganic,medium
+974,¿Qué gas se libera al reaccionar ácidos con carbonatos?,CO₂,O₂,H₂,Cl₂,A,inroganic,medium
+975,¿Qué complejo se conoce como azul de Prusia?,Fe₄[Fe(CN)₆]3,[Fe(H₂O)₆]2+,Fe₂O₃,[FeCl₄]-,A,inroganic,medium
+976,¿Cuál es el comportamiento magnético de [Ni(H₂O)₆]2+?,paramagnético,diamagnético,ferromagnético,antiferromagnético,A,inroganic,medium
+977,¿Qué metal alcalino reacciona con mayor violencia con agua?,Cs,Li,Na,K,A,inroganic,medium
+978,¿Cuál es el número de coordinación del Cu en Cu₂O sólido?,2,3,4,6,A,inroganic,medium
+979,¿Qué alótropo del fósforo es más estable termodinámicamente a temperatura ambiente?,blanco,rojo,negro,violeta,B,inroganic,medium
+980,¿Cuál es el estado de oxidación del azufre en SO₂?,4,2,6,0,A,inroganic,medium
+981,¿Qué haluro es el menos soluble en agua?,AgCl,NaCl,KCl,CsCl,A,inroganic,medium
+982,¿Cuál es la geometría electrónica de PF₅?,bipiramidal trigonal,octaédrica,tetraédrica,lineal,A,inroganic,medium
+983,¿Qué metal de transición se usa como catalizador en el proceso Haber?,Fe,Pd,Ni,Pt,A,inroganic,medium
+984,¿Cómo se llama la reacción: MnO₄- + 8 H+ + 5 e- → Mn₂+ + 4 H₂O?,reducción,oxidación,desproporción,hidrólisis,A,inroganic,medium
+985,¿Cuál es la geometría molecular del NH₃?,piramidal trigonal,planar trigonal,tetraédrica,angular,A,inroganic,medium
+986,¿Qué elemento forma un gas coloreado a temperatura ambiente?,Cl₂,O₂,Br₂,N₂,A,inroganic,medium
+987,¿Qué óxido de nitrógeno es un gas de efecto invernadero?,N₂O,NO,NO₂,N₂,A,inroganic,medium
+988,¿Cuál es el estado de oxidación del vanadio en VO₂+?,4,5,3,2,A,inroganic,medium
+989,¿Qué ión forma un precipitado con iones sulfato?,Ba₂+,Na+,K+,NH₄+,A,inroganic,medium
+990,¿Qué metal tiene estructura hexagonal compacta a temperatura ambiente?,Mg,Fe,Cu,Ni,A,inroganic,medium
+991,¿Cuál es la geometría de [PtCl₄]2-?,plano cuadrado,tetraédrica,octaédrica,lineal,A,inroganic,medium
+992,¿Qué ácido halógeno es el más fuerte en agua?,HI,HBr,HCl,HF,A,inroganic,medium
+993,¿Cuál es el estado de oxidación promedio del hierro en Fe₃O₄?,2.67,2,3,2.5,A,inroganic,medium
+994,¿Qué compuesto presenta enlace de hidrógeno en estado sólido?,NH₃,PH₃,HCl,Cl₂,A,inroganic,medium
+995,¿Cuál es el estado de oxidación del aluminio en Al₂O₃?,3,2,1,4,A,inroganic,medium
+996,¿Qué elemento del grupo 14 muestra con menor frecuencia el estado⁺2 debido al efecto del par inerte?,Pb,Si,Ge,Sn,A,inroganic,medium
+997,¿Qué orden de fuerza de ligandos de más débil a más fuerte es correcto para complejos octaédricos?,I- < Br- < Cl- < F-,F- < Cl- < Br- < I-,Cl- < Br- < I- < F-,Br- < I- < Cl- < F-,A,inroganic,medium
+998,¿Cuál es el estado de oxidación del fósforo en H₃PO₄?,5,3,2,4,A,inroganic,medium
+999,¿Qué metal forma una capa de óxido protectora que evita más corrosión?,Al,Fe,Cu,Ni,A,inroganic,medium
+1000,¿Cuál es la geometría de [AlCl₄]-,tetraédrica,octaédrica,plano cuadrado,bipiramidal trigonal,A,inroganic,medium
+1001,¿Qué especie es un agente oxidante fuerte en medio ácido?,Cr₂O₇²⁻,Fe₂+,Mn₂+,Sn₂-,A,inroganic,medium
+1002,¿En qué sistema cristalino cristaliza el diamante?,cúbico,tetragonal,hexagonal,ortorrómbico,A,inroganic,medium
+1003,¿Qué óxido se disuelve tanto en ácidos como en bases?,Al₂O₃,Na₂O,SiO₂,SO₃,A,inroganic,medium
+1004,¿Cuál es el estado de oxidación del cobalto en la vitamina B₁₂?,3,2,4,1,A,inroganic,medium
+1005,¿Qué lantánido tiene el radio iónico más pequeño?,Lu,La,Ce,Nd,A,inroganic,medium
+1006,"En el proceso Hall–Héroult, ¿qué compuesto es el electrolito para extraer aluminio?",Al₂O₃,NaCl,CaCO₃,SiO₂,A,inroganic,medium
+1007,¿Cuál es el estado de oxidación del nitrógeno en óxido nitroso N₂O?,1,2,0,3,A,inroganic,medium
+1008,¿Qué ión metálico forma un complejo azul en disolución acuosa?,Cu₂+,Fe₃+,Zn₂+,Hg₂+,A,inroganic,medium
+1009,¿Qué óxido se utiliza como material refractario por su alto punto de fusión?,Al₂O₃,SiO₂,Fe₂O₃,CuO,A,inroganic,medium
+1010,¿Cuál es la geometría del ión perclorato ClO₄-?,tetraédrica,see-saw,angular,planar trigonal,A,inroganic,medium
+1011,¿Qué especie es la base conjugada de H₂PO₄-?,HPO₄²⁻,PO₄³⁻,H₃PO₄,PO₄-,A,inroganic,medium
+1012,¿Qué metal se emplea comúnmente en termopares?,Ni,Cu,Fe,Pt,A,inroganic,medium
+1013,¿Cuál es la configuración electrónica de Cu+?,[Ar]3d₁₀,[Ar]3d₉ 4s₁,[Ar]3d₈ 4s₂,[Ar]4s₂ 4p₁,A,inroganic,medium
+1014,¿Qué complejo presenta distorsión de Jahn–Teller?,[Cu(H₂O)₆]2+,[Fe(H₂O)₆]2+,[Ni(H₂O)₆]2+,[Zn(H₂O)₆]2+,A,inroganic,medium
+1015,¿Qué modelo de enlace explica la conductividad en metales?,teoría de bandas,modelo de esfera dura,teoría de enlace de valencia,teoría de Hückel,A,inroganic,medium
+1016,¿Cuál es el número de coordinación del Ti en la estructura de rutilo TiO₂?,6,4,8,3,A,inroganic,medium
+1017,¿Qué elemento presenta alótropos con diamante y grafito?,carbono,fósforo,azufre,oxígeno,A,inroganic,medium
+1018,¿Cuál es el estado de oxidación del plomo en PbO₂?,4,2,3,1,A,inroganic,medium
+1019,¿Qué elemento se usa como absorber de neutrones en reactores nucleares?,B,Cd,Al,Si,A,inroganic,medium
+1020,¿Qué haluro muestra el enlace de hidrógeno más fuerte en disolución acuosa?,F-,Cl-,Br-,I-,A,inroganic,medium
+1021,¿Cuál es el potencial estándar del par MnO₄-/Mn₂+ en medio ácido?,+1.51 V,+1.23 V,+0.80 V,+2.00 V,A,inroganic,medium
+1022,¿Qué óxido actúa como desecante debido a su naturaleza higroscópica?,P₂O₅,SiO₂,Al₂O₃,Fe₂O₃,A,inroganic,medium
+1023,¿Qué especie es anfiprótica?,HCO₃-,CO₃²⁻,H₂CO₃,OH-,A,inroganic,medium
+1024,¿Qué elemento tiene el radio iónico más grande entre los lantánidos?,La,Lu,Eu,Yb,A,inroganic,medium
+1025,¿Cuál es la simetría de la molécula de metano CH₄?,Td,C₂v,Oh,D₃h,A,inroganic,medium
+1026,¿Cuál es el pH de una disolución 0.10 M de AlCl₃?,ácido,neutro,básico,indefinido,A,inroganic,medium
+1027,¿Qué compuesto se llama prusiato amarillo de potasio?,K₄[Fe(CN)₆],K₃[Fe(CN)₆],K₂[Fe(CN)₆],KFe(CN)₆,A,inroganic,medium
+1028,¿Qué óxido tiene estructura de espinela?,MgAl₂O₄,Al₂O₃,Fe₂O₃,NiO,A,inroganic,medium
+1029,¿Cuál es el estado de oxidación del uranio en UO₂?,4,6,5,3,A,inroganic,medium
+1030,¿Qué ión forma un complejo rosa con amoníaco?,Co₂+,Cu₂+,Ni₂+,Zn₂+,A,inroganic,medium
+1031,¿Qué elemento es más abundante en el núcleo de la Tierra?,Fe,Ni,Si,O,A,inroganic,medium
+1032,¿Qué ácido haloidrídrico es más fuerte?,HI,HBr,HCl,HF,A,inroganic,medium
+1033,¿Qué defecto puntual involucra vacantes pareadas de catión y anión?,Schottky,Frenkel,intersticial,vacante,A,inroganic,medium
+1034,¿Qué metal de transición forma solo el estado de oxidación⁺2 de manera estable?,Zn,Fe,Mn,Cu,A,inroganic,medium
+1035,¿Qué superficie metálica se activa mediante amalgamación?,Zn,Cu,Al,Fe,A,inroganic,medium
+1036,¿Qué ión tiene cinco electrones desapareados?,Mn₂+,Fe₃+,Cu₂+,Co₂+,A,inroganic,medium
+1037,¿Qué no metal es líquido a temperatura ambiente?,Br₂,Cl₂,I₂,F₂,A,inroganic,medium
+1038,¿Cuál es el recuento de electrones d de Fe₃+ en complejos octaédricos?,5,6,4,3,A,inroganic,medium
+1039,¿Qué óxido metálico se disuelve en exceso de base para formar complejos?,ZnO,Fe₂O₃,CuO,NiO,A,inroganic,medium
+1040,¿Qué haluro produce un precipitado blanco con AgNO₃?,Cl-,Br-,I-,F-,A,inroganic,medium
+1041,¿Qué ión poliatómico es planar trigonal?,NO₃-,SO₄²⁻,PO₄³⁻,CO₃²⁻,A,inroganic,medium
+1042,¿Qué hidróxido metálico precipita en disolución neutra y luego se disuelve en exceso de base?,Zn(OH)₂,Fe(OH)₂,Cu(OH)₂,Mg(OH)₂,A,inroganic,medium
+1043,¿Qué elemento tiene el radio atómico más grande?,Fr,Cs,Rb,Na,B,inroganic,medium
+1044,¿Qué elemento se usa para tratar el hipertiroidismo?,Yodo,Flúor,Cloro,Bromo,A,inroganic,medium
+1045,¿Qué complejo se forma al reaccionar NH₃ con Cu₂+?,[Cu(NH₃)₄]2+,[Cu(NH₃)₆]3+,[Cu(NH₃)₃]+,[Cu(NH₃)₂]2+,A,inroganic,medium
+1046,¿Qué reactivo precipita Fe₃+ como Fe(OH)₃?,NaOH,NH₃,HCl,KOH,A,inroganic,medium
+1047,¿Qué catión forma complejos solubles y estables con EDTA?,Ca₂+,Ag+,Ba₂+,Pb₂+,A,inroganic,medium
+1048,¿Qué elemento es más reactivo con Cl₂ para formar un cloruro?,K,Na,Ca,Al,A,inroganic,medium
+1049,¿Cuál es el producto de la reacción entre NH₃ y HCl gaseoso?,NH₄Cl,N₂H₄,NH₂Cl,NHCl₂,A,inroganic,medium
+1050,¿Cuál es el símbolo de término fundamental para un complejo octaédrico d₄ de alto espín?,5T₂g,5Eg,3T₂g,3A₂g,A,inorganic,hard
+1051,¿Qué transición electrónica en un complejo octaédrico corresponde a t₂g→eg?,d–d,transferencia de carga,MLCT,LLCT,A,inorganic,hard
+1052,"En un complejo cuadrado planar d₈, ¿qué orbital metálico está más alto en energía?",dx₂–y₂,dz₂,dxy,dxz,A,inorganic,hard
+1053,¿Qué ligando es de campo más fuerte en la serie espectroquímica?,CN–,NH₃,Cl–,F–,A,inorganic,hard
+1054,La separación tetraédrica Δt es qué fracción de la separación octaédrica Δo?,45756,45659,45693,45660,A,inorganic,hard
+1055,La distorsión de Jahn–Teller es más pronunciada para qué configuración electrónica?,d₉,d₅ alto espín,d₃,d₆ bajo espín,A,inorganic,hard
+1056,El paramagnetismo surge de qué propiedad de una sustancia?,Electrones desapareados,Electrones apareados,Huecos electrónicos,Espines acoplados,A,inorganic,hard
+1057,El momento magnético sólo-spin de un ion d₅ de alto espín es aproximadamente?,5.92 BM,4.90 BM,3.87 BM,2.83 BM,A,inorganic,hard
+1058,"En análogos del azul de Prusia, los centros de Fe están unidos por qué ligando?",CN–,NCS–,OH–,H₂O,A,inorganic,hard
+1059,"Según la teoría MO para H₂, el orbital antienlazante es?",σ*1s,σ1s,π*1s,δ1s,A,inorganic,hard
+1060,¿Qué geometría de coordinación adoptan complejos ML₆ con d₀?,Octaédrica,Tetraédrica,Plano cuadrado,Bipirámide trigonal,A,inorganic,hard
+1061,¿La CFSE para un ion d₃ de alto espín octaédrico es?,–1.2Δo,–0.6Δo,–2.0Δo,–0.4Δo,A,inorganic,hard
+1062,¿Qué MO representa solapamiento de orbitales p a lo largo del eje interatómico?,σ,π,δ,φ,A,inorganic,hard
+1063,¿Qué método espectroscópico estudia transiciones de campo de ligandos?,UV-Vis,IR,RMN,Espectrometría de masas,A,inorganic,hard
+1064,La elongación de enlaces axiales en un complejo octaédrico de Cu₂+ ocurre en qué eje?,Eje Z,Eje X,Eje Y,Diagonal,Z,inorganic,hard
+1065,El efecto nefelauxético afecta directamente a qué parámetro?,Racah B,Separación de campo de ligandos,Acoplamiento spin-órbita,CFSE,A,inorganic,hard
+1066,La contracción de los lantánidos se refiere a la disminución del radio iónico en qué serie?,La→Lu,Ce→Yb,Th→Pa,Bk→Cf,A,inorganic,hard
+1067,"En la estructura K₂NiF₄, el níquel está coordinado en qué geometría?",Octaédrica,Tetraédrica,Plano cuadrado,Trigonal planar,A,inorganic,hard
+1068,El desplazamiento isomérico Mössbauer es más sensible a qué propiedad?,Estado de oxidación,Orden magnético,Longitudes de enlace,Síntesis cristales,A,inorganic,hard
+1069,"En una ecuación de Nernst, E = E° – (RT/nF) ln Q, ¿qué representa n?",1,2,3,4,A,inorganic,hard
+1070,"En un ciclo Born–Haber para NaCl, ¿qué término se calcula después de conocer los demás?",Energía reticular,Entalpía de formación,Energía de ionización,Afinidad electrónica,A,inorganic,hard
+1071,¿Qué defecto se caracteriza por vacantes pareadas de catión y anión?,Schottky,Frenkel,Antisitio,Intersticial,A,inorganic,hard
+1072,¿Qué óxido perovskita exhibe ferroelectricidad a temperatura ambiente?,PbTiO₃,BaTiO₃,SrTiO₃,CaTiO₃,A,inorganic,hard
+1073,"En teoría de bandas, los aislantes tienen brechas de banda mayores de aproximadamente?",4 eV,1 eV,2 eV,0 eV,A,inorganic,hard
+1074,¿Qué estructura es el motivo anti-fluorita?,Li₂O,CaF₂,NaCl,Al₂O₃,A,inorganic,hard
+1075,¿Qué metal de transición tiene la conductividad eléctrica más baja?,Fe,Cu,Ag,Au,A,inorganic,hard
+1076,¿Qué polimorfo de TiO₂ es más estable bajo condiciones estándar?,Rutilo,Anatasa,Brookita,Perovskita,A,inorganic,hard
+1077,¿Qué orden magnético surge de espines antiparalelos con momento neto cero?,Antiferromagnetismo,Ferromagnetismo,Paramagnetismo,Diamagnetismo,A,inorganic,hard
+1078,"A alta presión, el hielo se transforma en qué forma más densa?",Hielo VII,Hielo I,Hielo III,Hielo II,A,inorganic,hard
+1079,¿Qué perovskita haluro es libre de plomo?,CsSnCl₃,CH₃NH₃PbI₃,CsPbBr₃,RbPbI₃,A,inorganic,hard
+1080,¿Qué número de coordinación adopta Pt en la perovskita CaPtO₃?,6,4,8,12,A,inorganic,hard
+1081,¿Qué ligando muestra la mayor capacidad aceptora π?,CO,CN–,NH₃,NO₂–,A,inorganic,hard
+1082,¿Qué término electrónico en d₆ bajo espín octaédrico no tiene CFSE?,1A₁g,1T₁g,1T₂g,1Eg,A,inorganic,hard
+1083,¿Qué óxido es un semiconductor tipo p debido a vacantes de oxígeno?,Cu₂O,TiO₂,ZnO,Fe₂O₃,A,inorganic,hard
+1084,¿Qué nitrato se emplea en el proceso Ostwald para producir ácido nítrico?,NH₄NO₃,HNO₃,KNO₃,NaNO₃,A,inorganic,hard
+1085,¿Cuál es el estado de oxidación del Cr en [Cr(NH₃)₅Cl]2+?,3,2,4,5,A,inorganic,hard
+1086,¿Qué modo de puente describe μ3-oxo en clústeres metálicos?,Tres centros,Dos centros,Cuatro centros,Un centro,A,inorganic,hard
+1087,¿Qué grupo puntual tiene el anión SF₆? (e.g. SF₆)?,Oh,C₃v,D₄h,C₂v,A,inorganic,hard
+1088,¿Qué carbonilo metálico es diamagnético y muy estable?,Ni(CO)₄,Fe(CO)₅,Cr(CO)₆,Co₂(CO)₈,A,inorganic,hard
+1089,¿Qué silicato consta de tetraedros SiO₄ aislados?,Nesosilicato,Inosilicato,Ciclosilicato,Fillosilicato,A,inorganic,hard
+1090,¿Qué óxido anfótero reacciona con ácidos y bases?,Al₂O₃,ZnO,SiO₂,Fe₂O₃,A,inorganic,hard
+1091,¿Qué orden de campo de ligandos es correcto de más débil a más fuerte?,I–<Br–<Cl–<F–,F–<Cl–<Br–<I–,Cl–<Br–<I–<F–,Br–<I–<Cl–<F–,A,inorganic,hard
+1092,¿Qué elemento muestra mayor anisotropía magnética en la serie 3d?,Co,Fe,Ni,Cr,A,inorganic,hard
+1093,¿Qué óxido de uranio es combustible principal en reactores?,UO₂,U₃O₈,UF₆,UO₃,A,inorganic,hard
+1094,¿Qué transición MO da el color del permanganato?,LMCT,d–d,MLCT,LLCT,A,inorganic,hard
+1095,"En zeolita A, ¿qué catión equilibra la carga del marco?",Na+,K+,Ca₂+,Mg₂+,A,inorganic,hard
+1096,¿Qué ángulo de enlace es característico de geometría angular AX₂E₂?,104.5°,120°,90°,109.5°,A,inorganic,hard
+1097,¿Cuál es el número de coordinación de La en La₂O₃?,7,6,8,9,A,inorganic,hard
+1098,¿Qué ion de tierras raras es más eficaz para emisión en el infrarrojo cercano?,Er₃+,Nd₃+,Tm₃+,Yb₃+,A,inorganic,hard
+1099,¿Qué óxido exhibe estructura de espinela?,MgAl₂O₄,Fe₂O₃,Al₂O₃,ZnO,A,inorganic,hard
+1100,¿Qué ligando pseudohaluro se une a través de nitrógeno a metales?,NCS–,SCN–,CN–,OCN–,A,inorganic,hard
+1101,¿Qué estructura M–O en rutile describe?,Cadenas lineales,Hojas,Marco,Cápsulas,A,inorganic,hard
+1102,¿Qué parámetro de campo cristalino varía con la distancia M–L a la –5 potencia?,Dq,Racah B,CFSE,Δt,A,inorganic,hard
+1103,¿Qué lantánido muestra estabilización por f₇ de semillena atómica?,Eu₃+,Gd₃+,Sm₃+,Tb₃+,B,inorganic,hard
+1104,¿Qué óxido es aislante de Mott por fuerte correlación electrónica?,MnO,TiO₂,SiO₂,Al₂O₃,A,inorganic,hard
+1105,¿Qué compuesto de coordinación exhibe isomería de enlace?,Co(NH₃)₅NO₂ 2+,CoCl₂(NH₃)₄,Co(en)₃ 3+,Co(NO₂)₃ 2+,A,inorganic,hard
+1106,¿Qué ligando no inocente participa en química redox?,Dithiolenos,Cianuro,Amina,Cloruro,A,inorganic,hard
+1107,¿Qué geometría impone un ligando de Schiff base tetradentado?,Plano cuadrado,Octaédrica,Tetraédrica,Bipirámide trigonal,A,inorganic,hard
+1108,¿Qué catalizador metálico se emplea en el proceso Wacker?,Pd,Pt,Ni,Cu,A,inorganic,hard
+1109,¿Qué ligando forma complejos de 18 electrones con Fe₂+?,CO,NH₃,Cl–,H₂O,A,inorganic,hard
+1110,¿Qué fase de AgI exhibe conductividad superiónica?,α-fase,β-fase,γ-fase,δ-fase,A,inorganic,hard
+1111,¿Qué estructura tiene el motivo de roca-sal?,NaCl,MgO,CaO,FeO,A,inorganic,hard
+1112,¿Qué polímero de coordinación exhibe magnetismo de cadena simple?,[Mn(ac)₂py]n,[Co(en)₃]3+,Ni(cyclam),Cu(tren),A,inorganic,hard
+1113,¿Qué motivo de clúster se halla en B₁₂H₁₂ 2–?,Icosaédrico,Esférico,Cuboctaédrico,Tetraédrico,A,inorganic,hard
+1114,¿Qué aproximación MO trata ligandos como cargas puntuales?,Campo cristalino,VSEPR,Enlace de valencia,Hückel,A,inorganic,hard
+1115,¿Qué parámetro EPR g≈2.002 indica?,Radical orgánico,Radical metálico,Metal de transición,Centro de defecto,A,inorganic,hard
+1116,¿Qué defecto aumenta la conductividad iónica?,Frenkel,Schottky,Antisitio,Intersticial,A,inorganic,hard
+1117,¿Qué óxido iónico se disuelve sólo en exceso de ácido?,CaO,SiO₂,Al₂O₃,Fe₂O₃,A,inorganic,hard
+1118,¿Qué dopante de tierras raras se usa en LED verdes?,Eu₂+,Ce₃+,Tb₃+,Er₃+,C,inorganic,hard
+1119,¿Qué mecanismo de sustitución de ligando es asociativo en octaédrico?,I–/Cl–,CO disociación,H₂O pérdida,Br–/I–,A,inorganic,hard
+1120,¿Qué hidruro metálico sirve para almacenamiento de hidrógeno?,MgH₂,NaH,CaH₂,AlH₃,A,inorganic,hard
+1121,¿Qué geometría de coordinación da CFSE cero para d₂?,Tetraédrica,Octaédrica,Plano cuadrado,Bipirámide trigonal,A,inorganic,hard
+1122,¿Qué fluoruro alcalinotérreo tiene mayor energía reticular?,BeF₂,MgF₂,CaF₂,BaF₂,A,inorganic,hard
+1123,¿Qué ley describe variación de energías reticulares en sales MX?,Born–Lande,Raoult,Hess,Henry,A,inorganic,hard
+1124,¿Qué cúpula de coordinación tiene estequiometría M₄L₆?,Tetraédrica prismática,Caja cúbica,Prisma cuadrado,Dodecaedro,A,inorganic,hard
+1125,¿Qué analogía de grupo puntual usa Eg y T₂g en MO octaédrica?,Analogía Oh,Analogía Td,C₄v,D₄h,A,inorganic,hard
+1126,¿Qué óxido de transición metálica exhibe transición metal-aislante?,V₂O₃,VO₂,TiO₂,Fe₂O₃,B,inorganic,hard
+1127,¿Qué defecto domina en LiCl a alta T?,Frenkel,Schottky,V-center,Color center,A,inorganic,hard
+1128,¿Qué ligando promueve alto espín en complejos de Fe₂+?,F–,CN–,PPh₃,CO,A,inorganic,hard
+1129,¿Qué óxido forma compuesto no estequiométrico a alta T?,FeO,CuO,MnO₂,Cr₂O₃,A,inorganic,hard
+1130,¿Qué complejo es fluxional por pseudorrotación de Berry?,PF₅,AsF₅,SF₆,BF₃,A,inorganic,hard
+1131,¿Qué óxido refractario tiene punto de fusión más alto?,ThO₂,Al₂O₃,ZrO₂,SiO₂,D,inorganic,hard
+1132,¿Qué modelo de banda explica conductividad en metales?,Electrón libre,Banda de valencia,VSEPR,Covalente,A,inorganic,hard
+1133,¿Qué óxido de transición metálica es ferromagnético a temperatura ambiente?,CrO₂,Fe₂O₃,NiO,CoO,A,inorganic,hard
+1134,¿Qué ácido de Lewis es más blando que BF₃?,AlCl₃,PF₅,SO₃,NO₂+,B,inorganic,hard
+1135,¿Qué organometálico sigue la regla de 18 electrones?,Cr(CO)₆,Fe(C₅H₅)₂,Ni(CO)₄,Mo(CO)₆,A,inorganic,hard
+1136,¿Qué MOF muestra porosidad permanente?,MOF-5,UiO-66,HKUST-1,ZIF-8,A,inorganic,hard
+1137,¿Qué mineral exhibe piezoelectricidad?,Cuarzo,Granate,Calcita,Halita,A,inorganic,hard
+1138,¿Qué fase Zintl combina Na y Sn?,NaSn,Na₄Sn,Na₂Sn,Na₃Sn₂,D,inorganic,hard
+1139,¿Qué motivo de clúster es [Re₆Se₈Cl₂]4+?,Núcleo octaédrico,Núcleo tetraédrico,Núcleo cúbico,Núcleo decaédrico,A,inorganic,hard
+1140,¿Qué enlace en carbonilos metálicos se debilita con retro-enlace?,C–O,M–C,C–M,O–C,A,inorganic,hard
+1141,¿Qué estructura AB₂ tiene motivo fluorita?,Fluorita,Perovskita,Espinela,Zinc blenda,A,inorganic,hard
+1142,¿Qué óxido de transición exhibe crossover de espín cerca de RT?,Fe₂+,Co₂+,Ni₂+,Mn₂+,A,inorganic,hard
+1143,¿Qué número de coordinación es común para lantánidos en haluros?,8,6,4,12,A,inorganic,hard
+1144,¿Qué óxido cataliza el proceso Haber–Bosch?,Fe₂O₃,Al₂O₃,TiO₂,SiO₂,A,inorganic,hard
+1145,¿Qué ligando produce gran separación de campo por π retro-enlace?,CO,NO,CN–,PPh₃,A,inorganic,hard
+1146,¿Qué isomería muestra [Co(NH₃)₅Br]2+?,Ionización,Enlace,Geométrico,Óptico,C,inorganic,hard
+1147,¿Qué término describe sustitución de ligando por mecanismo disociativo?,D,Id,Id*,Ia,A,inorganic,hard
+1148,¿Qué metal exhibe estado⁺6 con mayor frecuencia?,Cr,V,Mo,Fe,A,inorganic,hard
+1149,¿Qué perovskita se vuelve superconductor al doparse?,La₂CuO₄,BaTiO₃,SrTiO₃,KNbO₃,A,inorganic,hard
+1150,¿Qué polioxometalato tiene estructura Keggin?,[PW₁₂O₄₀]3–,[Mo₇O₂₄]6–,[V₁₀O₂₈]6–,[WO₃]2–,A,inorganic,hard
+1151,¿Qué defecto da lugar a centros F en haluros alcalinos?,Electrón atrapado en vacante de anión,Intersticial catiónico,Vacante de Schottky,Impureza,A,inorganic,hard
+1152,¿Qué óxido forma estructura piroloclor?,Bi₂Ti₂O₇,Y₂Ti₂O₇,Fe₂O₃,Al₂O₃,B,inorganic,hard
+1153,¿Qué reordenamiento de esfera de coordinación se llama twist de Bailar?,Isomerización octaédrica,Inversión planar cuadrada,Giro tetraédrico,Captura trigonal,A,inorganic,hard
+1154,¿Qué ligando aromático forma complejos “sándwich” con Fe₂+?,C₅H₅–,C₆H₆,CO,NO,A,inorganic,hard
+1155,¿Qué ligando puente produce clusters en forma de mariposa M₂?,μ2-O,μ2-Cl,μ2-CN,μ2-S,A,inorganic,hard
+1156,"¿Qué elemento muestra⁺2, 3, 4,+5 en óxidos?",Mn,Cr,Fe,Co,A,inorganic,hard
+1157,¿Qué mineral Al₂SiO₅ se forma a alta presión?,Cianita,Andalucita,Sillimanita,Cloritoide,A,inorganic,hard
+1158,¿Qué vidrio de calcogenuro exhibe conducción iónica rápida?,Ag₂S,As₂S₃,GeS₂,SeS₂,A,inorganic,hard
+1159,¿Qué motivo de poliedro coordinado es común en políedros metálicos?,Cara triangular,Vértice tetraédrico,Unidad cúbica,Cara octaédrica,A,inorganic,hard
+1160,¿Cuál es el alcano más simple?,Metano,Etano,Propano,Butano,A,organic,easy
+1161,¿Cuál es la fórmula molecular del etano?,C₂H₆,C₂H₄,C₂H₂,C₃H₈,A,organic,easy
+1162,¿Qué grupo funcional está presente en alcoholes?,Hidroxilo,Carbonilo,Carboxilo,Amino,A,organic,easy
+1163,¿Cuál es la fórmula general de los alquenos?,CnH₂n,CnH₂n+2,CnH₂n-2,CnH₂n-1,A,organic,easy
+1164,¿Cuál es la hibridación del carbono en el metano?,sp₃,sp₂,sp,sp₃d,A,organic,easy
+1165,¿Qué compuesto es aromático?,Benceno,Ciclohexano,Hexano,C₆H₁₄,A,organic,easy
+1166,¿Cuál es el nombre IUPAC de CH₃CH₂OH?,Etanol,Metanol,Propanol,Butanol,A,organic,easy
+1167,¿Cuál es la fórmula general de los alquinos?,CnH₂n-2,CnH₂n,CnH₂n+2,CnH₂n-1,A,organic,easy
+1168,¿Qué reactivo añade H₂ a un doble enlace?,H₂/Pt,HBr/H₂O,KMnO₄,NaOH,A,organic,easy
+1169,¿Qué tipo de reacción es la hidratación de un alqueno?,Adición,Sustitución,Eliminación,Oxidación,A,organic,easy
+1170,¿Qué grupo funcional está presente en cetonas?,Carbonilo,Hidroxilo,Éster,Amida,A,organic,easy
+1171,¿Cuál es el nombre IUPAC de CH₃CHO?,Etanal,Acetaldehído,Propanal,Butanal,A,organic,easy
+1172,¿Qué compuesto es un ácido carboxílico?,Ácido acético,Etanol,Acetona,Etileno,A,organic,easy
+1173,¿Cuál es el pH de una solución acuosa neutra?,7,1,14,0,A,organic,easy
+1174,¿Qué grupo funcional está presente en ésteres?,Éster,Alcohol,Amina,Aldehído,A,organic,easy
+1175,¿Qué producto se forma cuando un alcohol reacciona con un ácido carboxílico?,Éster,Amida,Alcano,Éter,A,organic,easy
+1176,¿Qué grupo funcional está presente en aminas?,Amino,Hidroxilo,Carbonilo,Carboxilo,A,organic,easy
+1177,¿Cuál es el nombre común del ácido etanoico?,Ácido acético,Ácido fórmico,Ácido propiónico,Ácido butírico,A,organic,easy
+1178,¿Qué tipo de isomería muestran el butano y el isobutano?,Estructural,Esterioisomérico,Geométrico,Óptico,A,organic,easy
+1179,¿Cuál es el alqueno más simple?,Eteno,Etino,Propeno,Buteno,A,organic,easy
+1180,¿Cuál es la fórmula empírica del benceno?,CH,CH₂,CH₃,CH₄,A,organic,easy
+1181,¿Qué sustancia es un éter?,Éter etílico,Propanol,Etanol,Acetona,A,organic,easy
+1182,¿Cuáles son los productos de la combustión completa del metano?,CO₂ y H₂O,CO y H₂,Solo CO₂,Solo H₂O,A,organic,easy
+1183,¿Qué grupo funcional contiene C=O y O–H?,Carboxilo,Carbonilo,Alcohol,Éster,A,organic,easy
+1184,¿Qué tipo de enlace hay en alcanos?,Enlace sencillo,Enlace doble,Enlace triple,Enlace aromático,A,organic,easy
+1185,¿Qué reacción elimina H₂O de un alcohol?,Eliminación,Adición,Sustitución,Oxidación,A,organic,easy
+1186,¿Cuál es un ejemplo de alcohol primario?,CH₃CH₂OH,CH₃OH,(CH₃)₂CH–OH,(CH₃)₃COH,A,organic,easy
+1187,¿Cuál es el nombre IUPAC de CH₃COCH₃?,Propanona,Propanal,Propanol,Propanodiol,A,organic,easy
+1188,¿Qué reactivo oxida alcoholes primarios a aldehídos?,PCC,KMnO₄,LiAlH₄,NaBH₄,A,organic,easy
+1189,¿Qué grupo funcional está presente en amidas?,Amida,Amina,Aldehído,Alcohol,A,organic,easy
+1190,¿Qué producto se forma cuando una amina reacciona con un cloruro de ácido?,Amida,Éster,Alcohol,Sal de amina,A,organic,easy
+1191,¿Qué compuesto es un alquino?,Etino,Eteno,Etano,Butano,A,organic,easy
+1192,¿Cuál es el nombre IUPAC de C₂H₂?,Etino,Eteno,Etano,Metano,A,organic,easy
+1193,¿Qué mecanismo describe SN₁?,Sustitución unimolecular,Sustitución bimolecular,Adición,Eliminación,A,organic,easy
+1194,¿Qué mecanismo describe SN₂?,Sustitución bimolecular,Sustitución unimolecular,Adición,Eliminación,A,organic,easy
+1195,¿Cuál es el producto de la hidrogenación del eteno?,Etano,Etino,Ethanol?, Actually: Ethane. Etano,A,organic,easy
+1196,¿Cuál es el estado de oxidación del carbono en CO₂?,4,2,0,–4,A,organic,easy
+1197,¿Qué compuesto es un diol?,HOCH₂CH₂OH,CH₃CH₂OH,CH₃OH,CH₃OCH₃,A,organic,easy
+1198,¿Qué tipo de enlace hay en el etino?,Enlace triple,Enlace doble,Enlace sencillo,Enlace coordinado,A,organic,easy
+1199,¿Qué compuesto es quiral?,2-Butanol,1-Butanol,2-Butanona,1-Butanona,A,organic,easy
+1200,¿Qué es una mezcla racémica?,Enantiómeros iguales,Un enantiómero,Diastereómero,Enoltautómeros,A,organic,easy
+1201,¿Qué polímero se forma por polimerización de adición del eteno?,Polietileno,Poliéster,Poliamida,Poliestireno,A,organic,easy
+1202,¿Qué isomería muestran el cis-2-buteno y el trans-2-buteno?,Geométrica,Estructural,Óptica,Conformacional,A,organic,easy
+1203,¿Cómo se llama el isómero óptico de una molécula quiral?,Enantiómero,Diastereómero,Isómero constitucional,Taútor,A,organic,easy
+1204,¿Qué reactivo convierte un haluro de alquilo en alqueno por eliminación?,KOH (alc),HCl,NaBr,H₂O,A,organic,easy
+1205,¿Cómo varía el punto de ebullición de los alcanos al aumentar la longitud de cadena?,Aumenta,Disminuye,No cambia,Primero aumenta y luego disminuye,A,organic,easy
+1206,¿Qué haluro de alquilo reacciona más rápido por SN₁?,Terciario,Secundario,Primario,Metilo,A,organic,easy
+1207,¿Qué haluro de alquilo reacciona más rápido por SN₂?,Metilo,Primario,Secundario,Terciario,A,organic,easy
+1208,¿Cuál es el nombre IUPAC de CH₃OCH₃?,Metoximetano,Éter dimetílico,Etanol,Éter,A,organic,easy
+1209,¿Qué ejemplo es una amina secundaria?,CH₃NHCH₃,CH₃NH₂,NH₃,CH₃NH₃+,A,organic,easy
+1210,¿Cuál es el rango típico de pKa de los ácidos carboxílicos?,4–5,1–2,7–8,10–11,A,organic,easy
+1211,¿Cuál es el principal producto de la nitración del benceno?,Nitrobenceno,Anilina,Benzaldehído,Alcohol bencílico,A,organic,easy
+1212,¿Qué reactivo nitrata el benceno?,HNO₃/H₂SO₄,Br₂/FeBr₃,Cl₂/FeCl₃,H₂/Pt,A,organic,easy
+1213,¿Qué es el electrófilo en la acilación de Friedel–Crafts?,Ion acilio,Carbanión,Nucleófilo,Radical,A,organic,easy
+1214,¿Qué catalizador se usa en la alquilación de Friedel–Crafts?,AlCl₃,H₂SO₄,HNO₃,Pd/C,A,organic,easy
+1215,¿Cuál es el producto de la bromación del eteno?,"1,2- Dibromoetano",1-Bromoeteno,2-Bromoeteno,Etano,A,organic,easy
+1216,¿Qué reacción añade halógeno a un alqueno?,Halogenación,Hidrogenación,Hidratación,Polimerización,A,organic,easy
+1217,¿Qué mecanismo forma epóxidos a partir de alquenos?,Oxidación con perácido,Nitración,Halogenación,Hidrogenación,A,organic,easy
+1218,¿Qué reactivo forma epóxidos a partir de alquenos?,mCPBA,HCl,KMnO₄/H₂O,H₂/Pd,A,organic,easy
+1219,¿Qué azúcar es un aldehído simple?,Glucosa,Fructosa,Sacarosa,Lactosa,A,organic,easy
+1220,¿Qué grupo funcional está presente en la acetona?,Cetona,Alcohol,Aldehído,Éster,A,organic,easy
+1221,¿Cuál es el nombre IUPAC de CH₃COOH?,Ácido etanoico,Ácido acético,Ácido metanoico,Ácido propanoico,A,organic,easy
+1222,¿Qué clase de compuestos es CH₃CONH₂?,Amida,Aldehído,Éster,Alcohol,A,organic,easy
+1223,¿Qué se produce cuando un alquino reacciona con H₂ en presencia de catalizador de Lindlar?,Cis-alqueno,Alcano,Trans-alqueno,Alcohol,A,organic,easy
+1224,¿Cómo es la estructura de un enantiómero?,Imagen especular,Misma molécula,Molécula rotada,Estructura idéntica,A,organic,easy
+1225,¿Qué espectroscopía identifica grupos funcionales?,IR,UV-Vis,RMN,Espectrometría de masas,A,organic,easy
+1226,¿Cuál es la absorción aproximada de C=O en IR?,1700 cm-1,3300 cm-1,2100 cm-1,1450 cm-1,A,organic,easy
+1227,¿Qué pico corresponde al ion molecular en espectrometría de masas?,M+,Pico base,Pico de fragmento,Pico de isótopo,A,organic,easy
+1228,¿Qué núcleo de RMN es más común en orgánica?,1H,13C,19F,31P,A,organic,easy
+1229,¿Qué disolvente se usa comúnmente en RMN?,CDCl₃,D₂O,H₂O,CHCl₃,A,organic,easy
+1230,¿Cuál es el producto de la deshidratación del etanol?,Eteno,Etano,Etino,Etanol,A,organic,easy
+1231,¿Qué reacción convierte un alqueno en alcohol?,Hidratación,Hidrogenación,Halogenación,Ozónolisis,A,organic,easy
+1232,¿Qué se produce por ozónolisis de alquenos?,Compuestos carbonílicos,Alcoholes,Éteres,Alcanos,A,organic,easy
+1233,¿Qué reactivo es ozono seguido de Zn/H₂O?,Ozónolisis,Oxidación con KMnO₄,H₂/Pd,Adición de HBr,A,organic,easy
+1234,¿Qué grupo funcional está presente en la metilamina?,Amina,Amida,Aldehído,Éster,A,organic,easy
+1235,¿En qué difieren los isómeros?,Conectividad,Masa,Carga,Isótopo,A,organic,easy
+1236,¿Qué ejemplo es un alcohol terciario?,(CH₃)₃COH,CH₃CH₂OH,CH₃OH,(CH₃)₂CHOH,A,organic,easy
+1237,¿Qué tipo de reacción es la deshidratación de alcoholes?,Eliminación,Adición,Sustitución,Oxidación,A,organic,easy
+1238,¿Cuál es el nombre IUPAC de (CH₃)₂CHOH?,Propan-2-ol,Propanol,Isopropanol,Etanol,A,organic,easy
+1239,¿Cuál es el producto cuando un haluro de alquilo reacciona con NaOH acuoso?,Alcohol,Éter,Alqueno,Amina,A,organic,easy
+1240,¿Qué reactivo se usa en la síntesis de éteres de Williamson?,NaOH,HCl,HBr,K₂Cr₂O₇,A,organic,easy
+1241,¿Qué grupo sale mejor en reacciones SN₁?,I–,OH–,CH₃–,H+,A,organic,easy
+1242,¿Qué carbocatión es más estable?,Terciario,Secundario,Primario,Metilo,A,organic,easy
+1243,¿Qué mecanismo reacciona por carbocationes?,SN₁,E₁,SN₂,E₂,A,organic,easy
+1244,¿Cuál es el producto de oxidación de un alcohol secundario?,Cetona,Aldehído,Ácido carboxílico,Alcohol,A,organic,easy
+1245,¿Qué reactivo oxida alcoholes secundarios a cetonas?,CrO₃,PCC,KMnO₄,NaBH₄,A,organic,easy
+1246,¿Qué reacción añade agua a un alqueno según Markovnikov?,Hidratación,Hidrogenación,Halogenación,Ozónolisis,A,organic,easy
+1247,¿Qué intermedio tiene carga positiva en carbono?,Carbocatión,Carbanión,Radical libre,Taútomero,A,organic,easy
+1248,¿Qué mecanismo forma radicales?,Sustitución radicalaria,Adición electrófila,Sustitución nucleófila,Eliminación,A,organic,easy
+1249,¿Cuál es el producto cuando el metano reacciona con Cl₂ bajo luz UV?,Clorometano,Metanol,Cloroformo,Tetracloruro de carbono,A,organic,easy
+1250,¿Cuál es el producto cuando el eteno reacciona con HBr?,Bromoetano,Etano,Etanol,Cloroetano,A,organic,easy
+1251,¿Qué producto se forma cuando el benceno reacciona con HNO₃ y H₂SO₄?,Nitrobenceno,Anilina,Benzaldehído,Alcohol bencílico,A,organic,easy
+1252,¿Qué grupo funcional está presente en el cloruro de acetilo?,Cloruro de acilo,Acilo,Haluro,Éster,A,organic,easy
+1253,¿Qué reactivo convierte un ácido carboxílico en cloruro de acilo?,SOCl₂,PCl₅,NaOH,NaCl,A,organic,easy
+1254,¿Qué reacción produce una amida a partir de un ácido carboxílico?,Amidación,Esterificación,Hidrogenación,Halogenación,A,organic,easy
+1255,¿Qué reactivo se usa para proteger alcoholes como acetatos?,Ac₂O,HCl,NaOH,PCC,A,organic,easy
+1256,¿Qué reacción forma nitrilos a partir de haluros de alquilo?,SN₂ con KCN,Nitración,Hidrólisis,Oxidación,A,organic,easy
+1257,¿Qué grupo funcional está presente en la urea?,Amida,Amina,Amidina,Carboxilo,A,organic,easy
+1258,¿Cuál es el alcano más simple?,Metano,Etano,Propano,Butano,A,organic,easy
+1259,¿Qué reactivo convierte benceno en bromobenceno?,Br₂/FeBr₃,HBr,NBS,Br₂/UV,A,organic,medium
+1260,"En una reacción SN₂ en un centro quiral, ¿cuál es el resultado estereoquímico?",Inversión,Retención,Racemización,Sin cambio,A,organic,medium
+1261,¿Cuál es el epóxido producto del ciclohexeno con mCPBA?,Óxido de ciclohexeno,"trans-1,2-ciclohexanodiol",ciclohexanol,ciclohexano,A,organic,medium
+1262,¿Qué reactivo reduce selectivamente cetonas a alcoholes secundarios?,NaBH₄,LiAlH₄,H₂/Pt,BH₃,A,organic,medium
+1263,¿Qué reactivo ylide se usa en la reacción de Wittig?,Ph₃P=CH₂,CH₂N₂,CH₂I₂/Zn,CH₃Li,A,organic,medium
+1264,Una banda aguda en IR a 2250 cm-1 indica qué grupo funcional?,Nitrilo,Carbonilo,Hidroxilo,C=C,A,organic,medium
+1265,"En RMN 1H, un triplete a 1.2 ppm y un cuarteto a 3.6 ppm sugiere qué fragmento?",Grupo etilo,Grupo isopropilo,Grupo metilo,Grupo terc-butilo,A,organic,medium
+1266,La condensación aldólica involucra qué intermedio?,Ion enolato,Carbocatión,Radical,Carbanión,A,organic,medium
+1267,La deshidratación de²⁻butanol con H₂SO₄ produce qué alqueno?,2-Buteno,1-Buteno,Isobuteno,Butano,A,organic,medium
+1268,La hidrólisis de un éster en medio ácido produce qué?,Ácido carboxílico y alcohol,Éter y agua,Alqueno,Amida,A,organic,medium
+1269,¿Qué reacción forma β-cetoésteres a partir de ésteres y cetonas?,Condensación de Claisen,Condensación aldólica,Adición de Michael,Dieckmann,A,organic,medium
+1270,La reacción Diels–Alder es qué tipo de reacción?,Cicloaddition,Esterificación,Sustitución,Oxidación,A,organic,medium
+1271,El pico base en espectrometría de masas es?,Fragmento más abundante,Ión molecular,Pico de isótopo,Pico M+1,A,organic,medium
+1272,¿Qué oxidante convierte alcoholes primarios en ácidos carboxílicos?,KMnO₄,PCC,NaBH₄,LiAlH₄,A,organic,medium
+1273,La eliminación E₂ de²⁻bromobutano da qué producto mayoritario?,2-Buteno,1-Buteno,Butano,2-Butanol,A,organic,medium
+1274,Un grupo –OH en benceno dirige electrófilos a qué posiciones?,Orto/para,Meta,Solo para,Solo orto,A,organic,medium
+1275,La hidroboración–oxidación de alquenos produce alcoholes con qué regiología?,Anti-Markovnikov,Markovnikov,No selectivo,Sin adición,A,organic,medium
+1276,La ozonólisis de ciclohexeno con Zn/H₂O produce qué?,Glutaraldehído,Ciclohexanol,Ácido adípico,Hexano,A,organic,medium
+1277,¿Qué reactivo convierte ácidos carboxílicos en cloruros de ácido?,SOCl₂,PCl₅,HCl,PBr₃,A,organic,medium
+1278,La reducción de Rosenmund convierte cloruros de ácido en?,Aldehídos,Ácidos carboxílicos,Alcoholes,Cetonas,A,organic,medium
+1279,¿Qué reactivo reduce alquenos a alcanos?,H₂/Pt,O₃,HBr,KMnO₄,A,organic,medium
+1280,La reducción de Birch del benceno da?,"1,4-Ciclohexadieno",Ciclohexano,Fenol,Benceno,A,organic,medium
+1281,¿Qué mecanismo caracteriza la reacción de Wittig?,Adición de ylide a carbonilo,Cadena radical,SN₁,Eliminación E₁,A,organic,medium
+1282,¿Qué reactivo oxida alcoholes secundarios a cetonas?,PCC,NaBH₄,LiAlH₄,BH₃,A,organic,medium
+1283,LiAlH₄ reduce ácidos carboxílicos a?,Alcoholes primarios,Aldehídos,Cetonas,Éteres,A,organic,medium
+1284,¿Qué reactivo convierte alcoholes en bromuros de alquilo vía SN₂?,PBr₃,HBr,SOCl₂,PCl₅,A,organic,medium
+1285,SOCl₂ convierte alcoholes en cloruros de alquilo con qué estereoquímica?,Inversión,Retención,Racemización,Ninguna,A,organic,medium
+1286,¿Qué reacción usa ylide de trifenilfosfonio metilo?,Reacción de Wittig,Condensación aldólica,Claisen,Adición de Michael,A,organic,medium
+1287,¿Qué perácido se usa comúnmente para epoxidación?,mCPBA,Ácido peracético,H₂O₂,KMnO₄,A,organic,medium
+1288,La reacción Hell–Volhard–Zelinsky bromina qué posición de los ácidos carboxílicos?,Posición alfa,Beta,Gamma,Delta,A,organic,medium
+1289,La síntesis de Gabriel genera aminas primarias a partir de qué precursor?,Ftalamida,Azida,Imina,Nitrilo,A,organic,medium
+1290,¿Qué grupo protector se elimina con TBAF?,TBDMS,THP,Acetilo,Bencil,A,organic,medium
+1291,La eliminación de Cope convierte óxidos de amina terciaria en?,Alquenos,Alcoholes,Aminas,Éteres,A,organic,medium
+1292,La eliminación de Hofmann da qué alqueno mayoritario?,Alqueno menos sustituido,Alqueno más sustituido,Aleatorio,Conjugado,A,organic,medium
+1293,¿Qué producto surge de la dihidroxilación de alquenos con OsO₄?,Diol vicinal,Epóxido,Cetona,Alcohol,A,organic,medium
+1294,¿Qué reactivo realiza dihidroxilación en condiciones suaves?,OsO₄,KMnO₄,H₂O₂,mCPBA,A,organic,medium
+1295,¿Qué produce la reordenación de Claisen de alquilfenil éter?,o-Alilfenol,m-Alilfenol,p-Alilfenol,Sin reacción,A,organic,medium
+1296,¿Qué reactivo realiza la reordenación de Hofmann de amidas a aminas?,Br₂/NaOH,PCl₅,SOCl₂,PCC,A,organic,medium
+1297,La reordenación de Curtius transforma azidas de ácido en?,Isocianatos,Ácidos carboxílicos,Ésteres,Amidas,A,organic,medium
+1298,¿Qué reactivo reduce nitrilos a aminas primarias?,LiAlH₄,NaBH₄,H₂/Pt,BH₃,A,organic,medium
+1299,¿Qué reactivo oxida selectivamente alcoholes primarios a aldehídos?,PCC,KMnO₄,CrO₃,H₂O₂,A,organic,medium
+1300,La oxidación de Baeyer–Villiger de cetonas produce?,Ésteres,Alcoholes,Ácidos,Alquenos,A,organic,medium
+1301,¿Qué reactivo media la oxidación de Baeyer–Villiger?,mCPBA,H₂O₂/ácido,Ácido peracético,Todos,A,organic,medium
+1302,¿Qué reacción elimina éteres bencílicos por hidrogenólisis?,H₂/Pd,TBAF,HCl,NaOH,A,organic,medium
+1303,La reordenación de Beckmann convierte oximas en?,Amidas,Nitrilos,Ésteres,Ácidos carboxílicos,A,organic,medium
+1304,¿Qué reactivo deshidrata amidas a nitrilos?,POCl₃,PCC,PDC,SOCl₂,A,organic,medium
+1305,¿Qué reactivo realiza Sandmeyer para introducir Cl?,CuCl,CuBr,HCl,FeCl₃,A,organic,medium
+1306,¿Qué reacción acopla fenoles con sales de diazonio?,Acoplamiento azo,Friedel–Crafts,Sandmeyer,Hell–Volhard,A,organic,medium
+1307,¿Qué reactivo diazotiza aminas aromáticas primarias?,NaNO₂/HCl,HNO₃,H₂O₂,Br₂,A,organic,medium
+1308,¿Qué reactivo protege alcoholes como éteres bencílicos?,BnBr/NaH,TBDMSCl/piridina,Ac₂O/piridina,TsCl/piridina,A,organic,medium
+1309,¿Qué reactivo elimina grupos bencílicos por hidrogenólisis?,H₂/Pd,NaOH,HCl,TBAF,A,organic,medium
+1310,¿Qué reacción acopla alquinos finales formando diinos?,Acoplamiento de Glaser,Heck,Suzuki,Sonogashira,A,organic,medium
+1311,¿Qué catalizador se usa en acoplamiento Suzuki?,Pd(0),Pt,Ni,Cu,A,organic,medium
+1312,¿Qué reacción acopla dos alquinos terminales?,Glaser,Heck,Suzuki,Sonogashira,A,organic,medium
+1313,¿Qué reactivo realiza acoplamiento Sonogashira?,Pd(PPh₃)₂Cl₂/CuI,PtCl₂,NiCl₂,FeCl₃,A,organic,medium
+1314,¿Qué reactivo convierte haluros de alquilo en nitrilos vía SN₂?,NaCN,KCN,LiCN,NH₄CN,A,organic,medium
+1315,¿Qué mecanismo describe la hidrólisis ácida de nitrilos?,Hidratación acidificada,Base catalizada,Radical,Fotolítico,A,organic,medium
+1316,¿Qué reactivo hidroliza nitrilos a ácidos carboxílicos en ácido?,H₃O+,OH–,PCC,LiAlH₄,A,organic,medium
+1317,La esterificación de Fischer se impulsa eliminando qué?,Agua,Alcohol,Ácido,Calor,A,organic,medium
+1318,¿Qué reacción usa DCC para enlazar amidas?,Síntesis de péptidos,Esterificación de Fischer,Aldol,Adición de Michael,A,organic,medium
+1319,¿Qué reactivo desprotege grupos Fmoc?,Piperidina,TFA,HCl,NaOH,A,organic,medium
+1320,¿Qué reactivo se usa en Mitsunobu?,DEAD/PPh₃,DCC,NBS,BH₃,A,organic,medium
+1321,Mitsunobu invierte qué grupo?,Alcohol,Amina,Ácido carboxílico,Cetona,A,organic,medium
+1322,Swern usa qué reactivo?,DMSO/cloruro de oxalilo,DMSO/TFAA,DMSO/Ac₂O,DMSO/HCl,A,organic,medium
+1323,Dess–Martin usa qué reactivo?,DMP,PCC,Jones,Swern,A,organic,medium
+1324,Jones usa qué reactivo?,CrO₃/H₂SO₄,PCC,DMP,Swern,A,organic,medium
+1325,¿Qué grupo identifica reacción haloformo?,Cetonas metílicas,Aldehídos,Alcoholes,Ésteres,A,organic,medium
+1326,El test iodoforma precipita compuestos con?,CH₃CO–,CH₂CO–,CH=CO–,CO–,A,organic,medium
+1327,¿Qué reactivo halogena cetonas metílicas en alfa?,Br₂/ácido,NBS,Cl₂/UV,Br₂/UV,A,organic,medium
+1328,Haloformo procede por qué mecanismo?,Adición-eliminación nucleofílica,Sustitución radical,Adición electrófila,Eliminación,A,organic,medium
+1329,¿Estado de transición Zimmerman–Traxler en qué reacción?,Aldol,Michael,Claisen,Diels–Alder,A,organic,medium
+1330,¿Qué reactivo escinde dioles vicinales oxidativamente?,HIO₄,KMnO₄,O₃,O₂,A,organic,medium
+1331,Ácido periódico sobre dioles da?,Dos carbonilos,Dos alcoholes,Alcanos,Ácidos,A,organic,medium
+1332,Wittig con ylides no estabilizados da?,Alqueno Z,Alqueno E,Ninguno,Racémico,A,organic,medium
+1333,¿Qué reacción convierte alcoholes en alquenos?,Deshidratación,Esterificación,Oxidación,Reducción,A,organic,medium
+1334,¿Qué reacción convierte alquenos en alcoholes?,Hidratación,Hidrogenación,Halogenación,Ozónolisis,A,organic,medium
+1335,¿Qué reacción añade Br₂ anti a un alqueno?,Brominación,Halohidrina,Sustitución radical,Hidrogenación,A,organic,medium
+1336,Sharpless epoxidación es enantioselectiva para?,Alcoholes alílicos,Alquenos internos,Alquenos terminales,Aromáticos,A,organic,medium
+1337,Jacobsen usa qué metal?,Mn,Ti,Fe,Co,A,organic,medium
+1338,Prilezhaev epoxida con?,Perácidos,KMnO₄,H₂O,O₃,A,organic,medium
+1339,Reordenación benzílica convierte benzil en?,Ácido benzílico,Ácido benzílico?,Benzaldehído,Benceno,A,organic,medium
+1340,"En la epoxidación asimétrica de Sharpless de (E)-2-hexen-1-ol con (+)-DET, ¿cuál es la configuración absoluta del epóxido?","(2R,3R)","(2S,3S)","(2R,3S)","(2S,3R)",A,organic ,hard
+1341,"En la reducción CBS de acetofenona con (S)-oxazaborolidina, ¿qué enantiómero predomina? ",(R)-1-feniletanol,(S)-1-feniletanol,Racémico,meso,A,organic ,hard
+1342,"En la reorganización Ireland–Claisen de un éster alílico, ¿qué intermedio determina la estereoquímica? ",Acetal de silyl ceteno,Oxonio,Carbocatión,Enolato,A,organic ,hard
+1343,¿Qué reactivo efectúa la hidratación anti-Markovnikov de¹⁻hexeno? ,1. BH₃·THF 2. H₂O₂/NaOH,H₃O⁺,Hg(OAc)₂/NaBH₄,H₂/Pt,A,organic ,hard
+1344,¿Cuál es el producto de la oxidación Baeyer–Villiger de ciclobutanona? ,γ-Butirolactona,δ-Lactona,ε-Lactona,α-Lactona,A,organic ,hard
+1345,¿Qué mecanismo describe la eliminación en la reorganización Cope? ,"Desplazamiento sigmatrópico [3,3]","[1,5] hidrógeno"," [2,3] sigmatrópico",[4+2] cicloadición,A,organic ,hard
+1346,¿Cuál es el producto principal de la reorganización Claisen de éter alílico fenílico? ,o-Alilfenol,p-Alilfenol,m-Alilfenol,Sin reacción,A,organic ,hard
+1347,¿Qué reacción convierte eficientemente una amida primaria en amina primaria con un carbono menos? ,Reordenación Hofmann,Reordenación Curtius,Descarboxilación de Barton,Congreso–Smith,A,organic ,hard
+1348,"En la ciclopropanación Simmons–Smith del estireno, ¿qué intermedio reacciona con el doble enlace? ",Iodomethylzinc iodide,Radical carbénico,Zinc acetiluro,Diazometano,A,organic ,hard
+1349,¿Qué reactivo realiza la dihidroxilación sin‐selectiva de alquenos? ,OsO₄/NMO,KMnO₄/calentamiento,mCPBA,H₂/Pt,A,organic ,hard
+1350,¿Cuál es el producto de la homologación Corey–Fuchs de benzaldehído? ,Fenilacetileno,Estireno,Cloruro de bencilo,Alcohol bencílico,A,organic ,hard
+1351,¿Qué acoplamiento usa un ácido bórico y un catalizador de paladio? ,Suzuki,Heck,Sonogashira,Stille,A,organic ,hard
+1352,"En el acoplamiento Sonogashira de yoduro de fenilo con acetileno trimetilsililo, ¿cuál es el producto inmediato? ",Fenil–C≡C–SiMe₃,Fenilacetileno,Fenileteno,Fenilalcano,A,organic ,hard
+1353,¿Qué reactivo convierte un nitrilo en aldehído en condiciones suaves? ,DIBAL-H a –78 °C,LiAlH₄,BH₃·THF,NaBH₄,A,organic ,hard
+1354,¿Cuál es el intermedio clave en una reacción aldólica Mukaiyama? ,Enolato de sililo,Radical,Carbocatión,Oxonio,A,organic ,hard
+1355,¿Qué reagente transforma alcoholes primarios en ácidos carboxílicos? ,KMnO₄,PCC,NaBH₄,LiAlH₄,A,organic ,hard
+1356,¿Qué reacción Elimina²⁻bromobutano en E₂? ,2-Buteno,1-Buteno,Butano,2-Butanol,A,organic ,hard
+1357,Un –OH en benceno dirige electrófilos a qué posiciones? ,Orto/para,Meta,Sólo para,Sólo orto,A,organic ,hard
+1358,¿Qué producto da la hidroboración–oxidación de alquenos? ,Alcohol anti-Markovnikov,Alcohol Markovnikov,Producto aleatorio,Sin adición,A,organic ,hard
+1359,¿Qué produce la ozonólisis de ciclohexeno con Zn/H₂O? ,Glutaraldehído,Ciclohexanol,Ácido adípico,Hexano,A,organic ,hard
+1360,¿Qué reactivo convierte ácidos carboxílicos en cloruros de ácido? ,SOCl₂,PCl₅,HCl,PBr₃,A,organic ,hard
+1361,La reducción de Rosenmund convierte cloruros de ácido en? ,Aldehídos,Ácidos carboxílicos,Alcoholes,Cetonas,A,organic ,hard
+1362,¿Qué reactivo reduce alquenos a alcanos? ,H₂/Pt,O₃,HBr,KMnO₄,A,organic ,hard
+1363,¿Qué da la reducción de Birch del benceno? ,"1,4-Ciclohexadieno",Ciclohexano,Fenol,Benceno,A,organic ,hard
+1364,¿Qué mecanismo caracteriza la reacción de Wittig? ,Adición de ylide a carbonilo,Cadena radical, SN₁,Eliminación E₁,A,organic ,hard
+1365,¿Qué reactivo oxida alcoholes secundarios a cetonas? ,PCC,NaBH₄,LiAlH₄,BH₃,A,organic ,hard
+1366,LiAlH₄ reduce ácidos carboxílicos a? ,Alcoholes primarios,Aldehídos,Cetonas,Éteres,A,organic ,hard
+1367,¿Qué reactivo convierte alcoholes en bromuros de alquilo via SN₂? ,PBr₃,HBr,SOCl₂,PCl₅,A,organic ,hard
+1368,SOCl₂ convierte alcoholes en cloruros de alquilo con qué estereoquímica? ,Inversión,Retención,Racemización,Ninguna,A,organic ,hard
+1369,¿Qué reacción usa ylide de trifenilfosfonio metilo? ,Reacción de Wittig,Condensación aldólica,Claisen,Adición de Michael,A,organic ,hard
+1370,¿Qué perácido se usa para epoxidación? ,mCPBA,Ácido peracético,H₂O₂,KMnO₄,A,organic ,hard
+1371,La reacción Hell–Volhard–Zelinsky bromina en posición? ,Alfa,Beta,Gamma,Delta,A,organic ,hard
+1372,La síntesis de Gabriel genera aminas primarias de? ,Ftalamida,Azida,Imina,Nitrilo,A,organic ,hard
+1373,¿Qué grupo se elimina con TBAF? ,TBDMS,THP,Acetilo,Bencil,A,organic ,hard
+1374,La eliminación de Cope de óxidos de amina da? ,Alquenos,Alcoholes,Aminas,Éteres,A,organic ,hard
+1375,La eliminación de Hofmann da? ,Alqueno menos sustituido,Alqueno más sustituido,Aleatorio,Conjugado,A,organic ,hard
+1376,¿Qué da la dihidroxilación de alquenos con OsO₄? ,Diol vicinal,Epóxido,Cetona,Alcohol,A,organic ,hard
+1377,¿Qué reactivo hace dihidroxilación suave? ,OsO₄,KMnO₄,H₂O₂,mCPBA,A,organic ,hard
+1378,¿Qué produce Claisen de alquilfenil éter? ,o-Alilfenol,m-Alilfenol,p-Alilfenol,Sin reacción,A,organic ,hard
+1379,¿Qué reactivo hace Beckmann de oximas? ,Reordenación Beckmann,Reordenación Rosenmund,Favorskii,Baeyer–Villiger,A,organic ,hard
+1380,La reordenación de Curtius convierte azidas de ácido en? ,Isocianatos,Ácidos carboxílicos,Ésteres,Amidas,A,organic ,hard
+1381,¿Qué reactivo reduce nitrilos a aminas primarias? ,LiAlH₄,NaBH₄,H₂/Pt,BH₃,A,organic ,hard
+1382,¿Qué reactivo oxida alcoholes primarios a aldehídos? ,PCC,KMnO₄,CrO₃,H₂O₂,A,organic ,hard
+1383,La oxidación Baeyer–Villiger da? ,Ésteres,Alcoholes,Ácidos,Alquenos,A,organic ,hard
+1384,¿Qué cataliza Baeyer–Villiger? ,mCPBA,H₂O₂/ácido,Ácido peracético,Todos,A,organic ,hard
+1385,¿Qué reacción elimina éteres bencílicos? ,H₂/Pd,TBAF,HCl,NaOH,A,organic ,hard
+1386,La reordenación de Beckmann convierte oximas en? ,Amidas,Nitrilos,Ésteres,Ácidos,A,organic ,hard
+1387,¿Qué reactivo convierte amidas a nitrilos? ,POCl₃,PCC,PDC,SOCl₂,A,organic ,hard
+1388,¿Qué hace Sandmeyer para Cl? ,CuCl,CuBr,HCl,FeCl₃,A,organic ,hard
+1389,¿Qué acopla fenoles con diazonio? ,Acoplamiento azo,Friedel–Crafts,Sandmeyer,HVZ,A,organic ,hard
+1390,¿Qué diazotiza aminas aromáticas? ,NaNO₂/HCl,HNO₃,H₂O₂,Br₂,A,organic ,hard
+1391,¿Qué protege alcoholes como bencílicos? ,BnBr/NaH,TBDMSCl/piridina,Ac₂O/piridina,TsCl/piridina,A,organic ,hard
+1392,¿Qué elimina bencílicos? ,H₂/Pd,NaOH,HCl,TBAF,A,organic ,hard
+1393,¿Qué acopla alquinos terminales a diinos? ,Acoplamiento Glaser,Heck,Suzuki,Sonogashira,A,organic ,hard
+1394,¿Qué cataliza Suzuki? ,Pd(0),Pt,Ni,Cu,A,organic ,hard
+1395,¿Qué acopla alquinos? ,Glaser,Heck,Suzuki,Sonogashira,A,organic ,hard
+1396,¿Qué reactivo Sonogashira? ,Pd(PPh₃)₂Cl₂/CuI,PtCl₂,NiCl₂,FeCl₃,A,organic ,hard
+1397,¿Qué convierte haluros a nitrilos? ,NaCN,KCN,LiCN,NH₄CN,A,organic ,hard
+1398,¿Qué hidrólisis de nitrilos es ácida? ,H₃O⁺,OH–,PCC,LiAlH₄,A,organic ,hard
+1399,Fischer se conduce eliminando? ,Agua,Alcohol,Ácido,Calor,A,organic ,hard
+1400,¿Qué usa DCC para amidas? ,Síntesis péptidos,Esterificación,Condensación aldólica,Michael,A,organic ,hard
+1401,¿Qué desprotege Fmoc? ,Piperidina,TFA,HCl,NaOH,A,organic ,hard
+1402,¿Qué usa Mitsunobu? ,DEAD/PPh₃,DCC,NBS,BH₃,A,organic ,hard
+1403,Mitsunobu invierte? ,Alcohol,Amina,Ácido,Cond,A,organic ,hard
+1404,Swern usa? ,DMSO/Oxalilo, TFAA,Ac₂O,HCl,A,organic ,hard
+1405,Dess–Martin usa? ,DMP,PCC,Jones,Swern,A,organic ,hard
+1406,Jones usa? ,CrO₃/H₂SO₄,PCC,DMP,Swern,A,organic ,hard
+1407,¿Qué identifica haloformo? ,Metil cetona,Aldehído,Alcohol,Éster,A,organic ,hard
+1408,Prueba iodoforma para? ,CH₃CO–,CH₂CO–,CH=CO–,CO–,A,organic ,hard
+1409,¿Qué halogena cetonas alpha? ,Br₂/ácido,NBS,Cl₂/UV,Br₂/UV,A,organic ,hard
+1410,Haloformo procede por? ,Adición-eliminación nucleofílica,Radic radical,Adición electrófila,Eliminación,A,organic ,hard
+1411,Zimmerman–Traxler en? ,Aldol,Michael,Claisen,Diels–Alder,A,organic ,hard
+1412,¿Qué escinde dioles con HIO₄? ,Dos carbonilos,Dos alcoholes,Alcano,Ácido,A,organic ,hard
+1413,Ácido periódico da? ,Carbonilos,Alcohol,Alcano,Ácido,A,organic ,hard
+1414,Wittig con ylides da? ,Alqueno Z,Alqueno E,Ninguno,Racémico,A,organic ,hard
+1415,¿Qué convierte alcohol en alqueno? ,Deshidratación,Esterificación,Oxidación,Reducción,A,organic ,hard
+1416,¿Qué convierte alqueno a alcohol? ,Hidratación,Hidrogenación,Halogenación,Ozónolisis,A,organic ,hard
+1417,¿Qué añade Br₂ anti? ,Brominación,Halohidrina,Sustitución radical,Hidrogenación,A,organic ,hard
+1418,Sharpless epox para? ,Alcoholes alílicos,Alquenos internos,Alquenos terminales,Aromáticos,A,organic ,hard
+1419,Jacobsen usa? ,Mn,Ti,Fe,Co,A,organic ,hard
+1420,Prilezhaev con? ,Perácidos,KMnO₄,H₂O,O₃,A,organic ,hard
+1421,Beckmann convierte benzil en? ,Ácido benzílico,Ácido benzílico?,Benzaldehído,Benceno,A,organic ,hard
+1422,¿Cuál es el símbolo químico del sodio?,Na,K,Na+,S,A,university,easy
+1423,¿Cuál es el pH de una solución neutra a 25 °C?,7,0,14,1,A,university,easy
+1424,¿Cuál es la masa molar del agua en g/mol?,18.02,16,20.02,17.01,A,university,easy
+1425,¿Cuál es el número atómico del carbono?,6,12,14,8,A,university,easy
+1426,¿Cuál es el número de Avogadro?,6.02×10²³,3.14,1.01×10³,9.81×10²,A,university,easy
+1427,¿Cuál es la carga de un electrón?,–1,1,0,–2,A,university,easy
+1428,¿Cuál es la fórmula de la sal de mesa?,NaCl,KCl,CaCl₂,Na₂CO₃,A,university,easy
+1429,¿Cuál es la unidad de presión en el SI?,Pascal,atm,bar,torr,A,university,easy
+1430,¿Qué ley de los gases relaciona presión y volumen a temperatura constante?,Ley de Boyle,Ley de Charles,Ley de Avogadro,Ley de los gases ideales,A,university,easy
+1431,¿Cuál es el punto de fusión del hielo en °C?,0,32,100,273,A,university,easy
+1432,¿Cuál es la unidad básica de masa en el SI?,Kilogramo,Gramo,Miligramo,Newton,A,university,easy
+1433,¿Qué elemento tiene número atómico 1?,Hidrógeno,Helio,Litio,Oxígeno,A,university,easy
+1434,¿Cuál es el gas más abundante en la atmósfera terrestre?,Nitrógeno,Oxígeno,Argón,Dióxido de carbono,A,university,easy
+1435,¿Cuál es la fórmula química del dióxido de carbono?,CO₂,CO,O₂,CH₄,A,university,easy
+1436,¿Cuál es la configuración electrónica del neón?,1s² 2s² 2p⁶,1s² 2p⁶,1s² 2s² 2p⁴,2s² 2p⁶,A,university,easy
+1437,¿Cuál es el estado de oxidación del oxígeno en el agua?,–2,2,0,–1,A,university,easy
+1438,¿Cuál es la fórmula química del amoníaco?,NH₃,NH₄,O₃,NH₂,A,university,easy
+1439,¿Cuál es el nombre común de CH₃COOH?,Ácido acético,Ácido fórmico,Ácido propiónico,Ácido butírico,A,university,easy
+1440,¿Cuál es la geometría molecular del CO₂?,Lineal,Angular,Tetraédrica,Planar trigonal,A,university,easy
+1441,¿Qué tipo de enlace se forma compartiendo electrones?,Covalente,Iónico,Metálico,Puente de hidrógeno,A,university,easy
+1442,"¿Cuál es el pH de una solución 0,1 M de HCl?",1,2,3,4,A,university,easy
+1443,¿Qué sustancia es un ácido según Arrhenius?,HCl,NaOH,H₂O,CO₂,A,university,easy
+1444,¿Qué sustancia es una base según Arrhenius?,NaOH,HCl,H₂SO₄,HClO₄,A,university,easy
+1445,¿Qué símbolo denota el cambio de entalpía estándar?,ΔH,ΔG,ΔS,ΔE,A,university,easy
+1446,¿Cuál es el nombre común del NaOH?,Hidróxido de sodio,Hidróxido de potasio,Hidróxido de calcio,Hidróxido de magnesio,A,university,easy
+1447,¿Cuál de los siguientes es un metal?,Hierro,Cloro,Helio,Neón,A,university,easy
+1448,¿Cuál es la principal fuerza intermolecular en el agua?,Puentes de hidrógeno,Dispersiones de London,Enlace iónico,Enlace metálico,A,university,easy
+1449,¿Qué unidad mide la cantidad de sustancia?,Mol,Gramo,Litro,Newton,A,university,easy
+1450,¿Cuál es la constante de los gases ideales R en J/(mol·K)?,8314,"0,82",1,"0,273",A,university,easy
+1451,¿Qué principio establece que no dos electrones pueden tener los mismos cuatro números cuánticos?,Principio de exclusión de Pauli,Principio de Aufbau,Regla de Hund,Principio de incertidumbre,A,university,easy
+1452,¿Cuál es la fórmula empírica del peróxido de hidrógeno?,HO,H₂O,OOH,HHO,A,university,easy
+1453,¿Qué unidad de concentración expresa gramos de soluto por 100 g de solución?,Porcentaje en masa,Porcentaje molar,Molaridad,Molalidad,A,university,easy
+1454,¿Cuál es el azúcar más simple y común?,Glucosa,Fructosa,Sacarosa,Lactosa,A,university,easy
+1455,¿Qué símbolo denota la constante crioscópica?,Kf,kb,ka,Kr,A,university,easy
+1456,¿Qué unidad tiene la molalidad?,mol/kg,mol/L,g/L,%,A,university,easy
+1457,¿Qué ley describe la disminución de presión de vapor en soluciones?,Ley de Raoult,Ley de Henry,Ley de Boyle,Ley de Charles,A,university,easy
+1458,¿Cuál es la fórmula química del ácido sulfúrico?,H₂SO₄,H₂SO₃,HCl,HNO₃,A,university,easy
+1459,¿Qué solución es más ácida?,pH 2,pH 4,Son iguales,Indeterminado,A,university,easy
+1460,¿Cómo se llama el calor necesario para elevar 1 g de agua en 1 °C?,Caloría,Julio,Erg,Vatio,A,university,easy
+1461,¿Cuál es la unidad SI de energía?,Joule,Caloría,Erg,Electronvoltio,A,university,easy
+1462,¿Qué instrumento mide la presión?,Barómetro,Termómetro,Higrómetro,Voltímetro,A,university,easy
+1463,¿Qué instrumento mide el pH?,pH-metro,Termómetro,Espectrofotómetro,Barómetro,A,university,easy
+1464,¿Cuál es la ley de velocidad para una reacción de primer orden?,vel = k[A],vel = k[A]²,vel = k,vel = k[A][B],A,university,easy
+1465,"En una reacción de primer orden, la vida media es independiente de la concentración inicial",Verdadero,Falso,Depende,Desconocido,A,university,easy
+1466,¿Qué unidad tiene la constante de velocidad en una reacción de segundo orden?,L/(mol·s),s⁻¹,mol/L,adimensional,A,university,easy
+1467,¿Qué dispositivo convierte reacciones redox espontáneas en corriente eléctrica?,Celda galvánica,Celda electrolítica,Célula fotoeléctrica,Pila de combustible,A,university,easy
+1468,¿Qué especie se reduce en una celda galvánica Zn/Cu?,Cu²⁺,Zn²⁺,Zn,Cu,A,university,easy
+1469,¿Cuál es el potencial del electrodo estándar de hidrógeno?,0 V,"1,0 V","–0,76 V","0,34 V",A,university,easy
+1470,¿Cuál es el rango de longitudes de onda de la luz visible?,400–700 nm,200–400 nm,700–1000 nm,100–200 nm,A,university,easy
+1471,¿Qué disolvente es polar aprótico?,Acetona,Agua,Etanol,Metanol,A,university,easy
+1472,¿Qué disolvente es no polar?,Hexano,Agua,Acetona,Metanol,A,university,easy
+1473,¿Qué técnica separa mezclas por punto de ebullición?,Destilación,Filtración,Cromatografía,Extracción,A,university,easy
+1474,¿Qué técnica separa por tamaño de partícula?,Filtración,Destilación,Cromatografía,Centrifugación,A,university,easy
+1475,¿Qué técnica separa según la adsorción en fase estacionaria?,Cromatografía,Filtración,Destilación,Extracción,A,university,easy
+1476,¿Qué color tiene una solución acuosa de cloruro de cobalto(II)?,Rosa,Azul,Verde,Amarillo,A,university,easy
+1477,¿Qué color tiene una solución de permanganato de potasio?,Púrpura,Rosa,Verde,Amarillo,A,university,easy
+1478,¿Cuál es la fórmula química de la glucosa?,C₆H₁₂O₆,C₆H₆,O₆H₁₂,C₁₂H₆O₆,A,university,easy
+1479,¿Cuál es la geometría molecular del NH₃?,Pirámide trigonal,Angular,Tetraédrica,Lineal,A,university,easy
+1480,¿Qué ley relaciona volúmenes de gases con la estequiometría?,Ley de Gay-Lussac,Ley de Boyle,Ley de Charles,Ley de Avogadro,A,university,easy
+1481,¿Qué indicador de pH se vuelve rosa en solución básica?,Fenolftaleína,Azul de bromotimol,Naranja de metilo,Azul de metileno,A,university,easy
+1482,¿Cuáles son los productos de la neutralización ácido-base?,Sal y agua,Gas y agua,Ácido y base,Calor solamente,A,university,easy
+1483,¿Qué define el punto de equivalencia en una titulación?,Equivalencia estequiométrica,Cambio de color,pH 7,Volumen inicial,A,university,easy
+1484,¿Qué símbolo representa el cambio de energía libre de Gibbs?,ΔG,ΔH,ΔS,ΔE,A,university,easy
+1485,¿Cuál es la capacidad calorífica molar de un gas monoatómico ideal?,3/2 R,5/2 R,3 R,R,A,university,easy
+1486,¿Qué establece la tercera ley de la termodinámica sobre la entropía a 0 K?,La entropía de un cristal perfecto es cero,La energía es cero,La temperatura es indefinida,La presión es infinita,A,university,easy
+1487,¿Cuál es la ecuación del gas ideal?,PV = nRT,PV/n = RT,P/n = RT,V = nRT,A,university,easy
+1488,¿Cuál es la expresión para el trabajo presión-volumen en un sistema cerrado?,w = –PΔV,w = PΔV,w = –ΔH,w = ΔH,A,university,easy
+1489,¿Cuál es la unidad base SI de temperatura?,Kelvin,Celsius,Fahrenheit,Rankine,A,university,easy
+1490,¿Cuál es el porcentaje en masa de hidrógeno en H₂O?,"11,11%","88,89%",0.5,0.25,A,university,easy
+1491,¿Cuántos electrones tiene un átomo neutro de oxígeno?,8,16,6,2,A,university,easy
+1492,¿Cuál es la fórmula general de un aldehído?,R–CHO,R–COOH,R–OH,R–NH₂,A,university,easy
+1493,¿Qué reactivo convierte un alqueno en un diol trans vicinal?,KMnO₄ frío y diluido,OsO₄,mCPBA,H₂/Pt,A,university,easy
+1494,¿Cuál de los siguientes es un no electrolito?,Glucosa,NaCl,HCl,NaOH,A,university,easy
+1495,¿Qué tipo de enlace hay en NaCl?,Iónico,Covalente,Metálico,Puente de hidrógeno,A,university,easy
+1496,¿Cuál es el factor de Van ’t Hoff para NaCl en solución acuosa?,2,1,3,0,A,university,easy
+1497,¿Qué símbolo denota la constante crioscópica?,Kf,kb,ka,Kr,A,university,easy
+1498,¿Cuál es la unidad de la constante de velocidad en una reacción de orden cero?,mol/(L·s),s⁻¹,mol²/(L²·s),adimensional,A,university,easy
+1499,¿Qué ácido es diprótico?,H₂SO₄,HCl,HNO₃,H₃PO₄,A,university,easy
+1500,¿Qué ácido es monoprótico?,HCl,H₂SO₄,H₃PO₄,H₂CO₃,A,university,easy
+1501,¿Cuál es la ecuación de Beer?,A = ε b c,A = ε b/c,A = l c/b,A = b/(ε c),A,university,easy
+1502,¿Cuál es el pH en el punto de equivalencia al titular un ácido fuerte con una base fuerte?,7,> 7,< 7,Depende de la concentración,A,university,easy
+1503,¿Qué describe el efecto del ion común?,Disminución de solubilidad por ion común,Aumento de solubilidad,Disolución,Diferente,A,university,easy
+1504,¿Qué gas se comporta más como gas ideal?,He,CO₂,NH₃,H₂O,A,university,easy
+1505,¿Cuál es la semirreacción de oxidación de Fe²⁺ a Fe³⁺?,Fe²⁺ → Fe³⁺ + e⁻,Fe³⁺ → Fe²⁺ + e⁻,Fe²⁺ + e⁻ → Fe,Fe³⁺ + e⁻ → Fe²⁺,A,university,easy
+1506,¿Qué técnica separa enantiómeros usando fase estacionaria quiral?,Cromatografía HPLC quiral,Cromatografía de gases,Destilación,Filtración,A,university,easy
+1507,¿Cuál es la definición de pH?,–log[H⁺],log[H⁺],ln[H⁺],[H⁺],A,university,easy
+1508,¿Cuál es el rango efectivo de amortiguación de un tampón Henderson–Hasselbalch?,pKa ± 1,pKa ± 0,pKa ± 5,pKa ± 10,A,university,easy
+1509,"Al reaccionar 2 mol H₂ con 1 mol O₂ para formar H₂O, el reactivo limitante es:",O₂,H₂,H₂O,ninguno,D,university,medium
+1510,"En el punto medio de equivalencia de una titulación de ácido débil, el pH iguala:",pKa,7,0,14,A,university,medium
+1511,"En un tampón con [HA] = [A⁻], el pH iguala:",pKa,pKb,7,pKw,A,university,medium
+1512,La solubilidad de AgCl (Ksp = 1.8×10⁻¹⁰) en agua pura es aproximadamente:,1.3×10⁻⁵ M,1.8×10⁻¹⁰ M,4.2×10⁻⁶ M,1.0×10⁻³ M,A,university,medium
+1513,El número de coordinación de [Fe(CN)₆]⁴⁻ es:,6,4,8,2,A,university,medium
+1514,Para un complejo tetraédrico Δt es:,4/9 Δo,1/2 Δo,2/5 Δo,1/3 Δo,A,university,medium
+1515,El potencial estándar de celda E°cell es:,E°cátodo – E°ánodo,E°ánodo – E°cátodo,E°cátodo + E°ánodo,E°ánodo + E°cátodo,A,university,medium
+1516,La relación entre ΔG° y la constante de equilibrio K es:,ΔG° = −RT ln K,ΔG° = RT ln K,ΔG° = K/RT,ΔG° = RT/K,A,university,medium
+1517,La ley integrada para reacción de primer orden es:,ln([A]ₜ/[A]₀) = −kt,1/[A]ₜ − 1/[A]₀ = kt,[A]ₜ = [A]₀ − kt,[A]ₜ = [A]₀ e(kt),A,university,medium
+1518,"Si duplicar [A] duplica la velocidad, la reacción es:",primer orden en A,segundo orden en A,cero orden,tercer orden,A,university,medium
+1519,"En la ecuación de Arrhenius, la pendiente de ln k vs 1/T es:",−Ea/R,Ea/R,−R/Ea,R/Ea,A,university,medium
+1520,Las reacciones SN₁ son más rápidas con:,haluros de alquilo terciarios,primarios,metílicos,secundarios,A,university,medium
+1521,Las reacciones SN₂ son más rápidas con:,haluros de metilo,terciarios,secundarios,neopentílicos,A,university,medium
+1522,Un triplete a 1.2 ppm y un cuarteto a 3.6 ppm en RMN ¹H indica:,un grupo etilo,un grupo isopropilo,un terc-butilo,un metilo,A,university,medium
+1523,Una absorción aguda en IR a ~2250 cm⁻¹ indica:,nitrilo,carbonilo,hidroxilo,C=C,A,university,medium
+1524,Aumentar la conjugación en un compuesto típicamente:,desplaza λmax al rojo,desplaza al azul,sin cambio,disminuye intensidad,A,university,medium
+1525,"En espectrometría de masas, el pico base es:",el fragmento más abundante,el ión molecular,el pico M+1,el menos abundante,A,university,medium
+1526,"En eliminación E₁, el producto mayoritario es:",el alqueno más sustituido,el menos sustituido,siempre terminal,cíclico,A,university,medium
+1527,La conjugación de hidrógenos α aumenta su:,acidez,basicidad,estabilidad neutra,volatilidad,A,university,medium
+1528,"Una solución 0,1 M de NH₄Cl tiene pH:",<7,7,>7,depende,A,university,medium
+1529,¿Qué especie es isolectrónica con Ar?:,Cl⁻,K⁺,Ca²⁺,todas,A,university,medium
+1530,La ley de Dalton establece:,P_total = ΣP_i,PV = nRT,V ∝ T,P ∝ n,A,university,medium
+1531,La depresión del punto de congelación ΔTf es:,Kf·m,Kb·m,Kf/m,m/Kf,A,university,medium
+1532,La presión osmótica Π es:,MRT,MRM,R/MT,MT/R,A,university,medium
+1533,"Según Le' Châtelier, añadir producto desplaza el equilibrio:",hacia la izquierda,hacia la derecha,sin cambio,a completitud,A,university,medium
+1534,"Si Q > K, la reacción se desplaza:",hacia reactivos,hacia productos,se queda,explota,A,university,medium
+1535,La ley de Hess permite ΔH° sumando:,entalpías de reacciones,mensajes directos,calorimetría,energías de enlace,A,university,medium
+1536,"Cuando un gas se condensa, ΔS:",disminuye,aumenta,cero,infinito,A,university,medium
+1537,La espontaneidad ΔG se determina:,ΔG = ΔH − TΔS,ΔH = ΔG + TΔS,ΔS = ΔH − TΔG,ΔG = TΔS − ΔH,A,university,medium
+1538,"En equilibrios heterogéneos, Kc excluye:",sólidos puros,líquidos puros,gas,especies,A,university,medium
+1539,pKa + pKb para pareja conjugada es:,14,7,0,variable,A,university,medium
+1540,Las reglas de Fajans predicen:,carácter iónico/covalente,punto de fusión,color,olor,A,university,medium
+1541,La energía reticular generalmente:,aumenta al disminuir el radio,i.a.,independiente,disminuye con carga,A,university,medium
+1542,El número de oxidación de Cr en Cr₂O₇²⁻ es:,6,3,2,4,A,university,medium
+1543,Una celda galvánica se escribe:,Zn|Zn²⁺||Cu²⁺|Cu,Cu|Cu²⁺||Zn²⁺|Zn,Pt|H₂|H⁺||Ag⁺|Ag,Ni|Ni²⁺||Fe²⁺|Fe,A,university,medium
+1544,La ecuación de Nernst es:,E = E° − (RT/nF) ln Q,E = E° + (RT/nF) ln Q,E = RT ln K,E = E°/Q,A,university,medium
+1545,"En disolución diluida, la actividad ≈:",concentración,presión,moles,volumen,A,university,medium
+1546,La ley de Henry dice que solubilidad ∝:,presión parcial,temperatura,volumen,densidad,A,university,medium
+1547,La ley de Raoult dice:,P_solvente = X_solvente·P°,P_solvente = X_soluto·P°,P_total = P°/X,P = nRT/V,A,university,medium
+1548,El aumento de punto de ebullición ΔTb es:,Kb·m,Kf·m,m/Kb,Kb/m,A,university,medium
+1549,El punto triple en diagrama de fases es donde:,coexisten los tres,solo sólido/líquido,solo vapor/líquido,ninguno,A,university,medium
+1550,La energía de activación es:,barrera entre reactivos y estado de transición,ΔH,ΔG,ΔS,A,university,medium
+1551,Un catalizador aumenta la velocidad al:,reducir Ea,aumentar ΔG,consumir reactivos,aumentar T,A,university,medium
+1552,Una reacción con ΔG < 0 es:,espontánea,no espontánea,en equilibrio,imposible,A,university,medium
+1553,La ecuación de van der Waals corrige:,volumen molecular y fuerzas,ΔH y ΔS,presión parcial,energía cinética,A,university,medium
+1554,La ley de Graham: velocidad ∝:,1/√M,√M,M,1/M,A,university,medium
+1555,La destilación fraccionada separa por:,volatilidad relativa,polaridad,tamaño,adsorción,A,university,medium
+1556,"En CCM, Rf =:",distancia soluto/frente solvente,al revés,altura,anchura,A,university,medium
+1557,Protones aromáticos en RMN aparecen cerca de:,7 ppm,1 ppm,0 ppm,10 ppm,A,university,medium
+1558,Protones aldehído aparecen a:,9–10 ppm,1–2 ppm,5 ppm,12 ppm,A,university,medium
+1559,El estiramiento C=O en IR a:,1700 cm⁻¹,3300 cm⁻¹,2250 cm⁻¹,1500 cm⁻¹,A,university,medium
+1560,El estiramiento O–H en IR a:,3300 cm⁻¹,1700 cm⁻¹,2100 cm⁻¹,2850 cm⁻¹,A,university,medium
+1561,C=O conjugado absorbe a:,1680 cm⁻¹,1700 cm⁻¹,1750 cm⁻¹,1600 cm⁻¹,A,university,medium
+1562,La tautomería ceto-enol es:,catalizada por ácidos/bases,solo calor,luz,ninguna,A,university,medium
+1563,E/Z usa:,reglas CIP,IUPAC,Arrhenius,Avogadro,A,university,medium
+1564,R/S usa:,prioridad CIP,nernst,Le Châtelier,Hess,A,university,medium
+1565,"En Fischer, enlaces horizontales:",proyectan hacia adelante,hacia atrás,en plano,son iónicos,A,university,medium
+1566,Un compuesto meso es:,aciral pese a centros,siempre quiral,activo ópticamente,rácemico,A,university,medium
+1567,Una mezcla racémica:,enantiómeros iguales e inactiva,rota luz,un enantiómero,aciral,A,university,medium
+1568,Desplazamiento al rojo UV-Vis:,λmax a mayor,λmax a menor,intensidad baja,ninguno,A,university,medium
+1569,Wittig no estabilizado da:,alqueno Z,alqueno E,50/50,ninguno,A,university,medium
+1570,Grignard se prepara con:,RX + Mg en éter,RX + Zn,RX + Li,RX + Pt,A,university,medium
+1571,Grignard se destruye con:,agua,nitrógeno,argón,oxígeno,A,university,medium
+1572,Hidroboración convierte en:,anti-Markovnikov,Markovnikov,aleatorio,ninguno,A,university,medium
+1573,HBr en alquenos da:,Markovnikov,anti-Markovnikov,radi,ninguno,A,university,medium
+1574,E₁ requiere:,substrato terciario y base débil,base fuerte,iniciador radical,solo ácido,A,university,medium
+1575,E₂ requiere:,base fuerte y anti-periplanar,ácido,radical,solo calor,A,university,medium
+1576,Reordenación Pinacol da:,cetonas,alcoholes,éteres,alcanos,A,university,medium
+1577,Beckmann da:,amidas,nitrilos,éteres,ácidos,A,university,medium
+1578,Baeyer–Villiger da:,ésteres,alcoholes,amidas,alcanos,A,university,medium
+1579,Diels–Alder favorece:,endo,exo,radical,iónico,A,university,medium
+1580,Cope es:,"sigmatrópico [3,3]","[1,5]-shift","[2,3]-shift",radical,A,university,medium
+1581,Ozonólisis da:,carbonilos,alcanos,alcoholes,éteres,A,university,medium
+1582,IE tendencia:,aumenta período,disminuye,constante,aleatorio,A,university,medium
+1583,Radio atómico:,aumenta grupo,disminuye,constante,aleatorio,A,university,medium
+1584,Electronegatividad:,aumenta período,disminuye,constante,aleatorio,A,university,medium
+1585,Caracter metálico:,aumenta grupo,disminuye,aleatorio,ninguno,A,university,medium
+1586,Fuerza ácido binario:,aumenta grupo,disminuye,igual,aleatorio,A,university,medium
+1587,Acidez oxoácidos:,más O = más fuerte,tamaño,base,pH,A,university,medium
+1588,CN⁻ es:,ligando fuerte,ligando débil,medio,no ligando,A,university,medium
+1589,H₂O es:,ligando débil,fuerte,medio,no ligando,A,university,medium
+1590,Efecto quelato:,aumenta estabilidad,disminuye,igual,impredecible,A,university,medium
+1591,HSAB: CN⁻ se une a:,ácidos blandos,ácidos duros,todos,ninguno,A,university,medium
+1592,[Cu(H₂O)₆]²⁺ CN:,6,4,2,8,A,university,medium
+1593,CFSE influye:,color,solubilidad,olor,magnetismo,A,university,medium
+1594,Precipita si Q:,> Ksp,< Ksp,#NAME?,ninguno,A,university,medium
+1595,Solubilidad CaCO₃ aumenta en:,medio ácido,básico,neutro,orgánico,A,university,medium
+1596,Hidróxidos metálicos precipitan a:,pH alto,pH bajo,neutro,depende,A,university,medium
+1597,ΔH≈:,Σ enlaces rotos – Σ formados,entalpía,T°,pH,A,university,medium
+1598,Calorímetro bomba mide:,ΔH_comb,p.m.,p.e.,pH,A,university,medium
+1599,Eq. peso H₂SO₄ = M/2 por:,2 H⁺ por molécula,1,3,4,A,university,medium
+1600,Normalidad =:,equivalentes/L,mol/L,g/L,moles disolvente,A,university,medium
+1601,Molalidad vs molaridad:,kg disolvente,L disolución,g soluto,moles soluto,A,university,medium
+1602,Neutralizar derrame ácido usas:,NaHCO₃,HCl,NaOH,acetona,A,university,medium
+1603,Fenolftaleína cambia a:,pH 8.3–10,4–6,6–8,10–12,A,university,medium
+1604,Bureta debe enjuagarse con:,titulante,agua,ácido,base,A,university,medium
+1605,Análisis gravimétrico mide:,masa del precipitado,volumen titulante,color,olor,A,university,medium
+1606,Microondas en orgánica:,acelera,reducir,nada,inhibe,A,university,medium
+1607,Química verde promueve:,prevención de desechos,eliminación,generación de residuos,ninguno,A,university,medium
+1608,¿Qué símbolo de término corresponde al estado fundamental del átomo de carbono?,3P₀,3P₁,1D₂,5S₂,A,university,hard
+1609,"Según el teorema de Koopmans, la energía de ionización equivale a:",–ε_HOMO,–ε_LUMO,ε_HOMO,ε_LUMO,A,university,hard
+1610,El principio de Franck–Condon describe:,transiciones electrónicas verticales,transferencia de energía por colisiones,equilibrio térmico,relajación vibracional,A,university,hard
+1611,¿Qué aproximación desprecia el acoplamiento espín–órbita en átomos ligeros?,acoplamiento LS,acoplamiento jj,dieléctrico,adiabático,A,university,hard
+1612,El principio variacional garantiza que las energías calculadas sean:,un límite superior a la energía real de estado basal,un límite inferior,exactas,cero,A,university,hard
+1613,"En la teoría del funcional de la densidad, los orbitales de Kohn–Sham reproducen:",la densidad electrónica,la energía total,la energía cinética,la entropía,A,university,hard
+1614,El funcional de intercambio-correlación en DFT tiene en cuenta:,intercambio y correlación electrónica,repulsión nuclear,energía cinética,acoplamiento de espín,A,university,hard
+1615,¿Qué orbital molecular es no enlazante en el agua?,par solitario de oxígeno,σ_CC,σ_CH,π_CC,A,university,hard
+1616,"En la teoría de Hartree–Fock, el operador de Fock excluye:",la correlación electrónica,el intercambio electrónico,la energía cinética,la atracción nuclear,A,university,hard
+1617,"En CIS (Interacción de Configuración Simples), se incluyen:",excitaciones simples,excitaciones dobles,excitaciones triples,ninguna,A,university,hard
+1618,El método CCSD incluye:,excitaciones simples y dobles,solo excitaciones simples,solo dobles,ninguna,A,university,hard
+1619,La teoría de perturbaciones de Møller–Plesset (MP₂) estima:,la correlación electrónica,la masa total,la entropía,el acoplamiento de espín,A,university,hard
+1620,El teorema de Wigner–Eckart relaciona:,elementos de matriz y acoplamiento angular,energía cinética y potencial,presión y volumen,temperatura y entropía,A,university,hard
+1621,El teorema de Hellmann–Feynman proporciona:,la fuerza sobre los núcleos a partir de la función de onda electrónica,el operador de energía cinética,el acoplamiento espín–órbita,la energía de intercambio,A,university,hard
+1622,¿Qué base incluye funciones de polarización?,6-31G*,STO-3G,MINIMAL,AUG-cc-pVDZ,A,university,hard
+1623,Un conjunto de bases de ondas planas se usa comúnmente en:,cálculos periódicos de estado sólido,química cuántica molecular,termodinámica,cinética,A,university,hard
+1624,La ecuación de Schrödinger dependiente del tiempo gobierna:,la dinámica de estados electrónicos excitados,la energía de estado basal,la distribución estadística,la termodinámica no equilibrada,A,university,hard
+1625,El factor de Franck–Condon cuantifica:,solapamientos vibracionales,coupling electrónico,spin nuclear,fusión nuclear,A,university,hard
+1626,"En la teoría de Marcus, la energía de activación para la transferencia de electrones depende de:",la energía de reorganización y la fuerza impulsora,la viscosidad del disolvente,el pH,la presión,A,university,hard
+1627,¿Qué función describe la distribución de probabilidad en el espacio de fases?,distribución de Boltzmann,delta de Dirac,Fermi–Dirac,Bose–Einstein,A,university,hard
+1628,La función de partición Q se relaciona con:,los potenciales termodinámicos,las energías orbitales,las constantes cinéticas,solo las entropías,A,university,hard
+1629,Las relaciones de Maxwell derivan de:,diferenciales exactos de potenciales termodinámicos,fluctuaciones estadísticas,leyes de Newton,mecánica cuántica,A,university,hard
+1630,El factor de Boltzmann es:,exp(−E/kT),E/kT,ln(E/kT),exp(E/kT),A,university,hard
+1631,"En el ensamble canónico, la temperatura es:",fija,variable,infinita,cero,A,university,hard
+1632,La ecuación de Sackur–Tetrode ofrece:,la entropía de un gas monatomico ideal,la presión de un gas,la entalpía en sólidos,la energía libre,A,university,hard
+1633,La paradoja de Gibbs se refiere a:,la entropía de mezcla de gases idénticos,la eficiencia de combustión,las velocidades de Arrhenius,la ecuación de van ’t Hoff,A,university,hard
+1634,¿Qué modelo describe los fonones en un cristal?,modelo de Debye,modelo de Einstein,modelo de Nernst,modelo de Arrhenius,A,university,hard
+1635,El parámetro de Grüneisen describe:,el coeficiente de expansión térmica,el calor específico,el punto de fusión,la energía almacenada,A,university,hard
+1636,"A bajas temperaturas en metales, la resistividad está dominada por:",resistividad residual,dispersión por fonones,dispersión electrón–electrón,dispersión por impurezas,A,university,hard
+1637,La ley de Wiedemann–Franz relaciona:,conductividad térmica y eléctrica,viscosidad y conductividad,calor específico y expansión,presión y volumen,A,university,hard
+1638,"En RMN, el desplazamiento químico δ se referencia a:",TMS (tetrametilsilano),agua,acetona,benceno,A,university,hard
+1639,"En espectroscopia EPR, la desviación del factor g indica:",la fuerza del acoplamiento espín–órbita,la intensidad del campo magnético,la temperatura,el número de electrones,A,university,hard
+1640,¿Qué constante de acoplamiento en RMN surge de la geometría cis?,vicinal ~10 Hz,geminal ~15 Hz,lejana ~1 Hz,ninguna,A,university,hard
+1641,La regla de Laporte prohíbe:,transiciones d–d en complejos centrosimétricos,p→p,n→n,σ→σ,A,university,hard
+1642,El efecto Jahn–Teller es más pronunciado para la configuración octaédrica:,d₉ de alto espín,d₀,d₅,d₃,A,university,hard
+1643,La ley límite de Debye–Hückel se aplica a baja:,fuerza iónica,concentración,presión,temperatura,A,university,hard
+1644,La ecuación de Nernst–Planck describe:,el flujo de iones bajo gradientes de concentración y potencial eléctrico,solo difusión,solo convección,solo migración,A,university,hard
+1645,En voltametría cíclica,59 mV,100 mV,10 mV,150 mV,A,university,hard
+1646,La ecuación de Butler–Volmer describe:,cinética electroquímica de electrodos,cinética en el volumen,energía de activación,flujo de calor,A,university,hard
+1647,La pendiente de Tafel es:,2.303 RT/αnF,RT/F,RT/2F,RT/,A,university,hard
+1648,"En espectrometría de masas ESI, los iones con carga múltiple se forman por:",protonación en disolución,fragmentación,formación de radicales,captura de electrones,A,university,hard
+1649,MALDI utiliza:,desorción con láser,evaporación de matriz,electroaspersión,ionización química,A,university,hard
+1650,La longitud de Debye escala como:,1/√I,1/I,I,√I,A,university,hard
+1651,El potencial zeta indica:,carga superficial en el plano de corte,pH de la fase, fuerza iónica,viscosidad,A,university,hard
+1652,El efecto Pockels es:,electro-óptico lineal,no lineal,magneto-óptico,fotoeléctrico,A,university,hard
+1653,La generación de segundo armónico requiere:,cristales no centrosimétricos,todos los cristales,materiales amorfos,metales,A,university,hard
+1654,La gráfica de Stern–Volmer para extinción dinámica es:,lineal vs [Q],no lineal vs [Q],lineal vs 1/[Q],ninguna,A,university,hard
+1655,La eficiencia de FRET es proporcional a:,1/r⁶,1/r²,1/r⁴,1/r⁸,A,university,hard
+1656,La aproximación de Born–Oppenheimer asume:,que el movimiento electrónico y nuclear se puede separar,que la repulsión nuclear es despreciable,que la energía cinética es constante,que el acoplamiento espín–órbita es cero,A,university,hard
+1657,La función de partición en el ensamble microcanónico es:,el número de estados accesibles,los niveles de energía,la presión,la temperatura,A,university,hard
+1658,El rendimiento cuántico de fluorescencia es:,fotones emitidos/fotones absorbidos,moléculas excitadas/fotones absorbidos,fotones absorbidos/fotones emitidos,moléculas excitadas/fotones emitidos,A,university,hard
+1659,La región invertida de Marcus ocurre cuando:,la fuerza impulsora excede la energía de reorganización,la fuerza impulsora es cero,la energía de reorganización es cero,la temperatura es demasiado alta,A,university,hard
+1660,La constante de Hamaker cuantifica:,la atracción van der Waals entre partículas,módulo elástico,constante dieléctrica,viscosidad,A,university,hard
+1661,Un análisis de Weinhold proporciona:,energías de orbitales naturales de enlace (NBO),cargas parciales,entalpías,entropía,A,university,hard
+1662,Las ecuaciones de Pitzer corrigen:,coeficientes de actividad a alta fuerza iónica,a baja,por presión,por temperatura,A,university,hard
+1663,La ecuación de Eyring relaciona la constante de velocidad con:,entalpía y entropía de activación,solo energía de activación,solo temperatura,solo concentración,A,university,hard
+1664,La entalpía de van ’t Hoff ΔH_vH se deriva de:,la dependencia de la constante de equilibrio con la temperatura,dependencia con la presión,solo capacidad calorífica,solo entropía,A,university,hard
+1665,Las integrales de Kirkwood–Buff relacionan:,funciones de distribución radial con propiedades termodinámicas,líneas espectrales con concentraciones,pKa con pKb,ninguna,A,university,hard
+1666,El teorema de fluctuación-disipación conecta:,funciones de respuesta con fluctuaciones espontáneas,energía cinética con potencial,presión con volumen,entropía con temperatura,A,university,hard
+1667,Las relaciones de Green–Kubo calculan:,coeficientes de transporte a partir de funciones de correlación temporal,constantes de velocidad a partir de energía de activación,entropía a partir de capacidad calorífica,temperatura de inversión,A,university,hard
+1668,Las relaciones recíprocas de Onsager se aplican a:,procesos de flujo acoplados,procesos desacoplados,transiciones cuánticas,ninguna,A,university,hard
+1669,La relación de Einstein en el movimiento browniano vincula el coeficiente de difusión con:,temperatura y coeficiente de fricción,viscosidad y presión,solo entropía,solo entalpía,A,university,hard
+1670,La expansión de energía libre de Landau describe:,transiciones de fase mediante parámetros de orden,degeneración cuántica,expansión térmica,viscosidad,A,university,hard
+1671,La ecuación de Debye–Hückel–Onsager describe:,ley límite de conductividad eléctrica,dependencia con presión,dependencia con viscosidad,conductividad térmica,A,university,hard
+1672,El parámetro de Flack en cristalografía cuantifica:,la inversión de la estructura absoluta,el volumen de la celda unitaria,el factor R,ninguna,A,university,hard
+1673,El análisis de carga de Bader particiona:,la densidad electrónica en cuencas atómicas,energías orbitales en contribuciones de MO,pH en contribuciones de pKa,ninguna,A,university,hard
+1674,La construcción de Wulff predice:,la forma cristalina de equilibrio,separación de líneas espectrales,tendencias de reactividad,coeficientes de difusión,A,university,hard
+1675,El factor g de Landé describe:,la separación del momento magnético,energías orbitales,energías de activación,entropía,A,university,hard
+1676,Las relaciones de Kramers–Kronig enlazan:,partes real e imaginaria de funciones de respuesta,k y T,k y p,k y V,A,university,hard
+1677,La dispersión dinámica de luz mide:,la distribución de tamaño de partículas,absorbancia,conductividad,pH,A,university,hard
+1678,La ecuación de Debye–Scherrer da:,el tamaño de cristalito a partir del ensanchamiento de picos de DRX,punto de fusión a partir de capacidad calorífica,pKa a partir de conductividad,ninguna,A,university,hard
+1679,La técnica ELS mide:,movilidad electroforética,absorbancia,presión,temperatura,A,university,hard
+1680,La ecuación de Cottrell describe:,la decaída de corriente en cronoamperometría,la desactivación de catalizadores,cambio de presión,pérdida de masa,A,university,hard
+1681,La ecuación de Koutecký–Levich analiza:,cinética de reacción y transporte de masa en electrodos de disco giratorio,constantes de equilibrio,energía de activación,ninguna,A,university,hard
+1682,¿Cuál es el estado de la materia del agua a temperatura ambiente?,Líquido,Sólido,Gaseoso,Plasma,A,general ,easy
+1683,¿Qué gas respiramos mayoritariamente?,Nitrógeno,O₂,CO₂,H₂,A,general ,easy
+1684,¿Cuál es la fórmula del bicarbonato de sodio?,NaHCO₃,KHCO₃,NaCO₃,NaCl,A,general ,easy
+1685,¿Qué elemento se representa con el símbolo K?,Potasio,Calcio,Magnesio,Sodio,A,general ,easy
+1686,¿Cuál es el número de Avogadro?,"6,02×10²³","3,00×10⁸","9,81","6,67×10⁻11",A,general ,easy
+1687,¿Qué unidad mide la cantidad de sustancia?,Mol,Gramo,Litro,Pascal,A,general ,easy
+1688,¿Cómo se llama HCl en solución acuosa?,Ácido clorhídrico,Ácido sulfúrico,Ácido nítrico,Ácido acético,A,general ,easy
+1689,¿Qué color de llama produce el sodio?,Amarillo,Rojo,Azul,Verde,A,general ,easy
+1690,¿Cuál es la masa molar del CO₂?,44 g/mol,28 g/mol,18 g/mol,32 g/mol,A,general ,easy
+1691,¿Qué gas incoloro es responsable del efecto invernadero?,CO₂,O₂,N₂,He,A,general ,easy
+1692,¿Qué es un anión?,Ion con carga negativa,Ion con carga positiva,Átomo neutro,Catión,A,general ,easy
+1693,¿Qué ion H⁺ define la acidez?,Protón,Electrón,Neutrón,Átomo,A,general ,easy
+1694,¿Cuál es la fórmula del etanol?,C₂H₅OH,CH₃OH,C₂H₄,CH₄,A,general ,easy
+1695,¿Qué tendencia sigue la electronegatividad en la tabla periódica?,Aumenta hacia arriba y a la derecha,Disminuye hacia arriba y a la derecha,Aumenta hacia abajo y a la izquierda,Es constante,A,general ,easy
+1696,¿Cuál es el metal líquido a temperatura ambiente?,Mercurio,Plomo,Aluminio,Hierro,A,general ,easy
+1697,¿Qué elemento se usa en termómetros antiguos?,Mercurio,Helio,Nitrógeno,Oro,A,general ,easy
+1698,¿Cuál es la fórmula del amoníaco?,NH₃,NH₄,H₂O,NO₂,A,general ,easy
+1699,¿Qué componente del aire es esencial para la combustión?,Oxígeno,Nitrógeno,Argón,Neón,A,general ,easy
+1700,¿Qué es la electrólisis?,Descomposición por corriente eléctrica,Fusión por calor,Sublimación,Combustión,A,general ,easy
+1701,¿Cómo se llama NaCl comúnmente?,Sal de mesa,Bicarbonato de sodio,Azúcar,Fertilizante,A,general ,easy
+1702,¿Qué pH tiene el vinagre?,~3,7,14,10,A,general ,easy
+1703,¿Qué tipo de enlace une Na y Cl en NaCl?,Iónico,Covalente,Metálico,Puente de hidrógeno,A,general ,easy
+1704,¿Cuál es el principal componente del gas natural?,Metano,Etano,Propano,Butano,A,general ,easy
+1705,¿Qué gas se libera al mezclar un ácido con un carbonato?,CO₂,O₂,H₂,N₂,A,general ,easy
+1706,¿Qué color de llama da el cobre?,Verde,Azul,Amarillo,Rojo,A,general ,easy
+1707,¿Qué símbolo representa la energía libre de Gibbs?,ΔG,ΔH,ΔS,ΔE,A,general ,easy
+1708,¿Cuál es la molécula más pequeña?,H₂,O₂,CO₂,CH₄,A,general ,easy
+1709,¿Qué isómero tiene diferente disposición espacial sin cambiar fórmula?,Estructural,Geométrico,Óptico,Conformacional,A,general ,easy
+1710,¿Qué sustancia es un electrolito fuerte?,NaCl,Azúcar,Etanol,Methanol,A,general ,easy
+1711,¿Qué instrumento mide la conductividad eléctrica de una disolución?,Conductorímetro,Termómetro,pH-metro,Barómetro,A,general ,easy
+1712,¿Qué gas ocupa más volumen a la misma presión y temperatura?,Todos igual,O₂,CO₂,H₂,A,general ,easy
+1713,¿Qué ley describe la relación P·V a T constante?,Ley de Boyle,Ley de Charles,Ley de Avogadro,Ley de Gay-Lussac,A,general ,easy
+1714,¿Cómo se llama la capa de electrones más cercana al núcleo?,Capa K,Capa L,Capa M,Capa N,A,general ,easy
+1715,¿Qué número cuántico describe la energía principal?,n,l,m,s,A,general ,easy
+1716,¿Qué propiedad define la tendencia a perder electrones?,Potencial de ionización,Electronegatividad,Radio atómico,Electroafinidad,A,general ,easy
+1717,¿Qué sustancia muestra pH > 7?,NaOH,HCl,CO₂,H₂SO₄,A,general ,easy
+1718,¿Qué fuerza intermolecular es más fuerte en el agua?,Puente de hidrógeno,Van der Waals,Dipolo-dipolo,London,A,general ,easy
+1719,¿Qué gas noble se usa en globos de fiesta?,Helio,Neón,Argón,Xenón,A,general ,easy
+1720,¿Qué elemento es esencial para la tiroides?,Yodo,Flúor,Cloro,Bromo,A,general ,easy
+1721,¿Qué unidad mide la presión osmótica?,atm,Pa,M,kg,A,general ,easy
+1722,¿Qué gas forma burbujas en ácido y calcio?,H₂,CO₂,O₂,N₂,A,general ,easy
+1723,¿Cuál es el nombre de NaHCO₃?,Bicarbonato de sodio,Sulfato de sodio,Cloruro de sodio,Carbonato de sodio,A,general ,easy
+1724,¿Qué fórmula describe la ley de Henry?,C = kP,P = kC,V = kT,n = kT,A,general ,easy
+1725,¿Qué es la molalidad?,mol/kg de disolvente,mol/L de disolución,g/L de disolución,kg/mol,A,general ,easy
+1726,¿Qué unidad se usa para la concentración en química?,M (molaridad),% en masa,ppm,psi,A,general ,easy
+1727,¿Qué gas se produce en la fermentación alcohólica?,CO₂,O₂,H₂,N₂,A,general ,easy
+1728,¿Qué tipo de reacción es la combustión completa?,Reacción redox,Reacción ácido-base,Reacción de precipitación,Síntesis,A,general ,easy
+1729,¿Qué compuesto es un alcano?,Propano,Propeno,Propino,Benceno,A,general ,easy
+1730,¿Qué compuesto es un alqueno?,Eteno,Etano,Etino,Etanol,A,general ,easy
+1731,¿Qué compuesto es un alquino?,Etino,Eteno,Etano,Etanol,A,general ,easy
+1732,¿Qué compuesto es un alcohol?,Etanol,Etano,Eteno,Etino,A,general ,easy
+1733,¿Qué compuesto es un éster?,Acetato de metilo,Etanol,Ácido acético,Metanol,A,general ,easy
+1734,¿Qué es el ion hidronio?,H₃O⁺,H⁺,OH⁻,H₂O,A,general ,easy
+1735,¿Cuál es el pH de una solución 1 M de NaOH?,14,0,7,1,A,general ,easy
+1736,¿Qué gas se mide con un eudiometro?,CO₂,O₂,He,Ar,A,general ,easy
+1737,¿Qué es el índice de refracción?,n=c/v,v=c/n,c=n·v,c=n+v,A,general ,easy
+1738,¿Qué propiedad física separa líquidos en destilación?,punto de ebullición,solubilidad,polaridad,microestructura,A,general ,easy
+1739,¿Qué reactivo se usa en titulación ácido-base?,Fenolftaleína,Azul de bromotimol,Marrón de metilo,Rojo de metilo,A,general ,easy
+1740,¿Qué es el punto equivalencia en una titulación?,Cuando moles de base = moles de ácido,cuando pH=7,cuando indicador cambia,cuando volumen inicial,A,general ,easy
+1741,¿Qué es la reacción de desplazamiento simple?,A + BC → B + AC,AB + CD → AD + CB,A + B → AB,AB → A + B,A,general ,easy
+1742,¿Qué es la reacción de doble desplazamiento?,AB + CD → AD + CB,A + B → AB,AB → A + B,A + BC → B + AC,A,general ,easy
+1743,¿Qué es la disolución saturada?,cuando ya no se disuelve más soluto,cuando nada se disuelve,cuando todo se disuelve,cuando soluto precipita,A,general ,easy
+1744,¿Qué sustancia es anfótera?,Al₂O₃,Na₂O,CO₂,SF₆,A,general ,easy
+1745,¿Cómo se llama la energía necesaria para romper un enlace?,Energía de enlace,Energía de activación,Entalpía libre,Entropía,A,general ,easy
+1746,¿Qué mide un espectrofotómetro?,Absorbancia,Conductividad,pH,Presión,A,general ,easy
+1747,¿Qué describe la entalpía de reacción?,ΔH,ΔG,ΔS,ΔE,A,general ,easy
+1748,¿Qué describe la entropía?,ΔS,ΔH,ΔG,ΔE,A,general ,easy
+1749,¿Qué describe la energía libre de Gibbs?,ΔG,ΔH,ΔS,ΔE,A,general ,easy
+1750,¿Qué condición hace espontánea una reacción?,ΔG < 0,ΔH > 0,ΔS < 0,ΔG > 0,A,general ,easy
+1751,¿Qué disolvente se usa para disoluciones polares?,Agua,Hexano,Benceno,Metano,A,general ,easy
+1752,¿Qué disolvente es apolar?,Hexano,Agua,Metanol,Etanol,A,general ,easy
+1753,¿Qué gas noble se usa en lámparas de neón?,Neón,Helio,Argón,Xenón,A,general ,easy
+1754,¿Qué gas noble se usa en lámparas fluorescentes?,Argón,Neón,Helio,Xenón,A,general ,easy
+1755,¿Qué gas se produce en electrólisis del agua en el cátodo?,H₂,O₂,Cl₂,NO₂,A,general ,easy
+1756,¿Qué gas se produce en el ánodo en electrólisis del agua?,O₂,H₂,Cl₂,H₂O₂,A,general ,easy
+1757,¿Qué indica la constante de disociación Ka?,fuerza del ácido,fuerza de la base,pH,pKa,A,general ,easy
+1758,¿La constante Kb mide?,fuerza de la base,fuerza del ácido,pH,pKb,A,general ,easy
+1759,¿Cuál es la fórmula de los óxidos metálicos típicos?,MO,M₂O₃,MO₂,MO₃,A,general ,easy
+1760,¿Cuál es la fórmula de los anhídridos ácidos?,SO₃,SO₂,NO₂,CO₂,A,general ,easy
+1761,¿Cuál es la fórmula de los hidruros metálicos?,MH,HM,H₂O,HOH,A,general ,easy
+1762,¿Cuál es la fórmula de los peróxidos?,MO₂,MO₃,MO,MO₄,A,general ,easy
+1763,¿Cuál es la fórmula de los hiperóxidos?,MO₂,MO₃,MO₄,MO₅,A,general ,easy
+1764,¿Cuál es el símbolo químico del hierro?,Fe,Ir,H,Fi,A,general ,easy
+1765,¿Cuál es el estado de oxidación del sodio en NaCl?,1,-1,2,0,A,general ,easy
