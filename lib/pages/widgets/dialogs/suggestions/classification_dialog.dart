@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_negative_button.dart';
 import 'package:quimify_client/routes.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class ClassificationDialog extends StatelessWidget {
   const ClassificationDialog({
@@ -39,12 +40,12 @@ class ClassificationDialog extends StatelessWidget {
     Navigator.of(context).pop();
 
     String problemType = classification == Classification.chemicalProblem
-        ? '*problemas químicos*'
-        : 'eso';
+        ? '*${context.l10n.chemicalProblem}*'
+        : context.l10n.that;
 
     MessageDialog(
-      title: '¡Estamos en ello!',
-      details: 'Podremos resolver $problemType en próximas actualizaciones.',
+      title: context.l10n.weAreOnIt,
+      details: context.l10n.weMayResolveInFuture(problemType),
     ).show(context);
   }
 
@@ -56,7 +57,7 @@ class ClassificationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyDialog(
-      title: 'Un momento...',
+      title: context.l10n.oneMoment,
       content: [
         Center(
           child: DialogContentText(
@@ -66,12 +67,12 @@ class ClassificationDialog extends StatelessWidget {
       ],
       actions: [
         DialogButton(
-          text: 'Sí, eso es',
+          text: context.l10n.yesThat,
           onPressed: () => _agreePressed(context),
         ),
         const SizedBox(height: 8),
         DialogNegativeButton(
-          text: 'No, seguir buscando',
+          text: context.l10n.noKeepSearching,
           onPressed: () => _disagreePressed(context),
         ),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quimify_client/internet/accounts/accounts.dart';
 import 'package:quimify_client/pages/accounts/sign_in_page.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class DeleteAccountDialog extends StatefulWidget {
   const DeleteAccountDialog({
@@ -16,14 +17,14 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Eliminar Cuenta'),
-      content: const Text(
-        '¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
+      title: Text(context.l10n.deleteAccount),
+      content: Text(
+        context.l10n.areYouSureYouWantToDeleteYourAccount,
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancelar'),
+          child: Text(context.l10n.cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -56,9 +57,7 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
                 Navigator.pop(context);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text(
-                          'Error al eliminar la cuenta, cierre sesión y vuelva a iniciar sesión para eliminar la cuenta.')),
+                  SnackBar(content: Text(context.l10n.errorDeletingAccount)),
                 );
               }
             }
@@ -71,7 +70,7 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
                   dimension: 20,
                   child: CircularProgressIndicator(),
                 )
-              : const Text('Eliminar'),
+              : Text(context.l10n.delete),
         ),
       ],
     );

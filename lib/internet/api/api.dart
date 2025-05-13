@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io' as io;
 
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as io;
 import 'package:quimify_client/internet/api/env/env.dart';
@@ -10,6 +12,7 @@ import 'package:quimify_client/internet/api/results/molecular_mass_result.dart';
 import 'package:quimify_client/internet/api/results/organic_result.dart';
 import 'package:quimify_client/internet/internet.dart';
 import 'package:quimify_client/internet/api/results/equation_result.dart';
+import 'package:quimify_client/internet/language/language.dart';
 
 class Api {
   static final Api _singleton = Api._internal();
@@ -23,13 +26,13 @@ class Api {
   // Constants:
 
   static const _httpStatusCodeOk = 200;
-  
-  static const _apiVersion = 6;
-  static const _clientVersion = 20;
 
-  static const _authority = 'api.quimify.com';
+  static const _apiVersion = 6;
+  static const _clientVersion = 21;
+
+  static const _authority = 'api2.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
-  
+
   static const _timeout = Duration(seconds: 15);
 
   // Initialize:
@@ -59,10 +62,15 @@ class Api {
   Future<String?> _getBody(String authority, String path, parameters) async {
     String? response;
 
+    final currentLanguage = LanguageService().currentLanguage;
+
     Uri url = Uri.https(authority, path, parameters);
 
     try {
-      http.Response httpResponse = await _client.get(url).timeout(_timeout);
+      http.Response httpResponse = await _client.get(
+        url,
+        headers: {'language': currentLanguage == 'es' ? 'sp' : currentLanguage},
+      ).timeout(_timeout);
 
       if (httpResponse.statusCode == _httpStatusCodeOk) {
         response = utf8.decode(httpResponse.bodyBytes);
@@ -340,6 +348,7 @@ class Api {
 
   Future<OrganicResult?> getOrganicFromStructure(List<int> sequence) async {
     OrganicResult? result;
+    final currentLanguage = LanguageService().currentLanguage;
 
     String? response = await _getBodyWithRetry(
       'organic/name',
@@ -351,6 +360,13 @@ class Api {
     if (response != null) {
       try {
         result = OrganicResult.fromJson(response);
+        // If language is english we need to translate the name by using our translateText function
+        if (currentLanguage == 'en') {
+          final translatedName = await translateText(result.name!, 'en');
+          if (translatedName != null) {
+            result = result.copyWith(name: translatedName);
+          }
+        }
       } catch (error) {
         sendError(
           context: 'Organic from structure JSON',
@@ -385,5 +401,25 @@ class Api {
     }
 
     return result;
+  }
+
+  // Use Firebase
+  Future<String?> translateText(String text, String language) async {
+    try {
+      final result =
+          await FirebaseFunctions.instance.httpsCallable('translateText').call({
+        'text': text,
+        'language': language,
+      });
+
+      return result.data['translatedText'];
+    } on FirebaseFunctionsException catch (e) {
+      sendError(
+        context: 'Translate text',
+        details: e.toString(),
+      );
+
+      return null;
+    }
   }
 }

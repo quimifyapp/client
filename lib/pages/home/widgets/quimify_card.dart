@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:quimify_client/pages/widgets/dialogs/messages/coming_soon_dialog.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class QuimifyCard extends StatefulWidget {
   const QuimifyCard({
@@ -83,7 +84,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
 
   _onPressed(BuildContext context) async {
     if (widget.page == null) {
-      comingSoonDialog.show(context);
+      comingSoonDialog(context).show(context);
       return;
     }
 
@@ -150,7 +151,7 @@ class _QuimifyCardState extends State<QuimifyCard> {
                                 ? widget.customBody!.values.elementAt(_selector)
                                 : widget.body != null
                                     ? widget.body!.values.elementAt(_selector)
-                                    : 'Próximamente',
+                                    : context.l10n.soon,
                             style: TextStyle(
                               fontSize: 16,
                               color: QuimifyColors.primary(context),

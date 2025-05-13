@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/organic/widgets/finding_formula_help_dialog
 import 'package:quimify_client/pages/organic/widgets/naming_help_dialog.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class OrganicPage extends StatelessWidget {
   const OrganicPage({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class OrganicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuimifySectionTitle(
-          title: 'De nombre a fórmula',
-          helpDialog: FindingFormulaHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.fromNameToFormula,
+          helpDialog: const FindingFormulaHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard.custom(
@@ -29,21 +30,21 @@ class OrganicPage extends StatelessWidget {
           },
           page: const FindingFormulaPage(),
         ),
-        const QuimifySectionTitle(
-          title: 'De fórmula a nombre',
-          helpDialog: NamingHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.fromFormulaToName,
+          helpDialog: const NamingHelpDialog(),
         ),
         const SizedBox(height: 15),
-        const QuimifyCard(
+        QuimifyCard(
           body: {
             'CHO – CN': '2-oxoetanonitrilo',
             'CH₃ – CONH₂': 'etanamida',
-            'CH₃ – O – CF₃': 'metil trifluorometil éter',
-            'CN – COOH': 'ácido cianometanoico',
+            'CH₃ – O – CF₃': context.l10n.methylTrifluoromethylEther,
+            'CN – COOH': context.l10n.cyanomethanoicAcid,
             'CH₃ – C Ξ CH': 'prop-1-ino',
             'CH₂ = CBr₂': '1,1-dibromoeteno',
           },
-          page: NamingPage(),
+          page: const NamingPage(),
         ),
       ],
     );

@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/widgets/dialogs/messages/message_dialog.dar
 import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class QuimifySearchBar extends StatefulWidget {
   const QuimifySearchBar({
@@ -81,10 +82,11 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
       // If there are more compounds than the max, show a message
       if (compounds.length > _maxInorganicCompounds) {
         if (context.mounted) {
-          const MessageDialog(
-            title: 'Aviso',
-            details:
-                'Sólo se pueden procesar $_maxInorganicCompounds compuestos a la vez.',
+          MessageDialog(
+            title: context.l10n.warning,
+            details: context.l10n.onlyXAmountCanBeProcessedAtATime(
+              _maxInorganicCompounds,
+            ),
           ).show(context);
         }
       }
@@ -112,10 +114,10 @@ class _QuimifySearchBarState extends State<QuimifySearchBar> {
 
         // Show warning if there were more compounds
         if (compounds.length > 1 && context.mounted) {
-          const MessageDialog(
-            title: 'Aviso',
+          MessageDialog(
+            title: context.l10n.warning,
             details:
-                'Para compuestos orgánicos, solo se puede procesar 1 a la vez.',
+                context.l10n.forOrganicCompoundsOnlyOneCanBeProcessedAtATime,
           ).show(context);
         }
       }

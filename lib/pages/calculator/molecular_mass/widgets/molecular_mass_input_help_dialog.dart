@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class MolecularMassInputHelpDialog extends StatelessWidget {
   const MolecularMassInputHelpDialog({Key? key}) : super(key: key);
@@ -10,31 +11,31 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Concepto de mol': const [
+        context.l10n.moleConcept: [
           Center(
             child: DialogContentText(
-              richText: 'Un mol significa 6.022 x 10²³ cosas. Este número se '
-                  'conoce como la constante de Avogadro.',
+              richText: context.l10n
+                  .aMoleRepresentsOfMatterThisNumberIsKnownAsAvogadroConstant,
             ),
           ),
           DialogContentText(
-            richText: '*Ejemplo:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: DialogContentText(
-              richText: 'Un mol de coches son 6.022 x 10²³ coches.',
+              richText: context.l10n.aMoleOfCarsAre,
             ),
           ),
         ],
-        'Elementos': [
-          const Center(
+        context.l10n.items: [
+          Center(
             child: DialogContentText(
-              richText: 'La masa molecular de un átomo es la masa, en gramos, de '
-                  '1 mol de ese átomo.',
+              richText: context.l10n
+                  .theMolecularMassOfAnAtomIsTheMassInGramsOfOneMolOfThatAtom,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplos:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Center(
             child: RichText(
@@ -44,13 +45,13 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
-                children: const [
-                  TextSpan(text: 'H (hidrógeno)   ➔   '),
-                  TextSpan(
+                children: [
+                  TextSpan(text: 'H (${context.l10n.hydrogen})   ➔   '),
+                  const TextSpan(
                     text: '1.01',
                     style: TextStyle(color: Colors.blue),
                   ),
-                  TextSpan(text: ' g/mol'),
+                  const TextSpan(text: ' g/mol'),
                 ],
               ),
             ),
@@ -63,32 +64,32 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
-                children: const [
-                  TextSpan(text: 'O (oxígeno)   ➔   '),
-                  TextSpan(
+                children: [
+                  TextSpan(text: 'O (${context.l10n.oxygen})   ➔   '),
+                  const TextSpan(
                     text: '15.99',
                     style: TextStyle(color: Colors.red),
                   ),
-                  TextSpan(text: ' g/mol'),
+                  const TextSpan(text: ' g/mol'),
                 ],
               ),
             ),
           ),
         ],
-        'Masa molecular': [
-          const Center(
+        context.l10n.molecularMass: [
+          Center(
             child: DialogContentText(
-              richText: 'La masa molecular de un compuesto es la suma de las '
-                  'masas de sus átomos.',
+              richText: context.l10n
+                  .theMolecularMassOfACompoundIsTheSumOfTheMassesOfItsAtoms,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'El H₂O (agua) tiene 2 átomos de hidrógeno y 1 de '
-                  'oxígeno en su molécula. Su masa molecular es:',
+              richText: context.l10n
+                  .waterHas2HydrogenAtomsAnd1OxygenAtomInItsMoleculeItsMolecularMassIs,
             ),
           ),
           Center(

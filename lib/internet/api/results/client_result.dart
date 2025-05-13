@@ -1,12 +1,17 @@
 import 'dart:convert';
+import 'package:quimify_client/internet/language/language.dart';
 
 class ClientResult {
   final bool updateAvailable;
   final bool? updateNeeded;
-  final String? updateDetails;
+  final String? updateDetailsSpanish;
+  final String? updateDetailsEnglish;
 
   final bool messagePresent;
-  final String? messageTitle, messageDetails;
+  final String? messageTitleSpanish;
+  final String? messageTitleEnglish;
+  final String? messageDetailsSpanish;
+  final String? messageDetailsEnglish;
   final bool? messageLinkPresent;
   final String? messageLinkName, messageLink;
 
@@ -23,10 +28,13 @@ class ClientResult {
   ClientResult(
     this.updateAvailable,
     this.updateNeeded,
-    this.updateDetails,
+    this.updateDetailsSpanish,
+    this.updateDetailsEnglish,
     this.messagePresent,
-    this.messageTitle,
-    this.messageDetails,
+    this.messageTitleSpanish,
+    this.messageTitleEnglish,
+    this.messageDetailsSpanish,
+    this.messageDetailsEnglish,
     this.messageLinkPresent,
     this.messageLinkName,
     this.messageLink,
@@ -45,10 +53,13 @@ class ClientResult {
     return ClientResult(
       json['updateAvailable'],
       json['updateNeeded'],
-      json['updateDetails'],
+      json['updateDetailsSpanish'],
+      json['updateDetailsEnglish'],
       json['messagePresent'],
-      json['messageTitle'],
-      json['messageDetails'],
+      json['messageTitleSpanish'],
+      json['messageTitleEnglish'],
+      json['messageDetailsSpanish'],
+      json['messageDetailsEnglish'],
       json['messageLinkPresent'],
       json['messageLinkLabel'],
       json['messageLink'],

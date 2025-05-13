@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/objects/history_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class NamingHelpDialog extends StatelessWidget {
   const NamingHelpDialog({
@@ -28,7 +29,7 @@ class NamingHelpDialog extends StatelessWidget {
 
     return HelpSlidesDialog(
       titleToContent: {
-        'Sustituyentes': [
+        context.l10n.substituents: [
           Container(
             decoration: exampleButtonBorder,
             height: 60,
@@ -60,7 +61,7 @@ class NamingHelpDialog extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'Hidrógeno',
+                  context.l10n.hydrogen,
                   style: TextStyle(
                     color: QuimifyColors.teal(),
                     fontSize: 16,
@@ -77,14 +78,16 @@ class NamingHelpDialog extends StatelessWidget {
               ],
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'En la lista aparecen los sustituyentes que se pueden '
-                  'enlazar al carbono.',
+              richText: context
+                  .l10n.theListWillShowTheProductsYouCanUseToPrepareCarbon,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          Center(
+            child: DialogContentText(
+              richText: context.l10n.example,
+            ),
           ),
           Center(
             child: Text(
@@ -96,20 +99,22 @@ class NamingHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(carbono con 3 hidrógenos)',
+              richText: context.l10n.carbonatedWithThreeHydrogens,
             ),
           ),
         ],
-        'Radicales': [
-          const Center(
+        context.l10n.radicals: [
+          Center(
             child: DialogContentText(
-              richText: 'Son ramificaciones de la cadena principal de carbonos.',
+              richText: context.l10n.theyAreBranchesOfTheMainCarbonChain,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          Center(
+            child: DialogContentText(
+              richText: context.l10n.example,
+            ),
           ),
           Center(
             child: Image.asset(
@@ -118,13 +123,13 @@ class NamingHelpDialog extends StatelessWidget {
               color: QuimifyColors.primary(context),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(2-metilpropano)',
+              richText: context.l10n.twoMethylPropane,
             ),
           ),
         ],
-        'Enlazar carbono': [
+        context.l10n.bondCarbon: [
           Center(
             child: SizedBox(
               width: 100,
@@ -135,13 +140,13 @@ class NamingHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'Este botón sirve para añadir un carbono a la cadena.',
+              richText: context.l10n.thisButtonIsUsedToAddACarbonToTheChain,
             ),
           ),
         ],
-        'Hidrogenar': [
+        context.l10n.hydrogenate: [
           Center(
             child: SizedBox(
               width: 100,
@@ -152,14 +157,14 @@ class NamingHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'Este botón sirve para enlazar varios hidrógenos al '
-                  'carbono.',
+              richText:
+                  context.l10n.thisButtonIsUsedToLinkSeveralHydrogensToCarbon,
             ),
           ),
         ],
-        'Historial': [
+        context.l10n.history: [
           Center(
             child: Container(
               width: 100,
@@ -170,13 +175,13 @@ class NamingHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'Este botón sirve para ver tus resultados anteriores.',
+              richText: context.l10n.thisButtonIsUsedToSeePreviousResults,
             ),
           ),
         ],
-        'Deshacer': [
+        context.l10n.undo: [
           Center(
             child: SizedBox(
               width: 100,
@@ -187,9 +192,9 @@ class NamingHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'Este botón sirve para deshacer el último cambio.',
+              richText: context.l10n.thisButtonIsUsedToUndoTheLastChange,
             ),
           ),
         ],
