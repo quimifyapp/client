@@ -31,14 +31,6 @@ class AccountsPage extends StatelessWidget {
                 'assets/images/flags/${language == 'es' ? 'spain.png' : 'usa.png'}',
                 width: 48,
               ),
-              // Text(
-              //   language == 'es' ? '🇪🇸' : '🇺🇸',
-              //   style: const TextStyle(
-              //     color: Colors.white,
-              //     fontWeight: FontWeight.bold,
-              //     fontSize: 32,
-              //   ),
-              // ),
             );
           },
         ),
