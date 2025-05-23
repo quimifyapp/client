@@ -5,6 +5,7 @@ import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart'
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HelpSlidesDialog extends StatefulWidget {
@@ -38,11 +39,10 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
 
   @override
   Widget build(BuildContext context) {
-    _titleToContent['¿Necesitas ayuda?'] = [
-      const Center(
+    _titleToContent[context.l10n.doYouNeedHelp] = [
+      Center(
         child: DialogContentText(
-          richText: 'Chatea con nosotros y nuestro equipo solucionará tus '
-              'dudas al momento.',
+          richText: context.l10n.needHelpDescription,
         ),
       ),
       ContactButtons(
@@ -74,8 +74,8 @@ class _HelpSlidesDialogState extends State<HelpSlidesDialog> {
           DialogButton(
             onPressed: _goToNextSlide,
             text: _currentSlide < _titleToContent.length - 1
-                ? 'Siguiente'
-                : 'Entendido',
+                ? context.l10n.next
+                : context.l10n.understood,
           ),
         ],
       ),

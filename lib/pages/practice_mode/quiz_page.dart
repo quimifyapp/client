@@ -9,6 +9,7 @@ import 'package:quimify_client/pages/practice_mode/leaderboard_page.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key, required this.difficulty, required this.category});
@@ -21,19 +22,30 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  static const int maxTime = 60;
   PageController? _pageController;
   List<Question> _questions = [];
   List<Answer> _answers = [];
   bool isLoading = true;
   Timer? _timer;
-  int _timeLeft = 30;
+  int _timeLeft = maxTime;
   bool _answerSelected = false;
+
+  bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    _loadQuestions();
     _pageController = PageController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _loadQuestions();
+      _initialized = true;
+    }
   }
 
   @override
@@ -46,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
   void _startTimer() {
     _timer?.cancel();
     setState(() {
-      _timeLeft = 30;
+      _timeLeft = maxTime;
       _answerSelected = false;
     });
 
@@ -85,10 +97,13 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> _loadQuestions() async {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
+
     final service = PracticeModeService();
     final questions = await service.createQuiz(
       difficulty: widget.difficulty,
       category: widget.category,
+      language: currentLanguage,
     );
     log(questions.length.toString());
     setState(() {
@@ -115,8 +130,8 @@ class _QuizPageState extends State<QuizPage> {
       log('Error submitting quiz: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error submitting quiz results'),
+          SnackBar(
+            content: Text(context.l10n.errorSubmittingQuizResults),
           ),
         );
       }
@@ -202,7 +217,7 @@ class _QuizPageState extends State<QuizPage> {
                                     top: 16,
                                     left: 16,
                                     child: Text(
-                                      'Pregunta ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
+                                      '${context.l10n.question} ${(_pageController?.page?.toInt() ?? 0) + 1} / ${_questions.length}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,

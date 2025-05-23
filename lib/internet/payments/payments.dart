@@ -61,7 +61,7 @@ class Payments {
     if (connectivityResult == ConnectivityResult.none) {
       showDialog(
         context: context,
-        builder: (BuildContext context) => noInternetDialog,
+        builder: (BuildContext context) => noInternetDialog(context),
       );
       return;
     }

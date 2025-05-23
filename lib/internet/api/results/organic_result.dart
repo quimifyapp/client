@@ -18,15 +18,11 @@ class OrganicResult {
 
   OrganicResult(
     this.found,
-
     this.classification,
     this.suggestion,
-
     this.structure,
     this.name,
-
     this.molecularMass,
-
     this.url2D,
     this.url3D,
   );
@@ -35,15 +31,11 @@ class OrganicResult {
     var json = jsonDecode(body);
     return OrganicResult(
       json['found'],
-
       stringToClassification[json['classification']],
       json['suggestion'],
-
       json['structure'],
       json['name'],
-
       json['molecularMass'],
-
       json['url2D'],
       json['url3D'],
     );
@@ -55,12 +47,9 @@ class OrganicResult {
     List<String?> identifiers = [
       classification.toString(),
       suggestion,
-
       structure,
       name,
-
       molecularMass.toString(),
-
       url2D,
       url3D,
     ];
@@ -68,5 +57,27 @@ class OrganicResult {
     identifiers.removeWhere((identifier) => identifier == null);
 
     return identifiers.toString();
+  }
+
+  OrganicResult copyWith({
+    bool? found,
+    Classification? classification,
+    String? suggestion,
+    String? structure,
+    String? name,
+    num? molecularMass,
+    String? url2D,
+    String? url3D,
+  }) {
+    return OrganicResult(
+      found ?? this.found,
+      classification ?? this.classification,
+      suggestion ?? this.suggestion,
+      structure ?? this.structure,
+      name ?? this.name,
+      molecularMass ?? this.molecularMass,
+      url2D ?? this.url2D,
+      url3D ?? this.url3D,
+    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Diagram3DPage extends StatefulWidget {
@@ -160,36 +161,36 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
             0, 0, 0, 1, 0, // fromBackground -> toBackground, not dividing by 0
           ];
 
-    const String errorTitle = '¡Ups! No se ha podido cargar';
+    final String errorTitle = context.l10n.oopsCouldNotLoad;
     final Map<_Result, QuimifyMascotMessage> resultToQuimifyMascot = {
       _Result.noInternet: QuimifyMascotMessage(
         tone: QuimifyMascotTone.negative,
         title: errorTitle,
-        details: 'Parece que no hay conexión a Internet.',
-        buttonLabel: 'Reintentar',
+        details: context.l10n.itLooksLikeThereIsNoInternetConnection,
+        buttonLabel: context.l10n.retry,
         onButtonPressed: _reloadPage,
       ),
       _Result.unsupported: QuimifyMascotMessage.withoutButton(
         tone: QuimifyMascotTone.negative,
         title: errorTitle,
-        details: 'Puede que este dispositivo sea demasiado antiguo.',
+        details: context.l10n.thisDeviceMayBeTooOld,
       ),
       _Result.unavailable: QuimifyMascotMessage.withoutButton(
         tone: QuimifyMascotTone.negative,
-        title: '¡Ups! No disponible',
-        details: 'Puedes ver la estructura 3D de otros compuestos.',
+        title: context.l10n.oopsNotAvailable,
+        details: context.l10n.youCanSeeThe3DStructureOfOtherCompounds,
       ),
       _Result.error: QuimifyMascotMessage(
         tone: QuimifyMascotTone.negative,
         title: errorTitle,
-        details: 'Puedes probar a intentarlo otra vez.',
-        buttonLabel: 'Reintentar',
+        details: context.l10n.youCanTryAgain,
+        buttonLabel: context.l10n.retry,
         onButtonPressed: _reloadPage,
       ),
     };
 
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Estructura 3D'),
+      header: QuimifyPageBar(title: context.l10n.structure3D),
       body: Stack(
         children: [
           if (_result == null || _result == _Result.successful)
@@ -251,7 +252,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   Future<bool> _checkUnsupported() async {
-    String text = 'Apologies, we no longer support your browser...';
+    String text = context.l10n.apologiesWeNoLongerSupportYourBrowser;
 
     String innerText = await _controller.runJavaScriptReturningResult('''
       document.body.innerText
@@ -261,7 +262,7 @@ class _Diagram3DPageState extends State<Diagram3DPage> {
   }
 
   Future<bool> _checkUnavailable() async {
-    String text = 'No data found';
+    String text = context.l10n.noDataFound;
 
     String innerText = await _controller.runJavaScriptReturningResult('''
       document.body.innerText

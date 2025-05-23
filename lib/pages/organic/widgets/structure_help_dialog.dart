@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quimify_client/pages/widgets/dialogs/help_slides_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class StructureHelpDialog extends StatelessWidget {
   const StructureHelpDialog({Key? key}) : super(key: key);
@@ -10,14 +11,14 @@ class StructureHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        'Estructura': [
-          const Center(
+        context.l10n.structure: [
+          Center(
             child: DialogContentText(
-              richText: 'Cada carbono es un vértice. Los hidrógenos se omiten.',
+              richText: context.l10n.everyCarbonIsAVertexTheHydrogensAreOmitted,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -29,20 +30,20 @@ class StructureHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(butano)',
+              richText: '(${context.l10n.butane})',
             ),
           ),
         ],
-        'Enlace simple': [
-          const Center(
+        context.l10n.singleBond: [
+          Center(
             child: DialogContentText(
-              richText: 'Se representa con 1 línea.',
+              richText: context.l10n.itIsRepresentedWithOneLine,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -54,20 +55,20 @@ class StructureHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(butano)',
+              richText: '(${context.l10n.butane})',
             ),
           ),
         ],
-        'Enlace doble': [
-          const Center(
+        context.l10n.doubleBond: [
+          Center(
             child: DialogContentText(
-              richText: 'Se representa con 2 líneas.',
+              richText: context.l10n.itIsRepresentedWithTwoLines,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -85,14 +86,14 @@ class StructureHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        'Enlace triple': [
-          const Center(
+        context.l10n.tripleBond: [
+          Center(
             child: DialogContentText(
-              richText: 'Se representa con 3 líneas.',
+              richText: context.l10n.itIsRepresentedWithThreeLines,
             ),
           ),
-          const DialogContentText(
-            richText: '*Ejemplo:*',
+          DialogContentText(
+            richText: context.l10n.example,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),

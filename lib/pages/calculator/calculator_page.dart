@@ -6,6 +6,7 @@ import 'package:quimify_client/pages/calculator/widgets/molecular_mass_help_dial
 import 'package:quimify_client/pages/home/widgets/quimify_card.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_section_title.dart';
 import 'package:quimify_client/text.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class CalculatorPage extends StatelessWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class CalculatorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuimifySectionTitle(
-          title: 'Masas moleculares',
-          helpDialog: MolecularMassHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.molecularMass,
+          helpDialog: const MolecularMassHelpDialog(),
         ),
         const SizedBox(height: 15),
         const QuimifyCard(
@@ -30,9 +31,9 @@ class CalculatorPage extends StatelessWidget {
           },
           page: MolecularMassPage(),
         ),
-        const QuimifySectionTitle(
-          title: 'Balancear reacciones',
-          helpDialog: EquationHelpDialog(),
+        QuimifySectionTitle(
+          title: context.l10n.balanceReactions,
+          helpDialog: const EquationHelpDialog(),
         ),
         const SizedBox(height: 15),
         QuimifyCard(

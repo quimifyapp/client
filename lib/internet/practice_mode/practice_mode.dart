@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 import 'package:quimify_client/internet/accounts/accounts.dart';
+import 'package:quimify_client/internet/language/language.dart';
 import 'models/question.dart';
 import 'models/answer.dart';
 import 'models/leaderboard_user.dart';
@@ -17,10 +18,15 @@ class PracticeModeService {
   Future<void> loadQuestions() async {
     if (_questions != null) return;
 
+    final currentLanguage = LanguageService().currentLanguage;
+
+    final fileName = currentLanguage == 'es'
+        ? 'practice_mode_spanish.csv'
+        : 'practice_mode_english.csv';
+
     try {
       // Get the ByteData and decode with UTF8
-      final ByteData fileData =
-          await rootBundle.load('assets/csv/practice_mode_spanish.csv');
+      final ByteData fileData = await rootBundle.load('assets/csv/$fileName');
       final String rawData = utf8.decode(
         fileData.buffer
             .asUint8List(fileData.offsetInBytes, fileData.lengthInBytes),
@@ -82,7 +88,7 @@ class PracticeModeService {
   Future<List<Question>> createQuiz({
     required String difficulty,
     required String category,
-    String language = 'es',
+    required String language,
   }) async {
     if (_questions == null) {
       await loadQuestions();
@@ -94,9 +100,16 @@ class PracticeModeService {
             q.category == category.toLowerCase())
         .toList();
 
-    // Randomize questions
+    // Randomize questions and their options
     filtered.shuffle();
-    return filtered.take(_maxQuestions).toList();
+    final selectedQuestions = filtered.take(_maxQuestions).toList();
+    
+    // Shuffle options for each question
+    for (var question in selectedQuestions) {
+      question.options.shuffle();
+    }
+    
+    return selectedQuestions;
   }
 
   Future<Map<String, dynamic>> submitQuizResults({
