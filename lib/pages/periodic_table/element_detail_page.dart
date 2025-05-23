@@ -130,7 +130,7 @@ class _ElementCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.network(
-            'https://images-of-elements.com/${element.nameEn}.jpg',
+            'https://images-of-elements.com/${element.nameEn.toLowerCase()}.jpg',
             width: 120,
             height: 120,
             fit: BoxFit.contain,
