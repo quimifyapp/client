@@ -20,7 +20,29 @@ class AccountsPage extends StatelessWidget {
     final languageService = LanguageService();
 
     return QuimifyScaffold.noAd(
-      header: QuimifyPageBar(title: context.l10n.account),
+      header: QuimifyPageBar(
+        title: context.l10n.account,
+        trailing: ValueListenableBuilder<String>(
+          valueListenable: languageService.languageNotifier,
+          builder: (context, language, _) {
+            return GestureDetector(
+              onTap: () => languageService.toggleLanguage(),
+              child: Image.asset(
+                'assets/images/flags/${language == 'es' ? 'spain.png' : 'usa.png'}',
+                width: 48,
+              ),
+              // Text(
+              //   language == 'es' ? '🇪🇸' : '🇺🇸',
+              //   style: const TextStyle(
+              //     color: Colors.white,
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 32,
+              //   ),
+              // ),
+            );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -64,31 +86,6 @@ class AccountsPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
-                      ),
-                      ValueListenableBuilder<String>(
-                        valueListenable: languageService.languageNotifier,
-                        builder: (context, language, _) {
-                          return TextButton(
-                            onPressed: () => languageService.toggleLanguage(),
-                            style: TextButton.styleFrom(
-                              backgroundColor: QuimifyColors.teal(),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                            ),
-                            child: Text(
-                              language.toUpperCase(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          );
-                        },
                       ),
                     ],
                   ),
