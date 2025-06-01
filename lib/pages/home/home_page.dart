@@ -16,6 +16,7 @@ import 'package:quimify_client/pages/widgets/gestures/quimify_swipe_detector.dar
 import 'package:quimify_client/pages/widgets/objects/user_profile_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -54,18 +55,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showWelcomeMessagePopup() {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     if (widget.clientResult!.messagePresent) {
       if (widget.clientResult!.messageLinkPresent!) {
         MessageDialog.linked(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
+          title: currentLanguage == 'es'
+              ? widget.clientResult!.messageTitleSpanish!
+              : widget.clientResult!.messageTitleEnglish!,
+          details: currentLanguage == 'es'
+              ? widget.clientResult!.messageDetailsSpanish!
+              : widget.clientResult!.messageDetailsEnglish!,
           linkLabel: widget.clientResult!.messageLinkName!,
           link: widget.clientResult!.messageLink!,
         ).show(context);
       } else {
         MessageDialog(
-          title: widget.clientResult!.messageTitle!,
-          details: widget.clientResult!.messageDetails!,
+          title: currentLanguage == 'es'
+              ? widget.clientResult!.messageTitleSpanish!
+              : widget.clientResult!.messageTitleEnglish!,
+          details: currentLanguage == 'es'
+              ? widget.clientResult!.messageDetailsSpanish!
+              : widget.clientResult!.messageDetailsEnglish!,
         ).show(context);
       }
     }
@@ -77,12 +87,17 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (widget.clientResult!.updateAvailable) {
+      final currentLanguage = Localizations.localeOf(context).languageCode;
       bool optionalUpdate = !widget.clientResult!.updateNeeded!;
 
       MessageDialog updateDialog = MessageDialog.linked(
-        title: 'Actualización ${optionalUpdate ? 'disponible' : 'necesaria'}',
-        details: widget.clientResult!.updateDetails,
-        linkLabel: 'Actualizar',
+        title: optionalUpdate
+            ? context.l10n.updateAvailable
+            : context.l10n.updateNecessary,
+        details: currentLanguage == 'es'
+            ? widget.clientResult!.updateDetailsSpanish!
+            : widget.clientResult!.updateDetailsEnglish!,
+        linkLabel: context.l10n.update,
         link: Platform.isAndroid
             ? 'https://quimify.com/android'
             : 'https://quimify.com/ios',
@@ -126,6 +141,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
     return PopScope(
       onPopInvoked: (bool didPop) async {
         if (!didPop) {
@@ -144,8 +160,7 @@ class _HomePageState extends State<HomePage> {
                 width: 65,
                 height: 65,
                 child: FittedBox(
-                  child:
-                  FloatingActionButton(
+                  child: FloatingActionButton(
                     heroTag: null,
                     backgroundColor: QuimifyColors.teal(),
                     onPressed: () {
@@ -153,11 +168,14 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
-                          const PeriodicTablePage(),
+                              const PeriodicTablePage(),
                         ),
                       );
                     },
-                    child: const Icon(Icons.science_rounded, size: 35,),
+                    child: const Icon(
+                      Icons.science_rounded,
+                      size: 35,
+                    ),
                   ),
                 ),
               ),
@@ -165,8 +183,7 @@ class _HomePageState extends State<HomePage> {
                 width: 65,
                 height: 65,
                 child: FittedBox(
-                  child:
-                  FloatingActionButton(
+                  child: FloatingActionButton(
                     heroTag: null,
                     backgroundColor: QuimifyColors.teal(),
                     onPressed: () {
@@ -180,8 +197,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Por favor inicia sesión para chatear con Atomic'),
+                          SnackBar(
+                            content:
+                                Text(context.l10n.pleaseLoginToChatWithAtomic),
                           ),
                         );
                         return;
@@ -190,13 +208,14 @@ class _HomePageState extends State<HomePage> {
                       // Navigate to chatbot
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (BuildContext context) => const ChatbotPage(),
+                          builder: (BuildContext context) =>
+                              const ChatbotPage(),
                         ),
                       );
                     },
                     child: Image.asset(
                       'assets/images/atomic.png',
-                      width:45,
+                      width: 45,
                     ),
                   ),
                 ),
@@ -234,7 +253,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(width: 15),
                 Image.asset(
-                  'assets/images/icons/branding-slim.png',
+                  currentLanguage == 'es'
+                      ? 'assets/images/icons/branding-slim.png'
+                      : 'assets/images/icons/branding-slim-english.png',
                   height: 17,
                   color: QuimifyColors.inverseText(context),
                 ),
@@ -264,21 +285,21 @@ class _HomePageState extends State<HomePage> {
                     key: ValueKey(_currentPage),
                     children: [
                       QuimifyMenuButton(
-                        title: 'Inorgánica',
+                        title: context.l10n.inorganic,
                         selected: _currentPage == 0,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(0),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
-                        title: 'Orgánica',
+                        title: context.l10n.organic,
                         selected: _currentPage == 1,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(1),
                       ),
                       const SizedBox(width: 5),
                       QuimifyMenuButton(
-                        title: 'Calculadora',
+                        title: context.l10n.calculator,
                         selected: _currentPage == 2,
                         autoSizeGroup: _autoSizeGroup,
                         onPressed: () => _goToPage(2),

@@ -16,6 +16,7 @@ class PeriodicElement {
   final String electronConfiguration;
   final String simplifiedElectronConfiguration;
   final String description;
+  final String descriptionEn;
 
   PeriodicElement({
     required this.nameEn,
@@ -32,6 +33,7 @@ class PeriodicElement {
     required this.electronConfiguration,
     required this.simplifiedElectronConfiguration,
     required this.description,
+    required this.descriptionEn,
   });
 
   factory PeriodicElement.fromCsv(Map<String, dynamic> map) {
@@ -54,6 +56,7 @@ class PeriodicElement {
       simplifiedElectronConfiguration:
           map['simplified_electron_configuration'] ?? '',
       description: map['description'] ?? '',
+      descriptionEn: map['description_en'] ?? '',
     );
   }
 

@@ -1188,7 +1188,7 @@ PODS:
   - firebase_core (3.10.1):
     - Firebase/CoreOnly (= 11.6.0)
     - Flutter
-  - FirebaseAppCheckInterop (11.7.0)
+  - FirebaseAppCheckInterop (11.12.0)
   - FirebaseAuth (11.6.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
@@ -1198,7 +1198,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthInterop (11.7.0)
+  - FirebaseAuthInterop (11.12.0)
   - FirebaseCore (11.6.0):
     - FirebaseCoreInternal (~> 11.6.0)
     - GoogleUtilities/Environment (~> 8.0)
@@ -1235,8 +1235,8 @@ PODS:
     - FirebaseMessagingInterop (~> 11.0)
     - FirebaseSharedSwift (~> 11.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
-  - FirebaseMessagingInterop (11.7.0)
-  - FirebaseSharedSwift (11.7.0)
+  - FirebaseMessagingInterop (11.12.0)
+  - FirebaseSharedSwift (11.12.0)
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
@@ -1258,26 +1258,26 @@ PODS:
     - AppAuth (< 2.0, >= 1.7.3)
     - GTMAppAuth (< 5.0, >= 4.1.1)
     - GTMSessionFetcher/Core (~> 3.3)
-  - GoogleUserMessagingPlatform (2.7.0)
-  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
+  - GoogleUserMessagingPlatform (3.0.0)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Environment (8.0.2):
+  - GoogleUtilities/Environment (8.1.0):
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.0.2):
+  - GoogleUtilities/Logger (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Network (8.0.2):
+  - GoogleUtilities/Network (8.1.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (8.0.2)":
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.0.2)
-  - GoogleUtilities/Reachability (8.0.2):
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - "gRPC-C++ (1.65.5)":
@@ -1388,22 +1388,22 @@ PODS:
   - nanopb/encode (3.30910.0)
   - pointer_interceptor_ios (0.0.1):
     - Flutter
-  - purchases_flutter (8.4.2):
+  - purchases_flutter (8.5.2):
     - Flutter
-    - PurchasesHybridCommon (= 13.15.2)
-  - purchases_ui_flutter (8.4.2):
+    - PurchasesHybridCommon (= 13.19.0)
+  - purchases_ui_flutter (8.5.2):
     - Flutter
-    - PurchasesHybridCommonUI (= 13.15.2)
-  - PurchasesHybridCommon (13.15.2):
-    - RevenueCat (= 5.14.5)
-  - PurchasesHybridCommonUI (13.15.2):
-    - PurchasesHybridCommon (= 13.15.2)
-    - RevenueCatUI (= 5.14.5)
+    - PurchasesHybridCommonUI (= 13.19.0)
+  - PurchasesHybridCommon (13.19.0):
+    - RevenueCat (= 5.18.0)
+  - PurchasesHybridCommonUI (13.19.0):
+    - PurchasesHybridCommon (= 13.19.0)
+    - RevenueCatUI (= 5.18.0)
   - ReachabilitySwift (5.2.4)
   - RecaptchaInterop (100.0.0)
-  - RevenueCat (5.14.5)
-  - RevenueCatUI (5.14.5):
-    - RevenueCat (= 5.14.5)
+  - RevenueCat (5.18.0)
+  - RevenueCatUI (5.18.0):
+    - RevenueCat (= 5.18.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -1521,17 +1521,17 @@ SPEC CHECKSUMS:
   Firebase: 374a441a91ead896215703a674d58cdb3e9d772b
   firebase_auth: 9927cecefe4daaf92b0fbe5d1d283e9329445177
   firebase_core: e2aa06dbd854d961f8ce46c2e20933bee1bf2d2b
-  FirebaseAppCheckInterop: 2376d3ec5cb4267facad4fe754ab4f301a5a519b
+  FirebaseAppCheckInterop: 73b173e5ec45192e2d522ad43f526a82ad10b852
   FirebaseAuth: 0304982cfe00df8d49bf533bc4becd3de36c7122
-  FirebaseAuthInterop: a6973d72aa242ea88ffb6be9c9b06c65455071da
+  FirebaseAuthInterop: b583210c039a60ed3f1e48865e1f3da44a796595
   FirebaseCore: 48b0dd707581cf9c1a1220da68223fb0a562afaa
   FirebaseCoreExtension: 2d77d6430c16cf43ca2b04608302ed02b3598361
   FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
   FirebaseFirestore: d5dcc15724f291fe4b415322754bfa01616037fe
   FirebaseFirestoreInternal: db478fdaeb98fe8686ff49e600f3871c224a76ff
   FirebaseFunctions: 6c4f1d143d3dc6ca1b5d9f4e042408ede2eb1016
-  FirebaseMessagingInterop: b7acc94b0b65ce2df02a795b5488f698ac7d5c52
-  FirebaseSharedSwift: a45efd84d60ebbfdcdbaebc66948af3630459e62
+  FirebaseMessagingInterop: f4ed7b2d66b89b53fd7982b9317e403691dbd978
+  FirebaseSharedSwift: d2475748a2d2a36242ed13baa34b2acda846c925
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
@@ -1539,8 +1539,8 @@ SPEC CHECKSUMS:
   google_mobile_ads: 2a538d8e42b1813809782792e48f8cf4374c2180
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
-  GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
-  GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  GoogleUserMessagingPlatform: f8d0cdad3ca835406755d0a69aa634f00e76d576
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   "gRPC-C++": 2fa52b3141e7789a28a737f251e0c45b4cb20a87
   gRPC-Core: a27c294d6149e1c39a7d173527119cfbc3375ce4
   GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
@@ -1549,14 +1549,14 @@ SPEC CHECKSUMS:
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   pointer_interceptor_ios: 508241697ff0947f853c061945a8b822463947c1
-  purchases_flutter: ba79db4c048e48f2d9f6ce36f8c27175cc4aadd6
-  purchases_ui_flutter: a417a000ce089932e66a19b6865c2f20e6fc0f06
-  PurchasesHybridCommon: 8af6bb6d85b794dc47ccef1b536ed0e677c789ea
-  PurchasesHybridCommonUI: 7166156bfd855d2debcadee45c7087b3238b1129
+  purchases_flutter: d4b187584e27704b758b75baafb417f32a11c191
+  purchases_ui_flutter: d000050753663fb879474da1b025b072c9cf2805
+  PurchasesHybridCommon: ee940936ca9783c45492a9f5791cc148798d8601
+  PurchasesHybridCommonUI: 30ee9aca15c2cf0eecae1205606b5e810a788094
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RevenueCat: 4c0e809f7c7428cbe8d79cbb9a0dc7551e71e74e
-  RevenueCatUI: 3a9872584dfb7b50897c3a7d2d40f3e02b0e5ae4
+  RevenueCat: e825836f5d6baa870c53d7281be25a5fd91abd91
+  RevenueCatUI: f52648672be46e692955aab397a4a491f8aa196f
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe

@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/history/widgets/history_entry_view.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/objects/quimify_mascot_message.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({
@@ -37,7 +38,7 @@ class HistoryPage extends StatelessWidget {
     return QuimifyScaffold(
       showBannerAd: entries.isNotEmpty,
       bannerAdName: runtimeType.toString(),
-      header: const QuimifyPageBar(title: 'Historial'),
+      header: QuimifyPageBar(title: context.l10n.history),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: entries.isNotEmpty
@@ -48,10 +49,10 @@ class HistoryPage extends StatelessWidget {
               )
             : QuimifyMascotMessage(
                 tone: QuimifyMascotTone.negative,
-                title: '¡Ups! Aún no hay nada aquí',
-                details: 'Los resultados recientes se mostrarán cuando hagas '
-                    'tu primera consulta.',
-                buttonLabel: 'Comenzar',
+                title: context.l10n.oopsNothingHereYet,
+                details: context
+                    .l10n.recentResultsWillBeDisplayedWhenYouMakeYourFirstQuery,
+                buttonLabel: context.l10n.start,
                 onButtonPressed: () => _startButtonPressed(context),
               ),
       ),

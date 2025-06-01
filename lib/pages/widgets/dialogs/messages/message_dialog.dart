@@ -4,6 +4,7 @@ import 'package:quimify_client/pages/widgets/dialogs/report/report_dialog.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_button.dart';
 import 'package:quimify_client/pages/widgets/dialogs/widgets/dialog_content_text.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MessageDialog extends StatelessWidget {
@@ -57,8 +58,8 @@ class MessageDialog extends StatelessWidget {
 
   final bool _hasLink, _hasReportButton;
 
-  show(BuildContext context) async =>
-      await showQuimifyDialog(context: context, closable: closable, dialog: this);
+  show(BuildContext context) async => await showQuimifyDialog(
+      context: context, closable: closable, dialog: this);
 
   _exit(BuildContext context) => Navigator.of(context).pop();
 
@@ -116,7 +117,7 @@ class MessageDialog extends StatelessWidget {
               ],
               Expanded(
                 child: DialogButton(
-                  text: _hasLink ? linkLabel! : 'Entendido',
+                  text: _hasLink ? linkLabel! : context.l10n.understood,
                   onPressed: () => _pressedButton(context),
                 ),
               ),

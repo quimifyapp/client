@@ -7,6 +7,7 @@ import 'package:quimify_client/pages/practice_mode/selection_button.dart';
 import 'package:quimify_client/pages/widgets/bars/quimify_page_bar.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
 import 'package:quimify_client/pages/widgets/quimify_scaffold.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 
 import '../widgets/dialogs/messages/message_dialog.dart';
 import '../widgets/dialogs/messages/no_internet_dialog.dart';
@@ -144,7 +145,7 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QuimifyScaffold.noAd(
-      header: const QuimifyPageBar(title: 'Practicar'),
+      header: QuimifyPageBar(title: context.l10n.practice),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -169,7 +170,7 @@ class CategoryPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Categorías',
+                        context.l10n.categories,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -193,16 +194,19 @@ class CategoryPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SelectionButton(
-                                title: 'General',
+                                title: context.l10n.general,
                                 imageUr:
                                     'assets/images/practice_mode/category_general.png',
                                 onTap: () async {
                                   // Check internet connectivity before proceeding
-                                  final connectivityResult = await Connectivity().checkConnectivity();
-                                  if (connectivityResult == ConnectivityResult.none) {
+                                  final connectivityResult =
+                                      await Connectivity().checkConnectivity();
+                                  if (connectivityResult ==
+                                      ConnectivityResult.none) {
                                     showDialog(
                                       context: context,
-                                      builder: (BuildContext context) => noInternetDialog,
+                                      builder: (BuildContext context) =>
+                                          noInternetDialog(context),
                                     );
                                     return;
                                   }
@@ -226,11 +230,12 @@ class CategoryPage extends StatelessWidget {
                                   if (ads.canWatchPracticeModeRewardedAd) {
                                     if (!context.mounted) return;
                                     await MessageDialog(
-                                      title: 'Jugar a practicar',
-                                      details: 'Puedes jugar a practicar viendo un anuncio de vídeo.',
+                                      title: context.l10n.playPractice,
+                                      details:
+                                          context.l10n.playPracticeDescription,
                                       onButtonPressed: () async {
-                                        final watched =
-                                        await ads.showRewardedPracticeMode();
+                                        final watched = await ads
+                                            .showRewardedPracticeMode();
                                         if (watched && context.mounted) {
                                           Navigator.push(
                                             context,
@@ -249,15 +254,16 @@ class CategoryPage extends StatelessWidget {
 
                                   // If user cannot watch rewarded ad, show limit reached message
                                   if (!context.mounted) return;
-                                  await const MessageDialog(
-                                    title: 'Máximo diario alcanzado',
-                                    details: 'Solo puedes jugar 2 veces al día de manera gratuita. Vuelve mañana!',
+                                  await MessageDialog(
+                                    title: context.l10n.dailyMaximumReached,
+                                    details: context.l10n
+                                        .playPracticeLimitReachedDescription,
                                   ).show(context);
                                 },
                               ),
                               const SizedBox(width: 72),
                               SelectionButton(
-                                title: 'Balanceo',
+                                title: context.l10n.balancing,
                                 imageUr:
                                     'assets/images/practice_mode/category_balancing.png',
                                 onTap: () async {
@@ -284,7 +290,7 @@ class CategoryPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SelectionButton(
-                                title: 'Inorgánica',
+                                title: context.l10n.inorganic,
                                 imageUr:
                                     'assets/images/practice_mode/category_inorganic.png',
                                 onTap: () async {
@@ -306,7 +312,7 @@ class CategoryPage extends StatelessWidget {
                               ),
                               const SizedBox(width: 72),
                               SelectionButton(
-                                title: 'Orgánica',
+                                title: context.l10n.organic,
                                 imageUr:
                                     'assets/images/practice_mode/category_organic.png',
                                 onTap: () async {
@@ -330,7 +336,7 @@ class CategoryPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 40),
                           SelectionButton(
-                            title: 'Universidad',
+                            title: context.l10n.university,
                             imageUr:
                                 'assets/images/practice_mode/category_university.png',
                             onTap: () async {
