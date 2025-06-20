@@ -154,6 +154,8 @@ class _GeneralInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLanguage = Localizations.localeOf(context).languageCode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -190,7 +192,8 @@ class _GeneralInfo extends StatelessWidget {
               const SizedBox(height: 24),
               _SingleInfo(
                 label: context.l10n.stateAtRoomTemperature,
-                value: element.state, //TODO make it adapt to language
+                value:
+                    currentLanguage == 'es' ? element.state : element.stateEn,
               ),
               const SizedBox(height: 24),
               _SingleInfo(
