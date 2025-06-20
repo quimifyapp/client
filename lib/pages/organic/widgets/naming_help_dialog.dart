@@ -10,7 +10,7 @@ class NamingHelpDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return HelpSlidesDialog(
       titleToContent: {
-        context.l10n.name: [
+        context.l10n.naming: [
           Center(
             child: DialogContentText(
               richText:
@@ -18,7 +18,7 @@ class NamingHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           Center(
             child: DialogContentText(

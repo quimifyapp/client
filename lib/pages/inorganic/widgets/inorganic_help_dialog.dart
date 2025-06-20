@@ -18,7 +18,7 @@ class InorganicHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           const Center(
             child: DialogContentText(
@@ -36,7 +36,7 @@ class InorganicHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        context.l10n.formula: [
+        context.l10n.writingFormulas: [
           Center(
             child: DialogContentText(
               richText:
@@ -44,7 +44,7 @@ class InorganicHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           Center(
             child: DialogContentText(
@@ -57,7 +57,7 @@ class InorganicHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        context.l10n.name: [
+        context.l10n.writingNames: [
           Center(
             child: DialogContentText(
               richText:
@@ -65,7 +65,7 @@ class InorganicHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           Center(
             child: DialogContentText(

@@ -316,16 +316,6 @@ class _BodyState extends State<_Body> {
 
   List<String> quickQuestions = [];
 
-  final welcomeMessage = ChatMessageModel(
-    id: 'welcome',
-    content:
-        'Hola! Mi nombre es Atomic! Soy tu profesor particular con inteligencia '
-        'artifical, preguntame lo que quieras sobre Química',
-    isUser: false,
-    timestamp: DateTime.now(),
-    status: 'delivered',
-  );
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -452,6 +442,14 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
+    final welcomeMessage = ChatMessageModel(
+      id: 'welcome',
+      content:
+      context.l10n.helloMyNameIsAtomicImYourSmartTutorWithArtificialIntelligence,
+      isUser: false,
+      timestamp: DateTime.now(),
+      status: 'delivered',
+    );
     return Column(
       children: [
         Expanded(

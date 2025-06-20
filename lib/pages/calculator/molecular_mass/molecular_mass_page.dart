@@ -108,7 +108,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                       ),
                       HistoryField(
                         context.l10n.molecularMass,
-                        '${formatMolecularMass(e.molecularMass)} g/mol',
+                        '${formatMolecularMass(e.molecularMass)} ${context.l10n.gMole}',
                       ),
                     ],
                   ))
@@ -334,7 +334,7 @@ class _MolecularMassPageState extends State<MolecularMassPage> {
                       ),
                       const Spacer(),
                       AutoSizeText(
-                        '${formatMolecularMass(_result.molecularMass!)} g/mol',
+                        '${formatMolecularMass(_result.molecularMass!)} ${context.l10n.gMole}',
                         stepGranularity: 0.1,
                         maxLines: 1,
                         style: TextStyle(

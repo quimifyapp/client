@@ -16,7 +16,7 @@ class CalculatorPage extends StatelessWidget {
     return Column(
       children: [
         QuimifySectionTitle(
-          title: context.l10n.molecularMass,
+          title: context.l10n.molecularMasses,
           helpDialog: const MolecularMassHelpDialog(),
         ),
         const SizedBox(height: 15),

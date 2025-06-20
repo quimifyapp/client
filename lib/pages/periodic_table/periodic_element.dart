@@ -12,7 +12,8 @@ class PeriodicElement {
   final double atomicWeight;
   final double meltingPoint;
   final double boilingPoint;
-  final String phase;
+  final String state;
+  final String stateEn;
   final String electronConfiguration;
   final String simplifiedElectronConfiguration;
   final String description;
@@ -29,7 +30,8 @@ class PeriodicElement {
     required this.atomicWeight,
     required this.meltingPoint,
     required this.boilingPoint,
-    required this.phase,
+    required this.state,
+    required this.stateEn,
     required this.electronConfiguration,
     required this.simplifiedElectronConfiguration,
     required this.description,
@@ -51,7 +53,8 @@ class PeriodicElement {
           double.tryParse(map['melting_point']?.toString() ?? '') ?? double.nan,
       boilingPoint:
           double.tryParse(map['boiling_point']?.toString() ?? '') ?? double.nan,
-      phase: map['phase'] ?? '',
+      state: map['state'] ?? '',
+      stateEn: map['state_en'] ?? '',
       electronConfiguration: map['electron_configuration'] ?? '',
       simplifiedElectronConfiguration:
           map['simplified_electron_configuration'] ?? '',

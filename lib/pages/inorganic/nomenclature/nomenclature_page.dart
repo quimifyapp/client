@@ -34,32 +34,12 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
 
   late String _labelText;
   late List<InorganicResultView> _resultViews;
+  late final InorganicResultView _defaultResultView;
 
   static final Map<String, String> _normalizedToCompletion = {};
   static final Set<String> _completionNotFoundNormalizedInputs = {};
 
   // Constants:
-
-  // static const String _defaultLabelText = 'NaCl, óxido de hierro...';
-
-  static final _defaultResultView = InorganicResultView(
-    formattedQuery: 'NaCl',
-    result: InorganicResult(
-      true,
-      null,
-      null,
-      'NaCl',
-      'cloruro de sodio',
-      'monocloruro de sodio',
-      'cloruro sódico',
-      'sal de mesa',
-      '58.35',
-      '2.16',
-      '1074.15',
-      '1686.15',
-    ),
-  );
-
   // static const String _messageRoot = 'Parece que estás intentando resolver un';
 
   Map<Classification, String> _classificationToMessage = {};
@@ -70,6 +50,41 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _labelText = context.l10n.naclIronOxide;
+
+    // Initialize _defaultResultView
+    _defaultResultView = InorganicResultView(
+      formattedQuery: 'NaCl',
+      result: InorganicResult(
+        true,
+        null,
+        null,
+        'NaCl',
+        context.l10n.sodiumChloride,
+        context.l10n.sodiumMonoChloride,
+        context.l10n.cloruroSodico,
+        context.l10n.tableSalt,
+        '58.35',
+        '2.16',
+        '1074.15',
+        '1686.15',
+      ),
+    );
+
+    // Now populate _resultViews (moved from initState)
+    _resultViews = History()
+        .getInorganics()
+        .reversed
+        .map((localResult) => InorganicResultView(
+              formattedQuery: localResult.formattedQuery,
+              result: InorganicResult.fromLocal(localResult),
+            ))
+        .toList();
+
+    if (_resultViews.isEmpty) {
+      _resultViews.add(_defaultResultView);
+    }
+
+    // Classification messages
     _classificationToMessage = {
       Classification.organicFormula:
           context.l10n.itLooksLikeYouAreTryingToSolveAnOrganicCompoundFormula,
@@ -87,19 +102,12 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   @override
   initState() {
     super.initState();
-
-    _resultViews = History()
-        .getInorganics()
-        .reversed
-        .map((localResult) => InorganicResultView(
-              formattedQuery: localResult.formattedQuery,
-              result: InorganicResult.fromLocal(localResult),
-            ))
-        .toList();
-
-    if (_resultViews.isEmpty) {
-      _resultViews.add(_defaultResultView);
-    }
+    
+    // Initialize _resultViews as an empty list first
+    _resultViews = [];
+    
+    // We'll populate this after didChangeDependencies is called
+    // DO NOT reference _defaultResultView here
   }
 
   _storeCompletionInCache(String? completion, String normalizedInput) {

@@ -44,7 +44,7 @@ class EquationInputHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: '*${context.l10n.example}:*',
+            richText: context.l10n.example,
           ),
           Center(
             child: RichText(

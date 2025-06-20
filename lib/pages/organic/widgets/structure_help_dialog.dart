@@ -80,9 +80,9 @@ class StructureHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(but-2-eno)',
+              richText: context.l10n.but2ene,
             ),
           ),
         ],
@@ -105,9 +105,9 @@ class StructureHelpDialog extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: '(but-2-ino)',
+              richText: context.l10n.but2yne,
             ),
           ),
         ],

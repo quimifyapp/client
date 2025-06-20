@@ -32,21 +32,11 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFocusNode = FocusNode();
 
+  late OrganicResult _result;
   bool _argumentRead = false;
   bool _firstSearch = true;
 
   String _labelText = '';
-  OrganicResult _result = OrganicResult(
-      true,
-      null,
-      null,
-      'COOH - COOH',
-      'ácido etanodioico',
-      90.01,
-      null,
-      // There's already a pre-loaded 2D image
-      'https://pubchem.ncbi.nlm.nih.gov/compound/'
-          '971#section=3D-Conformer&fullscreen=true');
 
   Map<Classification, String> _classificationToMessage = {};
 
@@ -54,6 +44,18 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _labelText = context.l10n.diethylEtherBut2Ene;
+
+    _result = OrganicResult(
+        true,
+        null,
+        null,
+        'COOH - COOH',
+        context.l10n.ethanedioicAcid,
+        90.01,
+        null,
+        // There's already a pre-loaded 2D image
+        'https://pubchem.ncbi.nlm.nih.gov/compound/'
+            '971#section=3D-Conformer&fullscreen=true');
 
     _classificationToMessage = {
       Classification.inorganicFormula:

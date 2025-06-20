@@ -18,7 +18,7 @@ class MolecularMassHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           const Center(
             child: DialogContentText(

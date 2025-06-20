@@ -12,6 +12,7 @@ import 'package:quimify_client/pages/widgets/objects/quimify_icon_button.dart';
 import 'package:quimify_client/pages/widgets/objects/report_button.dart';
 import 'package:quimify_client/pages/widgets/objects/share_button.dart';
 import 'package:quimify_client/pages/widgets/quimify_colors.dart';
+import 'package:quimify_client/utils/localisation_extension.dart';
 import 'package:signed_spacing_flex/signed_spacing_flex.dart';
 
 class OrganicResultView extends StatelessWidget {
@@ -53,7 +54,7 @@ class OrganicResultView extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Resultado',
+                context.l10n.result,
                 style: TextStyle(
                   color: QuimifyColors.primary(context),
                   fontSize: 18,
@@ -107,7 +108,7 @@ class OrganicResultView extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Estructura',
+                  context.l10n.structure,
                   style: TextStyle(
                     color: QuimifyColors.primary(context),
                     fontSize: 18,
@@ -135,7 +136,7 @@ class OrganicResultView extends StatelessWidget {
                             color: QuimifyColors.inverseText(context),
                           ),
                           text: Text(
-                            'Ver en 3D',
+                            context.l10n.seeIn3D,
                             style: TextStyle(
                               color: QuimifyColors.inverseText(context),
                               fontSize: 15,

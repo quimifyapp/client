@@ -26,7 +26,7 @@ class PracticeHelpDialog extends StatelessWidget {
           ),
           Center(
             child: DialogContentText(
-              richText: context.l10n.difficult,
+              richText: context.l10n.expert,
             ),
           ),
         ],

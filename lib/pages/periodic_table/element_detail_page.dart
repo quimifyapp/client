@@ -190,7 +190,7 @@ class _GeneralInfo extends StatelessWidget {
               const SizedBox(height: 24),
               _SingleInfo(
                 label: context.l10n.stateAtRoomTemperature,
-                value: element.phase,
+                value: element.state, //TODO make it adapt to language
               ),
               const SizedBox(height: 24),
               _SingleInfo(

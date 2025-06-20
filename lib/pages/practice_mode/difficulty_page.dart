@@ -159,7 +159,7 @@ class DifficultyPage extends StatelessWidget {
                               ),
                               const SizedBox(width: 40),
                               SelectionButton(
-                                title: context.l10n.difficult,
+                                title: context.l10n.expert,
                                 imageUr:
                                     'assets/images/practice_mode/difficulty_difficult.png',
                                 onTap: () async {

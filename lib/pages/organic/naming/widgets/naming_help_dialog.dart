@@ -61,7 +61,7 @@ class NamingHelpDialog extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  context.l10n.hydrogen,
+                  context.l10n.capitalHydrogen,
                   style: TextStyle(
                     color: QuimifyColors.teal(),
                     fontSize: 16,
@@ -84,7 +84,8 @@ class NamingHelpDialog extends StatelessWidget {
                   .l10n.theListWillShowTheProductsYouCanUseToPrepareCarbon,
             ),
           ),
-          Center(
+          Align(
+            alignment: Alignment.centerLeft,
             child: DialogContentText(
               richText: context.l10n.example,
             ),
@@ -111,7 +112,8 @@ class NamingHelpDialog extends StatelessWidget {
               richText: context.l10n.theyAreBranchesOfTheMainCarbonChain,
             ),
           ),
-          Center(
+          Align(
+            alignment: Alignment.centerLeft,
             child: DialogContentText(
               richText: context.l10n.example,
             ),

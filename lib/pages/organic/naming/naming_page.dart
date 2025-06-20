@@ -113,7 +113,7 @@ class _NamingPageState extends State<NamingPage> {
               if (organicResult.molecularMass != null)
                 context.l10n.molecularMass:
                     '${formatMolecularMass(organicResult.molecularMass!)}'
-                        ' g/mol',
+                        ' ${context.l10n.gMole}',
             },
             imageProvider: organicResult.url2D != null
                 ? NetworkImage(organicResult.url2D!)
@@ -279,7 +279,7 @@ class _NamingPageState extends State<NamingPage> {
       Group.hydrogen: GroupButton(
         bonds: 1,
         structure: 'H',
-        name: context.l10n.hydrogen,
+        name: context.l10n.capitalHydrogen,
         onPressed: () => _pressedGroupButton(Group.hydrogen),
       ),
       Group.radical: GroupButton(

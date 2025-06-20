@@ -18,7 +18,7 @@ class FindingFormulaHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           const Center(
             child: DialogContentText(
@@ -34,7 +34,7 @@ class FindingFormulaHelpDialog extends StatelessWidget {
             ),
           ),
         ],
-        context.l10n.formula: [
+        context.l10n.writingFormulas: [
           Center(
             child: DialogContentText(
               richText:

@@ -35,7 +35,7 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
             ),
           ),
           DialogContentText(
-            richText: context.l10n.example,
+            richText: context.l10n.examples,
           ),
           Center(
             child: RichText(

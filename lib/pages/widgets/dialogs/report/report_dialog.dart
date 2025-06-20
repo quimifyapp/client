@@ -66,7 +66,7 @@ class ReportDialog extends StatelessWidget {
     return GestureDetector(
       onTap: _tappedOutsideText,
       child: QuimifyDialog(
-        title: 'Reportar error',
+        title: context.l10n.reportError,
         content: [
           if (details != null && details!.isNotEmpty)
             Center(
