@@ -54,7 +54,7 @@ class _ChartSelectorState extends State<ChartSelector> {
     widget.elementToMoles.forEach((symbol, moles) {
       formula += moles > 1 ? '$symbol$moles' : symbol;
       molBars.add(ChartBar(quantity: moles, total: totalMoles));
-      molQuantities.add(ChartNumber(text: '$moles mol'));
+      molQuantities.add(ChartNumber(text: '$moles ${context.l10n.mole}'));
     });
 
     return GestureDetector(

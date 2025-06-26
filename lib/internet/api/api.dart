@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io' as io;
 
 import 'package:cloud_functions/cloud_functions.dart';
@@ -27,10 +26,10 @@ class Api {
 
   static const _httpStatusCodeOk = 200;
 
-  static const _apiVersion = 6;
+  static const _apiVersion = 7;
   static const _clientVersion = 21;
 
-  static const _authority = 'api2.quimify.com';
+  static const _authority = 'api.quimify.com';
   static const _mirrorAuthority = 'api2.quimify.com';
 
   static const _timeout = Duration(seconds: 15);
