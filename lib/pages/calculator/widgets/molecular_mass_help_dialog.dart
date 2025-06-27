@@ -20,14 +20,14 @@ class MolecularMassHelpDialog extends StatelessWidget {
           DialogContentText(
             richText: context.l10n.examples,
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'CH₃ – CH₂(OH)   ➔   46.06 g/mol',
+              richText: 'CH₃ – CH₂(OH)   ➔   46.06 ${context.l10n.gMole}',
             ),
           ),
-          const Center(
+          Center(
             child: DialogContentText(
-              richText: 'B₂O₃   ➔   69.60 g/mol',
+              richText: 'B₂O₃   ➔   69.60 ${context.l10n.gMole}',
             ),
           ),
         ],

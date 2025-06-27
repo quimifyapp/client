@@ -143,7 +143,7 @@ class _InorganicResultViewState extends State<InorganicResultView> {
                               InorganicResultField(
                                 title: context.l10n.molecularMass,
                                 quantity: widget.result.molecularMass,
-                                unit: 'g/mol',
+                                unit: context.l10n.gMole,
                                 titleAutoSizeGroup: _fieldTitleAutoSizeGroup,
                               ),
                             if (widget.result.density != null)

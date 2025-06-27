@@ -20,14 +20,14 @@ class CalculatorPage extends StatelessWidget {
           helpDialog: const MolecularMassHelpDialog(),
         ),
         const SizedBox(height: 15),
-        const QuimifyCard(
+        QuimifyCard(
           body: {
-            'Fe₂O₃': '159.68 g/mol',
-            'C₅H₆O₂': '110.10 g/mol',
-            'NaCl': '58.35 g/mol',
-            'H₂S': '34.08 g/mol',
-            'CH₃CN': '41.05 g/mol',
-            'SiH₄': '32.12 g/mol',
+            'Fe₂O₃': '159.68 ${context.l10n.gMole}',
+            'C₅H₆O₂': '110.10 ${context.l10n.gMole}',
+            'NaCl': '58.35 ${context.l10n.gMole}',
+            'H₂S': '34.08 ${context.l10n.gMole}',
+            'CH₃CN': '41.05 ${context.l10n.gMole}',
+            'SiH₄': '32.12 ${context.l10n.gMole}',
           },
           page: MolecularMassPage(),
         ),

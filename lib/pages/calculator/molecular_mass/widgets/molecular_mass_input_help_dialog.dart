@@ -51,7 +51,7 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
                     text: '1.01',
                     style: TextStyle(color: Colors.blue),
                   ),
-                  const TextSpan(text: ' g/mol'),
+                  TextSpan(text: ' ${context.l10n.gMole}'),
                 ],
               ),
             ),
@@ -70,7 +70,7 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
                     text: '15.99',
                     style: TextStyle(color: Colors.red),
                   ),
-                  const TextSpan(text: ' g/mol'),
+                  TextSpan(text: ' ${context.l10n.gMole}'),
                 ],
               ),
             ),
@@ -100,18 +100,18 @@ class MolecularMassInputHelpDialog extends StatelessWidget {
                   fontSize: 16,
                   fontFamily: 'CeraPro',
                 ),
-                children: const [
-                  TextSpan(text: '2 x '),
-                  TextSpan(
+                children: [
+                  const TextSpan(text: '2 x '),
+                  const TextSpan(
                     text: '1.01',
                     style: TextStyle(color: Colors.blue),
                   ),
-                  TextSpan(text: ' + 1 x '),
-                  TextSpan(
+                  const TextSpan(text: ' + 1 x '),
+                  const TextSpan(
                     text: '15.99',
                     style: TextStyle(color: Colors.red),
                   ),
-                  TextSpan(text: ' = 18.00 g/mol'),
+                  TextSpan(text: ' = 18.00 ${context.l10n.gMole}'),
                 ],
               ),
             ),
