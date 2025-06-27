@@ -33,6 +33,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
   final FocusNode _textFocusNode = FocusNode();
 
   late OrganicResult _result;
+  bool _didInitResult = false; // ← guard
   bool _argumentRead = false;
   bool _firstSearch = true;
 
@@ -45,7 +46,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
     super.didChangeDependencies();
     _labelText = context.l10n.diethylEtherBut2Ene;
 
-    _result = OrganicResult(
+    // only set this up once
+    if (!_didInitResult) {
+      _labelText = context.l10n.diethylEtherBut2Ene;
+      _result = OrganicResult(
         true,
         null,
         null,
@@ -55,7 +59,10 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
         null,
         // There's already a pre-loaded 2D image
         'https://pubchem.ncbi.nlm.nih.gov/compound/'
-            '971#section=3D-Conformer&fullscreen=true');
+            '971#section=3D-Conformer&fullscreen=true',
+      );
+      _didInitResult = true;
+    }
 
     _classificationToMessage = {
       Classification.inorganicFormula:
@@ -265,7 +272,7 @@ class _FindingFormulaPageState extends State<FindingFormulaPage> {
                 context.l10n.formula: formatStructure(_result.structure!),
               if (_result.molecularMass != null)
                 context.l10n.molecularMass:
-                    '${formatMolecularMass(_result.molecularMass!)} g/mol',
+                    '${formatMolecularMass(_result.molecularMass!)} ${context.l10n.gMole}',
             },
             imageProvider: _firstSearch
                 ? const AssetImage('assets/images/dietanoic-acid.png')
