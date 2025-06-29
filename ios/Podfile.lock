@@ -1188,7 +1188,7 @@ PODS:
   - firebase_core (3.10.1):
     - Firebase/CoreOnly (= 11.6.0)
     - Flutter
-  - FirebaseAppCheckInterop (11.12.0)
+  - FirebaseAppCheckInterop (11.15.0)
   - FirebaseAuth (11.6.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
@@ -1198,7 +1198,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthInterop (11.12.0)
+  - FirebaseAuthInterop (11.15.0)
   - FirebaseCore (11.6.0):
     - FirebaseCoreInternal (~> 11.6.0)
     - GoogleUtilities/Environment (~> 8.0)
@@ -1235,8 +1235,8 @@ PODS:
     - FirebaseMessagingInterop (~> 11.0)
     - FirebaseSharedSwift (~> 11.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
-  - FirebaseMessagingInterop (11.12.0)
-  - FirebaseSharedSwift (11.12.0)
+  - FirebaseMessagingInterop (11.15.0)
+  - FirebaseSharedSwift (11.15.0)
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
@@ -1388,22 +1388,22 @@ PODS:
   - nanopb/encode (3.30910.0)
   - pointer_interceptor_ios (0.0.1):
     - Flutter
-  - purchases_flutter (8.5.2):
+  - purchases_flutter (8.10.4):
     - Flutter
-    - PurchasesHybridCommon (= 13.19.0)
-  - purchases_ui_flutter (8.5.2):
+    - PurchasesHybridCommon (= 13.38.1)
+  - purchases_ui_flutter (8.10.4):
     - Flutter
-    - PurchasesHybridCommonUI (= 13.19.0)
-  - PurchasesHybridCommon (13.19.0):
-    - RevenueCat (= 5.18.0)
-  - PurchasesHybridCommonUI (13.19.0):
-    - PurchasesHybridCommon (= 13.19.0)
-    - RevenueCatUI (= 5.18.0)
+    - PurchasesHybridCommonUI (= 13.38.1)
+  - PurchasesHybridCommon (13.38.1):
+    - RevenueCat (= 5.29.0)
+  - PurchasesHybridCommonUI (13.38.1):
+    - PurchasesHybridCommon (= 13.38.1)
+    - RevenueCatUI (= 5.29.0)
   - ReachabilitySwift (5.2.4)
   - RecaptchaInterop (100.0.0)
-  - RevenueCat (5.18.0)
-  - RevenueCatUI (5.18.0):
-    - RevenueCat (= 5.18.0)
+  - RevenueCat (5.29.0)
+  - RevenueCatUI (5.29.0):
+    - RevenueCat (= 5.29.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -1521,17 +1521,17 @@ SPEC CHECKSUMS:
   Firebase: 374a441a91ead896215703a674d58cdb3e9d772b
   firebase_auth: 9927cecefe4daaf92b0fbe5d1d283e9329445177
   firebase_core: e2aa06dbd854d961f8ce46c2e20933bee1bf2d2b
-  FirebaseAppCheckInterop: 73b173e5ec45192e2d522ad43f526a82ad10b852
+  FirebaseAppCheckInterop: 06fe5a3799278ae4667e6c432edd86b1030fa3df
   FirebaseAuth: 0304982cfe00df8d49bf533bc4becd3de36c7122
-  FirebaseAuthInterop: b583210c039a60ed3f1e48865e1f3da44a796595
+  FirebaseAuthInterop: 7087d7a4ee4bc4de019b2d0c240974ed5d89e2fd
   FirebaseCore: 48b0dd707581cf9c1a1220da68223fb0a562afaa
   FirebaseCoreExtension: 2d77d6430c16cf43ca2b04608302ed02b3598361
   FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
   FirebaseFirestore: d5dcc15724f291fe4b415322754bfa01616037fe
   FirebaseFirestoreInternal: db478fdaeb98fe8686ff49e600f3871c224a76ff
   FirebaseFunctions: 6c4f1d143d3dc6ca1b5d9f4e042408ede2eb1016
-  FirebaseMessagingInterop: f4ed7b2d66b89b53fd7982b9317e403691dbd978
-  FirebaseSharedSwift: d2475748a2d2a36242ed13baa34b2acda846c925
+  FirebaseMessagingInterop: 63e504b147a7206cfe64cbe2f40c2ddd009945bd
+  FirebaseSharedSwift: e17c654ef1f1a616b0b33054e663ad1035c8fd40
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
@@ -1549,14 +1549,14 @@ SPEC CHECKSUMS:
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   pointer_interceptor_ios: 508241697ff0947f853c061945a8b822463947c1
-  purchases_flutter: d4b187584e27704b758b75baafb417f32a11c191
-  purchases_ui_flutter: d000050753663fb879474da1b025b072c9cf2805
-  PurchasesHybridCommon: ee940936ca9783c45492a9f5791cc148798d8601
-  PurchasesHybridCommonUI: 30ee9aca15c2cf0eecae1205606b5e810a788094
+  purchases_flutter: 9aaa7456914f0de0812d14ffc03a56f58c56960f
+  purchases_ui_flutter: 05096e4a43037aec4072259b2b933ca03ec1e9d7
+  PurchasesHybridCommon: 5a46c67f78680dee9289783edbcebd983ff7bd9c
+  PurchasesHybridCommonUI: 16e8f67451f43e55308a10651283ecd0953d8bf7
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RevenueCat: e825836f5d6baa870c53d7281be25a5fd91abd91
-  RevenueCatUI: f52648672be46e692955aab397a4a491f8aa196f
+  RevenueCat: 5fa12c42c14b390dd2423897e925f407f474b8fa
+  RevenueCatUI: fd24e43324c5e3711e5b5cba18eadd0fe2f023d0
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
