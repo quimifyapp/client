@@ -173,47 +173,48 @@ class _QuimifyAppState extends State<QuimifyApp> {
         valueListenable: _languageService.languageNotifier,
         builder: (context, language, _) {
           return MaterialApp(
-        title: 'Quimify',
-        locale: Locale(language),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: _initialScreen,
-        routes: {
-          Routes.inorganicNomenclature: (context) => const NomenclaturePage(),
-          Routes.organicNaming: (context) => const NamingPage(),
-          Routes.organicFindingFormula: (context) => const FindingFormulaPage(),
-          Routes.calculatorMolecularMass: (context) =>
-              const MolecularMassPage(),
-          Routes.calculatorEquation: (context) => const EquationPage(),
-          Routes.signIn: (context) => SignInPage(
-                clientResult: widget.clientResult,
-              ),
-        },
-        debugShowCheckedModeBanner: false,
-        builder: (context, child) {
-          child = EasyLoading.init()(context, child);
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(
-              textScaler: const TextScaler.linear(1.0),
+            locale: Locale(language),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: _initialScreen,
+            routes: {
+              Routes.inorganicNomenclature: (context) =>
+                  const NomenclaturePage(),
+              Routes.organicNaming: (context) => const NamingPage(),
+              Routes.organicFindingFormula: (context) =>
+                  const FindingFormulaPage(),
+              Routes.calculatorMolecularMass: (context) =>
+                  const MolecularMassPage(),
+              Routes.calculatorEquation: (context) => const EquationPage(),
+              Routes.signIn: (context) => SignInPage(
+                    clientResult: widget.clientResult,
+                  ),
+            },
+            debugShowCheckedModeBanner: false,
+            builder: (context, child) {
+              child = EasyLoading.init()(context, child);
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(1.0),
+                ),
+                child: ScrollConfiguration(
+                  behavior: const ScrollBehavior().copyWith(
+                    overscroll: false,
+                  ),
+                  child: child,
+                ),
+              );
+            },
+            theme: ThemeData(
+              useMaterial3: false,
+              brightness: Brightness.light,
+              fontFamily: 'CeraPro',
             ),
-            child: ScrollConfiguration(
-              behavior: const ScrollBehavior().copyWith(
-                overscroll: false,
-              ),
-              child: child,
+            darkTheme: ThemeData(
+              useMaterial3: false,
+              brightness: Brightness.dark,
+              fontFamily: 'CeraPro',
             ),
-          );
-        },
-        theme: ThemeData(
-          useMaterial3: false,
-          brightness: Brightness.light,
-          fontFamily: 'CeraPro',
-        ),
-        darkTheme: ThemeData(
-          useMaterial3: false,
-          brightness: Brightness.dark,
-          fontFamily: 'CeraPro',
-        ),
           );
         },
       ),
