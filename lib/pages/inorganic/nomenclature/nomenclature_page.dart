@@ -31,6 +31,7 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   final FocusNode _textFocusNode = FocusNode();
 
   bool _argumentRead = false;
+  bool _isInitialized = false;
 
   late String _labelText;
   late List<InorganicResultView> _resultViews;
@@ -49,6 +50,11 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    if (_isInitialized) {
+      return;
+    }
+
     _labelText = context.l10n.naclIronOxide;
 
     // Initialize _defaultResultView
@@ -97,15 +103,17 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       Classification.chemicalReaction:
           context.l10n.itLooksLikeYouAreTryingToSolveAChemicalReaction,
     };
+
+    _isInitialized = true;
   }
 
   @override
   initState() {
     super.initState();
-    
+
     // Initialize _resultViews as an empty list first
     _resultViews = [];
-    
+
     // We'll populate this after didChangeDependencies is called
     // DO NOT reference _defaultResultView here
   }
@@ -204,20 +212,19 @@ class _NomenclaturePageState extends State<NomenclaturePage> {
       return;
     }
 
-    setState(
-      () => _resultViews.add(
+    setState(() {
+      _resultViews.add(
         InorganicResultView(
           formattedQuery: formattedQuery,
           result: result,
         ),
-      ),
-    );
+      );
+      _labelText = formattedQuery; // Sets previous input as label
+    });
 
     History().saveInorganic(result, formattedQuery);
 
     // UI/UX actions:
-
-    _labelText = formattedQuery; // Sets previous input as label
     _textController.clear(); // Clears input
     _textFocusNode.unfocus(); // Hides keyboard
     _scrollToStart(); // Goes to the top of the page
